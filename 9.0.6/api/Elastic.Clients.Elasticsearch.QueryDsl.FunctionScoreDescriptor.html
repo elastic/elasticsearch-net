@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct FunctionScoreDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct FunctionScoreDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.6/apiSpec/new?filename=Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor" class="text-break">
+Struct FunctionScoreDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/FunctionScore.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.html">QueryDsl</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct FunctionScoreDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.#ctor">
+  FunctionScoreDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L452"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor__ctor_Elastic_Clients_Elasticsearch_QueryDsl_FunctionScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.#ctor(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore)">
+  FunctionScoreDescriptor(FunctionScore)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L446"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor(FunctionScore instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore.html">FunctionScore</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Exp_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Exp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Exp_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunction_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Exp(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)">
+  Exp(IDecayFunction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L466"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Exp(IDecayFunction? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.html">IDecayFunction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Exp_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Exp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Exp_System_Func_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunctionFactory_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunction__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Exp(System.Func{Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory,Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction})">
+  Exp(Func&lt;IDecayFunctionFactory, IDecayFunction&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L477"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Exp(Func&lt;IDecayFunctionFactory, IDecayFunction&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.html">IDecayFunctionFactory</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.html">IDecayFunction</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Exp_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Exp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Exp__1_System_Func_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunctionFactory___0__Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunction__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Exp``1(System.Func{Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory{``0},Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction})">
+  Exp&lt;T&gt;(Func&lt;IDecayFunctionFactory&lt;T&gt;, IDecayFunction&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L488"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function that scores a document with a exponential decay, depending on the distance of a numeric field value of the document from an origin.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Exp&lt;T&gt;(Func&lt;IDecayFunctionFactory&lt;T&gt;, IDecayFunction&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory-1.html">IDecayFunctionFactory</a>&lt;T&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.html">IDecayFunction</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_FieldValueFactor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.FieldValueFactor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_FieldValueFactor_Elastic_Clients_Elasticsearch_QueryDsl_FieldValueFactorScoreFunction_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.FieldValueFactor(Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction)">
+  FieldValueFactor(FieldValueFactorScoreFunction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L500"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function allows you to use a field from a document to influence the score.
+It’s similar to using the script_score function, however, it avoids the overhead of scripting.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor FieldValueFactor(FieldValueFactorScoreFunction? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction.html">FieldValueFactorScoreFunction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_FieldValueFactor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.FieldValueFactor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_FieldValueFactor_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldValueFactorScoreFunctionDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.FieldValueFactor(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor})">
+  FieldValueFactor(Action&lt;FieldValueFactorScoreFunctionDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L512"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function allows you to use a field from a document to influence the score.
+It’s similar to using the script_score function, however, it avoids the overhead of scripting.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor FieldValueFactor(Action&lt;FieldValueFactorScoreFunctionDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor.html">FieldValueFactorScoreFunctionDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_FieldValueFactor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.FieldValueFactor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_FieldValueFactor__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldValueFactorScoreFunctionDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.FieldValueFactor``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor{``0}})">
+  FieldValueFactor&lt;T&gt;(Action&lt;FieldValueFactorScoreFunctionDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L524"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function allows you to use a field from a document to influence the score.
+It’s similar to using the script_score function, however, it avoids the overhead of scripting.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor FieldValueFactor&lt;T&gt;(Action&lt;FieldValueFactorScoreFunctionDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunctionDescriptor-1.html">FieldValueFactorScoreFunctionDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Filter_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Filter_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  Filter(Query?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L666"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Filter(Query? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Filter_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Filter_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Filter(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor})">
+  Filter(Action&lt;QueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L672"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Filter(Action&lt;QueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Filter_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Filter__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Filter``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor{``0}})">
+  Filter&lt;T&gt;(Action&lt;QueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L678"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Filter&lt;T&gt;(Action&lt;QueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor-1.html">QueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Gauss_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Gauss*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Gauss_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunction_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Gauss(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)">
+  Gauss(IDecayFunction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L535"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Gauss(IDecayFunction? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.html">IDecayFunction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Gauss_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Gauss*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Gauss_System_Func_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunctionFactory_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunction__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Gauss(System.Func{Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory,Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction})">
+  Gauss(Func&lt;IDecayFunctionFactory, IDecayFunction&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L546"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Gauss(Func&lt;IDecayFunctionFactory, IDecayFunction&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.html">IDecayFunctionFactory</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.html">IDecayFunction</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Gauss_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Gauss*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Gauss__1_System_Func_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunctionFactory___0__Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunction__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Gauss``1(System.Func{Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory{``0},Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction})">
+  Gauss&lt;T&gt;(Func&lt;IDecayFunctionFactory&lt;T&gt;, IDecayFunction&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L557"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function that scores a document with a normal decay, depending on the distance of a numeric field value of the document from an origin.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Gauss&lt;T&gt;(Func&lt;IDecayFunctionFactory&lt;T&gt;, IDecayFunction&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory-1.html">IDecayFunctionFactory</a>&lt;T&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.html">IDecayFunction</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Linear_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Linear*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Linear_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunction_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Linear(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)">
+  Linear(IDecayFunction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L568"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Linear(IDecayFunction? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.html">IDecayFunction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Linear_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Linear*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Linear_System_Func_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunctionFactory_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunction__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Linear(System.Func{Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory,Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction})">
+  Linear(Func&lt;IDecayFunctionFactory, IDecayFunction&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L579"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Linear(Func&lt;IDecayFunctionFactory, IDecayFunction&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory.html">IDecayFunctionFactory</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.html">IDecayFunction</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Linear_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Linear*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Linear__1_System_Func_Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunctionFactory___0__Elastic_Clients_Elasticsearch_QueryDsl_IDecayFunction__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Linear``1(System.Func{Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory{``0},Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction})">
+  Linear&lt;T&gt;(Func&lt;IDecayFunctionFactory&lt;T&gt;, IDecayFunction&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L590"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Function that scores a document with a linear decay, depending on the distance of a numeric field value of the document from an origin.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Linear&lt;T&gt;(Func&lt;IDecayFunctionFactory&lt;T&gt;, IDecayFunction&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionFactory-1.html">IDecayFunctionFactory</a>&lt;T&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction.html">IDecayFunction</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_RandomScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.RandomScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_RandomScore" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.RandomScore">
+  RandomScore()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L614"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Generates scores that are uniformly distributed from 0 up to but not including 1.
+In case you want scores to be reproducible, it is possible to provide a <code>seed</code> and <code>field</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor RandomScore()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_RandomScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.RandomScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_RandomScore_Elastic_Clients_Elasticsearch_QueryDsl_RandomScoreFunction_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.RandomScore(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction)">
+  RandomScore(RandomScoreFunction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L602"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Generates scores that are uniformly distributed from 0 up to but not including 1.
+In case you want scores to be reproducible, it is possible to provide a <code>seed</code> and <code>field</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor RandomScore(RandomScoreFunction? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction.html">RandomScoreFunction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_RandomScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.RandomScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_RandomScore_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_RandomScoreFunctionDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.RandomScore(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor})">
+  RandomScore(Action&lt;RandomScoreFunctionDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L626"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Generates scores that are uniformly distributed from 0 up to but not including 1.
+In case you want scores to be reproducible, it is possible to provide a <code>seed</code> and <code>field</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor RandomScore(Action&lt;RandomScoreFunctionDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor.html">RandomScoreFunctionDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_RandomScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.RandomScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_RandomScore__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_RandomScoreFunctionDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.RandomScore``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor{``0}})">
+  RandomScore&lt;T&gt;(Action&lt;RandomScoreFunctionDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L638"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Generates scores that are uniformly distributed from 0 up to but not including 1.
+In case you want scores to be reproducible, it is possible to provide a <code>seed</code> and <code>field</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor RandomScore&lt;T&gt;(Action&lt;RandomScoreFunctionDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor-1.html">RandomScoreFunctionDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_ScriptScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.ScriptScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_ScriptScore_Elastic_Clients_Elasticsearch_QueryDsl_ScriptScoreFunction_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.ScriptScore(Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction)">
+  ScriptScore(ScriptScoreFunction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L649"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor ScriptScore(ScriptScoreFunction? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunction.html">ScriptScoreFunction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_ScriptScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.ScriptScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_ScriptScore_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_ScriptScoreFunctionDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.ScriptScore(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor})">
+  ScriptScore(Action&lt;ScriptScoreFunctionDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L660"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Enables you to wrap another query and customize the scoring of it optionally with a computation derived from other numeric field values in the doc using a script expression.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor ScriptScore(Action&lt;ScriptScoreFunctionDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ScriptScoreFunctionDescriptor.html">ScriptScoreFunctionDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Weight_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Weight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_Weight_System_Nullable_System_Double__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.Weight(System.Nullable{System.Double})">
+  Weight(double?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L684"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor Weight(double? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_WeightScore_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.WeightScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_WeightScore_System_Double_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.WeightScore(System.Double)">
+  WeightScore(double)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/FunctionScore.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The weight score allows you to multiply the score by the provided weight.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FunctionScoreDescriptor WeightScore(double weight)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>weight</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_QueryDsl_FunctionScore__Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore)~Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor">
+  explicit operator FunctionScoreDescriptor(FunctionScore)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L458"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator FunctionScoreDescriptor(FunctionScore instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore.html">FunctionScore</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_FunctionScoreDescriptor__Elastic_Clients_Elasticsearch_QueryDsl_FunctionScore" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor)~Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore">
+  implicit operator FunctionScore(FunctionScoreDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/FunctionScore.g.cs/#L459"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator FunctionScore(FunctionScoreDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScoreDescriptor.html">FunctionScoreDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore.html">FunctionScore</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

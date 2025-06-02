@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class PhraseSuggester | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PhraseSuggester | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.6/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester" class="text-break">
+Class PhraseSuggester  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.html">Core</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.html">Search</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(PhraseSuggesterConverter))]
+public sealed class PhraseSuggester</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">PhraseSuggester</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester__ctor_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester__ctor" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.#ctor">
+  PhraseSuggester()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L214"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public PhraseSuggester()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester__ctor_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester__ctor_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.#ctor(Elastic.Clients.Elasticsearch.Field)">
+  PhraseSuggester(Field)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L203"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PhraseSuggester(Field field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Analyzer_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Analyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Analyzer" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Analyzer">
+  Analyzer
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The analyzer to analyze the suggest text with.
+Defaults to the search analyzer of the suggest field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Analyzer { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Collate_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Collate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Collate" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Collate">
+  Collate
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L238"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Checks each suggestion against the specified query to prune suggestions for which no matching docs exist in the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PhraseSuggestCollate? Collate { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestCollate.html">PhraseSuggestCollate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Confidence_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Confidence*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Confidence" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Confidence">
+  Confidence
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L246"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a factor applied to the input phrases score, which is used as a threshold for other suggest candidates.
+Only candidates that score higher than the threshold will be included in the result.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? Confidence { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_DirectGenerator_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.DirectGenerator*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_DirectGenerator" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.DirectGenerator">
+  DirectGenerator
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L253"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of candidate generators that produce a list of possible terms per term in the given text.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;DirectGenerator&gt;? DirectGenerator { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator.html">DirectGenerator</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Field_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Field" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Field">
+  Field
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L261"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field to fetch the candidate suggestions from.
+Needs to be set globally or per suggestion.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Field Field { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_ForceUnigrams_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.ForceUnigrams*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_ForceUnigrams" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.ForceUnigrams">
+  ForceUnigrams
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L266"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? ForceUnigrams { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_GramSize_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.GramSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_GramSize" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.GramSize">
+  GramSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sets max size of the n-grams (shingles) in the field.
+If the field doesn’t contain n-grams (shingles), this should be omitted or set to <code>1</code>.
+If the field uses a shingle filter, the <code>gram_size</code> is set to the <code>max_shingle_size</code> if not explicitly set.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? GramSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Highlight_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Highlight" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Highlight">
+  Highlight
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L283"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sets up suggestion highlighting.
+If not provided, no highlighted field is returned.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PhraseSuggestHighlight? Highlight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight.html">PhraseSuggestHighlight</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_MaxErrors_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.MaxErrors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_MaxErrors" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.MaxErrors">
+  MaxErrors
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L291"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum percentage of the terms considered to be misspellings in order to form a correction.
+This method accepts a float value in the range <code>[0..1)</code> as a fraction of the actual query terms or a number <code>&gt;=1</code> as an absolute number of query terms.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? MaxErrors { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_RealWordErrorLikelihood_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.RealWordErrorLikelihood*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_RealWordErrorLikelihood" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.RealWordErrorLikelihood">
+  RealWordErrorLikelihood
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L298"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The likelihood of a term being misspelled even if the term exists in the dictionary.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? RealWordErrorLikelihood { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Separator_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Separator*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Separator" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Separator">
+  Separator
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L306"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The separator that is used to separate terms in the bigram field.
+If not set, the whitespace character is used as a separator.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Separator { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_ShardSize_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.ShardSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_ShardSize" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.ShardSize">
+  ShardSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L313"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sets the maximum number of suggested terms to be retrieved from each individual shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? ShardSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Size_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Size" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Size">
+  Size
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L320"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum corrections to be returned per suggest text token.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Size { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Smoothing_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Smoothing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Smoothing" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Smoothing">
+  Smoothing
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L328"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The smoothing model used to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).
+The default model is Stupid Backoff.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SmoothingModel? Smoothing { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SmoothingModel.html">SmoothingModel</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Text_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Text*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_Text" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.Text">
+  Text
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L335"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The text/query to provide suggestions for.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Text { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_TokenLimit_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.TokenLimit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_PhraseSuggester_TokenLimit" data-uid="Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggester.TokenLimit">
+  TokenLimit
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/PhraseSuggester.g.cs/#L336"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? TokenLimit { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

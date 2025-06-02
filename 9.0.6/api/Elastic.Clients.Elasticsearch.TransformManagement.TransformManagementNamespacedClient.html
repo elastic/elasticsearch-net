@@ -1,0 +1,3220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class TransformManagementNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class TransformManagementNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.6/apiSpec/new?filename=Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient" class="text-break">
+Class TransformManagementNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.html">TransformManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TransformManagementNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">TransformManagementNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.#ctor">
+  TransformManagementNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.html">TransformManagementNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TransformManagementNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransform_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransform(Elastic.Clients.Elasticsearch.Id)">
+  DeleteTransform(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteTransformResponse DeleteTransform(Id transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse.html">DeleteTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransform_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_DeleteTransformRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransform(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor})">
+  DeleteTransform(Id, Action&lt;DeleteTransformRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteTransformResponse DeleteTransform(Id transformId, Action&lt;DeleteTransformRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor.html">DeleteTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse.html">DeleteTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransform_Elastic_Clients_Elasticsearch_TransformManagement_DeleteTransformRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransform(Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest)">
+  DeleteTransform(DeleteTransformRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteTransformResponse DeleteTransform(DeleteTransformRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest.html">DeleteTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse.html">DeleteTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_DeleteTransformRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteTransformAsync(Id, Action&lt;DeleteTransformRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteTransformResponse&gt; DeleteTransformAsync(Id transformId, Action&lt;DeleteTransformRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequestDescriptor.html">DeleteTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse.html">DeleteTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeleteTransformAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteTransformResponse&gt; DeleteTransformAsync(Id transformId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse.html">DeleteTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_DeleteTransformAsync_Elastic_Clients_Elasticsearch_TransformManagement_DeleteTransformRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.DeleteTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest,System.Threading.CancellationToken)">
+  DeleteTransformAsync(DeleteTransformRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteTransformResponse&gt; DeleteTransformAsync(DeleteTransformRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformRequest.html">DeleteTransformRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DeleteTransformResponse.html">DeleteTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransform" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransform">
+  GetTransform()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetTransformResponse GetTransform()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse.html">GetTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransform_Elastic_Clients_Elasticsearch_Names_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransform(Elastic.Clients.Elasticsearch.Names)">
+  GetTransform(Names?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetTransformResponse GetTransform(Names? transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse.html">GetTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransform_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_GetTransformRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransform(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor})">
+  GetTransform(Names?, Action&lt;GetTransformRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetTransformResponse GetTransform(Names? transformId, Action&lt;GetTransformRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor.html">GetTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse.html">GetTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransform_Elastic_Clients_Elasticsearch_TransformManagement_GetTransformRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransform(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest)">
+  GetTransform(GetTransformRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetTransformResponse GetTransform(GetTransformRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest.html">GetTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse.html">GetTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransform_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_GetTransformRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransform(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor})">
+  GetTransform(Action&lt;GetTransformRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetTransformResponse GetTransform(Action&lt;GetTransformRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor.html">GetTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse.html">GetTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformAsync_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_GetTransformRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformAsync(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor},System.Threading.CancellationToken)">
+  GetTransformAsync(Names?, Action&lt;GetTransformRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L158"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetTransformResponse&gt; GetTransformAsync(Names? transformId, Action&lt;GetTransformRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor.html">GetTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse.html">GetTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformAsync_Elastic_Clients_Elasticsearch_Names_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformAsync(Elastic.Clients.Elasticsearch.Names,System.Threading.CancellationToken)">
+  GetTransformAsync(Names?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L150"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetTransformResponse&gt; GetTransformAsync(Names? transformId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse.html">GetTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformAsync_Elastic_Clients_Elasticsearch_TransformManagement_GetTransformRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest,System.Threading.CancellationToken)">
+  GetTransformAsync(GetTransformRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetTransformResponse&gt; GetTransformAsync(GetTransformRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequest.html">GetTransformRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse.html">GetTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformAsync_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_GetTransformRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformAsync(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor},System.Threading.CancellationToken)">
+  GetTransformAsync(Action&lt;GetTransformRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L141"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetTransformResponse&gt; GetTransformAsync(Action&lt;GetTransformRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformRequestDescriptor.html">GetTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse.html">GetTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformAsync(System.Threading.CancellationToken)">
+  GetTransformAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetTransformResponse&gt; GetTransformAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformResponse.html">GetTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStats_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStats_Elastic_Clients_Elasticsearch_Names_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStats(Elastic.Clients.Elasticsearch.Names)">
+  GetTransformStats(Names)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L173"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetTransformStatsResponse GetTransformStats(Names transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse.html">GetTransformStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStats_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStats_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_GetTransformStatsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStats(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor})">
+  GetTransformStats(Names, Action&lt;GetTransformStatsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L181"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetTransformStatsResponse GetTransformStats(Names transformId, Action&lt;GetTransformStatsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor.html">GetTransformStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse.html">GetTransformStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStats_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStats_Elastic_Clients_Elasticsearch_TransformManagement_GetTransformStatsRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStats(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest)">
+  GetTransformStats(GetTransformStatsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L167"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetTransformStatsResponse GetTransformStats(GetTransformStatsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest.html">GetTransformStatsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse.html">GetTransformStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStatsAsync_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_GetTransformStatsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor},System.Threading.CancellationToken)">
+  GetTransformStatsAsync(Names, Action&lt;GetTransformStatsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L204"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetTransformStatsResponse&gt; GetTransformStatsAsync(Names transformId, Action&lt;GetTransformStatsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequestDescriptor.html">GetTransformStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse.html">GetTransformStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStatsAsync_Elastic_Clients_Elasticsearch_Names_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names,System.Threading.CancellationToken)">
+  GetTransformStatsAsync(Names, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L196"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetTransformStatsResponse&gt; GetTransformStatsAsync(Names transformId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse.html">GetTransformStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_GetTransformStatsAsync_Elastic_Clients_Elasticsearch_TransformManagement_GetTransformStatsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.GetTransformStatsAsync(Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest,System.Threading.CancellationToken)">
+  GetTransformStatsAsync(GetTransformStatsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L190"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetTransformStatsResponse&gt; GetTransformStatsAsync(GetTransformStatsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsRequest.html">GetTransformStatsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.GetTransformStatsResponse.html">GetTransformStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransformAsync__1_Elastic_Clients_Elasticsearch_TransformManagement_PreviewTransformRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransformAsync``1(Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest,System.Threading.CancellationToken)">
+  PreviewTransformAsync&lt;TTransform&gt;(PreviewTransformRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L253"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PreviewTransformResponse&lt;TTransform&gt;&gt; PreviewTransformAsync&lt;TTransform&gt;(PreviewTransformRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest.html">PreviewTransformRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse-1.html">PreviewTransformResponse</a>&lt;TTransform&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TTransform</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransformAsync__2_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_PreviewTransformRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransformAsync``2(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  PreviewTransformAsync&lt;TDocument, TTransform&gt;(Id?, Action&lt;PreviewTransformRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L284"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PreviewTransformResponse&lt;TTransform&gt;&gt; PreviewTransformAsync&lt;TDocument, TTransform&gt;(Id? transformId, Action&lt;PreviewTransformRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor-1.html">PreviewTransformRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse-1.html">PreviewTransformResponse</a>&lt;TTransform&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TTransform</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransformAsync__2_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransformAsync``2(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  PreviewTransformAsync&lt;TDocument, TTransform&gt;(Id?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L276"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PreviewTransformResponse&lt;TTransform&gt;&gt; PreviewTransformAsync&lt;TDocument, TTransform&gt;(Id? transformId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse-1.html">PreviewTransformResponse</a>&lt;TTransform&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TTransform</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransformAsync__2_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_PreviewTransformRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransformAsync``2(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  PreviewTransformAsync&lt;TDocument, TTransform&gt;(Action&lt;PreviewTransformRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PreviewTransformResponse&lt;TTransform&gt;&gt; PreviewTransformAsync&lt;TDocument, TTransform&gt;(Action&lt;PreviewTransformRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor-1.html">PreviewTransformRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse-1.html">PreviewTransformResponse</a>&lt;TTransform&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TTransform</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransformAsync__2_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransformAsync``2(System.Threading.CancellationToken)">
+  PreviewTransformAsync&lt;TDocument, TTransform&gt;(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PreviewTransformResponse&lt;TTransform&gt;&gt; PreviewTransformAsync&lt;TDocument, TTransform&gt;(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse-1.html">PreviewTransformResponse</a>&lt;TTransform&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TTransform</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransform__1_Elastic_Clients_Elasticsearch_TransformManagement_PreviewTransformRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransform``1(Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest)">
+  PreviewTransform&lt;TTransform&gt;(PreviewTransformRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PreviewTransformResponse&lt;TTransform&gt; PreviewTransform&lt;TTransform&gt;(PreviewTransformRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest.html">PreviewTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse-1.html">PreviewTransformResponse</a>&lt;TTransform&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TTransform</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransform__2" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransform``2">
+  PreviewTransform&lt;TDocument, TTransform&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PreviewTransformResponse&lt;TTransform&gt; PreviewTransform&lt;TDocument, TTransform&gt;()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse-1.html">PreviewTransformResponse</a>&lt;TTransform&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TTransform</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransform__2_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransform``2(Elastic.Clients.Elasticsearch.Id)">
+  PreviewTransform&lt;TDocument, TTransform&gt;(Id?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L236"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PreviewTransformResponse&lt;TTransform&gt; PreviewTransform&lt;TDocument, TTransform&gt;(Id? transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse-1.html">PreviewTransformResponse</a>&lt;TTransform&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TTransform</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransform__2_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_PreviewTransformRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransform``2(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor{``0}})">
+  PreviewTransform&lt;TDocument, TTransform&gt;(Id?, Action&lt;PreviewTransformRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L244"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PreviewTransformResponse&lt;TTransform&gt; PreviewTransform&lt;TDocument, TTransform&gt;(Id? transformId, Action&lt;PreviewTransformRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor-1.html">PreviewTransformRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse-1.html">PreviewTransformResponse</a>&lt;TTransform&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TTransform</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PreviewTransform__2_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_PreviewTransformRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PreviewTransform``2(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor{``0}})">
+  PreviewTransform&lt;TDocument, TTransform&gt;(Action&lt;PreviewTransformRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PreviewTransformResponse&lt;TTransform&gt; PreviewTransform&lt;TDocument, TTransform&gt;(Action&lt;PreviewTransformRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestDescriptor-1.html">PreviewTransformRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformResponse-1.html">PreviewTransformResponse</a>&lt;TTransform&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TTransform</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransform_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransform(Elastic.Clients.Elasticsearch.Id)">
+  PutTransform(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L299"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutTransformResponse PutTransform(Id transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse.html">PutTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransform_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransform(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor})">
+  PutTransform(Id, Action&lt;PutTransformRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L307"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutTransformResponse PutTransform(Id transformId, Action&lt;PutTransformRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor.html">PutTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse.html">PutTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransform_Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransform(Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest)">
+  PutTransform(PutTransformRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L293"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutTransformResponse PutTransform(PutTransformRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.html">PutTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse.html">PutTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor},System.Threading.CancellationToken)">
+  PutTransformAsync(Id, Action&lt;PutTransformRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L339"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutTransformResponse&gt; PutTransformAsync(Id transformId, Action&lt;PutTransformRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor.html">PutTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse.html">PutTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  PutTransformAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L331"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutTransformResponse&gt; PutTransformAsync(Id transformId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse.html">PutTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransformAsync_Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest,System.Threading.CancellationToken)">
+  PutTransformAsync(PutTransformRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L325"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutTransformResponse&gt; PutTransformAsync(PutTransformRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequest.html">PutTransformRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse.html">PutTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransformAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransformAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  PutTransformAsync&lt;TDocument&gt;(Id, Action&lt;PutTransformRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L348"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutTransformResponse&gt; PutTransformAsync&lt;TDocument&gt;(Id transformId, Action&lt;PutTransformRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor-1.html">PutTransformRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse.html">PutTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_PutTransform__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_PutTransformRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.PutTransform``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor{``0}})">
+  PutTransform&lt;TDocument&gt;(Id, Action&lt;PutTransformRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L316"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutTransformResponse PutTransform&lt;TDocument&gt;(Id transformId, Action&lt;PutTransformRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformRequestDescriptor-1.html">PutTransformRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.PutTransformResponse.html">PutTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransform_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransform(Elastic.Clients.Elasticsearch.Id)">
+  ResetTransform(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L363"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ResetTransformResponse ResetTransform(Id transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse.html">ResetTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransform_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_ResetTransformRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransform(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor})">
+  ResetTransform(Id, Action&lt;ResetTransformRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L371"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ResetTransformResponse ResetTransform(Id transformId, Action&lt;ResetTransformRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor.html">ResetTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse.html">ResetTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransform_Elastic_Clients_Elasticsearch_TransformManagement_ResetTransformRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransform(Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest)">
+  ResetTransform(ResetTransformRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L357"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ResetTransformResponse ResetTransform(ResetTransformRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest.html">ResetTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse.html">ResetTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_ResetTransformRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor},System.Threading.CancellationToken)">
+  ResetTransformAsync(Id, Action&lt;ResetTransformRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L394"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ResetTransformResponse&gt; ResetTransformAsync(Id transformId, Action&lt;ResetTransformRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequestDescriptor.html">ResetTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse.html">ResetTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  ResetTransformAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L386"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ResetTransformResponse&gt; ResetTransformAsync(Id transformId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse.html">ResetTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ResetTransformAsync_Elastic_Clients_Elasticsearch_TransformManagement_ResetTransformRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ResetTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest,System.Threading.CancellationToken)">
+  ResetTransformAsync(ResetTransformRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L380"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ResetTransformResponse&gt; ResetTransformAsync(ResetTransformRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformRequest.html">ResetTransformRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ResetTransformResponse.html">ResetTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransform_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransform(Elastic.Clients.Elasticsearch.Id)">
+  ScheduleNowTransform(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L409"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ScheduleNowTransformResponse ScheduleNowTransform(Id transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse.html">ScheduleNowTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransform_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_ScheduleNowTransformRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransform(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor})">
+  ScheduleNowTransform(Id, Action&lt;ScheduleNowTransformRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L417"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ScheduleNowTransformResponse ScheduleNowTransform(Id transformId, Action&lt;ScheduleNowTransformRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor.html">ScheduleNowTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse.html">ScheduleNowTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransform_Elastic_Clients_Elasticsearch_TransformManagement_ScheduleNowTransformRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransform(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest)">
+  ScheduleNowTransform(ScheduleNowTransformRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L403"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ScheduleNowTransformResponse ScheduleNowTransform(ScheduleNowTransformRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest.html">ScheduleNowTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse.html">ScheduleNowTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_ScheduleNowTransformRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor},System.Threading.CancellationToken)">
+  ScheduleNowTransformAsync(Id, Action&lt;ScheduleNowTransformRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L440"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ScheduleNowTransformResponse&gt; ScheduleNowTransformAsync(Id transformId, Action&lt;ScheduleNowTransformRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestDescriptor.html">ScheduleNowTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse.html">ScheduleNowTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  ScheduleNowTransformAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L432"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ScheduleNowTransformResponse&gt; ScheduleNowTransformAsync(Id transformId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse.html">ScheduleNowTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_ScheduleNowTransformAsync_Elastic_Clients_Elasticsearch_TransformManagement_ScheduleNowTransformRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest,System.Threading.CancellationToken)">
+  ScheduleNowTransformAsync(ScheduleNowTransformRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L426"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ScheduleNowTransformResponse&gt; ScheduleNowTransformAsync(ScheduleNowTransformRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest.html">ScheduleNowTransformRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse.html">ScheduleNowTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransform_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransform(Elastic.Clients.Elasticsearch.Id)">
+  StartTransform(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L455"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StartTransformResponse StartTransform(Id transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse.html">StartTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransform_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_StartTransformRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransform(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor})">
+  StartTransform(Id, Action&lt;StartTransformRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L463"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StartTransformResponse StartTransform(Id transformId, Action&lt;StartTransformRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor.html">StartTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse.html">StartTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransform_Elastic_Clients_Elasticsearch_TransformManagement_StartTransformRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransform(Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest)">
+  StartTransform(StartTransformRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L449"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StartTransformResponse StartTransform(StartTransformRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest.html">StartTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse.html">StartTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_StartTransformRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor},System.Threading.CancellationToken)">
+  StartTransformAsync(Id, Action&lt;StartTransformRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L486"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StartTransformResponse&gt; StartTransformAsync(Id transformId, Action&lt;StartTransformRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequestDescriptor.html">StartTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse.html">StartTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  StartTransformAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L478"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StartTransformResponse&gt; StartTransformAsync(Id transformId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse.html">StartTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StartTransformAsync_Elastic_Clients_Elasticsearch_TransformManagement_StartTransformRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StartTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest,System.Threading.CancellationToken)">
+  StartTransformAsync(StartTransformRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L472"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StartTransformResponse&gt; StartTransformAsync(StartTransformRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest.html">StartTransformRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse.html">StartTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransform_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransform(Elastic.Clients.Elasticsearch.Name)">
+  StopTransform(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L501"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StopTransformResponse StopTransform(Name transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse.html">StopTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransform_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_StopTransformRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransform(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor})">
+  StopTransform(Name, Action&lt;StopTransformRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L509"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StopTransformResponse StopTransform(Name transformId, Action&lt;StopTransformRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor.html">StopTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse.html">StopTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransform_Elastic_Clients_Elasticsearch_TransformManagement_StopTransformRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransform(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest)">
+  StopTransform(StopTransformRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L495"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StopTransformResponse StopTransform(StopTransformRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest.html">StopTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse.html">StopTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransformAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_StopTransformRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransformAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor},System.Threading.CancellationToken)">
+  StopTransformAsync(Name, Action&lt;StopTransformRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L532"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StopTransformResponse&gt; StopTransformAsync(Name transformId, Action&lt;StopTransformRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequestDescriptor.html">StopTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse.html">StopTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransformAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransformAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  StopTransformAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L524"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StopTransformResponse&gt; StopTransformAsync(Name transformId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse.html">StopTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_StopTransformAsync_Elastic_Clients_Elasticsearch_TransformManagement_StopTransformRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.StopTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest,System.Threading.CancellationToken)">
+  StopTransformAsync(StopTransformRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L518"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StopTransformResponse&gt; StopTransformAsync(StopTransformRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StopTransformRequest.html">StopTransformRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.StopTransformResponse.html">StopTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransform_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransform(Elastic.Clients.Elasticsearch.Id)">
+  UpdateTransform(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L547"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual UpdateTransformResponse UpdateTransform(Id transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse.html">UpdateTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransform_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransform(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor})">
+  UpdateTransform(Id, Action&lt;UpdateTransformRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L555"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual UpdateTransformResponse UpdateTransform(Id transformId, Action&lt;UpdateTransformRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse.html">UpdateTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransform_Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransform(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest)">
+  UpdateTransform(UpdateTransformRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L541"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual UpdateTransformResponse UpdateTransform(UpdateTransformRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest.html">UpdateTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse.html">UpdateTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor},System.Threading.CancellationToken)">
+  UpdateTransformAsync(Id, Action&lt;UpdateTransformRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L587"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;UpdateTransformResponse&gt; UpdateTransformAsync(Id transformId, Action&lt;UpdateTransformRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse.html">UpdateTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransformAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransformAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  UpdateTransformAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L579"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;UpdateTransformResponse&gt; UpdateTransformAsync(Id transformId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse.html">UpdateTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransformAsync_Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransformAsync(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest,System.Threading.CancellationToken)">
+  UpdateTransformAsync(UpdateTransformRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L573"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;UpdateTransformResponse&gt; UpdateTransformAsync(UpdateTransformRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest.html">UpdateTransformRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse.html">UpdateTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransformAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransformAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransformAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransformAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  UpdateTransformAsync&lt;TDocument&gt;(Id, Action&lt;UpdateTransformRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L596"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;UpdateTransformResponse&gt; UpdateTransformAsync&lt;TDocument&gt;(Id transformId, Action&lt;UpdateTransformRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor-1.html">UpdateTransformRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse.html">UpdateTransformResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransform_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransform*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpdateTransform__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpdateTransform``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor{``0}})">
+  UpdateTransform&lt;TDocument&gt;(Id, Action&lt;UpdateTransformRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L564"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual UpdateTransformResponse UpdateTransform&lt;TDocument&gt;(Id transformId, Action&lt;UpdateTransformRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor-1.html">UpdateTransformRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformResponse.html">UpdateTransformResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransforms_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransforms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransforms" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransforms">
+  UpgradeTransforms()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L611"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual UpgradeTransformsResponse UpgradeTransforms()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse.html">UpgradeTransformsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransforms_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransforms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransforms_Elastic_Clients_Elasticsearch_TransformManagement_UpgradeTransformsRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransforms(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest)">
+  UpgradeTransforms(UpgradeTransformsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L605"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual UpgradeTransformsResponse UpgradeTransforms(UpgradeTransformsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest.html">UpgradeTransformsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse.html">UpgradeTransformsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransforms_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransforms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransforms_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_UpgradeTransformsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransforms(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor})">
+  UpgradeTransforms(Action&lt;UpgradeTransformsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L619"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual UpgradeTransformsResponse UpgradeTransforms(Action&lt;UpgradeTransformsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor.html">UpgradeTransformsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse.html">UpgradeTransformsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransformsAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransformsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransformsAsync_Elastic_Clients_Elasticsearch_TransformManagement_UpgradeTransformsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransformsAsync(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest,System.Threading.CancellationToken)">
+  UpgradeTransformsAsync(UpgradeTransformsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L628"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;UpgradeTransformsResponse&gt; UpgradeTransformsAsync(UpgradeTransformsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest.html">UpgradeTransformsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse.html">UpgradeTransformsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransformsAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransformsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransformsAsync_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_UpgradeTransformsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransformsAsync(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor},System.Threading.CancellationToken)">
+  UpgradeTransformsAsync(Action&lt;UpgradeTransformsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L642"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;UpgradeTransformsResponse&gt; UpgradeTransformsAsync(Action&lt;UpgradeTransformsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor.html">UpgradeTransformsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse.html">UpgradeTransformsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransformsAsync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransformsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_TransformManagementNamespacedClient_UpgradeTransformsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.TransformManagementNamespacedClient.UpgradeTransformsAsync(System.Threading.CancellationToken)">
+  UpgradeTransformsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Transform.g.cs/#L634"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;UpgradeTransformsResponse&gt; UpgradeTransformsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsResponse.html">UpgradeTransformsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

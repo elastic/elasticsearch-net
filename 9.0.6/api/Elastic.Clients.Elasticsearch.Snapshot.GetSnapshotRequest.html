@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class GetSnapshotRequest | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class GetSnapshotRequest | Elasticsearch.NET ">
+      
+      <meta name="description" content="Get snapshot information.   NOTE: The after parameter and next field enable you to iterate through snapshots with some consistency guarantees regarding concurrent creation or deletion of snapshots. It is guaranteed that any snapshot that exists at the beginning of the iteration and is not concurrently deleted will be seen during the iteration. Snapshots concurrently created may be seen during an iteration.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.6/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest" class="text-break">
+Class GetSnapshotRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L176"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.html">Snapshot</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Get snapshot information.
+</p>
+<p>
+NOTE: The <code>after</code> parameter and <code>next</code> field enable you to iterate through snapshots with some consistency guarantees regarding concurrent creation or deletion of snapshots.
+It is guaranteed that any snapshot that exists at the beginning of the iteration and is not concurrently deleted will be seen during the iteration.
+Snapshots concurrently created may be seen during an iteration.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(GetSnapshotRequestConverter))]
+public sealed class GetSnapshotRequest : PlainRequest&lt;GetSnapshotRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestParameters.html">GetSnapshotRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestParameters.html">GetSnapshotRequestParameters</a>&gt;</div>
+      <div><span class="xref">GetSnapshotRequest</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;GetSnapshotRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;GetSnapshotRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;GetSnapshotRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;GetSnapshotRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;GetSnapshotRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RequestConfiguration">Request.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest__ctor_Elastic_Clients_Elasticsearch_Name_Elastic_Clients_Elasticsearch_Names_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.#ctor(Elastic.Clients.Elasticsearch.Name,Elastic.Clients.Elasticsearch.Names)">
+  GetSnapshotRequest(Name, Names)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSnapshotRequest(Name repository, Names snapshot)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>repository</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>snapshot</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_After_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.After*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_After" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.After">
+  After
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L243"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An offset identifier to start pagination from as returned by the next field in the response body.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? After { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_FromSortValue_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.FromSortValue*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_FromSortValue" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.FromSortValue">
+  FromSortValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L252"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The value of the current sort column at which to start retrieval.
+It can be a string <code>snapshot-</code> or a repository name when sorting by snapshot or repository name.
+It can be a millisecond time value or a number when sorting by <code>index-</code> or shard count.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? FromSortValue { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_IgnoreUnavailable" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.IgnoreUnavailable">
+  IgnoreUnavailable
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>false</code>, the request returns an error for any snapshots that are unavailable.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IgnoreUnavailable { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_IncludeRepository_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.IncludeRepository*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_IncludeRepository" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.IncludeRepository">
+  IncludeRepository
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L266"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the response includes the repository name in each snapshot.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IncludeRepository { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_IndexDetails_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.IndexDetails*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_IndexDetails" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.IndexDetails">
+  IndexDetails
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the response includes additional information about each index in the snapshot comprising the number of shards in the index, the total size of the index in bytes, and the maximum number of segments per shard in the index.
+The default is <code>false</code>, meaning that this information is omitted.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IndexDetails { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_IndexNames_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.IndexNames*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_IndexNames" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.IndexNames">
+  IndexNames
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L281"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the response includes the name of each index in each snapshot.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IndexNames { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_MasterTimeout_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.MasterTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_MasterTimeout" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.MasterTimeout">
+  MasterTimeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L289"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? MasterTimeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Offset_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Offset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Offset" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Offset">
+  Offset
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L296"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Numeric offset to start pagination from based on the snapshots matching this request. Using a non-zero value for this parameter is mutually exclusive with using the after parameter. Defaults to 0.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Offset { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Order_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Order*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Order" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Order">
+  Order
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The sort order.
+Valid values are <code>asc</code> for ascending and <code>desc</code> for descending order.
+The default behavior is ascending order.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOrder? Order { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOrder.html">SortOrder</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Repository_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Repository*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Repository" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Repository">
+  Repository
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of snapshot repository names used to limit the request.
+Wildcard (<code>*</code>) expressions are supported.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Name Repository { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Size_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Size" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Size">
+  Size
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L313"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of snapshots to return.
+The default is 0, which means to return all that match the request without limit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Size { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_SlmPolicyFilter_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.SlmPolicyFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_SlmPolicyFilter" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.SlmPolicyFilter">
+  SlmPolicyFilter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L326"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Filter snapshots by a comma-separated list of snapshot lifecycle management (SLM) policy names that snapshots belong to.
+</p>
+<p>
+You can use wildcards (<code>*</code>) and combinations of wildcards followed by exclude patterns starting with <code>-</code>.
+For example, the pattern <code>*,-policy-a-\*</code> will return all snapshots except for those that were created by an SLM policy with a name starting with <code>policy-a-</code>.
+Note that the wildcard pattern <code>*</code> matches all snapshots created by an SLM policy but not those snapshots that were not created by an SLM policy.
+To include snapshots that were not created by an SLM policy, you can use the special pattern <code>_none</code> that will match all snapshots without an SLM policy.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Name? SlmPolicyFilter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Snapshot_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Snapshot*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Snapshot" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Snapshot">
+  Snapshot
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L232"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of snapshot names to retrieve
+Wildcards (<code>*</code>) are supported.
+</p>
+<ul><li>
+<p>
+To get information about all snapshots in a registered repository, use a wildcard (<code>*</code>) or <code>_all</code>.
+</p>
+</li><li>
+<p>
+To get information about any snapshots that are currently running, use <code>_current</code>.
+</p>
+</li></ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Names Snapshot { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Sort_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Sort" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Sort">
+  Sort
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L334"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The sort order for the result.
+The default behavior is sorting by snapshot start time stamp.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SnapshotSort? Sort { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort.html">SnapshotSort</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L196"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Verbose_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Verbose*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_GetSnapshotRequest_Verbose" data-uid="Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequest.Verbose">
+  Verbose
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/GetSnapshotRequest.g.cs/#L344"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, returns additional information about each snapshot such as the version of Elasticsearch which took the snapshot, the start and end times of the snapshot, and the number of shards snapshotted.
+</p>
+<p>
+NOTE: The parameters <code>size</code>, <code>order</code>, <code>after</code>, <code>from_sort_value</code>, <code>offset</code>, <code>slm_policy_filter</code>, and <code>sort</code> are not supported when you set <code>verbose=false</code> and the sort order for requests with <code>verbose=false</code> is undefined.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Verbose { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

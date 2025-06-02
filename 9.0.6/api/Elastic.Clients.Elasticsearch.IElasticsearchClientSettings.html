@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Interface IElasticsearchClientSettings | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Interface IElasticsearchClientSettings | Elasticsearch.NET ">
+      
+      <meta name="description" content="Provides the connection settings for Elastic.Clients.Elasticsearch&#39;s high level">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.6/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IElasticsearchClientSettings.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IElasticsearchClientSettings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings" class="text-break">
+Interface IElasticsearchClientSettings  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Provides the connection settings for Elastic.Clients.Elasticsearch's high level <a class="xref" href="Elastic.Clients.Elasticsearch.ElasticsearchClient.html">ElasticsearchClient</a></p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IElasticsearchClientSettings : ITransportConfiguration, IRequestConfiguration, IDisposable</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.BootstrapLock</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.RequestInvoker</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.ConnectionLimit</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.NodePool</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.ProductRegistration</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.DateTimeProvider</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.PipelineProvider</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.DeadTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.DisableAutomaticProxyDetection</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.KeepAliveInterval</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.KeepAliveTime</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.MaxDeadTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.MemoryStreamFactory</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.NodePredicate</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.OnRequestCompleted</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.OnConfigurationBound</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.ProxyAddress</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.ProxyPassword</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.ProxyUsername</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.QueryStringParameters</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.RequestResponseSerializer</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.ServerCertificateValidationCallback</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.CertificateFingerprint</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.SkipDeserializationForStatusCodes</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.SniffInformationLifeSpan</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.SniffsOnConnectionFault</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.SniffsOnStartup</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.UrlFormatter</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.StatusCodeToResponseSuccess</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.DnsRefreshTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.PrettyJson</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.MetaHeaderProvider</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/ITransportConfiguration.cs">ITransportConfiguration.DisableMetaHeader</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.Accept</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.AllowedStatusCodes</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.Authentication</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.ClientCertificates</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.ContentType</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.DisableDirectStreaming</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.DisableAuditTrail</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.DisablePings</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.DisableSniff</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.HttpPipeliningEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.EnableHttpCompression</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.ForceNode</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.MaxRetries</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.MaxRetryTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.OpaqueId</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.ParseAllHeaders</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.PingTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.RequestTimeout</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.ResponseBuilders</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.ResponseHeadersToParse</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.RunAs</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.ThrowExceptions</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.TransferEncodingChunked</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.Headers</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.EnableTcpStats</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.EnableThreadPoolStats</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.RequestMetaData</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration.UserAgent</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable.dispose">IDisposable.Dispose()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultDisableIdInference_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DefaultDisableIdInference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultDisableIdInference" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DefaultDisableIdInference">
+  DefaultDisableIdInference
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Disables automatic Id inference for all CLR types.</p>
+<p></p>
+Elastic.Clients.Elasticsearch by default will use the value of a property named Id on a CLR type as the _id to send to Elasticsearch.
+Setting this to <code>true</code>
+will disable this behaviour for all CLR types and cannot be overridden. If Id inference should be disabled only for
+specific types, use
+<a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html#Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DisableIdInference">DisableIdInference</a>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool DefaultDisableIdInference { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultFieldNameInferrer_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DefaultFieldNameInferrer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultFieldNameInferrer" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DefaultFieldNameInferrer">
+  DefaultFieldNameInferrer
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specifies how field names are inferred from CLR property names.</p>
+<p></p>
+By default, Elastic.Clients.Elasticsearch camel cases property names.
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Func&lt;string, string&gt; DefaultFieldNameInferrer { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+  <h4 class="section" id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultFieldNameInferrer_examples">Examples</h4>
+  <p>CLR property EmailAddress will be inferred as &quot;emailAddress&quot; Elasticsearch document field name</p>
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultIndex_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DefaultIndex*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultIndex" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DefaultIndex">
+  DefaultIndex
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default index to use for a request when no index has been explicitly specified
+and no default indices are specified for the given CLR type specified for the request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string DefaultIndex { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultIndices_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DefaultIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultIndices" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DefaultIndices">
+  DefaultIndices
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default index/indices to use for a request for a given CLR type specified in the request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FluentDictionary&lt;Type, string&gt; DefaultIndices { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultRelationNames_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DefaultRelationNames*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultRelationNames" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DefaultRelationNames">
+  DefaultRelationNames
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default relation name to use for a request for a given CLR type specified in the request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FluentDictionary&lt;Type, string&gt; DefaultRelationNames { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DisableIdInference_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DisableIdInference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DisableIdInference" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.DisableIdInference">
+  DisableIdInference
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Disables automatic Id inference for given CLR types.</p>
+<p></p>
+Elastic.Clients.Elasticsearch by default will use the value of a property named Id on a CLR type as the _id to send to Elasticsearch. Adding
+a type
+will disable this behaviour for that CLR type. If Id inference should be disabled for all CLR types, use
+<a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html#Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_DefaultDisableIdInference">DefaultDisableIdInference</a>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">HashSet&lt;Type&gt; DisableIdInference { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_Experimental_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.Experimental*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_Experimental" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.Experimental">
+  Experimental
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L130"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Experimental settings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ExperimentalSettings Experimental { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ExperimentalSettings.html">ExperimentalSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_ExperimentalEnableSerializeNullInferredValues_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.ExperimentalEnableSerializeNullInferredValues*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_ExperimentalEnableSerializeNullInferredValues" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.ExperimentalEnableSerializeNullInferredValues">
+  ExperimentalEnableSerializeNullInferredValues
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L125"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>This is an advanced setting which controls serialization behaviour for inferred properies such as ID, routing and index name.</p>
+<p>When enabled, it may reduce allocations on serialisation paths where the cost can be more significant, such as in bulk operations.</p>
+<p>As a by-product it may cause null values to be included in the serialized data and impact payload size. This will only be a concern should some
+typed not have inferrence mappings defined for the required properties.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ExperimentalEnableSerializeNullInferredValues { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_ExperimentalEnableSerializeNullInferredValues_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This is marked as experiemental and may be removed or renamed in the future once its impact is evaluated.</p>
+</div>
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_IdProperties_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.IdProperties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_IdProperties" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.IdProperties">
+  IdProperties
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specify a property for a CLR type to use to infer the _id of the document when indexed in Elasticsearch.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FluentDictionary&lt;Type, string&gt; IdProperties { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_Inferrer_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.Inferrer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_Inferrer" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.Inferrer">
+  Inferrer
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Infers index, type, id, relation, routing and field names</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Inferrer Inferrer { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inferrer.html">Inferrer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_OnBeforeRequest_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.OnBeforeRequest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_OnBeforeRequest" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.OnBeforeRequest">
+  OnBeforeRequest
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A callback that is invoked immediately before a request is sent.</p>
+<p>
+Allows to dynamically update the <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Requests/Body/PostData.ByteArray.cs">PostData</a> and <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">BeforeRequestEvent? OnBeforeRequest { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BeforeRequestEvent.html">BeforeRequestEvent</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_PropertyMappingProvider_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.PropertyMappingProvider*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_PropertyMappingProvider" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.PropertyMappingProvider">
+  PropertyMappingProvider
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provides mappings for CLR types</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IPropertyMappingProvider PropertyMappingProvider { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IPropertyMappingProvider.html">IPropertyMappingProvider</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_PropertyMappings_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.PropertyMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_PropertyMappings" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.PropertyMappings">
+  PropertyMappings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Provides mappings for CLR type members</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FluentDictionary&lt;MemberInfo, PropertyMapping&gt; PropertyMappings { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.memberinfo">MemberInfo</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.PropertyMapping.html">PropertyMapping</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_RouteProperties_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.RouteProperties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_RouteProperties" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.RouteProperties">
+  RouteProperties
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Specify a property for a CLR type to use to infer the routing for of a document when indexed in Elasticsearch.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FluentDictionary&lt;Type, string&gt; RouteProperties { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_SourceSerializer_" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.SourceSerializer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_SourceSerializer" data-uid="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.SourceSerializer">
+  SourceSerializer
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Configuration/IElasticsearchClientSettings.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The serializer use to serialize CLR types representing documents and other types related to documents.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Serializer SourceSerializer { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Components/Serialization/Serializer.cs">Serializer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

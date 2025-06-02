@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct RefreshRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct RefreshRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Refresh an index. A refresh makes recent operations performed on one or more indices available for search. For data streams, the API runs the refresh operation on the stream’s backing indices.   By default, Elasticsearch periodically refreshes indices every second, but only on indices that have received one search request or more in the last 30 seconds. You can change this default interval with the index.refresh_interval setting.   Refresh requests are synchronous and do not return a response until the refresh operation completes.   Refreshes are resource-intensive. To ensure good cluster performance, it&#39;s recommended to wait for Elasticsearch&#39;s periodic refresh rather than performing an explicit refresh when possible.   If your application workflow indexes documents and then runs a search to retrieve the indexed document, it&#39;s recommended to use the index API&#39;s refresh=wait_for query parameter option. This option ensures the indexing operation waits for a periodic refresh before running the search.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.6/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1" class="text-break">
+Struct RefreshRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L357"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Refresh an index.
+A refresh makes recent operations performed on one or more indices available for search.
+For data streams, the API runs the refresh operation on the stream’s backing indices.
+</p>
+<p>
+By default, Elasticsearch periodically refreshes indices every second, but only on indices that have received one search request or more in the last 30 seconds.
+You can change this default interval with the <code>index.refresh_interval</code> setting.
+</p>
+<p>
+Refresh requests are synchronous and do not return a response until the refresh operation completes.
+</p>
+<p>
+Refreshes are resource-intensive.
+To ensure good cluster performance, it's recommended to wait for Elasticsearch's periodic refresh rather than performing an explicit refresh when possible.
+</p>
+<p>
+If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <code>refresh=wait_for</code> query parameter option.
+This option ensures the indexing operation waits for a periodic refresh before running the search.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct RefreshRequestDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.#ctor">
+  RefreshRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L372"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequest_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest)">
+  RefreshRequestDescriptor(RefreshRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L361"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor(RefreshRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest.html">RefreshRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.Indices)">
+  RefreshRequestDescriptor(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L367"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor(Indices? indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_AllowNoIndices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.AllowNoIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_AllowNoIndices_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.AllowNoIndices(System.Nullable{System.Boolean})">
+  AllowNoIndices(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L399"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>false</code>, the request returns an error if any wildcard expression, index alias, or <code>_all</code> value targets only missing or closed indices.
+This behavior applies even if the request targets other open indices.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; AllowNoIndices(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L457"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_ExpandWildcards_Elastic_Clients_Elasticsearch_ExpandWildcard___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcard[])">
+  ExpandWildcards(params ExpandWildcard[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L427"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <code>open,hidden</code>.
+Valid values are: <code>all</code>, <code>open</code>, <code>closed</code>, <code>hidden</code>, <code>none</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; ExpandWildcards(params ExpandWildcard[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_ExpandWildcards_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ExpandWildcard__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.ExpandWildcards(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ExpandWildcard})">
+  ExpandWildcards(ICollection&lt;ExpandWildcard&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L413"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <code>open,hidden</code>.
+Valid values are: <code>all</code>, <code>open</code>, <code>closed</code>, <code>hidden</code>, <code>none</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; ExpandWildcards(ICollection&lt;ExpandWildcard&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L463"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_Human_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L469"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_IgnoreUnavailable_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.IgnoreUnavailable(System.Nullable{System.Boolean})">
+  IgnoreUnavailable(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L438"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>false</code>, the request returns an error if it targets a missing or closed index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; IgnoreUnavailable(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_Indices_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.Indices(Elastic.Clients.Elasticsearch.Indices)">
+  Indices(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L387"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Comma-separated list of data streams, indices, and aliases used to limit the request.
+Supports wildcards (<code>*</code>).
+To target all data streams and indices, omit this parameter or use <code>*</code> or <code>_all</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; Indices(Indices? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_Pretty_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L475"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L487"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L493"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.6/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L481"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshRequestDescriptor&lt;TDocument&gt; SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequest__Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest)~Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor{`0}">
+  explicit operator RefreshRequestDescriptor&lt;TDocument&gt;(RefreshRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L377"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator RefreshRequestDescriptor&lt;TDocument&gt;(RefreshRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest.html">RefreshRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequestDescriptor__0___Elastic_Clients_Elasticsearch_IndexManagement_RefreshRequest" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor{`0})~Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest">
+  implicit operator RefreshRequest(RefreshRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.6/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RefreshRequest.g.cs/#L378"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator RefreshRequest(RefreshRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequestDescriptor-1.html">RefreshRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RefreshRequest.html">RefreshRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
