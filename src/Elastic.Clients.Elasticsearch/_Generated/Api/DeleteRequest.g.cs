@@ -611,6 +611,11 @@ public readonly partial struct DeleteRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(index, id);
 	}
 
+	public DeleteRequestDescriptor(string index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest((Elastic.Clients.Elasticsearch.IndexName)index, id);
+	}
+
 	public DeleteRequestDescriptor(TDocument document)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.DeleteRequest(typeof(TDocument), Elastic.Clients.Elasticsearch.Id.From(document));
