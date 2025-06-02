@@ -831,6 +831,11 @@ public readonly partial struct GetRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.GetRequest(index, id);
 	}
 
+	public GetRequestDescriptor(string index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.GetRequest((Elastic.Clients.Elasticsearch.IndexName)index, id);
+	}
+
 	public GetRequestDescriptor(TDocument document)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.GetRequest(typeof(TDocument), Elastic.Clients.Elasticsearch.Id.From(document));

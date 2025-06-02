@@ -77,6 +77,17 @@ public partial class BulkRequest : IStreamSerializable
 [StructLayout(LayoutKind.Auto)]
 public readonly partial struct BulkRequestDescriptor
 {
+	/// <summary>
+	/// <para>
+	/// The name of the data stream, index, or index alias to perform bulk actions on.
+	/// </para>
+	/// </summary>
+	public BulkRequestDescriptor Index(string? value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
 	public BulkRequestDescriptor Create<TSource>(TSource document, Action<BulkCreateOperationDescriptor<TSource>>? configure = null)
 	{
 		var descriptor = new BulkCreateOperationDescriptor<TSource>(document);
