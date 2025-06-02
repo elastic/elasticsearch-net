@@ -682,6 +682,11 @@ public readonly partial struct ExplainRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.ExplainRequest(index, id);
 	}
 
+	public ExplainRequestDescriptor(string index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.ExplainRequest((Elastic.Clients.Elasticsearch.IndexName)index, id);
+	}
+
 	public ExplainRequestDescriptor(TDocument document)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.ExplainRequest(typeof(TDocument), Elastic.Clients.Elasticsearch.Id.From(document));
