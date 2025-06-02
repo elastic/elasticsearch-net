@@ -1,0 +1,2993 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class RollupNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class RollupNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.0-preview.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient" class="text-break">
+Class RollupNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.html">Rollup</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class RollupNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">RollupNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.#ctor">
+  RollupNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.html">RollupNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected RollupNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJob_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJob(Elastic.Clients.Elasticsearch.Id)">
+  DeleteJob(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual DeleteJobResponse DeleteJob(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse.html">DeleteJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJob_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_DeleteJobRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJob(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor})">
+  DeleteJob(Id, Action&lt;DeleteJobRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual DeleteJobResponse DeleteJob(Id id, Action&lt;DeleteJobRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor.html">DeleteJobRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse.html">DeleteJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJob_Elastic_Clients_Elasticsearch_Rollup_DeleteJobRequest_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJob(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest)">
+  DeleteJob(DeleteJobRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteJobResponse DeleteJob(DeleteJobRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest.html">DeleteJobRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse.html">DeleteJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJobAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_DeleteJobRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJobAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteJobAsync(Id, Action&lt;DeleteJobRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;DeleteJobResponse&gt; DeleteJobAsync(Id id, Action&lt;DeleteJobRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequestDescriptor.html">DeleteJobRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse.html">DeleteJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJobAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJobAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeleteJobAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;DeleteJobResponse&gt; DeleteJobAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse.html">DeleteJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_DeleteJobAsync_Elastic_Clients_Elasticsearch_Rollup_DeleteJobRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.DeleteJobAsync(Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest,System.Threading.CancellationToken)">
+  DeleteJobAsync(DeleteJobRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteJobResponse&gt; DeleteJobAsync(DeleteJobRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobRequest.html">DeleteJobRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.DeleteJobResponse.html">DeleteJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobs_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobs" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobs">
+  GetJobs()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual GetJobsResponse GetJobs()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse.html">GetJobsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobs_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobs_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobs(Elastic.Clients.Elasticsearch.Id)">
+  GetJobs(Id?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual GetJobsResponse GetJobs(Id? id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse.html">GetJobsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobs_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobs_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_GetJobsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobs(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor})">
+  GetJobs(Id?, Action&lt;GetJobsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L125"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual GetJobsResponse GetJobs(Id? id, Action&lt;GetJobsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor.html">GetJobsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse.html">GetJobsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobs_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobs_Elastic_Clients_Elasticsearch_Rollup_GetJobsRequest_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobs(Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest)">
+  GetJobs(GetJobsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetJobsResponse GetJobs(GetJobsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest.html">GetJobsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse.html">GetJobsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobs_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobs_System_Action_Elastic_Clients_Elasticsearch_Rollup_GetJobsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobs(System.Action{Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor})">
+  GetJobs(Action&lt;GetJobsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual GetJobsResponse GetJobs(Action&lt;GetJobsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor.html">GetJobsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse.html">GetJobsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobsAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_GetJobsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobsAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor},System.Threading.CancellationToken)">
+  GetJobsAsync(Id?, Action&lt;GetJobsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L169"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;GetJobsResponse&gt; GetJobsAsync(Id? id, Action&lt;GetJobsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor.html">GetJobsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse.html">GetJobsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobsAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobsAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetJobsAsync(Id?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L160"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;GetJobsResponse&gt; GetJobsAsync(Id? id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse.html">GetJobsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobsAsync_Elastic_Clients_Elasticsearch_Rollup_GetJobsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobsAsync(Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest,System.Threading.CancellationToken)">
+  GetJobsAsync(GetJobsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L135"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetJobsResponse&gt; GetJobsAsync(GetJobsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsRequest.html">GetJobsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse.html">GetJobsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobsAsync_System_Action_Elastic_Clients_Elasticsearch_Rollup_GetJobsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobsAsync(System.Action{Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor},System.Threading.CancellationToken)">
+  GetJobsAsync(Action&lt;GetJobsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L150"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;GetJobsResponse&gt; GetJobsAsync(Action&lt;GetJobsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsRequestDescriptor.html">GetJobsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse.html">GetJobsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetJobsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetJobsAsync(System.Threading.CancellationToken)">
+  GetJobsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L141"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;GetJobsResponse&gt; GetJobsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetJobsResponse.html">GetJobsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCaps_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCaps*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCaps" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCaps">
+  GetRollupCaps()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual GetRollupCapsResponse GetRollupCaps()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse.html">GetRollupCapsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCaps_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCaps*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCaps_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCaps(Elastic.Clients.Elasticsearch.Id)">
+  GetRollupCaps(Id?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L204"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual GetRollupCapsResponse GetRollupCaps(Id? id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse.html">GetRollupCapsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCaps_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCaps*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCaps_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_GetRollupCapsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCaps(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor})">
+  GetRollupCaps(Id?, Action&lt;GetRollupCapsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual GetRollupCapsResponse GetRollupCaps(Id? id, Action&lt;GetRollupCapsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor.html">GetRollupCapsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse.html">GetRollupCapsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCaps_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCaps*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCaps_Elastic_Clients_Elasticsearch_Rollup_GetRollupCapsRequest_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCaps(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest)">
+  GetRollupCaps(GetRollupCapsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetRollupCapsResponse GetRollupCaps(GetRollupCapsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest.html">GetRollupCapsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse.html">GetRollupCapsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCaps_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCaps*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCaps_System_Action_Elastic_Clients_Elasticsearch_Rollup_GetRollupCapsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCaps(System.Action{Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor})">
+  GetRollupCaps(Action&lt;GetRollupCapsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L194"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual GetRollupCapsResponse GetRollupCaps(Action&lt;GetRollupCapsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor.html">GetRollupCapsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse.html">GetRollupCapsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCapsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCapsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCapsAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_GetRollupCapsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor},System.Threading.CancellationToken)">
+  GetRollupCapsAsync(Id?, Action&lt;GetRollupCapsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L257"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;GetRollupCapsResponse&gt; GetRollupCapsAsync(Id? id, Action&lt;GetRollupCapsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor.html">GetRollupCapsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse.html">GetRollupCapsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCapsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCapsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCapsAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetRollupCapsAsync(Id?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;GetRollupCapsResponse&gt; GetRollupCapsAsync(Id? id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse.html">GetRollupCapsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCapsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCapsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCapsAsync_Elastic_Clients_Elasticsearch_Rollup_GetRollupCapsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest,System.Threading.CancellationToken)">
+  GetRollupCapsAsync(GetRollupCapsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L223"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetRollupCapsResponse&gt; GetRollupCapsAsync(GetRollupCapsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest.html">GetRollupCapsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse.html">GetRollupCapsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCapsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCapsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCapsAsync_System_Action_Elastic_Clients_Elasticsearch_Rollup_GetRollupCapsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCapsAsync(System.Action{Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor},System.Threading.CancellationToken)">
+  GetRollupCapsAsync(Action&lt;GetRollupCapsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L238"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;GetRollupCapsResponse&gt; GetRollupCapsAsync(Action&lt;GetRollupCapsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor.html">GetRollupCapsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse.html">GetRollupCapsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCapsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCapsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupCapsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupCapsAsync(System.Threading.CancellationToken)">
+  GetRollupCapsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L229"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;GetRollupCapsResponse&gt; GetRollupCapsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse.html">GetRollupCapsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCaps_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCaps*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCaps_Elastic_Clients_Elasticsearch_Ids_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids)">
+  GetRollupIndexCaps(Ids)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L273"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(Ids index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse.html">GetRollupIndexCapsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCaps_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCaps*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCaps_Elastic_Clients_Elasticsearch_Ids_System_Action_Elastic_Clients_Elasticsearch_Rollup_GetRollupIndexCapsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids,System.Action{Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor})">
+  GetRollupIndexCaps(Ids, Action&lt;GetRollupIndexCapsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L282"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(Ids index, Action&lt;GetRollupIndexCapsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor.html">GetRollupIndexCapsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse.html">GetRollupIndexCapsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCaps_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCaps*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCaps_Elastic_Clients_Elasticsearch_Rollup_GetRollupIndexCapsRequest_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest)">
+  GetRollupIndexCaps(GetRollupIndexCapsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(GetRollupIndexCapsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest.html">GetRollupIndexCapsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse.html">GetRollupIndexCapsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCapsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCapsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCapsAsync_Elastic_Clients_Elasticsearch_Ids_System_Action_Elastic_Clients_Elasticsearch_Rollup_GetRollupIndexCapsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids,System.Action{Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor},System.Threading.CancellationToken)">
+  GetRollupIndexCapsAsync(Ids, Action&lt;GetRollupIndexCapsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L307"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;GetRollupIndexCapsResponse&gt; GetRollupIndexCapsAsync(Ids index, Action&lt;GetRollupIndexCapsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestDescriptor.html">GetRollupIndexCapsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse.html">GetRollupIndexCapsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCapsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCapsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCapsAsync_Elastic_Clients_Elasticsearch_Ids_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids,System.Threading.CancellationToken)">
+  GetRollupIndexCapsAsync(Ids, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L298"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;GetRollupIndexCapsResponse&gt; GetRollupIndexCapsAsync(Ids index, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse.html">GetRollupIndexCapsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCapsAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCapsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_GetRollupIndexCapsAsync_Elastic_Clients_Elasticsearch_Rollup_GetRollupIndexCapsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest,System.Threading.CancellationToken)">
+  GetRollupIndexCapsAsync(GetRollupIndexCapsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetRollupIndexCapsResponse&gt; GetRollupIndexCapsAsync(GetRollupIndexCapsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest.html">GetRollupIndexCapsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse.html">GetRollupIndexCapsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJob_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJob(Elastic.Clients.Elasticsearch.Id)">
+  PutJob(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L323"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual PutJobResponse PutJob(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobResponse.html">PutJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJob_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJob(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor})">
+  PutJob(Id, Action&lt;PutJobRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual PutJobResponse PutJob(Id id, Action&lt;PutJobRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobResponse.html">PutJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJob_Elastic_Clients_Elasticsearch_Rollup_PutJobRequest_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJob(Elastic.Clients.Elasticsearch.Rollup.PutJobRequest)">
+  PutJob(PutJobRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutJobResponse PutJob(PutJobRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequest.html">PutJobRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobResponse.html">PutJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJobAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJobAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor},System.Threading.CancellationToken)">
+  PutJobAsync(Id, Action&lt;PutJobRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L367"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;PutJobResponse&gt; PutJobAsync(Id id, Action&lt;PutJobRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobResponse.html">PutJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJobAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJobAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  PutJobAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L358"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;PutJobResponse&gt; PutJobAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobResponse.html">PutJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJobAsync_Elastic_Clients_Elasticsearch_Rollup_PutJobRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJobAsync(Elastic.Clients.Elasticsearch.Rollup.PutJobRequest,System.Threading.CancellationToken)">
+  PutJobAsync(PutJobRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L352"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutJobResponse&gt; PutJobAsync(PutJobRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequest.html">PutJobRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobResponse.html">PutJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJobAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJobAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  PutJobAsync&lt;TDocument&gt;(Id, Action&lt;PutJobRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L377"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;PutJobResponse&gt; PutJobAsync&lt;TDocument&gt;(Id id, Action&lt;PutJobRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor-1.html">PutJobRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobResponse.html">PutJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_PutJob__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.PutJob``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor{``0}})">
+  PutJob&lt;TDocument&gt;(Id, Action&lt;PutJobRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L342"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual PutJobResponse PutJob&lt;TDocument&gt;(Id id, Action&lt;PutJobRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor-1.html">PutJobRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobResponse.html">PutJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Rollup_RollupSearchRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  RollupSearchAsync&lt;TDocument&gt;(Indices, Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L503"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;RollupSearchResponse&lt;TDocument&gt;&gt; RollupSearchAsync&lt;TDocument&gt;(Indices indices, Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor-1.html">RollupSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync__1_Elastic_Clients_Elasticsearch_Indices_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync``1(Elastic.Clients.Elasticsearch.Indices,System.Threading.CancellationToken)">
+  RollupSearchAsync&lt;TDocument&gt;(Indices, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L494"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;RollupSearchResponse&lt;TDocument&gt;&gt; RollupSearchAsync&lt;TDocument&gt;(Indices indices, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync__1_Elastic_Clients_Elasticsearch_Rollup_RollupSearchRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync``1(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest,System.Threading.CancellationToken)">
+  RollupSearchAsync&lt;TDocument&gt;(RollupSearchRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L469"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;RollupSearchResponse&lt;TDocument&gt;&gt; RollupSearchAsync&lt;TDocument&gt;(RollupSearchRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest.html">RollupSearchRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync__1_System_Action_Elastic_Clients_Elasticsearch_Rollup_RollupSearchRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync``1(System.Action{Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  RollupSearchAsync&lt;TDocument&gt;(Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L484"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;RollupSearchResponse&lt;TDocument&gt;&gt; RollupSearchAsync&lt;TDocument&gt;(Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor-1.html">RollupSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync__1_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync``1(System.Threading.CancellationToken)">
+  RollupSearchAsync&lt;TDocument&gt;(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L475"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;RollupSearchResponse&lt;TDocument&gt;&gt; RollupSearchAsync&lt;TDocument&gt;(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync__2_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Rollup_RollupSearchRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync``2(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  RollupSearchAsync&lt;TDocument, TDocumentResponse&gt;(Indices, Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L541"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;RollupSearchResponse&lt;TDocumentResponse&gt;&gt; RollupSearchAsync&lt;TDocument, TDocumentResponse&gt;(Indices indices, Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor-1.html">RollupSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocumentResponse&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TDocumentResponse</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync__2_Elastic_Clients_Elasticsearch_Indices_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync``2(Elastic.Clients.Elasticsearch.Indices,System.Threading.CancellationToken)">
+  RollupSearchAsync&lt;TDocument, TDocumentResponse&gt;(Indices, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L532"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;RollupSearchResponse&lt;TDocumentResponse&gt;&gt; RollupSearchAsync&lt;TDocument, TDocumentResponse&gt;(Indices indices, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocumentResponse&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TDocumentResponse</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync__2_System_Action_Elastic_Clients_Elasticsearch_Rollup_RollupSearchRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync``2(System.Action{Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  RollupSearchAsync&lt;TDocument, TDocumentResponse&gt;(Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L522"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;RollupSearchResponse&lt;TDocumentResponse&gt;&gt; RollupSearchAsync&lt;TDocument, TDocumentResponse&gt;(Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor-1.html">RollupSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocumentResponse&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TDocumentResponse</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearchAsync__2_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearchAsync``2(System.Threading.CancellationToken)">
+  RollupSearchAsync&lt;TDocument, TDocumentResponse&gt;(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L513"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;RollupSearchResponse&lt;TDocumentResponse&gt;&gt; RollupSearchAsync&lt;TDocument, TDocumentResponse&gt;(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocumentResponse&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TDocumentResponse</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch__1" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch``1">
+  RollupSearch&lt;TDocument&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L393"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual RollupSearchResponse&lt;TDocument&gt; RollupSearch&lt;TDocument&gt;()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch__1_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch``1(Elastic.Clients.Elasticsearch.Indices)">
+  RollupSearch&lt;TDocument&gt;(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L412"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual RollupSearchResponse&lt;TDocument&gt; RollupSearch&lt;TDocument&gt;(Indices indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Rollup_RollupSearchRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor{``0}})">
+  RollupSearch&lt;TDocument&gt;(Indices, Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L421"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual RollupSearchResponse&lt;TDocument&gt; RollupSearch&lt;TDocument&gt;(Indices indices, Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor-1.html">RollupSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch__1_Elastic_Clients_Elasticsearch_Rollup_RollupSearchRequest_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch``1(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest)">
+  RollupSearch&lt;TDocument&gt;(RollupSearchRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L387"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual RollupSearchResponse&lt;TDocument&gt; RollupSearch&lt;TDocument&gt;(RollupSearchRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest.html">RollupSearchRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch__1_System_Action_Elastic_Clients_Elasticsearch_Rollup_RollupSearchRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch``1(System.Action{Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor{``0}})">
+  RollupSearch&lt;TDocument&gt;(Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L402"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual RollupSearchResponse&lt;TDocument&gt; RollupSearch&lt;TDocument&gt;(Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor-1.html">RollupSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch__2" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch``2">
+  RollupSearch&lt;TDocument, TDocumentResponse&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L431"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual RollupSearchResponse&lt;TDocumentResponse&gt; RollupSearch&lt;TDocument, TDocumentResponse&gt;()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocumentResponse&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TDocumentResponse</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch__2_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch``2(Elastic.Clients.Elasticsearch.Indices)">
+  RollupSearch&lt;TDocument, TDocumentResponse&gt;(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L450"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual RollupSearchResponse&lt;TDocumentResponse&gt; RollupSearch&lt;TDocument, TDocumentResponse&gt;(Indices indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocumentResponse&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TDocumentResponse</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch__2_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Rollup_RollupSearchRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch``2(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor{``0}})">
+  RollupSearch&lt;TDocument, TDocumentResponse&gt;(Indices, Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L459"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual RollupSearchResponse&lt;TDocumentResponse&gt; RollupSearch&lt;TDocument, TDocumentResponse&gt;(Indices indices, Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor-1.html">RollupSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocumentResponse&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TDocumentResponse</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_RollupSearch__2_System_Action_Elastic_Clients_Elasticsearch_Rollup_RollupSearchRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.RollupSearch``2(System.Action{Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor{``0}})">
+  RollupSearch&lt;TDocument, TDocumentResponse&gt;(Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L440"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual RollupSearchResponse&lt;TDocumentResponse&gt; RollupSearch&lt;TDocument, TDocumentResponse&gt;(Action&lt;RollupSearchRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor-1.html">RollupSearchRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.RollupSearchResponse-1.html">RollupSearchResponse</a>&lt;TDocumentResponse&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TDocumentResponse</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJob_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJob(Elastic.Clients.Elasticsearch.Id)">
+  StartJob(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L557"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual StartJobResponse StartJob(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobResponse.html">StartJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJob_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_StartJobRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJob(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor})">
+  StartJob(Id, Action&lt;StartJobRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L566"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual StartJobResponse StartJob(Id id, Action&lt;StartJobRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor.html">StartJobRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobResponse.html">StartJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJob_Elastic_Clients_Elasticsearch_Rollup_StartJobRequest_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJob(Elastic.Clients.Elasticsearch.Rollup.StartJobRequest)">
+  StartJob(StartJobRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L551"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StartJobResponse StartJob(StartJobRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobRequest.html">StartJobRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobResponse.html">StartJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJobAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_StartJobRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJobAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor},System.Threading.CancellationToken)">
+  StartJobAsync(Id, Action&lt;StartJobRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L591"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;StartJobResponse&gt; StartJobAsync(Id id, Action&lt;StartJobRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobRequestDescriptor.html">StartJobRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobResponse.html">StartJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJobAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJobAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  StartJobAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L582"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;StartJobResponse&gt; StartJobAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobResponse.html">StartJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StartJobAsync_Elastic_Clients_Elasticsearch_Rollup_StartJobRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StartJobAsync(Elastic.Clients.Elasticsearch.Rollup.StartJobRequest,System.Threading.CancellationToken)">
+  StartJobAsync(StartJobRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L576"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StartJobResponse&gt; StartJobAsync(StartJobRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobRequest.html">StartJobRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StartJobResponse.html">StartJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJob_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJob(Elastic.Clients.Elasticsearch.Id)">
+  StopJob(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L607"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual StopJobResponse StopJob(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobResponse.html">StopJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJob_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_StopJobRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJob(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor})">
+  StopJob(Id, Action&lt;StopJobRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L616"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual StopJobResponse StopJob(Id id, Action&lt;StopJobRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor.html">StopJobRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobResponse.html">StopJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJob_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJob*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJob_Elastic_Clients_Elasticsearch_Rollup_StopJobRequest_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJob(Elastic.Clients.Elasticsearch.Rollup.StopJobRequest)">
+  StopJob(StopJobRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L601"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual StopJobResponse StopJob(StopJobRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobRequest.html">StopJobRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobResponse.html">StopJobResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJobAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Rollup_StopJobRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJobAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor},System.Threading.CancellationToken)">
+  StopJobAsync(Id, Action&lt;StopJobRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L641"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;StopJobResponse&gt; StopJobAsync(Id id, Action&lt;StopJobRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobRequestDescriptor.html">StopJobRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobResponse.html">StopJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJobAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJobAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  StopJobAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L632"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;8.11.0&#39;.&quot;)]
+public virtual Task&lt;StopJobResponse&gt; StopJobAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobResponse.html">StopJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJobAsync_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJobAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_RollupNamespacedClient_StopJobAsync_Elastic_Clients_Elasticsearch_Rollup_StopJobRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient.StopJobAsync(Elastic.Clients.Elasticsearch.Rollup.StopJobRequest,System.Threading.CancellationToken)">
+  StopJobAsync(StopJobRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Rollup.g.cs/#L626"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;StopJobResponse&gt; StopJobAsync(StopJobRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobRequest.html">StopJobRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.StopJobResponse.html">StopJobResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

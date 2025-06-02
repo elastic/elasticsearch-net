@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class DataStream | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class DataStream | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.0-preview.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_DataStream.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.DataStream%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream" class="text-break">
+Class DataStream  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L209"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(DataStreamConverter))]
+public sealed class DataStream</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">DataStream</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream__ctor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.#ctor">
+  DataStream()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L232"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public DataStream()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream__ctor_System_Int32_System_Boolean_System_Collections_Generic_IReadOnlyCollection_Elastic_Clients_Elasticsearch_IndexManagement_DataStreamIndex__System_String_Elastic_Clients_Elasticsearch_IndexManagement_ManagedBy_System_Boolean_System_Boolean_Elastic_Clients_Elasticsearch_HealthStatus_System_String_Elastic_Clients_Elasticsearch_IndexManagement_DataStreamTimestampField_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.#ctor(System.Int32,System.Boolean,System.Collections.Generic.IReadOnlyCollection{Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex},System.String,Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy,System.Boolean,System.Boolean,Elastic.Clients.Elasticsearch.HealthStatus,System.String,Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField)">
+  DataStream(int, bool, IReadOnlyCollection&lt;DataStreamIndex&gt;, string, ManagedBy, bool, bool, HealthStatus, string, DataStreamTimestampField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L212"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataStream(int generation, bool hidden, IReadOnlyCollection&lt;DataStreamIndex&gt; indices, string name, ManagedBy nextGenerationManagedBy, bool preferIlm, bool rolloverOnWrite, HealthStatus status, string template, DataStreamTimestampField timestampField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>generation</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>hidden</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>indices</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex.html">DataStreamIndex</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>nextGenerationManagedBy</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.html">ManagedBy</a></dt>
+    <dd></dd>
+    <dt><code>preferIlm</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>rolloverOnWrite</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>status</code> <a class="xref" href="Elastic.Clients.Elasticsearch.HealthStatus.html">HealthStatus</a></dt>
+    <dd></dd>
+    <dt><code>template</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>timestampField</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField.html">DataStreamTimestampField</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_AllowCustomRouting_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.AllowCustomRouting*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_AllowCustomRouting" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.AllowCustomRouting">
+  AllowCustomRouting
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the data stream allows custom routing on write request.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? AllowCustomRouting { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_FailureStore_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.FailureStore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_FailureStore" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.FailureStore">
+  FailureStore
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Information about failure store backing indices
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FailureStore? FailureStore { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.FailureStore.html">FailureStore</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Generation_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Generation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Generation" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Generation">
+  Generation
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Current generation for the data stream. This number acts as a cumulative count of the stream’s rollovers, starting at 1.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Generation { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Hidden_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Hidden*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Hidden" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Hidden">
+  Hidden
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L273"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the data stream is hidden.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Hidden { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_IlmPolicy_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.IlmPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_IlmPolicy" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.IlmPolicy">
+  IlmPolicy
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L287"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Name of the current ILM lifecycle policy in the stream’s matching index template.
+This lifecycle policy is set in the <code>index.lifecycle.name</code> setting.
+If the template does not include a lifecycle policy, this property is not included in the response.
+NOTE: A data stream’s backing indices may be assigned different lifecycle policies. To retrieve the lifecycle policy for individual backing indices, use the get index settings API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? IlmPolicy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Indices" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Indices">
+  Indices
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L295"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of objects containing information about the data stream’s backing indices.
+The last item in this array contains information about the stream’s current write index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyCollection&lt;DataStreamIndex&gt; Indices { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex.html">DataStreamIndex</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Lifecycle_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Lifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Lifecycle" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Lifecycle">
+  Lifecycle
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L306"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Contains the configuration for the data stream lifecycle of this data stream.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataStreamLifecycleWithRollover? Lifecycle { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover.html">DataStreamLifecycleWithRollover</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Meta_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Meta" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Meta">
+  Meta
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L314"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Custom metadata for the stream, copied from the <code>_meta</code> object of the stream’s matching index template.
+If empty, the response omits this property.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyDictionary&lt;string, object&gt;? Meta { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Name_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Name*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Name" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Name">
+  Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L321"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Name of the data stream.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_NextGenerationManagedBy_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.NextGenerationManagedBy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_NextGenerationManagedBy" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.NextGenerationManagedBy">
+  NextGenerationManagedBy
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Name of the lifecycle system that'll manage the next generation of the data stream.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ManagedBy NextGenerationManagedBy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.html">ManagedBy</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_PreferIlm_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.PreferIlm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_PreferIlm" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.PreferIlm">
+  PreferIlm
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L343"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates if ILM should take precedence over DSL in case both are configured to managed this data stream.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool PreferIlm { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Replicated_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Replicated*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Replicated" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Replicated">
+  Replicated
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L354"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the data stream is created and managed by cross-cluster replication and the local cluster can not write into this data stream or change its mappings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Replicated { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_RolloverOnWrite_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.RolloverOnWrite*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_RolloverOnWrite" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.RolloverOnWrite">
+  RolloverOnWrite
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L361"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the next write to this data stream will trigger a rollover first and the document will be indexed in the new backing index. If the rollover fails the indexing request will fail too.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RolloverOnWrite { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Status_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Status*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Status" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Status">
+  Status
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L373"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Health status of the data stream.
+This health status is based on the state of the primary and replica shards of the stream’s backing indices.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HealthStatus Status { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.HealthStatus.html">HealthStatus</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_System_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.System*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_System" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.System">
+  System
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L384"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the data stream is created and managed by an Elastic stack component and cannot be modified through normal user interaction.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? System { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Template_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Template*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_Template" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.Template">
+  Template
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L392"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Name of the index template used to create the data stream’s backing indices.
+The template’s index pattern must match the name of this data stream.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Template { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_TimestampField_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.TimestampField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_DataStream_TimestampField" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.DataStream.TimestampField">
+  TimestampField
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/DataStream.g.cs/#L403"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Information about the <code>@timestamp</code> field in the data stream.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataStreamTimestampField TimestampField { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField.html">DataStreamTimestampField</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
