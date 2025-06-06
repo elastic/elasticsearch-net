@@ -28,7 +28,7 @@ public class IdResolver
 			return null;
 		}
 
-		return Resolve(instance.GetType(), instance);
+		return Resolve(typeof(T), instance);
 	}
 
 	public string? Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type, object instance)
