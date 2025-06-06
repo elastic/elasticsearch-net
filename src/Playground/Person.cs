@@ -4,6 +4,7 @@
 
 using System.Runtime.Serialization;
 using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Playground
 {
@@ -30,6 +31,8 @@ namespace Playground
 		public string Data { get; init; } = "NOTHING";
 
 		public DateTimeKind Enum { get; init; }
+
+		public Query? Q { get; init; }
 	}
 
 	public class PersonV3
