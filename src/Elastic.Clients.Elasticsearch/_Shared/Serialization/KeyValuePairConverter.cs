@@ -4,9 +4,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
@@ -17,9 +17,9 @@ internal sealed class KeyValuePairConverterFactory : JsonConverterFactory
 
 	public KeyValuePairConverterFactory(IElasticsearchClientSettings settings) => _settings = settings;
 
-	public override bool CanConvert(Type typeToConvert) => typeToConvert.IsGenericType
-		&& typeToConvert.Name == typeof(KeyValuePair<,>).Name
-		&& typeof(IUrlParameter).IsAssignableFrom(typeToConvert.GetGenericArguments()[0]);
+	public override bool CanConvert(Type typeToConvert) =>
+		typeToConvert.IsGenericType &&
+		typeToConvert.GetGenericTypeDefinition() == typeof(KeyValuePair<,>);
 
 	public override JsonConverter CreateConverter(
 		Type type,
@@ -31,7 +31,7 @@ internal sealed class KeyValuePairConverterFactory : JsonConverterFactory
 		return (JsonConverter)Activator.CreateInstance(typeof(KeyValuePairConverter<,>).MakeGenericType(itemOneType, itemTwoType), _settings);
 	}
 
-	private class KeyValuePairConverter<TItem1, TItem2> : JsonConverter<KeyValuePair<TItem1, TItem2>> where TItem1 : class, IUrlParameter
+	private class KeyValuePairConverter<TItem1, TItem2> : JsonConverter<KeyValuePair<TItem1, TItem2>>
 	{
 		private readonly IElasticsearchClientSettings _settings;
 
@@ -58,7 +58,16 @@ internal sealed class KeyValuePairConverterFactory : JsonConverterFactory
 			JsonSerializerOptions options)
 		{
 			writer.WriteStartObject();
-			writer.WritePropertyName(value.Key.GetString(_settings));
+
+			if (value.Key is IUrlParameter parameter)
+			{
+				writer.WritePropertyName(parameter.GetString(_settings));
+			}
+			else
+			{
+				writer.WritePropertyName(value.Key.ToString());
+			}
+
 			JsonSerializer.Serialize<TItem2>(writer, value.Value, options);
 			writer.WriteEndObject();
 		}
