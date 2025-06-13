@@ -115,8 +115,8 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 
 	private static void MutateOptions(JsonSerializerOptions options)
 	{
+		options.MaxDepth = 512;
 		options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-		options.IncludeFields = true;
 		options.NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals;
 		options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 	}
