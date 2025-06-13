@@ -22,13 +22,13 @@ jobs:
           json_pr_labels='${{ toJSON(github.event.pull_request.labels) }}'
           readarray -t pr_labels < <(echo "${json_pr_labels}" | jq -r -c '.[].name')
 
-          json_all_labels="$(gh label list --repo ${{ github.repository }} --json name --search "backport" --limit 1000)"
+          json_all_labels="$(gh label list --repo ${{ github.repository }} --json name --search "backport-" --limit 1000)"
           readarray -t all_labels < <(echo "${json_all_labels}" | jq -r -c '.[].name')
 
           declare -A all_backport_labels=()
           declare -A all_floating_majors=()
 
-          backport_regex="^backport ([0-9])+\.([0-9]+|x)$"
+          backport_regex="^backport-([0-9])+\.([0-9]+|x)$"
 
           echo "::group::Available Labels"
           echo "skip-backport"
