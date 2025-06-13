@@ -1,0 +1,3905 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SqlNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SqlNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient" class="text-break">
+Class SqlNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.html">Sql</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SqlNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">SqlNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.#ctor">
+  SqlNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.html">SqlNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SqlNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursor_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursor" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursor">
+  ClearCursor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Clear an SQL search cursor.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ClearCursorResponse ClearCursor()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse.html">ClearCursorResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursor_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursor_Elastic_Clients_Elasticsearch_Sql_ClearCursorRequest_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursor(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest)">
+  ClearCursor(ClearCursorRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Clear an SQL search cursor.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ClearCursorResponse ClearCursor(ClearCursorRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest.html">ClearCursorRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse.html">ClearCursorResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursor_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursor_Elastic_Clients_Elasticsearch_Sql_ClearCursorRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursor(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor)">
+  ClearCursor(ClearCursorRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Clear an SQL search cursor.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ClearCursorResponse ClearCursor(ClearCursorRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor.html">ClearCursorRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse.html">ClearCursorResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursor_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursor_System_Action_Elastic_Clients_Elasticsearch_Sql_ClearCursorRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursor(System.Action{Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor})">
+  ClearCursor(Action&lt;ClearCursorRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Clear an SQL search cursor.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual ClearCursorResponse ClearCursor(Action&lt;ClearCursorRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor.html">ClearCursorRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse.html">ClearCursorResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursorAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursorAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursorAsync_Elastic_Clients_Elasticsearch_Sql_ClearCursorRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursorAsync(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest,System.Threading.CancellationToken)">
+  ClearCursorAsync(ClearCursorRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Clear an SQL search cursor.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCursorResponse&gt; ClearCursorAsync(ClearCursorRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest.html">ClearCursorRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse.html">ClearCursorResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursorAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursorAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursorAsync_Elastic_Clients_Elasticsearch_Sql_ClearCursorRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursorAsync(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor,System.Threading.CancellationToken)">
+  ClearCursorAsync(ClearCursorRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Clear an SQL search cursor.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCursorResponse&gt; ClearCursorAsync(ClearCursorRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor.html">ClearCursorRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse.html">ClearCursorResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursorAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursorAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursorAsync_System_Action_Elastic_Clients_Elasticsearch_Sql_ClearCursorRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursorAsync(System.Action{Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor},System.Threading.CancellationToken)">
+  ClearCursorAsync(Action&lt;ClearCursorRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Clear an SQL search cursor.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCursorResponse&gt; ClearCursorAsync(Action&lt;ClearCursorRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor.html">ClearCursorRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse.html">ClearCursorResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursorAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursorAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_ClearCursorAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.ClearCursorAsync(System.Threading.CancellationToken)">
+  ClearCursorAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Clear an SQL search cursor.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCursorResponse&gt; ClearCursorAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.ClearCursorResponse.html">ClearCursorResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.Id)">
+  DeleteAsync(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L353"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncResponse DeleteAsync(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_DeleteAsyncRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor})">
+  DeleteAsync(Id, Action&lt;DeleteAsyncRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L384"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncResponse DeleteAsync(Id id, Action&lt;DeleteAsyncRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor.html">DeleteAsyncRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_Sql_DeleteAsyncRequest_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest)">
+  DeleteAsync(DeleteAsyncRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L171"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncResponse DeleteAsync(DeleteAsyncRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest.html">DeleteAsyncRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_Sql_DeleteAsyncRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor)">
+  DeleteAsync(DeleteAsyncRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L323"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncResponse DeleteAsync(DeleteAsyncRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor.html">DeleteAsyncRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_DeleteAsyncRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteAsyncAsync(Id, Action&lt;DeleteAsyncRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L565"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncResponse&gt; DeleteAsyncAsync(Id id, Action&lt;DeleteAsyncRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor.html">DeleteAsyncRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeleteAsyncAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L535"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncResponse&gt; DeleteAsyncAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync_Elastic_Clients_Elasticsearch_Sql_DeleteAsyncRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync(Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest,System.Threading.CancellationToken)">
+  DeleteAsyncAsync(DeleteAsyncRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L201"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncResponse&gt; DeleteAsyncAsync(DeleteAsyncRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequest.html">DeleteAsyncRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync_Elastic_Clients_Elasticsearch_Sql_DeleteAsyncRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync(Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor,System.Threading.CancellationToken)">
+  DeleteAsyncAsync(DeleteAsyncRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L506"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncResponse&gt; DeleteAsyncAsync(DeleteAsyncRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor.html">DeleteAsyncRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_DeleteAsyncRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  DeleteAsyncAsync&lt;TDocument&gt;(Id, Action&lt;DeleteAsyncRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L475"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncResponse&gt; DeleteAsyncAsync&lt;TDocument&gt;(Id id, Action&lt;DeleteAsyncRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor-1.html">DeleteAsyncRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync__1_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync``1(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeleteAsyncAsync&lt;TDocument&gt;(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L445"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncResponse&gt; DeleteAsyncAsync&lt;TDocument&gt;(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsyncAsync__1_Elastic_Clients_Elasticsearch_Sql_DeleteAsyncRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsyncAsync``1(Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor{``0},System.Threading.CancellationToken)">
+  DeleteAsyncAsync&lt;TDocument&gt;(DeleteAsyncRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L416"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteAsyncResponse&gt; DeleteAsyncAsync&lt;TDocument&gt;(DeleteAsyncRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor-1.html">DeleteAsyncRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync__1_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync``1(Elastic.Clients.Elasticsearch.Id)">
+  DeleteAsync&lt;TDocument&gt;(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L260"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncResponse DeleteAsync&lt;TDocument&gt;(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_DeleteAsyncRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor{``0}})">
+  DeleteAsync&lt;TDocument&gt;(Id, Action&lt;DeleteAsyncRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L291"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncResponse DeleteAsync&lt;TDocument&gt;(Id id, Action&lt;DeleteAsyncRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor-1.html">DeleteAsyncRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_DeleteAsync__1_Elastic_Clients_Elasticsearch_Sql_DeleteAsyncRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.DeleteAsync``1(Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor{``0})">
+  DeleteAsync&lt;TDocument&gt;(DeleteAsyncRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L230"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete an async SQL search.
+Delete an async SQL search or a stored synchronous SQL search.
+If the search is still running, the API cancels it.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the following users can use this API to delete a search:
+</p>
+<ul><li>
+<p>
+Users with the <code>cancel_task</code> cluster privilege.
+</p>
+</li><li>
+<p>
+The user who first submitted the search.
+</p>
+</li></ul>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteAsyncResponse DeleteAsync&lt;TDocument&gt;(DeleteAsyncRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncRequestDescriptor-1.html">DeleteAsyncRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.DeleteAsyncResponse.html">DeleteAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync(Elastic.Clients.Elasticsearch.Id)">
+  GetAsync(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L687"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncResponse GetAsync(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_GetAsyncRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor})">
+  GetAsync(Id, Action&lt;GetAsyncRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L705"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncResponse GetAsync(Id id, Action&lt;GetAsyncRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor.html">GetAsyncRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync_Elastic_Clients_Elasticsearch_Sql_GetAsyncRequest_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest)">
+  GetAsync(GetAsyncRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L583"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncResponse GetAsync(GetAsyncRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest.html">GetAsyncRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync_Elastic_Clients_Elasticsearch_Sql_GetAsyncRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor)">
+  GetAsync(GetAsyncRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L670"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncResponse GetAsync(GetAsyncRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor.html">GetAsyncRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_GetAsyncRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor},System.Threading.CancellationToken)">
+  GetAsyncAsync(Id, Action&lt;GetAsyncRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L808"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncResponse&gt; GetAsyncAsync(Id id, Action&lt;GetAsyncRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor.html">GetAsyncRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetAsyncAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L791"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncResponse&gt; GetAsyncAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync_Elastic_Clients_Elasticsearch_Sql_GetAsyncRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest,System.Threading.CancellationToken)">
+  GetAsyncAsync(GetAsyncRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L600"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncResponse&gt; GetAsyncAsync(GetAsyncRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest.html">GetAsyncRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync_Elastic_Clients_Elasticsearch_Sql_GetAsyncRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor,System.Threading.CancellationToken)">
+  GetAsyncAsync(GetAsyncRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L775"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncResponse&gt; GetAsyncAsync(GetAsyncRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor.html">GetAsyncRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_GetAsyncRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  GetAsyncAsync&lt;TDocument&gt;(Id, Action&lt;GetAsyncRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L757"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncResponse&gt; GetAsyncAsync&lt;TDocument&gt;(Id id, Action&lt;GetAsyncRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor-1.html">GetAsyncRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync__1_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync``1(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetAsyncAsync&lt;TDocument&gt;(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L740"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncResponse&gt; GetAsyncAsync&lt;TDocument&gt;(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncAsync__1_Elastic_Clients_Elasticsearch_Sql_GetAsyncRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncAsync``1(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor{``0},System.Threading.CancellationToken)">
+  GetAsyncAsync&lt;TDocument&gt;(GetAsyncRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L724"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncResponse&gt; GetAsyncAsync&lt;TDocument&gt;(GetAsyncRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor-1.html">GetAsyncRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus(Elastic.Clients.Elasticsearch.Id)">
+  GetAsyncStatus(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L909"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncStatusResponse GetAsyncStatus(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_GetAsyncStatusRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor})">
+  GetAsyncStatus(Id, Action&lt;GetAsyncStatusRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L924"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncStatusResponse GetAsyncStatus(Id id, Action&lt;GetAsyncStatusRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor.html">GetAsyncStatusRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus_Elastic_Clients_Elasticsearch_Sql_GetAsyncStatusRequest_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus(Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest)">
+  GetAsyncStatus(GetAsyncStatusRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L823"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncStatusResponse GetAsyncStatus(GetAsyncStatusRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest.html">GetAsyncStatusRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus_Elastic_Clients_Elasticsearch_Sql_GetAsyncStatusRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus(Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor)">
+  GetAsyncStatus(GetAsyncStatusRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L895"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncStatusResponse GetAsyncStatus(GetAsyncStatusRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor.html">GetAsyncStatusRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_GetAsyncStatusRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor},System.Threading.CancellationToken)">
+  GetAsyncStatusAsync(Id, Action&lt;GetAsyncStatusRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1009"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncStatusResponse&gt; GetAsyncStatusAsync(Id id, Action&lt;GetAsyncStatusRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor.html">GetAsyncStatusRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetAsyncStatusAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L995"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncStatusResponse&gt; GetAsyncStatusAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync_Elastic_Clients_Elasticsearch_Sql_GetAsyncStatusRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync(Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest,System.Threading.CancellationToken)">
+  GetAsyncStatusAsync(GetAsyncStatusRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L837"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncStatusResponse&gt; GetAsyncStatusAsync(GetAsyncStatusRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequest.html">GetAsyncStatusRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync_Elastic_Clients_Elasticsearch_Sql_GetAsyncStatusRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync(Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor,System.Threading.CancellationToken)">
+  GetAsyncStatusAsync(GetAsyncStatusRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L982"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncStatusResponse&gt; GetAsyncStatusAsync(GetAsyncStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor.html">GetAsyncStatusRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_GetAsyncStatusRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  GetAsyncStatusAsync&lt;TDocument&gt;(Id, Action&lt;GetAsyncStatusRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L967"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncStatusResponse&gt; GetAsyncStatusAsync&lt;TDocument&gt;(Id id, Action&lt;GetAsyncStatusRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor-1.html">GetAsyncStatusRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync__1_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync``1(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetAsyncStatusAsync&lt;TDocument&gt;(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L953"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncStatusResponse&gt; GetAsyncStatusAsync&lt;TDocument&gt;(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatusAsync__1_Elastic_Clients_Elasticsearch_Sql_GetAsyncStatusRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatusAsync``1(Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor{``0},System.Threading.CancellationToken)">
+  GetAsyncStatusAsync&lt;TDocument&gt;(GetAsyncStatusRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L940"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetAsyncStatusResponse&gt; GetAsyncStatusAsync&lt;TDocument&gt;(GetAsyncStatusRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor-1.html">GetAsyncStatusRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus__1_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus``1(Elastic.Clients.Elasticsearch.Id)">
+  GetAsyncStatus&lt;TDocument&gt;(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L864"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncStatusResponse GetAsyncStatus&lt;TDocument&gt;(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_GetAsyncStatusRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor{``0}})">
+  GetAsyncStatus&lt;TDocument&gt;(Id, Action&lt;GetAsyncStatusRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L879"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncStatusResponse GetAsyncStatus&lt;TDocument&gt;(Id id, Action&lt;GetAsyncStatusRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor-1.html">GetAsyncStatusRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsyncStatus__1_Elastic_Clients_Elasticsearch_Sql_GetAsyncStatusRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsyncStatus``1(Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor{``0})">
+  GetAsyncStatus&lt;TDocument&gt;(GetAsyncStatusRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L850"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get the async SQL search status.
+Get the current status of an async SQL search or a stored synchronous SQL search.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncStatusResponse GetAsyncStatus&lt;TDocument&gt;(GetAsyncStatusRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusRequestDescriptor-1.html">GetAsyncStatusRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse.html">GetAsyncStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync__1_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync``1(Elastic.Clients.Elasticsearch.Id)">
+  GetAsync&lt;TDocument&gt;(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L633"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncResponse GetAsync&lt;TDocument&gt;(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Sql_GetAsyncRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor{``0}})">
+  GetAsync&lt;TDocument&gt;(Id, Action&lt;GetAsyncRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L651"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncResponse GetAsync&lt;TDocument&gt;(Id id, Action&lt;GetAsyncRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor-1.html">GetAsyncRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_GetAsync__1_Elastic_Clients_Elasticsearch_Sql_GetAsyncRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.GetAsync``1(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor{``0})">
+  GetAsync&lt;TDocument&gt;(GetAsyncRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L616"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get async SQL search results.
+Get the current status and available results for an async SQL search or stored synchronous SQL search.
+</p>
+<p>
+If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetAsyncResponse GetAsync&lt;TDocument&gt;(GetAsyncRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor-1.html">GetAsyncRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse.html">GetAsyncResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query">
+  Query()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual QueryResponse Query()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query_Elastic_Clients_Elasticsearch_Sql_QueryRequest_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query(Elastic.Clients.Elasticsearch.Sql.QueryRequest)">
+  Query(QueryRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1024"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual QueryResponse Query(QueryRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequest.html">QueryRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query_Elastic_Clients_Elasticsearch_Sql_QueryRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query(Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor)">
+  Query(QueryRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1096"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual QueryResponse Query(QueryRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor.html">QueryRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query_System_Action_Elastic_Clients_Elasticsearch_Sql_QueryRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query(System.Action{Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor})">
+  Query(Action&lt;QueryRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1125"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual QueryResponse Query(Action&lt;QueryRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor.html">QueryRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync_Elastic_Clients_Elasticsearch_Sql_QueryRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync(Elastic.Clients.Elasticsearch.Sql.QueryRequest,System.Threading.CancellationToken)">
+  QueryAsync(QueryRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1038"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;QueryResponse&gt; QueryAsync(QueryRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequest.html">QueryRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync_Elastic_Clients_Elasticsearch_Sql_QueryRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync(Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor,System.Threading.CancellationToken)">
+  QueryAsync(QueryRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1183"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;QueryResponse&gt; QueryAsync(QueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor.html">QueryRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync_System_Action_Elastic_Clients_Elasticsearch_Sql_QueryRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync(System.Action{Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor},System.Threading.CancellationToken)">
+  QueryAsync(Action&lt;QueryRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1210"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;QueryResponse&gt; QueryAsync(Action&lt;QueryRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor.html">QueryRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync(System.Threading.CancellationToken)">
+  QueryAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1196"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;QueryResponse&gt; QueryAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync__1_Elastic_Clients_Elasticsearch_Sql_QueryRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync``1(Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor{``0},System.Threading.CancellationToken)">
+  QueryAsync&lt;TDocument&gt;(QueryRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1141"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;QueryResponse&gt; QueryAsync&lt;TDocument&gt;(QueryRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor-1.html">QueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync__1_System_Action_Elastic_Clients_Elasticsearch_Sql_QueryRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync``1(System.Action{Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  QueryAsync&lt;TDocument&gt;(Action&lt;QueryRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1168"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;QueryResponse&gt; QueryAsync&lt;TDocument&gt;(Action&lt;QueryRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor-1.html">QueryRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_QueryAsync__1_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.QueryAsync``1(System.Threading.CancellationToken)">
+  QueryAsync&lt;TDocument&gt;(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1154"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;QueryResponse&gt; QueryAsync&lt;TDocument&gt;(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query__1" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query``1">
+  Query&lt;TDocument&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1065"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual QueryResponse Query&lt;TDocument&gt;()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query__1_Elastic_Clients_Elasticsearch_Sql_QueryRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query``1(Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor{``0})">
+  Query&lt;TDocument&gt;(QueryRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1051"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual QueryResponse Query&lt;TDocument&gt;(QueryRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor-1.html">QueryRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Query__1_System_Action_Elastic_Clients_Elasticsearch_Sql_QueryRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Query``1(System.Action{Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor{``0}})">
+  Query&lt;TDocument&gt;(Action&lt;QueryRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1080"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual QueryResponse Query&lt;TDocument&gt;(Action&lt;QueryRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor-1.html">QueryRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryResponse.html">QueryResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate">
+  Translate()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1318"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual TranslateResponse Translate()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate_Elastic_Clients_Elasticsearch_Sql_TranslateRequest_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate(Elastic.Clients.Elasticsearch.Sql.TranslateRequest)">
+  Translate(TranslateRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1226"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual TranslateResponse Translate(TranslateRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateRequest.html">TranslateRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate_Elastic_Clients_Elasticsearch_Sql_TranslateRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate(Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor)">
+  Translate(TranslateRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1303"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual TranslateResponse Translate(TranslateRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor.html">TranslateRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate_System_Action_Elastic_Clients_Elasticsearch_Sql_TranslateRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate(System.Action{Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor})">
+  Translate(Action&lt;TranslateRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1334"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual TranslateResponse Translate(Action&lt;TranslateRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor.html">TranslateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync_Elastic_Clients_Elasticsearch_Sql_TranslateRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync(Elastic.Clients.Elasticsearch.Sql.TranslateRequest,System.Threading.CancellationToken)">
+  TranslateAsync(TranslateRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1241"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TranslateResponse&gt; TranslateAsync(TranslateRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateRequest.html">TranslateRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync_Elastic_Clients_Elasticsearch_Sql_TranslateRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync(Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor,System.Threading.CancellationToken)">
+  TranslateAsync(TranslateRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1396"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TranslateResponse&gt; TranslateAsync(TranslateRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor.html">TranslateRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync_System_Action_Elastic_Clients_Elasticsearch_Sql_TranslateRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync(System.Action{Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor},System.Threading.CancellationToken)">
+  TranslateAsync(Action&lt;TranslateRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1425"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TranslateResponse&gt; TranslateAsync(Action&lt;TranslateRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor.html">TranslateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync(System.Threading.CancellationToken)">
+  TranslateAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1410"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TranslateResponse&gt; TranslateAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync__1_Elastic_Clients_Elasticsearch_Sql_TranslateRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync``1(Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor{``0},System.Threading.CancellationToken)">
+  TranslateAsync&lt;TDocument&gt;(TranslateRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1351"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TranslateResponse&gt; TranslateAsync&lt;TDocument&gt;(TranslateRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor-1.html">TranslateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync__1_System_Action_Elastic_Clients_Elasticsearch_Sql_TranslateRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync``1(System.Action{Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  TranslateAsync&lt;TDocument&gt;(Action&lt;TranslateRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1380"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TranslateResponse&gt; TranslateAsync&lt;TDocument&gt;(Action&lt;TranslateRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor-1.html">TranslateRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_TranslateAsync__1_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.TranslateAsync``1(System.Threading.CancellationToken)">
+  TranslateAsync&lt;TDocument&gt;(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1365"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;TranslateResponse&gt; TranslateAsync&lt;TDocument&gt;(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate__1" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate``1">
+  Translate&lt;TDocument&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1270"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual TranslateResponse Translate&lt;TDocument&gt;()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate__1_Elastic_Clients_Elasticsearch_Sql_TranslateRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate``1(Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor{``0})">
+  Translate&lt;TDocument&gt;(TranslateRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual TranslateResponse Translate&lt;TDocument&gt;(TranslateRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor-1.html">TranslateRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate_" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_SqlNamespacedClient_Translate__1_System_Action_Elastic_Clients_Elasticsearch_Sql_TranslateRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient.Translate``1(System.Action{Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor{``0}})">
+  Translate&lt;TDocument&gt;(Action&lt;TranslateRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Sql.g.cs/#L1286"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Translate SQL into Elasticsearch queries.
+Translate an SQL search into a search API request containing Query DSL.
+It accepts the same request body parameters as the SQL search API, excluding <code>cursor</code>.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual TranslateResponse Translate&lt;TDocument&gt;(Action&lt;TranslateRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor-1.html">TranslateRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.TranslateResponse.html">TranslateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

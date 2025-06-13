@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ConvertProcessorDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ConvertProcessorDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor" class="text-break">
+Class ConvertProcessorDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L387"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.html">Ingest</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class ConvertProcessorDescriptor : SerializableDescriptor&lt;ConvertProcessorDescriptor&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor-1.html">SerializableDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a>&gt;</div>
+      <div><span class="xref">ConvertProcessorDescriptor</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.#ctor">
+  ConvertProcessorDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L391"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Description_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Description_System_String_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Description(System.String)">
+  Description(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L414"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Description of the processor.
+Useful for describing the purpose of the processor or its configuration.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor Description(string? description)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>description</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Field_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Field(Elastic.Clients.Elasticsearch.Field)">
+  Field(Field)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L425"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field whose value is to be converted.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor Field(Field field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Field__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Field``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  Field&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L447"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field whose value is to be converted.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor Field&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt; field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Field__2_System_Linq_Expressions_Expression_System_Func___0___1___" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Field``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+  Field&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L436"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field whose value is to be converted.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor Field&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_If_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.If*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_If_System_String_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.If(System.String)">
+  If(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L458"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Conditionally execute the processor.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor If(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_IgnoreFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.IgnoreFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_IgnoreFailure_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.IgnoreFailure(System.Nullable{System.Boolean})">
+  IgnoreFailure(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L469"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Ignore failures for the processor.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ignoreFailure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_IgnoreMissing_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.IgnoreMissing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_IgnoreMissing_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.IgnoreMissing(System.Nullable{System.Boolean})">
+  IgnoreMissing(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L480"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code> and <code>field</code> does not exist or is <code>null</code>, the processor quietly exits without modifying the document.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ignoreMissing</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_OnFailure_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor)">
+  OnFailure(ProcessorDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L500"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor OnFailure(ProcessorDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_OnFailure_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.OnFailure(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor})">
+  OnFailure(Action&lt;ProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L509"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor OnFailure(Action&lt;ProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_OnFailure_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.OnFailure(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor}[])">
+  OnFailure(params Action&lt;ProcessorDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L518"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor OnFailure(params Action&lt;ProcessorDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_OnFailure_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Ingest_Processor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.OnFailure(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Ingest.Processor})">
+  OnFailure(ICollection&lt;Processor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L491"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Handle failures for the processor.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor OnFailure(ICollection&lt;Processor&gt;? onFailure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>onFailure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Serialize_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L586"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Tag_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Tag*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Tag_System_String_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Tag(System.String)">
+  Tag(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L533"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Identifier for the processor.
+Useful for debugging and metrics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor Tag(string? tag)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>tag</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_TargetField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.TargetField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_TargetField_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.TargetField(Elastic.Clients.Elasticsearch.Field)">
+  TargetField(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L545"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field to assign the converted value to.
+By default, the <code>field</code> is updated in-place.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor TargetField(Field? targetField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>targetField</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_TargetField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.TargetField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_TargetField__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.TargetField``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  TargetField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L569"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field to assign the converted value to.
+By default, the <code>field</code> is updated in-place.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor TargetField&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt; targetField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>targetField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_TargetField_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.TargetField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_TargetField__2_System_Linq_Expressions_Expression_System_Func___0___1___" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.TargetField``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+  TargetField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L557"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field to assign the converted value to.
+By default, the <code>field</code> is updated in-place.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor TargetField&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; targetField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>targetField</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Type_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Type*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor_Type_Elastic_Clients_Elasticsearch_Ingest_ConvertType_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.Type(Elastic.Clients.Elasticsearch.Ingest.ConvertType)">
+  Type(ConvertType)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/ConvertProcessor.g.cs/#L580"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The type to convert the existing value to.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ConvertProcessorDescriptor Type(ConvertType type)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>type</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertType.html">ConvertType</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

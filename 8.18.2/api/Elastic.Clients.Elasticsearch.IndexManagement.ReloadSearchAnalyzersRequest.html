@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ReloadSearchAnalyzersRequest | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ReloadSearchAnalyzersRequest | Elasticsearch.NET ">
+      
+      <meta name="description" content="Reload search analyzers. Reload an index&#39;s search analyzers and their resources. For data streams, the API reloads search analyzers and resources for the stream&#39;s backing indices.   IMPORTANT: After reloading the search analyzers you should clear the request cache to make sure it doesn&#39;t contain responses derived from the previous versions of the analyzer.   You can use the reload search analyzers API to pick up changes to synonym files used in the synonym_graph or synonym token filter of a search analyzer. To be eligible, the token filter must have an updateable flag of true and only be used in search analyzers.   NOTE: This API does not perform a reload for each shard of an index. Instead, it performs a reload for each node containing index shards. As a result, the total shard count returned by the API can differ from the number of index shards. Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don&#39;t contain a shard replica--before using this API. This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest" class="text-break">
+Class ReloadSearchAnalyzersRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ReloadSearchAnalyzersRequest.g.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Reload search analyzers.
+Reload an index's search analyzers and their resources.
+For data streams, the API reloads search analyzers and resources for the stream's backing indices.
+</p>
+<p>
+IMPORTANT: After reloading the search analyzers you should clear the request cache to make sure it doesn't contain responses derived from the previous versions of the analyzer.
+</p>
+<p>
+You can use the reload search analyzers API to pick up changes to synonym files used in the <code>synonym_graph</code> or <code>synonym</code> token filter of a search analyzer.
+To be eligible, the token filter must have an <code>updateable</code> flag of <code>true</code> and only be used in search analyzers.
+</p>
+<p>
+NOTE: This API does not perform a reload for each shard of an index.
+Instead, it performs a reload for each node containing index shards.
+As a result, the total shard count returned by the API can differ from the number of index shards.
+Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
+This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class ReloadSearchAnalyzersRequest : PlainRequest&lt;ReloadSearchAnalyzersRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters.html">ReloadSearchAnalyzersRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters.html">ReloadSearchAnalyzersRequestParameters</a>&gt;</div>
+      <div><span class="xref">ReloadSearchAnalyzersRequest</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;ReloadSearchAnalyzersRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;ReloadSearchAnalyzersRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;ReloadSearchAnalyzersRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;ReloadSearchAnalyzersRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;ReloadSearchAnalyzersRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_RequestConfiguration">PlainRequest&lt;ReloadSearchAnalyzersRequestParameters&gt;.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest__ctor_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.#ctor(Elastic.Clients.Elasticsearch.Indices)">
+  ReloadSearchAnalyzersRequest(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ReloadSearchAnalyzersRequest.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReloadSearchAnalyzersRequest(Indices indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest_AllowNoIndices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.AllowNoIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest_AllowNoIndices" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.AllowNoIndices">
+  AllowNoIndices
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ReloadSearchAnalyzersRequest.g.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <code>_all</code> string or when no indices have been specified)
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public bool? AllowNoIndices { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest_ExpandWildcards" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.ExpandWildcards">
+  ExpandWildcards
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ReloadSearchAnalyzersRequest.g.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Whether to expand wildcard expression to concrete indices that are open, closed or both.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public ICollection&lt;ExpandWildcard&gt;? ExpandWildcards { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest_IgnoreUnavailable" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.IgnoreUnavailable">
+  IgnoreUnavailable
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ReloadSearchAnalyzersRequest.g.cs/#L120"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Whether specified concrete indices should be ignored when unavailable (missing or closed)
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public bool? IgnoreUnavailable { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest_Resource_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.Resource*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest_Resource" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.Resource">
+  Resource
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ReloadSearchAnalyzersRequest.g.cs/#L128"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Changed resource to reload analyzers from if applicable
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public string? Resource { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ReloadSearchAnalyzersRequest_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ReloadSearchAnalyzersRequest.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.18.2/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

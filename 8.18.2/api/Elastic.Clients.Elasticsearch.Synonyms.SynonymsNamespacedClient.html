@@ -1,0 +1,3907 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SynonymsNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SynonymsNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient" class="text-break">
+Class SynonymsNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.html">Synonyms</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SynonymsNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">SynonymsNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.#ctor">
+  SynonymsNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.html">SynonymsNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SynonymsNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym(Elastic.Clients.Elasticsearch.Id)">
+  DeleteSynonym(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L282"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteSynonymResponse DeleteSynonym(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor})">
+  DeleteSynonym(Id, Action&lt;DeleteSynonymRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L318"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteSynonymResponse DeleteSynonym(Id id, Action&lt;DeleteSynonymRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor.html">DeleteSynonymRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRequest_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest)">
+  DeleteSynonym(DeleteSynonymRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteSynonymResponse DeleteSynonym(DeleteSynonymRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest.html">DeleteSynonymRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor)">
+  DeleteSynonym(DeleteSynonymRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L247"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteSynonymResponse DeleteSynonym(DeleteSynonymRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor.html">DeleteSynonymRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteSynonymAsync(Id, Action&lt;DeleteSynonymRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L529"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSynonymResponse&gt; DeleteSynonymAsync(Id id, Action&lt;DeleteSynonymRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor.html">DeleteSynonymRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeleteSynonymAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L494"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSynonymResponse&gt; DeleteSynonymAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest,System.Threading.CancellationToken)">
+  DeleteSynonymAsync(DeleteSynonymRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L105"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSynonymResponse&gt; DeleteSynonymAsync(DeleteSynonymRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest.html">DeleteSynonymRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor,System.Threading.CancellationToken)">
+  DeleteSynonymAsync(DeleteSynonymRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L460"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSynonymResponse&gt; DeleteSynonymAsync(DeleteSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor.html">DeleteSynonymRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  DeleteSynonymAsync&lt;TDocument&gt;(Id, Action&lt;DeleteSynonymRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L424"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSynonymResponse&gt; DeleteSynonymAsync&lt;TDocument&gt;(Id id, Action&lt;DeleteSynonymRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor-1.html">DeleteSynonymRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync__1_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync``1(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeleteSynonymAsync&lt;TDocument&gt;(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L389"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSynonymResponse&gt; DeleteSynonymAsync&lt;TDocument&gt;(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymAsync__1_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymAsync``1(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor{``0},System.Threading.CancellationToken)">
+  DeleteSynonymAsync&lt;TDocument&gt;(DeleteSynonymRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L355"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSynonymResponse&gt; DeleteSynonymAsync&lt;TDocument&gt;(DeleteSynonymRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor-1.html">DeleteSynonymRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id)">
+  DeleteSynonymRule(Id, Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L585"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym rule.
+Delete a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteSynonymRuleResponse DeleteSynonymRule(Id setId, Id ruleId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse.html">DeleteSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRuleRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor})">
+  DeleteSynonymRule(Id, Id, Action&lt;DeleteSynonymRuleRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L600"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym rule.
+Delete a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteSynonymRuleResponse DeleteSynonymRule(Id setId, Id ruleId, Action&lt;DeleteSynonymRuleRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor.html">DeleteSynonymRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse.html">DeleteSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRule_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRuleRequest_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRule(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest)">
+  DeleteSynonymRule(DeleteSynonymRuleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L544"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym rule.
+Delete a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteSynonymRuleResponse DeleteSynonymRule(DeleteSynonymRuleRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest.html">DeleteSynonymRuleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse.html">DeleteSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRule_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRuleRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRule(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor)">
+  DeleteSynonymRule(DeleteSynonymRuleRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L571"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym rule.
+Delete a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteSynonymRuleResponse DeleteSynonymRule(DeleteSynonymRuleRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor.html">DeleteSynonymRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse.html">DeleteSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRuleRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteSynonymRuleAsync(Id, Id, Action&lt;DeleteSynonymRuleRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L643"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym rule.
+Delete a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSynonymRuleResponse&gt; DeleteSynonymRuleAsync(Id setId, Id ruleId, Action&lt;DeleteSynonymRuleRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor.html">DeleteSynonymRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse.html">DeleteSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeleteSynonymRuleAsync(Id, Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L629"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym rule.
+Delete a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSynonymRuleResponse&gt; DeleteSynonymRuleAsync(Id setId, Id ruleId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse.html">DeleteSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRuleAsync_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRuleRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest,System.Threading.CancellationToken)">
+  DeleteSynonymRuleAsync(DeleteSynonymRuleRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L558"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym rule.
+Delete a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSynonymRuleResponse&gt; DeleteSynonymRuleAsync(DeleteSynonymRuleRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest.html">DeleteSynonymRuleRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse.html">DeleteSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonymRuleAsync_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRuleRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor,System.Threading.CancellationToken)">
+  DeleteSynonymRuleAsync(DeleteSynonymRuleRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L616"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym rule.
+Delete a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSynonymRuleResponse&gt; DeleteSynonymRuleAsync(DeleteSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor.html">DeleteSynonymRuleRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse.html">DeleteSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym__1_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym``1(Elastic.Clients.Elasticsearch.Id)">
+  DeleteSynonym&lt;TDocument&gt;(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteSynonymResponse DeleteSynonym&lt;TDocument&gt;(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor{``0}})">
+  DeleteSynonym&lt;TDocument&gt;(Id, Action&lt;DeleteSynonymRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteSynonymResponse DeleteSynonym&lt;TDocument&gt;(Id id, Action&lt;DeleteSynonymRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor-1.html">DeleteSynonymRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_DeleteSynonym__1_Elastic_Clients_Elasticsearch_Synonyms_DeleteSynonymRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.DeleteSynonym``1(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor{``0})">
+  DeleteSynonym&lt;TDocument&gt;(DeleteSynonymRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual DeleteSynonymResponse DeleteSynonym&lt;TDocument&gt;(DeleteSynonymRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor-1.html">DeleteSynonymRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym(Elastic.Clients.Elasticsearch.Id)">
+  GetSynonym(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L737"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymResponse GetSynonym(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor})">
+  GetSynonym(Id, Action&lt;GetSynonymRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L751"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymResponse GetSynonym(Id id, Action&lt;GetSynonymRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor.html">GetSynonymRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRequest_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest)">
+  GetSynonym(GetSynonymRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L657"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymResponse GetSynonym(GetSynonymRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest.html">GetSynonymRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor)">
+  GetSynonym(GetSynonymRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L724"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymResponse GetSynonym(GetSynonymRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor.html">GetSynonymRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor},System.Threading.CancellationToken)">
+  GetSynonymAsync(Id, Action&lt;GetSynonymRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L830"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymResponse&gt; GetSynonymAsync(Id id, Action&lt;GetSynonymRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor.html">GetSynonymRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetSynonymAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L817"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymResponse&gt; GetSynonymAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest,System.Threading.CancellationToken)">
+  GetSynonymAsync(GetSynonymRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L670"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymResponse&gt; GetSynonymAsync(GetSynonymRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest.html">GetSynonymRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor,System.Threading.CancellationToken)">
+  GetSynonymAsync(GetSynonymRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L805"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymResponse&gt; GetSynonymAsync(GetSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor.html">GetSynonymRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  GetSynonymAsync&lt;TDocument&gt;(Id, Action&lt;GetSynonymRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L791"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymResponse&gt; GetSynonymAsync&lt;TDocument&gt;(Id id, Action&lt;GetSynonymRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor-1.html">GetSynonymRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync__1_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync``1(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetSynonymAsync&lt;TDocument&gt;(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L778"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymResponse&gt; GetSynonymAsync&lt;TDocument&gt;(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymAsync__1_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymAsync``1(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor{``0},System.Threading.CancellationToken)">
+  GetSynonymAsync&lt;TDocument&gt;(GetSynonymRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L766"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymResponse&gt; GetSynonymAsync&lt;TDocument&gt;(GetSynonymRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor-1.html">GetSynonymRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id)">
+  GetSynonymRule(Id, Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L886"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym rule.
+Get a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymRuleResponse GetSynonymRule(Id setId, Id ruleId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse.html">GetSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRuleRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor})">
+  GetSynonymRule(Id, Id, Action&lt;GetSynonymRuleRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L901"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym rule.
+Get a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymRuleResponse GetSynonymRule(Id setId, Id ruleId, Action&lt;GetSynonymRuleRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor.html">GetSynonymRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse.html">GetSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRule_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRuleRequest_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRule(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest)">
+  GetSynonymRule(GetSynonymRuleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L845"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym rule.
+Get a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymRuleResponse GetSynonymRule(GetSynonymRuleRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest.html">GetSynonymRuleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse.html">GetSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRule_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRuleRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRule(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor)">
+  GetSynonymRule(GetSynonymRuleRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L872"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym rule.
+Get a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymRuleResponse GetSynonymRule(GetSynonymRuleRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor.html">GetSynonymRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse.html">GetSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRuleRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor},System.Threading.CancellationToken)">
+  GetSynonymRuleAsync(Id, Id, Action&lt;GetSynonymRuleRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L944"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym rule.
+Get a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymRuleResponse&gt; GetSynonymRuleAsync(Id setId, Id ruleId, Action&lt;GetSynonymRuleRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor.html">GetSynonymRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse.html">GetSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetSynonymRuleAsync(Id, Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L930"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym rule.
+Get a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymRuleResponse&gt; GetSynonymRuleAsync(Id setId, Id ruleId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse.html">GetSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRuleAsync_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRuleRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest,System.Threading.CancellationToken)">
+  GetSynonymRuleAsync(GetSynonymRuleRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L859"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym rule.
+Get a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymRuleResponse&gt; GetSynonymRuleAsync(GetSynonymRuleRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest.html">GetSynonymRuleRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse.html">GetSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymRuleAsync_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRuleRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor,System.Threading.CancellationToken)">
+  GetSynonymRuleAsync(GetSynonymRuleRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L917"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym rule.
+Get a synonym rule from a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymRuleResponse&gt; GetSynonymRuleAsync(GetSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor.html">GetSynonymRuleRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse.html">GetSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym__1_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym``1(Elastic.Clients.Elasticsearch.Id)">
+  GetSynonym&lt;TDocument&gt;(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L695"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymResponse GetSynonym&lt;TDocument&gt;(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor{``0}})">
+  GetSynonym&lt;TDocument&gt;(Id, Action&lt;GetSynonymRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L709"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymResponse GetSynonym&lt;TDocument&gt;(Id id, Action&lt;GetSynonymRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor-1.html">GetSynonymRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonym__1_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonym``1(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor{``0})">
+  GetSynonym&lt;TDocument&gt;(GetSynonymRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L682"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get a synonym set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymResponse GetSynonym&lt;TDocument&gt;(GetSynonymRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor-1.html">GetSynonymRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSets_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSets*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSets" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSets">
+  GetSynonymsSets()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1000"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get all synonym sets.
+Get a summary of all defined synonym sets.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymsSetsResponse GetSynonymsSets()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse.html">GetSynonymsSetsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSets_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSets*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSets_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymsSetsRequest_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSets(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest)">
+  GetSynonymsSets(GetSynonymsSetsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L959"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get all synonym sets.
+Get a summary of all defined synonym sets.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymsSetsResponse GetSynonymsSets(GetSynonymsSetsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest.html">GetSynonymsSetsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse.html">GetSynonymsSetsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSets_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSets*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSets_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymsSetsRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSets(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor)">
+  GetSynonymsSets(GetSynonymsSetsRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L986"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get all synonym sets.
+Get a summary of all defined synonym sets.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymsSetsResponse GetSynonymsSets(GetSynonymsSetsRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor.html">GetSynonymsSetsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse.html">GetSynonymsSetsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSets_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSets*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSets_System_Action_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymsSetsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSets(System.Action{Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor})">
+  GetSynonymsSets(Action&lt;GetSynonymsSetsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1015"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get all synonym sets.
+Get a summary of all defined synonym sets.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual GetSynonymsSetsResponse GetSynonymsSets(Action&lt;GetSynonymsSetsRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor.html">GetSynonymsSetsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse.html">GetSynonymsSetsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSetsAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSetsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSetsAsync_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymsSetsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSetsAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest,System.Threading.CancellationToken)">
+  GetSynonymsSetsAsync(GetSynonymsSetsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L973"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get all synonym sets.
+Get a summary of all defined synonym sets.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymsSetsResponse&gt; GetSynonymsSetsAsync(GetSynonymsSetsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest.html">GetSynonymsSetsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse.html">GetSynonymsSetsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSetsAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSetsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSetsAsync_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymsSetsRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSetsAsync(Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor,System.Threading.CancellationToken)">
+  GetSynonymsSetsAsync(GetSynonymsSetsRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1031"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get all synonym sets.
+Get a summary of all defined synonym sets.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymsSetsResponse&gt; GetSynonymsSetsAsync(GetSynonymsSetsRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor.html">GetSynonymsSetsRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse.html">GetSynonymsSetsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSetsAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSetsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSetsAsync_System_Action_Elastic_Clients_Elasticsearch_Synonyms_GetSynonymsSetsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSetsAsync(System.Action{Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor},System.Threading.CancellationToken)">
+  GetSynonymsSetsAsync(Action&lt;GetSynonymsSetsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1058"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get all synonym sets.
+Get a summary of all defined synonym sets.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymsSetsResponse&gt; GetSynonymsSetsAsync(Action&lt;GetSynonymsSetsRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor.html">GetSynonymsSetsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse.html">GetSynonymsSetsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSetsAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSetsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_GetSynonymsSetsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.GetSynonymsSetsAsync(System.Threading.CancellationToken)">
+  GetSynonymsSetsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1044"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Get all synonym sets.
+Get a summary of all defined synonym sets.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSynonymsSetsResponse&gt; GetSynonymsSetsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse.html">GetSynonymsSetsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym(Elastic.Clients.Elasticsearch.Id)">
+  PutSynonym(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1194"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual PutSynonymResponse PutSynonym(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor})">
+  PutSynonym(Id, Action&lt;PutSynonymRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1214"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual PutSynonymResponse PutSynonym(Id id, Action&lt;PutSynonymRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor.html">PutSynonymRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRequest_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest)">
+  PutSynonym(PutSynonymRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1078"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual PutSynonymResponse PutSynonym(PutSynonymRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest.html">PutSynonymRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor)">
+  PutSynonym(PutSynonymRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1175"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual PutSynonymResponse PutSynonym(PutSynonymRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor.html">PutSynonymRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor},System.Threading.CancellationToken)">
+  PutSynonymAsync(Id, Action&lt;PutSynonymRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1329"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSynonymResponse&gt; PutSynonymAsync(Id id, Action&lt;PutSynonymRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor.html">PutSynonymRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  PutSynonymAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSynonymResponse&gt; PutSynonymAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest,System.Threading.CancellationToken)">
+  PutSynonymAsync(PutSynonymRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1097"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSynonymResponse&gt; PutSynonymAsync(PutSynonymRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest.html">PutSynonymRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor,System.Threading.CancellationToken)">
+  PutSynonymAsync(PutSynonymRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSynonymResponse&gt; PutSynonymAsync(PutSynonymRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor.html">PutSynonymRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  PutSynonymAsync&lt;TDocument&gt;(Id, Action&lt;PutSynonymRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1272"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSynonymResponse&gt; PutSynonymAsync&lt;TDocument&gt;(Id id, Action&lt;PutSynonymRequestDescriptor&lt;TDocument&gt;&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor-1.html">PutSynonymRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync__1_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync``1(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  PutSynonymAsync&lt;TDocument&gt;(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1253"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSynonymResponse&gt; PutSynonymAsync&lt;TDocument&gt;(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymAsync__1_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRequestDescriptor___0__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymAsync``1(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor{``0},System.Threading.CancellationToken)">
+  PutSynonymAsync&lt;TDocument&gt;(PutSynonymRequestDescriptor&lt;TDocument&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1235"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSynonymResponse&gt; PutSynonymAsync&lt;TDocument&gt;(PutSynonymRequestDescriptor&lt;TDocument&gt; descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor-1.html">PutSynonymRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id)">
+  PutSynonymRule(Id, Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1409"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym rule.
+Create or update a synonym rule in a synonym set.
+</p>
+<p>
+If any of the synonym rules included is invalid, the API returns an error.
+</p>
+<p>
+When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual PutSynonymRuleResponse PutSynonymRule(Id setId, Id ruleId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse.html">PutSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRule_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRuleRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRule(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor})">
+  PutSynonymRule(Id, Id, Action&lt;PutSynonymRuleRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1430"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym rule.
+Create or update a synonym rule in a synonym set.
+</p>
+<p>
+If any of the synonym rules included is invalid, the API returns an error.
+</p>
+<p>
+When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual PutSynonymRuleResponse PutSynonymRule(Id setId, Id ruleId, Action&lt;PutSynonymRuleRequestDescriptor&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor.html">PutSynonymRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse.html">PutSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRule_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRuleRequest_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRule(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest)">
+  PutSynonymRule(PutSynonymRuleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1350"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym rule.
+Create or update a synonym rule in a synonym set.
+</p>
+<p>
+If any of the synonym rules included is invalid, the API returns an error.
+</p>
+<p>
+When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual PutSynonymRuleResponse PutSynonymRule(PutSynonymRuleRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest.html">PutSynonymRuleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse.html">PutSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRule_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRule*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRule_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRuleRequestDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRule(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor)">
+  PutSynonymRule(PutSynonymRuleRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1389"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym rule.
+Create or update a synonym rule in a synonym set.
+</p>
+<p>
+If any of the synonym rules included is invalid, the API returns an error.
+</p>
+<p>
+When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual PutSynonymRuleResponse PutSynonymRule(PutSynonymRuleRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor.html">PutSynonymRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse.html">PutSynonymRuleResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRuleRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor},System.Threading.CancellationToken)">
+  PutSynonymRuleAsync(Id, Id, Action&lt;PutSynonymRuleRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1491"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym rule.
+Create or update a synonym rule in a synonym set.
+</p>
+<p>
+If any of the synonym rules included is invalid, the API returns an error.
+</p>
+<p>
+When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSynonymRuleResponse&gt; PutSynonymRuleAsync(Id setId, Id ruleId, Action&lt;PutSynonymRuleRequestDescriptor&gt; configureRequest, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor.html">PutSynonymRuleRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse.html">PutSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRuleAsync_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  PutSynonymRuleAsync(Id, Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1471"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym rule.
+Create or update a synonym rule in a synonym set.
+</p>
+<p>
+If any of the synonym rules included is invalid, the API returns an error.
+</p>
+<p>
+When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSynonymRuleResponse&gt; PutSynonymRuleAsync(Id setId, Id ruleId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse.html">PutSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRuleAsync_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRuleRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest,System.Threading.CancellationToken)">
+  PutSynonymRuleAsync(PutSynonymRuleRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1370"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym rule.
+Create or update a synonym rule in a synonym set.
+</p>
+<p>
+If any of the synonym rules included is invalid, the API returns an error.
+</p>
+<p>
+When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSynonymRuleResponse&gt; PutSynonymRuleAsync(PutSynonymRuleRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest.html">PutSynonymRuleRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse.html">PutSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRuleAsync_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRuleAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonymRuleAsync_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRuleRequestDescriptor_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonymRuleAsync(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor,System.Threading.CancellationToken)">
+  PutSynonymRuleAsync(PutSynonymRuleRequestDescriptor, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1452"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym rule.
+Create or update a synonym rule in a synonym set.
+</p>
+<p>
+If any of the synonym rules included is invalid, the API returns an error.
+</p>
+<p>
+When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonym-rule.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSynonymRuleResponse&gt; PutSynonymRuleAsync(PutSynonymRuleRequestDescriptor descriptor, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor.html">PutSynonymRuleRequestDescriptor</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse.html">PutSynonymRuleResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym__1_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym``1(Elastic.Clients.Elasticsearch.Id)">
+  PutSynonym&lt;TDocument&gt;(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1134"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual PutSynonymResponse PutSynonym&lt;TDocument&gt;(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor{``0}})">
+  PutSynonym&lt;TDocument&gt;(Id, Action&lt;PutSynonymRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1154"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual PutSynonymResponse PutSynonym&lt;TDocument&gt;(Id id, Action&lt;PutSynonymRequestDescriptor&lt;TDocument&gt;&gt; configureRequest)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>configureRequest</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor-1.html">PutSynonymRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym_" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Synonyms_SynonymsNamespacedClient_PutSynonym__1_Elastic_Clients_Elasticsearch_Synonyms_PutSynonymRequestDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.PutSynonym``1(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor{``0})">
+  PutSynonym&lt;TDocument&gt;(PutSynonymRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Synonyms.g.cs/#L1115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-synonyms-set.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Synchronous methods are deprecated and could be removed in the future.&quot;)]
+public virtual PutSynonymResponse PutSynonym&lt;TDocument&gt;(PutSynonymRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor-1.html">PutSynonymRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

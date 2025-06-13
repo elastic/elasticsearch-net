@@ -1,0 +1,3714 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ProcessorDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ProcessorDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor" class="text-break">
+Class ProcessorDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L747"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.html">Ingest</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class ProcessorDescriptor : SerializableDescriptor&lt;ProcessorDescriptor&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor-1.html">SerializableDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a>&gt;</div>
+      <div><span class="xref">ProcessorDescriptor</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.#ctor">
+  ProcessorDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L751"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Append_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Append*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Append_Elastic_Clients_Elasticsearch_Ingest_AppendProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Append(Elastic.Clients.Elasticsearch.Ingest.AppendProcessor)">
+  Append(AppendProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L778"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Append(AppendProcessor appendProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>appendProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.AppendProcessor.html">AppendProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Append_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Append*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Append__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_AppendProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Append``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor})">
+  Append&lt;TDocument&gt;(Action&lt;AppendProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L779"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Append&lt;TDocument&gt;(Action&lt;AppendProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor.html">AppendProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Attachment_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Attachment*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Attachment_Elastic_Clients_Elasticsearch_Ingest_AttachmentProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Attachment(Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor)">
+  Attachment(AttachmentProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L780"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Attachment(AttachmentProcessor attachmentProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>attachmentProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessor.html">AttachmentProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Attachment_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Attachment*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Attachment__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_AttachmentProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Attachment``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor})">
+  Attachment&lt;TDocument&gt;(Action&lt;AttachmentProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L781"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Attachment&lt;TDocument&gt;(Action&lt;AttachmentProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.AttachmentProcessorDescriptor.html">AttachmentProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Bytes_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Bytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Bytes_Elastic_Clients_Elasticsearch_Ingest_BytesProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Bytes(Elastic.Clients.Elasticsearch.Ingest.BytesProcessor)">
+  Bytes(BytesProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L782"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Bytes(BytesProcessor bytesProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bytesProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.BytesProcessor.html">BytesProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Bytes_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Bytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Bytes__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_BytesProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Bytes``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor})">
+  Bytes&lt;TDocument&gt;(Action&lt;BytesProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L783"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Bytes&lt;TDocument&gt;(Action&lt;BytesProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.BytesProcessorDescriptor.html">BytesProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Circle_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Circle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Circle_Elastic_Clients_Elasticsearch_Ingest_CircleProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Circle(Elastic.Clients.Elasticsearch.Ingest.CircleProcessor)">
+  Circle(CircleProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L784"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Circle(CircleProcessor circleProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>circleProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CircleProcessor.html">CircleProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Circle_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Circle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Circle__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_CircleProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Circle``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor})">
+  Circle&lt;TDocument&gt;(Action&lt;CircleProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L785"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Circle&lt;TDocument&gt;(Action&lt;CircleProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CircleProcessorDescriptor.html">CircleProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_CommunityId_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.CommunityId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_CommunityId_Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.CommunityId(Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor)">
+  CommunityId(CommunityIDProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L786"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor CommunityId(CommunityIDProcessor communityIDProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>communityIDProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessor.html">CommunityIDProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_CommunityId_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.CommunityId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_CommunityId__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_CommunityIDProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.CommunityId``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor})">
+  CommunityId&lt;TDocument&gt;(Action&lt;CommunityIDProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L787"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor CommunityId&lt;TDocument&gt;(Action&lt;CommunityIDProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CommunityIDProcessorDescriptor.html">CommunityIDProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Convert_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Convert*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Convert_Elastic_Clients_Elasticsearch_Ingest_ConvertProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Convert(Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor)">
+  Convert(ConvertProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L788"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Convert(ConvertProcessor convertProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>convertProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessor.html">ConvertProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Convert_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Convert*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Convert__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_ConvertProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Convert``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor})">
+  Convert&lt;TDocument&gt;(Action&lt;ConvertProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L789"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Convert&lt;TDocument&gt;(Action&lt;ConvertProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ConvertProcessorDescriptor.html">ConvertProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Csv_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Csv*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Csv_Elastic_Clients_Elasticsearch_Ingest_CsvProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Csv(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor)">
+  Csv(CsvProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L790"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Csv(CsvProcessor csvProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>csvProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CsvProcessor.html">CsvProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Csv_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Csv*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Csv__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_CsvProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Csv``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor})">
+  Csv&lt;TDocument&gt;(Action&lt;CsvProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L791"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Csv&lt;TDocument&gt;(Action&lt;CsvProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor.html">CsvProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Date_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Date*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Date_Elastic_Clients_Elasticsearch_Ingest_DateProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Date(Elastic.Clients.Elasticsearch.Ingest.DateProcessor)">
+  Date(DateProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L792"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Date(DateProcessor dateProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dateProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DateProcessor.html">DateProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_DateIndexName_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.DateIndexName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_DateIndexName_Elastic_Clients_Elasticsearch_Ingest_DateIndexNameProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.DateIndexName(Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor)">
+  DateIndexName(DateIndexNameProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L794"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor DateIndexName(DateIndexNameProcessor dateIndexNameProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dateIndexNameProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor.html">DateIndexNameProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_DateIndexName_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.DateIndexName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_DateIndexName__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_DateIndexNameProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.DateIndexName``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor})">
+  DateIndexName&lt;TDocument&gt;(Action&lt;DateIndexNameProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L795"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor DateIndexName&lt;TDocument&gt;(Action&lt;DateIndexNameProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor.html">DateIndexNameProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Date_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Date*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Date__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_DateProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Date``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor})">
+  Date&lt;TDocument&gt;(Action&lt;DateProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L793"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Date&lt;TDocument&gt;(Action&lt;DateProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor.html">DateProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Dissect_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Dissect*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Dissect_Elastic_Clients_Elasticsearch_Ingest_DissectProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Dissect(Elastic.Clients.Elasticsearch.Ingest.DissectProcessor)">
+  Dissect(DissectProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L796"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Dissect(DissectProcessor dissectProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dissectProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DissectProcessor.html">DissectProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Dissect_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Dissect*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Dissect__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_DissectProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Dissect``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor})">
+  Dissect&lt;TDocument&gt;(Action&lt;DissectProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L797"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Dissect&lt;TDocument&gt;(Action&lt;DissectProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DissectProcessorDescriptor.html">DissectProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_DotExpander_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.DotExpander*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_DotExpander_Elastic_Clients_Elasticsearch_Ingest_DotExpanderProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.DotExpander(Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor)">
+  DotExpander(DotExpanderProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L798"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor DotExpander(DotExpanderProcessor dotExpanderProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dotExpanderProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessor.html">DotExpanderProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_DotExpander_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.DotExpander*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_DotExpander__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_DotExpanderProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.DotExpander``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor})">
+  DotExpander&lt;TDocument&gt;(Action&lt;DotExpanderProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L799"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor DotExpander&lt;TDocument&gt;(Action&lt;DotExpanderProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DotExpanderProcessorDescriptor.html">DotExpanderProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Drop_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Drop*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Drop_Elastic_Clients_Elasticsearch_Ingest_DropProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Drop(Elastic.Clients.Elasticsearch.Ingest.DropProcessor)">
+  Drop(DropProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L800"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Drop(DropProcessor dropProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dropProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DropProcessor.html">DropProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Drop_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Drop*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Drop__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_DropProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Drop``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor})">
+  Drop&lt;TDocument&gt;(Action&lt;DropProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L801"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Drop&lt;TDocument&gt;(Action&lt;DropProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DropProcessorDescriptor.html">DropProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Enrich_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Enrich*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Enrich_Elastic_Clients_Elasticsearch_Ingest_EnrichProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Enrich(Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor)">
+  Enrich(EnrichProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L802"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Enrich(EnrichProcessor enrichProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>enrichProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.EnrichProcessor.html">EnrichProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Enrich_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Enrich*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Enrich__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_EnrichProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Enrich``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor})">
+  Enrich&lt;TDocument&gt;(Action&lt;EnrichProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L803"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Enrich&lt;TDocument&gt;(Action&lt;EnrichProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.EnrichProcessorDescriptor.html">EnrichProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Fail_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Fail*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Fail_Elastic_Clients_Elasticsearch_Ingest_FailProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Fail(Elastic.Clients.Elasticsearch.Ingest.FailProcessor)">
+  Fail(FailProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L804"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Fail(FailProcessor failProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>failProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.FailProcessor.html">FailProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Fail_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Fail*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Fail__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_FailProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Fail``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor})">
+  Fail&lt;TDocument&gt;(Action&lt;FailProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L805"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Fail&lt;TDocument&gt;(Action&lt;FailProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.FailProcessorDescriptor.html">FailProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Fingerprint_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Fingerprint*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Fingerprint_Elastic_Clients_Elasticsearch_Ingest_FingerprintProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Fingerprint(Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor)">
+  Fingerprint(FingerprintProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L806"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Fingerprint(FingerprintProcessor fingerprintProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fingerprintProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessor.html">FingerprintProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Fingerprint_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Fingerprint*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Fingerprint__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_FingerprintProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Fingerprint``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor})">
+  Fingerprint&lt;TDocument&gt;(Action&lt;FingerprintProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L807"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Fingerprint&lt;TDocument&gt;(Action&lt;FingerprintProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor.html">FingerprintProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Foreach_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Foreach*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Foreach_Elastic_Clients_Elasticsearch_Ingest_ForeachProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Foreach(Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor)">
+  Foreach(ForeachProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L808"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Foreach(ForeachProcessor foreachProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>foreachProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ForeachProcessor.html">ForeachProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Foreach_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Foreach*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Foreach__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_ForeachProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Foreach``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor})">
+  Foreach&lt;TDocument&gt;(Action&lt;ForeachProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L809"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Foreach&lt;TDocument&gt;(Action&lt;ForeachProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor.html">ForeachProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_GeoGrid_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.GeoGrid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_GeoGrid_Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.GeoGrid(Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor)">
+  GeoGrid(GeoGridProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L810"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor GeoGrid(GeoGridProcessor geoGridProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoGridProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessor.html">GeoGridProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_GeoGrid_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.GeoGrid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_GeoGrid__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_GeoGridProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.GeoGrid``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor})">
+  GeoGrid&lt;TDocument&gt;(Action&lt;GeoGridProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L811"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor GeoGrid&lt;TDocument&gt;(Action&lt;GeoGridProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoGridProcessorDescriptor.html">GeoGridProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Geoip_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Geoip*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Geoip_Elastic_Clients_Elasticsearch_Ingest_GeoIpProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Geoip(Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor)">
+  Geoip(GeoIpProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L812"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Geoip(GeoIpProcessor geoIpProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoIpProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessor.html">GeoIpProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Geoip_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Geoip*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Geoip__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_GeoIpProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Geoip``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor})">
+  Geoip&lt;TDocument&gt;(Action&lt;GeoIpProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L813"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Geoip&lt;TDocument&gt;(Action&lt;GeoIpProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpProcessorDescriptor.html">GeoIpProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Grok_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Grok*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Grok_Elastic_Clients_Elasticsearch_Ingest_GrokProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Grok(Elastic.Clients.Elasticsearch.Ingest.GrokProcessor)">
+  Grok(GrokProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L814"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Grok(GrokProcessor grokProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>grokProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GrokProcessor.html">GrokProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Grok_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Grok*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Grok__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_GrokProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Grok``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor})">
+  Grok&lt;TDocument&gt;(Action&lt;GrokProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L815"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Grok&lt;TDocument&gt;(Action&lt;GrokProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GrokProcessorDescriptor.html">GrokProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Gsub_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Gsub*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Gsub_Elastic_Clients_Elasticsearch_Ingest_GsubProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Gsub(Elastic.Clients.Elasticsearch.Ingest.GsubProcessor)">
+  Gsub(GsubProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L816"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Gsub(GsubProcessor gsubProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>gsubProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GsubProcessor.html">GsubProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Gsub_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Gsub*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Gsub__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_GsubProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Gsub``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor})">
+  Gsub&lt;TDocument&gt;(Action&lt;GsubProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L817"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Gsub&lt;TDocument&gt;(Action&lt;GsubProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GsubProcessorDescriptor.html">GsubProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_HtmlStrip_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.HtmlStrip*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_HtmlStrip_Elastic_Clients_Elasticsearch_Ingest_HtmlStripProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.HtmlStrip(Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor)">
+  HtmlStrip(HtmlStripProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L818"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor HtmlStrip(HtmlStripProcessor htmlStripProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>htmlStripProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessor.html">HtmlStripProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_HtmlStrip_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.HtmlStrip*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_HtmlStrip__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_HtmlStripProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.HtmlStrip``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor})">
+  HtmlStrip&lt;TDocument&gt;(Action&lt;HtmlStripProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L819"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor HtmlStrip&lt;TDocument&gt;(Action&lt;HtmlStripProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.HtmlStripProcessorDescriptor.html">HtmlStripProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Inference_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Inference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Inference_Elastic_Clients_Elasticsearch_Ingest_InferenceProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Inference(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor)">
+  Inference(InferenceProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L820"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Inference(InferenceProcessor inferenceProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>inferenceProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor.html">InferenceProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Inference_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Inference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Inference__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_InferenceProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Inference``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor})">
+  Inference&lt;TDocument&gt;(Action&lt;InferenceProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L821"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Inference&lt;TDocument&gt;(Action&lt;InferenceProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor.html">InferenceProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_IpLocation_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.IpLocation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_IpLocation_Elastic_Clients_Elasticsearch_Ingest_IpLocationProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.IpLocation(Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor)">
+  IpLocation(IpLocationProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L822"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor IpLocation(IpLocationProcessor ipLocationProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ipLocationProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessor.html">IpLocationProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_IpLocation_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.IpLocation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_IpLocation__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_IpLocationProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.IpLocation``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor})">
+  IpLocation&lt;TDocument&gt;(Action&lt;IpLocationProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L823"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor IpLocation&lt;TDocument&gt;(Action&lt;IpLocationProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.IpLocationProcessorDescriptor.html">IpLocationProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Join_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Join*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Join_Elastic_Clients_Elasticsearch_Ingest_JoinProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Join(Elastic.Clients.Elasticsearch.Ingest.JoinProcessor)">
+  Join(JoinProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L824"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Join(JoinProcessor joinProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>joinProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.JoinProcessor.html">JoinProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Join_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Join*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Join__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_JoinProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Join``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.JoinProcessorDescriptor})">
+  Join&lt;TDocument&gt;(Action&lt;JoinProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L825"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Join&lt;TDocument&gt;(Action&lt;JoinProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.JoinProcessorDescriptor.html">JoinProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Json_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Json*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Json_Elastic_Clients_Elasticsearch_Ingest_JsonProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Json(Elastic.Clients.Elasticsearch.Ingest.JsonProcessor)">
+  Json(JsonProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L826"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Json(JsonProcessor jsonProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>jsonProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.JsonProcessor.html">JsonProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Json_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Json*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Json__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_JsonProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Json``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor})">
+  Json&lt;TDocument&gt;(Action&lt;JsonProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L827"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Json&lt;TDocument&gt;(Action&lt;JsonProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.JsonProcessorDescriptor.html">JsonProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Kv_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Kv*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Kv_Elastic_Clients_Elasticsearch_Ingest_KeyValueProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Kv(Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor)">
+  Kv(KeyValueProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L828"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Kv(KeyValueProcessor keyValueProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>keyValueProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessor.html">KeyValueProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Kv_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Kv*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Kv__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_KeyValueProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Kv``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor})">
+  Kv&lt;TDocument&gt;(Action&lt;KeyValueProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L829"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Kv&lt;TDocument&gt;(Action&lt;KeyValueProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.KeyValueProcessorDescriptor.html">KeyValueProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Lowercase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Lowercase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Lowercase_Elastic_Clients_Elasticsearch_Ingest_LowercaseProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Lowercase(Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor)">
+  Lowercase(LowercaseProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L830"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Lowercase(LowercaseProcessor lowercaseProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>lowercaseProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessor.html">LowercaseProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Lowercase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Lowercase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Lowercase__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_LowercaseProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Lowercase``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor})">
+  Lowercase&lt;TDocument&gt;(Action&lt;LowercaseProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L831"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Lowercase&lt;TDocument&gt;(Action&lt;LowercaseProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.LowercaseProcessorDescriptor.html">LowercaseProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_NetworkDirection_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.NetworkDirection*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_NetworkDirection_Elastic_Clients_Elasticsearch_Ingest_NetworkDirectionProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.NetworkDirection(Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor)">
+  NetworkDirection(NetworkDirectionProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L832"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor NetworkDirection(NetworkDirectionProcessor networkDirectionProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>networkDirectionProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessor.html">NetworkDirectionProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_NetworkDirection_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.NetworkDirection*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_NetworkDirection__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_NetworkDirectionProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.NetworkDirection``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor})">
+  NetworkDirection&lt;TDocument&gt;(Action&lt;NetworkDirectionProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L833"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor NetworkDirection&lt;TDocument&gt;(Action&lt;NetworkDirectionProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.NetworkDirectionProcessorDescriptor.html">NetworkDirectionProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Pipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Pipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Pipeline_Elastic_Clients_Elasticsearch_Ingest_PipelineProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor)">
+  Pipeline(PipelineProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L834"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Pipeline(PipelineProcessor pipelineProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pipelineProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineProcessor.html">PipelineProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Pipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Pipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Pipeline__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_PipelineProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Pipeline``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor})">
+  Pipeline&lt;TDocument&gt;(Action&lt;PipelineProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L835"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Pipeline&lt;TDocument&gt;(Action&lt;PipelineProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorDescriptor.html">PipelineProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Redact_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Redact*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Redact_Elastic_Clients_Elasticsearch_Ingest_RedactProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Redact(Elastic.Clients.Elasticsearch.Ingest.RedactProcessor)">
+  Redact(RedactProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L836"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Redact(RedactProcessor redactProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>redactProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RedactProcessor.html">RedactProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Redact_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Redact*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Redact__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_RedactProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Redact``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor})">
+  Redact&lt;TDocument&gt;(Action&lt;RedactProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L837"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Redact&lt;TDocument&gt;(Action&lt;RedactProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RedactProcessorDescriptor.html">RedactProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_RegisteredDomain_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.RegisteredDomain*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_RegisteredDomain_Elastic_Clients_Elasticsearch_Ingest_RegisteredDomainProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.RegisteredDomain(Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor)">
+  RegisteredDomain(RegisteredDomainProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L838"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor RegisteredDomain(RegisteredDomainProcessor registeredDomainProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>registeredDomainProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessor.html">RegisteredDomainProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_RegisteredDomain_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.RegisteredDomain*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_RegisteredDomain__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_RegisteredDomainProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.RegisteredDomain``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor})">
+  RegisteredDomain&lt;TDocument&gt;(Action&lt;RegisteredDomainProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L839"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor RegisteredDomain&lt;TDocument&gt;(Action&lt;RegisteredDomainProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RegisteredDomainProcessorDescriptor.html">RegisteredDomainProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Remove_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Remove*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Remove_Elastic_Clients_Elasticsearch_Ingest_RemoveProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Remove(Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor)">
+  Remove(RemoveProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L840"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Remove(RemoveProcessor removeProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>removeProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RemoveProcessor.html">RemoveProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Remove_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Remove*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Remove__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_RemoveProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Remove``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor})">
+  Remove&lt;TDocument&gt;(Action&lt;RemoveProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L841"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Remove&lt;TDocument&gt;(Action&lt;RemoveProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RemoveProcessorDescriptor.html">RemoveProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Rename_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Rename*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Rename_Elastic_Clients_Elasticsearch_Ingest_RenameProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Rename(Elastic.Clients.Elasticsearch.Ingest.RenameProcessor)">
+  Rename(RenameProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L842"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Rename(RenameProcessor renameProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>renameProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RenameProcessor.html">RenameProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Rename_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Rename*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Rename__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_RenameProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Rename``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor})">
+  Rename&lt;TDocument&gt;(Action&lt;RenameProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L843"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Rename&lt;TDocument&gt;(Action&lt;RenameProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RenameProcessorDescriptor.html">RenameProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Reroute_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Reroute*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Reroute_Elastic_Clients_Elasticsearch_Ingest_RerouteProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Reroute(Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor)">
+  Reroute(RerouteProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L844"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Reroute(RerouteProcessor rerouteProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rerouteProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RerouteProcessor.html">RerouteProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Reroute_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Reroute*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Reroute__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_RerouteProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Reroute``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor})">
+  Reroute&lt;TDocument&gt;(Action&lt;RerouteProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L845"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Reroute&lt;TDocument&gt;(Action&lt;RerouteProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.RerouteProcessorDescriptor.html">RerouteProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Script_Elastic_Clients_Elasticsearch_Ingest_ScriptProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Script(Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor)">
+  Script(ScriptProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L846"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Script(ScriptProcessor scriptProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scriptProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ScriptProcessor.html">ScriptProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Script__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_ScriptProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Script``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor})">
+  Script&lt;TDocument&gt;(Action&lt;ScriptProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L847"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Script&lt;TDocument&gt;(Action&lt;ScriptProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor.html">ScriptProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Serialize_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L869"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Set_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Set*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Set_Elastic_Clients_Elasticsearch_Ingest_SetProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Set(Elastic.Clients.Elasticsearch.Ingest.SetProcessor)">
+  Set(SetProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L848"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Set(SetProcessor setProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SetProcessor.html">SetProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_SetSecurityUser_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.SetSecurityUser*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_SetSecurityUser_Elastic_Clients_Elasticsearch_Ingest_SetSecurityUserProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.SetSecurityUser(Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor)">
+  SetSecurityUser(SetSecurityUserProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L850"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor SetSecurityUser(SetSecurityUserProcessor setSecurityUserProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>setSecurityUserProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessor.html">SetSecurityUserProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_SetSecurityUser_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.SetSecurityUser*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_SetSecurityUser__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_SetSecurityUserProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.SetSecurityUser``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor})">
+  SetSecurityUser&lt;TDocument&gt;(Action&lt;SetSecurityUserProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L851"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor SetSecurityUser&lt;TDocument&gt;(Action&lt;SetSecurityUserProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SetSecurityUserProcessorDescriptor.html">SetSecurityUserProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Set_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Set*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Set__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_SetProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Set``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor})">
+  Set&lt;TDocument&gt;(Action&lt;SetProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L849"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Set&lt;TDocument&gt;(Action&lt;SetProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SetProcessorDescriptor.html">SetProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Sort_Elastic_Clients_Elasticsearch_Ingest_SortProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Sort(Elastic.Clients.Elasticsearch.Ingest.SortProcessor)">
+  Sort(SortProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L852"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Sort(SortProcessor sortProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sortProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SortProcessor.html">SortProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Sort__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_SortProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Sort``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor})">
+  Sort&lt;TDocument&gt;(Action&lt;SortProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L853"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Sort&lt;TDocument&gt;(Action&lt;SortProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SortProcessorDescriptor.html">SortProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Split_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Split*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Split_Elastic_Clients_Elasticsearch_Ingest_SplitProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Split(Elastic.Clients.Elasticsearch.Ingest.SplitProcessor)">
+  Split(SplitProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L854"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Split(SplitProcessor splitProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>splitProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SplitProcessor.html">SplitProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Split_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Split*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Split__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_SplitProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Split``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.SplitProcessorDescriptor})">
+  Split&lt;TDocument&gt;(Action&lt;SplitProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L855"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Split&lt;TDocument&gt;(Action&lt;SplitProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SplitProcessorDescriptor.html">SplitProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Terminate_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Terminate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Terminate_Elastic_Clients_Elasticsearch_Ingest_TerminateProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Terminate(Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor)">
+  Terminate(TerminateProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L856"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Terminate(TerminateProcessor terminateProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>terminateProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.TerminateProcessor.html">TerminateProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Terminate_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Terminate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Terminate__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_TerminateProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Terminate``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor})">
+  Terminate&lt;TDocument&gt;(Action&lt;TerminateProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L857"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Terminate&lt;TDocument&gt;(Action&lt;TerminateProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.TerminateProcessorDescriptor.html">TerminateProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Trim_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Trim*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Trim_Elastic_Clients_Elasticsearch_Ingest_TrimProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Trim(Elastic.Clients.Elasticsearch.Ingest.TrimProcessor)">
+  Trim(TrimProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L858"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Trim(TrimProcessor trimProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>trimProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.TrimProcessor.html">TrimProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Trim_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Trim*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Trim__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_TrimProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Trim``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor})">
+  Trim&lt;TDocument&gt;(Action&lt;TrimProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L859"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Trim&lt;TDocument&gt;(Action&lt;TrimProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.TrimProcessorDescriptor.html">TrimProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Uppercase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Uppercase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Uppercase_Elastic_Clients_Elasticsearch_Ingest_UppercaseProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Uppercase(Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor)">
+  Uppercase(UppercaseProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L860"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Uppercase(UppercaseProcessor uppercaseProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>uppercaseProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessor.html">UppercaseProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Uppercase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Uppercase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_Uppercase__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_UppercaseProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Uppercase``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor})">
+  Uppercase&lt;TDocument&gt;(Action&lt;UppercaseProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L861"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor Uppercase&lt;TDocument&gt;(Action&lt;UppercaseProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UppercaseProcessorDescriptor.html">UppercaseProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UriParts_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UriParts*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UriParts_Elastic_Clients_Elasticsearch_Ingest_UriPartsProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UriParts(Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor)">
+  UriParts(UriPartsProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L862"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor UriParts(UriPartsProcessor uriPartsProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>uriPartsProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessor.html">UriPartsProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UriParts_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UriParts*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UriParts__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_UriPartsProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UriParts``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor})">
+  UriParts&lt;TDocument&gt;(Action&lt;UriPartsProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L863"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor UriParts&lt;TDocument&gt;(Action&lt;UriPartsProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor.html">UriPartsProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UrlDecode_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UrlDecode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UrlDecode_Elastic_Clients_Elasticsearch_Ingest_UrlDecodeProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UrlDecode(Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor)">
+  UrlDecode(UrlDecodeProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L864"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor UrlDecode(UrlDecodeProcessor urlDecodeProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>urlDecodeProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessor.html">UrlDecodeProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UrlDecode_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UrlDecode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UrlDecode__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_UrlDecodeProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UrlDecode``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor})">
+  UrlDecode&lt;TDocument&gt;(Action&lt;UrlDecodeProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L865"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor UrlDecode&lt;TDocument&gt;(Action&lt;UrlDecodeProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UrlDecodeProcessorDescriptor.html">UrlDecodeProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UserAgent_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UserAgent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UserAgent_Elastic_Clients_Elasticsearch_Ingest_UserAgentProcessor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UserAgent(Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor)">
+  UserAgent(UserAgentProcessor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L866"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor UserAgent(UserAgentProcessor userAgentProcessor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>userAgentProcessor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessor.html">UserAgentProcessor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UserAgent_" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UserAgent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor_UserAgent__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_UserAgentProcessorDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.UserAgent``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor})">
+  UserAgent&lt;TDocument&gt;(Action&lt;UserAgentProcessorDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Processor.g.cs/#L867"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessorDescriptor UserAgent&lt;TDocument&gt;(Action&lt;UserAgentProcessorDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.UserAgentProcessorDescriptor.html">UserAgentProcessorDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.html">ProcessorDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

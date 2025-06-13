@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class PipelineDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PipelineDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1" class="text-break">
+Class PipelineDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.html">Ingest</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class PipelineDescriptor&lt;TDocument&gt; : SerializableDescriptor&lt;PipelineDescriptor&lt;TDocument&gt;&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor-1.html">SerializableDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;&gt;</div>
+      <div><span class="xref">PipelineDescriptor&lt;TDocument&gt;</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.#ctor">
+  PipelineDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Deprecated_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Deprecated*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Deprecated_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Deprecated(System.Nullable{System.Boolean})">
+  Deprecated(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Marks this ingest pipeline as deprecated.
+When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; Deprecated(bool? deprecated = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>deprecated</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Description_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Description_System_String_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Description(System.String)">
+  Description(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Description of the ingest pipeline.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; Description(string? description)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>description</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Meta_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Meta_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_System_Object__Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Meta(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,System.Object},Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,System.Object}})">
+  Meta(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L132"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Arbitrary metadata about the ingest pipeline. This map is not automatically generated by Elasticsearch.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; Meta(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_OnFailure_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor{`0})">
+  OnFailure(ProcessorDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L152"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; OnFailure(ProcessorDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor-1.html">ProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_OnFailure_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.OnFailure(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor{`0}})">
+  OnFailure(Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L161"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; OnFailure(Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor-1.html">ProcessorDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_OnFailure_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__0_____" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.OnFailure(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor{`0}}[])">
+  OnFailure(params Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; OnFailure(params Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor-1.html">ProcessorDescriptor</a>&lt;TDocument&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_OnFailure_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.OnFailure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_OnFailure_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Ingest_Processor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.OnFailure(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Ingest.Processor})">
+  OnFailure(ICollection&lt;Processor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L143"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Processors to run immediately after a processor failure.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; OnFailure(ICollection&lt;Processor&gt;? onFailure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>onFailure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Processors_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Processors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Processors_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__0__" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Processors(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor{`0})">
+  Processors(ProcessorDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L194"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; Processors(ProcessorDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor-1.html">ProcessorDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Processors_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Processors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Processors_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Processors(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor{`0}})">
+  Processors(Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L203"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; Processors(Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor-1.html">ProcessorDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Processors_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Processors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Processors_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorDescriptor__0_____" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Processors(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor{`0}}[])">
+  Processors(params Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L212"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; Processors(params Action&lt;ProcessorDescriptor&lt;TDocument&gt;&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor-1.html">ProcessorDescriptor</a>&lt;TDocument&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Processors_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Processors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Processors_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Ingest_Processor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Processors(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Ingest.Processor})">
+  Processors(ICollection&lt;Processor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Processors used to perform transformations on documents before indexing.
+Processors run sequentially in the order specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; Processors(ICollection&lt;Processor&gt;? processors)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>processors</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.Processor.html">Processor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Serialize_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L232"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Version_" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_PipelineDescriptor_1_Version_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor`1.Version(System.Nullable{System.Int64})">
+  Version(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/Ingest/Pipeline.g.cs/#L226"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Version number used by external systems to track ingest pipelines.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipelineDescriptor&lt;TDocument&gt; Version(long? version)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>version</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor-1.html">PipelineDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
