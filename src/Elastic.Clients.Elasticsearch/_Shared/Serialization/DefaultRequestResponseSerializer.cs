@@ -151,8 +151,8 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 		);
 #pragma warning restore IL2026, IL3050
 
+		options.MaxDepth = 512;
 		options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-		options.IncludeFields = true;
 		options.NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals;
 		options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 	}
