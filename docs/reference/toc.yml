@@ -31,3 +31,4 @@ toc:
           - file: troubleshoot/audit-trail.md
           - file: troubleshoot/debug-information.md
           - file: troubleshoot/debug-mode.md
+  - file: breaking-changes-policy.md
