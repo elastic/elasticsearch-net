@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class HistogramAggregationDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class HistogramAggregationDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor" class="text-break">
+Class HistogramAggregationDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L415"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.html">Aggregations</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class HistogramAggregationDescriptor : SerializableDescriptor&lt;HistogramAggregationDescriptor&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor-1.html">SerializableDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a>&gt;</div>
+      <div><span class="xref">HistogramAggregationDescriptor</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.#ctor">
+  HistogramAggregationDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L419"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_ExtendedBounds_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.ExtendedBounds*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_ExtendedBounds_Elastic_Clients_Elasticsearch_Aggregations_ExtendedBoundsFloat_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat)">
+  ExtendedBounds(ExtendedBoundsFloat?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L445"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Enables extending the bounds of the histogram beyond the data itself.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor ExtendedBounds(ExtendedBoundsFloat? extendedBounds)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>extendedBounds</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat.html">ExtendedBoundsFloat</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_ExtendedBounds_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.ExtendedBounds*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_ExtendedBounds_Elastic_Clients_Elasticsearch_Aggregations_ExtendedBoundsFloatDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.ExtendedBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor)">
+  ExtendedBounds(ExtendedBoundsFloatDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L453"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor ExtendedBounds(ExtendedBoundsFloatDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor.html">ExtendedBoundsFloatDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_ExtendedBounds_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.ExtendedBounds*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_ExtendedBounds_System_Action_Elastic_Clients_Elasticsearch_Aggregations_ExtendedBoundsFloatDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.ExtendedBounds(System.Action{Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor})">
+  ExtendedBounds(Action&lt;ExtendedBoundsFloatDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L461"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor ExtendedBounds(Action&lt;ExtendedBoundsFloatDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor.html">ExtendedBoundsFloatDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Field_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Field(Elastic.Clients.Elasticsearch.Field)">
+  Field(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L474"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the field to aggregate on.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor Field(Field? field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Field__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Field``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  Field&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L496"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the field to aggregate on.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor Field&lt;TDocument&gt;(Expression&lt;Func&lt;TDocument, object&gt;&gt; field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Field__2_System_Linq_Expressions_Expression_System_Func___0___1___" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Field``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+  Field&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L485"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the field to aggregate on.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor Field&lt;TDocument, TValue&gt;(Expression&lt;Func&lt;TDocument, TValue&gt;&gt; field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, TValue&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+    <dt><code>TValue</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Format_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Format*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Format_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Format(System.String)">
+  Format(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L502"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor Format(string? format)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>format</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_HardBounds_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.HardBounds*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_HardBounds_Elastic_Clients_Elasticsearch_Aggregations_ExtendedBoundsFloat_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat)">
+  HardBounds(ExtendedBoundsFloat?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L514"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Limits the range of buckets in the histogram.
+It is particularly useful in the case of open data ranges that can result in a very large number of buckets.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor HardBounds(ExtendedBoundsFloat? hardBounds)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>hardBounds</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloat.html">ExtendedBoundsFloat</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_HardBounds_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.HardBounds*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_HardBounds_Elastic_Clients_Elasticsearch_Aggregations_ExtendedBoundsFloatDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.HardBounds(Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor)">
+  HardBounds(ExtendedBoundsFloatDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L522"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor HardBounds(ExtendedBoundsFloatDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor.html">ExtendedBoundsFloatDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_HardBounds_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.HardBounds*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_HardBounds_System_Action_Elastic_Clients_Elasticsearch_Aggregations_ExtendedBoundsFloatDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.HardBounds(System.Action{Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor})">
+  HardBounds(Action&lt;ExtendedBoundsFloatDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L530"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor HardBounds(Action&lt;ExtendedBoundsFloatDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedBoundsFloatDescriptor.html">ExtendedBoundsFloatDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Interval_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Interval*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Interval_System_Nullable_System_Double__" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Interval(System.Nullable{System.Double})">
+  Interval(double?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L544"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The interval for the buckets.
+Must be a positive decimal.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor Interval(double? interval)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>interval</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_MinDocCount_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.MinDocCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_MinDocCount_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.MinDocCount(System.Nullable{System.Int32})">
+  MinDocCount(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L556"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only returns buckets that have <code>min_doc_count</code> number of documents.
+By default, the response will fill gaps in the histogram with empty buckets.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor MinDocCount(int? minDocCount)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>minDocCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Missing_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Missing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Missing_System_Nullable_System_Double__" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Missing(System.Nullable{System.Double})">
+  Missing(double?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L568"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The value to apply to documents that do not have a value.
+By default, documents without a value are ignored.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor Missing(double? missing)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>missing</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Offset_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Offset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Offset_System_Nullable_System_Double__" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Offset(System.Nullable{System.Double})">
+  Offset(double?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L580"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+By default, the bucket keys start with 0 and then continue in even spaced steps of <code>interval</code>.
+The bucket boundaries can be shifted by using the <code>offset</code> option.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor Offset(double? offset)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>offset</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Order_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Order*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Order_System_Collections_Generic_ICollection_System_Collections_Generic_KeyValuePair_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_SortOrder___" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Order(System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder}})">
+  Order(ICollection&lt;KeyValuePair&lt;Field, SortOrder&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L592"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The sort order of the returned buckets.
+By default, the returned buckets are sorted by their key ascending.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor Order(ICollection&lt;KeyValuePair&lt;Field, SortOrder&gt;&gt;? order)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>order</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.SortOrder.html">SortOrder</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Script_Elastic_Clients_Elasticsearch_Script_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Script(Elastic.Clients.Elasticsearch.Script)">
+  Script(Script?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L598"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor Script(Script? script)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>script</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Script.html">Script</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Script_Elastic_Clients_Elasticsearch_ScriptDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Script(Elastic.Clients.Elasticsearch.ScriptDescriptor)">
+  Script(ScriptDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L606"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor Script(ScriptDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ScriptDescriptor.html">ScriptDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Script_System_Action_Elastic_Clients_Elasticsearch_ScriptDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Script(System.Action{Elastic.Clients.Elasticsearch.ScriptDescriptor})">
+  Script(Action&lt;ScriptDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L614"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregationDescriptor Script(Action&lt;ScriptDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ScriptDescriptor.html">ScriptDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.html">HistogramAggregationDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Serialize_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_HistogramAggregationDescriptor_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregationDescriptor.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/HistogramAggregation.g.cs/#L622"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class PutJobRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PutJobRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create a rollup job.   WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.   The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.   There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.   Jobs are created in a STOPPED state. You can start them with the start rollup jobs API.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor" class="text-break">
+Class PutJobRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L428"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.html">Rollup</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create a rollup job.
+</p>
+<p>
+WARNING: From 8.15.0, calling this API in a cluster with no rollup usage will fail with a message about the deprecation and planned removal of rollup features. A cluster needs to contain either a rollup job or a rollup index in order for this API to be allowed to run.
+</p>
+<p>
+The rollup job configuration contains all the details about how the job should run, when it indexes documents, and what future queries will be able to run against the rollup index.
+</p>
+<p>
+There are three main sections to the job configuration: the logistical details about the job (for example, the cron schedule), the fields that are used for grouping, and what metrics to collect for each group.
+</p>
+<p>
+Jobs are created in a <code>STOPPED</code> state. You can start them with the start rollup jobs API.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class PutJobRequestDescriptor : RequestDescriptor&lt;PutJobRequestDescriptor, PutJobRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters.html">PutJobRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html">RequestDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters.html">PutJobRequestParameters</a>&gt;</div>
+      <div><span class="xref">PutJobRequestDescriptor</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__">RequestDescriptor&lt;PutJobRequestDescriptor, PutJobRequestParameters&gt;.RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_FilterPath_System_String___">RequestDescriptor&lt;PutJobRequestDescriptor, PutJobRequestParameters&gt;.FilterPath(params string[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Human_System_Nullable_System_Boolean__">RequestDescriptor&lt;PutJobRequestDescriptor, PutJobRequestParameters&gt;.Human(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Pretty_System_Nullable_System_Boolean__">RequestDescriptor&lt;PutJobRequestDescriptor, PutJobRequestParameters&gt;.Pretty(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Id)">
+  PutJobRequestDescriptor(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L432"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L438"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.18.3/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Cron_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Cron*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Cron_System_String_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Cron(System.String)">
+  Cron(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L473"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A cron string which defines the intervals when the rollup job should be executed. When the interval
+triggers, the indexer attempts to rollup the data in the index pattern. The cron pattern is unrelated
+to the time interval of the data being rolled up. For example, you may wish to create hourly rollups
+of your document but to only run the indexer on a daily basis at midnight, as defined by the cron. The
+cron pattern is defined just like a Watcher cron schedule.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Cron(string cron)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cron</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Groups_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Groups*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Groups_Elastic_Clients_Elasticsearch_Rollup_Groupings_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Groups(Elastic.Clients.Elasticsearch.Rollup.Groupings)">
+  Groups(Groupings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L488"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the grouping fields and aggregations that are defined for this rollup job. These fields will then be
+available later for aggregating into buckets. These aggs and fields can be used in any combination. Think of
+the groups configuration as defining a set of tools that can later be used in aggregations to partition the
+data. Unlike raw data, we have to think ahead to which fields and aggregations might be used. Rollups provide
+enough flexibility that you simply need to determine which fields are needed, not in what order they are needed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Groups(Groupings groups)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>groups</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.Groupings.html">Groupings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Groups_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Groups*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Groups_Elastic_Clients_Elasticsearch_Rollup_GroupingsDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Groups(Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor)">
+  Groups(GroupingsDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L496"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Groups(GroupingsDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor.html">GroupingsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Groups_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Groups*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Groups_System_Action_Elastic_Clients_Elasticsearch_Rollup_GroupingsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Groups(System.Action{Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor})">
+  Groups(Action&lt;GroupingsDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L504"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Groups(Action&lt;GroupingsDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.GroupingsDescriptor.html">GroupingsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Headers_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Headers*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Headers_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_Elastic_Clients_Elasticsearch_Union_System_String_System_Collections_Generic_ICollection_System_String____Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_Elastic_Clients_Elasticsearch_Union_System_String_System_Collections_Generic_ICollection_System_String_____" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Headers(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,Elastic.Clients.Elasticsearch.Union{System.String,System.Collections.Generic.ICollection{System.String}}},Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,Elastic.Clients.Elasticsearch.Union{System.String,System.Collections.Generic.ICollection{System.String}}}})">
+  Headers(Func&lt;FluentDictionary&lt;string, Union&lt;string, ICollection&lt;string&gt;&gt;&gt;, FluentDictionary&lt;string, Union&lt;string, ICollection&lt;string&gt;&gt;&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L512"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Headers(Func&lt;FluentDictionary&lt;string, Union&lt;string, ICollection&lt;string&gt;&gt;&gt;, FluentDictionary&lt;string, Union&lt;string, ICollection&lt;string&gt;&gt;&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html">Union</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html">Union</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Id_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Id*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Id_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Id(Elastic.Clients.Elasticsearch.Id)">
+  Id(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L444"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Id(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_IndexPattern_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.IndexPattern*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_IndexPattern_System_String_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.IndexPattern(System.String)">
+  IndexPattern(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L524"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The index or index pattern to roll up. Supports wildcard-style patterns (<code>logstash-*</code>). The job attempts to
+rollup the entire index or index-pattern.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor IndexPattern(string indexPattern)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indexPattern</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Metrics_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Metrics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Metrics_Elastic_Clients_Elasticsearch_Rollup_FieldMetricDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Metrics(Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor)">
+  Metrics(FieldMetricDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L546"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Metrics(FieldMetricDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor.html">FieldMetricDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Metrics_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Metrics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Metrics_System_Action_Elastic_Clients_Elasticsearch_Rollup_FieldMetricDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Metrics(System.Action{Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor})">
+  Metrics(Action&lt;FieldMetricDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L555"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Metrics(Action&lt;FieldMetricDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor.html">FieldMetricDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Metrics_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Metrics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Metrics_System_Action_Elastic_Clients_Elasticsearch_Rollup_FieldMetricDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Metrics(System.Action{Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor}[])">
+  Metrics(params Action&lt;FieldMetricDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L564"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Metrics(params Action&lt;FieldMetricDescriptor&gt;[] configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor.html">FieldMetricDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Metrics_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Metrics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Metrics_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Rollup_FieldMetric__" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Metrics(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Rollup.FieldMetric})">
+  Metrics(ICollection&lt;FieldMetric&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L537"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the metrics to collect for each grouping tuple. By default, only the doc_counts are collected for each
+group. To make rollup useful, you will often add metrics like averages, mins, maxes, etc. Metrics are defined
+on a per-field basis and for each field you configure which metric should be collected.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Metrics(ICollection&lt;FieldMetric&gt;? metrics)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>metrics</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.FieldMetric.html">FieldMetric</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_PageSize_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.PageSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_PageSize_System_Int32_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.PageSize(System.Int32)">
+  PageSize(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L580"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of bucket results that are processed on each iteration of the rollup indexer. A larger value tends
+to execute faster, but requires more memory during processing. This value has no effect on how the data is
+rolled up; it is merely used for tweaking the speed or memory cost of the indexer.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor PageSize(int pageSize)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pageSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_RollupIndex_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.RollupIndex*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_RollupIndex_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.RollupIndex(Elastic.Clients.Elasticsearch.IndexName)">
+  RollupIndex(IndexName)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L591"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The index that contains the rollup results. The index can be shared with other rollup jobs. The data is stored so that it doesn’t interfere with unrelated jobs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor RollupIndex(IndexName rollupIndex)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rollupIndex</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Serialize_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L608"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Timeout_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Rollup_PutJobRequestDescriptor_Timeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.Timeout(Elastic.Clients.Elasticsearch.Duration)">
+  Timeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/Rollup/PutJobRequest.g.cs/#L602"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Time to wait for the request to complete.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Timeout(Duration? timeout)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>timeout</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Rollup.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

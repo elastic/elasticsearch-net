@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class BulkRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class BulkRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Bulk index or delete documents. Perform multiple index, create, delete, and update actions in a single request. This reduces overhead and can greatly increase indexing speed.   If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:    To use the create action, you must have the create_doc, create, index, or write index privilege. Data streams support only the create action.    To use the index action, you must have the create, index, or write index privilege.    To use the delete action, you must have the delete or write index privilege.    To use the update action, you must have the index or write index privilege.    To automatically create a data stream or index with a bulk API request, you must have the auto_configure, create_index, or manage index privilege.    To make the result of a bulk operation visible to search using the refresh parameter, you must have the maintenance or manage index privilege.    Automatic data stream creation requires a matching index template with data stream enabled.   The actions are specified in the request body using a newline delimited JSON (NDJSON) structure:  action_and_meta_data\n optional_source\n action_and_meta_data\n optional_source\n .... action_and_meta_data\n optional_source\n  The index and create actions expect a source on the next line and have the same semantics as the op_type parameter in the standard index API. A create action fails if a document with the same ID already exists in the target An index action adds or replaces a document as necessary.   NOTE: Data streams support only the create action. To update or delete a document in a data stream, you must target the backing index containing the document.   An update action expects that the partial doc, upsert, and script and its options are specified on the next line.   A delete action does not expect a source on the next line and has the same semantics as the standard delete API.   NOTE: The final line of data must end with a newline character (\n). Each newline character may be preceded by a carriage return (\r). When sending NDJSON data to the _bulk endpoint, use a Content-Type header of application/json or application/x-ndjson. Because this format uses literal newline characters (\n) as delimiters, make sure that the JSON actions and sources are not pretty printed.   If you provide a target in the request path, it is used for any actions that don&#39;t explicitly specify an _index argument.   A note on the format: the idea here is to make processing as fast as possible. As some of the actions are redirected to other shards on other nodes, only action_meta_data is parsed on the receiving node side.   Client libraries using this protocol should try and strive to do something similar on the client side, and reduce buffering as much as possible.   There is no &quot;correct&quot; number of actions to perform in a single bulk request. Experiment with different settings to find the optimal size for your particular workload. Note that Elasticsearch limits the maximum size of a HTTP request to 100mb by default so clients must ensure that no request exceeds this size. It is not possible to index a single document that exceeds the size limit, so you must pre-process any such documents into smaller pieces before sending them to Elasticsearch. For instance, split documents into pages or chapters before indexing them, or store raw binary data in a system outside Elasticsearch and replace the raw data with a link to the external system in the documents that you send to Elasticsearch.   Client suppport for bulk requests   Some of the officially supported clients provide helpers to assist with bulk requests and reindexing:    Go: Check out esutil.BulkIndexer    Perl: Check out Search::Elasticsearch::Client::5_0::Bulk and Search::Elasticsearch::Client::5_0::Scroll    Python: Check out elasticsearch.helpers.*    JavaScript: Check out client.helpers.*    .NET: Check out BulkAllObservable    PHP: Check out bulk indexing.    Submitting bulk requests with cURL   If you&#39;re providing text file input to curl, you must use the --data-binary flag instead of plain -d. The latter doesn&#39;t preserve newlines. For example:  $ cat requests { &quot;index&quot; : { &quot;_index&quot; : &quot;test&quot;, &quot;_id&quot; : &quot;1&quot; } } { &quot;field1&quot; : &quot;value1&quot; } $ curl -s -H &quot;Content-Type: application/x-ndjson&quot; -XPOST localhost:9200/_bulk --data-binary &quot;@requests&quot;; echo {&quot;took&quot;:7, &quot;errors&quot;: false, &quot;items&quot;:[{&quot;index&quot;:{&quot;_index&quot;:&quot;test&quot;,&quot;_id&quot;:&quot;1&quot;,&quot;_version&quot;:1,&quot;result&quot;:&quot;created&quot;,&quot;forced_refresh&quot;:false}}]}  Optimistic concurrency control   Each index and delete action within a bulk API call may include the if_seq_no and if_primary_term parameters in their respective action and meta data lines. The if_seq_no and if_primary_term parameters control how operations are run, based on the last modification to existing documents. See Optimistic concurrency control for more details.   Versioning   Each bulk item can include the version value using the version field. It automatically follows the behavior of the index or delete operation based on the _version mapping. It also support the version_type.   Routing   Each bulk item can include the routing value using the routing field. It automatically follows the behavior of the index or delete operation based on the _routing mapping.   NOTE: Data streams do not support custom routing unless they were created with the allow_custom_routing setting enabled in the template.   Wait for active shards   When making bulk calls, you can set the wait_for_active_shards parameter to require a minimum number of shard copies to be active before starting to process the bulk request.   Refresh   Control when the changes made by this request are visible to search.   NOTE: Only the shards that receive the bulk request will be affected by refresh. Imagine a _bulk?refresh=wait_for request with three documents in it that happen to be routed to different shards in an index with five shards. The request will only wait for those three shards to refresh. The other two shards that make up the index do not participate in the _bulk request at all.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.BulkRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1" class="text-break">
+Class BulkRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L643"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Bulk index or delete documents.
+Perform multiple <code>index</code>, <code>create</code>, <code>delete</code>, and <code>update</code> actions in a single request.
+This reduces overhead and can greatly increase indexing speed.
+</p>
+<p>
+If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:
+</p>
+<ul><li>
+<p>
+To use the <code>create</code> action, you must have the <code>create_doc</code>, <code>create</code>, <code>index</code>, or <code>write</code> index privilege. Data streams support only the <code>create</code> action.
+</p>
+</li><li>
+<p>
+To use the <code>index</code> action, you must have the <code>create</code>, <code>index</code>, or <code>write</code> index privilege.
+</p>
+</li><li>
+<p>
+To use the <code>delete</code> action, you must have the <code>delete</code> or <code>write</code> index privilege.
+</p>
+</li><li>
+<p>
+To use the <code>update</code> action, you must have the <code>index</code> or <code>write</code> index privilege.
+</p>
+</li><li>
+<p>
+To automatically create a data stream or index with a bulk API request, you must have the <code>auto_configure</code>, <code>create_index</code>, or <code>manage</code> index privilege.
+</p>
+</li><li>
+<p>
+To make the result of a bulk operation visible to search using the <code>refresh</code> parameter, you must have the <code>maintenance</code> or <code>manage</code> index privilege.
+</p>
+</li></ul>
+<p>
+Automatic data stream creation requires a matching index template with data stream enabled.
+</p>
+<p>
+The actions are specified in the request body using a newline delimited JSON (NDJSON) structure:
+</p>
+<pre><code class="lang-csharp">action_and_meta_data\n
+optional_source\n
+action_and_meta_data\n
+optional_source\n
+....
+action_and_meta_data\n
+optional_source\n</code></pre>
+<p>
+The <code>index</code> and <code>create</code> actions expect a source on the next line and have the same semantics as the <code>op_type</code> parameter in the standard index API.
+A <code>create</code> action fails if a document with the same ID already exists in the target
+An <code>index</code> action adds or replaces a document as necessary.
+</p>
+<p>
+NOTE: Data streams support only the <code>create</code> action.
+To update or delete a document in a data stream, you must target the backing index containing the document.
+</p>
+<p>
+An <code>update</code> action expects that the partial doc, upsert, and script and its options are specified on the next line.
+</p>
+<p>
+A <code>delete</code> action does not expect a source on the next line and has the same semantics as the standard delete API.
+</p>
+<p>
+NOTE: The final line of data must end with a newline character (<code>\n</code>).
+Each newline character may be preceded by a carriage return (<code>\r</code>).
+When sending NDJSON data to the <code>_bulk</code> endpoint, use a <code>Content-Type</code> header of <code>application/json</code> or <code>application/x-ndjson</code>.
+Because this format uses literal newline characters (<code>\n</code>) as delimiters, make sure that the JSON actions and sources are not pretty printed.
+</p>
+<p>
+If you provide a target in the request path, it is used for any actions that don't explicitly specify an <code>_index</code> argument.
+</p>
+<p>
+A note on the format: the idea here is to make processing as fast as possible.
+As some of the actions are redirected to other shards on other nodes, only <code>action_meta_data</code> is parsed on the receiving node side.
+</p>
+<p>
+Client libraries using this protocol should try and strive to do something similar on the client side, and reduce buffering as much as possible.
+</p>
+<p>
+There is no "correct" number of actions to perform in a single bulk request.
+Experiment with different settings to find the optimal size for your particular workload.
+Note that Elasticsearch limits the maximum size of a HTTP request to 100mb by default so clients must ensure that no request exceeds this size.
+It is not possible to index a single document that exceeds the size limit, so you must pre-process any such documents into smaller pieces before sending them to Elasticsearch.
+For instance, split documents into pages or chapters before indexing them, or store raw binary data in a system outside Elasticsearch and replace the raw data with a link to the external system in the documents that you send to Elasticsearch.
+</p>
+<p>
+<strong>Client suppport for bulk requests</strong>
+</p>
+<p>
+Some of the officially supported clients provide helpers to assist with bulk requests and reindexing:
+</p>
+<ul><li>
+<p>
+Go: Check out <code>esutil.BulkIndexer</code>
+</p>
+</li><li>
+<p>
+Perl: Check out <code>Search::Elasticsearch::Client::5_0::Bulk</code> and <code>Search::Elasticsearch::Client::5_0::Scroll</code>
+</p>
+</li><li>
+<p>
+Python: Check out <code>elasticsearch.helpers.*</code>
+</p>
+</li><li>
+<p>
+JavaScript: Check out <code>client.helpers.*</code>
+</p>
+</li><li>
+<p>
+.NET: Check out <code>BulkAllObservable</code>
+</p>
+</li><li>
+<p>
+PHP: Check out bulk indexing.
+</p>
+</li></ul>
+<p>
+<strong>Submitting bulk requests with cURL</strong>
+</p>
+<p>
+If you're providing text file input to <code>curl</code>, you must use the <code>--data-binary</code> flag instead of plain <code>-d</code>.
+The latter doesn't preserve newlines. For example:
+</p>
+<pre><code class="lang-csharp">$ cat requests
+{ "index" : { "_index" : "test", "_id" : "1" } }
+{ "field1" : "value1" }
+$ curl -s -H "Content-Type: application/x-ndjson" -XPOST localhost:9200/_bulk --data-binary "@requests"; echo
+{"took":7, "errors": false, "items":[{"index":{"_index":"test","_id":"1","_version":1,"result":"created","forced_refresh":false}}]}</code></pre>
+<p>
+<strong>Optimistic concurrency control</strong>
+</p>
+<p>
+Each <code>index</code> and <code>delete</code> action within a bulk API call may include the <code>if_seq_no</code> and <code>if_primary_term</code> parameters in their respective action and meta data lines.
+The <code>if_seq_no</code> and <code>if_primary_term</code> parameters control how operations are run, based on the last modification to existing documents. See Optimistic concurrency control for more details.
+</p>
+<p>
+<strong>Versioning</strong>
+</p>
+<p>
+Each bulk item can include the version value using the <code>version</code> field.
+It automatically follows the behavior of the index or delete operation based on the <code>_version</code> mapping.
+It also support the <code>version_type</code>.
+</p>
+<p>
+<strong>Routing</strong>
+</p>
+<p>
+Each bulk item can include the routing value using the <code>routing</code> field.
+It automatically follows the behavior of the index or delete operation based on the <code>_routing</code> mapping.
+</p>
+<p>
+NOTE: Data streams do not support custom routing unless they were created with the <code>allow_custom_routing</code> setting enabled in the template.
+</p>
+<p>
+<strong>Wait for active shards</strong>
+</p>
+<p>
+When making bulk calls, you can set the <code>wait_for_active_shards</code> parameter to require a minimum number of shard copies to be active before starting to process the bulk request.
+</p>
+<p>
+<strong>Refresh</strong>
+</p>
+<p>
+Control when the changes made by this request are visible to search.
+</p>
+<p>
+NOTE: Only the shards that receive the bulk request will be affected by refresh.
+Imagine a <code>_bulk?refresh=wait_for</code> request with three documents in it that happen to be routed to different shards in an index with five shards.
+The request will only wait for those three shards to refresh.
+The other two shards that make up the index do not participate in the <code>_bulk</code> request at all.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class BulkRequestDescriptor&lt;TDocument&gt; : RequestDescriptor&lt;BulkRequestDescriptor&lt;TDocument&gt;, BulkRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestParameters.html">BulkRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html">RequestDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestParameters.html">BulkRequestParameters</a>&gt;</div>
+      <div><span class="xref">BulkRequestDescriptor&lt;TDocument&gt;</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__">RequestDescriptor&lt;BulkRequestDescriptor&lt;TDocument&gt;, BulkRequestParameters&gt;.RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_FilterPath_System_String___">RequestDescriptor&lt;BulkRequestDescriptor&lt;TDocument&gt;, BulkRequestParameters&gt;.FilterPath(params string[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Human_System_Nullable_System_Boolean__">RequestDescriptor&lt;BulkRequestDescriptor&lt;TDocument&gt;, BulkRequestParameters&gt;.Human(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.RequestDescriptor-2.html#Elastic_Clients_Elasticsearch_Requests_RequestDescriptor_2_Pretty_System_Nullable_System_Boolean__">RequestDescriptor&lt;BulkRequestDescriptor&lt;TDocument&gt;, BulkRequestParameters&gt;.Pretty(bool?)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.#ctor">
+  BulkRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L651"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.IndexName)">
+  BulkRequestDescriptor(IndexName?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L647"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor(IndexName? index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L657"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.18.3/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_IncludeSourceOnError_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.IncludeSourceOnError*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_IncludeSourceOnError_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.IncludeSourceOnError(System.Nullable{System.Boolean})">
+  IncludeSourceOnError(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L663"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; IncludeSourceOnError(bool? includeSourceOnError = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>includeSourceOnError</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Index_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Index_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Index(Elastic.Clients.Elasticsearch.IndexName)">
+  Index(IndexName?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L676"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; Index(IndexName? index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_ListExecutedPipelines_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.ListExecutedPipelines*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_ListExecutedPipelines_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.ListExecutedPipelines(System.Nullable{System.Boolean})">
+  ListExecutedPipelines(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L664"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; ListExecutedPipelines(bool? listExecutedPipelines = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>listExecutedPipelines</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Pipeline_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Pipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Pipeline_System_String_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Pipeline(System.String)">
+  Pipeline(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L665"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; Pipeline(string? pipeline)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>pipeline</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Refresh_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Refresh_System_Nullable_Elastic_Clients_Elasticsearch_Refresh__" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Refresh(System.Nullable{Elastic.Clients.Elasticsearch.Refresh})">
+  Refresh(Refresh?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L666"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; Refresh(Refresh? refresh)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>refresh</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Refresh.html">Refresh</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_RequireAlias_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.RequireAlias*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_RequireAlias_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.RequireAlias(System.Nullable{System.Boolean})">
+  RequireAlias(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L667"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; RequireAlias(bool? requireAlias = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>requireAlias</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_RequireDataStream_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.RequireDataStream*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_RequireDataStream_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.RequireDataStream(System.Nullable{System.Boolean})">
+  RequireDataStream(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L668"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; RequireDataStream(bool? requireDataStream = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>requireDataStream</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Routing_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Routing_Elastic_Clients_Elasticsearch_Routing_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Routing(Elastic.Clients.Elasticsearch.Routing)">
+  Routing(Routing?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L669"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; Routing(Routing? routing)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>routing</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Routing.html">Routing</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Serialize_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L682"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Source_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Source_Elastic_Clients_Elasticsearch_Core_Search_SourceConfigParam_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam)">
+  Source(SourceConfigParam?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L670"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; Source(SourceConfigParam? source)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam.html">SourceConfigParam</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_SourceExcludes_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.SourceExcludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_SourceExcludes_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.SourceExcludes(Elastic.Clients.Elasticsearch.Fields)">
+  SourceExcludes(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L671"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; SourceExcludes(Fields? sourceExcludes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourceExcludes</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_SourceIncludes_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.SourceIncludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_SourceIncludes_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.SourceIncludes(Elastic.Clients.Elasticsearch.Fields)">
+  SourceIncludes(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L672"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; SourceIncludes(Fields? sourceIncludes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>sourceIncludes</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Timeout_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_Timeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.Timeout(Elastic.Clients.Elasticsearch.Duration)">
+  Timeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L673"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; Timeout(Duration? timeout)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>timeout</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_WaitForActiveShards_" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.WaitForActiveShards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_BulkRequestDescriptor_1_WaitForActiveShards_System_Nullable_Elastic_Clients_Elasticsearch_WaitForActiveShards__" data-uid="Elastic.Clients.Elasticsearch.BulkRequestDescriptor`1.WaitForActiveShards(System.Nullable{Elastic.Clients.Elasticsearch.WaitForActiveShards})">
+  WaitForActiveShards(WaitForActiveShards?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/BulkRequest.g.cs/#L674"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkRequestDescriptor&lt;TDocument&gt; WaitForActiveShards(WaitForActiveShards? waitForActiveShards)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>waitForActiveShards</code> <a class="xref" href="Elastic.Clients.Elasticsearch.WaitForActiveShards.html">WaitForActiveShards</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkRequestDescriptor-1.html">BulkRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
