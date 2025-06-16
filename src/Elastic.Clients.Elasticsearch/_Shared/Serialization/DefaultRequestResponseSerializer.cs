@@ -95,7 +95,7 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 
 	private static IReadOnlyCollection<JsonConverter> CreateDefaultBuiltInConverters(IElasticsearchClientSettings settings) =>
 	[
-		new KeyValuePairConverterFactory(settings),
+		new KeyValuePairConverterFactory(),
 		new ObjectToInferredTypesConverter(),
 		new SourceConverterFactory(settings),
 		new SelfSerializableConverterFactory(settings),
