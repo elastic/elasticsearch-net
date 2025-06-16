@@ -1016,6 +1016,7 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>(request);
 	}
 
+	[System.Obsolete("Deprecated in '9.1.0'. Forcing any buffered data to be processed is deprecated, in a future major version a datafeed will be required.")]
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse FlushJob(Elastic.Clients.Elasticsearch.Id jobId)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(jobId);
@@ -1024,6 +1025,7 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>(request);
 	}
 
+	[System.Obsolete("Deprecated in '9.1.0'. Forcing any buffered data to be processed is deprecated, in a future major version a datafeed will be required.")]
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse FlushJob(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(jobId);
@@ -1039,6 +1041,7 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>(request, cancellationToken);
 	}
 
+	[System.Obsolete("Deprecated in '9.1.0'. Forcing any buffered data to be processed is deprecated, in a future major version a datafeed will be required.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse> FlushJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(jobId);
@@ -1047,6 +1050,7 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>(request, cancellationToken);
 	}
 
+	[System.Obsolete("Deprecated in '9.1.0'. Forcing any buffered data to be processed is deprecated, in a future major version a datafeed will be required.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse> FlushJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(jobId);

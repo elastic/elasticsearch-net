@@ -143,7 +143,7 @@ public sealed partial class MistralServiceSettings
 	/// <summary>
 	/// <para>
 	/// The name of the model to use for the inference task.
-	/// Refer to the Mistral models documentation for the list of available text embedding models.
+	/// Refer to the Mistral models documentation for the list of available models.
 	/// </para>
 	/// </summary>
 	public
@@ -212,7 +212,7 @@ public readonly partial struct MistralServiceSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// The name of the model to use for the inference task.
-	/// Refer to the Mistral models documentation for the list of available text embedding models.
+	/// Refer to the Mistral models documentation for the list of available models.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor Model(string value)

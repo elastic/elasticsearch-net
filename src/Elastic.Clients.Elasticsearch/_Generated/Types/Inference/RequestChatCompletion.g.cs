@@ -194,14 +194,51 @@ public sealed partial class RequestChatCompletion
 	/// <summary>
 	/// <para>
 	/// Controls which tool is called by the model.
+	/// String representation: One of <c>auto</c>, <c>none</c>, or <c>requrired</c>. <c>auto</c> allows the model to choose between calling tools and generating a message. <c>none</c> causes the model to not call any tools. <c>required</c> forces the model to call one or more tools.
+	/// Example (object representation):
 	/// </para>
+	/// <code>
+	/// {
+	///   "tool_choice": {
+	///       "type": "function",
+	///       "function": {
+	///           "name": "get_current_weather"
+	///       }
+	///   }
+	/// }
+	/// </code>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>? ToolChoice { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of tools that the model can call.
+	/// Example:
 	/// </para>
+	/// <code>
+	/// {
+	///   "tools": [
+	///       {
+	///           "type": "function",
+	///           "function": {
+	///               "name": "get_price_of_item",
+	///               "description": "Get the current price of an item",
+	///               "parameters": {
+	///                   "type": "object",
+	///                   "properties": {
+	///                       "item": {
+	///                           "id": "12345"
+	///                       },
+	///                       "unit": {
+	///                           "type": "currency"
+	///                       }
+	///                   }
+	///               }
+	///           }
+	///       }
+	///   ]
+	/// }
+	/// </code>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.CompletionTool>? Tools { get; set; }
 
@@ -335,7 +372,19 @@ public readonly partial struct RequestChatCompletionDescriptor
 	/// <summary>
 	/// <para>
 	/// Controls which tool is called by the model.
+	/// String representation: One of <c>auto</c>, <c>none</c>, or <c>requrired</c>. <c>auto</c> allows the model to choose between calling tools and generating a message. <c>none</c> causes the model to not call any tools. <c>required</c> forces the model to call one or more tools.
+	/// Example (object representation):
 	/// </para>
+	/// <code>
+	/// {
+	///   "tool_choice": {
+	///       "type": "function",
+	///       "function": {
+	///           "name": "get_current_weather"
+	///       }
+	///   }
+	/// }
+	/// </code>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor ToolChoice(Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>? value)
 	{
@@ -346,7 +395,32 @@ public readonly partial struct RequestChatCompletionDescriptor
 	/// <summary>
 	/// <para>
 	/// A list of tools that the model can call.
+	/// Example:
 	/// </para>
+	/// <code>
+	/// {
+	///   "tools": [
+	///       {
+	///           "type": "function",
+	///           "function": {
+	///               "name": "get_price_of_item",
+	///               "description": "Get the current price of an item",
+	///               "parameters": {
+	///                   "type": "object",
+	///                   "properties": {
+	///                       "item": {
+	///                           "id": "12345"
+	///                       },
+	///                       "unit": {
+	///                           "type": "currency"
+	///                       }
+	///                   }
+	///               }
+	///           }
+	///       }
+	///   ]
+	/// }
+	/// </code>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Tools(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.CompletionTool>? value)
 	{
@@ -357,7 +431,32 @@ public readonly partial struct RequestChatCompletionDescriptor
 	/// <summary>
 	/// <para>
 	/// A list of tools that the model can call.
+	/// Example:
 	/// </para>
+	/// <code>
+	/// {
+	///   "tools": [
+	///       {
+	///           "type": "function",
+	///           "function": {
+	///               "name": "get_price_of_item",
+	///               "description": "Get the current price of an item",
+	///               "parameters": {
+	///                   "type": "object",
+	///                   "properties": {
+	///                       "item": {
+	///                           "id": "12345"
+	///                       },
+	///                       "unit": {
+	///                           "type": "currency"
+	///                       }
+	///                   }
+	///               }
+	///           }
+	///       }
+	///   ]
+	/// }
+	/// </code>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Tools(params Elastic.Clients.Elasticsearch.Inference.CompletionTool[] values)
 	{
@@ -368,7 +467,32 @@ public readonly partial struct RequestChatCompletionDescriptor
 	/// <summary>
 	/// <para>
 	/// A list of tools that the model can call.
+	/// Example:
 	/// </para>
+	/// <code>
+	/// {
+	///   "tools": [
+	///       {
+	///           "type": "function",
+	///           "function": {
+	///               "name": "get_price_of_item",
+	///               "description": "Get the current price of an item",
+	///               "parameters": {
+	///                   "type": "object",
+	///                   "properties": {
+	///                       "item": {
+	///                           "id": "12345"
+	///                       },
+	///                       "unit": {
+	///                           "type": "currency"
+	///                       }
+	///                   }
+	///               }
+	///           }
+	///       }
+	///   ]
+	/// }
+	/// </code>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Tools(params System.Action<Elastic.Clients.Elasticsearch.Inference.CompletionToolDescriptor>[] actions)
 	{

@@ -230,7 +230,7 @@ public sealed partial class KnnSearch
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.RescoreVector? RescoreVector { get; set; }
@@ -435,7 +435,7 @@ public readonly partial struct KnnSearchDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
@@ -446,7 +446,7 @@ public readonly partial struct KnnSearchDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)
@@ -695,7 +695,7 @@ public readonly partial struct KnnSearchDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
@@ -706,7 +706,7 @@ public readonly partial struct KnnSearchDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)

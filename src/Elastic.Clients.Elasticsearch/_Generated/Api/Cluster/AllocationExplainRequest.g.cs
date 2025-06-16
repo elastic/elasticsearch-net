@@ -120,6 +120,7 @@ internal sealed partial class AllocationExplainRequestConverter : System.Text.Js
 /// For unassigned shards, it provides an explanation for why the shard is unassigned.
 /// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 /// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
+/// Refer to the linked documentation for examples of how to troubleshoot allocation issues using this API.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestConverter))]
@@ -206,6 +207,7 @@ public sealed partial class AllocationExplainRequest : Elastic.Clients.Elasticse
 /// For unassigned shards, it provides an explanation for why the shard is unassigned.
 /// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 /// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
+/// Refer to the linked documentation for examples of how to troubleshoot allocation issues using this API.
 /// </para>
 /// </summary>
 public readonly partial struct AllocationExplainRequestDescriptor

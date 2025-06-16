@@ -41,7 +41,7 @@ internal sealed partial class WeightedTokensQueryConverter : System.Text.Json.Se
 		LocalJsonValue<float?> propBoost = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig?> propPruningConfig = default;
 		LocalJsonValue<string?> propQueryName = default;
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, float>> propTokens = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, float>>> propTokens = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
@@ -59,7 +59,7 @@ internal sealed partial class WeightedTokensQueryConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propTokens.TryReadProperty(ref reader, options, PropTokens, static System.Collections.Generic.IDictionary<string, float> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, float>(o, null, null)!))
+			if (propTokens.TryReadProperty(ref reader, options, PropTokens, static System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, float>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.KeyValuePair<string, float>>(o, static System.Collections.Generic.KeyValuePair<string, float> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadKeyValuePairValue<string, float>(o, null, null))!))
 			{
 				continue;
 			}
@@ -94,7 +94,7 @@ internal sealed partial class WeightedTokensQueryConverter : System.Text.Json.Se
 		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
 		writer.WriteProperty(options, PropPruningConfig, value.PruningConfig, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
-		writer.WriteProperty(options, PropTokens, value.Tokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, float> v) => w.WriteDictionaryValue<string, float>(o, v, null, null));
+		writer.WriteProperty(options, PropTokens, value.Tokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, float>> v) => w.WriteCollectionValue<System.Collections.Generic.KeyValuePair<string, float>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<string, float> v) => w.WriteKeyValuePairValue<string, float>(o, v, null, null)));
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -110,7 +110,7 @@ public sealed partial class WeightedTokensQuery
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public WeightedTokensQuery(Elastic.Clients.Elasticsearch.Field field, System.Collections.Generic.IDictionary<string, float> tokens)
+	public WeightedTokensQuery(Elastic.Clients.Elasticsearch.Field field, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, float>> tokens)
 	{
 		Field = field;
 		Tokens = tokens;
@@ -158,7 +158,7 @@ public sealed partial class WeightedTokensQuery
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.Collections.Generic.IDictionary<string, float> Tokens { get; set; }
+	System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, float>> Tokens { get; set; }
 }
 
 public readonly partial struct WeightedTokensQueryDescriptor<TDocument>
@@ -250,7 +250,7 @@ public readonly partial struct WeightedTokensQueryDescriptor<TDocument>
 	/// The tokens representing this query
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Tokens(System.Collections.Generic.IDictionary<string, float> value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Tokens(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, float>> value)
 	{
 		Instance.Tokens = value;
 		return this;
@@ -263,7 +263,7 @@ public readonly partial struct WeightedTokensQueryDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Tokens()
 	{
-		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(null);
+		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringFloat.Build(null);
 		return this;
 	}
 
@@ -272,16 +272,16 @@ public readonly partial struct WeightedTokensQueryDescriptor<TDocument>
 	/// The tokens representing this query
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Tokens(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat>? action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> Tokens(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringFloat>? action)
 	{
-		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(action);
+		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringFloat.Build(action);
 		return this;
 	}
 
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor<TDocument> AddToken(string key, float value)
 	{
-		Instance.Tokens ??= new System.Collections.Generic.Dictionary<string, float>();
-		Instance.Tokens.Add(key, value);
+		Instance.Tokens ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, float>>();
+		Instance.Tokens.Add(new System.Collections.Generic.KeyValuePair<string, float>(key, value));
 		return this;
 	}
 
@@ -383,7 +383,7 @@ public readonly partial struct WeightedTokensQueryDescriptor
 	/// The tokens representing this query
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Tokens(System.Collections.Generic.IDictionary<string, float> value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Tokens(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, float>> value)
 	{
 		Instance.Tokens = value;
 		return this;
@@ -396,7 +396,7 @@ public readonly partial struct WeightedTokensQueryDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Tokens()
 	{
-		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(null);
+		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringFloat.Build(null);
 		return this;
 	}
 
@@ -405,16 +405,16 @@ public readonly partial struct WeightedTokensQueryDescriptor
 	/// The tokens representing this query
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Tokens(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat>? action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor Tokens(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringFloat>? action)
 	{
-		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat.Build(action);
+		Instance.Tokens = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringFloat.Build(action);
 		return this;
 	}
 
 	public Elastic.Clients.Elasticsearch.QueryDsl.WeightedTokensQueryDescriptor AddToken(string key, float value)
 	{
-		Instance.Tokens ??= new System.Collections.Generic.Dictionary<string, float>();
-		Instance.Tokens.Add(key, value);
+		Instance.Tokens ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, float>>();
+		Instance.Tokens.Add(new System.Collections.Generic.KeyValuePair<string, float>(key, value));
 		return this;
 	}
 

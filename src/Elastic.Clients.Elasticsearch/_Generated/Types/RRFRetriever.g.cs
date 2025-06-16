@@ -27,6 +27,7 @@ internal sealed partial class RRFRetrieverConverter : System.Text.Json.Serializa
 {
 	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
 	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("_name");
 	private static readonly System.Text.Json.JsonEncodedText PropRankConstant = System.Text.Json.JsonEncodedText.Encode("rank_constant");
 	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size");
 	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers");
@@ -36,6 +37,7 @@ internal sealed partial class RRFRetrieverConverter : System.Text.Json.Serializa
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
 		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<string?> propName = default;
 		LocalJsonValue<int?> propRankConstant = default;
 		LocalJsonValue<int?> propRankWindowSize = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever>> propRetrievers = default;
@@ -47,6 +49,11 @@ internal sealed partial class RRFRetrieverConverter : System.Text.Json.Serializa
 			}
 
 			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
@@ -80,6 +87,7 @@ internal sealed partial class RRFRetrieverConverter : System.Text.Json.Serializa
 		{
 			Filter = propFilter.Value,
 			MinScore = propMinScore.Value,
+			Name = propName.Value,
 			RankConstant = propRankConstant.Value,
 			RankWindowSize = propRankWindowSize.Value,
 			Retrievers = propRetrievers.Value
@@ -91,6 +99,7 @@ internal sealed partial class RRFRetrieverConverter : System.Text.Json.Serializa
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
 		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropRankConstant, value.RankConstant, null, null);
 		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
 		writer.WriteProperty(options, PropRetrievers, value.Retrievers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Retriever>(o, v, null));
@@ -136,6 +145,13 @@ public sealed partial class RRFRetriever
 	/// </para>
 	/// </summary>
 	public float? MinScore { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -229,6 +245,17 @@ public readonly partial struct RrfRetrieverDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Name(string? value)
+	{
+		Instance.Name = value;
 		return this;
 	}
 
@@ -385,6 +412,17 @@ public readonly partial struct RrfRetrieverDescriptor
 	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Name(string? value)
+	{
+		Instance.Name = value;
 		return this;
 	}
 

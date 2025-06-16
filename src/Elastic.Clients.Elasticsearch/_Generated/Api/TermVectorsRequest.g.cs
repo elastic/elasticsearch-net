@@ -265,6 +265,7 @@ internal sealed partial class TermVectorsRequestConverterFactory : System.Text.J
 /// The term and field statistics are therefore only useful as relative measures whereas the absolute numbers have no meaning in this context.
 /// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 /// Use <c>routing</c> only to hit a particular shard.
+/// Refer to the linked documentation for detailed examples of how to use this API.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TermVectorsRequestConverterFactory))]
@@ -522,6 +523,7 @@ public sealed partial class TermVectorsRequest<TDocument> : Elastic.Clients.Elas
 /// The term and field statistics are therefore only useful as relative measures whereas the absolute numbers have no meaning in this context.
 /// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 /// Use <c>routing</c> only to hit a particular shard.
+/// Refer to the linked documentation for detailed examples of how to use this API.
 /// </para>
 /// </summary>
 public readonly partial struct TermVectorsRequestDescriptor<TDocument>

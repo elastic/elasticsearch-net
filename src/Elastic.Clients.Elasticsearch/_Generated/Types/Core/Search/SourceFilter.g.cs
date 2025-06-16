@@ -27,6 +27,7 @@ internal sealed partial class SourceFilterConverter : System.Text.Json.Serializa
 {
 	private static readonly System.Text.Json.JsonEncodedText PropExcludes = System.Text.Json.JsonEncodedText.Encode("excludes");
 	private static readonly System.Text.Json.JsonEncodedText PropExcludes1 = System.Text.Json.JsonEncodedText.Encode("exclude");
+	private static readonly System.Text.Json.JsonEncodedText PropExcludeVectors = System.Text.Json.JsonEncodedText.Encode("exclude_vectors");
 	private static readonly System.Text.Json.JsonEncodedText PropIncludes = System.Text.Json.JsonEncodedText.Encode("includes");
 	private static readonly System.Text.Json.JsonEncodedText PropIncludes1 = System.Text.Json.JsonEncodedText.Encode("include");
 
@@ -43,10 +44,16 @@ internal sealed partial class SourceFilterConverter : System.Text.Json.Serializa
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propExcludes = default;
+		LocalJsonValue<bool?> propExcludeVectors = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propIncludes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propExcludes.TryReadProperty(ref reader, options, PropExcludes, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))) || propExcludes.TryReadProperty(ref reader, options, PropExcludes1, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propExcludeVectors.TryReadProperty(ref reader, options, PropExcludeVectors, null))
 			{
 				continue;
 			}
@@ -69,6 +76,7 @@ internal sealed partial class SourceFilterConverter : System.Text.Json.Serializa
 		return new Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Excludes = propExcludes.Value,
+			ExcludeVectors = propExcludeVectors.Value,
 			Includes = propIncludes.Value
 		};
 	}
@@ -77,6 +85,7 @@ internal sealed partial class SourceFilterConverter : System.Text.Json.Serializa
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropExcludes, value.Excludes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropExcludeVectors, value.ExcludeVectors, null, null);
 		writer.WriteProperty(options, PropIncludes, value.Includes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
 		writer.WriteEndObject();
 	}
@@ -101,7 +110,29 @@ public sealed partial class SourceFilter
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of fields to exclude from the returned source.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? Excludes { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, vector fields are excluded from the returned source.
+	/// </para>
+	/// <para>
+	/// This option takes precedence over <c>includes</c>: any vector field will
+	/// remain excluded even if it matches an <c>includes</c> rule.
+	/// </para>
+	/// </summary>
+	public bool? ExcludeVectors { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to include in the returned source.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? Includes { get; set; }
 }
 
@@ -124,24 +155,59 @@ public readonly partial struct SourceFilterDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.SourceFilter instance) => new Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// A list of fields to exclude from the returned source.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Excludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Excludes = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of fields to exclude from the returned source.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Excludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Excludes = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, vector fields are excluded from the returned source.
+	/// </para>
+	/// <para>
+	/// This option takes precedence over <c>includes</c>: any vector field will
+	/// remain excluded even if it matches an <c>includes</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> ExcludeVectors(bool? value = true)
+	{
+		Instance.ExcludeVectors = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to include in the returned source.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Includes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Includes = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of fields to include in the returned source.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor<TDocument> Includes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.Includes = value;
@@ -181,24 +247,59 @@ public readonly partial struct SourceFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.SourceFilter instance) => new Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.SourceFilter(Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// A list of fields to exclude from the returned source.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Excludes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Excludes = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of fields to exclude from the returned source.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Excludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Excludes = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, vector fields are excluded from the returned source.
+	/// </para>
+	/// <para>
+	/// This option takes precedence over <c>includes</c>: any vector field will
+	/// remain excluded even if it matches an <c>includes</c> rule.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor ExcludeVectors(bool? value = true)
+	{
+		Instance.ExcludeVectors = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to include in the returned source.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Includes(Elastic.Clients.Elasticsearch.Fields? value)
 	{
 		Instance.Includes = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of fields to include in the returned source.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceFilterDescriptor Includes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.Includes = value;

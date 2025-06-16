@@ -25,6 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 
 public sealed partial class PutSynonymRuleRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request will refresh the analyzers with the new synonym rule and wait for the new synonyms to be available before returning.
+	/// If <c>false</c>, analyzers will not be reloaded with the new synonym rule
+	/// </para>
+	/// </summary>
+	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 }
 
 internal sealed partial class PutSynonymRuleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest>
@@ -135,6 +142,14 @@ public sealed partial class PutSynonymRuleRequest : Elastic.Clients.Elasticsearc
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, the request will refresh the analyzers with the new synonym rule and wait for the new synonyms to be available before returning.
+	/// If <c>false</c>, analyzers will not be reloaded with the new synonym rule
+	/// </para>
+	/// </summary>
+	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>
 	/// The synonym rule information definition, which must be in Solr format.
 	/// </para>
 	/// </summary>
@@ -202,6 +217,18 @@ public readonly partial struct PutSynonymRuleRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor SetId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.SetId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request will refresh the analyzers with the new synonym rule and wait for the new synonyms to be available before returning.
+	/// If <c>false</c>, analyzers will not be reloaded with the new synonym rule
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor Refresh(bool? value = true)
+	{
+		Instance.Refresh = value;
 		return this;
 	}
 

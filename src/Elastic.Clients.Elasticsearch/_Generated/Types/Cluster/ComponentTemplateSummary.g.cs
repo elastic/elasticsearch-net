@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 internal sealed partial class ComponentTemplateSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
+	private static readonly System.Text.Json.JsonEncodedText PropDataStreamOptions = System.Text.Json.JsonEncodedText.Encode("data_stream_options");
 	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle");
 	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
@@ -36,6 +37,7 @@ internal sealed partial class ComponentTemplateSummaryConverter : System.Text.Js
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>?> propAliases = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate?> propDataStreamOptions = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover?> propLifecycle = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappings = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
@@ -44,6 +46,11 @@ internal sealed partial class ComponentTemplateSummaryConverter : System.Text.Js
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propDataStreamOptions.TryReadProperty(ref reader, options, PropDataStreamOptions, null))
 			{
 				continue;
 			}
@@ -86,6 +93,7 @@ internal sealed partial class ComponentTemplateSummaryConverter : System.Text.Js
 		return new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Aliases = propAliases.Value,
+			DataStreamOptions = propDataStreamOptions.Value,
 			Lifecycle = propLifecycle.Value,
 			Mappings = propMappings.Value,
 			Meta = propMeta.Value,
@@ -98,6 +106,7 @@ internal sealed partial class ComponentTemplateSummaryConverter : System.Text.Js
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>(o, v, null, null));
+		writer.WriteProperty(options, PropDataStreamOptions, value.DataStreamOptions, null, null);
 		writer.WriteProperty(options, PropLifecycle, value.Lifecycle, null, null);
 		writer.WriteProperty(options, PropMappings, value.Mappings, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
@@ -127,6 +136,7 @@ public sealed partial class ComponentTemplateSummary
 	}
 
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>? Aliases { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate? DataStreamOptions { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
@@ -207,6 +217,24 @@ public readonly partial struct ComponentTemplateSummaryDescriptor<TDocument>
 	{
 		Instance.Aliases ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>();
 		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> DataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate? value)
+	{
+		Instance.DataStreamOptions = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> DataStreamOptions()
+	{
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument> DataStreamOptions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor>? action)
+	{
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(action);
 		return this;
 	}
 
@@ -434,6 +462,24 @@ public readonly partial struct ComponentTemplateSummaryDescriptor
 	{
 		Instance.Aliases ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinition>();
 		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDefinitionDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor DataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplate? value)
+	{
+		Instance.DataStreamOptions = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor DataStreamOptions()
+	{
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor DataStreamOptions(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor>? action)
+	{
+		Instance.DataStreamOptions = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamOptionsTemplateDescriptor.Build(action);
 		return this;
 	}
 

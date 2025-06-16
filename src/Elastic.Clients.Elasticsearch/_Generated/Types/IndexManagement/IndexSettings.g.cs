@@ -590,6 +590,7 @@ public sealed partial class IndexSettings
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? Analyze { get; set; }
@@ -723,6 +724,7 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? value)
@@ -734,6 +736,7 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Analyze()
@@ -745,6 +748,7 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Analyze(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor>? action)
@@ -1441,6 +1445,7 @@ public readonly partial struct IndexSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? value)
@@ -1452,6 +1457,7 @@ public readonly partial struct IndexSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Analyze()
@@ -1463,6 +1469,7 @@ public readonly partial struct IndexSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Analyze(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor>? action)

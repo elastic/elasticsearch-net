@@ -527,6 +527,7 @@ public readonly partial struct ClusterPrivilege : Elastic.Clients.Elasticsearch.
 	public static ClusterPrivilege ManageDataFrameTransforms { get; } = new ClusterPrivilege("manage_data_frame_transforms");
 	public static ClusterPrivilege ManageDataStreamGlobalRetention { get; } = new ClusterPrivilege("manage_data_stream_global_retention");
 	public static ClusterPrivilege ManageEnrich { get; } = new ClusterPrivilege("manage_enrich");
+	public static ClusterPrivilege ManageEsql { get; } = new ClusterPrivilege("manage_esql");
 	public static ClusterPrivilege ManageIlm { get; } = new ClusterPrivilege("manage_ilm");
 	public static ClusterPrivilege ManageIndexTemplates { get; } = new ClusterPrivilege("manage_index_templates");
 	public static ClusterPrivilege ManageInference { get; } = new ClusterPrivilege("manage_inference");
@@ -552,6 +553,7 @@ public readonly partial struct ClusterPrivilege : Elastic.Clients.Elasticsearch.
 	public static ClusterPrivilege MonitorDataFrameTransforms { get; } = new ClusterPrivilege("monitor_data_frame_transforms");
 	public static ClusterPrivilege MonitorDataStreamGlobalRetention { get; } = new ClusterPrivilege("monitor_data_stream_global_retention");
 	public static ClusterPrivilege MonitorEnrich { get; } = new ClusterPrivilege("monitor_enrich");
+	public static ClusterPrivilege MonitorEsql { get; } = new ClusterPrivilege("monitor_esql");
 	public static ClusterPrivilege MonitorInference { get; } = new ClusterPrivilege("monitor_inference");
 	public static ClusterPrivilege MonitorMl { get; } = new ClusterPrivilege("monitor_ml");
 	public static ClusterPrivilege MonitorRollup { get; } = new ClusterPrivilege("monitor_rollup");

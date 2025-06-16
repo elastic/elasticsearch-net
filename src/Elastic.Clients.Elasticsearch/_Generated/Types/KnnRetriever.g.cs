@@ -29,6 +29,7 @@ internal sealed partial class KnnRetrieverConverter : System.Text.Json.Serializa
 	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
 	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k");
 	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("_name");
 	private static readonly System.Text.Json.JsonEncodedText PropNumCandidates = System.Text.Json.JsonEncodedText.Encode("num_candidates");
 	private static readonly System.Text.Json.JsonEncodedText PropQueryVector = System.Text.Json.JsonEncodedText.Encode("query_vector");
 	private static readonly System.Text.Json.JsonEncodedText PropQueryVectorBuilder = System.Text.Json.JsonEncodedText.Encode("query_vector_builder");
@@ -42,6 +43,7 @@ internal sealed partial class KnnRetrieverConverter : System.Text.Json.Serializa
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
 		LocalJsonValue<int> propK = default;
 		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<string?> propName = default;
 		LocalJsonValue<int> propNumCandidates = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<float>?> propQueryVector = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryVectorBuilder?> propQueryVectorBuilder = default;
@@ -65,6 +67,11 @@ internal sealed partial class KnnRetrieverConverter : System.Text.Json.Serializa
 			}
 
 			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
@@ -110,6 +117,7 @@ internal sealed partial class KnnRetrieverConverter : System.Text.Json.Serializa
 			Filter = propFilter.Value,
 			K = propK.Value,
 			MinScore = propMinScore.Value,
+			Name = propName.Value,
 			NumCandidates = propNumCandidates.Value,
 			QueryVector = propQueryVector.Value,
 			QueryVectorBuilder = propQueryVectorBuilder.Value,
@@ -125,6 +133,7 @@ internal sealed partial class KnnRetrieverConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
 		writer.WriteProperty(options, PropK, value.K, null, null);
 		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates, null, null);
 		writer.WriteProperty(options, PropQueryVector, value.QueryVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<float>? v) => w.WriteCollectionValue<float>(o, v, null));
 		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder, null, null);
@@ -199,6 +208,13 @@ public sealed partial class KnnRetriever
 
 	/// <summary>
 	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public string? Name { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Number of nearest neighbor candidates to consider per shard.
 	/// </para>
 	/// </summary>
@@ -224,7 +240,7 @@ public sealed partial class KnnRetriever
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.RescoreVector? RescoreVector { get; set; }
@@ -330,6 +346,17 @@ public readonly partial struct KnnRetrieverDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> Name(string? value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Number of nearest neighbor candidates to consider per shard.
 	/// </para>
 	/// </summary>
@@ -385,7 +412,7 @@ public readonly partial struct KnnRetrieverDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
@@ -396,7 +423,7 @@ public readonly partial struct KnnRetrieverDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument> RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)
@@ -535,6 +562,17 @@ public readonly partial struct KnnRetrieverDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor Name(string? value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Number of nearest neighbor candidates to consider per shard.
 	/// </para>
 	/// </summary>
@@ -590,7 +628,7 @@ public readonly partial struct KnnRetrieverDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
@@ -601,7 +639,7 @@ public readonly partial struct KnnRetrieverDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)

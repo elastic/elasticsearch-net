@@ -25,6 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 
 public sealed partial class DeleteSynonymRuleRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request will refresh the analyzers with the deleted synonym rule and wait for the new synonyms to be available before returning.
+	/// If <c>false</c>, analyzers will not be reloaded with the deleted synonym rule
+	/// </para>
+	/// </summary>
+	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 }
 
 internal sealed partial class DeleteSynonymRuleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest>
@@ -109,6 +116,14 @@ public sealed partial class DeleteSynonymRuleRequest : Elastic.Clients.Elasticse
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Id SetId { get => P<Elastic.Clients.Elasticsearch.Id>("set_id"); set => PR("set_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request will refresh the analyzers with the deleted synonym rule and wait for the new synonyms to be available before returning.
+	/// If <c>false</c>, analyzers will not be reloaded with the deleted synonym rule
+	/// </para>
+	/// </summary>
+	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 }
 
 /// <summary>
@@ -160,6 +175,18 @@ public readonly partial struct DeleteSynonymRuleRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor SetId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.SetId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request will refresh the analyzers with the deleted synonym rule and wait for the new synonyms to be available before returning.
+	/// If <c>false</c>, analyzers will not be reloaded with the deleted synonym rule
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor Refresh(bool? value = true)
+	{
+		Instance.Refresh = value;
 		return this;
 	}
 

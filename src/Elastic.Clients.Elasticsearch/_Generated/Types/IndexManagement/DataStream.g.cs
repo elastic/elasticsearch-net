@@ -30,6 +30,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 	private static readonly System.Text.Json.JsonEncodedText PropGeneration = System.Text.Json.JsonEncodedText.Encode("generation");
 	private static readonly System.Text.Json.JsonEncodedText PropHidden = System.Text.Json.JsonEncodedText.Encode("hidden");
 	private static readonly System.Text.Json.JsonEncodedText PropIlmPolicy = System.Text.Json.JsonEncodedText.Encode("ilm_policy");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexMode = System.Text.Json.JsonEncodedText.Encode("index_mode");
 	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
 	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
@@ -38,6 +39,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 	private static readonly System.Text.Json.JsonEncodedText PropPreferIlm = System.Text.Json.JsonEncodedText.Encode("prefer_ilm");
 	private static readonly System.Text.Json.JsonEncodedText PropReplicated = System.Text.Json.JsonEncodedText.Encode("replicated");
 	private static readonly System.Text.Json.JsonEncodedText PropRolloverOnWrite = System.Text.Json.JsonEncodedText.Encode("rollover_on_write");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
 	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
 	private static readonly System.Text.Json.JsonEncodedText PropSystem = System.Text.Json.JsonEncodedText.Encode("system");
 	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
@@ -51,6 +53,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 		LocalJsonValue<int> propGeneration = default;
 		LocalJsonValue<bool> propHidden = default;
 		LocalJsonValue<string?> propIlmPolicy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode?> propIndexMode = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex>> propIndices = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover?> propLifecycle = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMeta = default;
@@ -59,6 +62,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 		LocalJsonValue<bool> propPreferIlm = default;
 		LocalJsonValue<bool?> propReplicated = default;
 		LocalJsonValue<bool> propRolloverOnWrite = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings> propSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.HealthStatus> propStatus = default;
 		LocalJsonValue<bool?> propSystem = default;
 		LocalJsonValue<string> propTemplate = default;
@@ -86,6 +90,11 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 			}
 
 			if (propIlmPolicy.TryReadProperty(ref reader, options, PropIlmPolicy, null))
+			{
+				continue;
+			}
+
+			if (propIndexMode.TryReadProperty(ref reader, options, PropIndexMode, null))
 			{
 				continue;
 			}
@@ -130,6 +139,11 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 				continue;
 			}
 
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
+			{
+				continue;
+			}
+
 			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
 			{
 				continue;
@@ -167,6 +181,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 			Generation = propGeneration.Value,
 			Hidden = propHidden.Value,
 			IlmPolicy = propIlmPolicy.Value,
+			IndexMode = propIndexMode.Value,
 			Indices = propIndices.Value,
 			Lifecycle = propLifecycle.Value,
 			Meta = propMeta.Value,
@@ -175,6 +190,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 			PreferIlm = propPreferIlm.Value,
 			Replicated = propReplicated.Value,
 			RolloverOnWrite = propRolloverOnWrite.Value,
+			Settings = propSettings.Value,
 			Status = propStatus.Value,
 			System = propSystem.Value,
 			Template = propTemplate.Value,
@@ -190,6 +206,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropGeneration, value.Generation, null, null);
 		writer.WriteProperty(options, PropHidden, value.Hidden, null, null);
 		writer.WriteProperty(options, PropIlmPolicy, value.IlmPolicy, null, null);
+		writer.WriteProperty(options, PropIndexMode, value.IndexMode, null, null);
 		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex>(o, v, null));
 		writer.WriteProperty(options, PropLifecycle, value.Lifecycle, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
@@ -198,6 +215,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropPreferIlm, value.PreferIlm, null, null);
 		writer.WriteProperty(options, PropReplicated, value.Replicated, null, null);
 		writer.WriteProperty(options, PropRolloverOnWrite, value.RolloverOnWrite, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
 		writer.WriteProperty(options, PropStatus, value.Status, null, null);
 		writer.WriteProperty(options, PropSystem, value.System, null, null);
 		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
@@ -210,7 +228,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 public sealed partial class DataStream
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DataStream(int generation, bool hidden, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> indices, string name, Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy nextGenerationManagedBy, bool preferIlm, bool rolloverOnWrite, Elastic.Clients.Elasticsearch.HealthStatus status, string template, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField timestampField)
+	public DataStream(int generation, bool hidden, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> indices, string name, Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy nextGenerationManagedBy, bool preferIlm, bool rolloverOnWrite, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.HealthStatus status, string template, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField timestampField)
 	{
 		Generation = generation;
 		Hidden = hidden;
@@ -219,6 +237,7 @@ public sealed partial class DataStream
 		NextGenerationManagedBy = nextGenerationManagedBy;
 		PreferIlm = preferIlm;
 		RolloverOnWrite = rolloverOnWrite;
+		Settings = settings;
 		Status = status;
 		Template = template;
 		TimestampField = timestampField;
@@ -285,6 +304,13 @@ public sealed partial class DataStream
 	/// </para>
 	/// </summary>
 	public string? IlmPolicy { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The index mode for the data stream that will be used for newly created backing indices.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexMode? IndexMode { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -363,6 +389,18 @@ public sealed partial class DataStream
 	required
 #endif
 	bool RolloverOnWrite { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The settings specific to this data stream that will take precedence over the settings in the matching index
+	/// template.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 
 	/// <summary>
 	/// <para>

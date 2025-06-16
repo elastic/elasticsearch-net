@@ -62,6 +62,11 @@ internal sealed partial class RateLimitSettingConverter : System.Text.Json.Seria
 	}
 }
 
+/// <summary>
+/// <para>
+/// This setting helps to minimize the number of rate limit errors returned from the service.
+/// </para>
+/// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.RateLimitSettingConverter))]
 public sealed partial class RateLimitSetting
 {
@@ -84,11 +89,99 @@ public sealed partial class RateLimitSetting
 	/// <summary>
 	/// <para>
 	/// The number of requests allowed per minute.
+	/// By default, the number of requests allowed per minute is set by each service as follows:
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>alibabacloud-ai-search</c> service: <c>1000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>anthropic</c> service: <c>50</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>azureaistudio</c> service: <c>240</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>azureopenai</c> service and task type <c>text_embedding</c>: <c>1440</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>azureopenai</c> service and task type <c>completion</c>: <c>120</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>cohere</c> service: <c>10000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>elastic</c> service and task type <c>chat_completion</c>: <c>240</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>googleaistudio</c> service: <c>360</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>googlevertexai</c> service: <c>30000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hugging_face</c> service: <c>3000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>jinaai</c> service: <c>2000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>mistral</c> service: <c>240</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>openai</c> service and task type <c>text_embedding</c>: <c>3000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>openai</c> service and task type <c>completion</c>: <c>500</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>voyageai</c> service: <c>2000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>watsonxai</c> service: <c>120</c>
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public int? RequestsPerMinute { get; set; }
 }
 
+/// <summary>
+/// <para>
+/// This setting helps to minimize the number of rate limit errors returned from the service.
+/// </para>
+/// </summary>
 public readonly partial struct RateLimitSettingDescriptor
 {
 	internal Elastic.Clients.Elasticsearch.Inference.RateLimitSetting Instance { get; init; }
@@ -111,7 +204,90 @@ public readonly partial struct RateLimitSettingDescriptor
 	/// <summary>
 	/// <para>
 	/// The number of requests allowed per minute.
+	/// By default, the number of requests allowed per minute is set by each service as follows:
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>alibabacloud-ai-search</c> service: <c>1000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>anthropic</c> service: <c>50</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>azureaistudio</c> service: <c>240</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>azureopenai</c> service and task type <c>text_embedding</c>: <c>1440</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>azureopenai</c> service and task type <c>completion</c>: <c>120</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>cohere</c> service: <c>10000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>elastic</c> service and task type <c>chat_completion</c>: <c>240</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>googleaistudio</c> service: <c>360</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>googlevertexai</c> service: <c>30000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hugging_face</c> service: <c>3000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>jinaai</c> service: <c>2000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>mistral</c> service: <c>240</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>openai</c> service and task type <c>text_embedding</c>: <c>3000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>openai</c> service and task type <c>completion</c>: <c>500</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>voyageai</c> service: <c>2000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>watsonxai</c> service: <c>120</c>
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RateLimitSettingDescriptor RequestsPerMinute(int? value)
 	{

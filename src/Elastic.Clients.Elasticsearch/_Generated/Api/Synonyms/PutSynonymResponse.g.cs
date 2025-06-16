@@ -31,7 +31,7 @@ internal sealed partial class PutSynonymResponseConverter : System.Text.Json.Ser
 	public override Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult> propReloadAnalyzersDetails = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult?> propReloadAnalyzersDetails = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Result> propResult = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -85,14 +85,22 @@ public sealed partial class PutSynonymResponse : Elastic.Transport.Products.Elas
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Updating a synonyms set can reload the associated analyzers in case refresh is set to true.
+	/// This information is the analyzers reloading result.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult? ReloadAnalyzersDetails { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The update operation result.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
-		required
+	required
 #endif
-		Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult ReloadAnalyzersDetails { get; set; }
-	public
-#if NET7_0_OR_GREATER
-		required
-#endif
-		Elastic.Clients.Elasticsearch.Result Result { get; set; }
+	Elastic.Clients.Elasticsearch.Result Result { get; set; }
 }

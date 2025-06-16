@@ -27,6 +27,17 @@ public sealed partial class EsqlQueryRequestParameters : Elastic.Transport.Reque
 {
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// If <c>false</c>, the query will fail if there are any failures.
+	/// </para>
+	/// <para>
+	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
+
+	/// <summary>
+	/// <para>
 	/// The character to use between values within a CSV row. Only valid for the CSV format.
 	/// </para>
 	/// </summary>
@@ -182,6 +193,17 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// If <c>false</c>, the query will fail if there are any failures.
+	/// </para>
+	/// <para>
+	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
+
+	/// <summary>
+	/// <para>
 	/// The character to use between values within a CSV row. Only valid for the CSV format.
 	/// </para>
 	/// </summary>
@@ -278,6 +300,21 @@ public readonly partial struct EsqlQueryRequestDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// If <c>false</c>, the query will fail if there are any failures.
+	/// </para>
+	/// <para>
+	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor AllowPartialResults(bool? value = true)
+	{
+		Instance.AllowPartialResults = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -497,6 +534,21 @@ public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// If <c>false</c>, the query will fail if there are any failures.
+	/// </para>
+	/// <para>
+	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> AllowPartialResults(bool? value = true)
+	{
+		Instance.AllowPartialResults = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
