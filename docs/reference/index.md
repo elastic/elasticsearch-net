@@ -27,6 +27,18 @@ The .NET {{es}} client is built on the Elastic Transport library, which provides
 * Connection management and load balancing across all available nodes.
 * Request retries and dead connections handling.
 
+## Versioning [versioning]
+
+The *major* and *minor* version parts of the Elasticsearch .NET client are dictated by the version of the Elasticsearch server.
+
+:::{warning}
+
+This means that the Elasticsearch .NET client **does not** strictly follows semantic versioning!
+
+Although we try to avoid this as much as possible, it can happen that a *minor* or even *patch* version contains breaking changes (see also: [breaking changes policy](./breaking-changes-policy.md)). Please always check the [release notes](https://github.com/elastic/elasticsearch-net/releases) before updating the client package.
+
+:::
+
 ## {{es}} version compatibility [_es_version_compatibility]
 
 Language clients are **forward compatible**:
