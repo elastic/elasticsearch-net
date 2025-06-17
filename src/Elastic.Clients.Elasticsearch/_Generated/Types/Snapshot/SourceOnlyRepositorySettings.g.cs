@@ -51,7 +51,7 @@ internal sealed partial class SourceOnlyRepositorySettingsConverter : System.Tex
 				continue;
 			}
 
-			if (propCompress.TryReadProperty(ref reader, options, PropCompress, null))
+			if (propCompress.TryReadProperty(ref reader, options, PropCompress, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class SourceOnlyRepositorySettingsConverter : System.Tex
 				continue;
 			}
 
-			if (propMaxNumberOfSnapshots.TryReadProperty(ref reader, options, PropMaxNumberOfSnapshots, null))
+			if (propMaxNumberOfSnapshots.TryReadProperty(ref reader, options, PropMaxNumberOfSnapshots, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -76,7 +76,7 @@ internal sealed partial class SourceOnlyRepositorySettingsConverter : System.Tex
 				continue;
 			}
 
-			if (propReadOnly.TryReadProperty(ref reader, options, PropReadOnly, null) || propReadOnly.TryReadProperty(ref reader, options, PropReadOnly1, null))
+			if (propReadOnly.TryReadProperty(ref reader, options, PropReadOnly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)) || propReadOnly.TryReadProperty(ref reader, options, PropReadOnly1, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -107,12 +107,12 @@ internal sealed partial class SourceOnlyRepositorySettingsConverter : System.Tex
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);
-		writer.WriteProperty(options, PropCompress, value.Compress, null, null);
+		writer.WriteProperty(options, PropCompress, value.Compress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDelegateType, value.DelegateType, null, null);
-		writer.WriteProperty(options, PropMaxNumberOfSnapshots, value.MaxNumberOfSnapshots, null, null);
+		writer.WriteProperty(options, PropMaxNumberOfSnapshots, value.MaxNumberOfSnapshots, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
 		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
-		writer.WriteProperty(options, PropReadOnly, value.ReadOnly, null, null);
+		writer.WriteProperty(options, PropReadOnly, value.ReadOnly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

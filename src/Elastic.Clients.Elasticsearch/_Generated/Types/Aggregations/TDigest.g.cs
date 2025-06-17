@@ -33,7 +33,7 @@ internal sealed partial class TDigestConverter : System.Text.Json.Serialization.
 		LocalJsonValue<int?> propCompression = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCompression.TryReadProperty(ref reader, options, PropCompression, null))
+			if (propCompression.TryReadProperty(ref reader, options, PropCompression, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class TDigestConverter : System.Text.Json.Serialization.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TDigest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompression, value.Compression, null, null);
+		writer.WriteProperty(options, PropCompression, value.Compression, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

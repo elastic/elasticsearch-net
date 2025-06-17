@@ -33,7 +33,7 @@ internal sealed partial class DataframeEvaluationRegressionMetricsMsleConverter 
 		LocalJsonValue<double?> propOffset = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propOffset.TryReadProperty(ref reader, options, PropOffset, null))
+			if (propOffset.TryReadProperty(ref reader, options, PropOffset, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class DataframeEvaluationRegressionMetricsMsleConverter 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
+		writer.WriteProperty(options, PropOffset, value.Offset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

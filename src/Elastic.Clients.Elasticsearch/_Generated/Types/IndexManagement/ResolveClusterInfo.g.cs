@@ -51,7 +51,7 @@ internal sealed partial class ResolveClusterInfoConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propMatchingIndices.TryReadProperty(ref reader, options, PropMatchingIndices, null))
+			if (propMatchingIndices.TryReadProperty(ref reader, options, PropMatchingIndices, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class ResolveClusterInfoConverter : System.Text.Json.Ser
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropConnected, value.Connected, null, null);
 		writer.WriteProperty(options, PropError, value.Error, null, null);
-		writer.WriteProperty(options, PropMatchingIndices, value.MatchingIndices, null, null);
+		writer.WriteProperty(options, PropMatchingIndices, value.MatchingIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropSkipUnavailable, value.SkipUnavailable, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

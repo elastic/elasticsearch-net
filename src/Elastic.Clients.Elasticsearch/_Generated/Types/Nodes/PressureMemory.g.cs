@@ -62,7 +62,7 @@ internal sealed partial class PressureMemoryConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propAllInBytes.TryReadProperty(ref reader, options, PropAllInBytes, null))
+			if (propAllInBytes.TryReadProperty(ref reader, options, PropAllInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class PressureMemoryConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propCombinedCoordinatingAndPrimaryInBytes.TryReadProperty(ref reader, options, PropCombinedCoordinatingAndPrimaryInBytes, null))
+			if (propCombinedCoordinatingAndPrimaryInBytes.TryReadProperty(ref reader, options, PropCombinedCoordinatingAndPrimaryInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -82,12 +82,12 @@ internal sealed partial class PressureMemoryConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propCoordinatingInBytes.TryReadProperty(ref reader, options, PropCoordinatingInBytes, null))
+			if (propCoordinatingInBytes.TryReadProperty(ref reader, options, PropCoordinatingInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propCoordinatingRejections.TryReadProperty(ref reader, options, PropCoordinatingRejections, null))
+			if (propCoordinatingRejections.TryReadProperty(ref reader, options, PropCoordinatingRejections, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -97,12 +97,12 @@ internal sealed partial class PressureMemoryConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propPrimaryInBytes.TryReadProperty(ref reader, options, PropPrimaryInBytes, null))
+			if (propPrimaryInBytes.TryReadProperty(ref reader, options, PropPrimaryInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propPrimaryRejections.TryReadProperty(ref reader, options, PropPrimaryRejections, null))
+			if (propPrimaryRejections.TryReadProperty(ref reader, options, PropPrimaryRejections, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -112,12 +112,12 @@ internal sealed partial class PressureMemoryConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propReplicaInBytes.TryReadProperty(ref reader, options, PropReplicaInBytes, null))
+			if (propReplicaInBytes.TryReadProperty(ref reader, options, PropReplicaInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propReplicaRejections.TryReadProperty(ref reader, options, PropReplicaRejections, null))
+			if (propReplicaRejections.TryReadProperty(ref reader, options, PropReplicaRejections, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -154,18 +154,18 @@ internal sealed partial class PressureMemoryConverter : System.Text.Json.Seriali
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAll, value.All, null, null);
-		writer.WriteProperty(options, PropAllInBytes, value.AllInBytes, null, null);
+		writer.WriteProperty(options, PropAllInBytes, value.AllInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropCombinedCoordinatingAndPrimary, value.CombinedCoordinatingAndPrimary, null, null);
-		writer.WriteProperty(options, PropCombinedCoordinatingAndPrimaryInBytes, value.CombinedCoordinatingAndPrimaryInBytes, null, null);
+		writer.WriteProperty(options, PropCombinedCoordinatingAndPrimaryInBytes, value.CombinedCoordinatingAndPrimaryInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropCoordinating, value.Coordinating, null, null);
-		writer.WriteProperty(options, PropCoordinatingInBytes, value.CoordinatingInBytes, null, null);
-		writer.WriteProperty(options, PropCoordinatingRejections, value.CoordinatingRejections, null, null);
+		writer.WriteProperty(options, PropCoordinatingInBytes, value.CoordinatingInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropCoordinatingRejections, value.CoordinatingRejections, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropPrimary, value.Primary, null, null);
-		writer.WriteProperty(options, PropPrimaryInBytes, value.PrimaryInBytes, null, null);
-		writer.WriteProperty(options, PropPrimaryRejections, value.PrimaryRejections, null, null);
+		writer.WriteProperty(options, PropPrimaryInBytes, value.PrimaryInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropPrimaryRejections, value.PrimaryRejections, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropReplica, value.Replica, null, null);
-		writer.WriteProperty(options, PropReplicaInBytes, value.ReplicaInBytes, null, null);
-		writer.WriteProperty(options, PropReplicaRejections, value.ReplicaRejections, null, null);
+		writer.WriteProperty(options, PropReplicaInBytes, value.ReplicaInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropReplicaRejections, value.ReplicaRejections, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

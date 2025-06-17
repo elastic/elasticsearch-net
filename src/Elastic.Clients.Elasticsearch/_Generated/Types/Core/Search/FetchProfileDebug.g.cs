@@ -35,7 +35,7 @@ internal sealed partial class FetchProfileDebugConverter : System.Text.Json.Seri
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propStoredFields = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFastPath.TryReadProperty(ref reader, options, PropFastPath, null))
+			if (propFastPath.TryReadProperty(ref reader, options, PropFastPath, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -65,7 +65,7 @@ internal sealed partial class FetchProfileDebugConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.FetchProfileDebug value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFastPath, value.FastPath, null, null);
+		writer.WriteProperty(options, PropFastPath, value.FastPath, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropStoredFields, value.StoredFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 	}

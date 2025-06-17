@@ -54,17 +54,17 @@ internal sealed partial class TrainedModelTreeNodeConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propDefaultLeft.TryReadProperty(ref reader, options, PropDefaultLeft, null))
+			if (propDefaultLeft.TryReadProperty(ref reader, options, PropDefaultLeft, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propLeafValue.TryReadProperty(ref reader, options, PropLeafValue, null))
+			if (propLeafValue.TryReadProperty(ref reader, options, PropLeafValue, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propLeftChild.TryReadProperty(ref reader, options, PropLeftChild, null))
+			if (propLeftChild.TryReadProperty(ref reader, options, PropLeftChild, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -74,22 +74,22 @@ internal sealed partial class TrainedModelTreeNodeConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propRightChild.TryReadProperty(ref reader, options, PropRightChild, null))
+			if (propRightChild.TryReadProperty(ref reader, options, PropRightChild, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSplitFeature.TryReadProperty(ref reader, options, PropSplitFeature, null))
+			if (propSplitFeature.TryReadProperty(ref reader, options, PropSplitFeature, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSplitGain.TryReadProperty(ref reader, options, PropSplitGain, null))
+			if (propSplitGain.TryReadProperty(ref reader, options, PropSplitGain, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propThreshold.TryReadProperty(ref reader, options, PropThreshold, null))
+			if (propThreshold.TryReadProperty(ref reader, options, PropThreshold, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -122,14 +122,14 @@ internal sealed partial class TrainedModelTreeNodeConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDecisionType, value.DecisionType, null, null);
-		writer.WriteProperty(options, PropDefaultLeft, value.DefaultLeft, null, null);
-		writer.WriteProperty(options, PropLeafValue, value.LeafValue, null, null);
-		writer.WriteProperty(options, PropLeftChild, value.LeftChild, null, null);
+		writer.WriteProperty(options, PropDefaultLeft, value.DefaultLeft, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropLeafValue, value.LeafValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropLeftChild, value.LeftChild, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropNodeIndex, value.NodeIndex, null, null);
-		writer.WriteProperty(options, PropRightChild, value.RightChild, null, null);
-		writer.WriteProperty(options, PropSplitFeature, value.SplitFeature, null, null);
-		writer.WriteProperty(options, PropSplitGain, value.SplitGain, null, null);
-		writer.WriteProperty(options, PropThreshold, value.Threshold, null, null);
+		writer.WriteProperty(options, PropRightChild, value.RightChild, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSplitFeature, value.SplitFeature, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSplitGain, value.SplitGain, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropThreshold, value.Threshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

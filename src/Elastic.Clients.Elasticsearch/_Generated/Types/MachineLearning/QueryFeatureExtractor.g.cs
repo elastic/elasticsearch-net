@@ -37,7 +37,7 @@ internal sealed partial class QueryFeatureExtractorConverter : System.Text.Json.
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propQuery = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDefaultScore.TryReadProperty(ref reader, options, PropDefaultScore, null))
+			if (propDefaultScore.TryReadProperty(ref reader, options, PropDefaultScore, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -73,7 +73,7 @@ internal sealed partial class QueryFeatureExtractorConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDefaultScore, value.DefaultScore, null, null);
+		writer.WriteProperty(options, PropDefaultScore, value.DefaultScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropFeatureName, value.FeatureName, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteEndObject();

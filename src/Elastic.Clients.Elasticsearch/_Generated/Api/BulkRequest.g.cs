@@ -342,6 +342,10 @@ internal sealed partial class BulkRequestConverter : System.Text.Json.Serializat
 /// The request will only wait for those three shards to refresh.
 /// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 /// </para>
+/// <para>
+/// You might want to disable the refresh interval temporarily to improve indexing throughput for large bulk requests.
+/// Refer to the linked documentation for step-by-step instructions using the index settings API.
+/// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.BulkRequestConverter))]
 public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.BulkRequestParameters>
@@ -667,6 +671,10 @@ public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainR
 /// Imagine a <c>_bulk?refresh=wait_for</c> request with three documents in it that happen to be routed to different shards in an index with five shards.
 /// The request will only wait for those three shards to refresh.
 /// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
+/// </para>
+/// <para>
+/// You might want to disable the refresh interval temporarily to improve indexing throughput for large bulk requests.
+/// Refer to the linked documentation for step-by-step instructions using the index settings API.
 /// </para>
 /// </summary>
 public readonly partial struct BulkRequestDescriptor
@@ -1142,6 +1150,10 @@ public readonly partial struct BulkRequestDescriptor
 /// Imagine a <c>_bulk?refresh=wait_for</c> request with three documents in it that happen to be routed to different shards in an index with five shards.
 /// The request will only wait for those three shards to refresh.
 /// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
+/// </para>
+/// <para>
+/// You might want to disable the refresh interval temporarily to improve indexing throughput for large bulk requests.
+/// Refer to the linked documentation for step-by-step instructions using the index settings API.
 /// </para>
 /// </summary>
 public readonly partial struct BulkRequestDescriptor<TDocument>

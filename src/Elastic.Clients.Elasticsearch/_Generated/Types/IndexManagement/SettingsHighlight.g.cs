@@ -33,7 +33,7 @@ internal sealed partial class SettingsHighlightConverter : System.Text.Json.Seri
 		LocalJsonValue<int?> propMaxAnalyzedOffset = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxAnalyzedOffset.TryReadProperty(ref reader, options, PropMaxAnalyzedOffset, null))
+			if (propMaxAnalyzedOffset.TryReadProperty(ref reader, options, PropMaxAnalyzedOffset, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class SettingsHighlightConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsHighlight value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxAnalyzedOffset, value.MaxAnalyzedOffset, null, null);
+		writer.WriteProperty(options, PropMaxAnalyzedOffset, value.MaxAnalyzedOffset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

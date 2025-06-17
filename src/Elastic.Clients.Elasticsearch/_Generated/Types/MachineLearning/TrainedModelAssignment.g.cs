@@ -55,7 +55,7 @@ internal sealed partial class TrainedModelAssignmentConverter : System.Text.Json
 				continue;
 			}
 
-			if (propMaxAssignedAllocations.TryReadProperty(ref reader, options, PropMaxAssignedAllocations, null))
+			if (propMaxAssignedAllocations.TryReadProperty(ref reader, options, PropMaxAssignedAllocations, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -107,7 +107,7 @@ internal sealed partial class TrainedModelAssignmentConverter : System.Text.Json
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAdaptiveAllocations, value.AdaptiveAllocations, null, null);
 		writer.WriteProperty(options, PropAssignmentState, value.AssignmentState, null, null);
-		writer.WriteProperty(options, PropMaxAssignedAllocations, value.MaxAssignedAllocations, null, null);
+		writer.WriteProperty(options, PropMaxAssignedAllocations, value.MaxAssignedAllocations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropReason, value.Reason, null, null);
 		writer.WriteProperty(options, PropRoutingTable, value.RoutingTable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable>(o, v, null, null));
 		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));

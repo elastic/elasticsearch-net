@@ -45,7 +45,7 @@ internal sealed partial class PatternTokenizerConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propGroup.TryReadProperty(ref reader, options, PropGroup, null))
+			if (propGroup.TryReadProperty(ref reader, options, PropGroup, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -89,7 +89,7 @@ internal sealed partial class PatternTokenizerConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFlags, value.Flags, null, null);
-		writer.WriteProperty(options, PropGroup, value.Group, null, null);
+		writer.WriteProperty(options, PropGroup, value.Group, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropPattern, value.Pattern, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);

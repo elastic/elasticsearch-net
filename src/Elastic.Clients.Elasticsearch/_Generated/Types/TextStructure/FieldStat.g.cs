@@ -69,22 +69,22 @@ internal sealed partial class FieldStatConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propMaxValue.TryReadProperty(ref reader, options, PropMaxValue, null))
+			if (propMaxValue.TryReadProperty(ref reader, options, PropMaxValue, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMeanValue.TryReadProperty(ref reader, options, PropMeanValue, null))
+			if (propMeanValue.TryReadProperty(ref reader, options, PropMeanValue, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMedianValue.TryReadProperty(ref reader, options, PropMedianValue, null))
+			if (propMedianValue.TryReadProperty(ref reader, options, PropMedianValue, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinValue.TryReadProperty(ref reader, options, PropMinValue, null))
+			if (propMinValue.TryReadProperty(ref reader, options, PropMinValue, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -125,10 +125,10 @@ internal sealed partial class FieldStatConverter : System.Text.Json.Serializatio
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
 		writer.WriteProperty(options, PropEarliest, value.Earliest, null, null);
 		writer.WriteProperty(options, PropLatest, value.Latest, null, null);
-		writer.WriteProperty(options, PropMaxValue, value.MaxValue, null, null);
-		writer.WriteProperty(options, PropMeanValue, value.MeanValue, null, null);
-		writer.WriteProperty(options, PropMedianValue, value.MedianValue, null, null);
-		writer.WriteProperty(options, PropMinValue, value.MinValue, null, null);
+		writer.WriteProperty(options, PropMaxValue, value.MaxValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMeanValue, value.MeanValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMedianValue, value.MedianValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinValue, value.MinValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTopHits, value.TopHits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.TopHit> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.TextStructure.TopHit>(o, v, null));
 		writer.WriteEndObject();
 	}

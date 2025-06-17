@@ -55,7 +55,7 @@ internal sealed partial class ShardStoreConverter : System.Text.Json.Serializati
 			}
 
 			propNodeId.Initialized = propNode.Initialized = true;
-			reader.ReadProperty(options, out propNodeId.Value, out propNode.Value, null, null);
+			reader.ReadProperty(options, out propNodeId.Value, out propNode.Value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, null);
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -75,7 +75,7 @@ internal sealed partial class ShardStoreConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropAllocation, value.Allocation, null, null);
 		writer.WriteProperty(options, PropAllocationId, value.AllocationId, null, null);
 		writer.WriteProperty(options, PropStoreException, value.StoreException, null, null);
-		writer.WriteProperty(options, value.NodeId, value.Node, null, null);
+		writer.WriteProperty(options, value.NodeId, value.Node, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), null);
 		writer.WriteEndObject();
 	}
 }

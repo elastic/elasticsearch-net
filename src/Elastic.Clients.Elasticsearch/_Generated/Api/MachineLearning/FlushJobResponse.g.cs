@@ -40,7 +40,7 @@ internal sealed partial class FlushJobResponseConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propLastFinalizedBucketEnd.TryReadProperty(ref reader, options, PropLastFinalizedBucketEnd, null))
+			if (propLastFinalizedBucketEnd.TryReadProperty(ref reader, options, PropLastFinalizedBucketEnd, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class FlushJobResponseConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFlushed, value.Flushed, null, null);
-		writer.WriteProperty(options, PropLastFinalizedBucketEnd, value.LastFinalizedBucketEnd, null, null);
+		writer.WriteProperty(options, PropLastFinalizedBucketEnd, value.LastFinalizedBucketEnd, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -42,12 +42,12 @@ internal sealed partial class RandomSamplerAggregationConverter : System.Text.Js
 				continue;
 			}
 
-			if (propSeed.TryReadProperty(ref reader, options, PropSeed, null))
+			if (propSeed.TryReadProperty(ref reader, options, PropSeed, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propShardSeed.TryReadProperty(ref reader, options, PropShardSeed, null))
+			if (propShardSeed.TryReadProperty(ref reader, options, PropShardSeed, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -74,8 +74,8 @@ internal sealed partial class RandomSamplerAggregationConverter : System.Text.Js
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropProbability, value.Probability, null, null);
-		writer.WriteProperty(options, PropSeed, value.Seed, null, null);
-		writer.WriteProperty(options, PropShardSeed, value.ShardSeed, null, null);
+		writer.WriteProperty(options, PropSeed, value.Seed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropShardSeed, value.ShardSeed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

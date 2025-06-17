@@ -66,12 +66,12 @@ internal sealed partial class DetectorConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propDetectorIndex.TryReadProperty(ref reader, options, PropDetectorIndex, null))
+			if (propDetectorIndex.TryReadProperty(ref reader, options, PropDetectorIndex, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propExcludeFrequent.TryReadProperty(ref reader, options, PropExcludeFrequent, null))
+			if (propExcludeFrequent.TryReadProperty(ref reader, options, PropExcludeFrequent, static Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent>(o)))
 			{
 				continue;
 			}
@@ -96,7 +96,7 @@ internal sealed partial class DetectorConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propUseNull.TryReadProperty(ref reader, options, PropUseNull, null))
+			if (propUseNull.TryReadProperty(ref reader, options, PropUseNull, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -132,13 +132,13 @@ internal sealed partial class DetectorConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropByFieldName, value.ByFieldName, null, null);
 		writer.WriteProperty(options, PropCustomRules, value.CustomRules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>(o, v, null));
 		writer.WriteProperty(options, PropDetectorDescription, value.DetectorDescription, null, null);
-		writer.WriteProperty(options, PropDetectorIndex, value.DetectorIndex, null, null);
-		writer.WriteProperty(options, PropExcludeFrequent, value.ExcludeFrequent, null, null);
+		writer.WriteProperty(options, PropDetectorIndex, value.DetectorIndex, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropExcludeFrequent, value.ExcludeFrequent, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.ExcludeFrequent>(o, v));
 		writer.WriteProperty(options, PropFieldName, value.FieldName, null, null);
 		writer.WriteProperty(options, PropFunction, value.Function, null, null);
 		writer.WriteProperty(options, PropOverFieldName, value.OverFieldName, null, null);
 		writer.WriteProperty(options, PropPartitionFieldName, value.PartitionFieldName, null, null);
-		writer.WriteProperty(options, PropUseNull, value.UseNull, null, null);
+		writer.WriteProperty(options, PropUseNull, value.UseNull, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

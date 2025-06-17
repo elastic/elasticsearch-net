@@ -54,7 +54,7 @@ internal sealed partial class NodeInfoDiscoverConverter : System.Text.Json.Seria
 			}
 
 			propSettings ??= new System.Collections.Generic.Dictionary<string, object>();
-			reader.ReadProperty(options, out string key, out object value, null, null);
+			reader.ReadProperty(options, out string key, out object value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<object>(o)!);
 			propSettings[key] = value;
 		}
 
@@ -78,7 +78,7 @@ internal sealed partial class NodeInfoDiscoverConverter : System.Text.Json.Seria
 		{
 			foreach (var item in value.Settings)
 			{
-				writer.WriteProperty(options, item.Key, item.Value, null, null);
+				writer.WriteProperty(options, item.Key, item.Value, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), null);
 			}
 		}
 

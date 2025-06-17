@@ -70,12 +70,12 @@ internal sealed partial class CompletionSuggesterConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSkipDuplicates.TryReadProperty(ref reader, options, PropSkipDuplicates, null))
+			if (propSkipDuplicates.TryReadProperty(ref reader, options, PropSkipDuplicates, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -110,8 +110,8 @@ internal sealed partial class CompletionSuggesterConverter : System.Text.Json.Se
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFuzzy, value.Fuzzy, null, null);
 		writer.WriteProperty(options, PropRegex, value.Regex, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
-		writer.WriteProperty(options, PropSkipDuplicates, value.SkipDuplicates, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSkipDuplicates, value.SkipDuplicates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

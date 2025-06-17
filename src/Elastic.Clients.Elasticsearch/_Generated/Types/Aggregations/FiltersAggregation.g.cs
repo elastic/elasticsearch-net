@@ -42,7 +42,7 @@ internal sealed partial class FiltersAggregationConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propOtherBucket.TryReadProperty(ref reader, options, PropOtherBucket, null))
+			if (propOtherBucket.TryReadProperty(ref reader, options, PropOtherBucket, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ internal sealed partial class FiltersAggregationConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFilters, value.Filters, null, null);
-		writer.WriteProperty(options, PropOtherBucket, value.OtherBucket, null, null);
+		writer.WriteProperty(options, PropOtherBucket, value.OtherBucket, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropOtherBucketKey, value.OtherBucketKey, null, null);
 		writer.WriteEndObject();
 	}

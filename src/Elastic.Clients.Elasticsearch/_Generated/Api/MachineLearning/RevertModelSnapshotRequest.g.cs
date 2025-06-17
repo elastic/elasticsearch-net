@@ -37,7 +37,7 @@ internal sealed partial class RevertModelSnapshotRequestConverter : System.Text.
 		LocalJsonValue<bool?> propDeleteInterveningResults = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDeleteInterveningResults.TryReadProperty(ref reader, options, PropDeleteInterveningResults, null))
+			if (propDeleteInterveningResults.TryReadProperty(ref reader, options, PropDeleteInterveningResults, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class RevertModelSnapshotRequestConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDeleteInterveningResults, value.DeleteInterveningResults, null, null);
+		writer.WriteProperty(options, PropDeleteInterveningResults, value.DeleteInterveningResults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -47,7 +47,7 @@ internal sealed partial class TTestAggregationConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			if (propType.TryReadProperty(ref reader, options, PropType, static Elastic.Clients.Elasticsearch.Aggregations.TTestType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.TTestType>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class TTestAggregationConverter : System.Text.Json.Seria
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropA, value.A, null, null);
 		writer.WriteProperty(options, PropB, value.B, null, null);
-		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.TTestType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.TTestType>(o, v));
 		writer.WriteEndObject();
 	}
 }

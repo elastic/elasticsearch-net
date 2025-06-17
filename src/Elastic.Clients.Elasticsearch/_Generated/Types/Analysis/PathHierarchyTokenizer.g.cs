@@ -44,7 +44,7 @@ internal sealed partial class PathHierarchyTokenizerConverter : System.Text.Json
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBufferSize.TryReadProperty(ref reader, options, PropBufferSize, null))
+			if (propBufferSize.TryReadProperty(ref reader, options, PropBufferSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -59,12 +59,12 @@ internal sealed partial class PathHierarchyTokenizerConverter : System.Text.Json
 				continue;
 			}
 
-			if (propReverse.TryReadProperty(ref reader, options, PropReverse, null))
+			if (propReverse.TryReadProperty(ref reader, options, PropReverse, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propSkip.TryReadProperty(ref reader, options, PropSkip, null))
+			if (propSkip.TryReadProperty(ref reader, options, PropSkip, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -104,11 +104,11 @@ internal sealed partial class PathHierarchyTokenizerConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PathHierarchyTokenizer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBufferSize, value.BufferSize, null, null);
+		writer.WriteProperty(options, PropBufferSize, value.BufferSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropDelimiter, value.Delimiter, null, null);
 		writer.WriteProperty(options, PropReplacement, value.Replacement, null, null);
-		writer.WriteProperty(options, PropReverse, value.Reverse, null, null);
-		writer.WriteProperty(options, PropSkip, value.Skip, null, null);
+		writer.WriteProperty(options, PropReverse, value.Reverse, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropSkip, value.Skip, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

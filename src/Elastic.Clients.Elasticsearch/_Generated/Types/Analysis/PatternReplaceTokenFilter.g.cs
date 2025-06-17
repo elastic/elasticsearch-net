@@ -40,7 +40,7 @@ internal sealed partial class PatternReplaceTokenFilterConverter : System.Text.J
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAll.TryReadProperty(ref reader, options, PropAll, null))
+			if (propAll.TryReadProperty(ref reader, options, PropAll, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -88,7 +88,7 @@ internal sealed partial class PatternReplaceTokenFilterConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAll, value.All, null, null);
+		writer.WriteProperty(options, PropAll, value.All, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPattern, value.Pattern, null, null);
 		writer.WriteProperty(options, PropReplacement, value.Replacement, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);

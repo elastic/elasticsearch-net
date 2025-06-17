@@ -47,7 +47,7 @@ internal sealed partial class GetTokenRequestConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propGrantType.TryReadProperty(ref reader, options, PropGrantType, null))
+			if (propGrantType.TryReadProperty(ref reader, options, PropGrantType, static Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType>(o)))
 			{
 				continue;
 			}
@@ -101,7 +101,7 @@ internal sealed partial class GetTokenRequestConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetTokenRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropGrantType, value.GrantType, null, null);
+		writer.WriteProperty(options, PropGrantType, value.GrantType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType>(o, v));
 		writer.WriteProperty(options, PropKerberosTicket, value.KerberosTicket, null, null);
 		writer.WriteProperty(options, PropPassword, value.Password, null, null);
 		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);

@@ -56,12 +56,12 @@ internal sealed partial class QueryResponseConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propIsPartial.TryReadProperty(ref reader, options, PropIsPartial, null))
+			if (propIsPartial.TryReadProperty(ref reader, options, PropIsPartial, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIsRunning.TryReadProperty(ref reader, options, PropIsRunning, null))
+			if (propIsRunning.TryReadProperty(ref reader, options, PropIsRunning, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -92,8 +92,8 @@ internal sealed partial class QueryResponseConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropColumns, value.Columns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Sql.Column>(o, v, null));
 		writer.WriteProperty(options, PropCursor, value.Cursor, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);
-		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, null);
-		writer.WriteProperty(options, PropIsRunning, value.IsRunning, null, null);
+		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIsRunning, value.IsRunning, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

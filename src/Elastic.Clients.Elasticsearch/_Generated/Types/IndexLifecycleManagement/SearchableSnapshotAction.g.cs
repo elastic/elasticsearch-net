@@ -35,7 +35,7 @@ internal sealed partial class SearchableSnapshotActionConverter : System.Text.Js
 		LocalJsonValue<string> propSnapshotRepository = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propForceMergeIndex.TryReadProperty(ref reader, options, PropForceMergeIndex, null))
+			if (propForceMergeIndex.TryReadProperty(ref reader, options, PropForceMergeIndex, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -65,7 +65,7 @@ internal sealed partial class SearchableSnapshotActionConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropForceMergeIndex, value.ForceMergeIndex, null, null);
+		writer.WriteProperty(options, PropForceMergeIndex, value.ForceMergeIndex, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropSnapshotRepository, value.SnapshotRepository, null, null);
 		writer.WriteEndObject();
 	}

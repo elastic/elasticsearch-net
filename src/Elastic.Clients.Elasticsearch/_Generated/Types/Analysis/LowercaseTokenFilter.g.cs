@@ -36,7 +36,7 @@ internal sealed partial class LowercaseTokenFilterConverter : System.Text.Json.S
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLanguage.TryReadProperty(ref reader, options, PropLanguage, null))
+			if (propLanguage.TryReadProperty(ref reader, options, PropLanguage, static Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages>(o)))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class LowercaseTokenFilterConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
+		writer.WriteProperty(options, PropLanguage, value.Language, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

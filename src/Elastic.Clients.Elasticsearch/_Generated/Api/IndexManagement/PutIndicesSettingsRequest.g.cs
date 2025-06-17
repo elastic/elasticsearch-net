@@ -115,9 +115,49 @@ internal sealed partial class PutIndicesSettingsRequestConverter : System.Text.J
 /// </para>
 /// <para>
 /// To revert a setting to the default value, use a null value.
-/// The list of per-index settings that can be updated dynamically on live indices can be found in index module documentation.
+/// The list of per-index settings that can be updated dynamically on live indices can be found in index settings documentation.
 /// To preserve existing settings from being updated, set the <c>preserve_existing</c> parameter to <c>true</c>.
 /// </para>
+/// <para>
+/// For performance optimization during bulk indexing, you can disable the refresh interval.
+/// Refer to <a href="https://www.elastic.co/docs/deploy-manage/production-guidance/optimize-performance/indexing-speed#disable-refresh-interval">disable refresh interval</a> for an example.
+/// There are multiple valid ways to represent index settings in the request body. You can specify only the setting, for example:
+/// </para>
+/// <code>
+/// {
+///   "number_of_replicas": 1
+/// }
+/// </code>
+/// <para>
+/// Or you can use an <c>index</c> setting object:
+/// </para>
+/// <code>
+/// {
+///   "index": {
+///     "number_of_replicas": 1
+///   }
+/// }
+/// </code>
+/// <para>
+/// Or you can use dot annotation:
+/// </para>
+/// <code>
+/// {
+///   "index.number_of_replicas": 1
+/// }
+/// </code>
+/// <para>
+/// Or you can embed any of the aforementioned options in a <c>settings</c> object. For example:
+/// </para>
+/// <code>
+/// {
+///   "settings": {
+///     "index": {
+///       "number_of_replicas": 1
+///     }
+///   }
+/// }
+/// </code>
 /// <para>
 /// NOTE: You can only define new analyzers on closed indices.
 /// To add an analyzer, you must close the index, define the analyzer, and reopen the index.
@@ -127,6 +167,7 @@ internal sealed partial class PutIndicesSettingsRequestConverter : System.Text.J
 /// This affects searches and any new data added to the stream after the rollover.
 /// However, it does not affect the data stream's backing indices or their existing data.
 /// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
+/// Refer to <a href="https://www.elastic.co/docs/manage-data/data-store/text-analysis/specify-an-analyzer#update-analyzers-on-existing-indices">updating analyzers on existing indices</a> for step-by-step examples.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestConverter))]
@@ -265,9 +306,49 @@ public sealed partial class PutIndicesSettingsRequest : Elastic.Clients.Elastics
 /// </para>
 /// <para>
 /// To revert a setting to the default value, use a null value.
-/// The list of per-index settings that can be updated dynamically on live indices can be found in index module documentation.
+/// The list of per-index settings that can be updated dynamically on live indices can be found in index settings documentation.
 /// To preserve existing settings from being updated, set the <c>preserve_existing</c> parameter to <c>true</c>.
 /// </para>
+/// <para>
+/// For performance optimization during bulk indexing, you can disable the refresh interval.
+/// Refer to <a href="https://www.elastic.co/docs/deploy-manage/production-guidance/optimize-performance/indexing-speed#disable-refresh-interval">disable refresh interval</a> for an example.
+/// There are multiple valid ways to represent index settings in the request body. You can specify only the setting, for example:
+/// </para>
+/// <code>
+/// {
+///   "number_of_replicas": 1
+/// }
+/// </code>
+/// <para>
+/// Or you can use an <c>index</c> setting object:
+/// </para>
+/// <code>
+/// {
+///   "index": {
+///     "number_of_replicas": 1
+///   }
+/// }
+/// </code>
+/// <para>
+/// Or you can use dot annotation:
+/// </para>
+/// <code>
+/// {
+///   "index.number_of_replicas": 1
+/// }
+/// </code>
+/// <para>
+/// Or you can embed any of the aforementioned options in a <c>settings</c> object. For example:
+/// </para>
+/// <code>
+/// {
+///   "settings": {
+///     "index": {
+///       "number_of_replicas": 1
+///     }
+///   }
+/// }
+/// </code>
 /// <para>
 /// NOTE: You can only define new analyzers on closed indices.
 /// To add an analyzer, you must close the index, define the analyzer, and reopen the index.
@@ -277,6 +358,7 @@ public sealed partial class PutIndicesSettingsRequest : Elastic.Clients.Elastics
 /// This affects searches and any new data added to the stream after the rollover.
 /// However, it does not affect the data stream's backing indices or their existing data.
 /// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
+/// Refer to <a href="https://www.elastic.co/docs/manage-data/data-store/text-analysis/specify-an-analyzer#update-analyzers-on-existing-indices">updating analyzers on existing indices</a> for step-by-step examples.
 /// </para>
 /// </summary>
 public readonly partial struct PutIndicesSettingsRequestDescriptor
@@ -514,9 +596,49 @@ public readonly partial struct PutIndicesSettingsRequestDescriptor
 /// </para>
 /// <para>
 /// To revert a setting to the default value, use a null value.
-/// The list of per-index settings that can be updated dynamically on live indices can be found in index module documentation.
+/// The list of per-index settings that can be updated dynamically on live indices can be found in index settings documentation.
 /// To preserve existing settings from being updated, set the <c>preserve_existing</c> parameter to <c>true</c>.
 /// </para>
+/// <para>
+/// For performance optimization during bulk indexing, you can disable the refresh interval.
+/// Refer to <a href="https://www.elastic.co/docs/deploy-manage/production-guidance/optimize-performance/indexing-speed#disable-refresh-interval">disable refresh interval</a> for an example.
+/// There are multiple valid ways to represent index settings in the request body. You can specify only the setting, for example:
+/// </para>
+/// <code>
+/// {
+///   "number_of_replicas": 1
+/// }
+/// </code>
+/// <para>
+/// Or you can use an <c>index</c> setting object:
+/// </para>
+/// <code>
+/// {
+///   "index": {
+///     "number_of_replicas": 1
+///   }
+/// }
+/// </code>
+/// <para>
+/// Or you can use dot annotation:
+/// </para>
+/// <code>
+/// {
+///   "index.number_of_replicas": 1
+/// }
+/// </code>
+/// <para>
+/// Or you can embed any of the aforementioned options in a <c>settings</c> object. For example:
+/// </para>
+/// <code>
+/// {
+///   "settings": {
+///     "index": {
+///       "number_of_replicas": 1
+///     }
+///   }
+/// }
+/// </code>
 /// <para>
 /// NOTE: You can only define new analyzers on closed indices.
 /// To add an analyzer, you must close the index, define the analyzer, and reopen the index.
@@ -526,6 +648,7 @@ public readonly partial struct PutIndicesSettingsRequestDescriptor
 /// This affects searches and any new data added to the stream after the rollover.
 /// However, it does not affect the data stream's backing indices or their existing data.
 /// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
+/// Refer to <a href="https://www.elastic.co/docs/manage-data/data-store/text-analysis/specify-an-analyzer#update-analyzers-on-existing-indices">updating analyzers on existing indices</a> for step-by-step examples.
 /// </para>
 /// </summary>
 public readonly partial struct PutIndicesSettingsRequestDescriptor<TDocument>

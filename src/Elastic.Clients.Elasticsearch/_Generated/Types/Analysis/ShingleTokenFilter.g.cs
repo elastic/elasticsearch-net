@@ -51,22 +51,22 @@ internal sealed partial class ShingleTokenFilterConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propMaxShingleSize.TryReadProperty(ref reader, options, PropMaxShingleSize, null))
+			if (propMaxShingleSize.TryReadProperty(ref reader, options, PropMaxShingleSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinShingleSize.TryReadProperty(ref reader, options, PropMinShingleSize, null))
+			if (propMinShingleSize.TryReadProperty(ref reader, options, PropMinShingleSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propOutputUnigrams.TryReadProperty(ref reader, options, PropOutputUnigrams, null))
+			if (propOutputUnigrams.TryReadProperty(ref reader, options, PropOutputUnigrams, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propOutputUnigramsIfNoShingles.TryReadProperty(ref reader, options, PropOutputUnigramsIfNoShingles, null))
+			if (propOutputUnigramsIfNoShingles.TryReadProperty(ref reader, options, PropOutputUnigramsIfNoShingles, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -113,10 +113,10 @@ internal sealed partial class ShingleTokenFilterConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFillerToken, value.FillerToken, null, null);
-		writer.WriteProperty(options, PropMaxShingleSize, value.MaxShingleSize, null, null);
-		writer.WriteProperty(options, PropMinShingleSize, value.MinShingleSize, null, null);
-		writer.WriteProperty(options, PropOutputUnigrams, value.OutputUnigrams, null, null);
-		writer.WriteProperty(options, PropOutputUnigramsIfNoShingles, value.OutputUnigramsIfNoShingles, null, null);
+		writer.WriteProperty(options, PropMaxShingleSize, value.MaxShingleSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinShingleSize, value.MinShingleSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropOutputUnigrams, value.OutputUnigrams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropOutputUnigramsIfNoShingles, value.OutputUnigramsIfNoShingles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTokenSeparator, value.TokenSeparator, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);

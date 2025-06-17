@@ -47,12 +47,12 @@ internal sealed partial class CombinedFieldsQueryConverter : System.Text.Json.Se
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms?> propZeroTermsQuery = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAutoGenerateSynonymsPhraseQuery.TryReadProperty(ref reader, options, PropAutoGenerateSynonymsPhraseQuery, null))
+			if (propAutoGenerateSynonymsPhraseQuery.TryReadProperty(ref reader, options, PropAutoGenerateSynonymsPhraseQuery, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -67,7 +67,7 @@ internal sealed partial class CombinedFieldsQueryConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propOperator.TryReadProperty(ref reader, options, PropOperator, null))
+			if (propOperator.TryReadProperty(ref reader, options, PropOperator, static Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator>(o)))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class CombinedFieldsQueryConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propZeroTermsQuery.TryReadProperty(ref reader, options, PropZeroTermsQuery, null))
+			if (propZeroTermsQuery.TryReadProperty(ref reader, options, PropZeroTermsQuery, static Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms>(o)))
 			{
 				continue;
 			}
@@ -113,14 +113,14 @@ internal sealed partial class CombinedFieldsQueryConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery, null, null);
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, null);
 		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
-		writer.WriteProperty(options, PropOperator, value.Operator, null, null);
+		writer.WriteProperty(options, PropOperator, value.Operator, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsOperator>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
-		writer.WriteProperty(options, PropZeroTermsQuery, value.ZeroTermsQuery, null, null);
+		writer.WriteProperty(options, PropZeroTermsQuery, value.ZeroTermsQuery, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.CombinedFieldsZeroTerms>(o, v));
 		writer.WriteEndObject();
 	}
 }

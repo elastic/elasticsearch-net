@@ -40,7 +40,7 @@ internal sealed partial class DataframeEvaluationClassificationMetricsAucRocConv
 				continue;
 			}
 
-			if (propIncludeCurve.TryReadProperty(ref reader, options, PropIncludeCurve, null))
+			if (propIncludeCurve.TryReadProperty(ref reader, options, PropIncludeCurve, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class DataframeEvaluationClassificationMetricsAucRocConv
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropClassName, value.ClassName, null, null);
-		writer.WriteProperty(options, PropIncludeCurve, value.IncludeCurve, null, null);
+		writer.WriteProperty(options, PropIncludeCurve, value.IncludeCurve, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

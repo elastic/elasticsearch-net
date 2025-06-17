@@ -42,7 +42,7 @@ internal sealed partial class CreateFromConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propRemoveIndexBlocks.TryReadProperty(ref reader, options, PropRemoveIndexBlocks, null))
+			if (propRemoveIndexBlocks.TryReadProperty(ref reader, options, PropRemoveIndexBlocks, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ internal sealed partial class CreateFromConverter : System.Text.Json.Serializati
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMappingsOverride, value.MappingsOverride, null, null);
-		writer.WriteProperty(options, PropRemoveIndexBlocks, value.RemoveIndexBlocks, null, null);
+		writer.WriteProperty(options, PropRemoveIndexBlocks, value.RemoveIndexBlocks, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropSettingsOverride, value.SettingsOverride, null, null);
 		writer.WriteEndObject();
 	}

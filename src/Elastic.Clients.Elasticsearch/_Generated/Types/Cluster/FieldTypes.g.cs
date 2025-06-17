@@ -55,17 +55,17 @@ internal sealed partial class FieldTypesConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propIndexedVectorCount.TryReadProperty(ref reader, options, PropIndexedVectorCount, null))
+			if (propIndexedVectorCount.TryReadProperty(ref reader, options, PropIndexedVectorCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propIndexedVectorDimMax.TryReadProperty(ref reader, options, PropIndexedVectorDimMax, null))
+			if (propIndexedVectorDimMax.TryReadProperty(ref reader, options, PropIndexedVectorDimMax, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propIndexedVectorDimMin.TryReadProperty(ref reader, options, PropIndexedVectorDimMin, null))
+			if (propIndexedVectorDimMin.TryReadProperty(ref reader, options, PropIndexedVectorDimMin, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class FieldTypesConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propScriptCount.TryReadProperty(ref reader, options, PropScriptCount, null))
+			if (propScriptCount.TryReadProperty(ref reader, options, PropScriptCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -107,11 +107,11 @@ internal sealed partial class FieldTypesConverter : System.Text.Json.Serializati
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
 		writer.WriteProperty(options, PropIndexCount, value.IndexCount, null, null);
-		writer.WriteProperty(options, PropIndexedVectorCount, value.IndexedVectorCount, null, null);
-		writer.WriteProperty(options, PropIndexedVectorDimMax, value.IndexedVectorDimMax, null, null);
-		writer.WriteProperty(options, PropIndexedVectorDimMin, value.IndexedVectorDimMin, null, null);
+		writer.WriteProperty(options, PropIndexedVectorCount, value.IndexedVectorCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropIndexedVectorDimMax, value.IndexedVectorDimMax, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropIndexedVectorDimMin, value.IndexedVectorDimMin, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropScriptCount, value.ScriptCount, null, null);
+		writer.WriteProperty(options, PropScriptCount, value.ScriptCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

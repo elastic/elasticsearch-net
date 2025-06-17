@@ -44,7 +44,7 @@ internal sealed partial class IndexRoutingAllocationConverter : System.Text.Json
 				continue;
 			}
 
-			if (propEnable.TryReadProperty(ref reader, options, PropEnable, null))
+			if (propEnable.TryReadProperty(ref reader, options, PropEnable, static Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions>(o)))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class IndexRoutingAllocationConverter : System.Text.Json
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDisk, value.Disk, null, null);
-		writer.WriteProperty(options, PropEnable, value.Enable, null, null);
+		writer.WriteProperty(options, PropEnable, value.Enable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions>(o, v));
 		writer.WriteProperty(options, PropInclude, value.Include, null, null);
 		writer.WriteProperty(options, PropInitialRecovery, value.InitialRecovery, null, null);
 		writer.WriteEndObject();

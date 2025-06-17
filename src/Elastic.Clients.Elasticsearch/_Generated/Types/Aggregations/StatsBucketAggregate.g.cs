@@ -51,7 +51,7 @@ internal sealed partial class StatsBucketAggregateConverter : System.Text.Json.S
 		LocalJsonValue<string?> propSumAsString = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAvg.TryReadProperty(ref reader, options, PropAvg, null))
+			if (propAvg.TryReadProperty(ref reader, options, PropAvg, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class StatsBucketAggregateConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			if (propMax.TryReadProperty(ref reader, options, PropMax, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class StatsBucketAggregateConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
+			if (propMin.TryReadProperty(ref reader, options, PropMin, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -129,13 +129,13 @@ internal sealed partial class StatsBucketAggregateConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAvg, value.Avg, null, null);
+		writer.WriteProperty(options, PropAvg, value.Avg, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropAvgAsString, value.AvgAsString, null, null);
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
-		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMax, value.Max, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropMaxAsString, value.MaxAsString, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
-		writer.WriteProperty(options, PropMin, value.Min, null, null);
+		writer.WriteProperty(options, PropMin, value.Min, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropMinAsString, value.MinAsString, null, null);
 		writer.WriteProperty(options, PropSum, value.Sum, null, null);
 		writer.WriteProperty(options, PropSumAsString, value.SumAsString, null, null);

@@ -54,17 +54,17 @@ internal sealed partial class DenseVectorPropertyConverter : System.Text.Json.Se
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDims.TryReadProperty(ref reader, options, PropDims, null))
+			if (propDims.TryReadProperty(ref reader, options, PropDims, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, static Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>(o)))
 			{
 				continue;
 			}
 
-			if (propElementType.TryReadProperty(ref reader, options, PropElementType, null))
+			if (propElementType.TryReadProperty(ref reader, options, PropElementType, static Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType>(o)))
 			{
 				continue;
 			}
@@ -74,12 +74,12 @@ internal sealed partial class DenseVectorPropertyConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -99,12 +99,12 @@ internal sealed partial class DenseVectorPropertyConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, static Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity>(o)))
 			{
 				continue;
 			}
 
-			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, static Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum>(o)))
 			{
 				continue;
 			}
@@ -144,17 +144,17 @@ internal sealed partial class DenseVectorPropertyConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.DenseVectorProperty value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDims, value.Dims, null, null);
-		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
-		writer.WriteProperty(options, PropElementType, value.ElementType, null, null);
+		writer.WriteProperty(options, PropDims, value.Dims, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>(o, v));
+		writer.WriteProperty(options, PropElementType, value.ElementType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, null);
-		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
-		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropIndex, value.Index, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
-		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
-		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity>(o, v));
+		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}

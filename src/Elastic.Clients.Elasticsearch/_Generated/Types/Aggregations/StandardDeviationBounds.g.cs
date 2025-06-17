@@ -43,32 +43,32 @@ internal sealed partial class StandardDeviationBoundsConverter : System.Text.Jso
 		LocalJsonValue<double?> propUpperSampling = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLower.TryReadProperty(ref reader, options, PropLower, null))
+			if (propLower.TryReadProperty(ref reader, options, PropLower, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propLowerPopulation.TryReadProperty(ref reader, options, PropLowerPopulation, null))
+			if (propLowerPopulation.TryReadProperty(ref reader, options, PropLowerPopulation, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propLowerSampling.TryReadProperty(ref reader, options, PropLowerSampling, null))
+			if (propLowerSampling.TryReadProperty(ref reader, options, PropLowerSampling, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propUpper.TryReadProperty(ref reader, options, PropUpper, null))
+			if (propUpper.TryReadProperty(ref reader, options, PropUpper, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propUpperPopulation.TryReadProperty(ref reader, options, PropUpperPopulation, null))
+			if (propUpperPopulation.TryReadProperty(ref reader, options, PropUpperPopulation, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propUpperSampling.TryReadProperty(ref reader, options, PropUpperSampling, null))
+			if (propUpperSampling.TryReadProperty(ref reader, options, PropUpperSampling, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -97,12 +97,12 @@ internal sealed partial class StandardDeviationBoundsConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.StandardDeviationBounds value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLower, value.Lower, null, null);
-		writer.WriteProperty(options, PropLowerPopulation, value.LowerPopulation, null, null);
-		writer.WriteProperty(options, PropLowerSampling, value.LowerSampling, null, null);
-		writer.WriteProperty(options, PropUpper, value.Upper, null, null);
-		writer.WriteProperty(options, PropUpperPopulation, value.UpperPopulation, null, null);
-		writer.WriteProperty(options, PropUpperSampling, value.UpperSampling, null, null);
+		writer.WriteProperty(options, PropLower, value.Lower, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropLowerPopulation, value.LowerPopulation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropLowerSampling, value.LowerSampling, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropUpper, value.Upper, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropUpperPopulation, value.UpperPopulation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropUpperSampling, value.UpperSampling, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

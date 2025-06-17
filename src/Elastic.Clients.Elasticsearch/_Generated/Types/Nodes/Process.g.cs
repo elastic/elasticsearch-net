@@ -46,7 +46,7 @@ internal sealed partial class ProcessConverter : System.Text.Json.Serialization.
 				continue;
 			}
 
-			if (propMaxFileDescriptors.TryReadProperty(ref reader, options, PropMaxFileDescriptors, null))
+			if (propMaxFileDescriptors.TryReadProperty(ref reader, options, PropMaxFileDescriptors, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -56,12 +56,12 @@ internal sealed partial class ProcessConverter : System.Text.Json.Serialization.
 				continue;
 			}
 
-			if (propOpenFileDescriptors.TryReadProperty(ref reader, options, PropOpenFileDescriptors, null))
+			if (propOpenFileDescriptors.TryReadProperty(ref reader, options, PropOpenFileDescriptors, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -90,10 +90,10 @@ internal sealed partial class ProcessConverter : System.Text.Json.Serialization.
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCpu, value.Cpu, null, null);
-		writer.WriteProperty(options, PropMaxFileDescriptors, value.MaxFileDescriptors, null, null);
+		writer.WriteProperty(options, PropMaxFileDescriptors, value.MaxFileDescriptors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMem, value.Mem, null, null);
-		writer.WriteProperty(options, PropOpenFileDescriptors, value.OpenFileDescriptors, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteProperty(options, PropOpenFileDescriptors, value.OpenFileDescriptors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

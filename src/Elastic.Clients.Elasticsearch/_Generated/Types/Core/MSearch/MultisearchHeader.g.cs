@@ -53,17 +53,17 @@ internal sealed partial class MultisearchHeaderConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchType?> propSearchType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowNoIndices.TryReadProperty(ref reader, options, PropAllowNoIndices, null))
+			if (propAllowNoIndices.TryReadProperty(ref reader, options, PropAllowNoIndices, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propAllowPartialSearchResults.TryReadProperty(ref reader, options, PropAllowPartialSearchResults, null))
+			if (propAllowPartialSearchResults.TryReadProperty(ref reader, options, PropAllowPartialSearchResults, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propCcsMinimizeRoundtrips.TryReadProperty(ref reader, options, PropCcsMinimizeRoundtrips, null))
+			if (propCcsMinimizeRoundtrips.TryReadProperty(ref reader, options, PropCcsMinimizeRoundtrips, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -73,12 +73,12 @@ internal sealed partial class MultisearchHeaderConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propIgnoreThrottled.TryReadProperty(ref reader, options, PropIgnoreThrottled, null))
+			if (propIgnoreThrottled.TryReadProperty(ref reader, options, PropIgnoreThrottled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIgnoreUnavailable.TryReadProperty(ref reader, options, PropIgnoreUnavailable, null))
+			if (propIgnoreUnavailable.TryReadProperty(ref reader, options, PropIgnoreUnavailable, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -93,7 +93,7 @@ internal sealed partial class MultisearchHeaderConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propRequestCache.TryReadProperty(ref reader, options, PropRequestCache, null))
+			if (propRequestCache.TryReadProperty(ref reader, options, PropRequestCache, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -103,7 +103,7 @@ internal sealed partial class MultisearchHeaderConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propSearchType.TryReadProperty(ref reader, options, PropSearchType, null))
+			if (propSearchType.TryReadProperty(ref reader, options, PropSearchType, static Elastic.Clients.Elasticsearch.SearchType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.SearchType>(o)))
 			{
 				continue;
 			}
@@ -137,17 +137,17 @@ internal sealed partial class MultisearchHeaderConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowNoIndices, value.AllowNoIndices, null, null);
-		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults, null, null);
-		writer.WriteProperty(options, PropCcsMinimizeRoundtrips, value.CcsMinimizeRoundtrips, null, null);
+		writer.WriteProperty(options, PropAllowNoIndices, value.AllowNoIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropCcsMinimizeRoundtrips, value.CcsMinimizeRoundtrips, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropExpandWildcards, value.ExpandWildcards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.ExpandWildcard>(o, v, null));
-		writer.WriteProperty(options, PropIgnoreThrottled, value.IgnoreThrottled, null, null);
-		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, null);
+		writer.WriteProperty(options, PropIgnoreThrottled, value.IgnoreThrottled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
 		writer.WriteProperty(options, PropPreference, value.Preference, null, null);
-		writer.WriteProperty(options, PropRequestCache, value.RequestCache, null, null);
+		writer.WriteProperty(options, PropRequestCache, value.RequestCache, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
-		writer.WriteProperty(options, PropSearchType, value.SearchType, null, null);
+		writer.WriteProperty(options, PropSearchType, value.SearchType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SearchType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SearchType>(o, v));
 		writer.WriteEndObject();
 	}
 }

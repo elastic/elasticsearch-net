@@ -45,7 +45,7 @@ internal sealed partial class KeepWordsTokenFilterConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propKeepWordsCase.TryReadProperty(ref reader, options, PropKeepWordsCase, null))
+			if (propKeepWordsCase.TryReadProperty(ref reader, options, PropKeepWordsCase, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -89,7 +89,7 @@ internal sealed partial class KeepWordsTokenFilterConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropKeepWords, value.KeepWords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropKeepWordsCase, value.KeepWordsCase, null, null);
+		writer.WriteProperty(options, PropKeepWordsCase, value.KeepWordsCase, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropKeepWordsPath, value.KeepWordsPath, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);

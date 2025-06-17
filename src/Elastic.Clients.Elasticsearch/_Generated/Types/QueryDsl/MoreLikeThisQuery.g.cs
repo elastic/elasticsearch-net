@@ -76,17 +76,17 @@ internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propBoostTerms.TryReadProperty(ref reader, options, PropBoostTerms, null))
+			if (propBoostTerms.TryReadProperty(ref reader, options, PropBoostTerms, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propFailOnUnsupportedField.TryReadProperty(ref reader, options, PropFailOnUnsupportedField, null))
+			if (propFailOnUnsupportedField.TryReadProperty(ref reader, options, PropFailOnUnsupportedField, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -96,7 +96,7 @@ internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propInclude.TryReadProperty(ref reader, options, PropInclude, null))
+			if (propInclude.TryReadProperty(ref reader, options, PropInclude, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -106,22 +106,22 @@ internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propMaxDocFreq.TryReadProperty(ref reader, options, PropMaxDocFreq, null))
+			if (propMaxDocFreq.TryReadProperty(ref reader, options, PropMaxDocFreq, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxQueryTerms.TryReadProperty(ref reader, options, PropMaxQueryTerms, null))
+			if (propMaxQueryTerms.TryReadProperty(ref reader, options, PropMaxQueryTerms, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxWordLength.TryReadProperty(ref reader, options, PropMaxWordLength, null))
+			if (propMaxWordLength.TryReadProperty(ref reader, options, PropMaxWordLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinDocFreq.TryReadProperty(ref reader, options, PropMinDocFreq, null))
+			if (propMinDocFreq.TryReadProperty(ref reader, options, PropMinDocFreq, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -131,12 +131,12 @@ internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propMinTermFreq.TryReadProperty(ref reader, options, PropMinTermFreq, null))
+			if (propMinTermFreq.TryReadProperty(ref reader, options, PropMinTermFreq, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinWordLength.TryReadProperty(ref reader, options, PropMinWordLength, null))
+			if (propMinWordLength.TryReadProperty(ref reader, options, PropMinWordLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -161,12 +161,12 @@ internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, null))
+			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, static Elastic.Clients.Elasticsearch.VersionType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.VersionType>(o)))
 			{
 				continue;
 			}
@@ -210,25 +210,25 @@ internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Seri
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
-		writer.WriteProperty(options, PropBoostTerms, value.BoostTerms, null, null);
-		writer.WriteProperty(options, PropFailOnUnsupportedField, value.FailOnUnsupportedField, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropBoostTerms, value.BoostTerms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropFailOnUnsupportedField, value.FailOnUnsupportedField, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, null);
-		writer.WriteProperty(options, PropInclude, value.Include, null, null);
+		writer.WriteProperty(options, PropInclude, value.Include, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropLike, value.Like, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Like>(o, v, null));
-		writer.WriteProperty(options, PropMaxDocFreq, value.MaxDocFreq, null, null);
-		writer.WriteProperty(options, PropMaxQueryTerms, value.MaxQueryTerms, null, null);
-		writer.WriteProperty(options, PropMaxWordLength, value.MaxWordLength, null, null);
-		writer.WriteProperty(options, PropMinDocFreq, value.MinDocFreq, null, null);
+		writer.WriteProperty(options, PropMaxDocFreq, value.MaxDocFreq, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxQueryTerms, value.MaxQueryTerms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxWordLength, value.MaxWordLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinDocFreq, value.MinDocFreq, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
-		writer.WriteProperty(options, PropMinTermFreq, value.MinTermFreq, null, null);
-		writer.WriteProperty(options, PropMinWordLength, value.MinWordLength, null, null);
+		writer.WriteProperty(options, PropMinTermFreq, value.MinTermFreq, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinWordLength, value.MinWordLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteProperty(options, PropStopWords, value.StopWords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
 		writer.WriteProperty(options, PropUnlike, value.Unlike, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Like>(o, v, null));
-		writer.WriteProperty(options, PropVersion, value.Version, null, null);
-		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropVersionType, value.VersionType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.VersionType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.VersionType>(o, v));
 		writer.WriteEndObject();
 	}
 }

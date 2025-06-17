@@ -29,6 +29,7 @@ internal sealed partial class RuleQueryConverter : System.Text.Json.Serializatio
 	private static readonly System.Text.Json.JsonEncodedText PropMatchCriteria = System.Text.Json.JsonEncodedText.Encode("match_criteria");
 	private static readonly System.Text.Json.JsonEncodedText PropOrganic = System.Text.Json.JsonEncodedText.Encode("organic");
 	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRulesetId = System.Text.Json.JsonEncodedText.Encode("ruleset_id");
 	private static readonly System.Text.Json.JsonEncodedText PropRulesetIds = System.Text.Json.JsonEncodedText.Encode("ruleset_ids");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -38,10 +39,11 @@ internal sealed partial class RuleQueryConverter : System.Text.Json.Serializatio
 		LocalJsonValue<object> propMatchCriteria = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propOrganic = default;
 		LocalJsonValue<string?> propQueryName = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>> propRulesetIds = default;
+		LocalJsonValue<string?> propRulesetId = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>?> propRulesetIds = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -61,7 +63,12 @@ internal sealed partial class RuleQueryConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propRulesetIds.TryReadProperty(ref reader, options, PropRulesetIds, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, null)!))
+			if (propRulesetId.TryReadProperty(ref reader, options, PropRulesetId, null))
+			{
+				continue;
+			}
+
+			if (propRulesetIds.TryReadProperty(ref reader, options, PropRulesetIds, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, null)))
 			{
 				continue;
 			}
@@ -82,6 +89,7 @@ internal sealed partial class RuleQueryConverter : System.Text.Json.Serializatio
 			MatchCriteria = propMatchCriteria.Value,
 			Organic = propOrganic.Value,
 			QueryName = propQueryName.Value,
+			RulesetId = propRulesetId.Value,
 			RulesetIds = propRulesetIds.Value
 		};
 	}
@@ -89,11 +97,12 @@ internal sealed partial class RuleQueryConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.RuleQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropMatchCriteria, value.MatchCriteria, null, null);
 		writer.WriteProperty(options, PropOrganic, value.Organic, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
-		writer.WriteProperty(options, PropRulesetIds, value.RulesetIds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, v, null));
+		writer.WriteProperty(options, PropRulesetId, value.RulesetId, null, null);
+		writer.WriteProperty(options, PropRulesetIds, value.RulesetIds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, v, null));
 		writer.WriteEndObject();
 	}
 }
@@ -102,11 +111,10 @@ internal sealed partial class RuleQueryConverter : System.Text.Json.Serializatio
 public sealed partial class RuleQuery
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RuleQuery(object matchCriteria, Elastic.Clients.Elasticsearch.QueryDsl.Query organic, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> rulesetIds)
+	public RuleQuery(object matchCriteria, Elastic.Clients.Elasticsearch.QueryDsl.Query organic)
 	{
 		MatchCriteria = matchCriteria;
 		Organic = organic;
-		RulesetIds = rulesetIds;
 	}
 #if NET7_0_OR_GREATER
 	public RuleQuery()
@@ -145,11 +153,8 @@ public sealed partial class RuleQuery
 #endif
 	Elastic.Clients.Elasticsearch.QueryDsl.Query Organic { get; set; }
 	public string? QueryName { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> RulesetIds { get; set; }
+	public string? RulesetId { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? RulesetIds { get; set; }
 }
 
 public readonly partial struct RuleQueryDescriptor<TDocument>
@@ -209,7 +214,13 @@ public readonly partial struct RuleQueryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor<TDocument> RulesetIds(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor<TDocument> RulesetId(string? value)
+	{
+		Instance.RulesetId = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor<TDocument> RulesetIds(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.RulesetIds = value;
 		return this;
@@ -293,7 +304,13 @@ public readonly partial struct RuleQueryDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor RulesetIds(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor RulesetId(string? value)
+	{
+		Instance.RulesetId = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.RuleQueryDescriptor RulesetIds(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
 		Instance.RulesetIds = value;
 		return this;

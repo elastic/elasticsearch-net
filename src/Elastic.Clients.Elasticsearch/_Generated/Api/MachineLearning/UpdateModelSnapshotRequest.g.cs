@@ -44,7 +44,7 @@ internal sealed partial class UpdateModelSnapshotRequestConverter : System.Text.
 				continue;
 			}
 
-			if (propRetain.TryReadProperty(ref reader, options, PropRetain, null))
+			if (propRetain.TryReadProperty(ref reader, options, PropRetain, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -70,7 +70,7 @@ internal sealed partial class UpdateModelSnapshotRequestConverter : System.Text.
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropRetain, value.Retain, null, null);
+		writer.WriteProperty(options, PropRetain, value.Retain, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

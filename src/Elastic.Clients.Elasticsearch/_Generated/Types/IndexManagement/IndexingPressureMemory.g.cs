@@ -33,7 +33,7 @@ internal sealed partial class IndexingPressureMemoryConverter : System.Text.Json
 		LocalJsonValue<int?> propLimit = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLimit.TryReadProperty(ref reader, options, PropLimit, null))
+			if (propLimit.TryReadProperty(ref reader, options, PropLimit, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class IndexingPressureMemoryConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexingPressureMemory value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLimit, value.Limit, null, null);
+		writer.WriteProperty(options, PropLimit, value.Limit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

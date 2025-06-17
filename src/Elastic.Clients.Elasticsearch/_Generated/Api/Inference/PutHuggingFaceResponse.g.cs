@@ -40,7 +40,7 @@ internal sealed partial class PutHuggingFaceResponseConverter : System.Text.Json
 		LocalJsonValue<string> propService = default;
 		LocalJsonValue<object> propServiceSettings = default;
 		LocalJsonValue<object?> propTaskSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.TaskType> propTaskType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.TaskTypeHuggingFace> propTaskType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propChunkingSettings.TryReadProperty(ref reader, options, PropChunkingSettings, null))
@@ -177,5 +177,5 @@ public sealed partial class PutHuggingFaceResponse : Elastic.Transport.Products.
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.Inference.TaskType TaskType { get; set; }
+	Elastic.Clients.Elasticsearch.Inference.TaskTypeHuggingFace TaskType { get; set; }
 }

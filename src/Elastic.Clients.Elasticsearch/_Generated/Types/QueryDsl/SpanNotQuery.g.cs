@@ -45,12 +45,12 @@ internal sealed partial class SpanNotQueryConverter : System.Text.Json.Serializa
 		LocalJsonValue<string?> propQueryName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propDist.TryReadProperty(ref reader, options, PropDist, null))
+			if (propDist.TryReadProperty(ref reader, options, PropDist, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -65,12 +65,12 @@ internal sealed partial class SpanNotQueryConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propPost.TryReadProperty(ref reader, options, PropPost, null))
+			if (propPost.TryReadProperty(ref reader, options, PropPost, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propPre.TryReadProperty(ref reader, options, PropPre, null))
+			if (propPre.TryReadProperty(ref reader, options, PropPre, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -105,12 +105,12 @@ internal sealed partial class SpanNotQueryConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.SpanNotQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
-		writer.WriteProperty(options, PropDist, value.Dist, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropDist, value.Dist, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropExclude, value.Exclude, null, null);
 		writer.WriteProperty(options, PropInclude, value.Include, null, null);
-		writer.WriteProperty(options, PropPost, value.Post, null, null);
-		writer.WriteProperty(options, PropPre, value.Pre, null, null);
+		writer.WriteProperty(options, PropPost, value.Post, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropPre, value.Pre, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteEndObject();
 	}

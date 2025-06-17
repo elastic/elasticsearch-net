@@ -39,12 +39,12 @@ internal sealed partial class VoyageAIServiceSettingsConverter : System.Text.Jso
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.RateLimitSetting?> propRateLimit = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDimensions.TryReadProperty(ref reader, options, PropDimensions, null))
+			if (propDimensions.TryReadProperty(ref reader, options, PropDimensions, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propEmbeddingType.TryReadProperty(ref reader, options, PropEmbeddingType, null))
+			if (propEmbeddingType.TryReadProperty(ref reader, options, PropEmbeddingType, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -81,8 +81,8 @@ internal sealed partial class VoyageAIServiceSettingsConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.VoyageAIServiceSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDimensions, value.Dimensions, null, null);
-		writer.WriteProperty(options, PropEmbeddingType, value.EmbeddingType, null, null);
+		writer.WriteProperty(options, PropDimensions, value.Dimensions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropEmbeddingType, value.EmbeddingType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);
 		writer.WriteEndObject();

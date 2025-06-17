@@ -67,17 +67,17 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propForceTimeShift.TryReadProperty(ref reader, options, PropForceTimeShift, null))
+			if (propForceTimeShift.TryReadProperty(ref reader, options, PropForceTimeShift, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSkipModelUpdate.TryReadProperty(ref reader, options, PropSkipModelUpdate, null))
+			if (propSkipModelUpdate.TryReadProperty(ref reader, options, PropSkipModelUpdate, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propSkipResult.TryReadProperty(ref reader, options, PropSkipResult, null))
+			if (propSkipResult.TryReadProperty(ref reader, options, PropSkipResult, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -117,9 +117,9 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropEndTime, value.EndTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropEventId, value.EventId, null, null);
-		writer.WriteProperty(options, PropForceTimeShift, value.ForceTimeShift, null, null);
-		writer.WriteProperty(options, PropSkipModelUpdate, value.SkipModelUpdate, null, null);
-		writer.WriteProperty(options, PropSkipResult, value.SkipResult, null, null);
+		writer.WriteProperty(options, PropForceTimeShift, value.ForceTimeShift, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSkipModelUpdate, value.SkipModelUpdate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropSkipResult, value.SkipResult, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteEndObject();
 	}

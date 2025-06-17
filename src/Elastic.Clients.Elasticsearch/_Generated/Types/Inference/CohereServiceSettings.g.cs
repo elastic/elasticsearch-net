@@ -46,7 +46,7 @@ internal sealed partial class CohereServiceSettingsConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propEmbeddingType.TryReadProperty(ref reader, options, PropEmbeddingType, null))
+			if (propEmbeddingType.TryReadProperty(ref reader, options, PropEmbeddingType, static Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class CohereServiceSettingsConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, static Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType>(o)))
 			{
 				continue;
 			}
@@ -90,10 +90,10 @@ internal sealed partial class CohereServiceSettingsConverter : System.Text.Json.
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
-		writer.WriteProperty(options, PropEmbeddingType, value.EmbeddingType, null, null);
+		writer.WriteProperty(options, PropEmbeddingType, value.EmbeddingType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType>(o, v));
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);
-		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType>(o, v));
 		writer.WriteEndObject();
 	}
 }
@@ -144,8 +144,6 @@ public sealed partial class CohereServiceSettings
 	/// <summary>
 	/// <para>
 	/// For a <c>text_embedding</c> task, the types of embeddings you want to get back.
-	/// Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
-	/// Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>binary</c>).
 	/// Use <c>byte</c> for signed int8 embeddings (this is a synonym of <c>int8</c>).
 	/// Use <c>float</c> for the default float embeddings.
 	/// Use <c>int8</c> for signed int8 embeddings.
@@ -238,8 +236,6 @@ public readonly partial struct CohereServiceSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// For a <c>text_embedding</c> task, the types of embeddings you want to get back.
-	/// Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
-	/// Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>binary</c>).
 	/// Use <c>byte</c> for signed int8 embeddings (this is a synonym of <c>int8</c>).
 	/// Use <c>float</c> for the default float embeddings.
 	/// Use <c>int8</c> for signed int8 embeddings.

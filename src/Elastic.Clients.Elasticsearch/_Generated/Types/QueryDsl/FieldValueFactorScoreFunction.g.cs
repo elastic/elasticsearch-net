@@ -39,7 +39,7 @@ internal sealed partial class FieldValueFactorScoreFunctionConverter : System.Te
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier?> propModifier = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFactor.TryReadProperty(ref reader, options, PropFactor, null))
+			if (propFactor.TryReadProperty(ref reader, options, PropFactor, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -49,12 +49,12 @@ internal sealed partial class FieldValueFactorScoreFunctionConverter : System.Te
 				continue;
 			}
 
-			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propModifier.TryReadProperty(ref reader, options, PropModifier, null))
+			if (propModifier.TryReadProperty(ref reader, options, PropModifier, static Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier>(o)))
 			{
 				continue;
 			}
@@ -81,10 +81,10 @@ internal sealed partial class FieldValueFactorScoreFunctionConverter : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorScoreFunction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFactor, value.Factor, null, null);
+		writer.WriteProperty(options, PropFactor, value.Factor, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
-		writer.WriteProperty(options, PropModifier, value.Modifier, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropModifier, value.Modifier, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldValueFactorModifier>(o, v));
 		writer.WriteEndObject();
 	}
 }

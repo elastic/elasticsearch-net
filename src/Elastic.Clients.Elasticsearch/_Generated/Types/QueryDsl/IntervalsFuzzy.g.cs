@@ -53,7 +53,7 @@ internal sealed partial class IntervalsFuzzyConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -63,7 +63,7 @@ internal sealed partial class IntervalsFuzzyConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propTranspositions.TryReadProperty(ref reader, options, PropTranspositions, null))
+			if (propTranspositions.TryReadProperty(ref reader, options, PropTranspositions, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -99,9 +99,9 @@ internal sealed partial class IntervalsFuzzyConverter : System.Text.Json.Seriali
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
 		writer.WriteProperty(options, PropFuzziness, value.Fuzziness, null, null);
-		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTerm, value.Term, null, null);
-		writer.WriteProperty(options, PropTranspositions, value.Transpositions, null, null);
+		writer.WriteProperty(options, PropTranspositions, value.Transpositions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropUseField, value.UseField, null, null);
 		writer.WriteEndObject();
 	}

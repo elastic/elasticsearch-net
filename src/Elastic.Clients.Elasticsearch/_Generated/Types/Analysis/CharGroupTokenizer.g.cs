@@ -38,7 +38,7 @@ internal sealed partial class CharGroupTokenizerConverter : System.Text.Json.Ser
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxTokenLength.TryReadProperty(ref reader, options, PropMaxTokenLength, null))
+			if (propMaxTokenLength.TryReadProperty(ref reader, options, PropMaxTokenLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -80,7 +80,7 @@ internal sealed partial class CharGroupTokenizerConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxTokenLength, value.MaxTokenLength, null, null);
+		writer.WriteProperty(options, PropMaxTokenLength, value.MaxTokenLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTokenizeOnChars, value.TokenizeOnChars, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);

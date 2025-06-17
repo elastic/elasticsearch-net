@@ -61,7 +61,7 @@ internal sealed partial class TransportConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propRxCount.TryReadProperty(ref reader, options, PropRxCount, null))
+			if (propRxCount.TryReadProperty(ref reader, options, PropRxCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -71,22 +71,22 @@ internal sealed partial class TransportConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propRxSizeInBytes.TryReadProperty(ref reader, options, PropRxSizeInBytes, null))
+			if (propRxSizeInBytes.TryReadProperty(ref reader, options, PropRxSizeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propServerOpen.TryReadProperty(ref reader, options, PropServerOpen, null))
+			if (propServerOpen.TryReadProperty(ref reader, options, PropServerOpen, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalOutboundConnections.TryReadProperty(ref reader, options, PropTotalOutboundConnections, null))
+			if (propTotalOutboundConnections.TryReadProperty(ref reader, options, PropTotalOutboundConnections, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTxCount.TryReadProperty(ref reader, options, PropTxCount, null))
+			if (propTxCount.TryReadProperty(ref reader, options, PropTxCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -96,7 +96,7 @@ internal sealed partial class TransportConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propTxSizeInBytes.TryReadProperty(ref reader, options, PropTxSizeInBytes, null))
+			if (propTxSizeInBytes.TryReadProperty(ref reader, options, PropTxSizeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -131,14 +131,14 @@ internal sealed partial class TransportConverter : System.Text.Json.Serializatio
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropInboundHandlingTimeHistogram, value.InboundHandlingTimeHistogram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>(o, v, null));
 		writer.WriteProperty(options, PropOutboundHandlingTimeHistogram, value.OutboundHandlingTimeHistogram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.TransportHistogram>(o, v, null));
-		writer.WriteProperty(options, PropRxCount, value.RxCount, null, null);
+		writer.WriteProperty(options, PropRxCount, value.RxCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRxSize, value.RxSize, null, null);
-		writer.WriteProperty(options, PropRxSizeInBytes, value.RxSizeInBytes, null, null);
-		writer.WriteProperty(options, PropServerOpen, value.ServerOpen, null, null);
-		writer.WriteProperty(options, PropTotalOutboundConnections, value.TotalOutboundConnections, null, null);
-		writer.WriteProperty(options, PropTxCount, value.TxCount, null, null);
+		writer.WriteProperty(options, PropRxSizeInBytes, value.RxSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropServerOpen, value.ServerOpen, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTotalOutboundConnections, value.TotalOutboundConnections, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTxCount, value.TxCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTxSize, value.TxSize, null, null);
-		writer.WriteProperty(options, PropTxSizeInBytes, value.TxSizeInBytes, null, null);
+		writer.WriteProperty(options, PropTxSizeInBytes, value.TxSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

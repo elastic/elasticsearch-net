@@ -54,7 +54,7 @@ internal sealed partial class StringStatsAggregationConverter : System.Text.Json
 				continue;
 			}
 
-			if (propShowDistribution.TryReadProperty(ref reader, options, PropShowDistribution, null))
+			if (propShowDistribution.TryReadProperty(ref reader, options, PropShowDistribution, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class StringStatsAggregationConverter : System.Text.Json
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropShowDistribution, value.ShowDistribution, null, null);
+		writer.WriteProperty(options, PropShowDistribution, value.ShowDistribution, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

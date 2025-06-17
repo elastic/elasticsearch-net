@@ -68,7 +68,7 @@ internal sealed partial class AzureRepositorySettingsConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propCompress.TryReadProperty(ref reader, options, PropCompress, null))
+			if (propCompress.TryReadProperty(ref reader, options, PropCompress, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -78,7 +78,7 @@ internal sealed partial class AzureRepositorySettingsConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propDeleteObjectsMaxSize.TryReadProperty(ref reader, options, PropDeleteObjectsMaxSize, null))
+			if (propDeleteObjectsMaxSize.TryReadProperty(ref reader, options, PropDeleteObjectsMaxSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -88,7 +88,7 @@ internal sealed partial class AzureRepositorySettingsConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propMaxConcurrentBatchDeletes.TryReadProperty(ref reader, options, PropMaxConcurrentBatchDeletes, null))
+			if (propMaxConcurrentBatchDeletes.TryReadProperty(ref reader, options, PropMaxConcurrentBatchDeletes, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -103,7 +103,7 @@ internal sealed partial class AzureRepositorySettingsConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propReadonly.TryReadProperty(ref reader, options, PropReadonly, null))
+			if (propReadonly.TryReadProperty(ref reader, options, PropReadonly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -140,14 +140,14 @@ internal sealed partial class AzureRepositorySettingsConverter : System.Text.Jso
 		writer.WriteProperty(options, PropBasePath, value.BasePath, null, null);
 		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);
 		writer.WriteProperty(options, PropClient, value.Client, null, null);
-		writer.WriteProperty(options, PropCompress, value.Compress, null, null);
+		writer.WriteProperty(options, PropCompress, value.Compress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropContainer, value.Container, null, null);
-		writer.WriteProperty(options, PropDeleteObjectsMaxSize, value.DeleteObjectsMaxSize, null, null);
+		writer.WriteProperty(options, PropDeleteObjectsMaxSize, value.DeleteObjectsMaxSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropLocationMode, value.LocationMode, null, null);
-		writer.WriteProperty(options, PropMaxConcurrentBatchDeletes, value.MaxConcurrentBatchDeletes, null, null);
+		writer.WriteProperty(options, PropMaxConcurrentBatchDeletes, value.MaxConcurrentBatchDeletes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
 		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
-		writer.WriteProperty(options, PropReadonly, value.Readonly, null, null);
+		writer.WriteProperty(options, PropReadonly, value.Readonly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

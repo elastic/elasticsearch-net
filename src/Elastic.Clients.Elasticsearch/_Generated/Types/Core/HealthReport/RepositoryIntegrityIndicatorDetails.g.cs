@@ -42,12 +42,12 @@ internal sealed partial class RepositoryIntegrityIndicatorDetailsConverter : Sys
 				continue;
 			}
 
-			if (propCorruptedRepositories.TryReadProperty(ref reader, options, PropCorruptedRepositories, null))
+			if (propCorruptedRepositories.TryReadProperty(ref reader, options, PropCorruptedRepositories, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalRepositories.TryReadProperty(ref reader, options, PropTotalRepositories, null))
+			if (propTotalRepositories.TryReadProperty(ref reader, options, PropTotalRepositories, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -74,8 +74,8 @@ internal sealed partial class RepositoryIntegrityIndicatorDetailsConverter : Sys
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCorrupted, value.Corrupted, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropCorruptedRepositories, value.CorruptedRepositories, null, null);
-		writer.WriteProperty(options, PropTotalRepositories, value.TotalRepositories, null, null);
+		writer.WriteProperty(options, PropCorruptedRepositories, value.CorruptedRepositories, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTotalRepositories, value.TotalRepositories, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

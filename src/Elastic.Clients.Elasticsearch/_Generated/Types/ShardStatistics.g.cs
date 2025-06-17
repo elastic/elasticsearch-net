@@ -51,7 +51,7 @@ internal sealed partial class ShardStatisticsConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propSkipped.TryReadProperty(ref reader, options, PropSkipped, null))
+			if (propSkipped.TryReadProperty(ref reader, options, PropSkipped, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class ShardStatisticsConverter : System.Text.Json.Serial
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFailed, value.Failed, null, null);
 		writer.WriteProperty(options, PropFailures, value.Failures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ShardFailure>(o, v, null));
-		writer.WriteProperty(options, PropSkipped, value.Skipped, null, null);
+		writer.WriteProperty(options, PropSkipped, value.Skipped, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSuccessful, value.Successful, null, null);
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteEndObject();

@@ -41,12 +41,12 @@ internal sealed partial class TermConverter : System.Text.Json.Serialization.Jso
 		LocalJsonValue<int?> propTtf = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDocFreq.TryReadProperty(ref reader, options, PropDocFreq, null))
+			if (propDocFreq.TryReadProperty(ref reader, options, PropDocFreq, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propScore.TryReadProperty(ref reader, options, PropScore, null))
+			if (propScore.TryReadProperty(ref reader, options, PropScore, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class TermConverter : System.Text.Json.Serialization.Jso
 				continue;
 			}
 
-			if (propTtf.TryReadProperty(ref reader, options, PropTtf, null))
+			if (propTtf.TryReadProperty(ref reader, options, PropTtf, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -89,11 +89,11 @@ internal sealed partial class TermConverter : System.Text.Json.Serialization.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.TermVectors.Term value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocFreq, value.DocFreq, null, null);
-		writer.WriteProperty(options, PropScore, value.Score, null, null);
+		writer.WriteProperty(options, PropDocFreq, value.DocFreq, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropScore, value.Score, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropTermFreq, value.TermFreq, null, null);
 		writer.WriteProperty(options, PropTokens, value.Tokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.TermVectors.Token>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.TermVectors.Token>(o, v, null));
-		writer.WriteProperty(options, PropTtf, value.Ttf, null, null);
+		writer.WriteProperty(options, PropTtf, value.Ttf, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }
