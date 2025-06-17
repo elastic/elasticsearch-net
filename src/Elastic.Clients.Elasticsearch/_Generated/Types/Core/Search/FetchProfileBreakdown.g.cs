@@ -47,42 +47,42 @@ internal sealed partial class FetchProfileBreakdownConverter : System.Text.Json.
 		LocalJsonValue<int?> propProcessCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLoadSource.TryReadProperty(ref reader, options, PropLoadSource, null))
+			if (propLoadSource.TryReadProperty(ref reader, options, PropLoadSource, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propLoadSourceCount.TryReadProperty(ref reader, options, PropLoadSourceCount, null))
+			if (propLoadSourceCount.TryReadProperty(ref reader, options, PropLoadSourceCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propLoadStoredFields.TryReadProperty(ref reader, options, PropLoadStoredFields, null))
+			if (propLoadStoredFields.TryReadProperty(ref reader, options, PropLoadStoredFields, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propLoadStoredFieldsCount.TryReadProperty(ref reader, options, PropLoadStoredFieldsCount, null))
+			if (propLoadStoredFieldsCount.TryReadProperty(ref reader, options, PropLoadStoredFieldsCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propNextReader.TryReadProperty(ref reader, options, PropNextReader, null))
+			if (propNextReader.TryReadProperty(ref reader, options, PropNextReader, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propNextReaderCount.TryReadProperty(ref reader, options, PropNextReaderCount, null))
+			if (propNextReaderCount.TryReadProperty(ref reader, options, PropNextReaderCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propProcess.TryReadProperty(ref reader, options, PropProcess, null))
+			if (propProcess.TryReadProperty(ref reader, options, PropProcess, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propProcessCount.TryReadProperty(ref reader, options, PropProcessCount, null))
+			if (propProcessCount.TryReadProperty(ref reader, options, PropProcessCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -113,14 +113,14 @@ internal sealed partial class FetchProfileBreakdownConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.FetchProfileBreakdown value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLoadSource, value.LoadSource, null, null);
-		writer.WriteProperty(options, PropLoadSourceCount, value.LoadSourceCount, null, null);
-		writer.WriteProperty(options, PropLoadStoredFields, value.LoadStoredFields, null, null);
-		writer.WriteProperty(options, PropLoadStoredFieldsCount, value.LoadStoredFieldsCount, null, null);
-		writer.WriteProperty(options, PropNextReader, value.NextReader, null, null);
-		writer.WriteProperty(options, PropNextReaderCount, value.NextReaderCount, null, null);
-		writer.WriteProperty(options, PropProcess, value.Process, null, null);
-		writer.WriteProperty(options, PropProcessCount, value.ProcessCount, null, null);
+		writer.WriteProperty(options, PropLoadSource, value.LoadSource, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropLoadSourceCount, value.LoadSourceCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropLoadStoredFields, value.LoadStoredFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropLoadStoredFieldsCount, value.LoadStoredFieldsCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropNextReader, value.NextReader, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropNextReaderCount, value.NextReaderCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropProcess, value.Process, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropProcessCount, value.ProcessCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

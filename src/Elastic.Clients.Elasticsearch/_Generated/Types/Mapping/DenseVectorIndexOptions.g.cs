@@ -28,6 +28,7 @@ internal sealed partial class DenseVectorIndexOptionsConverter : System.Text.Jso
 	private static readonly System.Text.Json.JsonEncodedText PropConfidenceInterval = System.Text.Json.JsonEncodedText.Encode("confidence_interval");
 	private static readonly System.Text.Json.JsonEncodedText PropEfConstruction = System.Text.Json.JsonEncodedText.Encode("ef_construction");
 	private static readonly System.Text.Json.JsonEncodedText PropM = System.Text.Json.JsonEncodedText.Encode("m");
+	private static readonly System.Text.Json.JsonEncodedText PropRescoreVector = System.Text.Json.JsonEncodedText.Encode("rescore_vector");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -36,20 +37,26 @@ internal sealed partial class DenseVectorIndexOptionsConverter : System.Text.Jso
 		LocalJsonValue<float?> propConfidenceInterval = default;
 		LocalJsonValue<int?> propEfConstruction = default;
 		LocalJsonValue<int?> propM = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector?> propRescoreVector = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propConfidenceInterval.TryReadProperty(ref reader, options, PropConfidenceInterval, null))
+			if (propConfidenceInterval.TryReadProperty(ref reader, options, PropConfidenceInterval, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propEfConstruction.TryReadProperty(ref reader, options, PropEfConstruction, null))
+			if (propEfConstruction.TryReadProperty(ref reader, options, PropEfConstruction, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propM.TryReadProperty(ref reader, options, PropM, null))
+			if (propM.TryReadProperty(ref reader, options, PropM, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propRescoreVector.TryReadProperty(ref reader, options, PropRescoreVector, null))
 			{
 				continue;
 			}
@@ -74,6 +81,7 @@ internal sealed partial class DenseVectorIndexOptionsConverter : System.Text.Jso
 			ConfidenceInterval = propConfidenceInterval.Value,
 			EfConstruction = propEfConstruction.Value,
 			M = propM.Value,
+			RescoreVector = propRescoreVector.Value,
 			Type = propType.Value
 		};
 	}
@@ -81,9 +89,10 @@ internal sealed partial class DenseVectorIndexOptionsConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConfidenceInterval, value.ConfidenceInterval, null, null);
-		writer.WriteProperty(options, PropEfConstruction, value.EfConstruction, null, null);
-		writer.WriteProperty(options, PropM, value.M, null, null);
+		writer.WriteProperty(options, PropConfidenceInterval, value.ConfidenceInterval, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropEfConstruction, value.EfConstruction, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropM, value.M, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropRescoreVector, value.RescoreVector, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
@@ -153,6 +162,13 @@ public sealed partial class DenseVectorIndexOptions
 	/// </para>
 	/// </summary>
 	public int? M { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The rescore vector options. This is only applicable to <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector? RescoreVector { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -234,6 +250,28 @@ public readonly partial struct DenseVectorIndexOptionsDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor M(int? value)
 	{
 		Instance.M = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The rescore vector options. This is only applicable to <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor RescoreVector(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector? value)
+	{
+		Instance.RescoreVector = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The rescore vector options. This is only applicable to <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor RescoreVector(System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVectorDescriptor> action)
+	{
+		Instance.RescoreVector = Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVectorDescriptor.Build(action);
 		return this;
 	}
 

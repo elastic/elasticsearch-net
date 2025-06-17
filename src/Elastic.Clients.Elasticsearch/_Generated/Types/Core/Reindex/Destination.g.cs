@@ -46,7 +46,7 @@ internal sealed partial class DestinationConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propOpType.TryReadProperty(ref reader, options, PropOpType, null))
+			if (propOpType.TryReadProperty(ref reader, options, PropOpType, static Elastic.Clients.Elasticsearch.OpType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.OpType>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class DestinationConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, null))
+			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, static Elastic.Clients.Elasticsearch.VersionType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.VersionType>(o)))
 			{
 				continue;
 			}
@@ -90,10 +90,10 @@ internal sealed partial class DestinationConverter : System.Text.Json.Serializat
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropOpType, value.OpType, null, null);
+		writer.WriteProperty(options, PropOpType, value.OpType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.OpType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.OpType>(o, v));
 		writer.WriteProperty(options, PropPipeline, value.Pipeline, null, null);
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
-		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
+		writer.WriteProperty(options, PropVersionType, value.VersionType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.VersionType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.VersionType>(o, v));
 		writer.WriteEndObject();
 	}
 }

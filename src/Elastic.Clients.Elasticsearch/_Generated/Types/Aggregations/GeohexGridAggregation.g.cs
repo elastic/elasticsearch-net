@@ -51,17 +51,17 @@ internal sealed partial class GeohexGridAggregationConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -91,9 +91,9 @@ internal sealed partial class GeohexGridAggregationConverter : System.Text.Json.
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBounds, value.Bounds, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
-		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -37,7 +37,7 @@ internal sealed partial class ShrinkActionConverter : System.Text.Json.Serializa
 		LocalJsonValue<int?> propNumberOfShards = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowWriteAfterShrink.TryReadProperty(ref reader, options, PropAllowWriteAfterShrink, null))
+			if (propAllowWriteAfterShrink.TryReadProperty(ref reader, options, PropAllowWriteAfterShrink, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -47,7 +47,7 @@ internal sealed partial class ShrinkActionConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propNumberOfShards.TryReadProperty(ref reader, options, PropNumberOfShards, null))
+			if (propNumberOfShards.TryReadProperty(ref reader, options, PropNumberOfShards, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class ShrinkActionConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowWriteAfterShrink, value.AllowWriteAfterShrink, null, null);
+		writer.WriteProperty(options, PropAllowWriteAfterShrink, value.AllowWriteAfterShrink, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMaxPrimaryShardSize, value.MaxPrimaryShardSize, null, null);
-		writer.WriteProperty(options, PropNumberOfShards, value.NumberOfShards, null, null);
+		writer.WriteProperty(options, PropNumberOfShards, value.NumberOfShards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

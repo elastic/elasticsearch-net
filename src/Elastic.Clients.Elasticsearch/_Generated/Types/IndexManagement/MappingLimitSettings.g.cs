@@ -49,7 +49,7 @@ internal sealed partial class MappingLimitSettingsConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields?> propTotalFields = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCoerce.TryReadProperty(ref reader, options, PropCoerce, null))
+			if (propCoerce.TryReadProperty(ref reader, options, PropCoerce, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -121,7 +121,7 @@ internal sealed partial class MappingLimitSettingsConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCoerce, value.Coerce, null, null);
+		writer.WriteProperty(options, PropCoerce, value.Coerce, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDepth, value.Depth, null, null);
 		writer.WriteProperty(options, PropDimensionFields, value.DimensionFields, null, null);
 		writer.WriteProperty(options, PropFieldNameLength, value.FieldNameLength, null, null);

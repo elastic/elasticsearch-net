@@ -36,6 +36,8 @@ internal sealed partial class IndexingStatsConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropIndexTotal = System.Text.Json.JsonEncodedText.Encode("index_total");
 	private static readonly System.Text.Json.JsonEncodedText PropIsThrottled = System.Text.Json.JsonEncodedText.Encode("is_throttled");
 	private static readonly System.Text.Json.JsonEncodedText PropNoopUpdateTotal = System.Text.Json.JsonEncodedText.Encode("noop_update_total");
+	private static readonly System.Text.Json.JsonEncodedText PropPeakWriteLoad = System.Text.Json.JsonEncodedText.Encode("peak_write_load");
+	private static readonly System.Text.Json.JsonEncodedText PropRecentWriteLoad = System.Text.Json.JsonEncodedText.Encode("recent_write_load");
 	private static readonly System.Text.Json.JsonEncodedText PropThrottleTime = System.Text.Json.JsonEncodedText.Encode("throttle_time");
 	private static readonly System.Text.Json.JsonEncodedText PropThrottleTimeInMillis = System.Text.Json.JsonEncodedText.Encode("throttle_time_in_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropTypes = System.Text.Json.JsonEncodedText.Encode("types");
@@ -55,6 +57,8 @@ internal sealed partial class IndexingStatsConverter : System.Text.Json.Serializ
 		LocalJsonValue<long> propIndexTotal = default;
 		LocalJsonValue<bool> propIsThrottled = default;
 		LocalJsonValue<long> propNoopUpdateTotal = default;
+		LocalJsonValue<double?> propPeakWriteLoad = default;
+		LocalJsonValue<double?> propRecentWriteLoad = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propThrottleTime = default;
 		LocalJsonValue<System.TimeSpan> propThrottleTimeInMillis = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>?> propTypes = default;
@@ -116,6 +120,16 @@ internal sealed partial class IndexingStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
+			if (propPeakWriteLoad.TryReadProperty(ref reader, options, PropPeakWriteLoad, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
+			{
+				continue;
+			}
+
+			if (propRecentWriteLoad.TryReadProperty(ref reader, options, PropRecentWriteLoad, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
+			{
+				continue;
+			}
+
 			if (propThrottleTime.TryReadProperty(ref reader, options, PropThrottleTime, null))
 			{
 				continue;
@@ -131,7 +145,7 @@ internal sealed partial class IndexingStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propWriteLoad.TryReadProperty(ref reader, options, PropWriteLoad, null))
+			if (propWriteLoad.TryReadProperty(ref reader, options, PropWriteLoad, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -159,6 +173,8 @@ internal sealed partial class IndexingStatsConverter : System.Text.Json.Serializ
 			IndexTotal = propIndexTotal.Value,
 			IsThrottled = propIsThrottled.Value,
 			NoopUpdateTotal = propNoopUpdateTotal.Value,
+			PeakWriteLoad = propPeakWriteLoad.Value,
+			RecentWriteLoad = propRecentWriteLoad.Value,
 			ThrottleTime = propThrottleTime.Value,
 			ThrottleTimeInMillis = propThrottleTimeInMillis.Value,
 			Types = propTypes.Value,
@@ -180,10 +196,12 @@ internal sealed partial class IndexingStatsConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropIndexTotal, value.IndexTotal, null, null);
 		writer.WriteProperty(options, PropIsThrottled, value.IsThrottled, null, null);
 		writer.WriteProperty(options, PropNoopUpdateTotal, value.NoopUpdateTotal, null, null);
+		writer.WriteProperty(options, PropPeakWriteLoad, value.PeakWriteLoad, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropRecentWriteLoad, value.RecentWriteLoad, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropThrottleTime, value.ThrottleTime, null, null);
 		writer.WriteProperty(options, PropThrottleTimeInMillis, value.ThrottleTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropTypes, value.Types, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexingStats>(o, v, null, null));
-		writer.WriteProperty(options, PropWriteLoad, value.WriteLoad, null, null);
+		writer.WriteProperty(options, PropWriteLoad, value.WriteLoad, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }
@@ -269,6 +287,8 @@ public sealed partial class IndexingStats
 	required
 #endif
 	long NoopUpdateTotal { get; set; }
+	public double? PeakWriteLoad { get; set; }
+	public double? RecentWriteLoad { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? ThrottleTime { get; set; }
 	public
 #if NET7_0_OR_GREATER

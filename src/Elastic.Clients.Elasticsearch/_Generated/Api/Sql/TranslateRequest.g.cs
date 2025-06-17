@@ -43,7 +43,7 @@ internal sealed partial class TranslateRequestConverter : System.Text.Json.Seria
 		LocalJsonValue<string?> propTimeZone = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFetchSize.TryReadProperty(ref reader, options, PropFetchSize, null))
+			if (propFetchSize.TryReadProperty(ref reader, options, PropFetchSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -85,7 +85,7 @@ internal sealed partial class TranslateRequestConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Sql.TranslateRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFetchSize, value.FetchSize, null, null);
+		writer.WriteProperty(options, PropFetchSize, value.FetchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);

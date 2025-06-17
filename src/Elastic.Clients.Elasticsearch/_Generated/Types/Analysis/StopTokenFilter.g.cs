@@ -42,12 +42,12 @@ internal sealed partial class StopTokenFilterConverter : System.Text.Json.Serial
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propIgnoreCase.TryReadProperty(ref reader, options, PropIgnoreCase, null))
+			if (propIgnoreCase.TryReadProperty(ref reader, options, PropIgnoreCase, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propRemoveTrailing.TryReadProperty(ref reader, options, PropRemoveTrailing, null))
+			if (propRemoveTrailing.TryReadProperty(ref reader, options, PropRemoveTrailing, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -96,8 +96,8 @@ internal sealed partial class StopTokenFilterConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase, null, null);
-		writer.WriteProperty(options, PropRemoveTrailing, value.RemoveTrailing, null, null);
+		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropRemoveTrailing, value.RemoveTrailing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
 		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);

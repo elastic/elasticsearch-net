@@ -47,7 +47,7 @@ internal sealed partial class HealthReportResponseConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, static Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class HealthReportResponseConverter : System.Text.Json.S
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
 		writer.WriteProperty(options, PropIndicators, value.Indicators, null, null);
-		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus>(o, v));
 		writer.WriteEndObject();
 	}
 }

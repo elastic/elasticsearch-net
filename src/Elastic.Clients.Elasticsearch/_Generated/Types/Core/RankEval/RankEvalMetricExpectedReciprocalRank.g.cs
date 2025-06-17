@@ -35,7 +35,7 @@ internal sealed partial class RankEvalMetricExpectedReciprocalRankConverter : Sy
 		LocalJsonValue<int> propMaximumRelevance = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propK.TryReadProperty(ref reader, options, PropK, null))
+			if (propK.TryReadProperty(ref reader, options, PropK, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -65,7 +65,7 @@ internal sealed partial class RankEvalMetricExpectedReciprocalRankConverter : Sy
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropK, value.K, null, null);
+		writer.WriteProperty(options, PropK, value.K, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMaximumRelevance, value.MaximumRelevance, null, null);
 		writer.WriteEndObject();
 	}
@@ -75,7 +75,7 @@ internal sealed partial class RankEvalMetricExpectedReciprocalRankConverter : Sy
 /// <para>
 /// Expected Reciprocal Rank (ERR)
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v9/operation/operation-rank-eval#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rank-eval#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankConverter))]
 public sealed partial class RankEvalMetricExpectedReciprocalRank
@@ -125,7 +125,7 @@ public sealed partial class RankEvalMetricExpectedReciprocalRank
 /// <para>
 /// Expected Reciprocal Rank (ERR)
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v9/operation/operation-rank-eval#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rank-eval#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct RankEvalMetricExpectedReciprocalRankDescriptor
 {

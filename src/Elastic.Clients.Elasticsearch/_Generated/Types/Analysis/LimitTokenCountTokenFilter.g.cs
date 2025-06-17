@@ -38,12 +38,12 @@ internal sealed partial class LimitTokenCountTokenFilterConverter : System.Text.
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propConsumeAllTokens.TryReadProperty(ref reader, options, PropConsumeAllTokens, null))
+			if (propConsumeAllTokens.TryReadProperty(ref reader, options, PropConsumeAllTokens, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxTokenCount.TryReadProperty(ref reader, options, PropMaxTokenCount, null))
+			if (propMaxTokenCount.TryReadProperty(ref reader, options, PropMaxTokenCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -80,8 +80,8 @@ internal sealed partial class LimitTokenCountTokenFilterConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConsumeAllTokens, value.ConsumeAllTokens, null, null);
-		writer.WriteProperty(options, PropMaxTokenCount, value.MaxTokenCount, null, null);
+		writer.WriteProperty(options, PropConsumeAllTokens, value.ConsumeAllTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropMaxTokenCount, value.MaxTokenCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

@@ -68,17 +68,17 @@ internal sealed partial class SearchMvtRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propBuffer.TryReadProperty(ref reader, options, PropBuffer, null))
+			if (propBuffer.TryReadProperty(ref reader, options, PropBuffer, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propExactBounds.TryReadProperty(ref reader, options, PropExactBounds, null))
+			if (propExactBounds.TryReadProperty(ref reader, options, PropExactBounds, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propExtent.TryReadProperty(ref reader, options, PropExtent, null))
+			if (propExtent.TryReadProperty(ref reader, options, PropExtent, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -88,17 +88,17 @@ internal sealed partial class SearchMvtRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propGridAgg.TryReadProperty(ref reader, options, PropGridAgg, null))
+			if (propGridAgg.TryReadProperty(ref reader, options, PropGridAgg, static Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType>(o)))
 			{
 				continue;
 			}
 
-			if (propGridPrecision.TryReadProperty(ref reader, options, PropGridPrecision, null))
+			if (propGridPrecision.TryReadProperty(ref reader, options, PropGridPrecision, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propGridType.TryReadProperty(ref reader, options, PropGridType, null))
+			if (propGridType.TryReadProperty(ref reader, options, PropGridType, static Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType>(o)))
 			{
 				continue;
 			}
@@ -113,7 +113,7 @@ internal sealed partial class SearchMvtRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -128,7 +128,7 @@ internal sealed partial class SearchMvtRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propWithLabels.TryReadProperty(ref reader, options, PropWithLabels, null))
+			if (propWithLabels.TryReadProperty(ref reader, options, PropWithLabels, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -166,19 +166,19 @@ internal sealed partial class SearchMvtRequestConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAggs, value.Aggs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, v, null, null));
-		writer.WriteProperty(options, PropBuffer, value.Buffer, null, null);
-		writer.WriteProperty(options, PropExactBounds, value.ExactBounds, null, null);
-		writer.WriteProperty(options, PropExtent, value.Extent, null, null);
+		writer.WriteProperty(options, PropBuffer, value.Buffer, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropExactBounds, value.ExactBounds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropExtent, value.Extent, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
-		writer.WriteProperty(options, PropGridAgg, value.GridAgg, null, null);
-		writer.WriteProperty(options, PropGridPrecision, value.GridPrecision, null, null);
-		writer.WriteProperty(options, PropGridType, value.GridType, null, null);
+		writer.WriteProperty(options, PropGridAgg, value.GridAgg, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType>(o, v));
+		writer.WriteProperty(options, PropGridPrecision, value.GridPrecision, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropGridType, value.GridType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
 		writer.WriteProperty(options, PropTrackTotalHits, value.TrackTotalHits, null, null);
-		writer.WriteProperty(options, PropWithLabels, value.WithLabels, null, null);
+		writer.WriteProperty(options, PropWithLabels, value.WithLabels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

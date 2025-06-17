@@ -38,7 +38,7 @@ internal sealed partial class RegexpQueryConverter : System.Text.Json.Serializat
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		propField.ReadPropertyName(ref reader, options, null);
+		propField.ReadPropertyName(ref reader, options, static Elastic.Clients.Elasticsearch.Field (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Field>(o));
 		reader.Read();
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
@@ -61,12 +61,12 @@ internal sealed partial class RegexpQueryConverter : System.Text.Json.Serializat
 		LocalJsonValue<string> propValue = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propCaseInsensitive.TryReadProperty(ref reader, options, PropCaseInsensitive, null))
+			if (propCaseInsensitive.TryReadProperty(ref reader, options, PropCaseInsensitive, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -76,7 +76,7 @@ internal sealed partial class RegexpQueryConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propMaxDeterminizedStates.TryReadProperty(ref reader, options, PropMaxDeterminizedStates, null))
+			if (propMaxDeterminizedStates.TryReadProperty(ref reader, options, PropMaxDeterminizedStates, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -124,12 +124,12 @@ internal sealed partial class RegexpQueryConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.RegexpQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(options, value.Field, null);
+		writer.WritePropertyName(options, value.Field, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Field v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Field>(o, v));
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
-		writer.WriteProperty(options, PropCaseInsensitive, value.CaseInsensitive, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropCaseInsensitive, value.CaseInsensitive, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFlags, value.Flags, null, null);
-		writer.WriteProperty(options, PropMaxDeterminizedStates, value.MaxDeterminizedStates, null, null);
+		writer.WriteProperty(options, PropMaxDeterminizedStates, value.MaxDeterminizedStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteProperty(options, PropRewrite, value.Rewrite, null, null);
 		writer.WriteProperty(options, PropValue, value.Value, null, null);

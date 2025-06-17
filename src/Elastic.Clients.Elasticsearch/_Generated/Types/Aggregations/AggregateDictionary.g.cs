@@ -52,7 +52,7 @@ internal sealed partial class AggregateDictionaryConverter : System.Text.Json.Se
 
 	internal static void ReadItem(ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options, out string name, out Elastic.Clients.Elasticsearch.Aggregations.IAggregate value)
 	{
-		var key = reader.ReadPropertyName<string>(options, null);
+		var key = reader.ReadPropertyName<string>(options, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!);
 		reader.Read();
 		var parts = key.Split('#');
 		if (parts.Length != 2)
@@ -144,214 +144,214 @@ internal sealed partial class AggregateDictionaryConverter : System.Text.Json.Se
 		switch (value)
 		{
 			case Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.AverageAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.AverageAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.AverageAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileRanksAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileRanksAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileRanksAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.HdrPercentilesAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.HdrPercentilesAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.HdrPercentilesAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MinAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.MinAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.MinAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MissingAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.MissingAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.MissingAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.RateAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.RateAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.RateAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.SimpleValueAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.SimpleValueAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.SimpleValueAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.StringTermsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.StringTermsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.StringTermsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.SumAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.SumAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.SumAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.UnmappedRareTermsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.UnmappedRareTermsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.UnmappedRareTermsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.UnmappedTermsAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.UnmappedTermsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.UnmappedTermsAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.UnmappedSamplerAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.UnmappedSamplerAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.UnmappedSamplerAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate>(o, v));
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{0}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.IAggregate)}'.");

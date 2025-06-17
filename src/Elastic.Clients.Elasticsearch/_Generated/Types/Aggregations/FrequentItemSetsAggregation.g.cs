@@ -51,17 +51,17 @@ internal sealed partial class FrequentItemSetsAggregationConverter : System.Text
 				continue;
 			}
 
-			if (propMinimumSetSize.TryReadProperty(ref reader, options, PropMinimumSetSize, null))
+			if (propMinimumSetSize.TryReadProperty(ref reader, options, PropMinimumSetSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinimumSupport.TryReadProperty(ref reader, options, PropMinimumSupport, null))
+			if (propMinimumSupport.TryReadProperty(ref reader, options, PropMinimumSupport, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -91,9 +91,9 @@ internal sealed partial class FrequentItemSetsAggregationConverter : System.Text
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsField>(o, v, null));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropMinimumSetSize, value.MinimumSetSize, null, null);
-		writer.WriteProperty(options, PropMinimumSupport, value.MinimumSupport, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropMinimumSetSize, value.MinimumSetSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinimumSupport, value.MinimumSupport, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

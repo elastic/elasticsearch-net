@@ -79,7 +79,7 @@ internal sealed partial class ClusterNodeCountConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propDataFrozen.TryReadProperty(ref reader, options, PropDataFrozen, null))
+			if (propDataFrozen.TryReadProperty(ref reader, options, PropDataFrozen, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -165,7 +165,7 @@ internal sealed partial class ClusterNodeCountConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropData, value.Data, null, null);
 		writer.WriteProperty(options, PropDataCold, value.DataCold, null, null);
 		writer.WriteProperty(options, PropDataContent, value.DataContent, null, null);
-		writer.WriteProperty(options, PropDataFrozen, value.DataFrozen, null, null);
+		writer.WriteProperty(options, PropDataFrozen, value.DataFrozen, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropDataHot, value.DataHot, null, null);
 		writer.WriteProperty(options, PropDataWarm, value.DataWarm, null, null);
 		writer.WriteProperty(options, PropIngest, value.Ingest, null, null);

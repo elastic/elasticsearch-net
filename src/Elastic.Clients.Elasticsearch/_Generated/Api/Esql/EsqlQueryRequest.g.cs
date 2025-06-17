@@ -27,6 +27,17 @@ public sealed partial class EsqlQueryRequestParameters : Elastic.Transport.Reque
 {
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// If <c>false</c>, the query will fail if there are any failures.
+	/// </para>
+	/// <para>
+	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
+
+	/// <summary>
+	/// <para>
 	/// The character to use between values within a CSV row. Only valid for the CSV format.
 	/// </para>
 	/// </summary>
@@ -70,7 +81,7 @@ internal sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seria
 		LocalJsonValue<string> propQuery = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, null))
+			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -80,7 +91,7 @@ internal sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, null))
+			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -95,7 +106,7 @@ internal sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propProfile.TryReadProperty(ref reader, options, PropProfile, null))
+			if (propProfile.TryReadProperty(ref reader, options, PropProfile, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -130,12 +141,12 @@ internal sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropColumnar, value.Columnar, null, null);
+		writer.WriteProperty(options, PropColumnar, value.Columnar, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropIncludeCcsMetadata, value.IncludeCcsMetadata, null, null);
+		writer.WriteProperty(options, PropIncludeCcsMetadata, value.IncludeCcsMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
-		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
+		writer.WriteProperty(options, PropProfile, value.Profile, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteEndObject();
 	}
@@ -179,6 +190,17 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "esql.query";
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// If <c>false</c>, the query will fail if there are any failures.
+	/// </para>
+	/// <para>
+	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public bool? AllowPartialResults { get => Q<bool?>("allow_partial_results"); set => Q("allow_partial_results", value); }
 
 	/// <summary>
 	/// <para>
@@ -278,6 +300,21 @@ public readonly partial struct EsqlQueryRequestDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// If <c>false</c>, the query will fail if there are any failures.
+	/// </para>
+	/// <para>
+	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor AllowPartialResults(bool? value = true)
+	{
+		Instance.AllowPartialResults = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -497,6 +534,21 @@ public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest instance) => new Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequest(Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+	/// If <c>false</c>, the query will fail if there are any failures.
+	/// </para>
+	/// <para>
+	/// To override the default behavior, you can set the <c>esql.query.allow_partial_results</c> cluster setting to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> AllowPartialResults(bool? value = true)
+	{
+		Instance.AllowPartialResults = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>

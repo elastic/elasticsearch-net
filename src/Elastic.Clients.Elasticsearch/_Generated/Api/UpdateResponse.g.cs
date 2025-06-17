@@ -49,7 +49,7 @@ internal sealed partial class UpdateResponseConverter<TDocument> : System.Text.J
 		LocalJsonValue<long> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propForcedRefresh.TryReadProperty(ref reader, options, PropForcedRefresh, null))
+			if (propForcedRefresh.TryReadProperty(ref reader, options, PropForcedRefresh, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -69,7 +69,7 @@ internal sealed partial class UpdateResponseConverter<TDocument> : System.Text.J
 				continue;
 			}
 
-			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, null))
+			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -79,7 +79,7 @@ internal sealed partial class UpdateResponseConverter<TDocument> : System.Text.J
 				continue;
 			}
 
-			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, null))
+			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -121,13 +121,13 @@ internal sealed partial class UpdateResponseConverter<TDocument> : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.UpdateResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropForcedRefresh, value.ForcedRefresh, null, null);
+		writer.WriteProperty(options, PropForcedRefresh, value.ForcedRefresh, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropGet, value.Get, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, null);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropResult, value.Result, null, null);
-		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, null);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropShards, value.Shards, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

@@ -66,7 +66,7 @@ internal sealed partial class FindMessageStructureResponseConverter : System.Tex
 				continue;
 			}
 
-			if (propEcsCompatibility.TryReadProperty(ref reader, options, PropEcsCompatibility, null))
+			if (propEcsCompatibility.TryReadProperty(ref reader, options, PropEcsCompatibility, static Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType>(o)))
 			{
 				continue;
 			}
@@ -170,7 +170,7 @@ internal sealed partial class FindMessageStructureResponseConverter : System.Tex
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCharset, value.Charset, null, null);
-		writer.WriteProperty(options, PropEcsCompatibility, value.EcsCompatibility, null, null);
+		writer.WriteProperty(options, PropEcsCompatibility, value.EcsCompatibility, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.TextStructure.EcsCompatibilityType>(o, v));
 		writer.WriteProperty(options, PropFieldStats, value.FieldStats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.TextStructure.FieldStat> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.TextStructure.FieldStat>(o, v, null, null));
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropGrokPattern, value.GrokPattern, null, null);

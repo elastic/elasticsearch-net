@@ -39,17 +39,17 @@ internal sealed partial class ScriptCacheConverter : System.Text.Json.Serializat
 		LocalJsonValue<string?> propContext = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCacheEvictions.TryReadProperty(ref reader, options, PropCacheEvictions, null))
+			if (propCacheEvictions.TryReadProperty(ref reader, options, PropCacheEvictions, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propCompilationLimitTriggered.TryReadProperty(ref reader, options, PropCompilationLimitTriggered, null))
+			if (propCompilationLimitTriggered.TryReadProperty(ref reader, options, PropCompilationLimitTriggered, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propCompilations.TryReadProperty(ref reader, options, PropCompilations, null))
+			if (propCompilations.TryReadProperty(ref reader, options, PropCompilations, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -81,9 +81,9 @@ internal sealed partial class ScriptCacheConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.ScriptCache value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCacheEvictions, value.CacheEvictions, null, null);
-		writer.WriteProperty(options, PropCompilationLimitTriggered, value.CompilationLimitTriggered, null, null);
-		writer.WriteProperty(options, PropCompilations, value.Compilations, null, null);
+		writer.WriteProperty(options, PropCacheEvictions, value.CacheEvictions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropCompilationLimitTriggered, value.CompilationLimitTriggered, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropCompilations, value.Compilations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropContext, value.Context, null, null);
 		writer.WriteEndObject();
 	}

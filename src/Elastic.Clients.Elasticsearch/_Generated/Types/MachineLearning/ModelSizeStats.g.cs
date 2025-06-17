@@ -160,7 +160,7 @@ internal sealed partial class ModelSizeStatsConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -242,7 +242,7 @@ internal sealed partial class ModelSizeStatsConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropPeakModelBytes, value.PeakModelBytes, null, null);
 		writer.WriteProperty(options, PropRareCategoryCount, value.RareCategoryCount, null, null);
 		writer.WriteProperty(options, PropResultType, value.ResultType, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTotalByFieldCount, value.TotalByFieldCount, null, null);
 		writer.WriteProperty(options, PropTotalCategoryCount, value.TotalCategoryCount, null, null);
 		writer.WriteProperty(options, PropTotalOverFieldCount, value.TotalOverFieldCount, null, null);

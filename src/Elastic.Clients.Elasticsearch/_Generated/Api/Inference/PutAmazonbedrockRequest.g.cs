@@ -97,7 +97,7 @@ internal sealed partial class PutAmazonbedrockRequestConverter : System.Text.Jso
 /// Create an Amazon Bedrock inference endpoint.
 /// </para>
 /// <para>
-/// Creates an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
+/// Create an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
 /// </para>
 /// <para>
 /// info
@@ -198,7 +198,7 @@ public sealed partial class PutAmazonbedrockRequest : Elastic.Clients.Elasticsea
 /// Create an Amazon Bedrock inference endpoint.
 /// </para>
 /// <para>
-/// Creates an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
+/// Create an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
 /// </para>
 /// <para>
 /// info

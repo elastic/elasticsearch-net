@@ -120,7 +120,7 @@ internal sealed partial class ReindexRequestConverter : System.Text.Json.Seriali
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Source> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propConflicts.TryReadProperty(ref reader, options, PropConflicts, null))
+			if (propConflicts.TryReadProperty(ref reader, options, PropConflicts, static Elastic.Clients.Elasticsearch.Conflicts? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Conflicts>(o)))
 			{
 				continue;
 			}
@@ -130,7 +130,7 @@ internal sealed partial class ReindexRequestConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, null))
+			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -140,7 +140,7 @@ internal sealed partial class ReindexRequestConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -174,11 +174,11 @@ internal sealed partial class ReindexRequestConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ReindexRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConflicts, value.Conflicts, null, null);
+		writer.WriteProperty(options, PropConflicts, value.Conflicts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Conflicts? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Conflicts>(o, v));
 		writer.WriteProperty(options, PropDest, value.Dest, null, null);
-		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, null);
+		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteEndObject();
 	}

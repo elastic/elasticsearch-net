@@ -55,12 +55,12 @@ internal sealed partial class EqlSearchResponseConverter<TEvent> : System.Text.J
 				continue;
 			}
 
-			if (propIsPartial.TryReadProperty(ref reader, options, PropIsPartial, null))
+			if (propIsPartial.TryReadProperty(ref reader, options, PropIsPartial, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIsRunning.TryReadProperty(ref reader, options, PropIsRunning, null))
+			if (propIsRunning.TryReadProperty(ref reader, options, PropIsRunning, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -70,12 +70,12 @@ internal sealed partial class EqlSearchResponseConverter<TEvent> : System.Text.J
 				continue;
 			}
 
-			if (propTimedOut.TryReadProperty(ref reader, options, PropTimedOut, null))
+			if (propTimedOut.TryReadProperty(ref reader, options, PropTimedOut, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propTook.TryReadProperty(ref reader, options, PropTook, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propTook.TryReadProperty(ref reader, options, PropTook, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -107,11 +107,11 @@ internal sealed partial class EqlSearchResponseConverter<TEvent> : System.Text.J
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropHits, value.Hits, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);
-		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, null);
-		writer.WriteProperty(options, PropIsRunning, value.IsRunning, null, null);
+		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIsRunning, value.IsRunning, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropShardFailures, value.ShardFailures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ShardFailure>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ShardFailure>(o, v, null));
-		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
-		writer.WriteProperty(options, PropTook, value.Took, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropTook, value.Took, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteEndObject();
 	}
 }

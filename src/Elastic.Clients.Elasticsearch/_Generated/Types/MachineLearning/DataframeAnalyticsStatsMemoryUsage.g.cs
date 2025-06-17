@@ -39,7 +39,7 @@ internal sealed partial class DataframeAnalyticsStatsMemoryUsageConverter : Syst
 		LocalJsonValue<System.DateTimeOffset?> propTimestamp = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMemoryReestimateBytes.TryReadProperty(ref reader, options, PropMemoryReestimateBytes, null))
+			if (propMemoryReestimateBytes.TryReadProperty(ref reader, options, PropMemoryReestimateBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -54,7 +54,7 @@ internal sealed partial class DataframeAnalyticsStatsMemoryUsageConverter : Syst
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -81,10 +81,10 @@ internal sealed partial class DataframeAnalyticsStatsMemoryUsageConverter : Syst
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMemoryReestimateBytes, value.MemoryReestimateBytes, null, null);
+		writer.WriteProperty(options, PropMemoryReestimateBytes, value.MemoryReestimateBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropPeakUsageBytes, value.PeakUsageBytes, null, null);
 		writer.WriteProperty(options, PropStatus, value.Status, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteEndObject();
 	}
 }

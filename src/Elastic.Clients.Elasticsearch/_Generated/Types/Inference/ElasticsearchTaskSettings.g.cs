@@ -33,7 +33,7 @@ internal sealed partial class ElasticsearchTaskSettingsConverter : System.Text.J
 		LocalJsonValue<bool?> propReturnDocuments = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, null))
+			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class ElasticsearchTaskSettingsConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, null);
+		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

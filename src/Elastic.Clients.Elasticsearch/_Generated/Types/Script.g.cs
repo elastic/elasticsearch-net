@@ -55,7 +55,7 @@ internal sealed partial class ScriptConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
-			if (propLang.TryReadProperty(ref reader, options, PropLang, null))
+			if (propLang.TryReadProperty(ref reader, options, PropLang, static Elastic.Clients.Elasticsearch.ScriptLanguage? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.ScriptLanguage>(o)))
 			{
 				continue;
 			}
@@ -99,7 +99,7 @@ internal sealed partial class ScriptConverter : System.Text.Json.Serialization.J
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropId, value.Id, null, null);
-		writer.WriteProperty(options, PropLang, value.Lang, null, null);
+		writer.WriteProperty(options, PropLang, value.Lang, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.ScriptLanguage? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.ScriptLanguage>(o, v));
 		writer.WriteProperty(options, PropOptions, value.Options, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropSource, value.Source, null, null);

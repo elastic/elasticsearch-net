@@ -47,7 +47,7 @@ internal sealed partial class DataStreamLifecycleConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class DataStreamLifecycleConverter : System.Text.Json.Se
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDataRetention, value.DataRetention, null, null);
 		writer.WriteProperty(options, PropDownsampling, value.Downsampling, null, null);
-		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -47,7 +47,7 @@ internal sealed partial class RemoveIndexActionConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propMustExist.TryReadProperty(ref reader, options, PropMustExist, null))
+			if (propMustExist.TryReadProperty(ref reader, options, PropMustExist, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class RemoveIndexActionConverter : System.Text.Json.Seri
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
-		writer.WriteProperty(options, PropMustExist, value.MustExist, null, null);
+		writer.WriteProperty(options, PropMustExist, value.MustExist, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

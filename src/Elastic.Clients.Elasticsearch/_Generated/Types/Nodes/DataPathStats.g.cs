@@ -68,7 +68,7 @@ internal sealed partial class DataPathStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propAvailableInBytes.TryReadProperty(ref reader, options, PropAvailableInBytes, null))
+			if (propAvailableInBytes.TryReadProperty(ref reader, options, PropAvailableInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -78,7 +78,7 @@ internal sealed partial class DataPathStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propDiskReads.TryReadProperty(ref reader, options, PropDiskReads, null))
+			if (propDiskReads.TryReadProperty(ref reader, options, PropDiskReads, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -88,12 +88,12 @@ internal sealed partial class DataPathStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propDiskReadSizeInBytes.TryReadProperty(ref reader, options, PropDiskReadSizeInBytes, null))
+			if (propDiskReadSizeInBytes.TryReadProperty(ref reader, options, PropDiskReadSizeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propDiskWrites.TryReadProperty(ref reader, options, PropDiskWrites, null))
+			if (propDiskWrites.TryReadProperty(ref reader, options, PropDiskWrites, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -103,7 +103,7 @@ internal sealed partial class DataPathStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propDiskWriteSizeInBytes.TryReadProperty(ref reader, options, PropDiskWriteSizeInBytes, null))
+			if (propDiskWriteSizeInBytes.TryReadProperty(ref reader, options, PropDiskWriteSizeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -113,7 +113,7 @@ internal sealed partial class DataPathStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propFreeInBytes.TryReadProperty(ref reader, options, PropFreeInBytes, null))
+			if (propFreeInBytes.TryReadProperty(ref reader, options, PropFreeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -133,7 +133,7 @@ internal sealed partial class DataPathStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, null))
+			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -178,20 +178,20 @@ internal sealed partial class DataPathStatsConverter : System.Text.Json.Serializ
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
-		writer.WriteProperty(options, PropAvailableInBytes, value.AvailableInBytes, null, null);
+		writer.WriteProperty(options, PropAvailableInBytes, value.AvailableInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropDiskQueue, value.DiskQueue, null, null);
-		writer.WriteProperty(options, PropDiskReads, value.DiskReads, null, null);
+		writer.WriteProperty(options, PropDiskReads, value.DiskReads, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropDiskReadSize, value.DiskReadSize, null, null);
-		writer.WriteProperty(options, PropDiskReadSizeInBytes, value.DiskReadSizeInBytes, null, null);
-		writer.WriteProperty(options, PropDiskWrites, value.DiskWrites, null, null);
+		writer.WriteProperty(options, PropDiskReadSizeInBytes, value.DiskReadSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropDiskWrites, value.DiskWrites, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropDiskWriteSize, value.DiskWriteSize, null, null);
-		writer.WriteProperty(options, PropDiskWriteSizeInBytes, value.DiskWriteSizeInBytes, null, null);
+		writer.WriteProperty(options, PropDiskWriteSizeInBytes, value.DiskWriteSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropFree, value.Free, null, null);
-		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, null);
+		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMount, value.Mount, null, null);
 		writer.WriteProperty(options, PropPath, value.Path, null, null);
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);
-		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, null);
+		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}

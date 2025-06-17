@@ -33,7 +33,7 @@ internal sealed partial class HdrMethodConverter : System.Text.Json.Serializatio
 		LocalJsonValue<int?> propNumberOfSignificantValueDigits = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNumberOfSignificantValueDigits.TryReadProperty(ref reader, options, PropNumberOfSignificantValueDigits, null))
+			if (propNumberOfSignificantValueDigits.TryReadProperty(ref reader, options, PropNumberOfSignificantValueDigits, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class HdrMethodConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.HdrMethod value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNumberOfSignificantValueDigits, value.NumberOfSignificantValueDigits, null, null);
+		writer.WriteProperty(options, PropNumberOfSignificantValueDigits, value.NumberOfSignificantValueDigits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

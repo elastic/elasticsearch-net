@@ -174,7 +174,7 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propTotalIndexingBuffer.TryReadProperty(ref reader, options, PropTotalIndexingBuffer, null))
+			if (propTotalIndexingBuffer.TryReadProperty(ref reader, options, PropTotalIndexingBuffer, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -260,7 +260,7 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, v, null));
 		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
 		writer.WriteProperty(options, PropThreadPool, value.ThreadPool, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo>(o, v, null, null));
-		writer.WriteProperty(options, PropTotalIndexingBuffer, value.TotalIndexingBuffer, null, null);
+		writer.WriteProperty(options, PropTotalIndexingBuffer, value.TotalIndexingBuffer, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTotalIndexingBufferInBytes, value.TotalIndexingBufferInBytes, null, null);
 		writer.WriteProperty(options, PropTransport, value.Transport, null, null);
 		writer.WriteProperty(options, PropTransportAddress, value.TransportAddress, null, null);

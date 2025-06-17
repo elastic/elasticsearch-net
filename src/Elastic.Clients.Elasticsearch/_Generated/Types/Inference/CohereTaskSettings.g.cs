@@ -39,22 +39,22 @@ internal sealed partial class CohereTaskSettingsConverter : System.Text.Json.Ser
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CohereTruncateType?> propTruncate = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propInputType.TryReadProperty(ref reader, options, PropInputType, null))
+			if (propInputType.TryReadProperty(ref reader, options, PropInputType, static Elastic.Clients.Elasticsearch.Inference.CohereInputType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.CohereInputType>(o)))
 			{
 				continue;
 			}
 
-			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, null))
+			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propTopN.TryReadProperty(ref reader, options, PropTopN, null))
+			if (propTopN.TryReadProperty(ref reader, options, PropTopN, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propTruncate.TryReadProperty(ref reader, options, PropTruncate, null))
+			if (propTruncate.TryReadProperty(ref reader, options, PropTruncate, static Elastic.Clients.Elasticsearch.Inference.CohereTruncateType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.CohereTruncateType>(o)))
 			{
 				continue;
 			}
@@ -81,10 +81,10 @@ internal sealed partial class CohereTaskSettingsConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropInputType, value.InputType, null, null);
-		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, null);
-		writer.WriteProperty(options, PropTopN, value.TopN, null, null);
-		writer.WriteProperty(options, PropTruncate, value.Truncate, null, null);
+		writer.WriteProperty(options, PropInputType, value.InputType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.CohereInputType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.CohereInputType>(o, v));
+		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropTopN, value.TopN, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTruncate, value.Truncate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.CohereTruncateType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.CohereTruncateType>(o, v));
 		writer.WriteEndObject();
 	}
 }

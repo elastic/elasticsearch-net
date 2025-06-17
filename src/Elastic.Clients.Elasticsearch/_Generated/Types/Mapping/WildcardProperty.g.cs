@@ -57,12 +57,12 @@ internal sealed partial class WildcardPropertyConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, static Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>(o)))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class WildcardPropertyConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -92,12 +92,12 @@ internal sealed partial class WildcardPropertyConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
+			if (propStore.TryReadProperty(ref reader, options, PropStore, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, static Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum>(o)))
 			{
 				continue;
 			}
@@ -137,15 +137,15 @@ internal sealed partial class WildcardPropertyConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
-		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
-		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, null);
-		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropNullValue, value.NullValue, null, null);
 		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
-		writer.WriteProperty(options, PropStore, value.Store, null, null);
-		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}

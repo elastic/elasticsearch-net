@@ -119,8 +119,7 @@ public sealed partial class PutWatsonxRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// The task type.
-	/// The only valid task type for the model to perform is <c>text_embedding</c>.
+	/// The type of the inference task that the model will perform.
 	/// </para>
 	/// </summary>
 	public
@@ -197,8 +196,7 @@ public readonly partial struct PutWatsonxRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The task type.
-	/// The only valid task type for the model to perform is <c>text_embedding</c>.
+	/// The type of the inference task that the model will perform.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType value)

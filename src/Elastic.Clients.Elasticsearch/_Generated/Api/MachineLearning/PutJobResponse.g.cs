@@ -156,7 +156,7 @@ internal sealed partial class PutJobResponseConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propRenormalizationWindowDays.TryReadProperty(ref reader, options, PropRenormalizationWindowDays, null))
+			if (propRenormalizationWindowDays.TryReadProperty(ref reader, options, PropRenormalizationWindowDays, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -166,7 +166,7 @@ internal sealed partial class PutJobResponseConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propResultsRetentionDays.TryReadProperty(ref reader, options, PropResultsRetentionDays, null))
+			if (propResultsRetentionDays.TryReadProperty(ref reader, options, PropResultsRetentionDays, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -226,9 +226,9 @@ internal sealed partial class PutJobResponseConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropModelPlotConfig, value.ModelPlotConfig, null, null);
 		writer.WriteProperty(options, PropModelSnapshotId, value.ModelSnapshotId, null, null);
 		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, null);
-		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays, null, null);
+		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropResultsIndexName, value.ResultsIndexName, null, null);
-		writer.WriteProperty(options, PropResultsRetentionDays, value.ResultsRetentionDays, null, null);
+		writer.WriteProperty(options, PropResultsRetentionDays, value.ResultsRetentionDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

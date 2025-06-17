@@ -55,7 +55,7 @@ internal sealed partial class UnassignedInformationConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propDelayed.TryReadProperty(ref reader, options, PropDelayed, null))
+			if (propDelayed.TryReadProperty(ref reader, options, PropDelayed, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -65,7 +65,7 @@ internal sealed partial class UnassignedInformationConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propFailedAllocationAttempts.TryReadProperty(ref reader, options, PropFailedAllocationAttempts, null))
+			if (propFailedAllocationAttempts.TryReadProperty(ref reader, options, PropFailedAllocationAttempts, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -107,9 +107,9 @@ internal sealed partial class UnassignedInformationConverter : System.Text.Json.
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAllocationStatus, value.AllocationStatus, null, null);
 		writer.WriteProperty(options, PropAt, value.At, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropDelayed, value.Delayed, null, null);
+		writer.WriteProperty(options, PropDelayed, value.Delayed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDetails, value.Details, null, null);
-		writer.WriteProperty(options, PropFailedAllocationAttempts, value.FailedAllocationAttempts, null, null);
+		writer.WriteProperty(options, PropFailedAllocationAttempts, value.FailedAllocationAttempts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropLastAllocationStatus, value.LastAllocationStatus, null, null);
 		writer.WriteProperty(options, PropReason, value.Reason, null, null);
 		writer.WriteEndObject();

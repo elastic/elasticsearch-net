@@ -70,7 +70,7 @@ internal sealed partial class PipelineProcessorResultConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, static Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions>(o)))
 			{
 				continue;
 			}
@@ -110,7 +110,7 @@ internal sealed partial class PipelineProcessorResultConverter : System.Text.Jso
 		writer.WriteProperty(options, PropError, value.Error, null, null);
 		writer.WriteProperty(options, PropIgnoredError, value.IgnoredError, null, null);
 		writer.WriteProperty(options, PropProcessorType, value.ProcessorType, null, null);
-		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions>(o, v));
 		writer.WriteProperty(options, PropTag, value.Tag, null, null);
 		writer.WriteEndObject();
 	}

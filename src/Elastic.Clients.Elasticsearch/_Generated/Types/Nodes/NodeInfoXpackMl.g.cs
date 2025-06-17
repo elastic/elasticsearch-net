@@ -33,7 +33,7 @@ internal sealed partial class NodeInfoXpackMlConverter : System.Text.Json.Serial
 		LocalJsonValue<bool?> propUseAutoMachineMemoryPercent = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propUseAutoMachineMemoryPercent.TryReadProperty(ref reader, options, PropUseAutoMachineMemoryPercent, null))
+			if (propUseAutoMachineMemoryPercent.TryReadProperty(ref reader, options, PropUseAutoMachineMemoryPercent, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class NodeInfoXpackMlConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackMl value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropUseAutoMachineMemoryPercent, value.UseAutoMachineMemoryPercent, null, null);
+		writer.WriteProperty(options, PropUseAutoMachineMemoryPercent, value.UseAutoMachineMemoryPercent, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

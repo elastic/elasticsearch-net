@@ -54,7 +54,7 @@ internal sealed partial class JinaAIServiceSettingsConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, static Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType>(o)))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class JinaAIServiceSettingsConverter : System.Text.Json.
 		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);
-		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType>(o, v));
 		writer.WriteEndObject();
 	}
 }

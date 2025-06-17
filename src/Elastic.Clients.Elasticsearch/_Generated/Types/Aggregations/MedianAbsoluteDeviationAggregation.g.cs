@@ -41,7 +41,7 @@ internal sealed partial class MedianAbsoluteDeviationAggregationConverter : Syst
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCompression.TryReadProperty(ref reader, options, PropCompression, null))
+			if (propCompression.TryReadProperty(ref reader, options, PropCompression, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -89,7 +89,7 @@ internal sealed partial class MedianAbsoluteDeviationAggregationConverter : Syst
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompression, value.Compression, null, null);
+		writer.WriteProperty(options, PropCompression, value.Compression, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);

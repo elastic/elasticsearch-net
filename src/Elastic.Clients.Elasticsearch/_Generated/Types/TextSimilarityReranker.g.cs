@@ -30,6 +30,7 @@ internal sealed partial class TextSimilarityRerankerConverter : System.Text.Json
 	private static readonly System.Text.Json.JsonEncodedText PropInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
 	private static readonly System.Text.Json.JsonEncodedText PropInferenceText = System.Text.Json.JsonEncodedText.Encode("inference_text");
 	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("_name");
 	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size");
 	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever");
 
@@ -41,6 +42,7 @@ internal sealed partial class TextSimilarityRerankerConverter : System.Text.Json
 		LocalJsonValue<string?> propInferenceId = default;
 		LocalJsonValue<string?> propInferenceText = default;
 		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<string?> propName = default;
 		LocalJsonValue<int?> propRankWindowSize = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever> propRetriever = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -65,12 +67,17 @@ internal sealed partial class TextSimilarityRerankerConverter : System.Text.Json
 				continue;
 			}
 
-			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -97,6 +104,7 @@ internal sealed partial class TextSimilarityRerankerConverter : System.Text.Json
 			InferenceId = propInferenceId.Value,
 			InferenceText = propInferenceText.Value,
 			MinScore = propMinScore.Value,
+			Name = propName.Value,
 			RankWindowSize = propRankWindowSize.Value,
 			Retriever = propRetriever.Value
 		};
@@ -109,8 +117,9 @@ internal sealed partial class TextSimilarityRerankerConverter : System.Text.Json
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
 		writer.WriteProperty(options, PropInferenceId, value.InferenceId, null, null);
 		writer.WriteProperty(options, PropInferenceText, value.InferenceText, null, null);
-		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
-		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
 		writer.WriteEndObject();
 	}
@@ -175,6 +184,13 @@ public sealed partial class TextSimilarityReranker
 	/// </para>
 	/// </summary>
 	public float? MinScore { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -294,6 +310,17 @@ public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Name(string? value)
+	{
+		Instance.Name = value;
 		return this;
 	}
 
@@ -455,6 +482,17 @@ public readonly partial struct TextSimilarityRerankerDescriptor
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Name(string? value)
+	{
+		Instance.Name = value;
 		return this;
 	}
 

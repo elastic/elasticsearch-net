@@ -65,42 +65,42 @@ internal sealed partial class StatisticsConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propRetentionDeletionTimeMillis.TryReadProperty(ref reader, options, PropRetentionDeletionTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propRetentionDeletionTimeMillis.TryReadProperty(ref reader, options, PropRetentionDeletionTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propRetentionFailed.TryReadProperty(ref reader, options, PropRetentionFailed, null))
+			if (propRetentionFailed.TryReadProperty(ref reader, options, PropRetentionFailed, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propRetentionRuns.TryReadProperty(ref reader, options, PropRetentionRuns, null))
+			if (propRetentionRuns.TryReadProperty(ref reader, options, PropRetentionRuns, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propRetentionTimedOut.TryReadProperty(ref reader, options, PropRetentionTimedOut, null))
+			if (propRetentionTimedOut.TryReadProperty(ref reader, options, PropRetentionTimedOut, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalSnapshotDeletionFailures.TryReadProperty(ref reader, options, PropTotalSnapshotDeletionFailures, null) || propTotalSnapshotDeletionFailures.TryReadProperty(ref reader, options, PropTotalSnapshotDeletionFailures1, null))
+			if (propTotalSnapshotDeletionFailures.TryReadProperty(ref reader, options, PropTotalSnapshotDeletionFailures, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)) || propTotalSnapshotDeletionFailures.TryReadProperty(ref reader, options, PropTotalSnapshotDeletionFailures1, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalSnapshotsDeleted.TryReadProperty(ref reader, options, PropTotalSnapshotsDeleted, null) || propTotalSnapshotsDeleted.TryReadProperty(ref reader, options, PropTotalSnapshotsDeleted1, null))
+			if (propTotalSnapshotsDeleted.TryReadProperty(ref reader, options, PropTotalSnapshotsDeleted, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)) || propTotalSnapshotsDeleted.TryReadProperty(ref reader, options, PropTotalSnapshotsDeleted1, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalSnapshotsFailed.TryReadProperty(ref reader, options, PropTotalSnapshotsFailed, null) || propTotalSnapshotsFailed.TryReadProperty(ref reader, options, PropTotalSnapshotsFailed1, null))
+			if (propTotalSnapshotsFailed.TryReadProperty(ref reader, options, PropTotalSnapshotsFailed, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)) || propTotalSnapshotsFailed.TryReadProperty(ref reader, options, PropTotalSnapshotsFailed1, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalSnapshotsTaken.TryReadProperty(ref reader, options, PropTotalSnapshotsTaken, null) || propTotalSnapshotsTaken.TryReadProperty(ref reader, options, PropTotalSnapshotsTaken1, null))
+			if (propTotalSnapshotsTaken.TryReadProperty(ref reader, options, PropTotalSnapshotsTaken, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)) || propTotalSnapshotsTaken.TryReadProperty(ref reader, options, PropTotalSnapshotsTaken1, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -135,14 +135,14 @@ internal sealed partial class StatisticsConverter : System.Text.Json.Serializati
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropPolicy, value.Policy, null, null);
 		writer.WriteProperty(options, PropRetentionDeletionTime, value.RetentionDeletionTime, null, null);
-		writer.WriteProperty(options, PropRetentionDeletionTimeMillis, value.RetentionDeletionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
-		writer.WriteProperty(options, PropRetentionFailed, value.RetentionFailed, null, null);
-		writer.WriteProperty(options, PropRetentionRuns, value.RetentionRuns, null, null);
-		writer.WriteProperty(options, PropRetentionTimedOut, value.RetentionTimedOut, null, null);
-		writer.WriteProperty(options, PropTotalSnapshotDeletionFailures, value.TotalSnapshotDeletionFailures, null, null);
-		writer.WriteProperty(options, PropTotalSnapshotsDeleted, value.TotalSnapshotsDeleted, null, null);
-		writer.WriteProperty(options, PropTotalSnapshotsFailed, value.TotalSnapshotsFailed, null, null);
-		writer.WriteProperty(options, PropTotalSnapshotsTaken, value.TotalSnapshotsTaken, null, null);
+		writer.WriteProperty(options, PropRetentionDeletionTimeMillis, value.RetentionDeletionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropRetentionFailed, value.RetentionFailed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropRetentionRuns, value.RetentionRuns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropRetentionTimedOut, value.RetentionTimedOut, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTotalSnapshotDeletionFailures, value.TotalSnapshotDeletionFailures, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTotalSnapshotsDeleted, value.TotalSnapshotsDeleted, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTotalSnapshotsFailed, value.TotalSnapshotsFailed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTotalSnapshotsTaken, value.TotalSnapshotsTaken, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

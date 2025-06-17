@@ -43,32 +43,32 @@ internal sealed partial class ThreadCountConverter : System.Text.Json.Serializat
 		LocalJsonValue<long?> propThreads = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propActive.TryReadProperty(ref reader, options, PropActive, null))
+			if (propActive.TryReadProperty(ref reader, options, PropActive, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propCompleted.TryReadProperty(ref reader, options, PropCompleted, null))
+			if (propCompleted.TryReadProperty(ref reader, options, PropCompleted, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propLargest.TryReadProperty(ref reader, options, PropLargest, null))
+			if (propLargest.TryReadProperty(ref reader, options, PropLargest, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propQueue.TryReadProperty(ref reader, options, PropQueue, null))
+			if (propQueue.TryReadProperty(ref reader, options, PropQueue, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propRejected.TryReadProperty(ref reader, options, PropRejected, null))
+			if (propRejected.TryReadProperty(ref reader, options, PropRejected, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propThreads.TryReadProperty(ref reader, options, PropThreads, null))
+			if (propThreads.TryReadProperty(ref reader, options, PropThreads, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -97,12 +97,12 @@ internal sealed partial class ThreadCountConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.ThreadCount value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropActive, value.Active, null, null);
-		writer.WriteProperty(options, PropCompleted, value.Completed, null, null);
-		writer.WriteProperty(options, PropLargest, value.Largest, null, null);
-		writer.WriteProperty(options, PropQueue, value.Queue, null, null);
-		writer.WriteProperty(options, PropRejected, value.Rejected, null, null);
-		writer.WriteProperty(options, PropThreads, value.Threads, null, null);
+		writer.WriteProperty(options, PropActive, value.Active, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropCompleted, value.Completed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLargest, value.Largest, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropQueue, value.Queue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropRejected, value.Rejected, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropThreads, value.Threads, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

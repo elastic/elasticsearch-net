@@ -41,7 +41,7 @@ internal sealed partial class HyperparameterConverter : System.Text.Json.Seriali
 		LocalJsonValue<double> propValue = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAbsoluteImportance.TryReadProperty(ref reader, options, PropAbsoluteImportance, null))
+			if (propAbsoluteImportance.TryReadProperty(ref reader, options, PropAbsoluteImportance, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -51,7 +51,7 @@ internal sealed partial class HyperparameterConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propRelativeImportance.TryReadProperty(ref reader, options, PropRelativeImportance, null))
+			if (propRelativeImportance.TryReadProperty(ref reader, options, PropRelativeImportance, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -89,9 +89,9 @@ internal sealed partial class HyperparameterConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAbsoluteImportance, value.AbsoluteImportance, null, null);
+		writer.WriteProperty(options, PropAbsoluteImportance, value.AbsoluteImportance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropRelativeImportance, value.RelativeImportance, null, null);
+		writer.WriteProperty(options, PropRelativeImportance, value.RelativeImportance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropSupplied, value.Supplied, null, null);
 		writer.WriteProperty(options, PropValue, value.Value, null, null);
 		writer.WriteEndObject();

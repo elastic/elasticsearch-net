@@ -170,6 +170,7 @@ public sealed partial class WatsonxServiceSettings
 	/// <para>
 	/// The name of the model to use for the inference task.
 	/// Refer to the IBM Embedding Models section in the Watsonx documentation for the list of available text embedding models.
+	/// Refer to the IBM library - Foundation models in Watsonx.ai.
 	/// </para>
 	/// </summary>
 	public
@@ -262,6 +263,7 @@ public readonly partial struct WatsonxServiceSettingsDescriptor
 	/// <para>
 	/// The name of the model to use for the inference task.
 	/// Refer to the IBM Embedding Models section in the Watsonx documentation for the list of available text embedding models.
+	/// Refer to the IBM library - Foundation models in Watsonx.ai.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.WatsonxServiceSettingsDescriptor ModelId(string value)

@@ -68,6 +68,8 @@ internal static class ApiUrlLookup
 	internal static ApiUrls EsqlAsyncQueryDelete = new ApiUrls(new[] { "_query/async/{id}" });
 	internal static ApiUrls EsqlAsyncQueryGet = new ApiUrls(new[] { "_query/async/{id}" });
 	internal static ApiUrls EsqlAsyncQueryStop = new ApiUrls(new[] { "_query/async/{id}/stop" });
+	internal static ApiUrls EsqlGetQuery = new ApiUrls(new[] { "_query/queries/{id}" });
+	internal static ApiUrls EsqlListQueries = new ApiUrls(new[] { "_query/queries" });
 	internal static ApiUrls EsqlQuery = new ApiUrls(new[] { "_query" });
 	internal static ApiUrls FeaturesGetFeatures = new ApiUrls(new[] { "_features" });
 	internal static ApiUrls FeaturesResetFeatures = new ApiUrls(new[] { "_features/_reset" });
@@ -95,6 +97,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementDeleteAlias = new ApiUrls(new[] { "{index}/_alias/{name}" });
 	internal static ApiUrls IndexManagementDeleteDataLifecycle = new ApiUrls(new[] { "_data_stream/{name}/_lifecycle" });
 	internal static ApiUrls IndexManagementDeleteDataStream = new ApiUrls(new[] { "_data_stream/{name}" });
+	internal static ApiUrls IndexManagementDeleteDataStreamOptions = new ApiUrls(new[] { "_data_stream/{name}/_options" });
 	internal static ApiUrls IndexManagementDeleteIndexTemplate = new ApiUrls(new[] { "_index_template/{name}" });
 	internal static ApiUrls IndexManagementDeleteTemplate = new ApiUrls(new[] { "_template/{name}" });
 	internal static ApiUrls IndexManagementDiskUsage = new ApiUrls(new[] { "{index}/_disk_usage" });
@@ -112,6 +115,8 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementGetDataLifecycle = new ApiUrls(new[] { "_data_stream/{name}/_lifecycle" });
 	internal static ApiUrls IndexManagementGetDataLifecycleStats = new ApiUrls(new[] { "_lifecycle/stats" });
 	internal static ApiUrls IndexManagementGetDataStream = new ApiUrls(new[] { "_data_stream", "_data_stream/{name}" });
+	internal static ApiUrls IndexManagementGetDataStreamOptions = new ApiUrls(new[] { "_data_stream/{name}/_options" });
+	internal static ApiUrls IndexManagementGetDataStreamSettings = new ApiUrls(new[] { "_data_stream/{name}/_settings" });
 	internal static ApiUrls IndexManagementGetFieldMapping = new ApiUrls(new[] { "_mapping/field/{fields}", "{index}/_mapping/field/{fields}" });
 	internal static ApiUrls IndexManagementGetIndexTemplate = new ApiUrls(new[] { "_index_template", "_index_template/{name}" });
 	internal static ApiUrls IndexManagementGetMapping = new ApiUrls(new[] { "_mapping", "{index}/_mapping" });
@@ -125,6 +130,8 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementPromoteDataStream = new ApiUrls(new[] { "_data_stream/_promote/{name}" });
 	internal static ApiUrls IndexManagementPutAlias = new ApiUrls(new[] { "{index}/_alias/{name}" });
 	internal static ApiUrls IndexManagementPutDataLifecycle = new ApiUrls(new[] { "_data_stream/{name}/_lifecycle" });
+	internal static ApiUrls IndexManagementPutDataStreamOptions = new ApiUrls(new[] { "_data_stream/{name}/_options" });
+	internal static ApiUrls IndexManagementPutDataStreamSettings = new ApiUrls(new[] { "_data_stream/{name}/_settings" });
 	internal static ApiUrls IndexManagementPutIndexTemplate = new ApiUrls(new[] { "_index_template/{name}" });
 	internal static ApiUrls IndexManagementPutMapping = new ApiUrls(new[] { "{index}/_mapping" });
 	internal static ApiUrls IndexManagementPutSettings = new ApiUrls(new[] { "_settings", "{index}/_settings" });

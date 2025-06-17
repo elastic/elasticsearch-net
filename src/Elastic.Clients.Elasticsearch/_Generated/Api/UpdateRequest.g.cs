@@ -138,7 +138,7 @@ internal sealed partial class UpdateRequestConverter<TDocument, TPartialDocument
 		LocalJsonValue<TDocument?> propUpsert = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDetectNoop.TryReadProperty(ref reader, options, PropDetectNoop, null))
+			if (propDetectNoop.TryReadProperty(ref reader, options, PropDetectNoop, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -148,7 +148,7 @@ internal sealed partial class UpdateRequestConverter<TDocument, TPartialDocument
 				continue;
 			}
 
-			if (propDocAsUpsert.TryReadProperty(ref reader, options, PropDocAsUpsert, null))
+			if (propDocAsUpsert.TryReadProperty(ref reader, options, PropDocAsUpsert, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -158,7 +158,7 @@ internal sealed partial class UpdateRequestConverter<TDocument, TPartialDocument
 				continue;
 			}
 
-			if (propScriptedUpsert.TryReadProperty(ref reader, options, PropScriptedUpsert, null))
+			if (propScriptedUpsert.TryReadProperty(ref reader, options, PropScriptedUpsert, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -198,11 +198,11 @@ internal sealed partial class UpdateRequestConverter<TDocument, TPartialDocument
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.UpdateRequest<TDocument, TPartialDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDetectNoop, value.DetectNoop, null, null);
+		writer.WriteProperty(options, PropDetectNoop, value.DetectNoop, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDoc, value.Doc, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TPartialDocument? v) => w.WriteValueEx<TPartialDocument?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TPartialDocument?>)));
-		writer.WriteProperty(options, PropDocAsUpsert, value.DocAsUpsert, null, null);
+		writer.WriteProperty(options, PropDocAsUpsert, value.DocAsUpsert, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropScriptedUpsert, value.ScriptedUpsert, null, null);
+		writer.WriteProperty(options, PropScriptedUpsert, value.ScriptedUpsert, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteProperty(options, PropUpsert, value.Upsert, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument?>)));
 		writer.WriteEndObject();

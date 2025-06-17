@@ -49,7 +49,7 @@ internal sealed partial class FileSystemConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -83,7 +83,7 @@ internal sealed partial class FileSystemConverter : System.Text.Json.Serializati
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropData, value.Data, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.DataPathStats>(o, v, null));
 		writer.WriteProperty(options, PropIoStats, value.IoStats, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteEndObject();
 	}

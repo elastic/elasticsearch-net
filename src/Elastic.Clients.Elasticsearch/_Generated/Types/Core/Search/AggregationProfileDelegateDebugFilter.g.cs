@@ -44,12 +44,12 @@ internal sealed partial class AggregationProfileDelegateDebugFilterConverter : S
 				continue;
 			}
 
-			if (propResultsFromMetadata.TryReadProperty(ref reader, options, PropResultsFromMetadata, null))
+			if (propResultsFromMetadata.TryReadProperty(ref reader, options, PropResultsFromMetadata, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSegmentsCountedInConstantTime.TryReadProperty(ref reader, options, PropSegmentsCountedInConstantTime, null))
+			if (propSegmentsCountedInConstantTime.TryReadProperty(ref reader, options, PropSegmentsCountedInConstantTime, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -82,8 +82,8 @@ internal sealed partial class AggregationProfileDelegateDebugFilterConverter : S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteProperty(options, PropResultsFromMetadata, value.ResultsFromMetadata, null, null);
-		writer.WriteProperty(options, PropSegmentsCountedInConstantTime, value.SegmentsCountedInConstantTime, null, null);
+		writer.WriteProperty(options, PropResultsFromMetadata, value.ResultsFromMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSegmentsCountedInConstantTime, value.SegmentsCountedInConstantTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSpecializedFor, value.SpecializedFor, null, null);
 		writer.WriteEndObject();
 	}

@@ -51,7 +51,7 @@ internal sealed partial class ExplainDataFrameAnalyticsRequestConverter : System
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSource?> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowLazyStart.TryReadProperty(ref reader, options, PropAllowLazyStart, null))
+			if (propAllowLazyStart.TryReadProperty(ref reader, options, PropAllowLazyStart, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -76,7 +76,7 @@ internal sealed partial class ExplainDataFrameAnalyticsRequestConverter : System
 				continue;
 			}
 
-			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, null))
+			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -117,12 +117,12 @@ internal sealed partial class ExplainDataFrameAnalyticsRequestConverter : System
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowLazyStart, value.AllowLazyStart, null, null);
+		writer.WriteProperty(options, PropAllowLazyStart, value.AllowLazyStart, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropAnalysis, value.Analysis, null, null);
 		writer.WriteProperty(options, PropAnalyzedFields, value.AnalyzedFields, null, null);
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropDest, value.Dest, null, null);
-		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, null);
+		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
 		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteEndObject();

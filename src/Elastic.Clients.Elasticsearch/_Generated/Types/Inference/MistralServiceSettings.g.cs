@@ -44,7 +44,7 @@ internal sealed partial class MistralServiceSettingsConverter : System.Text.Json
 				continue;
 			}
 
-			if (propMaxInputTokens.TryReadProperty(ref reader, options, PropMaxInputTokens, null))
+			if (propMaxInputTokens.TryReadProperty(ref reader, options, PropMaxInputTokens, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class MistralServiceSettingsConverter : System.Text.Json
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
-		writer.WriteProperty(options, PropMaxInputTokens, value.MaxInputTokens, null, null);
+		writer.WriteProperty(options, PropMaxInputTokens, value.MaxInputTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropModel, value.Model, null, null);
 		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);
 		writer.WriteEndObject();
@@ -143,7 +143,7 @@ public sealed partial class MistralServiceSettings
 	/// <summary>
 	/// <para>
 	/// The name of the model to use for the inference task.
-	/// Refer to the Mistral models documentation for the list of available text embedding models.
+	/// Refer to the Mistral models documentation for the list of available models.
 	/// </para>
 	/// </summary>
 	public
@@ -212,7 +212,7 @@ public readonly partial struct MistralServiceSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// The name of the model to use for the inference task.
-	/// Refer to the Mistral models documentation for the list of available text embedding models.
+	/// Refer to the Mistral models documentation for the list of available models.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsDescriptor Model(string value)

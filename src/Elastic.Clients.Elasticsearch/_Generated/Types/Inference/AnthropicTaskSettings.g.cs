@@ -44,17 +44,17 @@ internal sealed partial class AnthropicTaskSettingsConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propTemperature.TryReadProperty(ref reader, options, PropTemperature, null))
+			if (propTemperature.TryReadProperty(ref reader, options, PropTemperature, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propTopK.TryReadProperty(ref reader, options, PropTopK, null))
+			if (propTopK.TryReadProperty(ref reader, options, PropTopK, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propTopP.TryReadProperty(ref reader, options, PropTopP, null))
+			if (propTopP.TryReadProperty(ref reader, options, PropTopP, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -82,9 +82,9 @@ internal sealed partial class AnthropicTaskSettingsConverter : System.Text.Json.
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMaxTokens, value.MaxTokens, null, null);
-		writer.WriteProperty(options, PropTemperature, value.Temperature, null, null);
-		writer.WriteProperty(options, PropTopK, value.TopK, null, null);
-		writer.WriteProperty(options, PropTopP, value.TopP, null, null);
+		writer.WriteProperty(options, PropTemperature, value.Temperature, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropTopK, value.TopK, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTopP, value.TopP, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteEndObject();
 	}
 }

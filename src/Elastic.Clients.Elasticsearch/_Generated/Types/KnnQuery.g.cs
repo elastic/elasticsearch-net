@@ -51,7 +51,7 @@ internal sealed partial class KnnQueryConverter : System.Text.Json.Serialization
 		LocalJsonValue<float?> propSimilarity = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -66,12 +66,12 @@ internal sealed partial class KnnQueryConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propK.TryReadProperty(ref reader, options, PropK, null))
+			if (propK.TryReadProperty(ref reader, options, PropK, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propNumCandidates.TryReadProperty(ref reader, options, PropNumCandidates, null))
+			if (propNumCandidates.TryReadProperty(ref reader, options, PropNumCandidates, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -96,7 +96,7 @@ internal sealed partial class KnnQueryConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -129,16 +129,16 @@ internal sealed partial class KnnQueryConverter : System.Text.Json.Serialization
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.KnnQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
-		writer.WriteProperty(options, PropK, value.K, null, null);
-		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates, null, null);
+		writer.WriteProperty(options, PropK, value.K, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteProperty(options, PropQueryVector, value.QueryVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<float>? v) => w.WriteCollectionValue<float>(o, v, null));
 		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder, null, null);
 		writer.WriteProperty(options, PropRescoreVector, value.RescoreVector, null, null);
-		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteEndObject();
 	}
 }
@@ -227,7 +227,7 @@ public sealed partial class KnnQuery
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.RescoreVector? RescoreVector { get; set; }
@@ -408,7 +408,7 @@ public readonly partial struct KnnQueryDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument> RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
@@ -419,7 +419,7 @@ public readonly partial struct KnnQueryDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnQueryDescriptor<TDocument> RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)
@@ -633,7 +633,7 @@ public readonly partial struct KnnQueryDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnQueryDescriptor RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? value)
@@ -644,7 +644,7 @@ public readonly partial struct KnnQueryDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Apply oversampling and rescoring to quantized vectors *
+	/// Apply oversampling and rescoring to quantized vectors
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.KnnQueryDescriptor RescoreVector(System.Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> action)

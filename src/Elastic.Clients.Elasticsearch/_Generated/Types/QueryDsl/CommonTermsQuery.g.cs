@@ -39,7 +39,7 @@ internal sealed partial class CommonTermsQueryConverter : System.Text.Json.Seria
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		propField.ReadPropertyName(ref reader, options, null);
+		propField.ReadPropertyName(ref reader, options, static Elastic.Clients.Elasticsearch.Field (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Field>(o));
 		reader.Read();
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
@@ -68,22 +68,22 @@ internal sealed partial class CommonTermsQueryConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propCutoffFrequency.TryReadProperty(ref reader, options, PropCutoffFrequency, null))
+			if (propCutoffFrequency.TryReadProperty(ref reader, options, PropCutoffFrequency, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propHighFreqOperator.TryReadProperty(ref reader, options, PropHighFreqOperator, null))
+			if (propHighFreqOperator.TryReadProperty(ref reader, options, PropHighFreqOperator, static Elastic.Clients.Elasticsearch.QueryDsl.Operator? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator>(o)))
 			{
 				continue;
 			}
 
-			if (propLowFreqOperator.TryReadProperty(ref reader, options, PropLowFreqOperator, null))
+			if (propLowFreqOperator.TryReadProperty(ref reader, options, PropLowFreqOperator, static Elastic.Clients.Elasticsearch.QueryDsl.Operator? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator>(o)))
 			{
 				continue;
 			}
@@ -132,13 +132,13 @@ internal sealed partial class CommonTermsQueryConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.CommonTermsQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(options, value.Field, null);
+		writer.WritePropertyName(options, value.Field, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Field v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Field>(o, v));
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
-		writer.WriteProperty(options, PropCutoffFrequency, value.CutoffFrequency, null, null);
-		writer.WriteProperty(options, PropHighFreqOperator, value.HighFreqOperator, null, null);
-		writer.WriteProperty(options, PropLowFreqOperator, value.LowFreqOperator, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropCutoffFrequency, value.CutoffFrequency, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropHighFreqOperator, value.HighFreqOperator, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.Operator? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator>(o, v));
+		writer.WriteProperty(options, PropLowFreqOperator, value.LowFreqOperator, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.Operator? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator>(o, v));
 		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);

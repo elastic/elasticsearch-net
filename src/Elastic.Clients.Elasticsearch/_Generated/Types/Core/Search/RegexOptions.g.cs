@@ -40,7 +40,7 @@ internal sealed partial class RegexOptionsConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propMaxDeterminizedStates.TryReadProperty(ref reader, options, PropMaxDeterminizedStates, null))
+			if (propMaxDeterminizedStates.TryReadProperty(ref reader, options, PropMaxDeterminizedStates, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class RegexOptionsConverter : System.Text.Json.Serializa
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFlags, value.Flags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<int, string>? v) => w.WriteUnionValue<int, string>(o, v, null, null));
-		writer.WriteProperty(options, PropMaxDeterminizedStates, value.MaxDeterminizedStates, null, null);
+		writer.WriteProperty(options, PropMaxDeterminizedStates, value.MaxDeterminizedStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

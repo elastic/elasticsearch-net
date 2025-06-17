@@ -44,7 +44,7 @@ internal sealed partial class NestedSortValueConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propMaxChildren.TryReadProperty(ref reader, options, PropMaxChildren, null))
+			if (propMaxChildren.TryReadProperty(ref reader, options, PropMaxChildren, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class NestedSortValueConverter : System.Text.Json.Serial
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropMaxChildren, value.MaxChildren, null, null);
+		writer.WriteProperty(options, PropMaxChildren, value.MaxChildren, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropNested, value.Nested, null, null);
 		writer.WriteProperty(options, PropPath, value.Path, null, null);
 		writer.WriteEndObject();

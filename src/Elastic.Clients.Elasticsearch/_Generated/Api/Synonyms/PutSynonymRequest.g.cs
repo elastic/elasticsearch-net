@@ -25,6 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Synonyms;
 
 public sealed partial class PutSynonymRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request will refresh the analyzers with the new synonyms set and wait for the new synonyms to be available before returning.
+	/// If <c>false</c>, analyzers will not be reloaded with the new synonym set
+	/// </para>
+	/// </summary>
+	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 }
 
 internal sealed partial class PutSynonymRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest>
@@ -123,6 +130,14 @@ public sealed partial class PutSynonymRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, the request will refresh the analyzers with the new synonyms set and wait for the new synonyms to be available before returning.
+	/// If <c>false</c>, analyzers will not be reloaded with the new synonym set
+	/// </para>
+	/// </summary>
+	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>
 	/// The synonym rules definitions for the synonyms set.
 	/// </para>
 	/// </summary>
@@ -178,6 +193,18 @@ public readonly partial struct PutSynonymRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.Id = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request will refresh the analyzers with the new synonyms set and wait for the new synonyms to be available before returning.
+	/// If <c>false</c>, analyzers will not be reloaded with the new synonym set
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor Refresh(bool? value = true)
+	{
+		Instance.Refresh = value;
 		return this;
 	}
 

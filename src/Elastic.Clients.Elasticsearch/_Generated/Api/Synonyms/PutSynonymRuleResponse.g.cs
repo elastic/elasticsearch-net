@@ -31,7 +31,7 @@ internal sealed partial class PutSynonymRuleResponseConverter : System.Text.Json
 	public override Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult> propReloadAnalyzersDetails = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult?> propReloadAnalyzersDetails = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Result> propResult = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -87,15 +87,11 @@ public sealed partial class PutSynonymRuleResponse : Elastic.Transport.Products.
 
 	/// <summary>
 	/// <para>
-	/// Updating synonyms in a synonym set reloads the associated analyzers.
+	/// Updating synonyms in a synonym set can reload the associated analyzers in case refresh is set to true.
 	/// This information is the analyzers reloading result.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult ReloadAnalyzersDetails { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult? ReloadAnalyzersDetails { get; set; }
 
 	/// <summary>
 	/// <para>

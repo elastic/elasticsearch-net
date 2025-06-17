@@ -67,7 +67,7 @@ internal sealed partial class TaskInfoConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propCancelled.TryReadProperty(ref reader, options, PropCancelled, null))
+			if (propCancelled.TryReadProperty(ref reader, options, PropCancelled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -155,7 +155,7 @@ internal sealed partial class TaskInfoConverter : System.Text.Json.Serialization
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAction, value.Action, null, null);
 		writer.WriteProperty(options, PropCancellable, value.Cancellable, null, null);
-		writer.WriteProperty(options, PropCancelled, value.Cancelled, null, null);
+		writer.WriteProperty(options, PropCancelled, value.Cancelled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropId, value.Id, null, null);

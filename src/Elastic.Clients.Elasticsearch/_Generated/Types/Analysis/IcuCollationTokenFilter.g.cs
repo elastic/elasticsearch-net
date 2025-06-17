@@ -58,17 +58,17 @@ internal sealed partial class IcuCollationTokenFilterConverter : System.Text.Jso
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAlternate.TryReadProperty(ref reader, options, PropAlternate, null))
+			if (propAlternate.TryReadProperty(ref reader, options, PropAlternate, static Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate>(o)))
 			{
 				continue;
 			}
 
-			if (propCaseFirst.TryReadProperty(ref reader, options, PropCaseFirst, null))
+			if (propCaseFirst.TryReadProperty(ref reader, options, PropCaseFirst, static Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst>(o)))
 			{
 				continue;
 			}
 
-			if (propCaseLevel.TryReadProperty(ref reader, options, PropCaseLevel, null))
+			if (propCaseLevel.TryReadProperty(ref reader, options, PropCaseLevel, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -78,12 +78,12 @@ internal sealed partial class IcuCollationTokenFilterConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propDecomposition.TryReadProperty(ref reader, options, PropDecomposition, null))
+			if (propDecomposition.TryReadProperty(ref reader, options, PropDecomposition, static Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition>(o)))
 			{
 				continue;
 			}
 
-			if (propHiraganaQuaternaryMode.TryReadProperty(ref reader, options, PropHiraganaQuaternaryMode, null))
+			if (propHiraganaQuaternaryMode.TryReadProperty(ref reader, options, PropHiraganaQuaternaryMode, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -93,7 +93,7 @@ internal sealed partial class IcuCollationTokenFilterConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propNumeric.TryReadProperty(ref reader, options, PropNumeric, null))
+			if (propNumeric.TryReadProperty(ref reader, options, PropNumeric, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -103,7 +103,7 @@ internal sealed partial class IcuCollationTokenFilterConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propStrength.TryReadProperty(ref reader, options, PropStrength, null))
+			if (propStrength.TryReadProperty(ref reader, options, PropStrength, static Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength>(o)))
 			{
 				continue;
 			}
@@ -160,16 +160,16 @@ internal sealed partial class IcuCollationTokenFilterConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuCollationTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAlternate, value.Alternate, null, null);
-		writer.WriteProperty(options, PropCaseFirst, value.CaseFirst, null, null);
-		writer.WriteProperty(options, PropCaseLevel, value.CaseLevel, null, null);
+		writer.WriteProperty(options, PropAlternate, value.Alternate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationAlternate>(o, v));
+		writer.WriteProperty(options, PropCaseFirst, value.CaseFirst, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationCaseFirst>(o, v));
+		writer.WriteProperty(options, PropCaseLevel, value.CaseLevel, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropCountry, value.Country, null, null);
-		writer.WriteProperty(options, PropDecomposition, value.Decomposition, null, null);
-		writer.WriteProperty(options, PropHiraganaQuaternaryMode, value.HiraganaQuaternaryMode, null, null);
+		writer.WriteProperty(options, PropDecomposition, value.Decomposition, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationDecomposition>(o, v));
+		writer.WriteProperty(options, PropHiraganaQuaternaryMode, value.HiraganaQuaternaryMode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
-		writer.WriteProperty(options, PropNumeric, value.Numeric, null, null);
+		writer.WriteProperty(options, PropNumeric, value.Numeric, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRules, value.Rules, null, null);
-		writer.WriteProperty(options, PropStrength, value.Strength, null, null);
+		writer.WriteProperty(options, PropStrength, value.Strength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuCollationStrength>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVariableTop, value.VariableTop, null, null);
 		writer.WriteProperty(options, PropVariant, value.Variant, null, null);

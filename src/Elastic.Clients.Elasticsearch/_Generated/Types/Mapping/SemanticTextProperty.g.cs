@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 
 internal sealed partial class SemanticTextPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropChunkingSettings = System.Text.Json.JsonEncodedText.Encode("chunking_settings");
 	private static readonly System.Text.Json.JsonEncodedText PropInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
 	private static readonly System.Text.Json.JsonEncodedText PropSearchInferenceId = System.Text.Json.JsonEncodedText.Encode("search_inference_id");
@@ -33,11 +34,17 @@ internal sealed partial class SemanticTextPropertyConverter : System.Text.Json.S
 	public override Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings?> propChunkingSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propInferenceId = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propSearchInferenceId = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propChunkingSettings.TryReadProperty(ref reader, options, PropChunkingSettings, null))
+			{
+				continue;
+			}
+
 			if (propInferenceId.TryReadProperty(ref reader, options, PropInferenceId, null))
 			{
 				continue;
@@ -71,6 +78,7 @@ internal sealed partial class SemanticTextPropertyConverter : System.Text.Json.S
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			ChunkingSettings = propChunkingSettings.Value,
 			InferenceId = propInferenceId.Value,
 			Meta = propMeta.Value,
 			SearchInferenceId = propSearchInferenceId.Value
@@ -80,6 +88,7 @@ internal sealed partial class SemanticTextPropertyConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropChunkingSettings, value.ChunkingSettings, null, null);
 		writer.WriteProperty(options, PropInferenceId, value.InferenceId, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropSearchInferenceId, value.SearchInferenceId, null, null);
@@ -106,6 +115,15 @@ public sealed partial class SemanticTextProperty : Elastic.Clients.Elasticsearch
 	{
 		_ = sentinel;
 	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for chunking text into smaller passages. If specified, these will override the
+	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
+	/// they will not be applied to existing documents until they are reindexed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings? ChunkingSettings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -147,6 +165,32 @@ public readonly partial struct SemanticTextPropertyDescriptor<TDocument>
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty(Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Settings for chunking text into smaller passages. If specified, these will override the
+	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
+	/// they will not be applied to existing documents until they are reindexed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> ChunkingSettings(Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings? value)
+	{
+		Instance.ChunkingSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for chunking text into smaller passages. If specified, these will override the
+	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
+	/// they will not be applied to existing documents until they are reindexed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor> action)
+	{
+		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(action);
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -231,6 +275,32 @@ public readonly partial struct SemanticTextPropertyDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty(Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Settings for chunking text into smaller passages. If specified, these will override the
+	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
+	/// they will not be applied to existing documents until they are reindexed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings? value)
+	{
+		Instance.ChunkingSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for chunking text into smaller passages. If specified, these will override the
+	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
+	/// they will not be applied to existing documents until they are reindexed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor> action)
+	{
+		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(action);
+		return this;
+	}
 
 	/// <summary>
 	/// <para>

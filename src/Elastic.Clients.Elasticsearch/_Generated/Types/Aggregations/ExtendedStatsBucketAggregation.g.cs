@@ -49,12 +49,12 @@ internal sealed partial class ExtendedStatsBucketAggregationConverter : System.T
 				continue;
 			}
 
-			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, null))
+			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, static Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>(o)))
 			{
 				continue;
 			}
 
-			if (propSigma.TryReadProperty(ref reader, options, PropSigma, null))
+			if (propSigma.TryReadProperty(ref reader, options, PropSigma, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -83,8 +83,8 @@ internal sealed partial class ExtendedStatsBucketAggregationConverter : System.T
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBucketsPath, value.BucketsPath, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, null);
-		writer.WriteProperty(options, PropSigma, value.Sigma, null, null);
+		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>(o, v));
+		writer.WriteProperty(options, PropSigma, value.Sigma, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

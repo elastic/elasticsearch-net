@@ -43,7 +43,7 @@ internal sealed partial class PatternCaptureTokenFilterConverter : System.Text.J
 				continue;
 			}
 
-			if (propPreserveOriginal.TryReadProperty(ref reader, options, PropPreserveOriginal, null))
+			if (propPreserveOriginal.TryReadProperty(ref reader, options, PropPreserveOriginal, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class PatternCaptureTokenFilterConverter : System.Text.J
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropPatterns, value.Patterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal, null, null);
+		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

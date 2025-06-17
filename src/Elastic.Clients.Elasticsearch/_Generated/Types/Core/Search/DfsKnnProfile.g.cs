@@ -54,7 +54,7 @@ internal sealed partial class DfsKnnProfileConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propVectorOperationsCount.TryReadProperty(ref reader, options, PropVectorOperationsCount, null))
+			if (propVectorOperationsCount.TryReadProperty(ref reader, options, PropVectorOperationsCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class DfsKnnProfileConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropCollector, value.Collector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult>(o, v, null));
 		writer.WriteProperty(options, PropQuery, value.Query, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileResult>(o, v, null));
 		writer.WriteProperty(options, PropRewriteTime, value.RewriteTime, null, null);
-		writer.WriteProperty(options, PropVectorOperationsCount, value.VectorOperationsCount, null, null);
+		writer.WriteProperty(options, PropVectorOperationsCount, value.VectorOperationsCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

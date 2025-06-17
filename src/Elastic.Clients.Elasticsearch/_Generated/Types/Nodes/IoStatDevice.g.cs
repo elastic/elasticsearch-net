@@ -48,27 +48,27 @@ internal sealed partial class IoStatDeviceConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propOperations.TryReadProperty(ref reader, options, PropOperations, null))
+			if (propOperations.TryReadProperty(ref reader, options, PropOperations, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propReadKilobytes.TryReadProperty(ref reader, options, PropReadKilobytes, null))
+			if (propReadKilobytes.TryReadProperty(ref reader, options, PropReadKilobytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propReadOperations.TryReadProperty(ref reader, options, PropReadOperations, null))
+			if (propReadOperations.TryReadProperty(ref reader, options, PropReadOperations, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propWriteKilobytes.TryReadProperty(ref reader, options, PropWriteKilobytes, null))
+			if (propWriteKilobytes.TryReadProperty(ref reader, options, PropWriteKilobytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propWriteOperations.TryReadProperty(ref reader, options, PropWriteOperations, null))
+			if (propWriteOperations.TryReadProperty(ref reader, options, PropWriteOperations, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -98,11 +98,11 @@ internal sealed partial class IoStatDeviceConverter : System.Text.Json.Serializa
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDeviceName, value.DeviceName, null, null);
-		writer.WriteProperty(options, PropOperations, value.Operations, null, null);
-		writer.WriteProperty(options, PropReadKilobytes, value.ReadKilobytes, null, null);
-		writer.WriteProperty(options, PropReadOperations, value.ReadOperations, null, null);
-		writer.WriteProperty(options, PropWriteKilobytes, value.WriteKilobytes, null, null);
-		writer.WriteProperty(options, PropWriteOperations, value.WriteOperations, null, null);
+		writer.WriteProperty(options, PropOperations, value.Operations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropReadKilobytes, value.ReadKilobytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropReadOperations, value.ReadOperations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropWriteKilobytes, value.WriteKilobytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropWriteOperations, value.WriteOperations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

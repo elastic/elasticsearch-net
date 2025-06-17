@@ -47,7 +47,7 @@ internal sealed partial class MatrixStatsAggregationConverter : System.Text.Json
 				continue;
 			}
 
-			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, static Elastic.Clients.Elasticsearch.SortMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.SortMode>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class MatrixStatsAggregationConverter : System.Text.Json
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
 		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, double>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, double>(o, v, null, null));
-		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SortMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SortMode>(o, v));
 		writer.WriteEndObject();
 	}
 }

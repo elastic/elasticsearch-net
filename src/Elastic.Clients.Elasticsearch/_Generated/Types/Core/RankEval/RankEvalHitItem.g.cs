@@ -40,7 +40,7 @@ internal sealed partial class RankEvalHitItemConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propRating.TryReadProperty(ref reader, options, PropRating, null))
+			if (propRating.TryReadProperty(ref reader, options, PropRating, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class RankEvalHitItemConverter : System.Text.Json.Serial
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropHit, value.Hit, null, null);
-		writer.WriteProperty(options, PropRating, value.Rating, null, null);
+		writer.WriteProperty(options, PropRating, value.Rating, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

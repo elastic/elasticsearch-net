@@ -88,6 +88,8 @@ internal sealed partial class GetClusterSettingsRequestConverter : System.Text.J
 /// <summary>
 /// <para>
 /// Get cluster-wide settings.
+/// </para>
+/// <para>
 /// By default, it returns only settings that have been explicitly defined.
 /// </para>
 /// </summary>
@@ -152,6 +154,8 @@ public sealed partial class GetClusterSettingsRequest : Elastic.Clients.Elastics
 /// <summary>
 /// <para>
 /// Get cluster-wide settings.
+/// </para>
+/// <para>
 /// By default, it returns only settings that have been explicitly defined.
 /// </para>
 /// </summary>

@@ -37,17 +37,17 @@ internal sealed partial class CgroupCpuStatConverter : System.Text.Json.Serializ
 		LocalJsonValue<System.TimeSpan?> propTimeThrottledNanos = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNumberOfElapsedPeriods.TryReadProperty(ref reader, options, PropNumberOfElapsedPeriods, null))
+			if (propNumberOfElapsedPeriods.TryReadProperty(ref reader, options, PropNumberOfElapsedPeriods, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propNumberOfTimesThrottled.TryReadProperty(ref reader, options, PropNumberOfTimesThrottled, null))
+			if (propNumberOfTimesThrottled.TryReadProperty(ref reader, options, PropNumberOfTimesThrottled, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTimeThrottledNanos.TryReadProperty(ref reader, options, PropTimeThrottledNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			if (propTimeThrottledNanos.TryReadProperty(ref reader, options, PropTimeThrottledNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class CgroupCpuStatConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNumberOfElapsedPeriods, value.NumberOfElapsedPeriods, null, null);
-		writer.WriteProperty(options, PropNumberOfTimesThrottled, value.NumberOfTimesThrottled, null, null);
-		writer.WriteProperty(options, PropTimeThrottledNanos, value.TimeThrottledNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropNumberOfElapsedPeriods, value.NumberOfElapsedPeriods, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropNumberOfTimesThrottled, value.NumberOfTimesThrottled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTimeThrottledNanos, value.TimeThrottledNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
 		writer.WriteEndObject();
 	}
 }

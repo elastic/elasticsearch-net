@@ -44,12 +44,12 @@ internal sealed partial class SlowlogSettingsConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propReformat.TryReadProperty(ref reader, options, PropReformat, null))
+			if (propReformat.TryReadProperty(ref reader, options, PropReformat, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -82,8 +82,8 @@ internal sealed partial class SlowlogSettingsConverter : System.Text.Json.Serial
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropLevel, value.Level, null, null);
-		writer.WriteProperty(options, PropReformat, value.Reformat, null, null);
-		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropReformat, value.Reformat, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropThreshold, value.Threshold, null, null);
 		writer.WriteEndObject();
 	}

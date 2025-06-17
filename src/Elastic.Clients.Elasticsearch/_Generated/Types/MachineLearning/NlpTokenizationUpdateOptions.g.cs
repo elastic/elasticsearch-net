@@ -35,12 +35,12 @@ internal sealed partial class NlpTokenizationUpdateOptionsConverter : System.Tex
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate?> propTruncate = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propSpan.TryReadProperty(ref reader, options, PropSpan, null))
+			if (propSpan.TryReadProperty(ref reader, options, PropSpan, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propTruncate.TryReadProperty(ref reader, options, PropTruncate, null))
+			if (propTruncate.TryReadProperty(ref reader, options, PropTruncate, static Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate>(o)))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class NlpTokenizationUpdateOptionsConverter : System.Tex
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSpan, value.Span, null, null);
-		writer.WriteProperty(options, PropTruncate, value.Truncate, null, null);
+		writer.WriteProperty(options, PropSpan, value.Span, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTruncate, value.Truncate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate>(o, v));
 		writer.WriteEndObject();
 	}
 }

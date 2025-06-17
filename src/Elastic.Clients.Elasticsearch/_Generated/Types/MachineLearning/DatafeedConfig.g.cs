@@ -101,7 +101,7 @@ internal sealed partial class DatafeedConfigConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propMaxEmptySearches.TryReadProperty(ref reader, options, PropMaxEmptySearches, null))
+			if (propMaxEmptySearches.TryReadProperty(ref reader, options, PropMaxEmptySearches, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -126,7 +126,7 @@ internal sealed partial class DatafeedConfigConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propScrollSize.TryReadProperty(ref reader, options, PropScrollSize, null))
+			if (propScrollSize.TryReadProperty(ref reader, options, PropScrollSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -171,12 +171,12 @@ internal sealed partial class DatafeedConfigConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
 		writer.WriteProperty(options, PropIndicesOptions, value.IndicesOptions, null, null);
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
-		writer.WriteProperty(options, PropMaxEmptySearches, value.MaxEmptySearches, null, null);
+		writer.WriteProperty(options, PropMaxEmptySearches, value.MaxEmptySearches, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropQueryDelay, value.QueryDelay, null, null);
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
 		writer.WriteProperty(options, PropScriptFields, value.ScriptFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.ScriptField>(o, v, null, null));
-		writer.WriteProperty(options, PropScrollSize, value.ScrollSize, null, null);
+		writer.WriteProperty(options, PropScrollSize, value.ScrollSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

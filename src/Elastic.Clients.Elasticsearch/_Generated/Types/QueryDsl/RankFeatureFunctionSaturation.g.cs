@@ -33,7 +33,7 @@ internal sealed partial class RankFeatureFunctionSaturationConverter : System.Te
 		LocalJsonValue<float?> propPivot = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propPivot.TryReadProperty(ref reader, options, PropPivot, null))
+			if (propPivot.TryReadProperty(ref reader, options, PropPivot, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class RankFeatureFunctionSaturationConverter : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPivot, value.Pivot, null, null);
+		writer.WriteProperty(options, PropPivot, value.Pivot, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteEndObject();
 	}
 }

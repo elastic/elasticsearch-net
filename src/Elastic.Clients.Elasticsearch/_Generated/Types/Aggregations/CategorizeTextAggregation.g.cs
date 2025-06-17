@@ -66,37 +66,37 @@ internal sealed partial class CategorizeTextAggregationConverter : System.Text.J
 				continue;
 			}
 
-			if (propMaxMatchedTokens.TryReadProperty(ref reader, options, PropMaxMatchedTokens, null))
+			if (propMaxMatchedTokens.TryReadProperty(ref reader, options, PropMaxMatchedTokens, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxUniqueTokens.TryReadProperty(ref reader, options, PropMaxUniqueTokens, null))
+			if (propMaxUniqueTokens.TryReadProperty(ref reader, options, PropMaxUniqueTokens, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propShardMinDocCount.TryReadProperty(ref reader, options, PropShardMinDocCount, null))
+			if (propShardMinDocCount.TryReadProperty(ref reader, options, PropShardMinDocCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSimilarityThreshold.TryReadProperty(ref reader, options, PropSimilarityThreshold, null))
+			if (propSimilarityThreshold.TryReadProperty(ref reader, options, PropSimilarityThreshold, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -132,13 +132,13 @@ internal sealed partial class CategorizeTextAggregationConverter : System.Text.J
 		writer.WriteProperty(options, PropCategorizationAnalyzer, value.CategorizationAnalyzer, null, null);
 		writer.WriteProperty(options, PropCategorizationFilters, value.CategorizationFilters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropMaxMatchedTokens, value.MaxMatchedTokens, null, null);
-		writer.WriteProperty(options, PropMaxUniqueTokens, value.MaxUniqueTokens, null, null);
-		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
-		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, null);
-		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
-		writer.WriteProperty(options, PropSimilarityThreshold, value.SimilarityThreshold, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropMaxMatchedTokens, value.MaxMatchedTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxUniqueTokens, value.MaxUniqueTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSimilarityThreshold, value.SimilarityThreshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

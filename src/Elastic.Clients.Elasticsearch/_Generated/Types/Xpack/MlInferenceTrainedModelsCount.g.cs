@@ -47,12 +47,12 @@ internal sealed partial class MlInferenceTrainedModelsCountConverter : System.Te
 		LocalJsonValue<long> propTotal = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propClassification.TryReadProperty(ref reader, options, PropClassification, null))
+			if (propClassification.TryReadProperty(ref reader, options, PropClassification, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propNer.TryReadProperty(ref reader, options, PropNer, null))
+			if (propNer.TryReadProperty(ref reader, options, PropNer, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -62,7 +62,7 @@ internal sealed partial class MlInferenceTrainedModelsCountConverter : System.Te
 				continue;
 			}
 
-			if (propPassThrough.TryReadProperty(ref reader, options, PropPassThrough, null))
+			if (propPassThrough.TryReadProperty(ref reader, options, PropPassThrough, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -72,12 +72,12 @@ internal sealed partial class MlInferenceTrainedModelsCountConverter : System.Te
 				continue;
 			}
 
-			if (propRegression.TryReadProperty(ref reader, options, PropRegression, null))
+			if (propRegression.TryReadProperty(ref reader, options, PropRegression, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTextEmbedding.TryReadProperty(ref reader, options, PropTextEmbedding, null))
+			if (propTextEmbedding.TryReadProperty(ref reader, options, PropTextEmbedding, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -113,13 +113,13 @@ internal sealed partial class MlInferenceTrainedModelsCountConverter : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MlInferenceTrainedModelsCount value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClassification, value.Classification, null, null);
-		writer.WriteProperty(options, PropNer, value.Ner, null, null);
+		writer.WriteProperty(options, PropClassification, value.Classification, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropNer, value.Ner, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropOther, value.Other, null, null);
-		writer.WriteProperty(options, PropPassThrough, value.PassThrough, null, null);
+		writer.WriteProperty(options, PropPassThrough, value.PassThrough, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropPrepackaged, value.Prepackaged, null, null);
-		writer.WriteProperty(options, PropRegression, value.Regression, null, null);
-		writer.WriteProperty(options, PropTextEmbedding, value.TextEmbedding, null, null);
+		writer.WriteProperty(options, PropRegression, value.Regression, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTextEmbedding, value.TextEmbedding, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteEndObject();
 	}

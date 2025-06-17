@@ -56,13 +56,6 @@ public sealed partial class GetFieldMappingRequestParameters : Elastic.Transport
 	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
-	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 internal sealed partial class GetFieldMappingRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequest>
@@ -187,13 +180,6 @@ public sealed partial class GetFieldMappingRequest : Elastic.Clients.Elasticsear
 	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
-	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 /// <summary>
@@ -331,17 +317,6 @@ public readonly partial struct GetFieldMappingRequestDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor Local(bool? value = true)
-	{
-		Instance.Local = value;
 		return this;
 	}
 
@@ -531,17 +506,6 @@ public readonly partial struct GetFieldMappingRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
 	{
 		Instance.IncludeDefaults = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingRequestDescriptor<TDocument> Local(bool? value = true)
-	{
-		Instance.Local = value;
 		return this;
 	}
 

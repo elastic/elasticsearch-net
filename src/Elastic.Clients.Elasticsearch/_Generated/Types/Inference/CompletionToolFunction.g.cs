@@ -54,7 +54,7 @@ internal sealed partial class CompletionToolFunctionConverter : System.Text.Json
 				continue;
 			}
 
-			if (propStrict.TryReadProperty(ref reader, options, PropStrict, null))
+			if (propStrict.TryReadProperty(ref reader, options, PropStrict, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class CompletionToolFunctionConverter : System.Text.Json
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropParameters, value.Parameters, null, null);
-		writer.WriteProperty(options, PropStrict, value.Strict, null, null);
+		writer.WriteProperty(options, PropStrict, value.Strict, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

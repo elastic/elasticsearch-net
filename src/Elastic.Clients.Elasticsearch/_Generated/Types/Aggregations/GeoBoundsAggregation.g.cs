@@ -54,7 +54,7 @@ internal sealed partial class GeoBoundsAggregationConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propWrapLongitude.TryReadProperty(ref reader, options, PropWrapLongitude, null))
+			if (propWrapLongitude.TryReadProperty(ref reader, options, PropWrapLongitude, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class GeoBoundsAggregationConverter : System.Text.Json.S
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropWrapLongitude, value.WrapLongitude, null, null);
+		writer.WriteProperty(options, PropWrapLongitude, value.WrapLongitude, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }
