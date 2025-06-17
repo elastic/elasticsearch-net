@@ -26,6 +26,9 @@ namespace Elastic.Clients.Elasticsearch;
 internal sealed partial class RetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Retriever>
 {
 	private static readonly System.Text.Json.JsonEncodedText VariantKnn = System.Text.Json.JsonEncodedText.Encode("knn");
+	private static readonly System.Text.Json.JsonEncodedText VariantLinear = System.Text.Json.JsonEncodedText.Encode("linear");
+	private static readonly System.Text.Json.JsonEncodedText VariantPinned = System.Text.Json.JsonEncodedText.Encode("pinned");
+	private static readonly System.Text.Json.JsonEncodedText VariantRescorer = System.Text.Json.JsonEncodedText.Encode("rescorer");
 	private static readonly System.Text.Json.JsonEncodedText VariantRrf = System.Text.Json.JsonEncodedText.Encode("rrf");
 	private static readonly System.Text.Json.JsonEncodedText VariantRule = System.Text.Json.JsonEncodedText.Encode("rule");
 	private static readonly System.Text.Json.JsonEncodedText VariantStandard = System.Text.Json.JsonEncodedText.Encode("standard");
@@ -43,6 +46,30 @@ internal sealed partial class RetrieverConverter : System.Text.Json.Serializatio
 				variantType = VariantKnn.Value;
 				reader.Read();
 				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.KnnRetriever>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantLinear))
+			{
+				variantType = VariantLinear.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.LinearRetriever>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantPinned))
+			{
+				variantType = VariantPinned.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.PinnedRetriever>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRescorer))
+			{
+				variantType = VariantRescorer.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.RescorerRetriever>(options, null);
 				continue;
 			}
 
@@ -105,6 +132,15 @@ internal sealed partial class RetrieverConverter : System.Text.Json.Serializatio
 			case "knn":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.KnnRetriever)value.Variant, null, null);
 				break;
+			case "linear":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.LinearRetriever)value.Variant, null, null);
+				break;
+			case "pinned":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.PinnedRetriever)value.Variant, null, null);
+				break;
+			case "rescorer":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RescorerRetriever)value.Variant, null, null);
+				break;
 			case "rrf":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.RRFRetriever)value.Variant, null, null);
 				break;
@@ -155,6 +191,28 @@ public sealed partial class Retriever
 
 	/// <summary>
 	/// <para>
+	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LinearRetriever? Linear { get => GetVariant<Elastic.Clients.Elasticsearch.LinearRetriever>("linear"); set => SetVariant("linear", value); }
+
+	/// <summary>
+	/// <para>
+	/// A pinned retriever applies pinned documents to the underlying retriever.
+	/// This retriever will rewrite to a PinnedQueryBuilder.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.PinnedRetriever? Pinned { get => GetVariant<Elastic.Clients.Elasticsearch.PinnedRetriever>("pinned"); set => SetVariant("pinned", value); }
+
+	/// <summary>
+	/// <para>
+	/// A retriever that re-scores only the results produced by its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RescorerRetriever? Rescorer { get => GetVariant<Elastic.Clients.Elasticsearch.RescorerRetriever>("rescorer"); set => SetVariant("rescorer", value); }
+
+	/// <summary>
+	/// <para>
 	/// A retriever that produces top documents from reciprocal rank fusion (RRF).
 	/// </para>
 	/// </summary>
@@ -182,6 +240,9 @@ public sealed partial class Retriever
 	public Elastic.Clients.Elasticsearch.TextSimilarityReranker? TextSimilarityReranker { get => GetVariant<Elastic.Clients.Elasticsearch.TextSimilarityReranker>("text_similarity_reranker"); set => SetVariant("text_similarity_reranker", value); }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.KnnRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Knn = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.LinearRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Linear = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.PinnedRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Pinned = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.RescorerRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Rescorer = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.RRFRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Rrf = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.RuleRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Rule = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Retriever(Elastic.Clients.Elasticsearch.StandardRetriever value) => new Elastic.Clients.Elasticsearch.Retriever { Standard = value };
@@ -244,6 +305,74 @@ public readonly partial struct RetrieverDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Knn(System.Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>> action)
 	{
 		Instance.Knn = Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Linear(Elastic.Clients.Elasticsearch.LinearRetriever? value)
+	{
+		Instance.Linear = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Linear(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>> action)
+	{
+		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A pinned retriever applies pinned documents to the underlying retriever.
+	/// This retriever will rewrite to a PinnedQueryBuilder.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Pinned(Elastic.Clients.Elasticsearch.PinnedRetriever? value)
+	{
+		Instance.Pinned = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A pinned retriever applies pinned documents to the underlying retriever.
+	/// This retriever will rewrite to a PinnedQueryBuilder.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Pinned(System.Action<Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument>> action)
+	{
+		Instance.Pinned = Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that re-scores only the results produced by its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rescorer(Elastic.Clients.Elasticsearch.RescorerRetriever? value)
+	{
+		Instance.Rescorer = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that re-scores only the results produced by its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Rescorer(System.Action<Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument>> action)
+	{
+		Instance.Rescorer = Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -404,6 +533,108 @@ public readonly partial struct RetrieverDescriptor
 	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Knn<T>(System.Action<Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<T>> action)
 	{
 		Instance.Knn = Elastic.Clients.Elasticsearch.KnnRetrieverDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear(Elastic.Clients.Elasticsearch.LinearRetriever? value)
+	{
+		Instance.Linear = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor> action)
+	{
+		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear<T>(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<T>> action)
+	{
+		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A pinned retriever applies pinned documents to the underlying retriever.
+	/// This retriever will rewrite to a PinnedQueryBuilder.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Pinned(Elastic.Clients.Elasticsearch.PinnedRetriever? value)
+	{
+		Instance.Pinned = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A pinned retriever applies pinned documents to the underlying retriever.
+	/// This retriever will rewrite to a PinnedQueryBuilder.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Pinned(System.Action<Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor> action)
+	{
+		Instance.Pinned = Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A pinned retriever applies pinned documents to the underlying retriever.
+	/// This retriever will rewrite to a PinnedQueryBuilder.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Pinned<T>(System.Action<Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<T>> action)
+	{
+		Instance.Pinned = Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that re-scores only the results produced by its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rescorer(Elastic.Clients.Elasticsearch.RescorerRetriever? value)
+	{
+		Instance.Rescorer = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that re-scores only the results produced by its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rescorer(System.Action<Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor> action)
+	{
+		Instance.Rescorer = Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that re-scores only the results produced by its child retriever.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Rescorer<T>(System.Action<Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<T>> action)
+	{
+		Instance.Rescorer = Elastic.Clients.Elasticsearch.RescorerRetrieverDescriptor<T>.Build(action);
 		return this;
 	}
 

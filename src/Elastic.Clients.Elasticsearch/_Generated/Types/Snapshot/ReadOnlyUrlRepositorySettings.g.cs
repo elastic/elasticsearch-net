@@ -52,12 +52,12 @@ internal sealed partial class ReadOnlyUrlRepositorySettingsConverter : System.Te
 				continue;
 			}
 
-			if (propCompress.TryReadProperty(ref reader, options, PropCompress, null))
+			if (propCompress.TryReadProperty(ref reader, options, PropCompress, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propHttpMaxRetries.TryReadProperty(ref reader, options, PropHttpMaxRetries, null))
+			if (propHttpMaxRetries.TryReadProperty(ref reader, options, PropHttpMaxRetries, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -67,7 +67,7 @@ internal sealed partial class ReadOnlyUrlRepositorySettingsConverter : System.Te
 				continue;
 			}
 
-			if (propMaxNumberOfSnapshots.TryReadProperty(ref reader, options, PropMaxNumberOfSnapshots, null))
+			if (propMaxNumberOfSnapshots.TryReadProperty(ref reader, options, PropMaxNumberOfSnapshots, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -114,10 +114,10 @@ internal sealed partial class ReadOnlyUrlRepositorySettingsConverter : System.Te
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);
-		writer.WriteProperty(options, PropCompress, value.Compress, null, null);
-		writer.WriteProperty(options, PropHttpMaxRetries, value.HttpMaxRetries, null, null);
+		writer.WriteProperty(options, PropCompress, value.Compress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropHttpMaxRetries, value.HttpMaxRetries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropHttpSocketTimeout, value.HttpSocketTimeout, null, null);
-		writer.WriteProperty(options, PropMaxNumberOfSnapshots, value.MaxNumberOfSnapshots, null, null);
+		writer.WriteProperty(options, PropMaxNumberOfSnapshots, value.MaxNumberOfSnapshots, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
 		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
 		writer.WriteProperty(options, PropUrl, value.Url, null, null);

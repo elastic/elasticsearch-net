@@ -91,22 +91,22 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 				continue;
 			}
 
-			if (propAllocationDelayInMillis.TryReadProperty(ref reader, options, PropAllocationDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propAllocationDelayInMillis.TryReadProperty(ref reader, options, PropAllocationDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propCanAllocate.TryReadProperty(ref reader, options, PropCanAllocate, null))
+			if (propCanAllocate.TryReadProperty(ref reader, options, PropCanAllocate, static Elastic.Clients.Elasticsearch.Cluster.Decision? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Cluster.Decision>(o)))
 			{
 				continue;
 			}
 
-			if (propCanMoveToOtherNode.TryReadProperty(ref reader, options, PropCanMoveToOtherNode, null))
+			if (propCanMoveToOtherNode.TryReadProperty(ref reader, options, PropCanMoveToOtherNode, static Elastic.Clients.Elasticsearch.Cluster.Decision? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Cluster.Decision>(o)))
 			{
 				continue;
 			}
 
-			if (propCanRebalanceCluster.TryReadProperty(ref reader, options, PropCanRebalanceCluster, null))
+			if (propCanRebalanceCluster.TryReadProperty(ref reader, options, PropCanRebalanceCluster, static Elastic.Clients.Elasticsearch.Cluster.Decision? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Cluster.Decision>(o)))
 			{
 				continue;
 			}
@@ -116,7 +116,7 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 				continue;
 			}
 
-			if (propCanRebalanceToOtherNode.TryReadProperty(ref reader, options, PropCanRebalanceToOtherNode, null))
+			if (propCanRebalanceToOtherNode.TryReadProperty(ref reader, options, PropCanRebalanceToOtherNode, static Elastic.Clients.Elasticsearch.Cluster.Decision? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Cluster.Decision>(o)))
 			{
 				continue;
 			}
@@ -126,7 +126,7 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 				continue;
 			}
 
-			if (propCanRemainOnCurrentNode.TryReadProperty(ref reader, options, PropCanRemainOnCurrentNode, null))
+			if (propCanRemainOnCurrentNode.TryReadProperty(ref reader, options, PropCanRemainOnCurrentNode, static Elastic.Clients.Elasticsearch.Cluster.Decision? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Cluster.Decision>(o)))
 			{
 				continue;
 			}
@@ -141,7 +141,7 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 				continue;
 			}
 
-			if (propConfiguredDelayInMillis.TryReadProperty(ref reader, options, PropConfiguredDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propConfiguredDelayInMillis.TryReadProperty(ref reader, options, PropConfiguredDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -191,7 +191,7 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 				continue;
 			}
 
-			if (propRemainingDelayInMillis.TryReadProperty(ref reader, options, PropRemainingDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propRemainingDelayInMillis.TryReadProperty(ref reader, options, PropRemainingDelayInMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -251,17 +251,17 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAllocateExplanation, value.AllocateExplanation, null, null);
 		writer.WriteProperty(options, PropAllocationDelay, value.AllocationDelay, null, null);
-		writer.WriteProperty(options, PropAllocationDelayInMillis, value.AllocationDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
-		writer.WriteProperty(options, PropCanAllocate, value.CanAllocate, null, null);
-		writer.WriteProperty(options, PropCanMoveToOtherNode, value.CanMoveToOtherNode, null, null);
-		writer.WriteProperty(options, PropCanRebalanceCluster, value.CanRebalanceCluster, null, null);
+		writer.WriteProperty(options, PropAllocationDelayInMillis, value.AllocationDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropCanAllocate, value.CanAllocate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Cluster.Decision? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Cluster.Decision>(o, v));
+		writer.WriteProperty(options, PropCanMoveToOtherNode, value.CanMoveToOtherNode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Cluster.Decision? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Cluster.Decision>(o, v));
+		writer.WriteProperty(options, PropCanRebalanceCluster, value.CanRebalanceCluster, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Cluster.Decision? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Cluster.Decision>(o, v));
 		writer.WriteProperty(options, PropCanRebalanceClusterDecisions, value.CanRebalanceClusterDecisions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, v, null));
-		writer.WriteProperty(options, PropCanRebalanceToOtherNode, value.CanRebalanceToOtherNode, null, null);
+		writer.WriteProperty(options, PropCanRebalanceToOtherNode, value.CanRebalanceToOtherNode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Cluster.Decision? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Cluster.Decision>(o, v));
 		writer.WriteProperty(options, PropCanRemainDecisions, value.CanRemainDecisions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, v, null));
-		writer.WriteProperty(options, PropCanRemainOnCurrentNode, value.CanRemainOnCurrentNode, null, null);
+		writer.WriteProperty(options, PropCanRemainOnCurrentNode, value.CanRemainOnCurrentNode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Cluster.Decision? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Cluster.Decision>(o, v));
 		writer.WriteProperty(options, PropClusterInfo, value.ClusterInfo, null, null);
 		writer.WriteProperty(options, PropConfiguredDelay, value.ConfiguredDelay, null, null);
-		writer.WriteProperty(options, PropConfiguredDelayInMillis, value.ConfiguredDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropConfiguredDelayInMillis, value.ConfiguredDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropCurrentNode, value.CurrentNode, null, null);
 		writer.WriteProperty(options, PropCurrentState, value.CurrentState, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
@@ -271,7 +271,7 @@ internal sealed partial class AllocationExplainResponseConverter : System.Text.J
 		writer.WriteProperty(options, PropPrimary, value.Primary, null, null);
 		writer.WriteProperty(options, PropRebalanceExplanation, value.RebalanceExplanation, null, null);
 		writer.WriteProperty(options, PropRemainingDelay, value.RemainingDelay, null, null);
-		writer.WriteProperty(options, PropRemainingDelayInMillis, value.RemainingDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropRemainingDelayInMillis, value.RemainingDelayInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropShard, value.Shard, null, null);
 		writer.WriteProperty(options, PropUnassignedInfo, value.UnassignedInfo, null, null);
 		writer.WriteEndObject();

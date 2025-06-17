@@ -41,7 +41,7 @@ internal sealed partial class SpanNearQueryConverter : System.Text.Json.Serializ
 		LocalJsonValue<int?> propSlop = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -51,7 +51,7 @@ internal sealed partial class SpanNearQueryConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propInOrder.TryReadProperty(ref reader, options, PropInOrder, null))
+			if (propInOrder.TryReadProperty(ref reader, options, PropInOrder, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class SpanNearQueryConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propSlop.TryReadProperty(ref reader, options, PropSlop, null))
+			if (propSlop.TryReadProperty(ref reader, options, PropSlop, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -89,11 +89,11 @@ internal sealed partial class SpanNearQueryConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.SpanNearQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropClauses, value.Clauses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.SpanQuery>(o, v, null));
-		writer.WriteProperty(options, PropInOrder, value.InOrder, null, null);
+		writer.WriteProperty(options, PropInOrder, value.InOrder, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
-		writer.WriteProperty(options, PropSlop, value.Slop, null, null);
+		writer.WriteProperty(options, PropSlop, value.Slop, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

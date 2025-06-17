@@ -63,7 +63,7 @@ internal sealed partial class TopMetricsAggregationConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -101,7 +101,7 @@ internal sealed partial class TopMetricsAggregationConverter : System.Text.Json.
 		writer.WriteProperty(options, PropMetrics, value.Metrics, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.TopMetricsValue>(o, v, null));
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
 		writer.WriteEndObject();
 	}

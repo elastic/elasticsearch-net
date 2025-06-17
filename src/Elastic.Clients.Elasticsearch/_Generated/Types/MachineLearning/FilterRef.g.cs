@@ -40,7 +40,7 @@ internal sealed partial class FilterRefConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propFilterType.TryReadProperty(ref reader, options, PropFilterType, null))
+			if (propFilterType.TryReadProperty(ref reader, options, PropFilterType, static Elastic.Clients.Elasticsearch.MachineLearning.FilterType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.FilterType>(o)))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class FilterRefConverter : System.Text.Json.Serializatio
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFilterId, value.FilterId, null, null);
-		writer.WriteProperty(options, PropFilterType, value.FilterType, null, null);
+		writer.WriteProperty(options, PropFilterType, value.FilterType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.MachineLearning.FilterType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.FilterType>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -28,6 +28,7 @@ internal sealed partial class StandardRetrieverConverter : System.Text.Json.Seri
 	private static readonly System.Text.Json.JsonEncodedText PropCollapse = System.Text.Json.JsonEncodedText.Encode("collapse");
 	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
 	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("_name");
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
 	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
 	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
@@ -39,6 +40,7 @@ internal sealed partial class StandardRetrieverConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse?> propCollapse = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
 		LocalJsonValue<float?> propMinScore = default;
+		LocalJsonValue<string?> propName = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
@@ -55,7 +57,12 @@ internal sealed partial class StandardRetrieverConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
 			{
 				continue;
 			}
@@ -75,7 +82,7 @@ internal sealed partial class StandardRetrieverConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propTerminateAfter.TryReadProperty(ref reader, options, PropTerminateAfter, null))
+			if (propTerminateAfter.TryReadProperty(ref reader, options, PropTerminateAfter, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -95,6 +102,7 @@ internal sealed partial class StandardRetrieverConverter : System.Text.Json.Seri
 			Collapse = propCollapse.Value,
 			Filter = propFilter.Value,
 			MinScore = propMinScore.Value,
+			Name = propName.Value,
 			Query = propQuery.Value,
 			SearchAfter = propSearchAfter.Value,
 			Sort = propSort.Value,
@@ -107,11 +115,12 @@ internal sealed partial class StandardRetrieverConverter : System.Text.Json.Seri
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCollapse, value.Collapse, null, null);
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
-		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
 		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
-		writer.WriteProperty(options, PropTerminateAfter, value.TerminateAfter, null, null);
+		writer.WriteProperty(options, PropTerminateAfter, value.TerminateAfter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }
@@ -155,6 +164,13 @@ public sealed partial class StandardRetriever
 	/// </para>
 	/// </summary>
 	public float? MinScore { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public string? Name { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -273,6 +289,17 @@ public readonly partial struct StandardRetrieverDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> MinScore(float? value)
 	{
 		Instance.MinScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor<TDocument> Name(string? value)
+	{
+		Instance.Name = value;
 		return this;
 	}
 
@@ -500,6 +527,17 @@ public readonly partial struct StandardRetrieverDescriptor
 	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor MinScore(float? value)
 	{
 		Instance.MinScore = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Retriever name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor Name(string? value)
+	{
+		Instance.Name = value;
 		return this;
 	}
 

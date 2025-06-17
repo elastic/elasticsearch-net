@@ -37,17 +37,17 @@ internal sealed partial class PublishedClusterStatesConverter : System.Text.Json
 		LocalJsonValue<long?> propIncompatibleDiffs = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCompatibleDiffs.TryReadProperty(ref reader, options, PropCompatibleDiffs, null))
+			if (propCompatibleDiffs.TryReadProperty(ref reader, options, PropCompatibleDiffs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propFullStates.TryReadProperty(ref reader, options, PropFullStates, null))
+			if (propFullStates.TryReadProperty(ref reader, options, PropFullStates, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propIncompatibleDiffs.TryReadProperty(ref reader, options, PropIncompatibleDiffs, null))
+			if (propIncompatibleDiffs.TryReadProperty(ref reader, options, PropIncompatibleDiffs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class PublishedClusterStatesConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompatibleDiffs, value.CompatibleDiffs, null, null);
-		writer.WriteProperty(options, PropFullStates, value.FullStates, null, null);
-		writer.WriteProperty(options, PropIncompatibleDiffs, value.IncompatibleDiffs, null, null);
+		writer.WriteProperty(options, PropCompatibleDiffs, value.CompatibleDiffs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropFullStates, value.FullStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropIncompatibleDiffs, value.IncompatibleDiffs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

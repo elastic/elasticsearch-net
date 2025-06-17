@@ -83,7 +83,7 @@ internal sealed partial class TermVectorsRequestConverter<TDocument> : System.Te
 				continue;
 			}
 
-			if (propFieldStatistics.TryReadProperty(ref reader, options, PropFieldStatistics, null))
+			if (propFieldStatistics.TryReadProperty(ref reader, options, PropFieldStatistics, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -93,12 +93,12 @@ internal sealed partial class TermVectorsRequestConverter<TDocument> : System.Te
 				continue;
 			}
 
-			if (propOffsets.TryReadProperty(ref reader, options, PropOffsets, null))
+			if (propOffsets.TryReadProperty(ref reader, options, PropOffsets, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propPayloads.TryReadProperty(ref reader, options, PropPayloads, null))
+			if (propPayloads.TryReadProperty(ref reader, options, PropPayloads, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -108,7 +108,7 @@ internal sealed partial class TermVectorsRequestConverter<TDocument> : System.Te
 				continue;
 			}
 
-			if (propPositions.TryReadProperty(ref reader, options, PropPositions, null))
+			if (propPositions.TryReadProperty(ref reader, options, PropPositions, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -118,17 +118,17 @@ internal sealed partial class TermVectorsRequestConverter<TDocument> : System.Te
 				continue;
 			}
 
-			if (propTermStatistics.TryReadProperty(ref reader, options, PropTermStatistics, null))
+			if (propTermStatistics.TryReadProperty(ref reader, options, PropTermStatistics, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, null))
+			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, static Elastic.Clients.Elasticsearch.VersionType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.VersionType>(o)))
 			{
 				continue;
 			}
@@ -165,16 +165,16 @@ internal sealed partial class TermVectorsRequestConverter<TDocument> : System.Te
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDoc, value.Doc, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument?>)));
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
-		writer.WriteProperty(options, PropFieldStatistics, value.FieldStatistics, null, null);
+		writer.WriteProperty(options, PropFieldStatistics, value.FieldStatistics, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropOffsets, value.Offsets, null, null);
-		writer.WriteProperty(options, PropPayloads, value.Payloads, null, null);
+		writer.WriteProperty(options, PropOffsets, value.Offsets, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropPayloads, value.Payloads, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPerFieldAnalyzer, value.PerFieldAnalyzer, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, string>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, string>(o, v, null, null));
-		writer.WriteProperty(options, PropPositions, value.Positions, null, null);
+		writer.WriteProperty(options, PropPositions, value.Positions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
-		writer.WriteProperty(options, PropTermStatistics, value.TermStatistics, null, null);
-		writer.WriteProperty(options, PropVersion, value.Version, null, null);
-		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
+		writer.WriteProperty(options, PropTermStatistics, value.TermStatistics, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropVersionType, value.VersionType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.VersionType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.VersionType>(o, v));
 		writer.WriteEndObject();
 	}
 }
@@ -265,6 +265,7 @@ internal sealed partial class TermVectorsRequestConverterFactory : System.Text.J
 /// The term and field statistics are therefore only useful as relative measures whereas the absolute numbers have no meaning in this context.
 /// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 /// Use <c>routing</c> only to hit a particular shard.
+/// Refer to the linked documentation for detailed examples of how to use this API.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TermVectorsRequestConverterFactory))]
@@ -522,6 +523,7 @@ public sealed partial class TermVectorsRequest<TDocument> : Elastic.Clients.Elas
 /// The term and field statistics are therefore only useful as relative measures whereas the absolute numbers have no meaning in this context.
 /// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 /// Use <c>routing</c> only to hit a particular shard.
+/// Refer to the linked documentation for detailed examples of how to use this API.
 /// </para>
 /// </summary>
 public readonly partial struct TermVectorsRequestDescriptor<TDocument>

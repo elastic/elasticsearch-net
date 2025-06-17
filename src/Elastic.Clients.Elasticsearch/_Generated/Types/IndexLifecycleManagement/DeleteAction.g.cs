@@ -33,7 +33,7 @@ internal sealed partial class DeleteActionConverter : System.Text.Json.Serializa
 		LocalJsonValue<bool?> propDeleteSearchableSnapshot = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDeleteSearchableSnapshot.TryReadProperty(ref reader, options, PropDeleteSearchableSnapshot, null))
+			if (propDeleteSearchableSnapshot.TryReadProperty(ref reader, options, PropDeleteSearchableSnapshot, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class DeleteActionConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDeleteSearchableSnapshot, value.DeleteSearchableSnapshot, null, null);
+		writer.WriteProperty(options, PropDeleteSearchableSnapshot, value.DeleteSearchableSnapshot, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

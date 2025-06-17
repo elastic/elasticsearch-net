@@ -72,7 +72,7 @@ internal sealed partial class JvmConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class JvmConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propUptimeInMillis.TryReadProperty(ref reader, options, PropUptimeInMillis, null))
+			if (propUptimeInMillis.TryReadProperty(ref reader, options, PropUptimeInMillis, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -118,9 +118,9 @@ internal sealed partial class JvmConverter : System.Text.Json.Serialization.Json
 		writer.WriteProperty(options, PropGc, value.Gc, null, null);
 		writer.WriteProperty(options, PropMem, value.Mem, null, null);
 		writer.WriteProperty(options, PropThreads, value.Threads, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropUptime, value.Uptime, null, null);
-		writer.WriteProperty(options, PropUptimeInMillis, value.UptimeInMillis, null, null);
+		writer.WriteProperty(options, PropUptimeInMillis, value.UptimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

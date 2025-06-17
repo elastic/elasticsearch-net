@@ -99,12 +99,12 @@ internal sealed partial class S3RepositorySettingsConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propCompress.TryReadProperty(ref reader, options, PropCompress, null))
+			if (propCompress.TryReadProperty(ref reader, options, PropCompress, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propDeleteObjectsMaxSize.TryReadProperty(ref reader, options, PropDeleteObjectsMaxSize, null))
+			if (propDeleteObjectsMaxSize.TryReadProperty(ref reader, options, PropDeleteObjectsMaxSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -114,12 +114,12 @@ internal sealed partial class S3RepositorySettingsConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propMaxMultipartParts.TryReadProperty(ref reader, options, PropMaxMultipartParts, null))
+			if (propMaxMultipartParts.TryReadProperty(ref reader, options, PropMaxMultipartParts, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxMultipartUploadCleanupSize.TryReadProperty(ref reader, options, PropMaxMultipartUploadCleanupSize, null))
+			if (propMaxMultipartUploadCleanupSize.TryReadProperty(ref reader, options, PropMaxMultipartUploadCleanupSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -134,12 +134,12 @@ internal sealed partial class S3RepositorySettingsConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propReadonly.TryReadProperty(ref reader, options, PropReadonly, null))
+			if (propReadonly.TryReadProperty(ref reader, options, PropReadonly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propServerSideEncryption.TryReadProperty(ref reader, options, PropServerSideEncryption, null))
+			if (propServerSideEncryption.TryReadProperty(ref reader, options, PropServerSideEncryption, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -159,7 +159,7 @@ internal sealed partial class S3RepositorySettingsConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propThrottledDeleteRetryMaximumNumberOfRetries.TryReadProperty(ref reader, options, PropThrottledDeleteRetryMaximumNumberOfRetries, null))
+			if (propThrottledDeleteRetryMaximumNumberOfRetries.TryReadProperty(ref reader, options, PropThrottledDeleteRetryMaximumNumberOfRetries, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -207,19 +207,19 @@ internal sealed partial class S3RepositorySettingsConverter : System.Text.Json.S
 		writer.WriteProperty(options, PropCannedAcl, value.CannedAcl, null, null);
 		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);
 		writer.WriteProperty(options, PropClient, value.Client, null, null);
-		writer.WriteProperty(options, PropCompress, value.Compress, null, null);
-		writer.WriteProperty(options, PropDeleteObjectsMaxSize, value.DeleteObjectsMaxSize, null, null);
+		writer.WriteProperty(options, PropCompress, value.Compress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropDeleteObjectsMaxSize, value.DeleteObjectsMaxSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropGetRegisterRetryDelay, value.GetRegisterRetryDelay, null, null);
-		writer.WriteProperty(options, PropMaxMultipartParts, value.MaxMultipartParts, null, null);
-		writer.WriteProperty(options, PropMaxMultipartUploadCleanupSize, value.MaxMultipartUploadCleanupSize, null, null);
+		writer.WriteProperty(options, PropMaxMultipartParts, value.MaxMultipartParts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxMultipartUploadCleanupSize, value.MaxMultipartUploadCleanupSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
 		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
-		writer.WriteProperty(options, PropReadonly, value.Readonly, null, null);
-		writer.WriteProperty(options, PropServerSideEncryption, value.ServerSideEncryption, null, null);
+		writer.WriteProperty(options, PropReadonly, value.Readonly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropServerSideEncryption, value.ServerSideEncryption, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropStorageClass, value.StorageClass, null, null);
 		writer.WriteProperty(options, PropThrottledDeleteRetryDelayIncrement, value.ThrottledDeleteRetryDelayIncrement, null, null);
 		writer.WriteProperty(options, PropThrottledDeleteRetryMaximumDelay, value.ThrottledDeleteRetryMaximumDelay, null, null);
-		writer.WriteProperty(options, PropThrottledDeleteRetryMaximumNumberOfRetries, value.ThrottledDeleteRetryMaximumNumberOfRetries, null, null);
+		writer.WriteProperty(options, PropThrottledDeleteRetryMaximumNumberOfRetries, value.ThrottledDeleteRetryMaximumNumberOfRetries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

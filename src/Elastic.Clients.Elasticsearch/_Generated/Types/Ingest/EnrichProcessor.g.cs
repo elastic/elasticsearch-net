@@ -70,17 +70,17 @@ internal sealed partial class EnrichProcessorConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxMatches.TryReadProperty(ref reader, options, PropMaxMatches, null))
+			if (propMaxMatches.TryReadProperty(ref reader, options, PropMaxMatches, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -90,7 +90,7 @@ internal sealed partial class EnrichProcessorConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propOverride.TryReadProperty(ref reader, options, PropOverride, null))
+			if (propOverride.TryReadProperty(ref reader, options, PropOverride, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -100,7 +100,7 @@ internal sealed partial class EnrichProcessorConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propShapeRelation.TryReadProperty(ref reader, options, PropShapeRelation, null))
+			if (propShapeRelation.TryReadProperty(ref reader, options, PropShapeRelation, static Elastic.Clients.Elasticsearch.GeoShapeRelation? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.GeoShapeRelation>(o)))
 			{
 				continue;
 			}
@@ -148,13 +148,13 @@ internal sealed partial class EnrichProcessorConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropIf, value.If, null, null);
-		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
-		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
-		writer.WriteProperty(options, PropMaxMatches, value.MaxMatches, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropMaxMatches, value.MaxMatches, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
-		writer.WriteProperty(options, PropOverride, value.Override, null, null);
+		writer.WriteProperty(options, PropOverride, value.Override, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPolicyName, value.PolicyName, null, null);
-		writer.WriteProperty(options, PropShapeRelation, value.ShapeRelation, null, null);
+		writer.WriteProperty(options, PropShapeRelation, value.ShapeRelation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.GeoShapeRelation? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.GeoShapeRelation>(o, v));
 		writer.WriteProperty(options, PropTag, value.Tag, null, null);
 		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
 		writer.WriteEndObject();

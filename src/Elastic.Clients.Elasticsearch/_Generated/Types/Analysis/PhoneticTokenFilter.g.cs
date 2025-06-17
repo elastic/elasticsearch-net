@@ -56,22 +56,22 @@ internal sealed partial class PhoneticTokenFilterConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propMaxCodeLen.TryReadProperty(ref reader, options, PropMaxCodeLen, null))
+			if (propMaxCodeLen.TryReadProperty(ref reader, options, PropMaxCodeLen, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propNameType.TryReadProperty(ref reader, options, PropNameType, null))
+			if (propNameType.TryReadProperty(ref reader, options, PropNameType, static Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType>(o)))
 			{
 				continue;
 			}
 
-			if (propReplace.TryReadProperty(ref reader, options, PropReplace, null))
+			if (propReplace.TryReadProperty(ref reader, options, PropReplace, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propRuleType.TryReadProperty(ref reader, options, PropRuleType, null))
+			if (propRuleType.TryReadProperty(ref reader, options, PropRuleType, static Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType>(o)))
 			{
 				continue;
 			}
@@ -114,10 +114,10 @@ internal sealed partial class PhoneticTokenFilterConverter : System.Text.Json.Se
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropEncoder, value.Encoder, null, null);
 		writer.WriteProperty(options, PropLanguageset, value.Languageset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>(o, v, null));
-		writer.WriteProperty(options, PropMaxCodeLen, value.MaxCodeLen, null, null);
-		writer.WriteProperty(options, PropNameType, value.NameType, null, null);
-		writer.WriteProperty(options, PropReplace, value.Replace, null, null);
-		writer.WriteProperty(options, PropRuleType, value.RuleType, null, null);
+		writer.WriteProperty(options, PropMaxCodeLen, value.MaxCodeLen, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropNameType, value.NameType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticNameType>(o, v));
+		writer.WriteProperty(options, PropReplace, value.Replace, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropRuleType, value.RuleType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticRuleType>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

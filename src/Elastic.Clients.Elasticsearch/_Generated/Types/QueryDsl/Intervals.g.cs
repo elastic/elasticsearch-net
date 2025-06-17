@@ -30,6 +30,8 @@ internal sealed partial class IntervalsConverter : System.Text.Json.Serializatio
 	private static readonly System.Text.Json.JsonEncodedText VariantFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy");
 	private static readonly System.Text.Json.JsonEncodedText VariantMatch = System.Text.Json.JsonEncodedText.Encode("match");
 	private static readonly System.Text.Json.JsonEncodedText VariantPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText VariantRange = System.Text.Json.JsonEncodedText.Encode("range");
+	private static readonly System.Text.Json.JsonEncodedText VariantRegexp = System.Text.Json.JsonEncodedText.Encode("regexp");
 	private static readonly System.Text.Json.JsonEncodedText VariantWildcard = System.Text.Json.JsonEncodedText.Encode("wildcard");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.Intervals Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -79,6 +81,22 @@ internal sealed partial class IntervalsConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
+			if (reader.ValueTextEquals(VariantRange))
+			{
+				variantType = VariantRange.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRegexp))
+			{
+				variantType = VariantRegexp.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp>(options, null);
+				continue;
+			}
+
 			if (reader.ValueTextEquals(VariantWildcard))
 			{
 				variantType = VariantWildcard.Value;
@@ -125,6 +143,12 @@ internal sealed partial class IntervalsConverter : System.Text.Json.Serializatio
 				break;
 			case "prefix":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix)value.Variant, null, null);
+				break;
+			case "range":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange)value.Variant, null, null);
+				break;
+			case "regexp":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp)value.Variant, null, null);
 				break;
 			case "wildcard":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard)value.Variant, null, null);
@@ -192,6 +216,8 @@ public sealed partial class Intervals
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? Prefix { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix>("prefix"); set => SetVariant("prefix", value); }
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange? Range { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange>("range"); set => SetVariant("range", value); }
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp? Regexp { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp>("regexp"); set => SetVariant("regexp", value); }
 
 	/// <summary>
 	/// <para>
@@ -205,6 +231,8 @@ public sealed partial class Intervals
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFuzzy value) => new Elastic.Clients.Elasticsearch.QueryDsl.Intervals { Fuzzy = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsMatch value) => new Elastic.Clients.Elasticsearch.QueryDsl.Intervals { Match = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix value) => new Elastic.Clients.Elasticsearch.QueryDsl.Intervals { Prefix = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange value) => new Elastic.Clients.Elasticsearch.QueryDsl.Intervals { Range = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp value) => new Elastic.Clients.Elasticsearch.QueryDsl.Intervals { Regexp = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Intervals(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard value) => new Elastic.Clients.Elasticsearch.QueryDsl.Intervals { Wildcard = value };
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -352,6 +380,36 @@ public readonly partial struct IntervalsDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument> Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument>> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange? value)
+	{
+		Instance.Range = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument> Range()
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument> Range(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument>>? action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument> Regexp(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp? value)
+	{
+		Instance.Regexp = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor<TDocument> Regexp(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor<TDocument>> action)
+	{
+		Instance.Regexp = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -567,6 +625,48 @@ public readonly partial struct IntervalsDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor Prefix<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<T>> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange? value)
+	{
+		Instance.Range = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor Range()
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor Range(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor>? action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor Range<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<T>>? action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor Regexp(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp? value)
+	{
+		Instance.Regexp = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor Regexp(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor> action)
+	{
+		Instance.Regexp = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsDescriptor Regexp<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor<T>> action)
+	{
+		Instance.Regexp = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor<T>.Build(action);
 		return this;
 	}
 

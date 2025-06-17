@@ -124,7 +124,7 @@ internal sealed partial class PutJobRequestConverter : System.Text.Json.Serializ
 		LocalJsonValue<long?> propResultsRetentionDays = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowLazyOpen.TryReadProperty(ref reader, options, PropAllowLazyOpen, null))
+			if (propAllowLazyOpen.TryReadProperty(ref reader, options, PropAllowLazyOpen, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -149,7 +149,7 @@ internal sealed partial class PutJobRequestConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propDailyModelSnapshotRetentionAfterDays.TryReadProperty(ref reader, options, PropDailyModelSnapshotRetentionAfterDays, null))
+			if (propDailyModelSnapshotRetentionAfterDays.TryReadProperty(ref reader, options, PropDailyModelSnapshotRetentionAfterDays, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -184,12 +184,12 @@ internal sealed partial class PutJobRequestConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propModelSnapshotRetentionDays.TryReadProperty(ref reader, options, PropModelSnapshotRetentionDays, null))
+			if (propModelSnapshotRetentionDays.TryReadProperty(ref reader, options, PropModelSnapshotRetentionDays, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propRenormalizationWindowDays.TryReadProperty(ref reader, options, PropRenormalizationWindowDays, null))
+			if (propRenormalizationWindowDays.TryReadProperty(ref reader, options, PropRenormalizationWindowDays, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -199,7 +199,7 @@ internal sealed partial class PutJobRequestConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propResultsRetentionDays.TryReadProperty(ref reader, options, PropResultsRetentionDays, null))
+			if (propResultsRetentionDays.TryReadProperty(ref reader, options, PropResultsRetentionDays, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -238,22 +238,22 @@ internal sealed partial class PutJobRequestConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowLazyOpen, value.AllowLazyOpen, null, null);
+		writer.WriteProperty(options, PropAllowLazyOpen, value.AllowLazyOpen, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropAnalysisConfig, value.AnalysisConfig, null, null);
 		writer.WriteProperty(options, PropAnalysisLimits, value.AnalysisLimits, null, null);
 		writer.WriteProperty(options, PropBackgroundPersistInterval, value.BackgroundPersistInterval, null, null);
 		writer.WriteProperty(options, PropCustomSettings, value.CustomSettings, null, null);
-		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, null);
+		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropDataDescription, value.DataDescription, null, null);
 		writer.WriteProperty(options, PropDatafeedConfig, value.DatafeedConfig, null, null);
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropModelPlotConfig, value.ModelPlotConfig, null, null);
-		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, null);
-		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays, null, null);
+		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropResultsIndexName, value.ResultsIndexName, null, null);
-		writer.WriteProperty(options, PropResultsRetentionDays, value.ResultsRetentionDays, null, null);
+		writer.WriteProperty(options, PropResultsRetentionDays, value.ResultsRetentionDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -39,17 +39,17 @@ internal sealed partial class DenseVectorIndexOptionsConverter : System.Text.Jso
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propConfidenceInterval.TryReadProperty(ref reader, options, PropConfidenceInterval, null))
+			if (propConfidenceInterval.TryReadProperty(ref reader, options, PropConfidenceInterval, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propEfConstruction.TryReadProperty(ref reader, options, PropEfConstruction, null))
+			if (propEfConstruction.TryReadProperty(ref reader, options, PropEfConstruction, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propM.TryReadProperty(ref reader, options, PropM, null))
+			if (propM.TryReadProperty(ref reader, options, PropM, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -81,9 +81,9 @@ internal sealed partial class DenseVectorIndexOptionsConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConfidenceInterval, value.ConfidenceInterval, null, null);
-		writer.WriteProperty(options, PropEfConstruction, value.EfConstruction, null, null);
-		writer.WriteProperty(options, PropM, value.M, null, null);
+		writer.WriteProperty(options, PropConfidenceInterval, value.ConfidenceInterval, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropEfConstruction, value.EfConstruction, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropM, value.M, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}

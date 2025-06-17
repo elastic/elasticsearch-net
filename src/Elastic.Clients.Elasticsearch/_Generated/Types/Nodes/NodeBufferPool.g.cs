@@ -41,7 +41,7 @@ internal sealed partial class NodeBufferPoolConverter : System.Text.Json.Seriali
 		LocalJsonValue<long?> propUsedInBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -51,7 +51,7 @@ internal sealed partial class NodeBufferPoolConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propTotalCapacityInBytes.TryReadProperty(ref reader, options, PropTotalCapacityInBytes, null))
+			if (propTotalCapacityInBytes.TryReadProperty(ref reader, options, PropTotalCapacityInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class NodeBufferPoolConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propUsedInBytes.TryReadProperty(ref reader, options, PropUsedInBytes, null))
+			if (propUsedInBytes.TryReadProperty(ref reader, options, PropUsedInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -89,11 +89,11 @@ internal sealed partial class NodeBufferPoolConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeBufferPool value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropCount, value.Count, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTotalCapacity, value.TotalCapacity, null, null);
-		writer.WriteProperty(options, PropTotalCapacityInBytes, value.TotalCapacityInBytes, null, null);
+		writer.WriteProperty(options, PropTotalCapacityInBytes, value.TotalCapacityInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropUsed, value.Used, null, null);
-		writer.WriteProperty(options, PropUsedInBytes, value.UsedInBytes, null, null);
+		writer.WriteProperty(options, PropUsedInBytes, value.UsedInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

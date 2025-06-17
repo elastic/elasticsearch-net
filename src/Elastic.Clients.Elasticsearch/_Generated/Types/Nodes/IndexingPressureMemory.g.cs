@@ -49,7 +49,7 @@ internal sealed partial class IndexingPressureMemoryConverter : System.Text.Json
 				continue;
 			}
 
-			if (propLimitInBytes.TryReadProperty(ref reader, options, PropLimitInBytes, null))
+			if (propLimitInBytes.TryReadProperty(ref reader, options, PropLimitInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -83,7 +83,7 @@ internal sealed partial class IndexingPressureMemoryConverter : System.Text.Json
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCurrent, value.Current, null, null);
 		writer.WriteProperty(options, PropLimit, value.Limit, null, null);
-		writer.WriteProperty(options, PropLimitInBytes, value.LimitInBytes, null, null);
+		writer.WriteProperty(options, PropLimitInBytes, value.LimitInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteEndObject();
 	}

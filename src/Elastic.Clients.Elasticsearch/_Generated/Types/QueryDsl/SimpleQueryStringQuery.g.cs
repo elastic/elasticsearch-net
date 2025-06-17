@@ -66,22 +66,22 @@ internal sealed partial class SimpleQueryStringQueryConverter : System.Text.Json
 				continue;
 			}
 
-			if (propAnalyzeWildcard.TryReadProperty(ref reader, options, PropAnalyzeWildcard, null))
+			if (propAnalyzeWildcard.TryReadProperty(ref reader, options, PropAnalyzeWildcard, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propAutoGenerateSynonymsPhraseQuery.TryReadProperty(ref reader, options, PropAutoGenerateSynonymsPhraseQuery, null))
+			if (propAutoGenerateSynonymsPhraseQuery.TryReadProperty(ref reader, options, PropAutoGenerateSynonymsPhraseQuery, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propDefaultOperator.TryReadProperty(ref reader, options, PropDefaultOperator, null))
+			if (propDefaultOperator.TryReadProperty(ref reader, options, PropDefaultOperator, static Elastic.Clients.Elasticsearch.QueryDsl.Operator? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator>(o)))
 			{
 				continue;
 			}
@@ -91,27 +91,27 @@ internal sealed partial class SimpleQueryStringQueryConverter : System.Text.Json
 				continue;
 			}
 
-			if (propFlags.TryReadProperty(ref reader, options, PropFlags, null))
+			if (propFlags.TryReadProperty(ref reader, options, PropFlags, static Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags>(o)))
 			{
 				continue;
 			}
 
-			if (propFuzzyMaxExpansions.TryReadProperty(ref reader, options, PropFuzzyMaxExpansions, null))
+			if (propFuzzyMaxExpansions.TryReadProperty(ref reader, options, PropFuzzyMaxExpansions, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propFuzzyPrefixLength.TryReadProperty(ref reader, options, PropFuzzyPrefixLength, null))
+			if (propFuzzyPrefixLength.TryReadProperty(ref reader, options, PropFuzzyPrefixLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propFuzzyTranspositions.TryReadProperty(ref reader, options, PropFuzzyTranspositions, null))
+			if (propFuzzyTranspositions.TryReadProperty(ref reader, options, PropFuzzyTranspositions, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propLenient.TryReadProperty(ref reader, options, PropLenient, null))
+			if (propLenient.TryReadProperty(ref reader, options, PropLenient, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -170,16 +170,16 @@ internal sealed partial class SimpleQueryStringQueryConverter : System.Text.Json
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
-		writer.WriteProperty(options, PropAnalyzeWildcard, value.AnalyzeWildcard, null, null);
-		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery, null, null);
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
-		writer.WriteProperty(options, PropDefaultOperator, value.DefaultOperator, null, null);
+		writer.WriteProperty(options, PropAnalyzeWildcard, value.AnalyzeWildcard, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropAutoGenerateSynonymsPhraseQuery, value.AutoGenerateSynonymsPhraseQuery, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropDefaultOperator, value.DefaultOperator, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.Operator? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, null);
-		writer.WriteProperty(options, PropFlags, value.Flags, null, null);
-		writer.WriteProperty(options, PropFuzzyMaxExpansions, value.FuzzyMaxExpansions, null, null);
-		writer.WriteProperty(options, PropFuzzyPrefixLength, value.FuzzyPrefixLength, null, null);
-		writer.WriteProperty(options, PropFuzzyTranspositions, value.FuzzyTranspositions, null, null);
-		writer.WriteProperty(options, PropLenient, value.Lenient, null, null);
+		writer.WriteProperty(options, PropFlags, value.Flags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags>(o, v));
+		writer.WriteProperty(options, PropFuzzyMaxExpansions, value.FuzzyMaxExpansions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropFuzzyPrefixLength, value.FuzzyPrefixLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropFuzzyTranspositions, value.FuzzyTranspositions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropLenient, value.Lenient, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);

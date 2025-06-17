@@ -164,7 +164,7 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propCheckOnStartup.TryReadProperty(ref reader, options, PropCheckOnStartup, null))
+			if (propCheckOnStartup.TryReadProperty(ref reader, options, PropCheckOnStartup, static Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup>(o)))
 			{
 				continue;
 			}
@@ -174,12 +174,12 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propCreationDate.TryReadProperty(ref reader, options, PropCreationDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propCreationDate.TryReadProperty(ref reader, options, PropCreationDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propCreationDateString.TryReadProperty(ref reader, options, PropCreationDateString, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propCreationDateString.TryReadProperty(ref reader, options, PropCreationDateString, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -234,7 +234,7 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propLoadFixedBitsetFiltersEagerly.TryReadProperty(ref reader, options, PropLoadFixedBitsetFiltersEagerly, null))
+			if (propLoadFixedBitsetFiltersEagerly.TryReadProperty(ref reader, options, PropLoadFixedBitsetFiltersEagerly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -244,57 +244,57 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propMaxDocvalueFieldsSearch.TryReadProperty(ref reader, options, PropMaxDocvalueFieldsSearch, null))
+			if (propMaxDocvalueFieldsSearch.TryReadProperty(ref reader, options, PropMaxDocvalueFieldsSearch, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxInnerResultWindow.TryReadProperty(ref reader, options, PropMaxInnerResultWindow, null))
+			if (propMaxInnerResultWindow.TryReadProperty(ref reader, options, PropMaxInnerResultWindow, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxNgramDiff.TryReadProperty(ref reader, options, PropMaxNgramDiff, null))
+			if (propMaxNgramDiff.TryReadProperty(ref reader, options, PropMaxNgramDiff, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxRefreshListeners.TryReadProperty(ref reader, options, PropMaxRefreshListeners, null))
+			if (propMaxRefreshListeners.TryReadProperty(ref reader, options, PropMaxRefreshListeners, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxRegexLength.TryReadProperty(ref reader, options, PropMaxRegexLength, null))
+			if (propMaxRegexLength.TryReadProperty(ref reader, options, PropMaxRegexLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxRescoreWindow.TryReadProperty(ref reader, options, PropMaxRescoreWindow, null))
+			if (propMaxRescoreWindow.TryReadProperty(ref reader, options, PropMaxRescoreWindow, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxResultWindow.TryReadProperty(ref reader, options, PropMaxResultWindow, null))
+			if (propMaxResultWindow.TryReadProperty(ref reader, options, PropMaxResultWindow, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxScriptFields.TryReadProperty(ref reader, options, PropMaxScriptFields, null))
+			if (propMaxScriptFields.TryReadProperty(ref reader, options, PropMaxScriptFields, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxShingleDiff.TryReadProperty(ref reader, options, PropMaxShingleDiff, null))
+			if (propMaxShingleDiff.TryReadProperty(ref reader, options, PropMaxShingleDiff, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxSlicesPerScroll.TryReadProperty(ref reader, options, PropMaxSlicesPerScroll, null))
+			if (propMaxSlicesPerScroll.TryReadProperty(ref reader, options, PropMaxSlicesPerScroll, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxTermsCount.TryReadProperty(ref reader, options, PropMaxTermsCount, null))
+			if (propMaxTermsCount.TryReadProperty(ref reader, options, PropMaxTermsCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -314,7 +314,7 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propNumberOfRoutingShards.TryReadProperty(ref reader, options, PropNumberOfRoutingShards, null))
+			if (propNumberOfRoutingShards.TryReadProperty(ref reader, options, PropNumberOfRoutingShards, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -354,7 +354,7 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propRoutingPartitionSize.TryReadProperty(ref reader, options, PropRoutingPartitionSize, null))
+			if (propRoutingPartitionSize.TryReadProperty(ref reader, options, PropRoutingPartitionSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -399,7 +399,7 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propTopMetricsMaxSize.TryReadProperty(ref reader, options, PropTopMetricsMaxSize, null))
+			if (propTopMetricsMaxSize.TryReadProperty(ref reader, options, PropTopMetricsMaxSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -425,7 +425,7 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 			}
 
 			propOtherSettings ??= new System.Collections.Generic.Dictionary<string, object>();
-			reader.ReadProperty(options, out string key, out object value, null, null);
+			reader.ReadProperty(options, out string key, out object value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<object>(o)!);
 			propOtherSettings[key] = value;
 		}
 
@@ -499,10 +499,10 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropAnalyze, value.Analyze, null, null);
 		writer.WriteProperty(options, PropAutoExpandReplicas, value.AutoExpandReplicas, null, null);
 		writer.WriteProperty(options, PropBlocks, value.Blocks, null, null);
-		writer.WriteProperty(options, PropCheckOnStartup, value.CheckOnStartup, null, null);
+		writer.WriteProperty(options, PropCheckOnStartup, value.CheckOnStartup, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup>(o, v));
 		writer.WriteProperty(options, PropCodec, value.Codec, null, null);
-		writer.WriteProperty(options, PropCreationDate, value.CreationDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropCreationDateString, value.CreationDateString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreationDate, value.CreationDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropCreationDateString, value.CreationDateString, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropDefaultPipeline, value.DefaultPipeline, null, null);
 		writer.WriteProperty(options, PropFinalPipeline, value.FinalPipeline, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<string, int>? v) => w.WriteUnionValue<string, int>(o, v, null, null));
@@ -513,23 +513,23 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropIndexingPressure, value.IndexingPressure, null, null);
 		writer.WriteProperty(options, PropIndexingSlowlog, value.IndexingSlowlog, null, null);
 		writer.WriteProperty(options, PropLifecycle, value.Lifecycle, null, null);
-		writer.WriteProperty(options, PropLoadFixedBitsetFiltersEagerly, value.LoadFixedBitsetFiltersEagerly, null, null);
+		writer.WriteProperty(options, PropLoadFixedBitsetFiltersEagerly, value.LoadFixedBitsetFiltersEagerly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMapping, value.Mapping, null, null);
-		writer.WriteProperty(options, PropMaxDocvalueFieldsSearch, value.MaxDocvalueFieldsSearch, null, null);
-		writer.WriteProperty(options, PropMaxInnerResultWindow, value.MaxInnerResultWindow, null, null);
-		writer.WriteProperty(options, PropMaxNgramDiff, value.MaxNgramDiff, null, null);
-		writer.WriteProperty(options, PropMaxRefreshListeners, value.MaxRefreshListeners, null, null);
-		writer.WriteProperty(options, PropMaxRegexLength, value.MaxRegexLength, null, null);
-		writer.WriteProperty(options, PropMaxRescoreWindow, value.MaxRescoreWindow, null, null);
-		writer.WriteProperty(options, PropMaxResultWindow, value.MaxResultWindow, null, null);
-		writer.WriteProperty(options, PropMaxScriptFields, value.MaxScriptFields, null, null);
-		writer.WriteProperty(options, PropMaxShingleDiff, value.MaxShingleDiff, null, null);
-		writer.WriteProperty(options, PropMaxSlicesPerScroll, value.MaxSlicesPerScroll, null, null);
-		writer.WriteProperty(options, PropMaxTermsCount, value.MaxTermsCount, null, null);
+		writer.WriteProperty(options, PropMaxDocvalueFieldsSearch, value.MaxDocvalueFieldsSearch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxInnerResultWindow, value.MaxInnerResultWindow, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxNgramDiff, value.MaxNgramDiff, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxRefreshListeners, value.MaxRefreshListeners, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxRegexLength, value.MaxRegexLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxRescoreWindow, value.MaxRescoreWindow, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxResultWindow, value.MaxResultWindow, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxScriptFields, value.MaxScriptFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxShingleDiff, value.MaxShingleDiff, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxSlicesPerScroll, value.MaxSlicesPerScroll, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxTermsCount, value.MaxTermsCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMerge, value.Merge, null, null);
 		writer.WriteProperty(options, PropMode, value.Mode, null, null);
 		writer.WriteProperty(options, PropNumberOfReplicas, value.NumberOfReplicas, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<int, string>? v) => w.WriteUnionValue<int, string>(o, v, null, null));
-		writer.WriteProperty(options, PropNumberOfRoutingShards, value.NumberOfRoutingShards, null, null);
+		writer.WriteProperty(options, PropNumberOfRoutingShards, value.NumberOfRoutingShards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropNumberOfShards, value.NumberOfShards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<int, string>? v) => w.WriteUnionValue<int, string>(o, v, null, null));
 		writer.WriteProperty(options, PropPriority, value.Priority, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<int, string>? v) => w.WriteUnionValue<int, string>(o, v, null, null));
 		writer.WriteProperty(options, PropProvidedName, value.ProvidedName, null, null);
@@ -537,7 +537,7 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropQueryString, value.QueryString, null, null);
 		writer.WriteProperty(options, PropRefreshInterval, value.RefreshInterval, null, null);
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
-		writer.WriteProperty(options, PropRoutingPartitionSize, value.RoutingPartitionSize, null, null);
+		writer.WriteProperty(options, PropRoutingPartitionSize, value.RoutingPartitionSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRoutingPath, value.RoutingPath, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropSearch, value.Search, null, null);
 		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
@@ -546,7 +546,7 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropSort, value.Sort, null, null);
 		writer.WriteProperty(options, PropStore, value.Store, null, null);
 		writer.WriteProperty(options, PropTimeSeries, value.TimeSeries, null, null);
-		writer.WriteProperty(options, PropTopMetricsMaxSize, value.TopMetricsMaxSize, null, null);
+		writer.WriteProperty(options, PropTopMetricsMaxSize, value.TopMetricsMaxSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTranslog, value.Translog, null, null);
 		writer.WriteProperty(options, PropUuid, value.Uuid, null, null);
 		writer.WriteProperty(options, PropVerifiedBeforeClose, value.VerifiedBeforeClose, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<bool, string>? v) => w.WriteUnionValue<bool, string>(o, v, null, null));
@@ -555,7 +555,7 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 		{
 			foreach (var item in value.OtherSettings)
 			{
-				writer.WriteProperty(options, item.Key, item.Value, null, null);
+				writer.WriteProperty(options, item.Key, item.Value, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), null);
 			}
 		}
 
@@ -590,6 +590,7 @@ public sealed partial class IndexSettings
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? Analyze { get; set; }
@@ -723,6 +724,7 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? value)
@@ -734,6 +736,7 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Analyze()
@@ -745,6 +748,7 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> Analyze(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor>? action)
@@ -1441,6 +1445,7 @@ public readonly partial struct IndexSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Analyze(Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze? value)
@@ -1452,6 +1457,7 @@ public readonly partial struct IndexSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Analyze()
@@ -1463,6 +1469,7 @@ public readonly partial struct IndexSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// Settings to define analyzers, tokenizers, token filters and character filters.
+	/// Refer to the linked documentation for step-by-step examples of updating analyzers on existing indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor Analyze(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyzeDescriptor>? action)

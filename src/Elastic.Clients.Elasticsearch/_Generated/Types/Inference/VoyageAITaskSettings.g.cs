@@ -44,17 +44,17 @@ internal sealed partial class VoyageAITaskSettingsConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, null))
+			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propTopK.TryReadProperty(ref reader, options, PropTopK, null))
+			if (propTopK.TryReadProperty(ref reader, options, PropTopK, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propTruncation.TryReadProperty(ref reader, options, PropTruncation, null))
+			if (propTruncation.TryReadProperty(ref reader, options, PropTruncation, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -82,9 +82,9 @@ internal sealed partial class VoyageAITaskSettingsConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropInputType, value.InputType, null, null);
-		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, null);
-		writer.WriteProperty(options, PropTopK, value.TopK, null, null);
-		writer.WriteProperty(options, PropTruncation, value.Truncation, null, null);
+		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropTopK, value.TopK, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTruncation, value.Truncation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

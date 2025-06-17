@@ -53,57 +53,57 @@ internal sealed partial class RequestCountsConverter : System.Text.Json.Serializ
 		LocalJsonValue<long?> propPutObject = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propGetBlob.TryReadProperty(ref reader, options, PropGetBlob, null))
+			if (propGetBlob.TryReadProperty(ref reader, options, PropGetBlob, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propGetBlobProperties.TryReadProperty(ref reader, options, PropGetBlobProperties, null))
+			if (propGetBlobProperties.TryReadProperty(ref reader, options, PropGetBlobProperties, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propGetObject.TryReadProperty(ref reader, options, PropGetObject, null))
+			if (propGetObject.TryReadProperty(ref reader, options, PropGetObject, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propInsertObject.TryReadProperty(ref reader, options, PropInsertObject, null))
+			if (propInsertObject.TryReadProperty(ref reader, options, PropInsertObject, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propListBlobs.TryReadProperty(ref reader, options, PropListBlobs, null))
+			if (propListBlobs.TryReadProperty(ref reader, options, PropListBlobs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propListObjects.TryReadProperty(ref reader, options, PropListObjects, null))
+			if (propListObjects.TryReadProperty(ref reader, options, PropListObjects, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propPutBlob.TryReadProperty(ref reader, options, PropPutBlob, null))
+			if (propPutBlob.TryReadProperty(ref reader, options, PropPutBlob, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propPutBlock.TryReadProperty(ref reader, options, PropPutBlock, null))
+			if (propPutBlock.TryReadProperty(ref reader, options, PropPutBlock, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propPutBlockList.TryReadProperty(ref reader, options, PropPutBlockList, null))
+			if (propPutBlockList.TryReadProperty(ref reader, options, PropPutBlockList, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propPutMultipartObject.TryReadProperty(ref reader, options, PropPutMultipartObject, null))
+			if (propPutMultipartObject.TryReadProperty(ref reader, options, PropPutMultipartObject, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propPutObject.TryReadProperty(ref reader, options, PropPutObject, null))
+			if (propPutObject.TryReadProperty(ref reader, options, PropPutObject, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -137,17 +137,17 @@ internal sealed partial class RequestCountsConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.RequestCounts value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropGetBlob, value.GetBlob, null, null);
-		writer.WriteProperty(options, PropGetBlobProperties, value.GetBlobProperties, null, null);
-		writer.WriteProperty(options, PropGetObject, value.GetObject, null, null);
-		writer.WriteProperty(options, PropInsertObject, value.InsertObject, null, null);
-		writer.WriteProperty(options, PropListBlobs, value.ListBlobs, null, null);
-		writer.WriteProperty(options, PropListObjects, value.ListObjects, null, null);
-		writer.WriteProperty(options, PropPutBlob, value.PutBlob, null, null);
-		writer.WriteProperty(options, PropPutBlock, value.PutBlock, null, null);
-		writer.WriteProperty(options, PropPutBlockList, value.PutBlockList, null, null);
-		writer.WriteProperty(options, PropPutMultipartObject, value.PutMultipartObject, null, null);
-		writer.WriteProperty(options, PropPutObject, value.PutObject, null, null);
+		writer.WriteProperty(options, PropGetBlob, value.GetBlob, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropGetBlobProperties, value.GetBlobProperties, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropGetObject, value.GetObject, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropInsertObject, value.InsertObject, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropListBlobs, value.ListBlobs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropListObjects, value.ListObjects, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropPutBlob, value.PutBlob, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropPutBlock, value.PutBlock, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropPutBlockList, value.PutBlockList, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropPutMultipartObject, value.PutMultipartObject, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropPutObject, value.PutObject, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

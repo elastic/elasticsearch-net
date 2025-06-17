@@ -51,7 +51,7 @@ internal sealed partial class CreateApiKeyResponseConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, null))
+			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class CreateApiKeyResponseConverter : System.Text.Json.S
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
 		writer.WriteProperty(options, PropEncoded, value.Encoded, null, null);
-		writer.WriteProperty(options, PropExpiration, value.Expiration, null, null);
+		writer.WriteProperty(options, PropExpiration, value.Expiration, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteEndObject();

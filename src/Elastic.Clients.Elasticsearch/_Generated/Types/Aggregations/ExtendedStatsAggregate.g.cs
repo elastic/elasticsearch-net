@@ -79,7 +79,7 @@ internal sealed partial class ExtendedStatsAggregateConverter : System.Text.Json
 		LocalJsonValue<string?> propVarianceSamplingAsString = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAvg.TryReadProperty(ref reader, options, PropAvg, null))
+			if (propAvg.TryReadProperty(ref reader, options, PropAvg, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -94,7 +94,7 @@ internal sealed partial class ExtendedStatsAggregateConverter : System.Text.Json
 				continue;
 			}
 
-			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			if (propMax.TryReadProperty(ref reader, options, PropMax, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -109,7 +109,7 @@ internal sealed partial class ExtendedStatsAggregateConverter : System.Text.Json
 				continue;
 			}
 
-			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
+			if (propMin.TryReadProperty(ref reader, options, PropMin, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -119,7 +119,7 @@ internal sealed partial class ExtendedStatsAggregateConverter : System.Text.Json
 				continue;
 			}
 
-			if (propStdDeviation.TryReadProperty(ref reader, options, PropStdDeviation, null))
+			if (propStdDeviation.TryReadProperty(ref reader, options, PropStdDeviation, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -139,12 +139,12 @@ internal sealed partial class ExtendedStatsAggregateConverter : System.Text.Json
 				continue;
 			}
 
-			if (propStdDeviationPopulation.TryReadProperty(ref reader, options, PropStdDeviationPopulation, null))
+			if (propStdDeviationPopulation.TryReadProperty(ref reader, options, PropStdDeviationPopulation, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propStdDeviationSampling.TryReadProperty(ref reader, options, PropStdDeviationSampling, null))
+			if (propStdDeviationSampling.TryReadProperty(ref reader, options, PropStdDeviationSampling, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -159,7 +159,7 @@ internal sealed partial class ExtendedStatsAggregateConverter : System.Text.Json
 				continue;
 			}
 
-			if (propSumOfSquares.TryReadProperty(ref reader, options, PropSumOfSquares, null))
+			if (propSumOfSquares.TryReadProperty(ref reader, options, PropSumOfSquares, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -169,7 +169,7 @@ internal sealed partial class ExtendedStatsAggregateConverter : System.Text.Json
 				continue;
 			}
 
-			if (propVariance.TryReadProperty(ref reader, options, PropVariance, null))
+			if (propVariance.TryReadProperty(ref reader, options, PropVariance, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -179,7 +179,7 @@ internal sealed partial class ExtendedStatsAggregateConverter : System.Text.Json
 				continue;
 			}
 
-			if (propVariancePopulation.TryReadProperty(ref reader, options, PropVariancePopulation, null))
+			if (propVariancePopulation.TryReadProperty(ref reader, options, PropVariancePopulation, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -189,7 +189,7 @@ internal sealed partial class ExtendedStatsAggregateConverter : System.Text.Json
 				continue;
 			}
 
-			if (propVarianceSampling.TryReadProperty(ref reader, options, PropVarianceSampling, null))
+			if (propVarianceSampling.TryReadProperty(ref reader, options, PropVarianceSampling, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -241,29 +241,29 @@ internal sealed partial class ExtendedStatsAggregateConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAvg, value.Avg, null, null);
+		writer.WriteProperty(options, PropAvg, value.Avg, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropAvgAsString, value.AvgAsString, null, null);
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
-		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMax, value.Max, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropMaxAsString, value.MaxAsString, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
-		writer.WriteProperty(options, PropMin, value.Min, null, null);
+		writer.WriteProperty(options, PropMin, value.Min, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropMinAsString, value.MinAsString, null, null);
-		writer.WriteProperty(options, PropStdDeviation, value.StdDeviation, null, null);
+		writer.WriteProperty(options, PropStdDeviation, value.StdDeviation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropStdDeviationAsString, value.StdDeviationAsString, null, null);
 		writer.WriteProperty(options, PropStdDeviationBounds, value.StdDeviationBounds, null, null);
 		writer.WriteProperty(options, PropStdDeviationBoundsAsString, value.StdDeviationBoundsAsString, null, null);
-		writer.WriteProperty(options, PropStdDeviationPopulation, value.StdDeviationPopulation, null, null);
-		writer.WriteProperty(options, PropStdDeviationSampling, value.StdDeviationSampling, null, null);
+		writer.WriteProperty(options, PropStdDeviationPopulation, value.StdDeviationPopulation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropStdDeviationSampling, value.StdDeviationSampling, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropSum, value.Sum, null, null);
 		writer.WriteProperty(options, PropSumAsString, value.SumAsString, null, null);
-		writer.WriteProperty(options, PropSumOfSquares, value.SumOfSquares, null, null);
+		writer.WriteProperty(options, PropSumOfSquares, value.SumOfSquares, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropSumOfSquaresAsString, value.SumOfSquaresAsString, null, null);
-		writer.WriteProperty(options, PropVariance, value.Variance, null, null);
+		writer.WriteProperty(options, PropVariance, value.Variance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropVarianceAsString, value.VarianceAsString, null, null);
-		writer.WriteProperty(options, PropVariancePopulation, value.VariancePopulation, null, null);
+		writer.WriteProperty(options, PropVariancePopulation, value.VariancePopulation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropVariancePopulationAsString, value.VariancePopulationAsString, null, null);
-		writer.WriteProperty(options, PropVarianceSampling, value.VarianceSampling, null, null);
+		writer.WriteProperty(options, PropVarianceSampling, value.VarianceSampling, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropVarianceSamplingAsString, value.VarianceSamplingAsString, null, null);
 		writer.WriteEndObject();
 	}

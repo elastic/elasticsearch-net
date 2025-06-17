@@ -44,17 +44,17 @@ internal sealed partial class ClusterIndicesShardsConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propPrimaries.TryReadProperty(ref reader, options, PropPrimaries, null))
+			if (propPrimaries.TryReadProperty(ref reader, options, PropPrimaries, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propReplication.TryReadProperty(ref reader, options, PropReplication, null))
+			if (propReplication.TryReadProperty(ref reader, options, PropReplication, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -82,9 +82,9 @@ internal sealed partial class ClusterIndicesShardsConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropPrimaries, value.Primaries, null, null);
-		writer.WriteProperty(options, PropReplication, value.Replication, null, null);
-		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropPrimaries, value.Primaries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropReplication, value.Replication, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropTotal, value.Total, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

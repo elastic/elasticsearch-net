@@ -35,7 +35,7 @@ internal sealed partial class ShardsCapacityIndicatorTierDetailConverter : Syste
 		LocalJsonValue<int> propMaxShardsInCluster = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCurrentUsedShards.TryReadProperty(ref reader, options, PropCurrentUsedShards, null))
+			if (propCurrentUsedShards.TryReadProperty(ref reader, options, PropCurrentUsedShards, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -65,7 +65,7 @@ internal sealed partial class ShardsCapacityIndicatorTierDetailConverter : Syste
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.ShardsCapacityIndicatorTierDetail value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCurrentUsedShards, value.CurrentUsedShards, null, null);
+		writer.WriteProperty(options, PropCurrentUsedShards, value.CurrentUsedShards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMaxShardsInCluster, value.MaxShardsInCluster, null, null);
 		writer.WriteEndObject();
 	}

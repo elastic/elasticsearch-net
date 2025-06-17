@@ -74,7 +74,7 @@ internal sealed partial class DataCountsConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propEarliestRecordTimestamp.TryReadProperty(ref reader, options, PropEarliestRecordTimestamp, null))
+			if (propEarliestRecordTimestamp.TryReadProperty(ref reader, options, PropEarliestRecordTimestamp, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -109,32 +109,32 @@ internal sealed partial class DataCountsConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propLastDataTime.TryReadProperty(ref reader, options, PropLastDataTime, null))
+			if (propLastDataTime.TryReadProperty(ref reader, options, PropLastDataTime, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propLatestBucketTimestamp.TryReadProperty(ref reader, options, PropLatestBucketTimestamp, null))
+			if (propLatestBucketTimestamp.TryReadProperty(ref reader, options, PropLatestBucketTimestamp, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propLatestEmptyBucketTimestamp.TryReadProperty(ref reader, options, PropLatestEmptyBucketTimestamp, null))
+			if (propLatestEmptyBucketTimestamp.TryReadProperty(ref reader, options, PropLatestEmptyBucketTimestamp, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propLatestRecordTimestamp.TryReadProperty(ref reader, options, PropLatestRecordTimestamp, null))
+			if (propLatestRecordTimestamp.TryReadProperty(ref reader, options, PropLatestRecordTimestamp, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propLatestSparseBucketTimestamp.TryReadProperty(ref reader, options, PropLatestSparseBucketTimestamp, null))
+			if (propLatestSparseBucketTimestamp.TryReadProperty(ref reader, options, PropLatestSparseBucketTimestamp, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propLogTime.TryReadProperty(ref reader, options, PropLogTime, null))
+			if (propLogTime.TryReadProperty(ref reader, options, PropLogTime, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -202,19 +202,19 @@ internal sealed partial class DataCountsConverter : System.Text.Json.Serializati
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBucketCount, value.BucketCount, null, null);
-		writer.WriteProperty(options, PropEarliestRecordTimestamp, value.EarliestRecordTimestamp, null, null);
+		writer.WriteProperty(options, PropEarliestRecordTimestamp, value.EarliestRecordTimestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropEmptyBucketCount, value.EmptyBucketCount, null, null);
 		writer.WriteProperty(options, PropInputBytes, value.InputBytes, null, null);
 		writer.WriteProperty(options, PropInputFieldCount, value.InputFieldCount, null, null);
 		writer.WriteProperty(options, PropInputRecordCount, value.InputRecordCount, null, null);
 		writer.WriteProperty(options, PropInvalidDateCount, value.InvalidDateCount, null, null);
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
-		writer.WriteProperty(options, PropLastDataTime, value.LastDataTime, null, null);
-		writer.WriteProperty(options, PropLatestBucketTimestamp, value.LatestBucketTimestamp, null, null);
-		writer.WriteProperty(options, PropLatestEmptyBucketTimestamp, value.LatestEmptyBucketTimestamp, null, null);
-		writer.WriteProperty(options, PropLatestRecordTimestamp, value.LatestRecordTimestamp, null, null);
-		writer.WriteProperty(options, PropLatestSparseBucketTimestamp, value.LatestSparseBucketTimestamp, null, null);
-		writer.WriteProperty(options, PropLogTime, value.LogTime, null, null);
+		writer.WriteProperty(options, PropLastDataTime, value.LastDataTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLatestBucketTimestamp, value.LatestBucketTimestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLatestEmptyBucketTimestamp, value.LatestEmptyBucketTimestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLatestRecordTimestamp, value.LatestRecordTimestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLatestSparseBucketTimestamp, value.LatestSparseBucketTimestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLogTime, value.LogTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMissingFieldCount, value.MissingFieldCount, null, null);
 		writer.WriteProperty(options, PropOutOfOrderTimestampCount, value.OutOfOrderTimestampCount, null, null);
 		writer.WriteProperty(options, PropProcessedFieldCount, value.ProcessedFieldCount, null, null);

@@ -37,12 +37,12 @@ internal sealed partial class ModelPlotConfigConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTerms = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAnnotationsEnabled.TryReadProperty(ref reader, options, PropAnnotationsEnabled, null))
+			if (propAnnotationsEnabled.TryReadProperty(ref reader, options, PropAnnotationsEnabled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -73,8 +73,8 @@ internal sealed partial class ModelPlotConfigConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnnotationsEnabled, value.AnnotationsEnabled, null, null);
-		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropAnnotationsEnabled, value.AnnotationsEnabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTerms, value.Terms, null, null);
 		writer.WriteEndObject();
 	}

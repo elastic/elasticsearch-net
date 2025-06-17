@@ -43,7 +43,7 @@ internal sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingConv
 		LocalJsonValue<int?> propStart = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCustom.TryReadProperty(ref reader, options, PropCustom, null))
+			if (propCustom.TryReadProperty(ref reader, options, PropCustom, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -58,7 +58,7 @@ internal sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingConv
 				continue;
 			}
 
-			if (propLength.TryReadProperty(ref reader, options, PropLength, null))
+			if (propLength.TryReadProperty(ref reader, options, PropLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -68,7 +68,7 @@ internal sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingConv
 				continue;
 			}
 
-			if (propStart.TryReadProperty(ref reader, options, PropStart, null))
+			if (propStart.TryReadProperty(ref reader, options, PropStart, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -97,12 +97,12 @@ internal sealed partial class DataframeAnalysisFeatureProcessorNGramEncodingConv
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessorNGramEncoding value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCustom, value.Custom, null, null);
+		writer.WriteProperty(options, PropCustom, value.Custom, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFeaturePrefix, value.FeaturePrefix, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropLength, value.Length, null, null);
+		writer.WriteProperty(options, PropLength, value.Length, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropNGrams, value.NGrams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<int> v) => w.WriteCollectionValue<int>(o, v, null));
-		writer.WriteProperty(options, PropStart, value.Start, null, null);
+		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

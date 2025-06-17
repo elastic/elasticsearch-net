@@ -103,12 +103,12 @@ internal sealed partial class PutTrainedModelRequestConverter : System.Text.Json
 				continue;
 			}
 
-			if (propModelSizeBytes.TryReadProperty(ref reader, options, PropModelSizeBytes, null))
+			if (propModelSizeBytes.TryReadProperty(ref reader, options, PropModelSizeBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propModelType.TryReadProperty(ref reader, options, PropModelType, null))
+			if (propModelType.TryReadProperty(ref reader, options, PropModelType, static Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType>(o)))
 			{
 				continue;
 			}
@@ -163,8 +163,8 @@ internal sealed partial class PutTrainedModelRequestConverter : System.Text.Json
 		writer.WriteProperty(options, PropInferenceConfig, value.InferenceConfig, null, null);
 		writer.WriteProperty(options, PropInput, value.Input, null, null);
 		writer.WriteProperty(options, PropMetadata, value.Metadata, null, null);
-		writer.WriteProperty(options, PropModelSizeBytes, value.ModelSizeBytes, null, null);
-		writer.WriteProperty(options, PropModelType, value.ModelType, null, null);
+		writer.WriteProperty(options, PropModelSizeBytes, value.ModelSizeBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropModelType, value.ModelType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType>(o, v));
 		writer.WriteProperty(options, PropPlatformArchitecture, value.PlatformArchitecture, null, null);
 		writer.WriteProperty(options, PropPrefixStrings, value.PrefixStrings, null, null);
 		writer.WriteProperty(options, PropTags, value.Tags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));

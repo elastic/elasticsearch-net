@@ -41,7 +41,7 @@ internal sealed partial class DiversifiedSamplerAggregationConverter : System.Te
 		LocalJsonValue<int?> propShardSize = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, null))
+			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, static Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint>(o)))
 			{
 				continue;
 			}
@@ -51,7 +51,7 @@ internal sealed partial class DiversifiedSamplerAggregationConverter : System.Te
 				continue;
 			}
 
-			if (propMaxDocsPerValue.TryReadProperty(ref reader, options, PropMaxDocsPerValue, null))
+			if (propMaxDocsPerValue.TryReadProperty(ref reader, options, PropMaxDocsPerValue, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class DiversifiedSamplerAggregationConverter : System.Te
 				continue;
 			}
 
-			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -89,11 +89,11 @@ internal sealed partial class DiversifiedSamplerAggregationConverter : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.DiversifiedSamplerAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, null);
+		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationExecutionHint>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropMaxDocsPerValue, value.MaxDocsPerValue, null, null);
+		writer.WriteProperty(options, PropMaxDocsPerValue, value.MaxDocsPerValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

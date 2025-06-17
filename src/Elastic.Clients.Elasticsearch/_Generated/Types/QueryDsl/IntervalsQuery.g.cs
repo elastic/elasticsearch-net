@@ -32,6 +32,8 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 	private static readonly System.Text.Json.JsonEncodedText VariantFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy");
 	private static readonly System.Text.Json.JsonEncodedText VariantMatch = System.Text.Json.JsonEncodedText.Encode("match");
 	private static readonly System.Text.Json.JsonEncodedText VariantPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+	private static readonly System.Text.Json.JsonEncodedText VariantRange = System.Text.Json.JsonEncodedText.Encode("range");
+	private static readonly System.Text.Json.JsonEncodedText VariantRegexp = System.Text.Json.JsonEncodedText.Encode("regexp");
 	private static readonly System.Text.Json.JsonEncodedText VariantWildcard = System.Text.Json.JsonEncodedText.Encode("wildcard");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -39,7 +41,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		propField.ReadPropertyName(ref reader, options, null);
+		propField.ReadPropertyName(ref reader, options, static Elastic.Clients.Elasticsearch.Field (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Field>(o));
 		reader.Read();
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<float?> propBoost = default;
@@ -48,7 +50,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -98,6 +100,22 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 				continue;
 			}
 
+			if (reader.ValueTextEquals(VariantRange))
+			{
+				variantType = VariantRange.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRegexp))
+			{
+				variantType = VariantRegexp.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp>(options, null);
+				continue;
+			}
+
 			if (reader.ValueTextEquals(VariantWildcard))
 			{
 				variantType = VariantWildcard.Value;
@@ -131,7 +149,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(options, value.Field, null);
+		writer.WritePropertyName(options, value.Field, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Field v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Field>(o, v));
 		writer.WriteStartObject();
 		switch (value.VariantType)
 		{
@@ -152,6 +170,12 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 			case "prefix":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix)value.Variant, null, null);
 				break;
+			case "range":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange)value.Variant, null, null);
+				break;
+			case "regexp":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp)value.Variant, null, null);
+				break;
 			case "wildcard":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.QueryDsl.IntervalsWildcard)value.Variant, null, null);
 				break;
@@ -159,7 +183,7 @@ internal sealed partial class IntervalsQueryConverter : System.Text.Json.Seriali
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQuery)}'.");
 		}
 
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
@@ -222,6 +246,8 @@ public sealed partial class IntervalsQuery
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix? Prefix { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix>("prefix"); set => SetVariant("prefix", value); }
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange? Range { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange>("range"); set => SetVariant("range", value); }
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp? Regexp { get => GetVariant<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp>("regexp"); set => SetVariant("regexp", value); }
 
 	/// <summary>
 	/// <para>
@@ -391,6 +417,36 @@ public readonly partial struct IntervalsQueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Prefix(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument>> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Range(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange? value)
+	{
+		Instance.Range = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Range()
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Range(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument>>? action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Regexp(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp? value)
+	{
+		Instance.Regexp = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor<TDocument> Regexp(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor<TDocument>> action)
+	{
+		Instance.Regexp = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -638,6 +694,48 @@ public readonly partial struct IntervalsQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Prefix<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<T>> action)
 	{
 		Instance.Prefix = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Range(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRange? value)
+	{
+		Instance.Range = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Range()
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Range(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor>? action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Range<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<T>>? action)
+	{
+		Instance.Range = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRangeDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Regexp(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexp? value)
+	{
+		Instance.Regexp = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Regexp(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor> action)
+	{
+		Instance.Regexp = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.IntervalsQueryDescriptor Regexp<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor<T>> action)
+	{
+		Instance.Regexp = Elastic.Clients.Elasticsearch.QueryDsl.IntervalsRegexpDescriptor<T>.Build(action);
 		return this;
 	}
 

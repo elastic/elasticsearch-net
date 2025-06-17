@@ -76,7 +76,7 @@ internal sealed partial class GetMigrateReindexStatusResponseConverter : System.
 				continue;
 			}
 
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -134,7 +134,7 @@ internal sealed partial class GetMigrateReindexStatusResponseConverter : System.
 		writer.WriteProperty(options, PropException, value.Exception, null, null);
 		writer.WriteProperty(options, PropInProgress, value.InProgress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress>(o, v, null));
 		writer.WriteProperty(options, PropPending, value.Pending, null, null);
-		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropStartTimeMillis, value.StartTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropSuccesses, value.Successes, null, null);
 		writer.WriteProperty(options, PropTotalIndicesInDataStream, value.TotalIndicesInDataStream, null, null);

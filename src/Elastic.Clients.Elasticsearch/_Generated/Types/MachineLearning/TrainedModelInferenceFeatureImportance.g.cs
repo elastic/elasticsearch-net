@@ -47,7 +47,7 @@ internal sealed partial class TrainedModelInferenceFeatureImportanceConverter : 
 				continue;
 			}
 
-			if (propImportance.TryReadProperty(ref reader, options, PropImportance, null))
+			if (propImportance.TryReadProperty(ref reader, options, PropImportance, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class TrainedModelInferenceFeatureImportanceConverter : 
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropClasses, value.Classes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceClassImportance>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceClassImportance>(o, v, null));
 		writer.WriteProperty(options, PropFeatureName, value.FeatureName, null, null);
-		writer.WriteProperty(options, PropImportance, value.Importance, null, null);
+		writer.WriteProperty(options, PropImportance, value.Importance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

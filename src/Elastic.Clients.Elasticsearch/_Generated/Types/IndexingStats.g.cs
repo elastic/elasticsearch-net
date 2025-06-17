@@ -131,7 +131,7 @@ internal sealed partial class IndexingStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propWriteLoad.TryReadProperty(ref reader, options, PropWriteLoad, null))
+			if (propWriteLoad.TryReadProperty(ref reader, options, PropWriteLoad, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -183,7 +183,7 @@ internal sealed partial class IndexingStatsConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropThrottleTime, value.ThrottleTime, null, null);
 		writer.WriteProperty(options, PropThrottleTimeInMillis, value.ThrottleTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropTypes, value.Types, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexingStats>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexingStats>(o, v, null, null));
-		writer.WriteProperty(options, PropWriteLoad, value.WriteLoad, null, null);
+		writer.WriteProperty(options, PropWriteLoad, value.WriteLoad, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

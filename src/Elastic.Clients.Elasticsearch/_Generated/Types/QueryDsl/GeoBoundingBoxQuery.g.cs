@@ -43,12 +43,12 @@ internal sealed partial class GeoBoundingBoxQueryConverter : System.Text.Json.Se
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?> propValidationMethod = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -58,18 +58,18 @@ internal sealed partial class GeoBoundingBoxQueryConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			if (propType.TryReadProperty(ref reader, options, PropType, static Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution>(o)))
 			{
 				continue;
 			}
 
-			if (propValidationMethod.TryReadProperty(ref reader, options, PropValidationMethod, null))
+			if (propValidationMethod.TryReadProperty(ref reader, options, PropValidationMethod, static Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod>(o)))
 			{
 				continue;
 			}
 
 			propField.Initialized = propBoundingBox.Initialized = true;
-			reader.ReadProperty(options, out propField.Value, out propBoundingBox.Value, null, null);
+			reader.ReadProperty(options, out propField.Value, out propBoundingBox.Value, static Elastic.Clients.Elasticsearch.Field (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Field>(o), null);
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -91,15 +91,15 @@ internal sealed partial class GeoBoundingBoxQueryConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.GeoBoundingBoxQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
-		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 #pragma warning disable CS0618
-		writer.WriteProperty(options, PropType, value.Type, null, null)
+		writer.WriteProperty(options, PropType, value.Type, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoExecution>(o, v))
 #pragma warning restore CS0618
 		;
-		writer.WriteProperty(options, PropValidationMethod, value.ValidationMethod, null, null);
-		writer.WriteProperty(options, value.Field, value.BoundingBox, null, null);
+		writer.WriteProperty(options, PropValidationMethod, value.ValidationMethod, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod>(o, v));
+		writer.WriteProperty(options, value.Field, value.BoundingBox, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Field v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Field>(o, v), null);
 		writer.WriteEndObject();
 	}
 }

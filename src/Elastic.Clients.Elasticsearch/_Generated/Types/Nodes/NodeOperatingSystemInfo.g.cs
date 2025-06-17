@@ -51,7 +51,7 @@ internal sealed partial class NodeOperatingSystemInfoConverter : System.Text.Jso
 		LocalJsonValue<string> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllocatedProcessors.TryReadProperty(ref reader, options, PropAllocatedProcessors, null))
+			if (propAllocatedProcessors.TryReadProperty(ref reader, options, PropAllocatedProcessors, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -129,7 +129,7 @@ internal sealed partial class NodeOperatingSystemInfoConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllocatedProcessors, value.AllocatedProcessors, null, null);
+		writer.WriteProperty(options, PropAllocatedProcessors, value.AllocatedProcessors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropArch, value.Arch, null, null);
 		writer.WriteProperty(options, PropAvailableProcessors, value.AvailableProcessors, null, null);
 		writer.WriteProperty(options, PropCpu, value.Cpu, null, null);

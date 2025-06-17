@@ -51,7 +51,7 @@ internal sealed partial class QueryRuleConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propPriority.TryReadProperty(ref reader, options, PropPriority, null))
+			if (propPriority.TryReadProperty(ref reader, options, PropPriority, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class QueryRuleConverter : System.Text.Json.Serializatio
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropActions, value.Actions, null, null);
 		writer.WriteProperty(options, PropCriteria, value.Criteria, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria>(o, v, null));
-		writer.WriteProperty(options, PropPriority, value.Priority, null, null);
+		writer.WriteProperty(options, PropPriority, value.Priority, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRuleId, value.RuleId, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();

@@ -33,7 +33,7 @@ internal sealed partial class MappingLimitSettingsDepthConverter : System.Text.J
 		LocalJsonValue<long?> propLimit = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLimit.TryReadProperty(ref reader, options, PropLimit, null))
+			if (propLimit.TryReadProperty(ref reader, options, PropLimit, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class MappingLimitSettingsDepthConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLimit, value.Limit, null, null);
+		writer.WriteProperty(options, PropLimit, value.Limit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -51,7 +51,7 @@ internal sealed partial class GrantApiKeyResponseConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class GrantApiKeyResponseConverter : System.Text.Json.Se
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
 		writer.WriteProperty(options, PropEncoded, value.Encoded, null, null);
-		writer.WriteProperty(options, PropExpiration, value.Expiration, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropExpiration, value.Expiration, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteEndObject();

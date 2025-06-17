@@ -42,7 +42,7 @@ internal sealed partial class MatchBoolPrefixQueryConverter : System.Text.Json.S
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		propField.ReadPropertyName(ref reader, options, null);
+		propField.ReadPropertyName(ref reader, options, static Elastic.Clients.Elasticsearch.Field (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Field>(o));
 		reader.Read();
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
@@ -74,7 +74,7 @@ internal sealed partial class MatchBoolPrefixQueryConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -89,12 +89,12 @@ internal sealed partial class MatchBoolPrefixQueryConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propFuzzyTranspositions.TryReadProperty(ref reader, options, PropFuzzyTranspositions, null))
+			if (propFuzzyTranspositions.TryReadProperty(ref reader, options, PropFuzzyTranspositions, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxExpansions.TryReadProperty(ref reader, options, PropMaxExpansions, null))
+			if (propMaxExpansions.TryReadProperty(ref reader, options, PropMaxExpansions, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -104,12 +104,12 @@ internal sealed partial class MatchBoolPrefixQueryConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propOperator.TryReadProperty(ref reader, options, PropOperator, null))
+			if (propOperator.TryReadProperty(ref reader, options, PropOperator, static Elastic.Clients.Elasticsearch.QueryDsl.Operator? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator>(o)))
 			{
 				continue;
 			}
 
-			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -156,17 +156,17 @@ internal sealed partial class MatchBoolPrefixQueryConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(options, value.Field, null);
+		writer.WritePropertyName(options, value.Field, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Field v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Field>(o, v));
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropFuzziness, value.Fuzziness, null, null);
 		writer.WriteProperty(options, PropFuzzyRewrite, value.FuzzyRewrite, null, null);
-		writer.WriteProperty(options, PropFuzzyTranspositions, value.FuzzyTranspositions, null, null);
-		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions, null, null);
+		writer.WriteProperty(options, PropFuzzyTranspositions, value.FuzzyTranspositions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropMaxExpansions, value.MaxExpansions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMinimumShouldMatch, value.MinimumShouldMatch, null, null);
-		writer.WriteProperty(options, PropOperator, value.Operator, null, null);
-		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
+		writer.WriteProperty(options, PropOperator, value.Operator, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.Operator? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.Operator>(o, v));
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteEndObject();

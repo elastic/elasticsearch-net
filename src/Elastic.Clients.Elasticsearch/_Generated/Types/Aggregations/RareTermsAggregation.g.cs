@@ -60,7 +60,7 @@ internal sealed partial class RareTermsAggregationConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propMaxDocCount.TryReadProperty(ref reader, options, PropMaxDocCount, null))
+			if (propMaxDocCount.TryReadProperty(ref reader, options, PropMaxDocCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -70,7 +70,7 @@ internal sealed partial class RareTermsAggregationConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -108,9 +108,9 @@ internal sealed partial class RareTermsAggregationConverter : System.Text.Json.S
 		writer.WriteProperty(options, PropExclude, value.Exclude, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropInclude, value.Include, null, null);
-		writer.WriteProperty(options, PropMaxDocCount, value.MaxDocCount, null, null);
+		writer.WriteProperty(options, PropMaxDocCount, value.MaxDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
-		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropValueType, value.ValueType, null, null);
 		writer.WriteEndObject();
 	}

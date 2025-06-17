@@ -41,12 +41,12 @@ internal sealed partial class GeoPolygonQueryConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod?> propValidationMethod = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -56,13 +56,13 @@ internal sealed partial class GeoPolygonQueryConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propValidationMethod.TryReadProperty(ref reader, options, PropValidationMethod, null))
+			if (propValidationMethod.TryReadProperty(ref reader, options, PropValidationMethod, static Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod>(o)))
 			{
 				continue;
 			}
 
 			propField.Initialized = propPolygon.Initialized = true;
-			reader.ReadProperty(options, out propField.Value, out propPolygon.Value, null, null);
+			reader.ReadProperty(options, out propField.Value, out propPolygon.Value, static Elastic.Clients.Elasticsearch.Field (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Field>(o), null);
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -80,11 +80,11 @@ internal sealed partial class GeoPolygonQueryConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.GeoPolygonQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
-		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
-		writer.WriteProperty(options, PropValidationMethod, value.ValidationMethod, null, null);
-		writer.WriteProperty(options, value.Field, value.Polygon, null, null);
+		writer.WriteProperty(options, PropValidationMethod, value.ValidationMethod, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.GeoValidationMethod>(o, v));
+		writer.WriteProperty(options, value.Field, value.Polygon, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Field v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Field>(o, v), null);
 		writer.WriteEndObject();
 	}
 }

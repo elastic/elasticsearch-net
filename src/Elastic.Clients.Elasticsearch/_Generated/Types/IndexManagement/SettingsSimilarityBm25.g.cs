@@ -38,17 +38,17 @@ internal sealed partial class SettingsSimilarityBm25Converter : System.Text.Json
 		LocalJsonValue<double?> propK1 = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propB.TryReadProperty(ref reader, options, PropB, null))
+			if (propB.TryReadProperty(ref reader, options, PropB, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propDiscountOverlaps.TryReadProperty(ref reader, options, PropDiscountOverlaps, null))
+			if (propDiscountOverlaps.TryReadProperty(ref reader, options, PropDiscountOverlaps, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propK1.TryReadProperty(ref reader, options, PropK1, null))
+			if (propK1.TryReadProperty(ref reader, options, PropK1, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -80,9 +80,9 @@ internal sealed partial class SettingsSimilarityBm25Converter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropB, value.B, null, null);
-		writer.WriteProperty(options, PropDiscountOverlaps, value.DiscountOverlaps, null, null);
-		writer.WriteProperty(options, PropK1, value.K1, null, null);
+		writer.WriteProperty(options, PropB, value.B, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropDiscountOverlaps, value.DiscountOverlaps, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropK1, value.K1, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}

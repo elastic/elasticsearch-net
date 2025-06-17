@@ -38,12 +38,12 @@ internal sealed partial class LengthTokenFilterConverter : System.Text.Json.Seri
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			if (propMax.TryReadProperty(ref reader, options, PropMax, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
+			if (propMin.TryReadProperty(ref reader, options, PropMin, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -80,8 +80,8 @@ internal sealed partial class LengthTokenFilterConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMax, value.Max, null, null);
-		writer.WriteProperty(options, PropMin, value.Min, null, null);
+		writer.WriteProperty(options, PropMax, value.Max, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMin, value.Min, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

@@ -37,17 +37,17 @@ internal sealed partial class JvmClassesConverter : System.Text.Json.Serializati
 		LocalJsonValue<long?> propTotalUnloadedCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCurrentLoadedCount.TryReadProperty(ref reader, options, PropCurrentLoadedCount, null))
+			if (propCurrentLoadedCount.TryReadProperty(ref reader, options, PropCurrentLoadedCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalLoadedCount.TryReadProperty(ref reader, options, PropTotalLoadedCount, null))
+			if (propTotalLoadedCount.TryReadProperty(ref reader, options, PropTotalLoadedCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalUnloadedCount.TryReadProperty(ref reader, options, PropTotalUnloadedCount, null))
+			if (propTotalUnloadedCount.TryReadProperty(ref reader, options, PropTotalUnloadedCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class JvmClassesConverter : System.Text.Json.Serializati
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.JvmClasses value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCurrentLoadedCount, value.CurrentLoadedCount, null, null);
-		writer.WriteProperty(options, PropTotalLoadedCount, value.TotalLoadedCount, null, null);
-		writer.WriteProperty(options, PropTotalUnloadedCount, value.TotalUnloadedCount, null, null);
+		writer.WriteProperty(options, PropCurrentLoadedCount, value.CurrentLoadedCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTotalLoadedCount, value.TotalLoadedCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTotalUnloadedCount, value.TotalUnloadedCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

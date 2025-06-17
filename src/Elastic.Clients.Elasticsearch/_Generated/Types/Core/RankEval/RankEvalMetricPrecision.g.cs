@@ -37,17 +37,17 @@ internal sealed partial class RankEvalMetricPrecisionConverter : System.Text.Jso
 		LocalJsonValue<int?> propRelevantRatingThreshold = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propIgnoreUnlabeled.TryReadProperty(ref reader, options, PropIgnoreUnlabeled, null))
+			if (propIgnoreUnlabeled.TryReadProperty(ref reader, options, PropIgnoreUnlabeled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propK.TryReadProperty(ref reader, options, PropK, null))
+			if (propK.TryReadProperty(ref reader, options, PropK, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propRelevantRatingThreshold.TryReadProperty(ref reader, options, PropRelevantRatingThreshold, null))
+			if (propRelevantRatingThreshold.TryReadProperty(ref reader, options, PropRelevantRatingThreshold, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class RankEvalMetricPrecisionConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIgnoreUnlabeled, value.IgnoreUnlabeled, null, null);
-		writer.WriteProperty(options, PropK, value.K, null, null);
-		writer.WriteProperty(options, PropRelevantRatingThreshold, value.RelevantRatingThreshold, null, null);
+		writer.WriteProperty(options, PropIgnoreUnlabeled, value.IgnoreUnlabeled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropK, value.K, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropRelevantRatingThreshold, value.RelevantRatingThreshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

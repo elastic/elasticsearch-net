@@ -54,7 +54,7 @@ internal sealed partial class FieldCollapseConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propMaxConcurrentGroupSearches.TryReadProperty(ref reader, options, PropMaxConcurrentGroupSearches, null))
+			if (propMaxConcurrentGroupSearches.TryReadProperty(ref reader, options, PropMaxConcurrentGroupSearches, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class FieldCollapseConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropCollapse, value.Collapse, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropInnerHits, value.InnerHits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.InnerHits>(o, v, null));
-		writer.WriteProperty(options, PropMaxConcurrentGroupSearches, value.MaxConcurrentGroupSearches, null, null);
+		writer.WriteProperty(options, PropMaxConcurrentGroupSearches, value.MaxConcurrentGroupSearches, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

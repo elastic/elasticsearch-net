@@ -68,7 +68,7 @@ internal sealed partial class InferenceAggregateConverter : System.Text.Json.Ser
 			}
 
 			propData ??= new System.Collections.Generic.Dictionary<string, object>();
-			reader.ReadProperty(options, out string key, out object value, null, null);
+			reader.ReadProperty(options, out string key, out object value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<object>(o)!);
 			propData[key] = value;
 		}
 
@@ -96,7 +96,7 @@ internal sealed partial class InferenceAggregateConverter : System.Text.Json.Ser
 		{
 			foreach (var item in value.Data)
 			{
-				writer.WriteProperty(options, item.Key, item.Value, null, null);
+				writer.WriteProperty(options, item.Key, item.Value, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), null);
 			}
 		}
 

@@ -41,7 +41,7 @@ internal sealed partial class TermSuggestOptionConverter : System.Text.Json.Seri
 		LocalJsonValue<string> propText = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCollateMatch.TryReadProperty(ref reader, options, PropCollateMatch, null))
+			if (propCollateMatch.TryReadProperty(ref reader, options, PropCollateMatch, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -89,7 +89,7 @@ internal sealed partial class TermSuggestOptionConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.TermSuggestOption value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCollateMatch, value.CollateMatch, null, null);
+		writer.WriteProperty(options, PropCollateMatch, value.CollateMatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFreq, value.Freq, null, null);
 		writer.WriteProperty(options, PropHighlighted, value.Highlighted, null, null);
 		writer.WriteProperty(options, PropScore, value.Score, null, null);

@@ -40,7 +40,7 @@ internal sealed partial class CpuAcctConverter : System.Text.Json.Serialization.
 				continue;
 			}
 
-			if (propUsageNanos.TryReadProperty(ref reader, options, PropUsageNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
+			if (propUsageNanos.TryReadProperty(ref reader, options, PropUsageNanos, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker))))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class CpuAcctConverter : System.Text.Json.Serialization.
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropControlGroup, value.ControlGroup, null, null);
-		writer.WriteProperty(options, PropUsageNanos, value.UsageNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
+		writer.WriteProperty(options, PropUsageNanos, value.UsageNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
 		writer.WriteEndObject();
 	}
 }

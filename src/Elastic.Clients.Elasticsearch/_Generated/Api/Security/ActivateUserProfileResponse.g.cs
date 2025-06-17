@@ -55,7 +55,7 @@ internal sealed partial class ActivateUserProfileResponseConverter : System.Text
 				continue;
 			}
 
-			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -107,7 +107,7 @@ internal sealed partial class ActivateUserProfileResponseConverter : System.Text
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropData, value.Data, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropDoc, value.Doc, null, null);
-		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropLabels, value.Labels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropLastSynchronized, value.LastSynchronized, null, null);
 		writer.WriteProperty(options, PropUid, value.Uid, null, null);

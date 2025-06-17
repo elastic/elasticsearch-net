@@ -61,12 +61,12 @@ internal sealed partial class ModelSnapshotConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propLatestRecordTimeStamp.TryReadProperty(ref reader, options, PropLatestRecordTimeStamp, null))
+			if (propLatestRecordTimeStamp.TryReadProperty(ref reader, options, PropLatestRecordTimeStamp, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propLatestResultTimeStamp.TryReadProperty(ref reader, options, PropLatestResultTimeStamp, null))
+			if (propLatestResultTimeStamp.TryReadProperty(ref reader, options, PropLatestResultTimeStamp, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -131,8 +131,8 @@ internal sealed partial class ModelSnapshotConverter : System.Text.Json.Serializ
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
-		writer.WriteProperty(options, PropLatestRecordTimeStamp, value.LatestRecordTimeStamp, null, null);
-		writer.WriteProperty(options, PropLatestResultTimeStamp, value.LatestResultTimeStamp, null, null);
+		writer.WriteProperty(options, PropLatestRecordTimeStamp, value.LatestRecordTimeStamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropLatestResultTimeStamp, value.LatestResultTimeStamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMinVersion, value.MinVersion, null, null);
 		writer.WriteProperty(options, PropModelSizeStats, value.ModelSizeStats, null, null);
 		writer.WriteProperty(options, PropRetain, value.Retain, null, null);

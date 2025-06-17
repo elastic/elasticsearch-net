@@ -37,17 +37,17 @@ internal sealed partial class AdaptiveAllocationsConverter : System.Text.Json.Se
 		LocalJsonValue<int?> propMinNumberOfAllocations = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxNumberOfAllocations.TryReadProperty(ref reader, options, PropMaxNumberOfAllocations, null))
+			if (propMaxNumberOfAllocations.TryReadProperty(ref reader, options, PropMaxNumberOfAllocations, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinNumberOfAllocations.TryReadProperty(ref reader, options, PropMinNumberOfAllocations, null))
+			if (propMinNumberOfAllocations.TryReadProperty(ref reader, options, PropMinNumberOfAllocations, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class AdaptiveAllocationsConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocations value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
-		writer.WriteProperty(options, PropMaxNumberOfAllocations, value.MaxNumberOfAllocations, null, null);
-		writer.WriteProperty(options, PropMinNumberOfAllocations, value.MinNumberOfAllocations, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropMaxNumberOfAllocations, value.MaxNumberOfAllocations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinNumberOfAllocations, value.MinNumberOfAllocations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

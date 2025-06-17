@@ -35,7 +35,7 @@ internal sealed partial class RoleTemplateConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script> propTemplate = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, static Elastic.Clients.Elasticsearch.Security.TemplateFormat? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Security.TemplateFormat>(o)))
 			{
 				continue;
 			}
@@ -65,7 +65,7 @@ internal sealed partial class RoleTemplateConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.RoleTemplate value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Security.TemplateFormat? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Security.TemplateFormat>(o, v));
 		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
 		writer.WriteEndObject();
 	}

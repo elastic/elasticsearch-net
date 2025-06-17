@@ -158,6 +158,56 @@ internal static class JsonReaderExtensions
 	}
 
 	/// <summary>
+	/// Reads a nullable value-type value from a given <see cref="Utf8JsonReader"/> instance using the default
+	/// <see cref="JsonConverter"/> for the type <typeparamref name="T"/>.
+	/// </summary>
+	/// <typeparam name="T">The type of the value to read.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <returns>The value read from the <paramref name="reader"/> instance.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static T? ReadNullableValue<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options)
+		where T : struct
+	{
+		// TODO: Support custom `T?` converters with `HandleNull`.
+		var converter = options.GetConverter<T>(null);
+
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		return converter.Read(ref reader, typeof(T), options);
+	}
+
+	/// <summary>
+	/// Reads a nullable value-type value from a given <see cref="Utf8JsonReader"/> instance using a specific <see cref="JsonConverter"/>
+	/// that is retrieved from the <see cref="JsonSerializerOptions"/> based on <paramref name="markerType"/>.
+	/// </summary>
+	/// <typeparam name="T">The type of the value to read.</typeparam>
+	/// <param name="reader">A reference to the <see cref="Utf8JsonReader"/> instance.</param>
+	/// <param name="options">The <see cref="JsonSerializerOptions"/> to use.</param>
+	/// <param name="markerType">
+	/// The marker type that is used to retrieve a specific <see cref="IMarkerTypeConverter"/> from the given <paramref name="options"/>.
+	/// </param>
+	/// <returns>The value read from the <paramref name="reader"/> instance.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static T? ReadNullableValueEx<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type markerType)
+		where T : struct
+	{
+		// TODO: Support custom `T?` converters with `HandleNull`.
+		var converter = options.GetConverter<T>(markerType);
+
+		if (reader.TokenType is JsonTokenType.Null)
+		{
+			return null;
+		}
+
+		return converter.Read(ref reader, typeof(T), options);
+	}
+
+	/// <summary>
 	/// Reads a property name value from a given <see cref="Utf8JsonReader"/> instance using the default <see cref="JsonConverter"/>
 	/// for the type <typeparamref name="T"/>.
 	/// </summary>

@@ -82,7 +82,7 @@ internal sealed partial class IngestDocumentSimulationConverter : System.Text.Js
 			}
 
 			propMetadata ??= new System.Collections.Generic.Dictionary<string, string>();
-			reader.ReadProperty(options, out string key, out string value, null, null);
+			reader.ReadProperty(options, out string key, out string value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!);
 			propMetadata[key] = value;
 		}
 
@@ -114,7 +114,7 @@ internal sealed partial class IngestDocumentSimulationConverter : System.Text.Js
 		{
 			foreach (var item in value.Metadata)
 			{
-				writer.WriteProperty(options, item.Key, item.Value, null, null);
+				writer.WriteProperty(options, item.Key, item.Value, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), null);
 			}
 		}
 

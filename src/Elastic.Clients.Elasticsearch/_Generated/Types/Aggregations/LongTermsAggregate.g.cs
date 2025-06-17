@@ -44,7 +44,7 @@ internal sealed partial class LongTermsAggregateConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propDocCountErrorUpperBound.TryReadProperty(ref reader, options, PropDocCountErrorUpperBound, null))
+			if (propDocCountErrorUpperBound.TryReadProperty(ref reader, options, PropDocCountErrorUpperBound, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -54,7 +54,7 @@ internal sealed partial class LongTermsAggregateConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propSumOtherDocCount.TryReadProperty(ref reader, options, PropSumOtherDocCount, null))
+			if (propSumOtherDocCount.TryReadProperty(ref reader, options, PropSumOtherDocCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -82,9 +82,9 @@ internal sealed partial class LongTermsAggregateConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBuckets, value.Buckets, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.LongTermsBucket> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.LongTermsBucket>(o, v, null));
-		writer.WriteProperty(options, PropDocCountErrorUpperBound, value.DocCountErrorUpperBound, null, null);
+		writer.WriteProperty(options, PropDocCountErrorUpperBound, value.DocCountErrorUpperBound, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
-		writer.WriteProperty(options, PropSumOtherDocCount, value.SumOtherDocCount, null, null);
+		writer.WriteProperty(options, PropSumOtherDocCount, value.SumOtherDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

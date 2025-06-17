@@ -45,7 +45,7 @@ internal sealed partial class AdaptiveSelectionConverter : System.Text.Json.Seri
 		LocalJsonValue<string?> propRank = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAvgQueueSize.TryReadProperty(ref reader, options, PropAvgQueueSize, null))
+			if (propAvgQueueSize.TryReadProperty(ref reader, options, PropAvgQueueSize, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -55,7 +55,7 @@ internal sealed partial class AdaptiveSelectionConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propAvgResponseTimeNs.TryReadProperty(ref reader, options, PropAvgResponseTimeNs, null))
+			if (propAvgResponseTimeNs.TryReadProperty(ref reader, options, PropAvgResponseTimeNs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -65,12 +65,12 @@ internal sealed partial class AdaptiveSelectionConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propAvgServiceTimeNs.TryReadProperty(ref reader, options, PropAvgServiceTimeNs, null))
+			if (propAvgServiceTimeNs.TryReadProperty(ref reader, options, PropAvgServiceTimeNs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propOutgoingSearches.TryReadProperty(ref reader, options, PropOutgoingSearches, null))
+			if (propOutgoingSearches.TryReadProperty(ref reader, options, PropOutgoingSearches, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -105,12 +105,12 @@ internal sealed partial class AdaptiveSelectionConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.AdaptiveSelection value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAvgQueueSize, value.AvgQueueSize, null, null);
+		writer.WriteProperty(options, PropAvgQueueSize, value.AvgQueueSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropAvgResponseTime, value.AvgResponseTime, null, null);
-		writer.WriteProperty(options, PropAvgResponseTimeNs, value.AvgResponseTimeNs, null, null);
+		writer.WriteProperty(options, PropAvgResponseTimeNs, value.AvgResponseTimeNs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropAvgServiceTime, value.AvgServiceTime, null, null);
-		writer.WriteProperty(options, PropAvgServiceTimeNs, value.AvgServiceTimeNs, null, null);
-		writer.WriteProperty(options, PropOutgoingSearches, value.OutgoingSearches, null, null);
+		writer.WriteProperty(options, PropAvgServiceTimeNs, value.AvgServiceTimeNs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropOutgoingSearches, value.OutgoingSearches, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRank, value.Rank, null, null);
 		writer.WriteEndObject();
 	}

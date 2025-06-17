@@ -57,22 +57,22 @@ internal sealed partial class CompositeGeoTileGridAggregationConverter : System.
 				continue;
 			}
 
-			if (propMissingBucket.TryReadProperty(ref reader, options, PropMissingBucket, null))
+			if (propMissingBucket.TryReadProperty(ref reader, options, PropMissingBucket, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propMissingOrder.TryReadProperty(ref reader, options, PropMissingOrder, null))
+			if (propMissingOrder.TryReadProperty(ref reader, options, PropMissingOrder, static Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder>(o)))
 			{
 				continue;
 			}
 
-			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static Elastic.Clients.Elasticsearch.SortOrder? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.SortOrder>(o)))
 			{
 				continue;
 			}
 
-			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class CompositeGeoTileGridAggregationConverter : System.
 				continue;
 			}
 
-			if (propValueType.TryReadProperty(ref reader, options, PropValueType, null))
+			if (propValueType.TryReadProperty(ref reader, options, PropValueType, static Elastic.Clients.Elasticsearch.Aggregations.ValueType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.ValueType>(o)))
 			{
 				continue;
 			}
@@ -115,12 +115,12 @@ internal sealed partial class CompositeGeoTileGridAggregationConverter : System.
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBounds, value.Bounds, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropMissingBucket, value.MissingBucket, null, null);
-		writer.WriteProperty(options, PropMissingOrder, value.MissingOrder, null, null);
-		writer.WriteProperty(options, PropOrder, value.Order, null, null);
-		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
+		writer.WriteProperty(options, PropMissingBucket, value.MissingBucket, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropMissingOrder, value.MissingOrder, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder>(o, v));
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SortOrder? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SortOrder>(o, v));
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropValueType, value.ValueType, null, null);
+		writer.WriteProperty(options, PropValueType, value.ValueType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ValueType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.ValueType>(o, v));
 		writer.WriteEndObject();
 	}
 }
