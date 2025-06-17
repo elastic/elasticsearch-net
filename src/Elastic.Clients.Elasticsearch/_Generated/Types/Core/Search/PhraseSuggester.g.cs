@@ -73,7 +73,7 @@ internal sealed partial class PhraseSuggesterConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propConfidence.TryReadProperty(ref reader, options, PropConfidence, null))
+			if (propConfidence.TryReadProperty(ref reader, options, PropConfidence, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -88,12 +88,12 @@ internal sealed partial class PhraseSuggesterConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propForceUnigrams.TryReadProperty(ref reader, options, PropForceUnigrams, null))
+			if (propForceUnigrams.TryReadProperty(ref reader, options, PropForceUnigrams, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propGramSize.TryReadProperty(ref reader, options, PropGramSize, null))
+			if (propGramSize.TryReadProperty(ref reader, options, PropGramSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -103,12 +103,12 @@ internal sealed partial class PhraseSuggesterConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propMaxErrors.TryReadProperty(ref reader, options, PropMaxErrors, null))
+			if (propMaxErrors.TryReadProperty(ref reader, options, PropMaxErrors, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propRealWordErrorLikelihood.TryReadProperty(ref reader, options, PropRealWordErrorLikelihood, null))
+			if (propRealWordErrorLikelihood.TryReadProperty(ref reader, options, PropRealWordErrorLikelihood, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -118,12 +118,12 @@ internal sealed partial class PhraseSuggesterConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -138,7 +138,7 @@ internal sealed partial class PhraseSuggesterConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propTokenLimit.TryReadProperty(ref reader, options, PropTokenLimit, null))
+			if (propTokenLimit.TryReadProperty(ref reader, options, PropTokenLimit, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -179,20 +179,20 @@ internal sealed partial class PhraseSuggesterConverter : System.Text.Json.Serial
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
 		writer.WriteProperty(options, PropCollate, value.Collate, null, null);
-		writer.WriteProperty(options, PropConfidence, value.Confidence, null, null);
+		writer.WriteProperty(options, PropConfidence, value.Confidence, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropDirectGenerator, value.DirectGenerator, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.DirectGenerator>(o, v, null));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropForceUnigrams, value.ForceUnigrams, null, null);
-		writer.WriteProperty(options, PropGramSize, value.GramSize, null, null);
+		writer.WriteProperty(options, PropForceUnigrams, value.ForceUnigrams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropGramSize, value.GramSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropHighlight, value.Highlight, null, null);
-		writer.WriteProperty(options, PropMaxErrors, value.MaxErrors, null, null);
-		writer.WriteProperty(options, PropRealWordErrorLikelihood, value.RealWordErrorLikelihood, null, null);
+		writer.WriteProperty(options, PropMaxErrors, value.MaxErrors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropRealWordErrorLikelihood, value.RealWordErrorLikelihood, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropSeparator, value.Separator, null, null);
-		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSmoothing, value.Smoothing, null, null);
 		writer.WriteProperty(options, PropText, value.Text, null, null);
-		writer.WriteProperty(options, PropTokenLimit, value.TokenLimit, null, null);
+		writer.WriteProperty(options, PropTokenLimit, value.TokenLimit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -38,7 +38,7 @@ internal sealed partial class FingerprintTokenFilterConverter : System.Text.Json
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxOutputSize.TryReadProperty(ref reader, options, PropMaxOutputSize, null))
+			if (propMaxOutputSize.TryReadProperty(ref reader, options, PropMaxOutputSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -80,7 +80,7 @@ internal sealed partial class FingerprintTokenFilterConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxOutputSize, value.MaxOutputSize, null, null);
+		writer.WriteProperty(options, PropMaxOutputSize, value.MaxOutputSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSeparator, value.Separator, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);

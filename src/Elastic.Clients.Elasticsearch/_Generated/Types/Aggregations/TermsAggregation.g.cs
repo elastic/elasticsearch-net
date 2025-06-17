@@ -65,7 +65,7 @@ internal sealed partial class TermsAggregationConverter : System.Text.Json.Seria
 		LocalJsonValue<string?> propValueType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCollectMode.TryReadProperty(ref reader, options, PropCollectMode, null))
+			if (propCollectMode.TryReadProperty(ref reader, options, PropCollectMode, static Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class TermsAggregationConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, null))
+			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, static Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint>(o)))
 			{
 				continue;
 			}
@@ -95,7 +95,7 @@ internal sealed partial class TermsAggregationConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -105,12 +105,12 @@ internal sealed partial class TermsAggregationConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propMissingBucket.TryReadProperty(ref reader, options, PropMissingBucket, null))
+			if (propMissingBucket.TryReadProperty(ref reader, options, PropMissingBucket, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propMissingOrder.TryReadProperty(ref reader, options, PropMissingOrder, null))
+			if (propMissingOrder.TryReadProperty(ref reader, options, PropMissingOrder, static Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder>(o)))
 			{
 				continue;
 			}
@@ -125,22 +125,22 @@ internal sealed partial class TermsAggregationConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propShardMinDocCount.TryReadProperty(ref reader, options, PropShardMinDocCount, null))
+			if (propShardMinDocCount.TryReadProperty(ref reader, options, PropShardMinDocCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propShowTermDocCountError.TryReadProperty(ref reader, options, PropShowTermDocCountError, null))
+			if (propShowTermDocCountError.TryReadProperty(ref reader, options, PropShowTermDocCountError, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -185,22 +185,22 @@ internal sealed partial class TermsAggregationConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TermsAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCollectMode, value.CollectMode, null, null);
+		writer.WriteProperty(options, PropCollectMode, value.CollectMode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode>(o, v));
 		writer.WriteProperty(options, PropExclude, value.Exclude, null, null);
-		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, null);
+		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropInclude, value.Include, null, null);
-		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
-		writer.WriteProperty(options, PropMissingBucket, value.MissingBucket, null, null);
-		writer.WriteProperty(options, PropMissingOrder, value.MissingOrder, null, null);
+		writer.WriteProperty(options, PropMissingBucket, value.MissingBucket, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropMissingOrder, value.MissingOrder, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.MissingOrder? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.MissingOrder>(o, v));
 		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? v) => w.WriteSingleOrManyCollectionValue<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder> v) => w.WriteKeyValuePairValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>(o, v, null, null)));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, null);
-		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
-		writer.WriteProperty(options, PropShowTermDocCountError, value.ShowTermDocCountError, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropShowTermDocCountError, value.ShowTermDocCountError, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropValueType, value.ValueType, null, null);
 		writer.WriteEndObject();
 	}

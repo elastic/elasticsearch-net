@@ -41,27 +41,27 @@ internal sealed partial class IndexSettingBlocksConverter : System.Text.Json.Ser
 		LocalJsonValue<bool?> propWrite = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, null))
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propRead.TryReadProperty(ref reader, options, PropRead, null))
+			if (propRead.TryReadProperty(ref reader, options, PropRead, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propReadOnly.TryReadProperty(ref reader, options, PropReadOnly, null))
+			if (propReadOnly.TryReadProperty(ref reader, options, PropReadOnly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propReadOnlyAllowDelete.TryReadProperty(ref reader, options, PropReadOnlyAllowDelete, null))
+			if (propReadOnlyAllowDelete.TryReadProperty(ref reader, options, PropReadOnlyAllowDelete, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propWrite.TryReadProperty(ref reader, options, PropWrite, null))
+			if (propWrite.TryReadProperty(ref reader, options, PropWrite, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -89,11 +89,11 @@ internal sealed partial class IndexSettingBlocksConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingBlocks value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMetadata, value.Metadata, null, null);
-		writer.WriteProperty(options, PropRead, value.Read, null, null);
-		writer.WriteProperty(options, PropReadOnly, value.ReadOnly, null, null);
-		writer.WriteProperty(options, PropReadOnlyAllowDelete, value.ReadOnlyAllowDelete, null, null);
-		writer.WriteProperty(options, PropWrite, value.Write, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropRead, value.Read, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropReadOnly, value.ReadOnly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropReadOnlyAllowDelete, value.ReadOnlyAllowDelete, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropWrite, value.Write, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

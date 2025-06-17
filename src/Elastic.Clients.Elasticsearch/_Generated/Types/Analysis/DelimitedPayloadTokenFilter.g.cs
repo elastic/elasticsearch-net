@@ -43,7 +43,7 @@ internal sealed partial class DelimitedPayloadTokenFilterConverter : System.Text
 				continue;
 			}
 
-			if (propEncoding.TryReadProperty(ref reader, options, PropEncoding, null))
+			if (propEncoding.TryReadProperty(ref reader, options, PropEncoding, static Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding>(o)))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class DelimitedPayloadTokenFilterConverter : System.Text
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDelimiter, value.Delimiter, null, null);
-		writer.WriteProperty(options, PropEncoding, value.Encoding, null, null);
+		writer.WriteProperty(options, PropEncoding, value.Encoding, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

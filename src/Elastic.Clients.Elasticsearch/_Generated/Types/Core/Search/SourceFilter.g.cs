@@ -53,7 +53,7 @@ internal sealed partial class SourceFilterConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propExcludeVectors.TryReadProperty(ref reader, options, PropExcludeVectors, null))
+			if (propExcludeVectors.TryReadProperty(ref reader, options, PropExcludeVectors, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -85,7 +85,7 @@ internal sealed partial class SourceFilterConverter : System.Text.Json.Serializa
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropExcludes, value.Excludes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
-		writer.WriteProperty(options, PropExcludeVectors, value.ExcludeVectors, null, null);
+		writer.WriteProperty(options, PropExcludeVectors, value.ExcludeVectors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropIncludes, value.Includes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
 		writer.WriteEndObject();
 	}

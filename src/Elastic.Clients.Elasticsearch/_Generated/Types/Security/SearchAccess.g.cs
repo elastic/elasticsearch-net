@@ -39,7 +39,7 @@ internal sealed partial class SearchAccessConverter : System.Text.Json.Serializa
 		LocalJsonValue<object?> propQuery = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowRestrictedIndices.TryReadProperty(ref reader, options, PropAllowRestrictedIndices, null))
+			if (propAllowRestrictedIndices.TryReadProperty(ref reader, options, PropAllowRestrictedIndices, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class SearchAccessConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SearchAccess value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowRestrictedIndices, value.AllowRestrictedIndices, null, null);
+		writer.WriteProperty(options, PropAllowRestrictedIndices, value.AllowRestrictedIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFieldSecurity, value.FieldSecurity, null, null);
 		writer.WriteProperty(options, PropNames, value.Names, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexName>(o, v, null));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);

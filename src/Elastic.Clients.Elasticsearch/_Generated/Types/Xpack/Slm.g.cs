@@ -49,7 +49,7 @@ internal sealed partial class SlmConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propPolicyCount.TryReadProperty(ref reader, options, PropPolicyCount, null))
+			if (propPolicyCount.TryReadProperty(ref reader, options, PropPolicyCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -83,7 +83,7 @@ internal sealed partial class SlmConverter : System.Text.Json.Serialization.Json
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
 		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
-		writer.WriteProperty(options, PropPolicyCount, value.PolicyCount, null, null);
+		writer.WriteProperty(options, PropPolicyCount, value.PolicyCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropPolicyStats, value.PolicyStats, null, null);
 		writer.WriteEndObject();
 	}

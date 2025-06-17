@@ -45,37 +45,37 @@ internal sealed partial class FilterConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<int?> propMinWordLength = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxDocFreq.TryReadProperty(ref reader, options, PropMaxDocFreq, null))
+			if (propMaxDocFreq.TryReadProperty(ref reader, options, PropMaxDocFreq, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxNumTerms.TryReadProperty(ref reader, options, PropMaxNumTerms, null))
+			if (propMaxNumTerms.TryReadProperty(ref reader, options, PropMaxNumTerms, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxTermFreq.TryReadProperty(ref reader, options, PropMaxTermFreq, null))
+			if (propMaxTermFreq.TryReadProperty(ref reader, options, PropMaxTermFreq, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxWordLength.TryReadProperty(ref reader, options, PropMaxWordLength, null))
+			if (propMaxWordLength.TryReadProperty(ref reader, options, PropMaxWordLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinDocFreq.TryReadProperty(ref reader, options, PropMinDocFreq, null))
+			if (propMinDocFreq.TryReadProperty(ref reader, options, PropMinDocFreq, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinTermFreq.TryReadProperty(ref reader, options, PropMinTermFreq, null))
+			if (propMinTermFreq.TryReadProperty(ref reader, options, PropMinTermFreq, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinWordLength.TryReadProperty(ref reader, options, PropMinWordLength, null))
+			if (propMinWordLength.TryReadProperty(ref reader, options, PropMinWordLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -105,13 +105,13 @@ internal sealed partial class FilterConverter : System.Text.Json.Serialization.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.TermVectors.Filter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxDocFreq, value.MaxDocFreq, null, null);
-		writer.WriteProperty(options, PropMaxNumTerms, value.MaxNumTerms, null, null);
-		writer.WriteProperty(options, PropMaxTermFreq, value.MaxTermFreq, null, null);
-		writer.WriteProperty(options, PropMaxWordLength, value.MaxWordLength, null, null);
-		writer.WriteProperty(options, PropMinDocFreq, value.MinDocFreq, null, null);
-		writer.WriteProperty(options, PropMinTermFreq, value.MinTermFreq, null, null);
-		writer.WriteProperty(options, PropMinWordLength, value.MinWordLength, null, null);
+		writer.WriteProperty(options, PropMaxDocFreq, value.MaxDocFreq, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxNumTerms, value.MaxNumTerms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxTermFreq, value.MaxTermFreq, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxWordLength, value.MaxWordLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinDocFreq, value.MinDocFreq, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinTermFreq, value.MinTermFreq, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinWordLength, value.MinWordLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

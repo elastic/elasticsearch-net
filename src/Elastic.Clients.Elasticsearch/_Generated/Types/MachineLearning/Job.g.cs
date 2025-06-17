@@ -102,7 +102,7 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -112,7 +112,7 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propDailyModelSnapshotRetentionAfterDays.TryReadProperty(ref reader, options, PropDailyModelSnapshotRetentionAfterDays, null))
+			if (propDailyModelSnapshotRetentionAfterDays.TryReadProperty(ref reader, options, PropDailyModelSnapshotRetentionAfterDays, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -127,7 +127,7 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propDeleting.TryReadProperty(ref reader, options, PropDeleting, null))
+			if (propDeleting.TryReadProperty(ref reader, options, PropDeleting, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -137,7 +137,7 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propFinishedTime.TryReadProperty(ref reader, options, PropFinishedTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propFinishedTime.TryReadProperty(ref reader, options, PropFinishedTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -177,7 +177,7 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propRenormalizationWindowDays.TryReadProperty(ref reader, options, PropRenormalizationWindowDays, null))
+			if (propRenormalizationWindowDays.TryReadProperty(ref reader, options, PropRenormalizationWindowDays, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -187,7 +187,7 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 				continue;
 			}
 
-			if (propResultsRetentionDays.TryReadProperty(ref reader, options, PropResultsRetentionDays, null))
+			if (propResultsRetentionDays.TryReadProperty(ref reader, options, PropResultsRetentionDays, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -238,14 +238,14 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 		writer.WriteProperty(options, PropAnalysisLimits, value.AnalysisLimits, null, null);
 		writer.WriteProperty(options, PropBackgroundPersistInterval, value.BackgroundPersistInterval, null, null);
 		writer.WriteProperty(options, PropBlocked, value.Blocked, null, null);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropCustomSettings, value.CustomSettings, null, null);
-		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, null);
+		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropDataDescription, value.DataDescription, null, null);
 		writer.WriteProperty(options, PropDatafeedConfig, value.DatafeedConfig, null, null);
-		writer.WriteProperty(options, PropDeleting, value.Deleting, null, null);
+		writer.WriteProperty(options, PropDeleting, value.Deleting, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropFinishedTime, value.FinishedTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropFinishedTime, value.FinishedTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropJobType, value.JobType, null, null);
@@ -253,9 +253,9 @@ internal sealed partial class JobConverter : System.Text.Json.Serialization.Json
 		writer.WriteProperty(options, PropModelPlotConfig, value.ModelPlotConfig, null, null);
 		writer.WriteProperty(options, PropModelSnapshotId, value.ModelSnapshotId, null, null);
 		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, null);
-		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays, null, null);
+		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropResultsIndexName, value.ResultsIndexName, null, null);
-		writer.WriteProperty(options, PropResultsRetentionDays, value.ResultsRetentionDays, null, null);
+		writer.WriteProperty(options, PropResultsRetentionDays, value.ResultsRetentionDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

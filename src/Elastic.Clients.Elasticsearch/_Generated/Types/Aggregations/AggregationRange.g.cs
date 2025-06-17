@@ -37,7 +37,7 @@ internal sealed partial class AggregationRangeConverter : System.Text.Json.Seria
 		LocalJsonValue<double?> propTo = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -47,7 +47,7 @@ internal sealed partial class AggregationRangeConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propTo.TryReadProperty(ref reader, options, PropTo, null))
+			if (propTo.TryReadProperty(ref reader, options, PropTo, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class AggregationRangeConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.AggregationRange value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropFrom, value.From, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropKey, value.Key, null, null);
-		writer.WriteProperty(options, PropTo, value.To, null, null);
+		writer.WriteProperty(options, PropTo, value.To, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

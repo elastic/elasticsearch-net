@@ -45,7 +45,7 @@ internal sealed partial class IndexSettingsLifecycleConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep?> propStep = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propIndexingComplete.TryReadProperty(ref reader, options, PropIndexingComplete, null))
+			if (propIndexingComplete.TryReadProperty(ref reader, options, PropIndexingComplete, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -55,12 +55,12 @@ internal sealed partial class IndexSettingsLifecycleConverter : System.Text.Json
 				continue;
 			}
 
-			if (propOriginationDate.TryReadProperty(ref reader, options, PropOriginationDate, null))
+			if (propOriginationDate.TryReadProperty(ref reader, options, PropOriginationDate, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propParseOriginationDate.TryReadProperty(ref reader, options, PropParseOriginationDate, null))
+			if (propParseOriginationDate.TryReadProperty(ref reader, options, PropParseOriginationDate, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -105,10 +105,10 @@ internal sealed partial class IndexSettingsLifecycleConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycle value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIndexingComplete, value.IndexingComplete, null, null);
+		writer.WriteProperty(options, PropIndexingComplete, value.IndexingComplete, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropOriginationDate, value.OriginationDate, null, null);
-		writer.WriteProperty(options, PropParseOriginationDate, value.ParseOriginationDate, null, null);
+		writer.WriteProperty(options, PropOriginationDate, value.OriginationDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropParseOriginationDate, value.ParseOriginationDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPreferIlm, value.PreferIlm, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<bool, string>? v) => w.WriteUnionValue<bool, string>(o, v, null, null));
 		writer.WriteProperty(options, PropRolloverAlias, value.RolloverAlias, null, null);
 		writer.WriteProperty(options, PropStep, value.Step, null, null);

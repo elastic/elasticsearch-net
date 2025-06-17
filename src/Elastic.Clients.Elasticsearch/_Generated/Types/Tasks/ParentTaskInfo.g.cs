@@ -69,7 +69,7 @@ internal sealed partial class ParentTaskInfoConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propCancelled.TryReadProperty(ref reader, options, PropCancelled, null))
+			if (propCancelled.TryReadProperty(ref reader, options, PropCancelled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -163,7 +163,7 @@ internal sealed partial class ParentTaskInfoConverter : System.Text.Json.Seriali
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAction, value.Action, null, null);
 		writer.WriteProperty(options, PropCancellable, value.Cancellable, null, null);
-		writer.WriteProperty(options, PropCancelled, value.Cancelled, null, null);
+		writer.WriteProperty(options, PropCancelled, value.Cancelled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropChildren, value.Children, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>(o, v, null));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));

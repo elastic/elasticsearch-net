@@ -95,27 +95,27 @@ internal sealed partial class AggregationProfileDebugConverter : System.Text.Jso
 		LocalJsonValue<int?> propValuesFetched = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBruteForceUsed.TryReadProperty(ref reader, options, PropBruteForceUsed, null))
+			if (propBruteForceUsed.TryReadProperty(ref reader, options, PropBruteForceUsed, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propBuiltBuckets.TryReadProperty(ref reader, options, PropBuiltBuckets, null))
+			if (propBuiltBuckets.TryReadProperty(ref reader, options, PropBuiltBuckets, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propCharsFetched.TryReadProperty(ref reader, options, PropCharsFetched, null))
+			if (propCharsFetched.TryReadProperty(ref reader, options, PropCharsFetched, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propCollectAnalyzedCount.TryReadProperty(ref reader, options, PropCollectAnalyzedCount, null))
+			if (propCollectAnalyzedCount.TryReadProperty(ref reader, options, PropCollectAnalyzedCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propCollectAnalyzedNs.TryReadProperty(ref reader, options, PropCollectAnalyzedNs, null))
+			if (propCollectAnalyzedNs.TryReadProperty(ref reader, options, PropCollectAnalyzedNs, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -140,27 +140,27 @@ internal sealed partial class AggregationProfileDebugConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propDynamicPruningAttempted.TryReadProperty(ref reader, options, PropDynamicPruningAttempted, null))
+			if (propDynamicPruningAttempted.TryReadProperty(ref reader, options, PropDynamicPruningAttempted, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propDynamicPruningUsed.TryReadProperty(ref reader, options, PropDynamicPruningUsed, null))
+			if (propDynamicPruningUsed.TryReadProperty(ref reader, options, PropDynamicPruningUsed, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propEmptyCollectorsUsed.TryReadProperty(ref reader, options, PropEmptyCollectorsUsed, null))
+			if (propEmptyCollectorsUsed.TryReadProperty(ref reader, options, PropEmptyCollectorsUsed, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propExtractCount.TryReadProperty(ref reader, options, PropExtractCount, null))
+			if (propExtractCount.TryReadProperty(ref reader, options, PropExtractCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propExtractNs.TryReadProperty(ref reader, options, PropExtractNs, null))
+			if (propExtractNs.TryReadProperty(ref reader, options, PropExtractNs, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -170,7 +170,7 @@ internal sealed partial class AggregationProfileDebugConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propHasFilter.TryReadProperty(ref reader, options, PropHasFilter, null))
+			if (propHasFilter.TryReadProperty(ref reader, options, PropHasFilter, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -180,17 +180,17 @@ internal sealed partial class AggregationProfileDebugConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propNumericCollectorsUsed.TryReadProperty(ref reader, options, PropNumericCollectorsUsed, null))
+			if (propNumericCollectorsUsed.TryReadProperty(ref reader, options, PropNumericCollectorsUsed, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propOrdinalsCollectorsOverheadTooHigh.TryReadProperty(ref reader, options, PropOrdinalsCollectorsOverheadTooHigh, null))
+			if (propOrdinalsCollectorsOverheadTooHigh.TryReadProperty(ref reader, options, PropOrdinalsCollectorsOverheadTooHigh, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propOrdinalsCollectorsUsed.TryReadProperty(ref reader, options, PropOrdinalsCollectorsUsed, null))
+			if (propOrdinalsCollectorsUsed.TryReadProperty(ref reader, options, PropOrdinalsCollectorsUsed, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -200,57 +200,57 @@ internal sealed partial class AggregationProfileDebugConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propSegmentsCollected.TryReadProperty(ref reader, options, PropSegmentsCollected, null))
+			if (propSegmentsCollected.TryReadProperty(ref reader, options, PropSegmentsCollected, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSegmentsCounted.TryReadProperty(ref reader, options, PropSegmentsCounted, null))
+			if (propSegmentsCounted.TryReadProperty(ref reader, options, PropSegmentsCounted, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSegmentsWithDeletedDocs.TryReadProperty(ref reader, options, PropSegmentsWithDeletedDocs, null))
+			if (propSegmentsWithDeletedDocs.TryReadProperty(ref reader, options, PropSegmentsWithDeletedDocs, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSegmentsWithDocCountField.TryReadProperty(ref reader, options, PropSegmentsWithDocCountField, null))
+			if (propSegmentsWithDocCountField.TryReadProperty(ref reader, options, PropSegmentsWithDocCountField, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSegmentsWithMultiValuedOrds.TryReadProperty(ref reader, options, PropSegmentsWithMultiValuedOrds, null))
+			if (propSegmentsWithMultiValuedOrds.TryReadProperty(ref reader, options, PropSegmentsWithMultiValuedOrds, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSegmentsWithSingleValuedOrds.TryReadProperty(ref reader, options, PropSegmentsWithSingleValuedOrds, null))
+			if (propSegmentsWithSingleValuedOrds.TryReadProperty(ref reader, options, PropSegmentsWithSingleValuedOrds, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSkippedDueToNoData.TryReadProperty(ref reader, options, PropSkippedDueToNoData, null))
+			if (propSkippedDueToNoData.TryReadProperty(ref reader, options, PropSkippedDueToNoData, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propStringHashingCollectorsUsed.TryReadProperty(ref reader, options, PropStringHashingCollectorsUsed, null))
+			if (propStringHashingCollectorsUsed.TryReadProperty(ref reader, options, PropStringHashingCollectorsUsed, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSurvivingBuckets.TryReadProperty(ref reader, options, PropSurvivingBuckets, null))
+			if (propSurvivingBuckets.TryReadProperty(ref reader, options, PropSurvivingBuckets, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalBuckets.TryReadProperty(ref reader, options, PropTotalBuckets, null))
+			if (propTotalBuckets.TryReadProperty(ref reader, options, PropTotalBuckets, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propValuesFetched.TryReadProperty(ref reader, options, PropValuesFetched, null))
+			if (propValuesFetched.TryReadProperty(ref reader, options, PropValuesFetched, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -305,38 +305,38 @@ internal sealed partial class AggregationProfileDebugConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDebug value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBruteForceUsed, value.BruteForceUsed, null, null);
-		writer.WriteProperty(options, PropBuiltBuckets, value.BuiltBuckets, null, null);
-		writer.WriteProperty(options, PropCharsFetched, value.CharsFetched, null, null);
-		writer.WriteProperty(options, PropCollectAnalyzedCount, value.CollectAnalyzedCount, null, null);
-		writer.WriteProperty(options, PropCollectAnalyzedNs, value.CollectAnalyzedNs, null, null);
+		writer.WriteProperty(options, PropBruteForceUsed, value.BruteForceUsed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropBuiltBuckets, value.BuiltBuckets, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropCharsFetched, value.CharsFetched, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropCollectAnalyzedCount, value.CollectAnalyzedCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropCollectAnalyzedNs, value.CollectAnalyzedNs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropCollectionStrategy, value.CollectionStrategy, null, null);
 		writer.WriteProperty(options, PropDeferredAggregators, value.DeferredAggregators, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropDelegate, value.Delegate, null, null);
 		writer.WriteProperty(options, PropDelegateDebug, value.DelegateDebug, null, null);
-		writer.WriteProperty(options, PropDynamicPruningAttempted, value.DynamicPruningAttempted, null, null);
-		writer.WriteProperty(options, PropDynamicPruningUsed, value.DynamicPruningUsed, null, null);
-		writer.WriteProperty(options, PropEmptyCollectorsUsed, value.EmptyCollectorsUsed, null, null);
-		writer.WriteProperty(options, PropExtractCount, value.ExtractCount, null, null);
-		writer.WriteProperty(options, PropExtractNs, value.ExtractNs, null, null);
+		writer.WriteProperty(options, PropDynamicPruningAttempted, value.DynamicPruningAttempted, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropDynamicPruningUsed, value.DynamicPruningUsed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropEmptyCollectorsUsed, value.EmptyCollectorsUsed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropExtractCount, value.ExtractCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropExtractNs, value.ExtractNs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropFilters, value.Filters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfileDelegateDebugFilter>(o, v, null));
-		writer.WriteProperty(options, PropHasFilter, value.HasFilter, null, null);
+		writer.WriteProperty(options, PropHasFilter, value.HasFilter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMapReducer, value.MapReducer, null, null);
-		writer.WriteProperty(options, PropNumericCollectorsUsed, value.NumericCollectorsUsed, null, null);
-		writer.WriteProperty(options, PropOrdinalsCollectorsOverheadTooHigh, value.OrdinalsCollectorsOverheadTooHigh, null, null);
-		writer.WriteProperty(options, PropOrdinalsCollectorsUsed, value.OrdinalsCollectorsUsed, null, null);
+		writer.WriteProperty(options, PropNumericCollectorsUsed, value.NumericCollectorsUsed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropOrdinalsCollectorsOverheadTooHigh, value.OrdinalsCollectorsOverheadTooHigh, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropOrdinalsCollectorsUsed, value.OrdinalsCollectorsUsed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropResultStrategy, value.ResultStrategy, null, null);
-		writer.WriteProperty(options, PropSegmentsCollected, value.SegmentsCollected, null, null);
-		writer.WriteProperty(options, PropSegmentsCounted, value.SegmentsCounted, null, null);
-		writer.WriteProperty(options, PropSegmentsWithDeletedDocs, value.SegmentsWithDeletedDocs, null, null);
-		writer.WriteProperty(options, PropSegmentsWithDocCountField, value.SegmentsWithDocCountField, null, null);
-		writer.WriteProperty(options, PropSegmentsWithMultiValuedOrds, value.SegmentsWithMultiValuedOrds, null, null);
-		writer.WriteProperty(options, PropSegmentsWithSingleValuedOrds, value.SegmentsWithSingleValuedOrds, null, null);
-		writer.WriteProperty(options, PropSkippedDueToNoData, value.SkippedDueToNoData, null, null);
-		writer.WriteProperty(options, PropStringHashingCollectorsUsed, value.StringHashingCollectorsUsed, null, null);
-		writer.WriteProperty(options, PropSurvivingBuckets, value.SurvivingBuckets, null, null);
-		writer.WriteProperty(options, PropTotalBuckets, value.TotalBuckets, null, null);
-		writer.WriteProperty(options, PropValuesFetched, value.ValuesFetched, null, null);
+		writer.WriteProperty(options, PropSegmentsCollected, value.SegmentsCollected, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSegmentsCounted, value.SegmentsCounted, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSegmentsWithDeletedDocs, value.SegmentsWithDeletedDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSegmentsWithDocCountField, value.SegmentsWithDocCountField, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSegmentsWithMultiValuedOrds, value.SegmentsWithMultiValuedOrds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSegmentsWithSingleValuedOrds, value.SegmentsWithSingleValuedOrds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSkippedDueToNoData, value.SkippedDueToNoData, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropStringHashingCollectorsUsed, value.StringHashingCollectorsUsed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSurvivingBuckets, value.SurvivingBuckets, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTotalBuckets, value.TotalBuckets, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropValuesFetched, value.ValuesFetched, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

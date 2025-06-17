@@ -35,12 +35,12 @@ internal sealed partial class HuggingFaceTaskSettingsConverter : System.Text.Jso
 		LocalJsonValue<int?> propTopN = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, null))
+			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propTopN.TryReadProperty(ref reader, options, PropTopN, null))
+			if (propTopN.TryReadProperty(ref reader, options, PropTopN, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class HuggingFaceTaskSettingsConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, null);
-		writer.WriteProperty(options, PropTopN, value.TopN, null, null);
+		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropTopN, value.TopN, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -42,7 +42,7 @@ internal sealed partial class PhraseSuggestCollateConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propPrune.TryReadProperty(ref reader, options, PropPrune, null))
+			if (propPrune.TryReadProperty(ref reader, options, PropPrune, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ internal sealed partial class PhraseSuggestCollateConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
-		writer.WriteProperty(options, PropPrune, value.Prune, null, null);
+		writer.WriteProperty(options, PropPrune, value.Prune, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteEndObject();
 	}

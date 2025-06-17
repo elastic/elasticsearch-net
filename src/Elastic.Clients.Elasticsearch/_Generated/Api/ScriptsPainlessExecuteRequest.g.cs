@@ -41,7 +41,7 @@ internal sealed partial class ScriptsPainlessExecuteRequestConverter : System.Te
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propContext.TryReadProperty(ref reader, options, PropContext, null))
+			if (propContext.TryReadProperty(ref reader, options, PropContext, static Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext>(o)))
 			{
 				continue;
 			}
@@ -77,7 +77,7 @@ internal sealed partial class ScriptsPainlessExecuteRequestConverter : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropContext, value.Context, null, null);
+		writer.WriteProperty(options, PropContext, value.Context, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext>(o, v));
 		writer.WriteProperty(options, PropContextSetup, value.ContextSetup, null, null);
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteEndObject();

@@ -88,7 +88,7 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitForCompletionTimeout = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, null))
+			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -98,7 +98,7 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, null))
+			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -108,7 +108,7 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propKeepOnCompletion.TryReadProperty(ref reader, options, PropKeepOnCompletion, null))
+			if (propKeepOnCompletion.TryReadProperty(ref reader, options, PropKeepOnCompletion, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -123,7 +123,7 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propProfile.TryReadProperty(ref reader, options, PropProfile, null))
+			if (propProfile.TryReadProperty(ref reader, options, PropProfile, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -166,14 +166,14 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropColumnar, value.Columnar, null, null);
+		writer.WriteProperty(options, PropColumnar, value.Columnar, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropIncludeCcsMetadata, value.IncludeCcsMetadata, null, null);
+		writer.WriteProperty(options, PropIncludeCcsMetadata, value.IncludeCcsMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
-		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, null);
+		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
-		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
+		writer.WriteProperty(options, PropProfile, value.Profile, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropWaitForCompletionTimeout, value.WaitForCompletionTimeout, null, null);
 		writer.WriteEndObject();

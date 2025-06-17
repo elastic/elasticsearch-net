@@ -35,7 +35,7 @@ internal sealed partial class AnalysisLimitsConverter : System.Text.Json.Seriali
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propModelMemoryLimit = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCategorizationExamplesLimit.TryReadProperty(ref reader, options, PropCategorizationExamplesLimit, null))
+			if (propCategorizationExamplesLimit.TryReadProperty(ref reader, options, PropCategorizationExamplesLimit, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -65,7 +65,7 @@ internal sealed partial class AnalysisLimitsConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCategorizationExamplesLimit, value.CategorizationExamplesLimit, null, null);
+		writer.WriteProperty(options, PropCategorizationExamplesLimit, value.CategorizationExamplesLimit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
 		writer.WriteEndObject();
 	}

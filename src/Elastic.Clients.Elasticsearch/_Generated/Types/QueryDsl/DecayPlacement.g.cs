@@ -39,7 +39,7 @@ internal sealed partial class DecayPlacementConverter<TOrigin, TScale> : System.
 		LocalJsonValue<TScale?> propScale = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDecay.TryReadProperty(ref reader, options, PropDecay, null))
+			if (propDecay.TryReadProperty(ref reader, options, PropDecay, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class DecayPlacementConverter<TOrigin, TScale> : System.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<TOrigin, TScale> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDecay, value.Decay, null, null);
+		writer.WriteProperty(options, PropDecay, value.Decay, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
 		writer.WriteProperty(options, PropOrigin, value.Origin, null, null);
 		writer.WriteProperty(options, PropScale, value.Scale, null, null);

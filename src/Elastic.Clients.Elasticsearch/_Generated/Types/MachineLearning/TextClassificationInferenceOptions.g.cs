@@ -46,7 +46,7 @@ internal sealed partial class TextClassificationInferenceOptionsConverter : Syst
 				continue;
 			}
 
-			if (propNumTopClasses.TryReadProperty(ref reader, options, PropNumTopClasses, null))
+			if (propNumTopClasses.TryReadProperty(ref reader, options, PropNumTopClasses, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -90,7 +90,7 @@ internal sealed partial class TextClassificationInferenceOptionsConverter : Syst
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropClassificationLabels, value.ClassificationLabels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropNumTopClasses, value.NumTopClasses, null, null);
+		writer.WriteProperty(options, PropNumTopClasses, value.NumTopClasses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
 		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);
 		writer.WriteProperty(options, PropVocabulary, value.Vocabulary, null, null);

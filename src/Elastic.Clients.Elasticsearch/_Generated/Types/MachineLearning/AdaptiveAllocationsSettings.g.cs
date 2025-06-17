@@ -42,12 +42,12 @@ internal sealed partial class AdaptiveAllocationsSettingsConverter : System.Text
 				continue;
 			}
 
-			if (propMaxNumberOfAllocations.TryReadProperty(ref reader, options, PropMaxNumberOfAllocations, null))
+			if (propMaxNumberOfAllocations.TryReadProperty(ref reader, options, PropMaxNumberOfAllocations, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinNumberOfAllocations.TryReadProperty(ref reader, options, PropMinNumberOfAllocations, null))
+			if (propMinNumberOfAllocations.TryReadProperty(ref reader, options, PropMinNumberOfAllocations, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -74,8 +74,8 @@ internal sealed partial class AdaptiveAllocationsSettingsConverter : System.Text
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
-		writer.WriteProperty(options, PropMaxNumberOfAllocations, value.MaxNumberOfAllocations, null, null);
-		writer.WriteProperty(options, PropMinNumberOfAllocations, value.MinNumberOfAllocations, null, null);
+		writer.WriteProperty(options, PropMaxNumberOfAllocations, value.MaxNumberOfAllocations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinNumberOfAllocations, value.MinNumberOfAllocations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

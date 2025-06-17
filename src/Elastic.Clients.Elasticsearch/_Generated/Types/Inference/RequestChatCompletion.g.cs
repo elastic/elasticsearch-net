@@ -47,7 +47,7 @@ internal sealed partial class RequestChatCompletionConverter : System.Text.Json.
 		LocalJsonValue<float?> propTopP = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxCompletionTokens.TryReadProperty(ref reader, options, PropMaxCompletionTokens, null))
+			if (propMaxCompletionTokens.TryReadProperty(ref reader, options, PropMaxCompletionTokens, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -67,7 +67,7 @@ internal sealed partial class RequestChatCompletionConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propTemperature.TryReadProperty(ref reader, options, PropTemperature, null))
+			if (propTemperature.TryReadProperty(ref reader, options, PropTemperature, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class RequestChatCompletionConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propTopP.TryReadProperty(ref reader, options, PropTopP, null))
+			if (propTopP.TryReadProperty(ref reader, options, PropTopP, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -113,14 +113,14 @@ internal sealed partial class RequestChatCompletionConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxCompletionTokens, value.MaxCompletionTokens, null, null);
+		writer.WriteProperty(options, PropMaxCompletionTokens, value.MaxCompletionTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMessages, value.Messages, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.Message> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.Message>(o, v, null));
 		writer.WriteProperty(options, PropModel, value.Model, null, null);
 		writer.WriteProperty(options, PropStop, value.Stop, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropTemperature, value.Temperature, null, null);
+		writer.WriteProperty(options, PropTemperature, value.Temperature, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropToolChoice, value.ToolChoice, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>? v) => w.WriteUnionValue<string, Elastic.Clients.Elasticsearch.Inference.CompletionToolChoice>(o, v, null, null));
 		writer.WriteProperty(options, PropTools, value.Tools, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Inference.CompletionTool>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Inference.CompletionTool>(o, v, null));
-		writer.WriteProperty(options, PropTopP, value.TopP, null, null);
+		writer.WriteProperty(options, PropTopP, value.TopP, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteEndObject();
 	}
 }

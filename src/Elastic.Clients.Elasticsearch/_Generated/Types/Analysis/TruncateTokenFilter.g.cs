@@ -36,7 +36,7 @@ internal sealed partial class TruncateTokenFilterConverter : System.Text.Json.Se
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLength.TryReadProperty(ref reader, options, PropLength, null))
+			if (propLength.TryReadProperty(ref reader, options, PropLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class TruncateTokenFilterConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLength, value.Length, null, null);
+		writer.WriteProperty(options, PropLength, value.Length, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

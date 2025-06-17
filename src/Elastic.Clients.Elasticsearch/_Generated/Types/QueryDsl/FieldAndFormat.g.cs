@@ -56,7 +56,7 @@ internal sealed partial class FieldAndFormatConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propIncludeUnmapped.TryReadProperty(ref reader, options, PropIncludeUnmapped, null))
+			if (propIncludeUnmapped.TryReadProperty(ref reader, options, PropIncludeUnmapped, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class FieldAndFormatConverter : System.Text.Json.Seriali
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteProperty(options, PropIncludeUnmapped, value.IncludeUnmapped, null, null);
+		writer.WriteProperty(options, PropIncludeUnmapped, value.IncludeUnmapped, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -47,7 +47,7 @@ internal sealed partial class RollupJobStatusConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propUpgradedDocId.TryReadProperty(ref reader, options, PropUpgradedDocId, null))
+			if (propUpgradedDocId.TryReadProperty(ref reader, options, PropUpgradedDocId, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class RollupJobStatusConverter : System.Text.Json.Serial
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCurrentPosition, value.CurrentPosition, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropJobState, value.JobState, null, null);
-		writer.WriteProperty(options, PropUpgradedDocId, value.UpgradedDocId, null, null);
+		writer.WriteProperty(options, PropUpgradedDocId, value.UpgradedDocId, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

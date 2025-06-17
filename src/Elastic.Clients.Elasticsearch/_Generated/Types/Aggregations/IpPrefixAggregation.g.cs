@@ -41,7 +41,7 @@ internal sealed partial class IpPrefixAggregationConverter : System.Text.Json.Se
 		LocalJsonValue<int> propPrefixLength = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAppendPrefixLength.TryReadProperty(ref reader, options, PropAppendPrefixLength, null))
+			if (propAppendPrefixLength.TryReadProperty(ref reader, options, PropAppendPrefixLength, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -51,12 +51,12 @@ internal sealed partial class IpPrefixAggregationConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propIsIpv6.TryReadProperty(ref reader, options, PropIsIpv6, null))
+			if (propIsIpv6.TryReadProperty(ref reader, options, PropIsIpv6, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -89,10 +89,10 @@ internal sealed partial class IpPrefixAggregationConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAppendPrefixLength, value.AppendPrefixLength, null, null);
+		writer.WriteProperty(options, PropAppendPrefixLength, value.AppendPrefixLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropIsIpv6, value.IsIpv6, null, null);
-		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
+		writer.WriteProperty(options, PropIsIpv6, value.IsIpv6, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
 		writer.WriteEndObject();
 	}

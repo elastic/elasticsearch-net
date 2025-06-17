@@ -61,7 +61,7 @@ internal sealed partial class OperatingSystemConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -93,7 +93,7 @@ internal sealed partial class OperatingSystemConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropCpu, value.Cpu, null, null);
 		writer.WriteProperty(options, PropMem, value.Mem, null, null);
 		writer.WriteProperty(options, PropSwap, value.Swap, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

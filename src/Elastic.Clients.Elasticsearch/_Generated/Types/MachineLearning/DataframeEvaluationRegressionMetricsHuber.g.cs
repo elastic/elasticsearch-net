@@ -33,7 +33,7 @@ internal sealed partial class DataframeEvaluationRegressionMetricsHuberConverter
 		LocalJsonValue<double?> propDelta = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDelta.TryReadProperty(ref reader, options, PropDelta, null))
+			if (propDelta.TryReadProperty(ref reader, options, PropDelta, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class DataframeEvaluationRegressionMetricsHuberConverter
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDelta, value.Delta, null, null);
+		writer.WriteProperty(options, PropDelta, value.Delta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

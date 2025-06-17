@@ -54,7 +54,7 @@ internal sealed partial class InlineGetConverter<TDocument> : System.Text.Json.S
 				continue;
 			}
 
-			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, null))
+			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -64,7 +64,7 @@ internal sealed partial class InlineGetConverter<TDocument> : System.Text.Json.S
 				continue;
 			}
 
-			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, null))
+			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class InlineGetConverter<TDocument> : System.Text.Json.S
 			}
 
 			propMetadata ??= new System.Collections.Generic.Dictionary<string, object>();
-			reader.ReadProperty(options, out string key, out object value, null, null);
+			reader.ReadProperty(options, out string key, out object value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<object>(o)!);
 			propMetadata[key] = value;
 		}
 
@@ -97,15 +97,15 @@ internal sealed partial class InlineGetConverter<TDocument> : System.Text.Json.S
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropFound, value.Found, null, null);
-		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, null);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
-		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, null);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		if (value.Metadata is not null)
 		{
 			foreach (var item in value.Metadata)
 			{
-				writer.WriteProperty(options, item.Key, item.Value, null, null);
+				writer.WriteProperty(options, item.Key, item.Value, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), null);
 			}
 		}
 

@@ -56,7 +56,7 @@ internal sealed partial class HitsEventConverter<TEvent> : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -92,7 +92,7 @@ internal sealed partial class HitsEventConverter<TEvent> : System.Text.Json.Seri
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<object>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<object>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<object> v) => w.WriteCollectionValue<object>(o, v, null)));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TEvent v) => w.WriteValueEx<TEvent>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TEvent>)));
 		writer.WriteEndObject();
 	}

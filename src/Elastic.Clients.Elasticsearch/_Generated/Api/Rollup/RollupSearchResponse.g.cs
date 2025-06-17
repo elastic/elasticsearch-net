@@ -58,7 +58,7 @@ internal sealed partial class RollupSearchResponseConverter<TDocument> : System.
 				continue;
 			}
 
-			if (propTerminatedEarly.TryReadProperty(ref reader, options, PropTerminatedEarly, null))
+			if (propTerminatedEarly.TryReadProperty(ref reader, options, PropTerminatedEarly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -100,7 +100,7 @@ internal sealed partial class RollupSearchResponseConverter<TDocument> : System.
 		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, null);
 		writer.WriteProperty(options, PropHits, value.Hits, null, null);
 		writer.WriteProperty(options, PropShards, value.Shards, null, null);
-		writer.WriteProperty(options, PropTerminatedEarly, value.TerminatedEarly, null, null);
+		writer.WriteProperty(options, PropTerminatedEarly, value.TerminatedEarly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
 		writer.WriteProperty(options, PropTook, value.Took, null, null);
 		writer.WriteEndObject();

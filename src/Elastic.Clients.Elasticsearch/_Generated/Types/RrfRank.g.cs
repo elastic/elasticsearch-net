@@ -35,12 +35,12 @@ internal sealed partial class RrfRankConverter : System.Text.Json.Serialization.
 		LocalJsonValue<long?> propRankWindowSize = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propRankConstant.TryReadProperty(ref reader, options, PropRankConstant, null))
+			if (propRankConstant.TryReadProperty(ref reader, options, PropRankConstant, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class RrfRankConverter : System.Text.Json.Serialization.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.RrfRank value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRankConstant, value.RankConstant, null, null);
-		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropRankConstant, value.RankConstant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

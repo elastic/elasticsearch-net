@@ -42,7 +42,7 @@ internal sealed partial class ShapeFieldQueryConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propRelation.TryReadProperty(ref reader, options, PropRelation, null))
+			if (propRelation.TryReadProperty(ref reader, options, PropRelation, static Elastic.Clients.Elasticsearch.GeoShapeRelation? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.GeoShapeRelation>(o)))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ internal sealed partial class ShapeFieldQueryConverter : System.Text.Json.Serial
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropIndexedShape, value.IndexedShape, null, null);
-		writer.WriteProperty(options, PropRelation, value.Relation, null, null);
+		writer.WriteProperty(options, PropRelation, value.Relation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.GeoShapeRelation? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.GeoShapeRelation>(o, v));
 		writer.WriteProperty(options, PropShape, value.Shape, null, null);
 		writer.WriteEndObject();
 	}

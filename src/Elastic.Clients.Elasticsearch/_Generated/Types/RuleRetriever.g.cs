@@ -55,7 +55,7 @@ internal sealed partial class RuleRetrieverConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -65,7 +65,7 @@ internal sealed partial class RuleRetrieverConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -107,9 +107,9 @@ internal sealed partial class RuleRetrieverConverter : System.Text.Json.Serializ
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
 		writer.WriteProperty(options, PropMatchCriteria, value.MatchCriteria, null, null);
-		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
 		writer.WriteProperty(options, PropRulesetIds, value.RulesetIds, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, v, null));
 		writer.WriteEndObject();

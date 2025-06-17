@@ -51,7 +51,7 @@ internal sealed partial class RangeAggregationConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class RangeAggregationConverter : System.Text.Json.Seria
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRanges, value.Ranges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>(o, v, null));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteEndObject();

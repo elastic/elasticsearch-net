@@ -43,12 +43,12 @@ internal sealed partial class ShardFileSizeInfoConverter : System.Text.Json.Seri
 		LocalJsonValue<long> propSizeInBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAverageSizeInBytes.TryReadProperty(ref reader, options, PropAverageSizeInBytes, null))
+			if (propAverageSizeInBytes.TryReadProperty(ref reader, options, PropAverageSizeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -58,12 +58,12 @@ internal sealed partial class ShardFileSizeInfoConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propMaxSizeInBytes.TryReadProperty(ref reader, options, PropMaxSizeInBytes, null))
+			if (propMaxSizeInBytes.TryReadProperty(ref reader, options, PropMaxSizeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propMinSizeInBytes.TryReadProperty(ref reader, options, PropMinSizeInBytes, null))
+			if (propMinSizeInBytes.TryReadProperty(ref reader, options, PropMinSizeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -97,11 +97,11 @@ internal sealed partial class ShardFileSizeInfoConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAverageSizeInBytes, value.AverageSizeInBytes, null, null);
-		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropAverageSizeInBytes, value.AverageSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropCount, value.Count, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropMaxSizeInBytes, value.MaxSizeInBytes, null, null);
-		writer.WriteProperty(options, PropMinSizeInBytes, value.MinSizeInBytes, null, null);
+		writer.WriteProperty(options, PropMaxSizeInBytes, value.MaxSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropMinSizeInBytes, value.MinSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropSizeInBytes, value.SizeInBytes, null, null);
 		writer.WriteEndObject();
 	}

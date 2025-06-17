@@ -95,12 +95,12 @@ internal sealed partial class AggregationBreakdownConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propPostCollection.TryReadProperty(ref reader, options, PropPostCollection, null))
+			if (propPostCollection.TryReadProperty(ref reader, options, PropPostCollection, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propPostCollectionCount.TryReadProperty(ref reader, options, PropPostCollectionCount, null))
+			if (propPostCollectionCount.TryReadProperty(ref reader, options, PropPostCollectionCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -153,8 +153,8 @@ internal sealed partial class AggregationBreakdownConverter : System.Text.Json.S
 		writer.WriteProperty(options, PropCollectCount, value.CollectCount, null, null);
 		writer.WriteProperty(options, PropInitialize, value.Initialize, null, null);
 		writer.WriteProperty(options, PropInitializeCount, value.InitializeCount, null, null);
-		writer.WriteProperty(options, PropPostCollection, value.PostCollection, null, null);
-		writer.WriteProperty(options, PropPostCollectionCount, value.PostCollectionCount, null, null);
+		writer.WriteProperty(options, PropPostCollection, value.PostCollection, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropPostCollectionCount, value.PostCollectionCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropReduce, value.Reduce, null, null);
 		writer.WriteProperty(options, PropReduceCount, value.ReduceCount, null, null);
 		writer.WriteEndObject();

@@ -42,7 +42,7 @@ internal sealed partial class ArrayPercentilesItemConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			if (propValue.TryReadProperty(ref reader, options, PropValue, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ internal sealed partial class ArrayPercentilesItemConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropKey, value.Key, null, null);
-		writer.WriteProperty(options, PropValue, value.Value, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropValueAsString, value.ValueAsString, null, null);
 		writer.WriteEndObject();
 	}

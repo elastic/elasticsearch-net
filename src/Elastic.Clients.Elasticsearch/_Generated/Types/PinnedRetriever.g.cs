@@ -60,7 +60,7 @@ internal sealed partial class PinnedRetrieverConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -108,7 +108,7 @@ internal sealed partial class PinnedRetrieverConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropDocs, value.Docs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SpecifiedDocument>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.SpecifiedDocument>(o, v, null));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
 		writer.WriteProperty(options, PropIds, value.Ids, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
 		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);

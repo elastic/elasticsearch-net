@@ -72,7 +72,7 @@ internal sealed partial class DataframeAnalysisRegressionConverter : System.Text
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Percentage?> propTrainingPercent = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAlpha.TryReadProperty(ref reader, options, PropAlpha, null))
+			if (propAlpha.TryReadProperty(ref reader, options, PropAlpha, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -82,27 +82,27 @@ internal sealed partial class DataframeAnalysisRegressionConverter : System.Text
 				continue;
 			}
 
-			if (propDownsampleFactor.TryReadProperty(ref reader, options, PropDownsampleFactor, null))
+			if (propDownsampleFactor.TryReadProperty(ref reader, options, PropDownsampleFactor, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propEarlyStoppingEnabled.TryReadProperty(ref reader, options, PropEarlyStoppingEnabled, null))
+			if (propEarlyStoppingEnabled.TryReadProperty(ref reader, options, PropEarlyStoppingEnabled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propEta.TryReadProperty(ref reader, options, PropEta, null))
+			if (propEta.TryReadProperty(ref reader, options, PropEta, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propEtaGrowthRatePerTree.TryReadProperty(ref reader, options, PropEtaGrowthRatePerTree, null))
+			if (propEtaGrowthRatePerTree.TryReadProperty(ref reader, options, PropEtaGrowthRatePerTree, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propFeatureBagFraction.TryReadProperty(ref reader, options, PropFeatureBagFraction, null))
+			if (propFeatureBagFraction.TryReadProperty(ref reader, options, PropFeatureBagFraction, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -112,12 +112,12 @@ internal sealed partial class DataframeAnalysisRegressionConverter : System.Text
 				continue;
 			}
 
-			if (propGamma.TryReadProperty(ref reader, options, PropGamma, null))
+			if (propGamma.TryReadProperty(ref reader, options, PropGamma, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propLambda.TryReadProperty(ref reader, options, PropLambda, null))
+			if (propLambda.TryReadProperty(ref reader, options, PropLambda, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -127,22 +127,22 @@ internal sealed partial class DataframeAnalysisRegressionConverter : System.Text
 				continue;
 			}
 
-			if (propLossFunctionParameter.TryReadProperty(ref reader, options, PropLossFunctionParameter, null))
+			if (propLossFunctionParameter.TryReadProperty(ref reader, options, PropLossFunctionParameter, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxOptimizationRoundsPerHyperparameter.TryReadProperty(ref reader, options, PropMaxOptimizationRoundsPerHyperparameter, null))
+			if (propMaxOptimizationRoundsPerHyperparameter.TryReadProperty(ref reader, options, PropMaxOptimizationRoundsPerHyperparameter, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxTrees.TryReadProperty(ref reader, options, PropMaxTrees, null) || propMaxTrees.TryReadProperty(ref reader, options, PropMaxTrees1, null))
+			if (propMaxTrees.TryReadProperty(ref reader, options, PropMaxTrees, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)) || propMaxTrees.TryReadProperty(ref reader, options, PropMaxTrees1, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propNumTopFeatureImportanceValues.TryReadProperty(ref reader, options, PropNumTopFeatureImportanceValues, null))
+			if (propNumTopFeatureImportanceValues.TryReadProperty(ref reader, options, PropNumTopFeatureImportanceValues, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -152,17 +152,17 @@ internal sealed partial class DataframeAnalysisRegressionConverter : System.Text
 				continue;
 			}
 
-			if (propRandomizeSeed.TryReadProperty(ref reader, options, PropRandomizeSeed, null))
+			if (propRandomizeSeed.TryReadProperty(ref reader, options, PropRandomizeSeed, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propSoftTreeDepthLimit.TryReadProperty(ref reader, options, PropSoftTreeDepthLimit, null))
+			if (propSoftTreeDepthLimit.TryReadProperty(ref reader, options, PropSoftTreeDepthLimit, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSoftTreeDepthTolerance.TryReadProperty(ref reader, options, PropSoftTreeDepthTolerance, null))
+			if (propSoftTreeDepthTolerance.TryReadProperty(ref reader, options, PropSoftTreeDepthTolerance, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -210,25 +210,25 @@ internal sealed partial class DataframeAnalysisRegressionConverter : System.Text
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAlpha, value.Alpha, null, null);
+		writer.WriteProperty(options, PropAlpha, value.Alpha, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropDependentVariable, value.DependentVariable, null, null);
-		writer.WriteProperty(options, PropDownsampleFactor, value.DownsampleFactor, null, null);
-		writer.WriteProperty(options, PropEarlyStoppingEnabled, value.EarlyStoppingEnabled, null, null);
-		writer.WriteProperty(options, PropEta, value.Eta, null, null);
-		writer.WriteProperty(options, PropEtaGrowthRatePerTree, value.EtaGrowthRatePerTree, null, null);
-		writer.WriteProperty(options, PropFeatureBagFraction, value.FeatureBagFraction, null, null);
+		writer.WriteProperty(options, PropDownsampleFactor, value.DownsampleFactor, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropEarlyStoppingEnabled, value.EarlyStoppingEnabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropEta, value.Eta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropEtaGrowthRatePerTree, value.EtaGrowthRatePerTree, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropFeatureBagFraction, value.FeatureBagFraction, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropFeatureProcessors, value.FeatureProcessors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor>(o, v, null));
-		writer.WriteProperty(options, PropGamma, value.Gamma, null, null);
-		writer.WriteProperty(options, PropLambda, value.Lambda, null, null);
+		writer.WriteProperty(options, PropGamma, value.Gamma, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropLambda, value.Lambda, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropLossFunction, value.LossFunction, null, null);
-		writer.WriteProperty(options, PropLossFunctionParameter, value.LossFunctionParameter, null, null);
-		writer.WriteProperty(options, PropMaxOptimizationRoundsPerHyperparameter, value.MaxOptimizationRoundsPerHyperparameter, null, null);
-		writer.WriteProperty(options, PropMaxTrees, value.MaxTrees, null, null);
-		writer.WriteProperty(options, PropNumTopFeatureImportanceValues, value.NumTopFeatureImportanceValues, null, null);
+		writer.WriteProperty(options, PropLossFunctionParameter, value.LossFunctionParameter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropMaxOptimizationRoundsPerHyperparameter, value.MaxOptimizationRoundsPerHyperparameter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxTrees, value.MaxTrees, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropNumTopFeatureImportanceValues, value.NumTopFeatureImportanceValues, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropPredictionFieldName, value.PredictionFieldName, null, null);
-		writer.WriteProperty(options, PropRandomizeSeed, value.RandomizeSeed, null, null);
-		writer.WriteProperty(options, PropSoftTreeDepthLimit, value.SoftTreeDepthLimit, null, null);
-		writer.WriteProperty(options, PropSoftTreeDepthTolerance, value.SoftTreeDepthTolerance, null, null);
+		writer.WriteProperty(options, PropRandomizeSeed, value.RandomizeSeed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropSoftTreeDepthLimit, value.SoftTreeDepthLimit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSoftTreeDepthTolerance, value.SoftTreeDepthTolerance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropTrainingPercent, value.TrainingPercent, null, null);
 		writer.WriteEndObject();
 	}

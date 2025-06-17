@@ -48,7 +48,7 @@ internal sealed partial class OpenAIServiceSettingsConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propDimensions.TryReadProperty(ref reader, options, PropDimensions, null))
+			if (propDimensions.TryReadProperty(ref reader, options, PropDimensions, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -98,7 +98,7 @@ internal sealed partial class OpenAIServiceSettingsConverter : System.Text.Json.
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
-		writer.WriteProperty(options, PropDimensions, value.Dimensions, null, null);
+		writer.WriteProperty(options, PropDimensions, value.Dimensions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropOrganizationId, value.OrganizationId, null, null);
 		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);

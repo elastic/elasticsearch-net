@@ -83,17 +83,17 @@ internal sealed partial class AddActionConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propIsHidden.TryReadProperty(ref reader, options, PropIsHidden, null))
+			if (propIsHidden.TryReadProperty(ref reader, options, PropIsHidden, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIsWriteIndex.TryReadProperty(ref reader, options, PropIsWriteIndex, null))
+			if (propIsWriteIndex.TryReadProperty(ref reader, options, PropIsWriteIndex, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propMustExist.TryReadProperty(ref reader, options, PropMustExist, null))
+			if (propMustExist.TryReadProperty(ref reader, options, PropMustExist, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -143,9 +143,9 @@ internal sealed partial class AddActionConverter : System.Text.Json.Serializatio
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropIndexRouting, value.IndexRouting, null, null);
 		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
-		writer.WriteProperty(options, PropIsHidden, value.IsHidden, null, null);
-		writer.WriteProperty(options, PropIsWriteIndex, value.IsWriteIndex, null, null);
-		writer.WriteProperty(options, PropMustExist, value.MustExist, null, null);
+		writer.WriteProperty(options, PropIsHidden, value.IsHidden, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIsWriteIndex, value.IsWriteIndex, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropMustExist, value.MustExist, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteProperty(options, PropSearchRouting, value.SearchRouting, null, null);
 		writer.WriteEndObject();

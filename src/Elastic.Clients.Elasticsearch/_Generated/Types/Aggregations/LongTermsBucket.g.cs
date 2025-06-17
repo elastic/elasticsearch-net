@@ -45,7 +45,7 @@ internal sealed partial class LongTermsBucketConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propDocCountErrorUpperBound.TryReadProperty(ref reader, options, PropDocCountErrorUpperBound, null))
+			if (propDocCountErrorUpperBound.TryReadProperty(ref reader, options, PropDocCountErrorUpperBound, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -80,7 +80,7 @@ internal sealed partial class LongTermsBucketConverter : System.Text.Json.Serial
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
-		writer.WriteProperty(options, PropDocCountErrorUpperBound, value.DocCountErrorUpperBound, null, null);
+		writer.WriteProperty(options, PropDocCountErrorUpperBound, value.DocCountErrorUpperBound, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropKey, value.Key, null, null);
 		writer.WriteProperty(options, PropKeyAsString, value.KeyAsString, null, null);
 		if (value.Aggregations is not null)

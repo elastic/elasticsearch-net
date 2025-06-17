@@ -79,12 +79,12 @@ internal sealed partial class SearchResponseConverter<TDocument> : System.Text.J
 				continue;
 			}
 
-			if (propMaxScore.TryReadProperty(ref reader, options, PropMaxScore, null))
+			if (propMaxScore.TryReadProperty(ref reader, options, PropMaxScore, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propNumReducePhases.TryReadProperty(ref reader, options, PropNumReducePhases, null))
+			if (propNumReducePhases.TryReadProperty(ref reader, options, PropNumReducePhases, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -114,7 +114,7 @@ internal sealed partial class SearchResponseConverter<TDocument> : System.Text.J
 				continue;
 			}
 
-			if (propTerminatedEarly.TryReadProperty(ref reader, options, PropTerminatedEarly, null))
+			if (propTerminatedEarly.TryReadProperty(ref reader, options, PropTerminatedEarly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -165,14 +165,14 @@ internal sealed partial class SearchResponseConverter<TDocument> : System.Text.J
 		writer.WriteProperty(options, PropClusters, value.Clusters, null, null);
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropHitsMetadata, value.HitsMetadata, null, null);
-		writer.WriteProperty(options, PropMaxScore, value.MaxScore, null, null);
-		writer.WriteProperty(options, PropNumReducePhases, value.NumReducePhases, null, null);
+		writer.WriteProperty(options, PropMaxScore, value.MaxScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropNumReducePhases, value.NumReducePhases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropPitId, value.PitId, null, null);
 		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
 		writer.WriteProperty(options, PropScrollId, value.ScrollId, null, null);
 		writer.WriteProperty(options, PropShards, value.Shards, null, null);
 		writer.WriteProperty(options, PropSuggest, value.Suggest, null, null);
-		writer.WriteProperty(options, PropTerminatedEarly, value.TerminatedEarly, null, null);
+		writer.WriteProperty(options, PropTerminatedEarly, value.TerminatedEarly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTimedOut, value.TimedOut, null, null);
 		writer.WriteProperty(options, PropTook, value.Took, null, null);
 		writer.WriteEndObject();

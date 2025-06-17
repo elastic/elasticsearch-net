@@ -61,7 +61,7 @@ internal sealed partial class ExtendedStatsAggregationConverter : System.Text.Js
 				continue;
 			}
 
-			if (propSigma.TryReadProperty(ref reader, options, PropSigma, null))
+			if (propSigma.TryReadProperty(ref reader, options, PropSigma, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -93,7 +93,7 @@ internal sealed partial class ExtendedStatsAggregationConverter : System.Text.Js
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropSigma, value.Sigma, null, null);
+		writer.WriteProperty(options, PropSigma, value.Sigma, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

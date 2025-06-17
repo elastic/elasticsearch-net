@@ -41,7 +41,7 @@ internal sealed partial class GeoDistanceAggregationConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.DistanceUnit?> propUnit = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDistanceType.TryReadProperty(ref reader, options, PropDistanceType, null))
+			if (propDistanceType.TryReadProperty(ref reader, options, PropDistanceType, static Elastic.Clients.Elasticsearch.GeoDistanceType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.GeoDistanceType>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class GeoDistanceAggregationConverter : System.Text.Json
 				continue;
 			}
 
-			if (propUnit.TryReadProperty(ref reader, options, PropUnit, null))
+			if (propUnit.TryReadProperty(ref reader, options, PropUnit, static Elastic.Clients.Elasticsearch.DistanceUnit? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.DistanceUnit>(o)))
 			{
 				continue;
 			}
@@ -89,11 +89,11 @@ internal sealed partial class GeoDistanceAggregationConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDistanceType, value.DistanceType, null, null);
+		writer.WriteProperty(options, PropDistanceType, value.DistanceType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.GeoDistanceType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.GeoDistanceType>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropOrigin, value.Origin, null, null);
 		writer.WriteProperty(options, PropRanges, value.Ranges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.AggregationRange>(o, v, null));
-		writer.WriteProperty(options, PropUnit, value.Unit, null, null);
+		writer.WriteProperty(options, PropUnit, value.Unit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.DistanceUnit? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.DistanceUnit>(o, v));
 		writer.WriteEndObject();
 	}
 }

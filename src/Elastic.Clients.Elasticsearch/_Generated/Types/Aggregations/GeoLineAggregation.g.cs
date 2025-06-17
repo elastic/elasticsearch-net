@@ -41,7 +41,7 @@ internal sealed partial class GeoLineAggregationConverter : System.Text.Json.Ser
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SortOrder?> propSortOrder = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propIncludeSort.TryReadProperty(ref reader, options, PropIncludeSort, null))
+			if (propIncludeSort.TryReadProperty(ref reader, options, PropIncludeSort, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -51,7 +51,7 @@ internal sealed partial class GeoLineAggregationConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class GeoLineAggregationConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propSortOrder.TryReadProperty(ref reader, options, PropSortOrder, null))
+			if (propSortOrder.TryReadProperty(ref reader, options, PropSortOrder, static Elastic.Clients.Elasticsearch.SortOrder? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.SortOrder>(o)))
 			{
 				continue;
 			}
@@ -89,11 +89,11 @@ internal sealed partial class GeoLineAggregationConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIncludeSort, value.IncludeSort, null, null);
+		writer.WriteProperty(options, PropIncludeSort, value.IncludeSort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPoint, value.Point, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSort, value.Sort, null, null);
-		writer.WriteProperty(options, PropSortOrder, value.SortOrder, null, null);
+		writer.WriteProperty(options, PropSortOrder, value.SortOrder, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SortOrder? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SortOrder>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -42,17 +42,17 @@ internal sealed partial class MinHashTokenFilterConverter : System.Text.Json.Ser
 		LocalJsonValue<bool?> propWithRotation = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBucketCount.TryReadProperty(ref reader, options, PropBucketCount, null))
+			if (propBucketCount.TryReadProperty(ref reader, options, PropBucketCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propHashCount.TryReadProperty(ref reader, options, PropHashCount, null))
+			if (propHashCount.TryReadProperty(ref reader, options, PropHashCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propHashSetSize.TryReadProperty(ref reader, options, PropHashSetSize, null))
+			if (propHashSetSize.TryReadProperty(ref reader, options, PropHashSetSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -68,7 +68,7 @@ internal sealed partial class MinHashTokenFilterConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propWithRotation.TryReadProperty(ref reader, options, PropWithRotation, null))
+			if (propWithRotation.TryReadProperty(ref reader, options, PropWithRotation, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -96,12 +96,12 @@ internal sealed partial class MinHashTokenFilterConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBucketCount, value.BucketCount, null, null);
-		writer.WriteProperty(options, PropHashCount, value.HashCount, null, null);
-		writer.WriteProperty(options, PropHashSetSize, value.HashSetSize, null, null);
+		writer.WriteProperty(options, PropBucketCount, value.BucketCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropHashCount, value.HashCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropHashSetSize, value.HashSetSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
-		writer.WriteProperty(options, PropWithRotation, value.WithRotation, null, null);
+		writer.WriteProperty(options, PropWithRotation, value.WithRotation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

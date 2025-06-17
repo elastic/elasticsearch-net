@@ -37,17 +37,17 @@ internal sealed partial class JinaAITaskSettingsConverter : System.Text.Json.Ser
 		LocalJsonValue<int?> propTopN = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, null))
+			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propTask.TryReadProperty(ref reader, options, PropTask, null))
+			if (propTask.TryReadProperty(ref reader, options, PropTask, static Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask>(o)))
 			{
 				continue;
 			}
 
-			if (propTopN.TryReadProperty(ref reader, options, PropTopN, null))
+			if (propTopN.TryReadProperty(ref reader, options, PropTopN, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class JinaAITaskSettingsConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.JinaAITaskSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, null);
-		writer.WriteProperty(options, PropTask, value.Task, null, null);
-		writer.WriteProperty(options, PropTopN, value.TopN, null, null);
+		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropTask, value.Task, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask>(o, v));
+		writer.WriteProperty(options, PropTopN, value.TopN, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

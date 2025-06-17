@@ -66,7 +66,7 @@ internal sealed partial class KnnRetrieverConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, null))
+			if (propMinScore.TryReadProperty(ref reader, options, PropMinScore, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -96,7 +96,7 @@ internal sealed partial class KnnRetrieverConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, null))
+			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -132,13 +132,13 @@ internal sealed partial class KnnRetrieverConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
 		writer.WriteProperty(options, PropK, value.K, null, null);
-		writer.WriteProperty(options, PropMinScore, value.MinScore, null, null);
+		writer.WriteProperty(options, PropMinScore, value.MinScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropNumCandidates, value.NumCandidates, null, null);
 		writer.WriteProperty(options, PropQueryVector, value.QueryVector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<float>? v) => w.WriteCollectionValue<float>(o, v, null));
 		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder, null, null);
 		writer.WriteProperty(options, PropRescoreVector, value.RescoreVector, null, null);
-		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
+		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteEndObject();
 	}
 }

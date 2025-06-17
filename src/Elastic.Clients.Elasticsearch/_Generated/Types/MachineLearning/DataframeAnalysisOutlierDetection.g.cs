@@ -43,12 +43,12 @@ internal sealed partial class DataframeAnalysisOutlierDetectionConverter : Syste
 		LocalJsonValue<bool?> propStandardizationEnabled = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propComputeFeatureInfluence.TryReadProperty(ref reader, options, PropComputeFeatureInfluence, null))
+			if (propComputeFeatureInfluence.TryReadProperty(ref reader, options, PropComputeFeatureInfluence, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propFeatureInfluenceThreshold.TryReadProperty(ref reader, options, PropFeatureInfluenceThreshold, null))
+			if (propFeatureInfluenceThreshold.TryReadProperty(ref reader, options, PropFeatureInfluenceThreshold, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -58,17 +58,17 @@ internal sealed partial class DataframeAnalysisOutlierDetectionConverter : Syste
 				continue;
 			}
 
-			if (propNNeighbors.TryReadProperty(ref reader, options, PropNNeighbors, null))
+			if (propNNeighbors.TryReadProperty(ref reader, options, PropNNeighbors, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propOutlierFraction.TryReadProperty(ref reader, options, PropOutlierFraction, null))
+			if (propOutlierFraction.TryReadProperty(ref reader, options, PropOutlierFraction, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propStandardizationEnabled.TryReadProperty(ref reader, options, PropStandardizationEnabled, null))
+			if (propStandardizationEnabled.TryReadProperty(ref reader, options, PropStandardizationEnabled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -97,12 +97,12 @@ internal sealed partial class DataframeAnalysisOutlierDetectionConverter : Syste
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropComputeFeatureInfluence, value.ComputeFeatureInfluence, null, null);
-		writer.WriteProperty(options, PropFeatureInfluenceThreshold, value.FeatureInfluenceThreshold, null, null);
+		writer.WriteProperty(options, PropComputeFeatureInfluence, value.ComputeFeatureInfluence, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropFeatureInfluenceThreshold, value.FeatureInfluenceThreshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropMethod, value.Method, null, null);
-		writer.WriteProperty(options, PropNNeighbors, value.NNeighbors, null, null);
-		writer.WriteProperty(options, PropOutlierFraction, value.OutlierFraction, null, null);
-		writer.WriteProperty(options, PropStandardizationEnabled, value.StandardizationEnabled, null, null);
+		writer.WriteProperty(options, PropNNeighbors, value.NNeighbors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropOutlierFraction, value.OutlierFraction, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropStandardizationEnabled, value.StandardizationEnabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

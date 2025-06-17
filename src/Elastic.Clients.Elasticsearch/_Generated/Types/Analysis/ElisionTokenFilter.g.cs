@@ -45,7 +45,7 @@ internal sealed partial class ElisionTokenFilterConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propArticlesCase.TryReadProperty(ref reader, options, PropArticlesCase, null))
+			if (propArticlesCase.TryReadProperty(ref reader, options, PropArticlesCase, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -89,7 +89,7 @@ internal sealed partial class ElisionTokenFilterConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropArticles, value.Articles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropArticlesCase, value.ArticlesCase, null, null);
+		writer.WriteProperty(options, PropArticlesCase, value.ArticlesCase, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropArticlesPath, value.ArticlesPath, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);

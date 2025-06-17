@@ -58,17 +58,17 @@ internal sealed partial class VertexDefinitionConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propShardMinDocCount.TryReadProperty(ref reader, options, PropShardMinDocCount, null))
+			if (propShardMinDocCount.TryReadProperty(ref reader, options, PropShardMinDocCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -100,9 +100,9 @@ internal sealed partial class VertexDefinitionConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropExclude, value.Exclude, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropInclude, value.Include, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexInclude>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Graph.VertexInclude>(o, v, null));
-		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
-		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

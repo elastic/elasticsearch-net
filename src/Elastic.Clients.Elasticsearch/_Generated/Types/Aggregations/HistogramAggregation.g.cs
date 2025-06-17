@@ -71,22 +71,22 @@ internal sealed partial class HistogramAggregationConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propInterval.TryReadProperty(ref reader, options, PropInterval, null))
+			if (propInterval.TryReadProperty(ref reader, options, PropInterval, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, null))
+			if (propMinDocCount.TryReadProperty(ref reader, options, PropMinDocCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propOffset.TryReadProperty(ref reader, options, PropOffset, null))
+			if (propOffset.TryReadProperty(ref reader, options, PropOffset, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -133,10 +133,10 @@ internal sealed partial class HistogramAggregationConverter : System.Text.Json.S
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropHardBounds, value.HardBounds, null, null);
-		writer.WriteProperty(options, PropInterval, value.Interval, null, null);
-		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, null);
-		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
-		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
+		writer.WriteProperty(options, PropInterval, value.Interval, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropOffset, value.Offset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>? v) => w.WriteSingleOrManyCollectionValue<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder> v) => w.WriteKeyValuePairValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.SortOrder>(o, v, null, null)));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteEndObject();

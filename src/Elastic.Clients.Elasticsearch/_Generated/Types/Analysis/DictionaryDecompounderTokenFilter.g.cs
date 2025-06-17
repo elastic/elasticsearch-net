@@ -46,22 +46,22 @@ internal sealed partial class DictionaryDecompounderTokenFilterConverter : Syste
 		LocalJsonValue<string?> propWordListPath = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxSubwordSize.TryReadProperty(ref reader, options, PropMaxSubwordSize, null))
+			if (propMaxSubwordSize.TryReadProperty(ref reader, options, PropMaxSubwordSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinSubwordSize.TryReadProperty(ref reader, options, PropMinSubwordSize, null))
+			if (propMinSubwordSize.TryReadProperty(ref reader, options, PropMinSubwordSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinWordSize.TryReadProperty(ref reader, options, PropMinWordSize, null))
+			if (propMinWordSize.TryReadProperty(ref reader, options, PropMinWordSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propOnlyLongestMatch.TryReadProperty(ref reader, options, PropOnlyLongestMatch, null))
+			if (propOnlyLongestMatch.TryReadProperty(ref reader, options, PropOnlyLongestMatch, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -112,10 +112,10 @@ internal sealed partial class DictionaryDecompounderTokenFilterConverter : Syste
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxSubwordSize, value.MaxSubwordSize, null, null);
-		writer.WriteProperty(options, PropMinSubwordSize, value.MinSubwordSize, null, null);
-		writer.WriteProperty(options, PropMinWordSize, value.MinWordSize, null, null);
-		writer.WriteProperty(options, PropOnlyLongestMatch, value.OnlyLongestMatch, null, null);
+		writer.WriteProperty(options, PropMaxSubwordSize, value.MaxSubwordSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinSubwordSize, value.MinSubwordSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinWordSize, value.MinWordSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropOnlyLongestMatch, value.OnlyLongestMatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteProperty(options, PropWordList, value.WordList, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));

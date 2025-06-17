@@ -52,21 +52,6 @@ internal static class JsonWriterExtensions
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static void WriteValue<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, T? value)
-		where T : struct
-	{
-		var converter = options.GetConverter<T>(null);
-
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		converter.Write(writer, value!.Value, options);
-	}
-
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static void WriteValueEx<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, T? value,
 		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type markerType)
 	{
@@ -82,10 +67,27 @@ internal static class JsonWriterExtensions
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static void WriteValueEx<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, T? value,
+	public static void WriteNullableValue<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, T? value)
+		where T : struct
+	{
+		// TODO: Support custom `T?` converters with `HandleNull`.
+		var converter = options.GetConverter<T>(null);
+
+		if (value is null)
+		{
+			writer.WriteNullValue();
+			return;
+		}
+
+		converter.Write(writer, value!.Value, options);
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static void WriteNullableValueEx<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, T? value,
 		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type markerType)
 		where T : struct
 	{
+		// TODO: Support custom `T?` converters with `HandleNull`.
 		var converter = options.GetConverter<T>(markerType);
 
 		if (value is null)

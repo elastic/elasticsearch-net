@@ -52,7 +52,7 @@ internal sealed partial class SuggestDictionaryConverter<TDocument> : System.Tex
 
 	internal static void ReadItem(ref System.Text.Json.Utf8JsonReader reader, System.Text.Json.JsonSerializerOptions options, out string name, out System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest> value)
 	{
-		var key = reader.ReadPropertyName<string>(options, null);
+		var key = reader.ReadPropertyName<string>(options, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!);
 		reader.Read();
 		var parts = key.Split('#');
 		if (parts.Length != 2)
@@ -77,13 +77,13 @@ internal sealed partial class SuggestDictionaryConverter<TDocument> : System.Tex
 		switch (value)
 		{
 			case System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>> v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>> v) => w.WritePropertyName<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggest<TDocument>>>(o, v));
 				break;
 			case System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest> v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest> v) => w.WritePropertyName<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggest>>(o, v));
 				break;
 			case System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest> v:
-				writer.WriteProperty(options, key, v, null, null);
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest> v) => w.WritePropertyName<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.TermSuggest>>(o, v));
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{0}' is not supported for type '{nameof(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.ISuggest>)}'.");

@@ -51,7 +51,7 @@ internal sealed partial class StringStatsAggregateConverter : System.Text.Json.S
 		LocalJsonValue<string?> propMinLengthAsString = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAvgLength.TryReadProperty(ref reader, options, PropAvgLength, null))
+			if (propAvgLength.TryReadProperty(ref reader, options, PropAvgLength, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -71,12 +71,12 @@ internal sealed partial class StringStatsAggregateConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propEntropy.TryReadProperty(ref reader, options, PropEntropy, null))
+			if (propEntropy.TryReadProperty(ref reader, options, PropEntropy, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxLength.TryReadProperty(ref reader, options, PropMaxLength, null))
+			if (propMaxLength.TryReadProperty(ref reader, options, PropMaxLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class StringStatsAggregateConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propMinLength.TryReadProperty(ref reader, options, PropMinLength, null))
+			if (propMinLength.TryReadProperty(ref reader, options, PropMinLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -129,15 +129,15 @@ internal sealed partial class StringStatsAggregateConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAvgLength, value.AvgLength, null, null);
+		writer.WriteProperty(options, PropAvgLength, value.AvgLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropAvgLengthAsString, value.AvgLengthAsString, null, null);
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
 		writer.WriteProperty(options, PropDistribution, value.Distribution, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, double>? v) => w.WriteDictionaryValue<string, double>(o, v, null, null));
-		writer.WriteProperty(options, PropEntropy, value.Entropy, null, null);
-		writer.WriteProperty(options, PropMaxLength, value.MaxLength, null, null);
+		writer.WriteProperty(options, PropEntropy, value.Entropy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropMaxLength, value.MaxLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMaxLengthAsString, value.MaxLengthAsString, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
-		writer.WriteProperty(options, PropMinLength, value.MinLength, null, null);
+		writer.WriteProperty(options, PropMinLength, value.MinLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMinLengthAsString, value.MinLengthAsString, null, null);
 		writer.WriteEndObject();
 	}
