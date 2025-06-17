@@ -37,17 +37,17 @@ internal sealed partial class MlDataFrameAnalyticsJobsAnalysisConverter : System
 		LocalJsonValue<int?> propRegression = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propClassification.TryReadProperty(ref reader, options, PropClassification, null))
+			if (propClassification.TryReadProperty(ref reader, options, PropClassification, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propOutlierDetection.TryReadProperty(ref reader, options, PropOutlierDetection, null))
+			if (propOutlierDetection.TryReadProperty(ref reader, options, PropOutlierDetection, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propRegression.TryReadProperty(ref reader, options, PropRegression, null))
+			if (propRegression.TryReadProperty(ref reader, options, PropRegression, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class MlDataFrameAnalyticsJobsAnalysisConverter : System
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClassification, value.Classification, null, null);
-		writer.WriteProperty(options, PropOutlierDetection, value.OutlierDetection, null, null);
-		writer.WriteProperty(options, PropRegression, value.Regression, null, null);
+		writer.WriteProperty(options, PropClassification, value.Classification, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropOutlierDetection, value.OutlierDetection, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropRegression, value.Regression, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

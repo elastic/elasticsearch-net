@@ -35,12 +35,12 @@ internal sealed partial class MergeSchedulerConverter : System.Text.Json.Seriali
 		LocalJsonValue<int?> propMaxThreadCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxMergeCount.TryReadProperty(ref reader, options, PropMaxMergeCount, null))
+			if (propMaxMergeCount.TryReadProperty(ref reader, options, PropMaxMergeCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxThreadCount.TryReadProperty(ref reader, options, PropMaxThreadCount, null))
+			if (propMaxThreadCount.TryReadProperty(ref reader, options, PropMaxThreadCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class MergeSchedulerConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MergeScheduler value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxMergeCount, value.MaxMergeCount, null, null);
-		writer.WriteProperty(options, PropMaxThreadCount, value.MaxThreadCount, null, null);
+		writer.WriteProperty(options, PropMaxMergeCount, value.MaxMergeCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxThreadCount, value.MaxThreadCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

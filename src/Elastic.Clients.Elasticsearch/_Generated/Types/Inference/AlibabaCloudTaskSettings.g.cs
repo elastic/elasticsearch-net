@@ -40,7 +40,7 @@ internal sealed partial class AlibabaCloudTaskSettingsConverter : System.Text.Js
 				continue;
 			}
 
-			if (propReturnToken.TryReadProperty(ref reader, options, PropReturnToken, null))
+			if (propReturnToken.TryReadProperty(ref reader, options, PropReturnToken, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class AlibabaCloudTaskSettingsConverter : System.Text.Js
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropInputType, value.InputType, null, null);
-		writer.WriteProperty(options, PropReturnToken, value.ReturnToken, null, null);
+		writer.WriteProperty(options, PropReturnToken, value.ReturnToken, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

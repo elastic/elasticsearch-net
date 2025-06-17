@@ -48,12 +48,12 @@ internal sealed partial class KuromojiTokenizerConverter : System.Text.Json.Seri
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDiscardCompoundToken.TryReadProperty(ref reader, options, PropDiscardCompoundToken, null))
+			if (propDiscardCompoundToken.TryReadProperty(ref reader, options, PropDiscardCompoundToken, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propDiscardPunctuation.TryReadProperty(ref reader, options, PropDiscardPunctuation, null))
+			if (propDiscardPunctuation.TryReadProperty(ref reader, options, PropDiscardPunctuation, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -63,7 +63,7 @@ internal sealed partial class KuromojiTokenizerConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propNbestCost.TryReadProperty(ref reader, options, PropNbestCost, null))
+			if (propNbestCost.TryReadProperty(ref reader, options, PropNbestCost, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -120,10 +120,10 @@ internal sealed partial class KuromojiTokenizerConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDiscardCompoundToken, value.DiscardCompoundToken, null, null);
-		writer.WriteProperty(options, PropDiscardPunctuation, value.DiscardPunctuation, null, null);
+		writer.WriteProperty(options, PropDiscardCompoundToken, value.DiscardCompoundToken, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropDiscardPunctuation, value.DiscardPunctuation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMode, value.Mode, null, null);
-		writer.WriteProperty(options, PropNbestCost, value.NbestCost, null, null);
+		writer.WriteProperty(options, PropNbestCost, value.NbestCost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropNbestExamples, value.NbestExamples, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropUserDictionary, value.UserDictionary, null, null);

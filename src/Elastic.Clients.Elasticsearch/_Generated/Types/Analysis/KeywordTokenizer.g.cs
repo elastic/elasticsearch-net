@@ -36,7 +36,7 @@ internal sealed partial class KeywordTokenizerConverter : System.Text.Json.Seria
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBufferSize.TryReadProperty(ref reader, options, PropBufferSize, null))
+			if (propBufferSize.TryReadProperty(ref reader, options, PropBufferSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class KeywordTokenizerConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KeywordTokenizer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBufferSize, value.BufferSize, null, null);
+		writer.WriteProperty(options, PropBufferSize, value.BufferSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

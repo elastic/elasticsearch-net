@@ -88,7 +88,7 @@ internal sealed partial class PutMistralRequestConverter : System.Text.Json.Seri
 /// Create a Mistral inference endpoint.
 /// </para>
 /// <para>
-/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
+/// Create an inference endpoint to perform an inference task with the <c>mistral</c> service.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.PutMistralRequestConverter))]
@@ -137,8 +137,7 @@ public sealed partial class PutMistralRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// The task type.
-	/// The only valid task type for the model to perform is <c>text_embedding</c>.
+	/// The type of the inference task that the model will perform.
 	/// </para>
 	/// </summary>
 	public
@@ -178,7 +177,7 @@ public sealed partial class PutMistralRequest : Elastic.Clients.Elasticsearch.Re
 /// Create a Mistral inference endpoint.
 /// </para>
 /// <para>
-/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
+/// Create an inference endpoint to perform an inference task with the <c>mistral</c> service.
 /// </para>
 /// </summary>
 public readonly partial struct PutMistralRequestDescriptor
@@ -220,8 +219,7 @@ public readonly partial struct PutMistralRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The task type.
-	/// The only valid task type for the model to perform is <c>text_embedding</c>.
+	/// The type of the inference task that the model will perform.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.MistralTaskType value)

@@ -61,7 +61,7 @@ internal sealed partial class RemoveActionConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propMustExist.TryReadProperty(ref reader, options, PropMustExist, null))
+			if (propMustExist.TryReadProperty(ref reader, options, PropMustExist, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -93,7 +93,7 @@ internal sealed partial class RemoveActionConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexAlias>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.IndexAlias>(o, v, null));
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
-		writer.WriteProperty(options, PropMustExist, value.MustExist, null, null);
+		writer.WriteProperty(options, PropMustExist, value.MustExist, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

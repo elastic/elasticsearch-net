@@ -44,12 +44,12 @@ internal sealed partial class ChunkingSettingsConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propOverlap.TryReadProperty(ref reader, options, PropOverlap, null))
+			if (propOverlap.TryReadProperty(ref reader, options, PropOverlap, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSentenceOverlap.TryReadProperty(ref reader, options, PropSentenceOverlap, null))
+			if (propSentenceOverlap.TryReadProperty(ref reader, options, PropSentenceOverlap, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -82,8 +82,8 @@ internal sealed partial class ChunkingSettingsConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMaxChunkSize, value.MaxChunkSize, null, null);
-		writer.WriteProperty(options, PropOverlap, value.Overlap, null, null);
-		writer.WriteProperty(options, PropSentenceOverlap, value.SentenceOverlap, null, null);
+		writer.WriteProperty(options, PropOverlap, value.Overlap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSentenceOverlap, value.SentenceOverlap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropStrategy, value.Strategy, null, null);
 		writer.WriteEndObject();
 	}

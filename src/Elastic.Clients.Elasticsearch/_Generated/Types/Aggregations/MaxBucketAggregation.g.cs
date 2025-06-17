@@ -47,7 +47,7 @@ internal sealed partial class MaxBucketAggregationConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, null))
+			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, static Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>(o)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class MaxBucketAggregationConverter : System.Text.Json.S
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBucketsPath, value.BucketsPath, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, null);
+		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>(o, v));
 		writer.WriteEndObject();
 	}
 }

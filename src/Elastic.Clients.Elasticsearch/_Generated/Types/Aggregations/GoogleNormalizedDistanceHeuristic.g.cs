@@ -33,7 +33,7 @@ internal sealed partial class GoogleNormalizedDistanceHeuristicConverter : Syste
 		LocalJsonValue<bool?> propBackgroundIsSuperset = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBackgroundIsSuperset.TryReadProperty(ref reader, options, PropBackgroundIsSuperset, null))
+			if (propBackgroundIsSuperset.TryReadProperty(ref reader, options, PropBackgroundIsSuperset, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class GoogleNormalizedDistanceHeuristicConverter : Syste
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBackgroundIsSuperset, value.BackgroundIsSuperset, null, null);
+		writer.WriteProperty(options, PropBackgroundIsSuperset, value.BackgroundIsSuperset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

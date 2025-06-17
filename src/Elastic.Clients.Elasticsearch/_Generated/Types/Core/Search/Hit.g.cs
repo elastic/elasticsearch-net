@@ -126,12 +126,12 @@ internal sealed partial class HitConverter<TDocument> : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, null))
+			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propRank.TryReadProperty(ref reader, options, PropRank, null))
+			if (propRank.TryReadProperty(ref reader, options, PropRank, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -141,12 +141,12 @@ internal sealed partial class HitConverter<TDocument> : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propScore.TryReadProperty(ref reader, options, PropScore, null))
+			if (propScore.TryReadProperty(ref reader, options, PropScore, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, null))
+			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -166,7 +166,7 @@ internal sealed partial class HitConverter<TDocument> : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -220,15 +220,15 @@ internal sealed partial class HitConverter<TDocument> : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropMatchedQueries, value.MatchedQueries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IReadOnlyCollection<string>, System.Collections.Generic.IReadOnlyDictionary<string, double>>? v) => w.WriteUnionValue<System.Collections.Generic.IReadOnlyCollection<string>, System.Collections.Generic.IReadOnlyDictionary<string, double>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, double> v) => w.WriteDictionaryValue<string, double>(o, v, null, null)));
 		writer.WriteProperty(options, PropNested, value.Nested, null, null);
 		writer.WriteProperty(options, PropNode, value.Node, null, null);
-		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, null);
-		writer.WriteProperty(options, PropRank, value.Rank, null, null);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropRank, value.Rank, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
-		writer.WriteProperty(options, PropScore, value.Score, null, null);
-		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, null);
+		writer.WriteProperty(options, PropScore, value.Score, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropShard, value.Shard, null, null);
 		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
 		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument?>)));
-		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

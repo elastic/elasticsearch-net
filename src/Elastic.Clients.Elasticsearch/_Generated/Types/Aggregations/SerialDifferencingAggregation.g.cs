@@ -49,12 +49,12 @@ internal sealed partial class SerialDifferencingAggregationConverter : System.Te
 				continue;
 			}
 
-			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, null))
+			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, static Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>(o)))
 			{
 				continue;
 			}
 
-			if (propLag.TryReadProperty(ref reader, options, PropLag, null))
+			if (propLag.TryReadProperty(ref reader, options, PropLag, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -83,8 +83,8 @@ internal sealed partial class SerialDifferencingAggregationConverter : System.Te
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBucketsPath, value.BucketsPath, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, null);
-		writer.WriteProperty(options, PropLag, value.Lag, null, null);
+		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>(o, v));
+		writer.WriteProperty(options, PropLag, value.Lag, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

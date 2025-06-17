@@ -44,12 +44,12 @@ internal sealed partial class ApiKeyFiltersAggregationConverter : System.Text.Js
 				continue;
 			}
 
-			if (propKeyed.TryReadProperty(ref reader, options, PropKeyed, null))
+			if (propKeyed.TryReadProperty(ref reader, options, PropKeyed, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propOtherBucket.TryReadProperty(ref reader, options, PropOtherBucket, null))
+			if (propOtherBucket.TryReadProperty(ref reader, options, PropOtherBucket, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -82,8 +82,8 @@ internal sealed partial class ApiKeyFiltersAggregationConverter : System.Text.Js
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFilters, value.Filters, null, null);
-		writer.WriteProperty(options, PropKeyed, value.Keyed, null, null);
-		writer.WriteProperty(options, PropOtherBucket, value.OtherBucket, null, null);
+		writer.WriteProperty(options, PropKeyed, value.Keyed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropOtherBucket, value.OtherBucket, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropOtherBucketKey, value.OtherBucketKey, null, null);
 		writer.WriteEndObject();
 	}

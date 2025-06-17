@@ -77,7 +77,7 @@ internal sealed partial class QueryRequestConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitForCompletionTimeout = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowPartialSearchResults.TryReadProperty(ref reader, options, PropAllowPartialSearchResults, null))
+			if (propAllowPartialSearchResults.TryReadProperty(ref reader, options, PropAllowPartialSearchResults, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -87,7 +87,7 @@ internal sealed partial class QueryRequestConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, null))
+			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -97,12 +97,12 @@ internal sealed partial class QueryRequestConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propFetchSize.TryReadProperty(ref reader, options, PropFetchSize, null))
+			if (propFetchSize.TryReadProperty(ref reader, options, PropFetchSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propFieldMultiValueLeniency.TryReadProperty(ref reader, options, PropFieldMultiValueLeniency, null))
+			if (propFieldMultiValueLeniency.TryReadProperty(ref reader, options, PropFieldMultiValueLeniency, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -112,7 +112,7 @@ internal sealed partial class QueryRequestConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propIndexUsingFrozen.TryReadProperty(ref reader, options, PropIndexUsingFrozen, null))
+			if (propIndexUsingFrozen.TryReadProperty(ref reader, options, PropIndexUsingFrozen, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -122,7 +122,7 @@ internal sealed partial class QueryRequestConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propKeepOnCompletion.TryReadProperty(ref reader, options, PropKeepOnCompletion, null))
+			if (propKeepOnCompletion.TryReadProperty(ref reader, options, PropKeepOnCompletion, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -197,16 +197,16 @@ internal sealed partial class QueryRequestConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Sql.QueryRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults, null, null);
+		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropCatalog, value.Catalog, null, null);
-		writer.WriteProperty(options, PropColumnar, value.Columnar, null, null);
+		writer.WriteProperty(options, PropColumnar, value.Columnar, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropCursor, value.Cursor, null, null);
-		writer.WriteProperty(options, PropFetchSize, value.FetchSize, null, null);
-		writer.WriteProperty(options, PropFieldMultiValueLeniency, value.FieldMultiValueLeniency, null, null);
+		writer.WriteProperty(options, PropFetchSize, value.FetchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropFieldMultiValueLeniency, value.FieldMultiValueLeniency, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropIndexUsingFrozen, value.IndexUsingFrozen, null, null);
+		writer.WriteProperty(options, PropIndexUsingFrozen, value.IndexUsingFrozen, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
-		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, null);
+		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPageTimeout, value.PageTimeout, null, null);
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);

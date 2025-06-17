@@ -42,7 +42,7 @@ internal sealed partial class WeightedAverageValueConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propMissing.TryReadProperty(ref reader, options, PropMissing, null))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ internal sealed partial class WeightedAverageValueConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
+		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteEndObject();
 	}

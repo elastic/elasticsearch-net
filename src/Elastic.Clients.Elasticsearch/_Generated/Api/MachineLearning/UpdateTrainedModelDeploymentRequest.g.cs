@@ -44,7 +44,7 @@ internal sealed partial class UpdateTrainedModelDeploymentRequestConverter : Sys
 				continue;
 			}
 
-			if (propNumberOfAllocations.TryReadProperty(ref reader, options, PropNumberOfAllocations, null))
+			if (propNumberOfAllocations.TryReadProperty(ref reader, options, PropNumberOfAllocations, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -70,7 +70,7 @@ internal sealed partial class UpdateTrainedModelDeploymentRequestConverter : Sys
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAdaptiveAllocations, value.AdaptiveAllocations, null, null);
-		writer.WriteProperty(options, PropNumberOfAllocations, value.NumberOfAllocations, null, null);
+		writer.WriteProperty(options, PropNumberOfAllocations, value.NumberOfAllocations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

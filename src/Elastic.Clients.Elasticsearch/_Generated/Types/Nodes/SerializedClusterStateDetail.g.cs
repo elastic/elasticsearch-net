@@ -46,12 +46,12 @@ internal sealed partial class SerializedClusterStateDetailConverter : System.Tex
 				continue;
 			}
 
-			if (propCompressedSizeInBytes.TryReadProperty(ref reader, options, PropCompressedSizeInBytes, null))
+			if (propCompressedSizeInBytes.TryReadProperty(ref reader, options, PropCompressedSizeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class SerializedClusterStateDetailConverter : System.Tex
 				continue;
 			}
 
-			if (propUncompressedSizeInBytes.TryReadProperty(ref reader, options, PropUncompressedSizeInBytes, null))
+			if (propUncompressedSizeInBytes.TryReadProperty(ref reader, options, PropUncompressedSizeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -90,10 +90,10 @@ internal sealed partial class SerializedClusterStateDetailConverter : System.Tex
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCompressedSize, value.CompressedSize, null, null);
-		writer.WriteProperty(options, PropCompressedSizeInBytes, value.CompressedSizeInBytes, null, null);
-		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropCompressedSizeInBytes, value.CompressedSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropCount, value.Count, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropUncompressedSize, value.UncompressedSize, null, null);
-		writer.WriteProperty(options, PropUncompressedSizeInBytes, value.UncompressedSizeInBytes, null, null);
+		writer.WriteProperty(options, PropUncompressedSizeInBytes, value.UncompressedSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

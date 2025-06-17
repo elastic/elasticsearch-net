@@ -53,7 +53,7 @@ internal sealed partial class FieldTypesMappingsConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propTotalDeduplicatedFieldCount.TryReadProperty(ref reader, options, PropTotalDeduplicatedFieldCount, null))
+			if (propTotalDeduplicatedFieldCount.TryReadProperty(ref reader, options, PropTotalDeduplicatedFieldCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -63,12 +63,12 @@ internal sealed partial class FieldTypesMappingsConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propTotalDeduplicatedMappingSizeInBytes.TryReadProperty(ref reader, options, PropTotalDeduplicatedMappingSizeInBytes, null))
+			if (propTotalDeduplicatedMappingSizeInBytes.TryReadProperty(ref reader, options, PropTotalDeduplicatedMappingSizeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalFieldCount.TryReadProperty(ref reader, options, PropTotalFieldCount, null))
+			if (propTotalFieldCount.TryReadProperty(ref reader, options, PropTotalFieldCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -99,10 +99,10 @@ internal sealed partial class FieldTypesMappingsConverter : System.Text.Json.Ser
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFieldTypes, value.FieldTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
 		writer.WriteProperty(options, PropRuntimeFieldTypes, value.RuntimeFieldTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>(o, v, null));
-		writer.WriteProperty(options, PropTotalDeduplicatedFieldCount, value.TotalDeduplicatedFieldCount, null, null);
+		writer.WriteProperty(options, PropTotalDeduplicatedFieldCount, value.TotalDeduplicatedFieldCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTotalDeduplicatedMappingSize, value.TotalDeduplicatedMappingSize, null, null);
-		writer.WriteProperty(options, PropTotalDeduplicatedMappingSizeInBytes, value.TotalDeduplicatedMappingSizeInBytes, null, null);
-		writer.WriteProperty(options, PropTotalFieldCount, value.TotalFieldCount, null, null);
+		writer.WriteProperty(options, PropTotalDeduplicatedMappingSizeInBytes, value.TotalDeduplicatedMappingSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTotalFieldCount, value.TotalFieldCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

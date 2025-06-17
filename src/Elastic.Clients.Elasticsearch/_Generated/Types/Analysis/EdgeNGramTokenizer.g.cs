@@ -47,12 +47,12 @@ internal sealed partial class EdgeNGramTokenizerConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propMaxGram.TryReadProperty(ref reader, options, PropMaxGram, null))
+			if (propMaxGram.TryReadProperty(ref reader, options, PropMaxGram, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinGram.TryReadProperty(ref reader, options, PropMinGram, null))
+			if (propMinGram.TryReadProperty(ref reader, options, PropMinGram, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -97,8 +97,8 @@ internal sealed partial class EdgeNGramTokenizerConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCustomTokenChars, value.CustomTokenChars, null, null);
-		writer.WriteProperty(options, PropMaxGram, value.MaxGram, null, null);
-		writer.WriteProperty(options, PropMinGram, value.MinGram, null, null);
+		writer.WriteProperty(options, PropMaxGram, value.MaxGram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinGram, value.MinGram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTokenChars, value.TokenChars, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Analysis.TokenChar>(o, v, null));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);

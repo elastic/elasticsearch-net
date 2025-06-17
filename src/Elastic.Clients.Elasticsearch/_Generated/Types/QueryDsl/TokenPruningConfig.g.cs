@@ -37,17 +37,17 @@ internal sealed partial class TokenPruningConfigConverter : System.Text.Json.Ser
 		LocalJsonValue<float?> propTokensWeightThreshold = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propOnlyScorePrunedTokens.TryReadProperty(ref reader, options, PropOnlyScorePrunedTokens, null))
+			if (propOnlyScorePrunedTokens.TryReadProperty(ref reader, options, PropOnlyScorePrunedTokens, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propTokensFreqRatioThreshold.TryReadProperty(ref reader, options, PropTokensFreqRatioThreshold, null))
+			if (propTokensFreqRatioThreshold.TryReadProperty(ref reader, options, PropTokensFreqRatioThreshold, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propTokensWeightThreshold.TryReadProperty(ref reader, options, PropTokensWeightThreshold, null))
+			if (propTokensWeightThreshold.TryReadProperty(ref reader, options, PropTokensWeightThreshold, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class TokenPruningConfigConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropOnlyScorePrunedTokens, value.OnlyScorePrunedTokens, null, null);
-		writer.WriteProperty(options, PropTokensFreqRatioThreshold, value.TokensFreqRatioThreshold, null, null);
-		writer.WriteProperty(options, PropTokensWeightThreshold, value.TokensWeightThreshold, null, null);
+		writer.WriteProperty(options, PropOnlyScorePrunedTokens, value.OnlyScorePrunedTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropTokensFreqRatioThreshold, value.TokensFreqRatioThreshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTokensWeightThreshold, value.TokensWeightThreshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteEndObject();
 	}
 }

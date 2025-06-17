@@ -51,17 +51,17 @@ internal sealed partial class JsonProcessorConverter : System.Text.Json.Serializ
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAddToRoot.TryReadProperty(ref reader, options, PropAddToRoot, null))
+			if (propAddToRoot.TryReadProperty(ref reader, options, PropAddToRoot, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propAddToRootConflictStrategy.TryReadProperty(ref reader, options, PropAddToRootConflictStrategy, null))
+			if (propAddToRootConflictStrategy.TryReadProperty(ref reader, options, PropAddToRootConflictStrategy, static Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy>(o)))
 			{
 				continue;
 			}
 
-			if (propAllowDuplicateKeys.TryReadProperty(ref reader, options, PropAllowDuplicateKeys, null))
+			if (propAllowDuplicateKeys.TryReadProperty(ref reader, options, PropAllowDuplicateKeys, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class JsonProcessorConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -129,13 +129,13 @@ internal sealed partial class JsonProcessorConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.JsonProcessor value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAddToRoot, value.AddToRoot, null, null);
-		writer.WriteProperty(options, PropAddToRootConflictStrategy, value.AddToRootConflictStrategy, null, null);
-		writer.WriteProperty(options, PropAllowDuplicateKeys, value.AllowDuplicateKeys, null, null);
+		writer.WriteProperty(options, PropAddToRoot, value.AddToRoot, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropAddToRootConflictStrategy, value.AddToRootConflictStrategy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Ingest.JsonProcessorConflictStrategy>(o, v));
+		writer.WriteProperty(options, PropAllowDuplicateKeys, value.AllowDuplicateKeys, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropIf, value.If, null, null);
-		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
 		writer.WriteProperty(options, PropTag, value.Tag, null, null);
 		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);

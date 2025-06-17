@@ -38,7 +38,7 @@ internal sealed partial class IcuTransformTokenFilterConverter : System.Text.Jso
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDir.TryReadProperty(ref reader, options, PropDir, null))
+			if (propDir.TryReadProperty(ref reader, options, PropDir, static Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection>(o)))
 			{
 				continue;
 			}
@@ -80,7 +80,7 @@ internal sealed partial class IcuTransformTokenFilterConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDir, value.Dir, null, null);
+		writer.WriteProperty(options, PropDir, value.Dir, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection>(o, v));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);

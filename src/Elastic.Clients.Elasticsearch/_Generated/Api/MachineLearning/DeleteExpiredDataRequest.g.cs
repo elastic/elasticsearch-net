@@ -39,7 +39,7 @@ internal sealed partial class DeleteExpiredDataRequestConverter : System.Text.Js
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propRequestsPerSecond.TryReadProperty(ref reader, options, PropRequestsPerSecond, null))
+			if (propRequestsPerSecond.TryReadProperty(ref reader, options, PropRequestsPerSecond, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -69,7 +69,7 @@ internal sealed partial class DeleteExpiredDataRequestConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRequestsPerSecond, value.RequestsPerSecond, null, null);
+		writer.WriteProperty(options, PropRequestsPerSecond, value.RequestsPerSecond, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
 		writer.WriteEndObject();
 	}

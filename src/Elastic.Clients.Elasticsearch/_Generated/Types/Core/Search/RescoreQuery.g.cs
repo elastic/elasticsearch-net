@@ -44,17 +44,17 @@ internal sealed partial class RescoreQueryConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propQueryWeight.TryReadProperty(ref reader, options, PropQueryWeight, null))
+			if (propQueryWeight.TryReadProperty(ref reader, options, PropQueryWeight, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propRescoreQueryWeight.TryReadProperty(ref reader, options, PropRescoreQueryWeight, null))
+			if (propRescoreQueryWeight.TryReadProperty(ref reader, options, PropRescoreQueryWeight, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propScoreMode.TryReadProperty(ref reader, options, PropScoreMode, null))
+			if (propScoreMode.TryReadProperty(ref reader, options, PropScoreMode, static Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.Search.ScoreMode>(o)))
 			{
 				continue;
 			}
@@ -82,9 +82,9 @@ internal sealed partial class RescoreQueryConverter : System.Text.Json.Serializa
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteProperty(options, PropQueryWeight, value.QueryWeight, null, null);
-		writer.WriteProperty(options, PropRescoreQueryWeight, value.RescoreQueryWeight, null, null);
-		writer.WriteProperty(options, PropScoreMode, value.ScoreMode, null, null);
+		writer.WriteProperty(options, PropQueryWeight, value.QueryWeight, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropRescoreQueryWeight, value.RescoreQueryWeight, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropScoreMode, value.ScoreMode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Search.ScoreMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Search.ScoreMode>(o, v));
 		writer.WriteEndObject();
 	}
 }

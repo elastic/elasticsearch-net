@@ -36,7 +36,7 @@ internal sealed partial class SnowballTokenFilterConverter : System.Text.Json.Se
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propLanguage.TryReadProperty(ref reader, options, PropLanguage, null))
+			if (propLanguage.TryReadProperty(ref reader, options, PropLanguage, static Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage>(o)))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class SnowballTokenFilterConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
+		writer.WriteProperty(options, PropLanguage, value.Language, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

@@ -49,7 +49,7 @@ internal sealed partial class TermsEnumRequestConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCaseInsensitive.TryReadProperty(ref reader, options, PropCaseInsensitive, null))
+			if (propCaseInsensitive.TryReadProperty(ref reader, options, PropCaseInsensitive, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -69,7 +69,7 @@ internal sealed partial class TermsEnumRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -109,11 +109,11 @@ internal sealed partial class TermsEnumRequestConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TermsEnumRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCaseInsensitive, value.CaseInsensitive, null, null);
+		writer.WriteProperty(options, PropCaseInsensitive, value.CaseInsensitive, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropIndexFilter, value.IndexFilter, null, null);
 		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropString, value.String, null, null);
 		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
 		writer.WriteEndObject();

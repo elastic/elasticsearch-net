@@ -46,7 +46,7 @@ internal sealed partial class DerivativeAggregateConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propNormalizedValue.TryReadProperty(ref reader, options, PropNormalizedValue, null))
+			if (propNormalizedValue.TryReadProperty(ref reader, options, PropNormalizedValue, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -56,7 +56,7 @@ internal sealed partial class DerivativeAggregateConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			if (propValue.TryReadProperty(ref reader, options, PropValue, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -90,9 +90,9 @@ internal sealed partial class DerivativeAggregateConverter : System.Text.Json.Se
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
-		writer.WriteProperty(options, PropNormalizedValue, value.NormalizedValue, null, null);
+		writer.WriteProperty(options, PropNormalizedValue, value.NormalizedValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropNormalizedValueAsString, value.NormalizedValueAsString, null, null);
-		writer.WriteProperty(options, PropValue, value.Value, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropValueAsString, value.ValueAsString, null, null);
 		writer.WriteEndObject();
 	}

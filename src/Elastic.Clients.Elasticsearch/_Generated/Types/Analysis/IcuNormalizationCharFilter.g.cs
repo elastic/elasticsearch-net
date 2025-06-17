@@ -40,12 +40,12 @@ internal sealed partial class IcuNormalizationCharFilterConverter : System.Text.
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, static Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode>(o)))
 			{
 				continue;
 			}
 
-			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			if (propName.TryReadProperty(ref reader, options, PropName, static Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType>(o)))
 			{
 				continue;
 			}
@@ -88,8 +88,8 @@ internal sealed partial class IcuNormalizationCharFilterConverter : System.Text.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMode, value.Mode, null, null);
-		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode>(o, v));
+		writer.WriteProperty(options, PropName, value.Name, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropUnicodeSetFilter, value.UnicodeSetFilter, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);

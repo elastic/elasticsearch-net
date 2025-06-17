@@ -47,7 +47,7 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propLowercase.TryReadProperty(ref reader, options, PropLowercase, null))
+			if (propLowercase.TryReadProperty(ref reader, options, PropLowercase, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -97,7 +97,7 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFlags, value.Flags, null, null);
-		writer.WriteProperty(options, PropLowercase, value.Lowercase, null, null);
+		writer.WriteProperty(options, PropLowercase, value.Lowercase, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPattern, value.Pattern, null, null);
 		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
 		writer.WriteProperty(options, PropType, value.Type, null, null);

@@ -49,12 +49,12 @@ internal sealed partial class HasChildQueryConverter : System.Text.Json.Serializ
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -64,12 +64,12 @@ internal sealed partial class HasChildQueryConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propMaxChildren.TryReadProperty(ref reader, options, PropMaxChildren, null))
+			if (propMaxChildren.TryReadProperty(ref reader, options, PropMaxChildren, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinChildren.TryReadProperty(ref reader, options, PropMinChildren, null))
+			if (propMinChildren.TryReadProperty(ref reader, options, PropMinChildren, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class HasChildQueryConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propScoreMode.TryReadProperty(ref reader, options, PropScoreMode, null))
+			if (propScoreMode.TryReadProperty(ref reader, options, PropScoreMode, static Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode>(o)))
 			{
 				continue;
 			}
@@ -121,14 +121,14 @@ internal sealed partial class HasChildQueryConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.HasChildQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
-		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropInnerHits, value.InnerHits, null, null);
-		writer.WriteProperty(options, PropMaxChildren, value.MaxChildren, null, null);
-		writer.WriteProperty(options, PropMinChildren, value.MinChildren, null, null);
+		writer.WriteProperty(options, PropMaxChildren, value.MaxChildren, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinChildren, value.MinChildren, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
-		writer.WriteProperty(options, PropScoreMode, value.ScoreMode, null, null);
+		writer.WriteProperty(options, PropScoreMode, value.ScoreMode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.ChildScoreMode>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}

@@ -51,7 +51,7 @@ internal sealed partial class AllocateActionConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propNumberOfReplicas.TryReadProperty(ref reader, options, PropNumberOfReplicas, null))
+			if (propNumberOfReplicas.TryReadProperty(ref reader, options, PropNumberOfReplicas, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class AllocateActionConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propTotalShardsPerNode.TryReadProperty(ref reader, options, PropTotalShardsPerNode, null))
+			if (propTotalShardsPerNode.TryReadProperty(ref reader, options, PropTotalShardsPerNode, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -91,9 +91,9 @@ internal sealed partial class AllocateActionConverter : System.Text.Json.Seriali
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropExclude, value.Exclude, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropInclude, value.Include, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
-		writer.WriteProperty(options, PropNumberOfReplicas, value.NumberOfReplicas, null, null);
+		writer.WriteProperty(options, PropNumberOfReplicas, value.NumberOfReplicas, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRequire, value.Require, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
-		writer.WriteProperty(options, PropTotalShardsPerNode, value.TotalShardsPerNode, null, null);
+		writer.WriteProperty(options, PropTotalShardsPerNode, value.TotalShardsPerNode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

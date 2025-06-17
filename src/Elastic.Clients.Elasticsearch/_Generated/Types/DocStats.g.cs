@@ -40,7 +40,7 @@ internal sealed partial class DocStatsConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propDeleted.TryReadProperty(ref reader, options, PropDeleted, null))
+			if (propDeleted.TryReadProperty(ref reader, options, PropDeleted, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class DocStatsConverter : System.Text.Json.Serialization
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
-		writer.WriteProperty(options, PropDeleted, value.Deleted, null, null);
+		writer.WriteProperty(options, PropDeleted, value.Deleted, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

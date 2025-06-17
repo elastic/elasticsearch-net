@@ -41,12 +41,12 @@ internal sealed partial class QuestionAnsweringInferenceUpdateOptionsConverter :
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions?> propTokenization = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxAnswerLength.TryReadProperty(ref reader, options, PropMaxAnswerLength, null))
+			if (propMaxAnswerLength.TryReadProperty(ref reader, options, PropMaxAnswerLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propNumTopClasses.TryReadProperty(ref reader, options, PropNumTopClasses, null))
+			if (propNumTopClasses.TryReadProperty(ref reader, options, PropNumTopClasses, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -89,8 +89,8 @@ internal sealed partial class QuestionAnsweringInferenceUpdateOptionsConverter :
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceUpdateOptions value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxAnswerLength, value.MaxAnswerLength, null, null);
-		writer.WriteProperty(options, PropNumTopClasses, value.NumTopClasses, null, null);
+		writer.WriteProperty(options, PropMaxAnswerLength, value.MaxAnswerLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropNumTopClasses, value.NumTopClasses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQuestion, value.Question, null, null);
 		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
 		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);

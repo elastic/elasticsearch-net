@@ -68,7 +68,7 @@ internal sealed partial class StoreStatsConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propTotalDataSetSizeInBytes.TryReadProperty(ref reader, options, PropTotalDataSetSizeInBytes, null))
+			if (propTotalDataSetSizeInBytes.TryReadProperty(ref reader, options, PropTotalDataSetSizeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -102,7 +102,7 @@ internal sealed partial class StoreStatsConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropSize, value.Size, null, null);
 		writer.WriteProperty(options, PropSizeInBytes, value.SizeInBytes, null, null);
 		writer.WriteProperty(options, PropTotalDataSetSize, value.TotalDataSetSize, null, null);
-		writer.WriteProperty(options, PropTotalDataSetSizeInBytes, value.TotalDataSetSizeInBytes, null, null);
+		writer.WriteProperty(options, PropTotalDataSetSizeInBytes, value.TotalDataSetSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

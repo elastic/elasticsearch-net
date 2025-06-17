@@ -39,7 +39,7 @@ internal sealed partial class TextEmbeddingInferenceOptionsConverter : System.Te
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary> propVocabulary = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propEmbeddingSize.TryReadProperty(ref reader, options, PropEmbeddingSize, null))
+			if (propEmbeddingSize.TryReadProperty(ref reader, options, PropEmbeddingSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class TextEmbeddingInferenceOptionsConverter : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEmbeddingSize, value.EmbeddingSize, null, null);
+		writer.WriteProperty(options, PropEmbeddingSize, value.EmbeddingSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
 		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);
 		writer.WriteProperty(options, PropVocabulary, value.Vocabulary, null, null);

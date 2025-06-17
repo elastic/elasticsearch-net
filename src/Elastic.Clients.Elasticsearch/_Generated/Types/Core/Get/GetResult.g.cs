@@ -76,7 +76,7 @@ internal sealed partial class GetResultConverter<TDocument> : System.Text.Json.S
 				continue;
 			}
 
-			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, null))
+			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -86,7 +86,7 @@ internal sealed partial class GetResultConverter<TDocument> : System.Text.Json.S
 				continue;
 			}
 
-			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, null))
+			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -96,7 +96,7 @@ internal sealed partial class GetResultConverter<TDocument> : System.Text.Json.S
 				continue;
 			}
 
-			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -134,11 +134,11 @@ internal sealed partial class GetResultConverter<TDocument> : System.Text.Json.S
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIgnored, value.Ignored, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, null);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
-		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, null);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument?>)));
-		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

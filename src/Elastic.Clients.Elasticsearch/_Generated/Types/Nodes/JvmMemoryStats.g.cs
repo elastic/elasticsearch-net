@@ -45,32 +45,32 @@ internal sealed partial class JvmMemoryStatsConverter : System.Text.Json.Seriali
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Pool>?> propPools = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propHeapCommittedInBytes.TryReadProperty(ref reader, options, PropHeapCommittedInBytes, null))
+			if (propHeapCommittedInBytes.TryReadProperty(ref reader, options, PropHeapCommittedInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propHeapMaxInBytes.TryReadProperty(ref reader, options, PropHeapMaxInBytes, null))
+			if (propHeapMaxInBytes.TryReadProperty(ref reader, options, PropHeapMaxInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propHeapUsedInBytes.TryReadProperty(ref reader, options, PropHeapUsedInBytes, null))
+			if (propHeapUsedInBytes.TryReadProperty(ref reader, options, PropHeapUsedInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propHeapUsedPercent.TryReadProperty(ref reader, options, PropHeapUsedPercent, null))
+			if (propHeapUsedPercent.TryReadProperty(ref reader, options, PropHeapUsedPercent, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propNonHeapCommittedInBytes.TryReadProperty(ref reader, options, PropNonHeapCommittedInBytes, null))
+			if (propNonHeapCommittedInBytes.TryReadProperty(ref reader, options, PropNonHeapCommittedInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propNonHeapUsedInBytes.TryReadProperty(ref reader, options, PropNonHeapUsedInBytes, null))
+			if (propNonHeapUsedInBytes.TryReadProperty(ref reader, options, PropNonHeapUsedInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -105,12 +105,12 @@ internal sealed partial class JvmMemoryStatsConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.JvmMemoryStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropHeapCommittedInBytes, value.HeapCommittedInBytes, null, null);
-		writer.WriteProperty(options, PropHeapMaxInBytes, value.HeapMaxInBytes, null, null);
-		writer.WriteProperty(options, PropHeapUsedInBytes, value.HeapUsedInBytes, null, null);
-		writer.WriteProperty(options, PropHeapUsedPercent, value.HeapUsedPercent, null, null);
-		writer.WriteProperty(options, PropNonHeapCommittedInBytes, value.NonHeapCommittedInBytes, null, null);
-		writer.WriteProperty(options, PropNonHeapUsedInBytes, value.NonHeapUsedInBytes, null, null);
+		writer.WriteProperty(options, PropHeapCommittedInBytes, value.HeapCommittedInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropHeapMaxInBytes, value.HeapMaxInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropHeapUsedInBytes, value.HeapUsedInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropHeapUsedPercent, value.HeapUsedPercent, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropNonHeapCommittedInBytes, value.NonHeapCommittedInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropNonHeapUsedInBytes, value.NonHeapUsedInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropPools, value.Pools, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.Pool>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.Pool>(o, v, null, null));
 		writer.WriteEndObject();
 	}

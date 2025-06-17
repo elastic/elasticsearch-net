@@ -74,7 +74,7 @@ internal sealed partial class GcsRepositorySettingsConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propCompress.TryReadProperty(ref reader, options, PropCompress, null))
+			if (propCompress.TryReadProperty(ref reader, options, PropCompress, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -89,7 +89,7 @@ internal sealed partial class GcsRepositorySettingsConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propReadonly.TryReadProperty(ref reader, options, PropReadonly, null))
+			if (propReadonly.TryReadProperty(ref reader, options, PropReadonly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -126,10 +126,10 @@ internal sealed partial class GcsRepositorySettingsConverter : System.Text.Json.
 		writer.WriteProperty(options, PropBucket, value.Bucket, null, null);
 		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);
 		writer.WriteProperty(options, PropClient, value.Client, null, null);
-		writer.WriteProperty(options, PropCompress, value.Compress, null, null);
+		writer.WriteProperty(options, PropCompress, value.Compress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
 		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
-		writer.WriteProperty(options, PropReadonly, value.Readonly, null, null);
+		writer.WriteProperty(options, PropReadonly, value.Readonly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

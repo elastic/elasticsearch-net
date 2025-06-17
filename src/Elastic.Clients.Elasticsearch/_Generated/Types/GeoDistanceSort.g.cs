@@ -45,17 +45,17 @@ internal sealed partial class GeoDistanceSortConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.DistanceUnit?> propUnit = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDistanceType.TryReadProperty(ref reader, options, PropDistanceType, null))
+			if (propDistanceType.TryReadProperty(ref reader, options, PropDistanceType, static Elastic.Clients.Elasticsearch.GeoDistanceType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.GeoDistanceType>(o)))
 			{
 				continue;
 			}
 
-			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, null))
+			if (propIgnoreUnmapped.TryReadProperty(ref reader, options, PropIgnoreUnmapped, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, static Elastic.Clients.Elasticsearch.SortMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.SortMode>(o)))
 			{
 				continue;
 			}
@@ -65,18 +65,18 @@ internal sealed partial class GeoDistanceSortConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static Elastic.Clients.Elasticsearch.SortOrder? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.SortOrder>(o)))
 			{
 				continue;
 			}
 
-			if (propUnit.TryReadProperty(ref reader, options, PropUnit, null))
+			if (propUnit.TryReadProperty(ref reader, options, PropUnit, static Elastic.Clients.Elasticsearch.DistanceUnit? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.DistanceUnit>(o)))
 			{
 				continue;
 			}
 
 			propField.Initialized = propLocation.Initialized = true;
-			reader.ReadProperty(options, out propField.Value, out propLocation.Value, null, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.GeoLocation>(o, null)!);
+			reader.ReadProperty(options, out propField.Value, out propLocation.Value, static Elastic.Clients.Elasticsearch.Field (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Field>(o), static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.GeoLocation>(o, null)!);
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -96,13 +96,13 @@ internal sealed partial class GeoDistanceSortConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.GeoDistanceSort value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDistanceType, value.DistanceType, null, null);
-		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, null);
-		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropDistanceType, value.DistanceType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.GeoDistanceType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.GeoDistanceType>(o, v));
+		writer.WriteProperty(options, PropIgnoreUnmapped, value.IgnoreUnmapped, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropMode, value.Mode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SortMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SortMode>(o, v));
 		writer.WriteProperty(options, PropNested, value.Nested, null, null);
-		writer.WriteProperty(options, PropOrder, value.Order, null, null);
-		writer.WriteProperty(options, PropUnit, value.Unit, null, null);
-		writer.WriteProperty(options, value.Field, value.Location, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.GeoLocation>(o, v, null));
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SortOrder? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SortOrder>(o, v));
+		writer.WriteProperty(options, PropUnit, value.Unit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.DistanceUnit? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.DistanceUnit>(o, v));
+		writer.WriteProperty(options, value.Field, value.Location, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Field v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Field>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeoLocation> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.GeoLocation>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

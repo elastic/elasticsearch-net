@@ -39,7 +39,7 @@ internal sealed partial class TranslogConverter : System.Text.Json.Serialization
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propSyncInterval = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDurability.TryReadProperty(ref reader, options, PropDurability, null))
+			if (propDurability.TryReadProperty(ref reader, options, PropDurability, static Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability>(o)))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class TranslogConverter : System.Text.Json.Serialization
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.Translog value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDurability, value.Durability, null, null);
+		writer.WriteProperty(options, PropDurability, value.Durability, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability>(o, v));
 		writer.WriteProperty(options, PropFlushThresholdSize, value.FlushThresholdSize, null, null);
 		writer.WriteProperty(options, PropRetention, value.Retention, null, null);
 		writer.WriteProperty(options, PropSyncInterval, value.SyncInterval, null, null);

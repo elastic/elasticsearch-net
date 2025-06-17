@@ -37,7 +37,7 @@ internal sealed partial class RescoreConverter : System.Text.Json.Serialization.
 		object? variant = null;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propWindowSize.TryReadProperty(ref reader, options, PropWindowSize, null))
+			if (propWindowSize.TryReadProperty(ref reader, options, PropWindowSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -93,7 +93,7 @@ internal sealed partial class RescoreConverter : System.Text.Json.Serialization.
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.Rescore)}'.");
 		}
 
-		writer.WriteProperty(options, PropWindowSize, value.WindowSize, null, null);
+		writer.WriteProperty(options, PropWindowSize, value.WindowSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

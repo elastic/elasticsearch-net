@@ -73,12 +73,12 @@ internal sealed partial class SetProcessorConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propIgnoreEmptyValue.TryReadProperty(ref reader, options, PropIgnoreEmptyValue, null))
+			if (propIgnoreEmptyValue.TryReadProperty(ref reader, options, PropIgnoreEmptyValue, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -93,7 +93,7 @@ internal sealed partial class SetProcessorConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propOverride.TryReadProperty(ref reader, options, PropOverride, null))
+			if (propOverride.TryReadProperty(ref reader, options, PropOverride, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -141,11 +141,11 @@ internal sealed partial class SetProcessorConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropIf, value.If, null, null);
-		writer.WriteProperty(options, PropIgnoreEmptyValue, value.IgnoreEmptyValue, null, null);
-		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreEmptyValue, value.IgnoreEmptyValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMediaType, value.MediaType, null, null);
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
-		writer.WriteProperty(options, PropOverride, value.Override, null, null);
+		writer.WriteProperty(options, PropOverride, value.Override, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTag, value.Tag, null, null);
 		writer.WriteProperty(options, PropValue, value.Value, null, null);
 		writer.WriteEndObject();

@@ -51,7 +51,7 @@ internal sealed partial class DataframePreviewConfigConverter : System.Text.Json
 				continue;
 			}
 
-			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, null))
+			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class DataframePreviewConfigConverter : System.Text.Json
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAnalysis, value.Analysis, null, null);
 		writer.WriteProperty(options, PropAnalyzedFields, value.AnalyzedFields, null, null);
-		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, null);
+		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
 		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteEndObject();

@@ -66,17 +66,17 @@ internal sealed partial class RolloverConditionsConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propMaxAgeMillis.TryReadProperty(ref reader, options, PropMaxAgeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propMaxAgeMillis.TryReadProperty(ref reader, options, PropMaxAgeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, null))
+			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxPrimaryShardDocs.TryReadProperty(ref reader, options, PropMaxPrimaryShardDocs, null))
+			if (propMaxPrimaryShardDocs.TryReadProperty(ref reader, options, PropMaxPrimaryShardDocs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -86,7 +86,7 @@ internal sealed partial class RolloverConditionsConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propMaxPrimaryShardSizeBytes.TryReadProperty(ref reader, options, PropMaxPrimaryShardSizeBytes, null))
+			if (propMaxPrimaryShardSizeBytes.TryReadProperty(ref reader, options, PropMaxPrimaryShardSizeBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -96,7 +96,7 @@ internal sealed partial class RolloverConditionsConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propMaxSizeBytes.TryReadProperty(ref reader, options, PropMaxSizeBytes, null))
+			if (propMaxSizeBytes.TryReadProperty(ref reader, options, PropMaxSizeBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -106,12 +106,12 @@ internal sealed partial class RolloverConditionsConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propMinDocs.TryReadProperty(ref reader, options, PropMinDocs, null))
+			if (propMinDocs.TryReadProperty(ref reader, options, PropMinDocs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propMinPrimaryShardDocs.TryReadProperty(ref reader, options, PropMinPrimaryShardDocs, null))
+			if (propMinPrimaryShardDocs.TryReadProperty(ref reader, options, PropMinPrimaryShardDocs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -121,7 +121,7 @@ internal sealed partial class RolloverConditionsConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propMinPrimaryShardSizeBytes.TryReadProperty(ref reader, options, PropMinPrimaryShardSizeBytes, null))
+			if (propMinPrimaryShardSizeBytes.TryReadProperty(ref reader, options, PropMinPrimaryShardSizeBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -131,7 +131,7 @@ internal sealed partial class RolloverConditionsConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propMinSizeBytes.TryReadProperty(ref reader, options, PropMinSizeBytes, null))
+			if (propMinSizeBytes.TryReadProperty(ref reader, options, PropMinSizeBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -170,20 +170,20 @@ internal sealed partial class RolloverConditionsConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMaxAge, value.MaxAge, null, null);
-		writer.WriteProperty(options, PropMaxAgeMillis, value.MaxAgeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
-		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, null);
-		writer.WriteProperty(options, PropMaxPrimaryShardDocs, value.MaxPrimaryShardDocs, null, null);
+		writer.WriteProperty(options, PropMaxAgeMillis, value.MaxAgeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropMaxPrimaryShardDocs, value.MaxPrimaryShardDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMaxPrimaryShardSize, value.MaxPrimaryShardSize, null, null);
-		writer.WriteProperty(options, PropMaxPrimaryShardSizeBytes, value.MaxPrimaryShardSizeBytes, null, null);
+		writer.WriteProperty(options, PropMaxPrimaryShardSizeBytes, value.MaxPrimaryShardSizeBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMaxSize, value.MaxSize, null, null);
-		writer.WriteProperty(options, PropMaxSizeBytes, value.MaxSizeBytes, null, null);
+		writer.WriteProperty(options, PropMaxSizeBytes, value.MaxSizeBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMinAge, value.MinAge, null, null);
-		writer.WriteProperty(options, PropMinDocs, value.MinDocs, null, null);
-		writer.WriteProperty(options, PropMinPrimaryShardDocs, value.MinPrimaryShardDocs, null, null);
+		writer.WriteProperty(options, PropMinDocs, value.MinDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropMinPrimaryShardDocs, value.MinPrimaryShardDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMinPrimaryShardSize, value.MinPrimaryShardSize, null, null);
-		writer.WriteProperty(options, PropMinPrimaryShardSizeBytes, value.MinPrimaryShardSizeBytes, null, null);
+		writer.WriteProperty(options, PropMinPrimaryShardSizeBytes, value.MinPrimaryShardSizeBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMinSize, value.MinSize, null, null);
-		writer.WriteProperty(options, PropMinSizeBytes, value.MinSizeBytes, null, null);
+		writer.WriteProperty(options, PropMinSizeBytes, value.MinSizeBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -70,7 +70,7 @@ internal sealed partial class PutAliasRequestConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propIsWriteIndex.TryReadProperty(ref reader, options, PropIsWriteIndex, null))
+			if (propIsWriteIndex.TryReadProperty(ref reader, options, PropIsWriteIndex, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -110,7 +110,7 @@ internal sealed partial class PutAliasRequestConverter : System.Text.Json.Serial
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
 		writer.WriteProperty(options, PropIndexRouting, value.IndexRouting, null, null);
-		writer.WriteProperty(options, PropIsWriteIndex, value.IsWriteIndex, null, null);
+		writer.WriteProperty(options, PropIsWriteIndex, value.IsWriteIndex, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteProperty(options, PropSearchRouting, value.SearchRouting, null, null);
 		writer.WriteEndObject();

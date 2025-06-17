@@ -56,7 +56,7 @@ internal sealed partial class ElasticsearchServiceSettingsConverter : System.Tex
 				continue;
 			}
 
-			if (propNumAllocations.TryReadProperty(ref reader, options, PropNumAllocations, null))
+			if (propNumAllocations.TryReadProperty(ref reader, options, PropNumAllocations, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -92,7 +92,7 @@ internal sealed partial class ElasticsearchServiceSettingsConverter : System.Tex
 		writer.WriteProperty(options, PropAdaptiveAllocations, value.AdaptiveAllocations, null, null);
 		writer.WriteProperty(options, PropDeploymentId, value.DeploymentId, null, null);
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
-		writer.WriteProperty(options, PropNumAllocations, value.NumAllocations, null, null);
+		writer.WriteProperty(options, PropNumAllocations, value.NumAllocations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropNumThreads, value.NumThreads, null, null);
 		writer.WriteEndObject();
 	}

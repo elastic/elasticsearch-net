@@ -42,7 +42,7 @@ internal sealed partial class CompositeAggregationConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ internal sealed partial class CompositeAggregationConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAfter, value.After, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>(o, v, null, null));
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSources, value.Sources, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? v) => w.WriteCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>(o, v, null, null)));
 		writer.WriteEndObject();
 	}

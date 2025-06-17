@@ -92,7 +92,7 @@ internal sealed partial class SearchStatsConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propOpenContexts.TryReadProperty(ref reader, options, PropOpenContexts, null))
+			if (propOpenContexts.TryReadProperty(ref reader, options, PropOpenContexts, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -198,7 +198,7 @@ internal sealed partial class SearchStatsConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropFetchTimeInMillis, value.FetchTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropFetchTotal, value.FetchTotal, null, null);
 		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.SearchStats>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.SearchStats>(o, v, null, null));
-		writer.WriteProperty(options, PropOpenContexts, value.OpenContexts, null, null);
+		writer.WriteProperty(options, PropOpenContexts, value.OpenContexts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropQueryCurrent, value.QueryCurrent, null, null);
 		writer.WriteProperty(options, PropQueryTime, value.QueryTime, null, null);
 		writer.WriteProperty(options, PropQueryTimeInMillis, value.QueryTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));

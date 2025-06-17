@@ -83,7 +83,7 @@ internal sealed partial class TrainedModelConfigConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propCreateTime.TryReadProperty(ref reader, options, PropCreateTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -98,17 +98,17 @@ internal sealed partial class TrainedModelConfigConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propEstimatedHeapMemoryUsageBytes.TryReadProperty(ref reader, options, PropEstimatedHeapMemoryUsageBytes, null))
+			if (propEstimatedHeapMemoryUsageBytes.TryReadProperty(ref reader, options, PropEstimatedHeapMemoryUsageBytes, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propEstimatedOperations.TryReadProperty(ref reader, options, PropEstimatedOperations, null))
+			if (propEstimatedOperations.TryReadProperty(ref reader, options, PropEstimatedOperations, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propFullyDefined.TryReadProperty(ref reader, options, PropFullyDefined, null))
+			if (propFullyDefined.TryReadProperty(ref reader, options, PropFullyDefined, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -153,7 +153,7 @@ internal sealed partial class TrainedModelConfigConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propModelType.TryReadProperty(ref reader, options, PropModelType, null))
+			if (propModelType.TryReadProperty(ref reader, options, PropModelType, static Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType>(o)))
 			{
 				continue;
 			}
@@ -219,12 +219,12 @@ internal sealed partial class TrainedModelConfigConverter : System.Text.Json.Ser
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCompressedDefinition, value.CompressedDefinition, null, null);
 		writer.WriteProperty(options, PropCreatedBy, value.CreatedBy, null, null);
-		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreateTime, value.CreateTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropDefaultFieldMap, value.DefaultFieldMap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropEstimatedHeapMemoryUsageBytes, value.EstimatedHeapMemoryUsageBytes, null, null);
-		writer.WriteProperty(options, PropEstimatedOperations, value.EstimatedOperations, null, null);
-		writer.WriteProperty(options, PropFullyDefined, value.FullyDefined, null, null);
+		writer.WriteProperty(options, PropEstimatedHeapMemoryUsageBytes, value.EstimatedHeapMemoryUsageBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropEstimatedOperations, value.EstimatedOperations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropFullyDefined, value.FullyDefined, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropInferenceConfig, value.InferenceConfig, null, null);
 		writer.WriteProperty(options, PropInput, value.Input, null, null);
 		writer.WriteProperty(options, PropLicenseLevel, value.LicenseLevel, null, null);
@@ -233,7 +233,7 @@ internal sealed partial class TrainedModelConfigConverter : System.Text.Json.Ser
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropModelPackage, value.ModelPackage, null, null);
 		writer.WriteProperty(options, PropModelSizeBytes, value.ModelSizeBytes, null, null);
-		writer.WriteProperty(options, PropModelType, value.ModelType, null, null);
+		writer.WriteProperty(options, PropModelType, value.ModelType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType>(o, v));
 		writer.WriteProperty(options, PropPlatformArchitecture, value.PlatformArchitecture, null, null);
 		writer.WriteProperty(options, PropPrefixStrings, value.PrefixStrings, null, null);
 		writer.WriteProperty(options, PropTags, value.Tags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));

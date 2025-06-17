@@ -49,6 +49,91 @@ internal sealed partial class PutInferenceRequestConverter : System.Text.Json.Se
 /// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 /// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 /// </para>
+/// <para>
+/// The following integrations are available through the inference API. You can find the available task types next to the integration name:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// AlibabaCloud AI Search (<c>completion</c>, <c>rerank</c>, <c>sparse_embedding</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Amazon Bedrock (<c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Anthropic (<c>completion</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Azure AI Studio (<c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Azure OpenAI (<c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Cohere (<c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Elasticsearch (<c>rerank</c>, <c>sparse_embedding</c>, <c>text_embedding</c> - this service is for built-in models and models uploaded through Eland)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// ELSER (<c>sparse_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Google AI Studio (<c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Google Vertex AI (<c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hugging Face (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Mistral (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// OpenAI (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// VoyageAI (<c>text_embedding</c>, <c>rerank</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Watsonx inference integration (<c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// JinaAI (<c>text_embedding</c>, <c>rerank</c>)
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestConverter))]
 public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestParameters>
@@ -108,7 +193,7 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 
 	/// <summary>
 	/// <para>
-	/// The task type
+	/// The task type. Refer to the integration list in the API description for the available task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
@@ -128,6 +213,91 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 /// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 /// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 /// </para>
+/// <para>
+/// The following integrations are available through the inference API. You can find the available task types next to the integration name:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// AlibabaCloud AI Search (<c>completion</c>, <c>rerank</c>, <c>sparse_embedding</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Amazon Bedrock (<c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Anthropic (<c>completion</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Azure AI Studio (<c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Azure OpenAI (<c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Cohere (<c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Elasticsearch (<c>rerank</c>, <c>sparse_embedding</c>, <c>text_embedding</c> - this service is for built-in models and models uploaded through Eland)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// ELSER (<c>sparse_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Google AI Studio (<c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Google Vertex AI (<c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hugging Face (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Mistral (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// OpenAI (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// VoyageAI (<c>text_embedding</c>, <c>rerank</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Watsonx inference integration (<c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// JinaAI (<c>text_embedding</c>, <c>rerank</c>)
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
 public readonly partial struct PutInferenceRequestDescriptor
 {
@@ -175,7 +345,7 @@ public readonly partial struct PutInferenceRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The task type
+	/// The task type. Refer to the integration list in the API description for the available task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? value)

@@ -2806,6 +2806,77 @@ internal sealed partial class FieldSortNumericTypeConverter : System.Text.Json.S
 	}
 }
 
+internal sealed partial class ScoreNormalizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ScoreNormalizer>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberL2Norm = System.Text.Json.JsonEncodedText.Encode("l2_norm");
+	private static readonly System.Text.Json.JsonEncodedText MemberMinmax = System.Text.Json.JsonEncodedText.Encode("minmax");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+
+	public override Elastic.Clients.Elasticsearch.ScoreNormalizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberL2Norm))
+		{
+			return Elastic.Clients.Elasticsearch.ScoreNormalizer.L2Norm;
+		}
+
+		if (reader.ValueTextEquals(MemberMinmax))
+		{
+			return Elastic.Clients.Elasticsearch.ScoreNormalizer.Minmax;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return Elastic.Clients.Elasticsearch.ScoreNormalizer.None;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberL2Norm.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.ScoreNormalizer.L2Norm;
+		}
+
+		if (string.Equals(value, MemberMinmax.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.ScoreNormalizer.Minmax;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.ScoreNormalizer.None;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.ScoreNormalizer)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ScoreNormalizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.ScoreNormalizer.L2Norm:
+				writer.WriteStringValue(MemberL2Norm);
+				break;
+			case Elastic.Clients.Elasticsearch.ScoreNormalizer.Minmax:
+				writer.WriteStringValue(MemberMinmax);
+				break;
+			case Elastic.Clients.Elasticsearch.ScoreNormalizer.None:
+				writer.WriteStringValue(MemberNone);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.ScoreNormalizer)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.ScoreNormalizer ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ScoreNormalizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TimeUnitConverter))]
 public enum TimeUnit
 {
@@ -3431,4 +3502,15 @@ public enum FieldSortNumericType
 	Double,
 	[System.Runtime.Serialization.EnumMember(Value = "long")]
 	Long
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ScoreNormalizerConverter))]
+public enum ScoreNormalizer
+{
+	[System.Runtime.Serialization.EnumMember(Value = "l2_norm")]
+	L2Norm,
+	[System.Runtime.Serialization.EnumMember(Value = "minmax")]
+	Minmax,
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None
 }

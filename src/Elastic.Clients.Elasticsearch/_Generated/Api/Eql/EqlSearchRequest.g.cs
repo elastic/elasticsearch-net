@@ -78,17 +78,17 @@ internal sealed partial class EqlSearchRequestConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitForCompletionTimeout = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowPartialSearchResults.TryReadProperty(ref reader, options, PropAllowPartialSearchResults, null))
+			if (propAllowPartialSearchResults.TryReadProperty(ref reader, options, PropAllowPartialSearchResults, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propAllowPartialSequenceResults.TryReadProperty(ref reader, options, PropAllowPartialSequenceResults, null))
+			if (propAllowPartialSequenceResults.TryReadProperty(ref reader, options, PropAllowPartialSequenceResults, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propCaseSensitive.TryReadProperty(ref reader, options, PropCaseSensitive, null))
+			if (propCaseSensitive.TryReadProperty(ref reader, options, PropCaseSensitive, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -98,7 +98,7 @@ internal sealed partial class EqlSearchRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propFetchSize.TryReadProperty(ref reader, options, PropFetchSize, null))
+			if (propFetchSize.TryReadProperty(ref reader, options, PropFetchSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -118,12 +118,12 @@ internal sealed partial class EqlSearchRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propKeepOnCompletion.TryReadProperty(ref reader, options, PropKeepOnCompletion, null))
+			if (propKeepOnCompletion.TryReadProperty(ref reader, options, PropKeepOnCompletion, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxSamplesPerKey.TryReadProperty(ref reader, options, PropMaxSamplesPerKey, null))
+			if (propMaxSamplesPerKey.TryReadProperty(ref reader, options, PropMaxSamplesPerKey, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -133,7 +133,7 @@ internal sealed partial class EqlSearchRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propResultPosition.TryReadProperty(ref reader, options, PropResultPosition, null))
+			if (propResultPosition.TryReadProperty(ref reader, options, PropResultPosition, static Elastic.Clients.Elasticsearch.Eql.ResultPosition? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Eql.ResultPosition>(o)))
 			{
 				continue;
 			}
@@ -143,7 +143,7 @@ internal sealed partial class EqlSearchRequestConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -198,20 +198,20 @@ internal sealed partial class EqlSearchRequestConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults, null, null);
-		writer.WriteProperty(options, PropAllowPartialSequenceResults, value.AllowPartialSequenceResults, null, null);
-		writer.WriteProperty(options, PropCaseSensitive, value.CaseSensitive, null, null);
+		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropAllowPartialSequenceResults, value.AllowPartialSequenceResults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropCaseSensitive, value.CaseSensitive, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropEventCategoryField, value.EventCategoryField, null, null);
-		writer.WriteProperty(options, PropFetchSize, value.FetchSize, null, null);
+		writer.WriteProperty(options, PropFetchSize, value.FetchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, v, null));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
 		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
-		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, null);
-		writer.WriteProperty(options, PropMaxSamplesPerKey, value.MaxSamplesPerKey, null, null);
+		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropMaxSamplesPerKey, value.MaxSamplesPerKey, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteProperty(options, PropResultPosition, value.ResultPosition, null, null);
+		writer.WriteProperty(options, PropResultPosition, value.ResultPosition, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Eql.ResultPosition? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Eql.ResultPosition>(o, v));
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTiebreakerField, value.TiebreakerField, null, null);
 		writer.WriteProperty(options, PropTimestampField, value.TimestampField, null, null);
 		writer.WriteProperty(options, PropWaitForCompletionTimeout, value.WaitForCompletionTimeout, null, null);

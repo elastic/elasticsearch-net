@@ -59,7 +59,7 @@ internal sealed partial class InferenceResponseResultConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propIsTruncated.TryReadProperty(ref reader, options, PropIsTruncated, null))
+			if (propIsTruncated.TryReadProperty(ref reader, options, PropIsTruncated, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -74,12 +74,12 @@ internal sealed partial class InferenceResponseResultConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propPredictionProbability.TryReadProperty(ref reader, options, PropPredictionProbability, null))
+			if (propPredictionProbability.TryReadProperty(ref reader, options, PropPredictionProbability, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propPredictionScore.TryReadProperty(ref reader, options, PropPredictionScore, null))
+			if (propPredictionScore.TryReadProperty(ref reader, options, PropPredictionScore, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -123,11 +123,11 @@ internal sealed partial class InferenceResponseResultConverter : System.Text.Jso
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropEntities, value.Entities, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelEntities>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelEntities>(o, v, null));
 		writer.WriteProperty(options, PropFeatureImportance, value.FeatureImportance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceFeatureImportance>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelInferenceFeatureImportance>(o, v, null));
-		writer.WriteProperty(options, PropIsTruncated, value.IsTruncated, null, null);
+		writer.WriteProperty(options, PropIsTruncated, value.IsTruncated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPredictedValue, value.PredictedValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? v) => w.WriteSingleOrManyCollectionValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null)));
 		writer.WriteProperty(options, PropPredictedValueSequence, value.PredictedValueSequence, null, null);
-		writer.WriteProperty(options, PropPredictionProbability, value.PredictionProbability, null, null);
-		writer.WriteProperty(options, PropPredictionScore, value.PredictionScore, null, null);
+		writer.WriteProperty(options, PropPredictionProbability, value.PredictionProbability, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropPredictionScore, value.PredictionScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropTopClasses, value.TopClasses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TopClassEntry>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TopClassEntry>(o, v, null));
 		writer.WriteProperty(options, PropWarning, value.Warning, null, null);
 		writer.WriteEndObject();

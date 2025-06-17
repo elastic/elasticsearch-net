@@ -78,17 +78,17 @@ internal sealed partial class RestoreRequestConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propIgnoreUnavailable.TryReadProperty(ref reader, options, PropIgnoreUnavailable, null))
+			if (propIgnoreUnavailable.TryReadProperty(ref reader, options, PropIgnoreUnavailable, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIncludeAliases.TryReadProperty(ref reader, options, PropIncludeAliases, null))
+			if (propIncludeAliases.TryReadProperty(ref reader, options, PropIncludeAliases, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIncludeGlobalState.TryReadProperty(ref reader, options, PropIncludeGlobalState, null))
+			if (propIncludeGlobalState.TryReadProperty(ref reader, options, PropIncludeGlobalState, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -103,7 +103,7 @@ internal sealed partial class RestoreRequestConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propPartial.TryReadProperty(ref reader, options, PropPartial, null))
+			if (propPartial.TryReadProperty(ref reader, options, PropPartial, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -148,12 +148,12 @@ internal sealed partial class RestoreRequestConverter : System.Text.Json.Seriali
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFeatureStates, value.FeatureStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropIgnoreIndexSettings, value.IgnoreIndexSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, null);
-		writer.WriteProperty(options, PropIncludeAliases, value.IncludeAliases, null, null);
-		writer.WriteProperty(options, PropIncludeGlobalState, value.IncludeGlobalState, null, null);
+		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIncludeAliases, value.IncludeAliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIncludeGlobalState, value.IncludeGlobalState, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropIndexSettings, value.IndexSettings, null, null);
 		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
-		writer.WriteProperty(options, PropPartial, value.Partial, null, null);
+		writer.WriteProperty(options, PropPartial, value.Partial, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRenamePattern, value.RenamePattern, null, null);
 		writer.WriteProperty(options, PropRenameReplacement, value.RenameReplacement, null, null);
 		writer.WriteEndObject();

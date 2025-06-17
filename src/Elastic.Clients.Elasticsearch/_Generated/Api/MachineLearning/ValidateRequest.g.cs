@@ -88,7 +88,7 @@ internal sealed partial class ValidateRequestConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propModelSnapshotRetentionDays.TryReadProperty(ref reader, options, PropModelSnapshotRetentionDays, null))
+			if (propModelSnapshotRetentionDays.TryReadProperty(ref reader, options, PropModelSnapshotRetentionDays, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -132,7 +132,7 @@ internal sealed partial class ValidateRequestConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropModelPlot, value.ModelPlot, null, null);
 		writer.WriteProperty(options, PropModelSnapshotId, value.ModelSnapshotId, null, null);
-		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, null);
+		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropResultsIndexName, value.ResultsIndexName, null, null);
 		writer.WriteEndObject();
 	}

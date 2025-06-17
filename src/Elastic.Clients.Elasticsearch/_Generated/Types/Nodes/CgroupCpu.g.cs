@@ -39,12 +39,12 @@ internal sealed partial class CgroupCpuConverter : System.Text.Json.Serializatio
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.CgroupCpuStat?> propStat = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCfsPeriodMicros.TryReadProperty(ref reader, options, PropCfsPeriodMicros, null))
+			if (propCfsPeriodMicros.TryReadProperty(ref reader, options, PropCfsPeriodMicros, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propCfsQuotaMicros.TryReadProperty(ref reader, options, PropCfsQuotaMicros, null))
+			if (propCfsQuotaMicros.TryReadProperty(ref reader, options, PropCfsQuotaMicros, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -81,8 +81,8 @@ internal sealed partial class CgroupCpuConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.CgroupCpu value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCfsPeriodMicros, value.CfsPeriodMicros, null, null);
-		writer.WriteProperty(options, PropCfsQuotaMicros, value.CfsQuotaMicros, null, null);
+		writer.WriteProperty(options, PropCfsPeriodMicros, value.CfsPeriodMicros, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropCfsQuotaMicros, value.CfsQuotaMicros, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropControlGroup, value.ControlGroup, null, null);
 		writer.WriteProperty(options, PropStat, value.Stat, null, null);
 		writer.WriteEndObject();

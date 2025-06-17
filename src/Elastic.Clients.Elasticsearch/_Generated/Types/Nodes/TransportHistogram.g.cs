@@ -37,17 +37,17 @@ internal sealed partial class TransportHistogramConverter : System.Text.Json.Ser
 		LocalJsonValue<long?> propLtMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propGeMillis.TryReadProperty(ref reader, options, PropGeMillis, null))
+			if (propGeMillis.TryReadProperty(ref reader, options, PropGeMillis, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propLtMillis.TryReadProperty(ref reader, options, PropLtMillis, null))
+			if (propLtMillis.TryReadProperty(ref reader, options, PropLtMillis, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class TransportHistogramConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.TransportHistogram value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count, null, null);
-		writer.WriteProperty(options, PropGeMillis, value.GeMillis, null, null);
-		writer.WriteProperty(options, PropLtMillis, value.LtMillis, null, null);
+		writer.WriteProperty(options, PropCount, value.Count, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropGeMillis, value.GeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLtMillis, value.LtMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

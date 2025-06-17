@@ -33,7 +33,7 @@ internal sealed partial class RateLimitSettingConverter : System.Text.Json.Seria
 		LocalJsonValue<int?> propRequestsPerMinute = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propRequestsPerMinute.TryReadProperty(ref reader, options, PropRequestsPerMinute, null))
+			if (propRequestsPerMinute.TryReadProperty(ref reader, options, PropRequestsPerMinute, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class RateLimitSettingConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.RateLimitSetting value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRequestsPerMinute, value.RequestsPerMinute, null, null);
+		writer.WriteProperty(options, PropRequestsPerMinute, value.RequestsPerMinute, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

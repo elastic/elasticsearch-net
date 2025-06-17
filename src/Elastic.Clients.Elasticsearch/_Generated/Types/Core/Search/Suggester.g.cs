@@ -40,7 +40,7 @@ internal sealed partial class SuggesterConverter : System.Text.Json.Serializatio
 			}
 
 			propSuggesters ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>();
-			reader.ReadProperty(options, out string key, out Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester value, null, null);
+			reader.ReadProperty(options, out string key, out Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>(o)!);
 			propSuggesters[key] = value;
 		}
 
@@ -60,7 +60,7 @@ internal sealed partial class SuggesterConverter : System.Text.Json.Serializatio
 		{
 			foreach (var item in value.Suggesters)
 			{
-				writer.WriteProperty(options, item.Key, item.Value, null, null);
+				writer.WriteProperty(options, item.Key, item.Value, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), null);
 			}
 		}
 

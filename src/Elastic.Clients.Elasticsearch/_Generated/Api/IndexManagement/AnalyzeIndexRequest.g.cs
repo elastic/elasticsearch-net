@@ -68,7 +68,7 @@ internal sealed partial class AnalyzeIndexRequestConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propExplain.TryReadProperty(ref reader, options, PropExplain, null))
+			if (propExplain.TryReadProperty(ref reader, options, PropExplain, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -128,7 +128,7 @@ internal sealed partial class AnalyzeIndexRequestConverter : System.Text.Json.Se
 		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
 		writer.WriteProperty(options, PropAttributes, value.Attributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropCharFilter, value.CharFilter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>(o, v, null));
-		writer.WriteProperty(options, PropExplain, value.Explain, null, null);
+		writer.WriteProperty(options, PropExplain, value.Explain, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Analysis.ITokenFilter>(o, v, null));
 		writer.WriteProperty(options, PropNormalizer, value.Normalizer, null, null);

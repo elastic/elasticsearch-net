@@ -43,7 +43,7 @@ internal sealed partial class GetAsyncStatusResponseConverter : System.Text.Json
 		LocalJsonValue<System.DateTimeOffset> propStartTimeInMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCompletionStatus.TryReadProperty(ref reader, options, PropCompletionStatus, null))
+			if (propCompletionStatus.TryReadProperty(ref reader, options, PropCompletionStatus, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -97,7 +97,7 @@ internal sealed partial class GetAsyncStatusResponseConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Sql.GetAsyncStatusResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompletionStatus, value.CompletionStatus, null, null);
+		writer.WriteProperty(options, PropCompletionStatus, value.CompletionStatus, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropExpirationTimeInMillis, value.ExpirationTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, null);

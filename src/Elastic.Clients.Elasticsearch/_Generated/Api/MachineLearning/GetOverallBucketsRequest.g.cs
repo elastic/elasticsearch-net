@@ -49,7 +49,7 @@ internal sealed partial class GetOverallBucketsRequestConverter : System.Text.Js
 		LocalJsonValue<int?> propTopN = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowNoMatch.TryReadProperty(ref reader, options, PropAllowNoMatch, null))
+			if (propAllowNoMatch.TryReadProperty(ref reader, options, PropAllowNoMatch, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -59,12 +59,12 @@ internal sealed partial class GetOverallBucketsRequestConverter : System.Text.Js
 				continue;
 			}
 
-			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propExcludeInterim.TryReadProperty(ref reader, options, PropExcludeInterim, null))
+			if (propExcludeInterim.TryReadProperty(ref reader, options, PropExcludeInterim, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -74,12 +74,12 @@ internal sealed partial class GetOverallBucketsRequestConverter : System.Text.Js
 				continue;
 			}
 
-			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
 
-			if (propTopN.TryReadProperty(ref reader, options, PropTopN, null))
+			if (propTopN.TryReadProperty(ref reader, options, PropTopN, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -109,13 +109,13 @@ internal sealed partial class GetOverallBucketsRequestConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowNoMatch, value.AllowNoMatch, null, null);
+		writer.WriteProperty(options, PropAllowNoMatch, value.AllowNoMatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropBucketSpan, value.BucketSpan, null, null);
-		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropExcludeInterim, value.ExcludeInterim, null, null);
+		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropExcludeInterim, value.ExcludeInterim, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropOverallScore, value.OverallScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<double, string>? v) => w.WriteUnionValue<double, string>(o, v, null, null));
-		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropTopN, value.TopN, null, null);
+		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropTopN, value.TopN, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -58,7 +58,7 @@ internal sealed partial class SuggestUserProfilesRequestConverter : System.Text.
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -88,7 +88,7 @@ internal sealed partial class SuggestUserProfilesRequestConverter : System.Text.
 		writer.WriteProperty(options, PropData, value.Data, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropHint, value.Hint, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

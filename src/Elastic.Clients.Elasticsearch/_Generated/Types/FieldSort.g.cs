@@ -38,11 +38,11 @@ internal sealed partial class FieldSortConverter : System.Text.Json.Serializatio
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		propField.ReadPropertyName(ref reader, options, null);
+		propField.ReadPropertyName(ref reader, options, static Elastic.Clients.Elasticsearch.Field (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Field>(o));
 		reader.Read();
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.SortOrder?>(options, null);
+			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.SortOrder?>(options, static Elastic.Clients.Elasticsearch.SortOrder? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.SortOrder>(o));
 			reader.Read();
 			return new Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 			{
@@ -71,7 +71,7 @@ internal sealed partial class FieldSortConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, static Elastic.Clients.Elasticsearch.SortMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.SortMode>(o)))
 			{
 				continue;
 			}
@@ -81,17 +81,17 @@ internal sealed partial class FieldSortConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propNumericType.TryReadProperty(ref reader, options, PropNumericType, null))
+			if (propNumericType.TryReadProperty(ref reader, options, PropNumericType, static Elastic.Clients.Elasticsearch.FieldSortNumericType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.FieldSortNumericType>(o)))
 			{
 				continue;
 			}
 
-			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static Elastic.Clients.Elasticsearch.SortOrder? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.SortOrder>(o)))
 			{
 				continue;
 			}
 
-			if (propUnmappedType.TryReadProperty(ref reader, options, PropUnmappedType, null))
+			if (propUnmappedType.TryReadProperty(ref reader, options, PropUnmappedType, static Elastic.Clients.Elasticsearch.Mapping.FieldType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.FieldType>(o)))
 			{
 				continue;
 			}
@@ -124,15 +124,15 @@ internal sealed partial class FieldSortConverter : System.Text.Json.Serializatio
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.FieldSort value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName(options, value.Field, null);
+		writer.WritePropertyName(options, value.Field, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Field v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Field>(o, v));
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
-		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SortMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SortMode>(o, v));
 		writer.WriteProperty(options, PropNested, value.Nested, null, null);
-		writer.WriteProperty(options, PropNumericType, value.NumericType, null, null);
-		writer.WriteProperty(options, PropOrder, value.Order, null, null);
-		writer.WriteProperty(options, PropUnmappedType, value.UnmappedType, null, null);
+		writer.WriteProperty(options, PropNumericType, value.NumericType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.FieldSortNumericType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.FieldSortNumericType>(o, v));
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SortOrder? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SortOrder>(o, v));
+		writer.WriteProperty(options, PropUnmappedType, value.UnmappedType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.FieldType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.FieldType>(o, v));
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}

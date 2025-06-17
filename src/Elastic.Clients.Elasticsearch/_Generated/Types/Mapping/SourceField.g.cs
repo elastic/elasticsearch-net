@@ -43,7 +43,7 @@ internal sealed partial class SourceFieldConverter : System.Text.Json.Serializat
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode?> propMode = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCompress.TryReadProperty(ref reader, options, PropCompress, null))
+			if (propCompress.TryReadProperty(ref reader, options, PropCompress, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -53,7 +53,7 @@ internal sealed partial class SourceFieldConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -68,7 +68,7 @@ internal sealed partial class SourceFieldConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, static Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode>(o)))
 			{
 				continue;
 			}
@@ -97,12 +97,12 @@ internal sealed partial class SourceFieldConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.SourceField value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompress, value.Compress, null, null);
+		writer.WriteProperty(options, PropCompress, value.Compress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropCompressThreshold, value.CompressThreshold, null, null);
-		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropExcludes, value.Excludes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropIncludes, value.Includes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode>(o, v));
 		writer.WriteEndObject();
 	}
 }

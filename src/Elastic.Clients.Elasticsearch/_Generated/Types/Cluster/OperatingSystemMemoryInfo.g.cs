@@ -43,7 +43,7 @@ internal sealed partial class OperatingSystemMemoryInfoConverter : System.Text.J
 		LocalJsonValue<int> propUsedPercent = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAdjustedTotalInBytes.TryReadProperty(ref reader, options, PropAdjustedTotalInBytes, null))
+			if (propAdjustedTotalInBytes.TryReadProperty(ref reader, options, PropAdjustedTotalInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -97,7 +97,7 @@ internal sealed partial class OperatingSystemMemoryInfoConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAdjustedTotalInBytes, value.AdjustedTotalInBytes, null, null);
+		writer.WriteProperty(options, PropAdjustedTotalInBytes, value.AdjustedTotalInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, null);
 		writer.WriteProperty(options, PropFreePercent, value.FreePercent, null, null);
 		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, null);

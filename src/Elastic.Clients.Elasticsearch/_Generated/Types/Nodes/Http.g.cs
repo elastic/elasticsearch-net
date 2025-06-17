@@ -44,7 +44,7 @@ internal sealed partial class HttpConverter : System.Text.Json.Serialization.Jso
 				continue;
 			}
 
-			if (propCurrentOpen.TryReadProperty(ref reader, options, PropCurrentOpen, null))
+			if (propCurrentOpen.TryReadProperty(ref reader, options, PropCurrentOpen, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -54,7 +54,7 @@ internal sealed partial class HttpConverter : System.Text.Json.Serialization.Jso
 				continue;
 			}
 
-			if (propTotalOpened.TryReadProperty(ref reader, options, PropTotalOpened, null))
+			if (propTotalOpened.TryReadProperty(ref reader, options, PropTotalOpened, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -82,9 +82,9 @@ internal sealed partial class HttpConverter : System.Text.Json.Serialization.Jso
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropClients, value.Clients, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Client>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.Client>(o, v, null));
-		writer.WriteProperty(options, PropCurrentOpen, value.CurrentOpen, null, null);
+		writer.WriteProperty(options, PropCurrentOpen, value.CurrentOpen, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRoutes, value.Routes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>(o, v, null, null));
-		writer.WriteProperty(options, PropTotalOpened, value.TotalOpened, null, null);
+		writer.WriteProperty(options, PropTotalOpened, value.TotalOpened, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

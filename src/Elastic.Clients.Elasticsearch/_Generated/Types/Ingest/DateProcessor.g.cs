@@ -73,7 +73,7 @@ internal sealed partial class DateProcessorConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -141,7 +141,7 @@ internal sealed partial class DateProcessorConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormats, value.Formats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropIf, value.If, null, null);
-		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
 		writer.WriteProperty(options, PropOutputFormat, value.OutputFormat, null, null);

@@ -43,7 +43,7 @@ internal sealed partial class UpdateDataFrameAnalyticsRequestConverter : System.
 		LocalJsonValue<string?> propModelMemoryLimit = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowLazyStart.TryReadProperty(ref reader, options, PropAllowLazyStart, null))
+			if (propAllowLazyStart.TryReadProperty(ref reader, options, PropAllowLazyStart, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -53,7 +53,7 @@ internal sealed partial class UpdateDataFrameAnalyticsRequestConverter : System.
 				continue;
 			}
 
-			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, null))
+			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -85,9 +85,9 @@ internal sealed partial class UpdateDataFrameAnalyticsRequestConverter : System.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowLazyStart, value.AllowLazyStart, null, null);
+		writer.WriteProperty(options, PropAllowLazyStart, value.AllowLazyStart, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, null);
+		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
 		writer.WriteEndObject();
 	}

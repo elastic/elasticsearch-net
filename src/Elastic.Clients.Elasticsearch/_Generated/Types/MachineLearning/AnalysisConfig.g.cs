@@ -93,7 +93,7 @@ internal sealed partial class AnalysisConfigConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propMultivariateByFields.TryReadProperty(ref reader, options, PropMultivariateByFields, null))
+			if (propMultivariateByFields.TryReadProperty(ref reader, options, PropMultivariateByFields, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -145,7 +145,7 @@ internal sealed partial class AnalysisConfigConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropInfluencers, value.Influencers, null, null);
 		writer.WriteProperty(options, PropLatency, value.Latency, null, null);
 		writer.WriteProperty(options, PropModelPruneWindow, value.ModelPruneWindow, null, null);
-		writer.WriteProperty(options, PropMultivariateByFields, value.MultivariateByFields, null, null);
+		writer.WriteProperty(options, PropMultivariateByFields, value.MultivariateByFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPerPartitionCategorization, value.PerPartitionCategorization, null, null);
 		writer.WriteProperty(options, PropSummaryCountFieldName, value.SummaryCountFieldName, null, null);
 		writer.WriteEndObject();

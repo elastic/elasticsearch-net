@@ -59,7 +59,7 @@ internal sealed partial class DynamicTemplateConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propMatchPattern.TryReadProperty(ref reader, options, PropMatchPattern, null))
+			if (propMatchPattern.TryReadProperty(ref reader, options, PropMatchPattern, static Elastic.Clients.Elasticsearch.Mapping.MatchType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.MatchType>(o)))
 			{
 				continue;
 			}
@@ -143,7 +143,7 @@ internal sealed partial class DynamicTemplateConverter : System.Text.Json.Serial
 
 		writer.WriteProperty(options, PropMatch, value.Match, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropMatchMappingType, value.MatchMappingType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropMatchPattern, value.MatchPattern, null, null);
+		writer.WriteProperty(options, PropMatchPattern, value.MatchPattern, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.MatchType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.MatchType>(o, v));
 		writer.WriteProperty(options, PropPathMatch, value.PathMatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropPathUnmatch, value.PathUnmatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropUnmatch, value.Unmatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));

@@ -71,12 +71,12 @@ internal sealed partial class LicenseConverter : System.Text.Json.Serialization.
 				continue;
 			}
 
-			if (propMaxNodes.TryReadProperty(ref reader, options, PropMaxNodes, null))
+			if (propMaxNodes.TryReadProperty(ref reader, options, PropMaxNodes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxResourceUnits.TryReadProperty(ref reader, options, PropMaxResourceUnits, null))
+			if (propMaxResourceUnits.TryReadProperty(ref reader, options, PropMaxResourceUnits, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -86,7 +86,7 @@ internal sealed partial class LicenseConverter : System.Text.Json.Serialization.
 				continue;
 			}
 
-			if (propStartDateInMillis.TryReadProperty(ref reader, options, PropStartDateInMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartDateInMillis.TryReadProperty(ref reader, options, PropStartDateInMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -133,10 +133,10 @@ internal sealed partial class LicenseConverter : System.Text.Json.Serialization.
 		writer.WriteProperty(options, PropIssueDateInMillis, value.IssueDateInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropIssuedTo, value.IssuedTo, null, null);
 		writer.WriteProperty(options, PropIssuer, value.Issuer, null, null);
-		writer.WriteProperty(options, PropMaxNodes, value.MaxNodes, null, null);
-		writer.WriteProperty(options, PropMaxResourceUnits, value.MaxResourceUnits, null, null);
+		writer.WriteProperty(options, PropMaxNodes, value.MaxNodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropMaxResourceUnits, value.MaxResourceUnits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropSignature, value.Signature, null, null);
-		writer.WriteProperty(options, PropStartDateInMillis, value.StartDateInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropStartDateInMillis, value.StartDateInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropUid, value.Uid, null, null);
 		writer.WriteEndObject();

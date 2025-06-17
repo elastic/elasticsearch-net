@@ -89,7 +89,7 @@ internal sealed partial class CategoryConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propNumMatches.TryReadProperty(ref reader, options, PropNumMatches, null))
+			if (propNumMatches.TryReadProperty(ref reader, options, PropNumMatches, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -167,7 +167,7 @@ internal sealed partial class CategoryConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropMaxMatchingLength, value.MaxMatchingLength, null, null);
 		writer.WriteProperty(options, PropMlcategory, value.Mlcategory, null, null);
-		writer.WriteProperty(options, PropNumMatches, value.NumMatches, null, null);
+		writer.WriteProperty(options, PropNumMatches, value.NumMatches, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropP, value.P, null, null);
 		writer.WriteProperty(options, PropPartitionFieldName, value.PartitionFieldName, null, null);
 		writer.WriteProperty(options, PropPartitionFieldValue, value.PartitionFieldValue, null, null);

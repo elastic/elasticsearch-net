@@ -51,7 +51,7 @@ internal sealed partial class LimitsConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
-			if (propMaxSingleMlNodeProcessors.TryReadProperty(ref reader, options, PropMaxSingleMlNodeProcessors, null))
+			if (propMaxSingleMlNodeProcessors.TryReadProperty(ref reader, options, PropMaxSingleMlNodeProcessors, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class LimitsConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
-			if (propTotalMlProcessors.TryReadProperty(ref reader, options, PropTotalMlProcessors, null))
+			if (propTotalMlProcessors.TryReadProperty(ref reader, options, PropTotalMlProcessors, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -91,9 +91,9 @@ internal sealed partial class LimitsConverter : System.Text.Json.Serialization.J
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropEffectiveMaxModelMemoryLimit, value.EffectiveMaxModelMemoryLimit, null, null);
 		writer.WriteProperty(options, PropMaxModelMemoryLimit, value.MaxModelMemoryLimit, null, null);
-		writer.WriteProperty(options, PropMaxSingleMlNodeProcessors, value.MaxSingleMlNodeProcessors, null, null);
+		writer.WriteProperty(options, PropMaxSingleMlNodeProcessors, value.MaxSingleMlNodeProcessors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTotalMlMemory, value.TotalMlMemory, null, null);
-		writer.WriteProperty(options, PropTotalMlProcessors, value.TotalMlProcessors, null, null);
+		writer.WriteProperty(options, PropTotalMlProcessors, value.TotalMlProcessors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

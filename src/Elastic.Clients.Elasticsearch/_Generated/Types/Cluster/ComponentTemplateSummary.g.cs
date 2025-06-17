@@ -68,7 +68,7 @@ internal sealed partial class ComponentTemplateSummaryConverter : System.Text.Js
 				continue;
 			}
 
-			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -102,7 +102,7 @@ internal sealed partial class ComponentTemplateSummaryConverter : System.Text.Js
 		writer.WriteProperty(options, PropMappings, value.Mappings, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropSettings, value.Settings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>(o, v, null, null));
-		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

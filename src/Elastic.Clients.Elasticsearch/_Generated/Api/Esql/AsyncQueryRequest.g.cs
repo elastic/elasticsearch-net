@@ -58,24 +58,6 @@ public sealed partial class AsyncQueryRequestParameters : Elastic.Transport.Requ
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
-
-	/// <summary>
-	/// <para>
-	/// The period for which the query and its results are stored in the cluster.
-	/// The default period is five days.
-	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
-	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
-
-	/// <summary>
-	/// <para>
-	/// Indicates whether the query and its results are stored in the cluster.
-	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
-	/// </para>
-	/// </summary>
-	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
 }
 
 internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest>
@@ -83,6 +65,8 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 	private static readonly System.Text.Json.JsonEncodedText PropColumnar = System.Text.Json.JsonEncodedText.Encode("columnar");
 	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
 	private static readonly System.Text.Json.JsonEncodedText PropIncludeCcsMetadata = System.Text.Json.JsonEncodedText.Encode("include_ccs_metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion");
 	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale");
 	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
 	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
@@ -95,6 +79,8 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 		LocalJsonValue<bool?> propColumnar = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
 		LocalJsonValue<bool?> propIncludeCcsMetadata = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propKeepAlive = default;
+		LocalJsonValue<bool?> propKeepOnCompletion = default;
 		LocalJsonValue<string?> propLocale = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propParams = default;
 		LocalJsonValue<bool?> propProfile = default;
@@ -102,7 +88,7 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitForCompletionTimeout = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, null))
+			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -112,7 +98,17 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, null))
+			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propKeepAlive.TryReadProperty(ref reader, options, PropKeepAlive, null))
+			{
+				continue;
+			}
+
+			if (propKeepOnCompletion.TryReadProperty(ref reader, options, PropKeepOnCompletion, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -127,7 +123,7 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propProfile.TryReadProperty(ref reader, options, PropProfile, null))
+			if (propProfile.TryReadProperty(ref reader, options, PropProfile, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -157,6 +153,8 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 			Columnar = propColumnar.Value,
 			Filter = propFilter.Value,
 			IncludeCcsMetadata = propIncludeCcsMetadata.Value,
+			KeepAlive = propKeepAlive.Value,
+			KeepOnCompletion = propKeepOnCompletion.Value,
 			Locale = propLocale.Value,
 			Params = propParams.Value,
 			Profile = propProfile.Value,
@@ -168,12 +166,14 @@ internal sealed partial class AsyncQueryRequestConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropColumnar, value.Columnar, null, null);
+		writer.WriteProperty(options, PropColumnar, value.Columnar, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropIncludeCcsMetadata, value.IncludeCcsMetadata, null, null);
+		writer.WriteProperty(options, PropIncludeCcsMetadata, value.IncludeCcsMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
+		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
-		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
+		writer.WriteProperty(options, PropProfile, value.Profile, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropWaitForCompletionTimeout, value.WaitForCompletionTimeout, null, null);
 		writer.WriteEndObject();
@@ -258,24 +258,6 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// The period for which the query and its results are stored in the cluster.
-	/// The default period is five days.
-	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
-	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
-
-	/// <summary>
-	/// <para>
-	/// Indicates whether the query and its results are stored in the cluster.
-	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
-	/// </para>
-	/// </summary>
-	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
-
-	/// <summary>
-	/// <para>
 	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
 	/// </para>
 	/// </summary>
@@ -296,6 +278,24 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 	/// </para>
 	/// </summary>
 	public bool? IncludeCcsMetadata { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The period for which the query and its results are stored in the cluster.
+	/// The default period is five days.
+	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
+	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether the query and its results are stored in the cluster.
+	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
+	/// </para>
+	/// </summary>
+	public bool? KeepOnCompletion { get; set; }
 	public string? Locale { get; set; }
 
 	/// <summary>
@@ -416,32 +416,6 @@ public readonly partial struct AsyncQueryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The period for which the query and its results are stored in the cluster.
-	/// The default period is five days.
-	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
-	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
-	{
-		Instance.KeepAlive = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Indicates whether the query and its results are stored in the cluster.
-	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor KeepOnCompletion(bool? value = true)
-	{
-		Instance.KeepOnCompletion = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
 	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
 	/// </para>
 	/// </summary>
@@ -494,6 +468,32 @@ public readonly partial struct AsyncQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor IncludeCcsMetadata(bool? value = true)
 	{
 		Instance.IncludeCcsMetadata = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period for which the query and its results are stored in the cluster.
+	/// The default period is five days.
+	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
+	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether the query and its results are stored in the cluster.
+	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor KeepOnCompletion(bool? value = true)
+	{
+		Instance.KeepOnCompletion = value;
 		return this;
 	}
 
@@ -694,32 +694,6 @@ public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The period for which the query and its results are stored in the cluster.
-	/// The default period is five days.
-	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
-	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
-	{
-		Instance.KeepAlive = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Indicates whether the query and its results are stored in the cluster.
-	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> KeepOnCompletion(bool? value = true)
-	{
-		Instance.KeepOnCompletion = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
 	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
 	/// </para>
 	/// </summary>
@@ -761,6 +735,32 @@ public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> IncludeCcsMetadata(bool? value = true)
 	{
 		Instance.IncludeCcsMetadata = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period for which the query and its results are stored in the cluster.
+	/// The default period is five days.
+	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
+	/// If the <c>keep_on_completion</c> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <c>wait_for_completion_timeout</c> parameter, regardless of this value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether the query and its results are stored in the cluster.
+	/// If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <c>wait_for_completion_timeout</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> KeepOnCompletion(bool? value = true)
+	{
+		Instance.KeepOnCompletion = value;
 		return this;
 	}
 

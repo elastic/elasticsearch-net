@@ -43,7 +43,7 @@ internal sealed partial class NodeThreadPoolInfoConverter : System.Text.Json.Ser
 		LocalJsonValue<string> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCore.TryReadProperty(ref reader, options, PropCore, null))
+			if (propCore.TryReadProperty(ref reader, options, PropCore, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -53,7 +53,7 @@ internal sealed partial class NodeThreadPoolInfoConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
+			if (propMax.TryReadProperty(ref reader, options, PropMax, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -63,7 +63,7 @@ internal sealed partial class NodeThreadPoolInfoConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -97,11 +97,11 @@ internal sealed partial class NodeThreadPoolInfoConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCore, value.Core, null, null);
+		writer.WriteProperty(options, PropCore, value.Core, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
-		writer.WriteProperty(options, PropMax, value.Max, null, null);
+		writer.WriteProperty(options, PropMax, value.Max, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropQueueSize, value.QueueSize, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}

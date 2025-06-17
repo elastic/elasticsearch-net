@@ -43,7 +43,7 @@ internal sealed partial class CardinalityAggregationConverter : System.Text.Json
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, null))
+			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, static Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode>(o)))
 			{
 				continue;
 			}
@@ -58,12 +58,12 @@ internal sealed partial class CardinalityAggregationConverter : System.Text.Json
 				continue;
 			}
 
-			if (propPrecisionThreshold.TryReadProperty(ref reader, options, PropPrecisionThreshold, null))
+			if (propPrecisionThreshold.TryReadProperty(ref reader, options, PropPrecisionThreshold, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propRehash.TryReadProperty(ref reader, options, PropRehash, null))
+			if (propRehash.TryReadProperty(ref reader, options, PropRehash, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -97,11 +97,11 @@ internal sealed partial class CardinalityAggregationConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, null);
+		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.CardinalityExecutionMode>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
-		writer.WriteProperty(options, PropPrecisionThreshold, value.PrecisionThreshold, null, null);
-		writer.WriteProperty(options, PropRehash, value.Rehash, null, null);
+		writer.WriteProperty(options, PropPrecisionThreshold, value.PrecisionThreshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropRehash, value.Rehash, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteEndObject();
 	}

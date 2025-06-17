@@ -37,7 +37,7 @@ internal sealed partial class ExistsQueryConverter : System.Text.Json.Serializat
 		LocalJsonValue<string?> propQueryName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -73,7 +73,7 @@ internal sealed partial class ExistsQueryConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteEndObject();

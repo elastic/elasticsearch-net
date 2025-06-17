@@ -42,7 +42,7 @@ internal sealed partial class MedianAbsoluteDeviationAggregateConverter : System
 				continue;
 			}
 
-			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			if (propValue.TryReadProperty(ref reader, options, PropValue, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ internal sealed partial class MedianAbsoluteDeviationAggregateConverter : System
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
-		writer.WriteProperty(options, PropValue, value.Value, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropValueAsString, value.ValueAsString, null, null);
 		writer.WriteEndObject();
 	}
