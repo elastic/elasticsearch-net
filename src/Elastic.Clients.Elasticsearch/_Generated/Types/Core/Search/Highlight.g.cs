@@ -82,12 +82,12 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propBoundaryMaxScan.TryReadProperty(ref reader, options, PropBoundaryMaxScan, null))
+			if (propBoundaryMaxScan.TryReadProperty(ref reader, options, PropBoundaryMaxScan, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propBoundaryScanner.TryReadProperty(ref reader, options, PropBoundaryScanner, null))
+			if (propBoundaryScanner.TryReadProperty(ref reader, options, PropBoundaryScanner, static Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner>(o)))
 			{
 				continue;
 			}
@@ -97,7 +97,7 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propEncoder.TryReadProperty(ref reader, options, PropEncoder, null))
+			if (propEncoder.TryReadProperty(ref reader, options, PropEncoder, static Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder>(o)))
 			{
 				continue;
 			}
@@ -107,22 +107,22 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propForceSource.TryReadProperty(ref reader, options, PropForceSource, null))
+			if (propForceSource.TryReadProperty(ref reader, options, PropForceSource, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propFragmenter.TryReadProperty(ref reader, options, PropFragmenter, null))
+			if (propFragmenter.TryReadProperty(ref reader, options, PropFragmenter, static Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter>(o)))
 			{
 				continue;
 			}
 
-			if (propFragmentSize.TryReadProperty(ref reader, options, PropFragmentSize, null))
+			if (propFragmentSize.TryReadProperty(ref reader, options, PropFragmentSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propHighlightFilter.TryReadProperty(ref reader, options, PropHighlightFilter, null))
+			if (propHighlightFilter.TryReadProperty(ref reader, options, PropHighlightFilter, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -132,22 +132,22 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propMaxAnalyzedOffset.TryReadProperty(ref reader, options, PropMaxAnalyzedOffset, null))
+			if (propMaxAnalyzedOffset.TryReadProperty(ref reader, options, PropMaxAnalyzedOffset, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxFragmentLength.TryReadProperty(ref reader, options, PropMaxFragmentLength, null))
+			if (propMaxFragmentLength.TryReadProperty(ref reader, options, PropMaxFragmentLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propNoMatchSize.TryReadProperty(ref reader, options, PropNoMatchSize, null))
+			if (propNoMatchSize.TryReadProperty(ref reader, options, PropNoMatchSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propNumberOfFragments.TryReadProperty(ref reader, options, PropNumberOfFragments, null))
+			if (propNumberOfFragments.TryReadProperty(ref reader, options, PropNumberOfFragments, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -157,12 +157,12 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propOrder.TryReadProperty(ref reader, options, PropOrder, null))
+			if (propOrder.TryReadProperty(ref reader, options, PropOrder, static Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder>(o)))
 			{
 				continue;
 			}
 
-			if (propPhraseLimit.TryReadProperty(ref reader, options, PropPhraseLimit, null))
+			if (propPhraseLimit.TryReadProperty(ref reader, options, PropPhraseLimit, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -177,17 +177,17 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propRequireFieldMatch.TryReadProperty(ref reader, options, PropRequireFieldMatch, null))
+			if (propRequireFieldMatch.TryReadProperty(ref reader, options, PropRequireFieldMatch, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propTagsSchema.TryReadProperty(ref reader, options, PropTagsSchema, null))
+			if (propTagsSchema.TryReadProperty(ref reader, options, PropTagsSchema, static Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema>(o)))
 			{
 				continue;
 			}
 
-			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			if (propType.TryReadProperty(ref reader, options, PropType, static Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterType>(o)))
 			{
 				continue;
 			}
@@ -234,28 +234,28 @@ internal sealed partial class HighlightConverter : System.Text.Json.Serializatio
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBoundaryChars, value.BoundaryChars, null, null);
-		writer.WriteProperty(options, PropBoundaryMaxScan, value.BoundaryMaxScan, null, null);
-		writer.WriteProperty(options, PropBoundaryScanner, value.BoundaryScanner, null, null);
+		writer.WriteProperty(options, PropBoundaryMaxScan, value.BoundaryMaxScan, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropBoundaryScanner, value.BoundaryScanner, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner>(o, v));
 		writer.WriteProperty(options, PropBoundaryScannerLocale, value.BoundaryScannerLocale, null, null);
-		writer.WriteProperty(options, PropEncoder, value.Encoder, null, null);
+		writer.WriteProperty(options, PropEncoder, value.Encoder, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField> v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Core.Search.HighlightField>(o, v, null, null));
-		writer.WriteProperty(options, PropForceSource, value.ForceSource, null, null);
-		writer.WriteProperty(options, PropFragmenter, value.Fragmenter, null, null);
-		writer.WriteProperty(options, PropFragmentSize, value.FragmentSize, null, null);
-		writer.WriteProperty(options, PropHighlightFilter, value.HighlightFilter, null, null);
+		writer.WriteProperty(options, PropForceSource, value.ForceSource, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropFragmenter, value.Fragmenter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter>(o, v));
+		writer.WriteProperty(options, PropFragmentSize, value.FragmentSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropHighlightFilter, value.HighlightFilter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropHighlightQuery, value.HighlightQuery, null, null);
-		writer.WriteProperty(options, PropMaxAnalyzedOffset, value.MaxAnalyzedOffset, null, null);
-		writer.WriteProperty(options, PropMaxFragmentLength, value.MaxFragmentLength, null, null);
-		writer.WriteProperty(options, PropNoMatchSize, value.NoMatchSize, null, null);
-		writer.WriteProperty(options, PropNumberOfFragments, value.NumberOfFragments, null, null);
+		writer.WriteProperty(options, PropMaxAnalyzedOffset, value.MaxAnalyzedOffset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxFragmentLength, value.MaxFragmentLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropNoMatchSize, value.NoMatchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropNumberOfFragments, value.NumberOfFragments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropOptions, value.Options, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
-		writer.WriteProperty(options, PropOrder, value.Order, null, null);
-		writer.WriteProperty(options, PropPhraseLimit, value.PhraseLimit, null, null);
+		writer.WriteProperty(options, PropOrder, value.Order, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder>(o, v));
+		writer.WriteProperty(options, PropPhraseLimit, value.PhraseLimit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropPostTags, value.PostTags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropPreTags, value.PreTags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropRequireFieldMatch, value.RequireFieldMatch, null, null);
-		writer.WriteProperty(options, PropTagsSchema, value.TagsSchema, null, null);
-		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropRequireFieldMatch, value.RequireFieldMatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropTagsSchema, value.TagsSchema, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema>(o, v));
+		writer.WriteProperty(options, PropType, value.Type, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Search.HighlighterType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Search.HighlighterType>(o, v));
 		writer.WriteEndObject();
 	}
 }

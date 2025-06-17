@@ -50,17 +50,17 @@ internal sealed partial class SynonymGraphTokenFilterConverter : System.Text.Jso
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propExpand.TryReadProperty(ref reader, options, PropExpand, null))
+			if (propExpand.TryReadProperty(ref reader, options, PropExpand, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, static Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.SynonymFormat>(o)))
 			{
 				continue;
 			}
 
-			if (propLenient.TryReadProperty(ref reader, options, PropLenient, null))
+			if (propLenient.TryReadProperty(ref reader, options, PropLenient, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class SynonymGraphTokenFilterConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propUpdateable.TryReadProperty(ref reader, options, PropUpdateable, null))
+			if (propUpdateable.TryReadProperty(ref reader, options, PropUpdateable, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -128,15 +128,15 @@ internal sealed partial class SynonymGraphTokenFilterConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExpand, value.Expand, null, null);
-		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteProperty(options, PropLenient, value.Lenient, null, null);
+		writer.WriteProperty(options, PropExpand, value.Expand, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropFormat, value.Format, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.SynonymFormat>(o, v));
+		writer.WriteProperty(options, PropLenient, value.Lenient, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropSynonyms, value.Synonyms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropSynonymsPath, value.SynonymsPath, null, null);
 		writer.WriteProperty(options, PropSynonymsSet, value.SynonymsSet, null, null);
 		writer.WriteProperty(options, PropTokenizer, value.Tokenizer, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteProperty(options, PropUpdateable, value.Updateable, null, null);
+		writer.WriteProperty(options, PropUpdateable, value.Updateable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}

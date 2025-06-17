@@ -43,7 +43,7 @@ internal sealed partial class CjkBigramTokenFilterConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propOutputUnigrams.TryReadProperty(ref reader, options, PropOutputUnigrams, null))
+			if (propOutputUnigrams.TryReadProperty(ref reader, options, PropOutputUnigrams, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class CjkBigramTokenFilterConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropIgnoredScripts, value.IgnoredScripts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript>(o, v, null));
-		writer.WriteProperty(options, PropOutputUnigrams, value.OutputUnigrams, null, null);
+		writer.WriteProperty(options, PropOutputUnigrams, value.OutputUnigrams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

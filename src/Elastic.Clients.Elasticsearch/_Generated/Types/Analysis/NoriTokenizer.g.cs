@@ -42,12 +42,12 @@ internal sealed partial class NoriTokenizerConverter : System.Text.Json.Serializ
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDecompoundMode.TryReadProperty(ref reader, options, PropDecompoundMode, null))
+			if (propDecompoundMode.TryReadProperty(ref reader, options, PropDecompoundMode, static Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode>(o)))
 			{
 				continue;
 			}
 
-			if (propDiscardPunctuation.TryReadProperty(ref reader, options, PropDiscardPunctuation, null))
+			if (propDiscardPunctuation.TryReadProperty(ref reader, options, PropDiscardPunctuation, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -96,8 +96,8 @@ internal sealed partial class NoriTokenizerConverter : System.Text.Json.Serializ
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDecompoundMode, value.DecompoundMode, null, null);
-		writer.WriteProperty(options, PropDiscardPunctuation, value.DiscardPunctuation, null, null);
+		writer.WriteProperty(options, PropDecompoundMode, value.DecompoundMode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.NoriDecompoundMode>(o, v));
+		writer.WriteProperty(options, PropDiscardPunctuation, value.DiscardPunctuation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropUserDictionary, value.UserDictionary, null, null);
 		writer.WriteProperty(options, PropUserDictionaryRules, value.UserDictionaryRules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));

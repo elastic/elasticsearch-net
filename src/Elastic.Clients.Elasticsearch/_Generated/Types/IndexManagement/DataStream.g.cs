@@ -65,7 +65,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField> propTimestampField = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowCustomRouting.TryReadProperty(ref reader, options, PropAllowCustomRouting, null))
+			if (propAllowCustomRouting.TryReadProperty(ref reader, options, PropAllowCustomRouting, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -120,7 +120,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propReplicated.TryReadProperty(ref reader, options, PropReplicated, null))
+			if (propReplicated.TryReadProperty(ref reader, options, PropReplicated, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -135,7 +135,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propSystem.TryReadProperty(ref reader, options, PropSystem, null))
+			if (propSystem.TryReadProperty(ref reader, options, PropSystem, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -185,7 +185,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DataStream value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowCustomRouting, value.AllowCustomRouting, null, null);
+		writer.WriteProperty(options, PropAllowCustomRouting, value.AllowCustomRouting, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFailureStore, value.FailureStore, null, null);
 		writer.WriteProperty(options, PropGeneration, value.Generation, null, null);
 		writer.WriteProperty(options, PropHidden, value.Hidden, null, null);
@@ -196,10 +196,10 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropNextGenerationManagedBy, value.NextGenerationManagedBy, null, null);
 		writer.WriteProperty(options, PropPreferIlm, value.PreferIlm, null, null);
-		writer.WriteProperty(options, PropReplicated, value.Replicated, null, null);
+		writer.WriteProperty(options, PropReplicated, value.Replicated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRolloverOnWrite, value.RolloverOnWrite, null, null);
 		writer.WriteProperty(options, PropStatus, value.Status, null, null);
-		writer.WriteProperty(options, PropSystem, value.System, null, null);
+		writer.WriteProperty(options, PropSystem, value.System, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
 		writer.WriteProperty(options, PropTimestampField, value.TimestampField, null, null);
 		writer.WriteEndObject();

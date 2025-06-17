@@ -33,7 +33,7 @@ internal sealed partial class SettingsAnalyzeConverter : System.Text.Json.Serial
 		LocalJsonValue<int?> propMaxTokenCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxTokenCount.TryReadProperty(ref reader, options, PropMaxTokenCount, null))
+			if (propMaxTokenCount.TryReadProperty(ref reader, options, PropMaxTokenCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class SettingsAnalyzeConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxTokenCount, value.MaxTokenCount, null, null);
+		writer.WriteProperty(options, PropMaxTokenCount, value.MaxTokenCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

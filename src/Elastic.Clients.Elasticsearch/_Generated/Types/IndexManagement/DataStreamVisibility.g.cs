@@ -35,12 +35,12 @@ internal sealed partial class DataStreamVisibilityConverter : System.Text.Json.S
 		LocalJsonValue<bool?> propHidden = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAllowCustomRouting.TryReadProperty(ref reader, options, PropAllowCustomRouting, null))
+			if (propAllowCustomRouting.TryReadProperty(ref reader, options, PropAllowCustomRouting, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propHidden.TryReadProperty(ref reader, options, PropHidden, null))
+			if (propHidden.TryReadProperty(ref reader, options, PropHidden, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -65,8 +65,8 @@ internal sealed partial class DataStreamVisibilityConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowCustomRouting, value.AllowCustomRouting, null, null);
-		writer.WriteProperty(options, PropHidden, value.Hidden, null, null);
+		writer.WriteProperty(options, PropAllowCustomRouting, value.AllowCustomRouting, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropHidden, value.Hidden, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

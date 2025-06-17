@@ -72,12 +72,12 @@ internal sealed partial class RedactProcessorConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -102,7 +102,7 @@ internal sealed partial class RedactProcessorConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propSkipIfUnlicensed.TryReadProperty(ref reader, options, PropSkipIfUnlicensed, null))
+			if (propSkipIfUnlicensed.TryReadProperty(ref reader, options, PropSkipIfUnlicensed, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -117,7 +117,7 @@ internal sealed partial class RedactProcessorConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propTraceRedact.TryReadProperty(ref reader, options, PropTraceRedact, null))
+			if (propTraceRedact.TryReadProperty(ref reader, options, PropTraceRedact, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -156,16 +156,16 @@ internal sealed partial class RedactProcessorConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropIf, value.If, null, null);
-		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
-		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
 		writer.WriteProperty(options, PropPatternDefinitions, value.PatternDefinitions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropPatterns, value.Patterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropPrefix, value.Prefix, null, null);
-		writer.WriteProperty(options, PropSkipIfUnlicensed, value.SkipIfUnlicensed, null, null);
+		writer.WriteProperty(options, PropSkipIfUnlicensed, value.SkipIfUnlicensed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropSuffix, value.Suffix, null, null);
 		writer.WriteProperty(options, PropTag, value.Tag, null, null);
-		writer.WriteProperty(options, PropTraceRedact, value.TraceRedact, null, null);
+		writer.WriteProperty(options, PropTraceRedact, value.TraceRedact, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

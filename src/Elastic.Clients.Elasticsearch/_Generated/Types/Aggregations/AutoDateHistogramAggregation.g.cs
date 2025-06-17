@@ -49,7 +49,7 @@ internal sealed partial class AutoDateHistogramAggregationConverter : System.Tex
 		LocalJsonValue<string?> propTimeZone = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBuckets.TryReadProperty(ref reader, options, PropBuckets, null))
+			if (propBuckets.TryReadProperty(ref reader, options, PropBuckets, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -64,12 +64,12 @@ internal sealed partial class AutoDateHistogramAggregationConverter : System.Tex
 				continue;
 			}
 
-			if (propMinimumInterval.TryReadProperty(ref reader, options, PropMinimumInterval, null))
+			if (propMinimumInterval.TryReadProperty(ref reader, options, PropMinimumInterval, static Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval>(o)))
 			{
 				continue;
 			}
 
-			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			if (propMissing.TryReadProperty(ref reader, options, PropMissing, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
 			{
 				continue;
 			}
@@ -121,11 +121,11 @@ internal sealed partial class AutoDateHistogramAggregationConverter : System.Tex
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBuckets, value.Buckets, null, null);
+		writer.WriteProperty(options, PropBuckets, value.Buckets, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteProperty(options, PropMinimumInterval, value.MinimumInterval, null, null);
-		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropMinimumInterval, value.MinimumInterval, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.MinimumInterval>(o, v));
+		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropOffset, value.Offset, null, null);
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);

@@ -35,13 +35,13 @@ internal sealed partial class GeoDecayFunctionConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<Elastic.Clients.Elasticsearch.GeoLocation, string>> propPlacement = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMultiValueMode.TryReadProperty(ref reader, options, PropMultiValueMode, null))
+			if (propMultiValueMode.TryReadProperty(ref reader, options, PropMultiValueMode, static Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode>(o)))
 			{
 				continue;
 			}
 
 			propField.Initialized = propPlacement.Initialized = true;
-			reader.ReadProperty(options, out propField.Value, out propPlacement.Value, null, null);
+			reader.ReadProperty(options, out propField.Value, out propPlacement.Value, static Elastic.Clients.Elasticsearch.Field (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Field>(o), null);
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
@@ -56,8 +56,8 @@ internal sealed partial class GeoDecayFunctionConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMultiValueMode, value.MultiValueMode, null, null);
-		writer.WriteProperty(options, value.Field, value.Placement, null, null);
+		writer.WriteProperty(options, PropMultiValueMode, value.MultiValueMode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode>(o, v));
+		writer.WriteProperty(options, value.Field, value.Placement, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Field v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Field>(o, v), null);
 		writer.WriteEndObject();
 	}
 }

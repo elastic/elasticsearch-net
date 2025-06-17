@@ -44,7 +44,7 @@ internal sealed partial class ExploreControlsConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propSampleSize.TryReadProperty(ref reader, options, PropSampleSize, null))
+			if (propSampleSize.TryReadProperty(ref reader, options, PropSampleSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class ExploreControlsConverter : System.Text.Json.Serial
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropSampleDiversity, value.SampleDiversity, null, null);
-		writer.WriteProperty(options, PropSampleSize, value.SampleSize, null, null);
+		writer.WriteProperty(options, PropSampleSize, value.SampleSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
 		writer.WriteProperty(options, PropUseSignificance, value.UseSignificance, null, null);
 		writer.WriteEndObject();

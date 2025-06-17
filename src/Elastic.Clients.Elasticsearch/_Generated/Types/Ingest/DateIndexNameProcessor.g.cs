@@ -80,7 +80,7 @@ internal sealed partial class DateIndexNameProcessorConverter : System.Text.Json
 				continue;
 			}
 
-			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -150,7 +150,7 @@ internal sealed partial class DateIndexNameProcessorConverter : System.Text.Json
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropIf, value.If, null, null);
-		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropIndexNameFormat, value.IndexNameFormat, null, null);
 		writer.WriteProperty(options, PropIndexNamePrefix, value.IndexNamePrefix, null, null);
 		writer.WriteProperty(options, PropLocale, value.Locale, null, null);

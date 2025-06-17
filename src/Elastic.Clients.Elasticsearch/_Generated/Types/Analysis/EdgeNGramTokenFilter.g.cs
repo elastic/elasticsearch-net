@@ -42,22 +42,22 @@ internal sealed partial class EdgeNGramTokenFilterConverter : System.Text.Json.S
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMaxGram.TryReadProperty(ref reader, options, PropMaxGram, null))
+			if (propMaxGram.TryReadProperty(ref reader, options, PropMaxGram, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propMinGram.TryReadProperty(ref reader, options, PropMinGram, null))
+			if (propMinGram.TryReadProperty(ref reader, options, PropMinGram, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propPreserveOriginal.TryReadProperty(ref reader, options, PropPreserveOriginal, null))
+			if (propPreserveOriginal.TryReadProperty(ref reader, options, PropPreserveOriginal, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propSide.TryReadProperty(ref reader, options, PropSide, null))
+			if (propSide.TryReadProperty(ref reader, options, PropSide, static Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide>(o)))
 			{
 				continue;
 			}
@@ -96,10 +96,10 @@ internal sealed partial class EdgeNGramTokenFilterConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxGram, value.MaxGram, null, null);
-		writer.WriteProperty(options, PropMinGram, value.MinGram, null, null);
-		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal, null, null);
-		writer.WriteProperty(options, PropSide, value.Side, null, null);
+		writer.WriteProperty(options, PropMaxGram, value.MaxGram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMinGram, value.MinGram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropSide, value.Side, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

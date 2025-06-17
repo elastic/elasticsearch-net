@@ -170,7 +170,7 @@ internal sealed partial class StatsConverter : System.Text.Json.Serialization.Js
 				continue;
 			}
 
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -244,7 +244,7 @@ internal sealed partial class StatsConverter : System.Text.Json.Serialization.Js
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteProperty(options, PropScriptCache, value.ScriptCache, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.ScriptCache> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Nodes.ScriptCache>(o, v, null)));
 		writer.WriteProperty(options, PropThreadPool, value.ThreadPool, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.ThreadCount>(o, v, null, null));
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTransport, value.Transport, null, null);
 		writer.WriteProperty(options, PropTransportAddress, value.TransportAddress, null, null);
 		writer.WriteEndObject();

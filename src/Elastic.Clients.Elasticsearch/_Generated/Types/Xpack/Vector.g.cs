@@ -61,7 +61,7 @@ internal sealed partial class VectorConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
-			if (propSparseVectorFieldsCount.TryReadProperty(ref reader, options, PropSparseVectorFieldsCount, null))
+			if (propSparseVectorFieldsCount.TryReadProperty(ref reader, options, PropSparseVectorFieldsCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -93,7 +93,7 @@ internal sealed partial class VectorConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropDenseVectorDimsAvgCount, value.DenseVectorDimsAvgCount, null, null);
 		writer.WriteProperty(options, PropDenseVectorFieldsCount, value.DenseVectorFieldsCount, null, null);
 		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
-		writer.WriteProperty(options, PropSparseVectorFieldsCount, value.SparseVectorFieldsCount, null, null);
+		writer.WriteProperty(options, PropSparseVectorFieldsCount, value.SparseVectorFieldsCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

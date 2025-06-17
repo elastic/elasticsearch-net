@@ -49,12 +49,12 @@ internal sealed partial class IntervalsAllOfConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propMaxGaps.TryReadProperty(ref reader, options, PropMaxGaps, null))
+			if (propMaxGaps.TryReadProperty(ref reader, options, PropMaxGaps, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propOrdered.TryReadProperty(ref reader, options, PropOrdered, null))
+			if (propOrdered.TryReadProperty(ref reader, options, PropOrdered, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -83,8 +83,8 @@ internal sealed partial class IntervalsAllOfConverter : System.Text.Json.Seriali
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
 		writer.WriteProperty(options, PropIntervals, value.Intervals, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(o, v, null));
-		writer.WriteProperty(options, PropMaxGaps, value.MaxGaps, null, null);
-		writer.WriteProperty(options, PropOrdered, value.Ordered, null, null);
+		writer.WriteProperty(options, PropMaxGaps, value.MaxGaps, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropOrdered, value.Ordered, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

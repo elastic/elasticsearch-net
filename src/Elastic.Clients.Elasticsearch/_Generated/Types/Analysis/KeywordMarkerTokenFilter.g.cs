@@ -42,7 +42,7 @@ internal sealed partial class KeywordMarkerTokenFilterConverter : System.Text.Js
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propIgnoreCase.TryReadProperty(ref reader, options, PropIgnoreCase, null))
+			if (propIgnoreCase.TryReadProperty(ref reader, options, PropIgnoreCase, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -96,7 +96,7 @@ internal sealed partial class KeywordMarkerTokenFilterConverter : System.Text.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase, null, null);
+		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropKeywords, value.Keywords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropKeywordsPath, value.KeywordsPath, null, null);
 		writer.WriteProperty(options, PropKeywordsPattern, value.KeywordsPattern, null, null);

@@ -73,12 +73,12 @@ internal sealed partial class AllocationExplainRequestConverter : System.Text.Js
 				continue;
 			}
 
-			if (propPrimary.TryReadProperty(ref reader, options, PropPrimary, null))
+			if (propPrimary.TryReadProperty(ref reader, options, PropPrimary, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propShard.TryReadProperty(ref reader, options, PropShard, null))
+			if (propShard.TryReadProperty(ref reader, options, PropShard, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -107,8 +107,8 @@ internal sealed partial class AllocationExplainRequestConverter : System.Text.Js
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCurrentNode, value.CurrentNode, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropPrimary, value.Primary, null, null);
-		writer.WriteProperty(options, PropShard, value.Shard, null, null);
+		writer.WriteProperty(options, PropPrimary, value.Primary, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropShard, value.Shard, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

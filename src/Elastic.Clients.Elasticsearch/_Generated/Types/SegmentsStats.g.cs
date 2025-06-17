@@ -109,7 +109,7 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propIndexWriterMaxMemoryInBytes.TryReadProperty(ref reader, options, PropIndexWriterMaxMemoryInBytes, null))
+			if (propIndexWriterMaxMemoryInBytes.TryReadProperty(ref reader, options, PropIndexWriterMaxMemoryInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -247,7 +247,7 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropFileSizes, value.FileSizes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo>(o, v, null, null));
 		writer.WriteProperty(options, PropFixedBitSet, value.FixedBitSet, null, null);
 		writer.WriteProperty(options, PropFixedBitSetMemoryInBytes, value.FixedBitSetMemoryInBytes, null, null);
-		writer.WriteProperty(options, PropIndexWriterMaxMemoryInBytes, value.IndexWriterMaxMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropIndexWriterMaxMemoryInBytes, value.IndexWriterMaxMemoryInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropIndexWriterMemory, value.IndexWriterMemory, null, null);
 		writer.WriteProperty(options, PropIndexWriterMemoryInBytes, value.IndexWriterMemoryInBytes, null, null);
 		writer.WriteProperty(options, PropMaxUnsafeAutoIdTimestamp, value.MaxUnsafeAutoIdTimestamp, null, null);

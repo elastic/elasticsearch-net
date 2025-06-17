@@ -44,7 +44,7 @@ internal sealed partial class BulkResponseConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propIngestTook.TryReadProperty(ref reader, options, PropIngestTook, null))
+			if (propIngestTook.TryReadProperty(ref reader, options, PropIngestTook, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class BulkResponseConverter : System.Text.Json.Serializa
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropErrors, value.Errors, null, null);
-		writer.WriteProperty(options, PropIngestTook, value.IngestTook, null, null);
+		writer.WriteProperty(options, PropIngestTook, value.IngestTook, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropItems, value.Items, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem>(o, v, null));
 		writer.WriteProperty(options, PropTook, value.Took, null, null);
 		writer.WriteEndObject();

@@ -665,11 +665,23 @@ internal sealed partial class GoogleAiStudioTaskTypeConverter : System.Text.Json
 
 internal sealed partial class GoogleVertexAITaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
 	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
 	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
 
 	public override Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberChatCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.ChatCompletion;
+		}
+
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Completion;
+		}
+
 		if (reader.ValueTextEquals(MemberRerank))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Rerank;
@@ -681,6 +693,16 @@ internal sealed partial class GoogleVertexAITaskTypeConverter : System.Text.Json
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.ChatCompletion;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Completion;
+		}
+
 		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Rerank;
@@ -698,6 +720,12 @@ internal sealed partial class GoogleVertexAITaskTypeConverter : System.Text.Json
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.ChatCompletion:
+				writer.WriteStringValue(MemberChatCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Rerank:
 				writer.WriteStringValue(MemberRerank);
 				break;
@@ -722,16 +750,49 @@ internal sealed partial class GoogleVertexAITaskTypeConverter : System.Text.Json
 
 internal sealed partial class HuggingFaceTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
 	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
 
 	public override Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberChatCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.ChatCompletion;
+		}
+
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.Rerank;
+		}
+
 		if (reader.ValueTextEquals(MemberTextEmbedding))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.TextEmbedding;
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.ChatCompletion;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.Rerank;
+		}
+
 		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.TextEmbedding;
@@ -744,6 +805,15 @@ internal sealed partial class HuggingFaceTaskTypeConverter : System.Text.Json.Se
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.ChatCompletion:
+				writer.WriteStringValue(MemberChatCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.TextEmbedding:
 				writer.WriteStringValue(MemberTextEmbedding);
 				break;
@@ -822,16 +892,38 @@ internal sealed partial class JinaAITaskTypeConverter : System.Text.Json.Seriali
 
 internal sealed partial class MistralTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.MistralTaskType>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
 	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
 
 	public override Elastic.Clients.Elasticsearch.Inference.MistralTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberChatCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.MistralTaskType.ChatCompletion;
+		}
+
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.MistralTaskType.Completion;
+		}
+
 		if (reader.ValueTextEquals(MemberTextEmbedding))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.MistralTaskType.TextEmbedding;
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.MistralTaskType.ChatCompletion;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.MistralTaskType.Completion;
+		}
+
 		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.MistralTaskType.TextEmbedding;
@@ -844,6 +936,12 @@ internal sealed partial class MistralTaskTypeConverter : System.Text.Json.Serial
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.MistralTaskType.ChatCompletion:
+				writer.WriteStringValue(MemberChatCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.MistralTaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.MistralTaskType.TextEmbedding:
 				writer.WriteStringValue(MemberTextEmbedding);
 				break;
@@ -1761,6 +1859,10 @@ public enum GoogleAiStudioTaskType
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskTypeConverter))]
 public enum GoogleVertexAITaskType
 {
+	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
+	ChatCompletion,
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
 	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
 	Rerank,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
@@ -1770,6 +1872,12 @@ public enum GoogleVertexAITaskType
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskTypeConverter))]
 public enum HuggingFaceTaskType
 {
+	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
+	ChatCompletion,
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
 	TextEmbedding
 }
@@ -1786,6 +1894,10 @@ public enum JinaAITaskType
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.MistralTaskTypeConverter))]
 public enum MistralTaskType
 {
+	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
+	ChatCompletion,
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
 	TextEmbedding
 }

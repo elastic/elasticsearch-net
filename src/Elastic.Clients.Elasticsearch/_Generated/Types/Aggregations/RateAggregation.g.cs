@@ -58,7 +58,7 @@ internal sealed partial class RateAggregationConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, static Elastic.Clients.Elasticsearch.Aggregations.RateMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.RateMode>(o)))
 			{
 				continue;
 			}
@@ -68,7 +68,7 @@ internal sealed partial class RateAggregationConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propUnit.TryReadProperty(ref reader, options, PropUnit, null))
+			if (propUnit.TryReadProperty(ref reader, options, PropUnit, static Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval>(o)))
 			{
 				continue;
 			}
@@ -100,9 +100,9 @@ internal sealed partial class RateAggregationConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
-		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.RateMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.RateMode>(o, v));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropUnit, value.Unit, null, null);
+		writer.WriteProperty(options, PropUnit, value.Unit, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval>(o, v));
 		writer.WriteEndObject();
 	}
 }

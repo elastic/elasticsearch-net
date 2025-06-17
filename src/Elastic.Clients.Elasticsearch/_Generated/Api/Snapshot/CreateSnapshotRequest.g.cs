@@ -65,12 +65,12 @@ internal sealed partial class CreateSnapshotRequestConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propIgnoreUnavailable.TryReadProperty(ref reader, options, PropIgnoreUnavailable, null))
+			if (propIgnoreUnavailable.TryReadProperty(ref reader, options, PropIgnoreUnavailable, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIncludeGlobalState.TryReadProperty(ref reader, options, PropIncludeGlobalState, null))
+			if (propIncludeGlobalState.TryReadProperty(ref reader, options, PropIncludeGlobalState, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -85,7 +85,7 @@ internal sealed partial class CreateSnapshotRequestConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propPartial.TryReadProperty(ref reader, options, PropPartial, null))
+			if (propPartial.TryReadProperty(ref reader, options, PropPartial, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -115,11 +115,11 @@ internal sealed partial class CreateSnapshotRequestConverter : System.Text.Json.
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFeatureStates, value.FeatureStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, null);
-		writer.WriteProperty(options, PropIncludeGlobalState, value.IncludeGlobalState, null, null);
+		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIncludeGlobalState, value.IncludeGlobalState, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
 		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
-		writer.WriteProperty(options, PropPartial, value.Partial, null, null);
+		writer.WriteProperty(options, PropPartial, value.Partial, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

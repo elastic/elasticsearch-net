@@ -53,7 +53,7 @@ internal sealed partial class MovingFunctionAggregationConverter : System.Text.J
 				continue;
 			}
 
-			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, null))
+			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, static Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>(o)))
 			{
 				continue;
 			}
@@ -63,12 +63,12 @@ internal sealed partial class MovingFunctionAggregationConverter : System.Text.J
 				continue;
 			}
 
-			if (propShift.TryReadProperty(ref reader, options, PropShift, null))
+			if (propShift.TryReadProperty(ref reader, options, PropShift, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propWindow.TryReadProperty(ref reader, options, PropWindow, null))
+			if (propWindow.TryReadProperty(ref reader, options, PropWindow, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -99,10 +99,10 @@ internal sealed partial class MovingFunctionAggregationConverter : System.Text.J
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBucketsPath, value.BucketsPath, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, null);
+		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>(o, v));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropShift, value.Shift, null, null);
-		writer.WriteProperty(options, PropWindow, value.Window, null, null);
+		writer.WriteProperty(options, PropShift, value.Shift, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropWindow, value.Window, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

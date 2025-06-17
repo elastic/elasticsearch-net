@@ -64,7 +64,7 @@ internal sealed partial class AnalyticsStatisticsConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propMultiTermsUsage.TryReadProperty(ref reader, options, PropMultiTermsUsage, null))
+			if (propMultiTermsUsage.TryReadProperty(ref reader, options, PropMultiTermsUsage, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -124,7 +124,7 @@ internal sealed partial class AnalyticsStatisticsConverter : System.Text.Json.Se
 		writer.WriteProperty(options, PropBoxplotUsage, value.BoxplotUsage, null, null);
 		writer.WriteProperty(options, PropCumulativeCardinalityUsage, value.CumulativeCardinalityUsage, null, null);
 		writer.WriteProperty(options, PropMovingPercentilesUsage, value.MovingPercentilesUsage, null, null);
-		writer.WriteProperty(options, PropMultiTermsUsage, value.MultiTermsUsage, null, null);
+		writer.WriteProperty(options, PropMultiTermsUsage, value.MultiTermsUsage, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropNormalizeUsage, value.NormalizeUsage, null, null);
 		writer.WriteProperty(options, PropRateUsage, value.RateUsage, null, null);
 		writer.WriteProperty(options, PropStringStatsUsage, value.StringStatsUsage, null, null);

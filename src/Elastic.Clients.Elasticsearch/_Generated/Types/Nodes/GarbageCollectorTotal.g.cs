@@ -37,7 +37,7 @@ internal sealed partial class GarbageCollectorTotalConverter : System.Text.Json.
 		LocalJsonValue<long?> propCollectionTimeInMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propCollectionCount.TryReadProperty(ref reader, options, PropCollectionCount, null))
+			if (propCollectionCount.TryReadProperty(ref reader, options, PropCollectionCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -47,7 +47,7 @@ internal sealed partial class GarbageCollectorTotalConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propCollectionTimeInMillis.TryReadProperty(ref reader, options, PropCollectionTimeInMillis, null))
+			if (propCollectionTimeInMillis.TryReadProperty(ref reader, options, PropCollectionTimeInMillis, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -73,9 +73,9 @@ internal sealed partial class GarbageCollectorTotalConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.GarbageCollectorTotal value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCollectionCount, value.CollectionCount, null, null);
+		writer.WriteProperty(options, PropCollectionCount, value.CollectionCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropCollectionTime, value.CollectionTime, null, null);
-		writer.WriteProperty(options, PropCollectionTimeInMillis, value.CollectionTimeInMillis, null, null);
+		writer.WriteProperty(options, PropCollectionTimeInMillis, value.CollectionTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

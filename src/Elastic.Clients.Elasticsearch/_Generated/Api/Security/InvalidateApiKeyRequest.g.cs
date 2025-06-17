@@ -62,7 +62,7 @@ internal sealed partial class InvalidateApiKeyRequestConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propOwner.TryReadProperty(ref reader, options, PropOwner, null))
+			if (propOwner.TryReadProperty(ref reader, options, PropOwner, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -104,7 +104,7 @@ internal sealed partial class InvalidateApiKeyRequestConverter : System.Text.Jso
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIds, value.Ids, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, v, null));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropOwner, value.Owner, null, null);
+		writer.WriteProperty(options, PropOwner, value.Owner, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRealmName, value.RealmName, null, null);
 		writer.WriteProperty(options, PropUsername, value.Username, null, null);
 		writer.WriteEndObject();

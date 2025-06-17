@@ -42,12 +42,12 @@ internal sealed partial class SizeHttpHistogramConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propGeBytes.TryReadProperty(ref reader, options, PropGeBytes, null))
+			if (propGeBytes.TryReadProperty(ref reader, options, PropGeBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propLtBytes.TryReadProperty(ref reader, options, PropLtBytes, null))
+			if (propLtBytes.TryReadProperty(ref reader, options, PropLtBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -74,8 +74,8 @@ internal sealed partial class SizeHttpHistogramConverter : System.Text.Json.Seri
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
-		writer.WriteProperty(options, PropGeBytes, value.GeBytes, null, null);
-		writer.WriteProperty(options, PropLtBytes, value.LtBytes, null, null);
+		writer.WriteProperty(options, PropGeBytes, value.GeBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLtBytes, value.LtBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

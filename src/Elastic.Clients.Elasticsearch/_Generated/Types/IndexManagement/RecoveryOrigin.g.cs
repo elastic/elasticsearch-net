@@ -55,7 +55,7 @@ internal sealed partial class RecoveryOriginConverter : System.Text.Json.Seriali
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propBootstrapNewHistoryUuid.TryReadProperty(ref reader, options, PropBootstrapNewHistoryUuid, null))
+			if (propBootstrapNewHistoryUuid.TryReadProperty(ref reader, options, PropBootstrapNewHistoryUuid, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -145,7 +145,7 @@ internal sealed partial class RecoveryOriginConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.RecoveryOrigin value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBootstrapNewHistoryUuid, value.BootstrapNewHistoryUuid, null, null);
+		writer.WriteProperty(options, PropBootstrapNewHistoryUuid, value.BootstrapNewHistoryUuid, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropHost, value.Host, null, null);
 		writer.WriteProperty(options, PropHostname, value.Hostname, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);

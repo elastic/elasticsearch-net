@@ -53,7 +53,7 @@ internal sealed partial class AnalyzeTokenConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propPositionLength.TryReadProperty(ref reader, options, PropPositionLength, null))
+			if (propPositionLength.TryReadProperty(ref reader, options, PropPositionLength, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -99,7 +99,7 @@ internal sealed partial class AnalyzeTokenConverter : System.Text.Json.Serializa
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropEndOffset, value.EndOffset, null, null);
 		writer.WriteProperty(options, PropPosition, value.Position, null, null);
-		writer.WriteProperty(options, PropPositionLength, value.PositionLength, null, null);
+		writer.WriteProperty(options, PropPositionLength, value.PositionLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropStartOffset, value.StartOffset, null, null);
 		writer.WriteProperty(options, PropToken, value.Token, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);

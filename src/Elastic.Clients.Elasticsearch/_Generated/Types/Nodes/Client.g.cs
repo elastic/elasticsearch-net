@@ -58,17 +58,17 @@ internal sealed partial class ClientConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
-			if (propClosedTimeMillis.TryReadProperty(ref reader, options, PropClosedTimeMillis, null))
+			if (propClosedTimeMillis.TryReadProperty(ref reader, options, PropClosedTimeMillis, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			if (propId.TryReadProperty(ref reader, options, PropId, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propLastRequestTimeMillis.TryReadProperty(ref reader, options, PropLastRequestTimeMillis, null))
+			if (propLastRequestTimeMillis.TryReadProperty(ref reader, options, PropLastRequestTimeMillis, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -83,7 +83,7 @@ internal sealed partial class ClientConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
-			if (propOpenedTimeMillis.TryReadProperty(ref reader, options, PropOpenedTimeMillis, null))
+			if (propOpenedTimeMillis.TryReadProperty(ref reader, options, PropOpenedTimeMillis, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -93,12 +93,12 @@ internal sealed partial class ClientConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
-			if (propRequestCount.TryReadProperty(ref reader, options, PropRequestCount, null))
+			if (propRequestCount.TryReadProperty(ref reader, options, PropRequestCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propRequestSizeBytes.TryReadProperty(ref reader, options, PropRequestSizeBytes, null))
+			if (propRequestSizeBytes.TryReadProperty(ref reader, options, PropRequestSizeBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -138,15 +138,15 @@ internal sealed partial class ClientConverter : System.Text.Json.Serialization.J
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAgent, value.Agent, null, null);
-		writer.WriteProperty(options, PropClosedTimeMillis, value.ClosedTimeMillis, null, null);
-		writer.WriteProperty(options, PropId, value.Id, null, null);
-		writer.WriteProperty(options, PropLastRequestTimeMillis, value.LastRequestTimeMillis, null, null);
+		writer.WriteProperty(options, PropClosedTimeMillis, value.ClosedTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropId, value.Id, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLastRequestTimeMillis, value.LastRequestTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropLastUri, value.LastUri, null, null);
 		writer.WriteProperty(options, PropLocalAddress, value.LocalAddress, null, null);
-		writer.WriteProperty(options, PropOpenedTimeMillis, value.OpenedTimeMillis, null, null);
+		writer.WriteProperty(options, PropOpenedTimeMillis, value.OpenedTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRemoteAddress, value.RemoteAddress, null, null);
-		writer.WriteProperty(options, PropRequestCount, value.RequestCount, null, null);
-		writer.WriteProperty(options, PropRequestSizeBytes, value.RequestSizeBytes, null, null);
+		writer.WriteProperty(options, PropRequestCount, value.RequestCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropRequestSizeBytes, value.RequestSizeBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropXOpaqueId, value.XOpaqueId, null, null);
 		writer.WriteEndObject();
 	}

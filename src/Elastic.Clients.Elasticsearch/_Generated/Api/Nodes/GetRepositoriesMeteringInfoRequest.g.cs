@@ -93,7 +93,7 @@ public sealed partial class GetRepositoriesMeteringInfoRequest : Elastic.Clients
 	/// <summary>
 	/// <para>
 	/// Comma-separated list of node IDs or names used to limit returned information.
-	/// All the nodes selective options are explained <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html#cluster-nodes">here</a>.
+	/// For more information about the nodes selective options, refer to the node specification documentation.
 	/// </para>
 	/// </summary>
 	public
@@ -138,7 +138,7 @@ public readonly partial struct GetRepositoriesMeteringInfoRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// Comma-separated list of node IDs or names used to limit returned information.
-	/// All the nodes selective options are explained <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster.html#cluster-nodes">here</a>.
+	/// For more information about the nodes selective options, refer to the node specification documentation.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds value)

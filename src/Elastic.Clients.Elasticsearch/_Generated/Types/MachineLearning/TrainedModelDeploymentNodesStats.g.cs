@@ -67,42 +67,42 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 		LocalJsonValue<int?> propTimeoutCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAverageInferenceTimeMs.TryReadProperty(ref reader, options, PropAverageInferenceTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propAverageInferenceTimeMs.TryReadProperty(ref reader, options, PropAverageInferenceTimeMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propAverageInferenceTimeMsExcludingCacheHits.TryReadProperty(ref reader, options, PropAverageInferenceTimeMsExcludingCacheHits, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propAverageInferenceTimeMsExcludingCacheHits.TryReadProperty(ref reader, options, PropAverageInferenceTimeMsExcludingCacheHits, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propAverageInferenceTimeMsLastMinute.TryReadProperty(ref reader, options, PropAverageInferenceTimeMsLastMinute, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			if (propAverageInferenceTimeMsLastMinute.TryReadProperty(ref reader, options, PropAverageInferenceTimeMsLastMinute, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propErrorCount.TryReadProperty(ref reader, options, PropErrorCount, null))
+			if (propErrorCount.TryReadProperty(ref reader, options, PropErrorCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propInferenceCacheHitCount.TryReadProperty(ref reader, options, PropInferenceCacheHitCount, null))
+			if (propInferenceCacheHitCount.TryReadProperty(ref reader, options, PropInferenceCacheHitCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propInferenceCacheHitCountLastMinute.TryReadProperty(ref reader, options, PropInferenceCacheHitCountLastMinute, null))
+			if (propInferenceCacheHitCountLastMinute.TryReadProperty(ref reader, options, PropInferenceCacheHitCountLastMinute, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propInferenceCount.TryReadProperty(ref reader, options, PropInferenceCount, null))
+			if (propInferenceCount.TryReadProperty(ref reader, options, PropInferenceCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propLastAccess.TryReadProperty(ref reader, options, PropLastAccess, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propLastAccess.TryReadProperty(ref reader, options, PropLastAccess, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -112,12 +112,12 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 				continue;
 			}
 
-			if (propNumberOfAllocations.TryReadProperty(ref reader, options, PropNumberOfAllocations, null))
+			if (propNumberOfAllocations.TryReadProperty(ref reader, options, PropNumberOfAllocations, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propNumberOfPendingRequests.TryReadProperty(ref reader, options, PropNumberOfPendingRequests, null))
+			if (propNumberOfPendingRequests.TryReadProperty(ref reader, options, PropNumberOfPendingRequests, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -127,7 +127,7 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 				continue;
 			}
 
-			if (propRejectedExecutionCount.TryReadProperty(ref reader, options, PropRejectedExecutionCount, null))
+			if (propRejectedExecutionCount.TryReadProperty(ref reader, options, PropRejectedExecutionCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -137,12 +137,12 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 				continue;
 			}
 
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
 
-			if (propThreadsPerAllocation.TryReadProperty(ref reader, options, PropThreadsPerAllocation, null))
+			if (propThreadsPerAllocation.TryReadProperty(ref reader, options, PropThreadsPerAllocation, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -152,7 +152,7 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 				continue;
 			}
 
-			if (propTimeoutCount.TryReadProperty(ref reader, options, PropTimeoutCount, null))
+			if (propTimeoutCount.TryReadProperty(ref reader, options, PropTimeoutCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -193,24 +193,24 @@ internal sealed partial class TrainedModelDeploymentNodesStatsConverter : System
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentNodesStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAverageInferenceTimeMs, value.AverageInferenceTimeMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
-		writer.WriteProperty(options, PropAverageInferenceTimeMsExcludingCacheHits, value.AverageInferenceTimeMsExcludingCacheHits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
-		writer.WriteProperty(options, PropAverageInferenceTimeMsLastMinute, value.AverageInferenceTimeMsLastMinute, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
-		writer.WriteProperty(options, PropErrorCount, value.ErrorCount, null, null);
-		writer.WriteProperty(options, PropInferenceCacheHitCount, value.InferenceCacheHitCount, null, null);
-		writer.WriteProperty(options, PropInferenceCacheHitCountLastMinute, value.InferenceCacheHitCountLastMinute, null, null);
-		writer.WriteProperty(options, PropInferenceCount, value.InferenceCount, null, null);
-		writer.WriteProperty(options, PropLastAccess, value.LastAccess, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropAverageInferenceTimeMs, value.AverageInferenceTimeMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropAverageInferenceTimeMsExcludingCacheHits, value.AverageInferenceTimeMsExcludingCacheHits, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropAverageInferenceTimeMsLastMinute, value.AverageInferenceTimeMsLastMinute, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropErrorCount, value.ErrorCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropInferenceCacheHitCount, value.InferenceCacheHitCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropInferenceCacheHitCountLastMinute, value.InferenceCacheHitCountLastMinute, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropInferenceCount, value.InferenceCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLastAccess, value.LastAccess, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropNode, value.Node, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>? v) => w.WriteKeyValuePairValue<string, Elastic.Clients.Elasticsearch.MachineLearning.DiscoveryNodeContent>(o, v, null, null));
-		writer.WriteProperty(options, PropNumberOfAllocations, value.NumberOfAllocations, null, null);
-		writer.WriteProperty(options, PropNumberOfPendingRequests, value.NumberOfPendingRequests, null, null);
+		writer.WriteProperty(options, PropNumberOfAllocations, value.NumberOfAllocations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropNumberOfPendingRequests, value.NumberOfPendingRequests, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropPeakThroughputPerMinute, value.PeakThroughputPerMinute, null, null);
-		writer.WriteProperty(options, PropRejectedExecutionCount, value.RejectedExecutionCount, null, null);
+		writer.WriteProperty(options, PropRejectedExecutionCount, value.RejectedExecutionCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRoutingState, value.RoutingState, null, null);
-		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropThreadsPerAllocation, value.ThreadsPerAllocation, null, null);
+		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropThreadsPerAllocation, value.ThreadsPerAllocation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropThroughputLastMinute, value.ThroughputLastMinute, null, null);
-		writer.WriteProperty(options, PropTimeoutCount, value.TimeoutCount, null, null);
+		writer.WriteProperty(options, PropTimeoutCount, value.TimeoutCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

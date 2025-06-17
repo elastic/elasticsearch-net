@@ -46,22 +46,22 @@ internal sealed partial class SuggestFuzzinessConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propMinLength.TryReadProperty(ref reader, options, PropMinLength, null))
+			if (propMinLength.TryReadProperty(ref reader, options, PropMinLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, null))
+			if (propPrefixLength.TryReadProperty(ref reader, options, PropPrefixLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propTranspositions.TryReadProperty(ref reader, options, PropTranspositions, null))
+			if (propTranspositions.TryReadProperty(ref reader, options, PropTranspositions, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propUnicodeAware.TryReadProperty(ref reader, options, PropUnicodeAware, null))
+			if (propUnicodeAware.TryReadProperty(ref reader, options, PropUnicodeAware, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -90,10 +90,10 @@ internal sealed partial class SuggestFuzzinessConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFuzziness, value.Fuzziness, null, null);
-		writer.WriteProperty(options, PropMinLength, value.MinLength, null, null);
-		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, null);
-		writer.WriteProperty(options, PropTranspositions, value.Transpositions, null, null);
-		writer.WriteProperty(options, PropUnicodeAware, value.UnicodeAware, null, null);
+		writer.WriteProperty(options, PropMinLength, value.MinLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropPrefixLength, value.PrefixLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTranspositions, value.Transpositions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropUnicodeAware, value.UnicodeAware, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

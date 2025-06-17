@@ -34,7 +34,7 @@ internal sealed partial class SettingsSimilarityLmdConverter : System.Text.Json.
 		LocalJsonValue<double?> propMu = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMu.TryReadProperty(ref reader, options, PropMu, null))
+			if (propMu.TryReadProperty(ref reader, options, PropMu, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -64,7 +64,7 @@ internal sealed partial class SettingsSimilarityLmdConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmd value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMu, value.Mu, null, null);
+		writer.WriteProperty(options, PropMu, value.Mu, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}

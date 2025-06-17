@@ -52,12 +52,12 @@ internal sealed partial class CustomAnalyzerConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propPositionIncrementGap.TryReadProperty(ref reader, options, PropPositionIncrementGap, null))
+			if (propPositionIncrementGap.TryReadProperty(ref reader, options, PropPositionIncrementGap, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propPositionOffsetGap.TryReadProperty(ref reader, options, PropPositionOffsetGap, null))
+			if (propPositionOffsetGap.TryReadProperty(ref reader, options, PropPositionOffsetGap, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -98,8 +98,8 @@ internal sealed partial class CustomAnalyzerConverter : System.Text.Json.Seriali
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCharFilter, value.CharFilter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropPositionIncrementGap, value.PositionIncrementGap, null, null);
-		writer.WriteProperty(options, PropPositionOffsetGap, value.PositionOffsetGap, null, null);
+		writer.WriteProperty(options, PropPositionIncrementGap, value.PositionIncrementGap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropPositionOffsetGap, value.PositionOffsetGap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTokenizer, value.Tokenizer, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();

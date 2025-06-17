@@ -54,7 +54,7 @@ internal sealed partial class RepositoryMeteringInformationConverter : System.Te
 				continue;
 			}
 
-			if (propClusterVersion.TryReadProperty(ref reader, options, PropClusterVersion, null))
+			if (propClusterVersion.TryReadProperty(ref reader, options, PropClusterVersion, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -79,7 +79,7 @@ internal sealed partial class RepositoryMeteringInformationConverter : System.Te
 				continue;
 			}
 
-			if (propRepositoryStoppedAt.TryReadProperty(ref reader, options, PropRepositoryStoppedAt, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			if (propRepositoryStoppedAt.TryReadProperty(ref reader, options, PropRepositoryStoppedAt, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -122,12 +122,12 @@ internal sealed partial class RepositoryMeteringInformationConverter : System.Te
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropArchived, value.Archived, null, null);
-		writer.WriteProperty(options, PropClusterVersion, value.ClusterVersion, null, null);
+		writer.WriteProperty(options, PropClusterVersion, value.ClusterVersion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRepositoryEphemeralId, value.RepositoryEphemeralId, null, null);
 		writer.WriteProperty(options, PropRepositoryLocation, value.RepositoryLocation, null, null);
 		writer.WriteProperty(options, PropRepositoryName, value.RepositoryName, null, null);
 		writer.WriteProperty(options, PropRepositoryStartedAt, value.RepositoryStartedAt, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropRepositoryStoppedAt, value.RepositoryStoppedAt, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropRepositoryStoppedAt, value.RepositoryStoppedAt, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropRepositoryType, value.RepositoryType, null, null);
 		writer.WriteProperty(options, PropRequestCounts, value.RequestCounts, null, null);
 		writer.WriteEndObject();

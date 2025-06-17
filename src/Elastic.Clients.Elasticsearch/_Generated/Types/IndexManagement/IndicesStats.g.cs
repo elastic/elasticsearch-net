@@ -43,7 +43,7 @@ internal sealed partial class IndicesStatsConverter : System.Text.Json.Serializa
 		LocalJsonValue<string?> propUuid = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propHealth.TryReadProperty(ref reader, options, PropHealth, null))
+			if (propHealth.TryReadProperty(ref reader, options, PropHealth, static Elastic.Clients.Elasticsearch.HealthStatus? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.HealthStatus>(o)))
 			{
 				continue;
 			}
@@ -58,7 +58,7 @@ internal sealed partial class IndicesStatsConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, static Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState>(o)))
 			{
 				continue;
 			}
@@ -97,10 +97,10 @@ internal sealed partial class IndicesStatsConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropHealth, value.Health, null, null);
+		writer.WriteProperty(options, PropHealth, value.Health, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.HealthStatus? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.HealthStatus>(o, v));
 		writer.WriteProperty(options, PropPrimaries, value.Primaries, null, null);
 		writer.WriteProperty(options, PropShards, value.Shards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardStats>(o, v, null)));
-		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState>(o, v));
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteProperty(options, PropUuid, value.Uuid, null, null);
 		writer.WriteEndObject();

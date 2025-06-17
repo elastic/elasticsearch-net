@@ -39,7 +39,7 @@ internal sealed partial class GetStatsResponseConverter : System.Text.Json.Seria
 	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propPolicyStats = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotPolicyStats>> propPolicyStats = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propRetentionDeletionTime = default;
 		LocalJsonValue<System.TimeSpan> propRetentionDeletionTimeMillis = default;
 		LocalJsonValue<long> propRetentionFailed = default;
@@ -51,7 +51,7 @@ internal sealed partial class GetStatsResponseConverter : System.Text.Json.Seria
 		LocalJsonValue<long> propTotalSnapshotsTaken = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propPolicyStats.TryReadProperty(ref reader, options, PropPolicyStats, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			if (propPolicyStats.TryReadProperty(ref reader, options, PropPolicyStats, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotPolicyStats> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotPolicyStats>(o, null)!))
 			{
 				continue;
 			}
@@ -129,7 +129,7 @@ internal sealed partial class GetStatsResponseConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPolicyStats, value.PolicyStats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPolicyStats, value.PolicyStats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotPolicyStats> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotPolicyStats>(o, v, null));
 		writer.WriteProperty(options, PropRetentionDeletionTime, value.RetentionDeletionTime, null, null);
 		writer.WriteProperty(options, PropRetentionDeletionTimeMillis, value.RetentionDeletionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropRetentionFailed, value.RetentionFailed, null, null);
@@ -161,7 +161,7 @@ public sealed partial class GetStatsResponse : Elastic.Transport.Products.Elasti
 #if NET7_0_OR_GREATER
 		required
 #endif
-		System.Collections.Generic.IReadOnlyCollection<string> PolicyStats { get; set; }
+		System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotPolicyStats> PolicyStats { get; set; }
 	public
 #if NET7_0_OR_GREATER
 		required

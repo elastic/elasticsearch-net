@@ -32,12 +32,14 @@ internal sealed partial class PutHuggingFaceRequestConverter : System.Text.Json.
 	private static readonly System.Text.Json.JsonEncodedText PropChunkingSettings = System.Text.Json.JsonEncodedText.Encode("chunking_settings");
 	private static readonly System.Text.Json.JsonEncodedText PropService = System.Text.Json.JsonEncodedText.Encode("service");
 	private static readonly System.Text.Json.JsonEncodedText PropServiceSettings = System.Text.Json.JsonEncodedText.Encode("service_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropTaskSettings = System.Text.Json.JsonEncodedText.Encode("task_settings");
 
 	public override Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings> propServiceSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettings?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propChunkingSettings.TryReadProperty(ref reader, options, PropChunkingSettings, null))
@@ -56,6 +58,11 @@ internal sealed partial class PutHuggingFaceRequestConverter : System.Text.Json.
 				continue;
 			}
 
+			if (propTaskSettings.TryReadProperty(ref reader, options, PropTaskSettings, null))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.Skip();
@@ -69,7 +76,8 @@ internal sealed partial class PutHuggingFaceRequestConverter : System.Text.Json.
 		return new Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
-			ServiceSettings = propServiceSettings.Value
+			ServiceSettings = propServiceSettings.Value,
+			TaskSettings = propTaskSettings.Value
 		};
 	}
 
@@ -79,6 +87,7 @@ internal sealed partial class PutHuggingFaceRequestConverter : System.Text.Json.
 		writer.WriteProperty(options, PropChunkingSettings, value.ChunkingSettings, null, null);
 		writer.WriteProperty(options, PropService, value.Service, null, null);
 		writer.WriteProperty(options, PropServiceSettings, value.ServiceSettings, null, null);
+		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -89,14 +98,17 @@ internal sealed partial class PutHuggingFaceRequestConverter : System.Text.Json.
 /// </para>
 /// <para>
 /// Create an inference endpoint to perform an inference task with the <c>hugging_face</c> service.
+/// Supported tasks include: <c>text_embedding</c>, <c>completion</c>, and <c>chat_completion</c>.
 /// </para>
 /// <para>
-/// You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL.
-/// Select the model you want to use on the new endpoint creation page (for example <c>intfloat/e5-small-v2</c>), then select the sentence embeddings task under the advanced configuration section.
-/// Create the endpoint and copy the URL after the endpoint initialization has been finished.
+/// To configure the endpoint, first visit the Hugging Face Inference Endpoints page and create a new endpoint.
+/// Select a model that supports the task you intend to use.
 /// </para>
 /// <para>
-/// The following models are recommended for the Hugging Face service:
+/// For Elastic's <c>text_embedding</c> task:
+/// The selected model must support the <c>Sentence Embeddings</c> task. On the new endpoint creation page, select the <c>Sentence Embeddings</c> task under the <c>Advanced Configuration</c> section.
+/// After the endpoint has initialized, copy the generated endpoint URL.
+/// Recommended models for <c>text_embedding</c> task:
 /// </para>
 /// <list type="bullet">
 /// <item>
@@ -132,6 +144,48 @@ internal sealed partial class PutHuggingFaceRequestConverter : System.Text.Json.
 /// <item>
 /// <para>
 /// <c>multilingual-e5-small</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For Elastic's <c>chat_completion</c> and <c>completion</c> tasks:
+/// The selected model must support the <c>Text Generation</c> task and expose OpenAI API. HuggingFace supports both serverless and dedicated endpoints for <c>Text Generation</c>. When creating dedicated endpoint select the <c>Text Generation</c> task.
+/// After the endpoint is initialized (for dedicated) or ready (for serverless), ensure it supports the OpenAI API and includes <c>/v1/chat/completions</c> part in URL. Then, copy the full endpoint URL for use.
+/// Recommended models for <c>chat_completion</c> and <c>completion</c> tasks:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>Mistral-7B-Instruct-v0.2</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>QwQ-32B</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>Phi-3-mini-128k-instruct</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For Elastic's <c>rerank</c> task:
+/// The selected model must support the <c>sentence-ranking</c> task and expose OpenAI API.
+/// HuggingFace supports only dedicated (not serverless) endpoints for <c>Rerank</c> so far.
+/// After the endpoint is initialized, copy the full endpoint URL for use.
+/// Tested models for <c>rerank</c> task:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>bge-reranker-base</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>jina-reranker-v1-turbo-en-GGUF</c>
 /// </para>
 /// </item>
 /// </list>
@@ -215,6 +269,14 @@ public sealed partial class PutHuggingFaceRequest : Elastic.Clients.Elasticsearc
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettings ServiceSettings { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Settings to configure the inference task.
+	/// These settings are specific to the task type you specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettings? TaskSettings { get; set; }
 }
 
 /// <summary>
@@ -223,14 +285,17 @@ public sealed partial class PutHuggingFaceRequest : Elastic.Clients.Elasticsearc
 /// </para>
 /// <para>
 /// Create an inference endpoint to perform an inference task with the <c>hugging_face</c> service.
+/// Supported tasks include: <c>text_embedding</c>, <c>completion</c>, and <c>chat_completion</c>.
 /// </para>
 /// <para>
-/// You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL.
-/// Select the model you want to use on the new endpoint creation page (for example <c>intfloat/e5-small-v2</c>), then select the sentence embeddings task under the advanced configuration section.
-/// Create the endpoint and copy the URL after the endpoint initialization has been finished.
+/// To configure the endpoint, first visit the Hugging Face Inference Endpoints page and create a new endpoint.
+/// Select a model that supports the task you intend to use.
 /// </para>
 /// <para>
-/// The following models are recommended for the Hugging Face service:
+/// For Elastic's <c>text_embedding</c> task:
+/// The selected model must support the <c>Sentence Embeddings</c> task. On the new endpoint creation page, select the <c>Sentence Embeddings</c> task under the <c>Advanced Configuration</c> section.
+/// After the endpoint has initialized, copy the generated endpoint URL.
+/// Recommended models for <c>text_embedding</c> task:
 /// </para>
 /// <list type="bullet">
 /// <item>
@@ -266,6 +331,48 @@ public sealed partial class PutHuggingFaceRequest : Elastic.Clients.Elasticsearc
 /// <item>
 /// <para>
 /// <c>multilingual-e5-small</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For Elastic's <c>chat_completion</c> and <c>completion</c> tasks:
+/// The selected model must support the <c>Text Generation</c> task and expose OpenAI API. HuggingFace supports both serverless and dedicated endpoints for <c>Text Generation</c>. When creating dedicated endpoint select the <c>Text Generation</c> task.
+/// After the endpoint is initialized (for dedicated) or ready (for serverless), ensure it supports the OpenAI API and includes <c>/v1/chat/completions</c> part in URL. Then, copy the full endpoint URL for use.
+/// Recommended models for <c>chat_completion</c> and <c>completion</c> tasks:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>Mistral-7B-Instruct-v0.2</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>QwQ-32B</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>Phi-3-mini-128k-instruct</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For Elastic's <c>rerank</c> task:
+/// The selected model must support the <c>sentence-ranking</c> task and expose OpenAI API.
+/// HuggingFace supports only dedicated (not serverless) endpoints for <c>Rerank</c> so far.
+/// After the endpoint is initialized, copy the full endpoint URL for use.
+/// Tested models for <c>rerank</c> task:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>bge-reranker-base</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>jina-reranker-v1-turbo-en-GGUF</c>
 /// </para>
 /// </item>
 /// </list>
@@ -370,6 +477,42 @@ public readonly partial struct PutHuggingFaceRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor> action)
 	{
 		Instance.ServiceSettings = Elastic.Clients.Elasticsearch.Inference.HuggingFaceServiceSettingsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings to configure the inference task.
+	/// These settings are specific to the task type you specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor TaskSettings(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettings? value)
+	{
+		Instance.TaskSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings to configure the inference task.
+	/// These settings are specific to the task type you specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor TaskSettings()
+	{
+		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettingsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings to configure the inference task.
+	/// These settings are specific to the task type you specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettingsDescriptor>? action)
+	{
+		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskSettingsDescriptor.Build(action);
 		return this;
 	}
 

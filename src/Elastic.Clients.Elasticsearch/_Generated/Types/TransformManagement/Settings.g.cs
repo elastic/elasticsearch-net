@@ -43,32 +43,32 @@ internal sealed partial class SettingsConverter : System.Text.Json.Serialization
 		LocalJsonValue<bool?> propUnattended = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAlignCheckpoints.TryReadProperty(ref reader, options, PropAlignCheckpoints, null))
+			if (propAlignCheckpoints.TryReadProperty(ref reader, options, PropAlignCheckpoints, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propDatesAsEpochMillis.TryReadProperty(ref reader, options, PropDatesAsEpochMillis, null))
+			if (propDatesAsEpochMillis.TryReadProperty(ref reader, options, PropDatesAsEpochMillis, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propDeduceMappings.TryReadProperty(ref reader, options, PropDeduceMappings, null))
+			if (propDeduceMappings.TryReadProperty(ref reader, options, PropDeduceMappings, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propDocsPerSecond.TryReadProperty(ref reader, options, PropDocsPerSecond, null))
+			if (propDocsPerSecond.TryReadProperty(ref reader, options, PropDocsPerSecond, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxPageSearchSize.TryReadProperty(ref reader, options, PropMaxPageSearchSize, null))
+			if (propMaxPageSearchSize.TryReadProperty(ref reader, options, PropMaxPageSearchSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propUnattended.TryReadProperty(ref reader, options, PropUnattended, null))
+			if (propUnattended.TryReadProperty(ref reader, options, PropUnattended, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -97,12 +97,12 @@ internal sealed partial class SettingsConverter : System.Text.Json.Serialization
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.Settings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAlignCheckpoints, value.AlignCheckpoints, null, null);
-		writer.WriteProperty(options, PropDatesAsEpochMillis, value.DatesAsEpochMillis, null, null);
-		writer.WriteProperty(options, PropDeduceMappings, value.DeduceMappings, null, null);
-		writer.WriteProperty(options, PropDocsPerSecond, value.DocsPerSecond, null, null);
-		writer.WriteProperty(options, PropMaxPageSearchSize, value.MaxPageSearchSize, null, null);
-		writer.WriteProperty(options, PropUnattended, value.Unattended, null, null);
+		writer.WriteProperty(options, PropAlignCheckpoints, value.AlignCheckpoints, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropDatesAsEpochMillis, value.DatesAsEpochMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropDeduceMappings, value.DeduceMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropDocsPerSecond, value.DocsPerSecond, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropMaxPageSearchSize, value.MaxPageSearchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropUnattended, value.Unattended, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

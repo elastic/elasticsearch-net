@@ -51,7 +51,7 @@ internal sealed partial class SearchableSnapshotsConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propFullCopyIndicesCount.TryReadProperty(ref reader, options, PropFullCopyIndicesCount, null))
+			if (propFullCopyIndicesCount.TryReadProperty(ref reader, options, PropFullCopyIndicesCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -61,7 +61,7 @@ internal sealed partial class SearchableSnapshotsConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propSharedCacheIndicesCount.TryReadProperty(ref reader, options, PropSharedCacheIndicesCount, null))
+			if (propSharedCacheIndicesCount.TryReadProperty(ref reader, options, PropSharedCacheIndicesCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -91,9 +91,9 @@ internal sealed partial class SearchableSnapshotsConverter : System.Text.Json.Se
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
 		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
-		writer.WriteProperty(options, PropFullCopyIndicesCount, value.FullCopyIndicesCount, null, null);
+		writer.WriteProperty(options, PropFullCopyIndicesCount, value.FullCopyIndicesCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropIndicesCount, value.IndicesCount, null, null);
-		writer.WriteProperty(options, PropSharedCacheIndicesCount, value.SharedCacheIndicesCount, null, null);
+		writer.WriteProperty(options, PropSharedCacheIndicesCount, value.SharedCacheIndicesCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

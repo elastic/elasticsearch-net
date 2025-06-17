@@ -51,17 +51,17 @@ internal sealed partial class TransformProgressConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propDocsRemaining.TryReadProperty(ref reader, options, PropDocsRemaining, null))
+			if (propDocsRemaining.TryReadProperty(ref reader, options, PropDocsRemaining, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propPercentComplete.TryReadProperty(ref reader, options, PropPercentComplete, null))
+			if (propPercentComplete.TryReadProperty(ref reader, options, PropPercentComplete, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalDocs.TryReadProperty(ref reader, options, PropTotalDocs, null))
+			if (propTotalDocs.TryReadProperty(ref reader, options, PropTotalDocs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -91,9 +91,9 @@ internal sealed partial class TransformProgressConverter : System.Text.Json.Seri
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDocsIndexed, value.DocsIndexed, null, null);
 		writer.WriteProperty(options, PropDocsProcessed, value.DocsProcessed, null, null);
-		writer.WriteProperty(options, PropDocsRemaining, value.DocsRemaining, null, null);
-		writer.WriteProperty(options, PropPercentComplete, value.PercentComplete, null, null);
-		writer.WriteProperty(options, PropTotalDocs, value.TotalDocs, null, null);
+		writer.WriteProperty(options, PropDocsRemaining, value.DocsRemaining, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropPercentComplete, value.PercentComplete, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropTotalDocs, value.TotalDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

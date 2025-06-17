@@ -36,7 +36,7 @@ internal sealed partial class UniqueTokenFilterConverter : System.Text.Json.Seri
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propOnlyOnSamePosition.TryReadProperty(ref reader, options, PropOnlyOnSamePosition, null))
+			if (propOnlyOnSamePosition.TryReadProperty(ref reader, options, PropOnlyOnSamePosition, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ internal sealed partial class UniqueTokenFilterConverter : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropOnlyOnSamePosition, value.OnlyOnSamePosition, null, null);
+		writer.WriteProperty(options, PropOnlyOnSamePosition, value.OnlyOnSamePosition, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

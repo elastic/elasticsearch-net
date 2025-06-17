@@ -39,7 +39,7 @@ internal sealed partial class TokenConverter : System.Text.Json.Serialization.Js
 		LocalJsonValue<int?> propStartOffset = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propEndOffset.TryReadProperty(ref reader, options, PropEndOffset, null))
+			if (propEndOffset.TryReadProperty(ref reader, options, PropEndOffset, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -54,7 +54,7 @@ internal sealed partial class TokenConverter : System.Text.Json.Serialization.Js
 				continue;
 			}
 
-			if (propStartOffset.TryReadProperty(ref reader, options, PropStartOffset, null))
+			if (propStartOffset.TryReadProperty(ref reader, options, PropStartOffset, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -81,10 +81,10 @@ internal sealed partial class TokenConverter : System.Text.Json.Serialization.Js
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.TermVectors.Token value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEndOffset, value.EndOffset, null, null);
+		writer.WriteProperty(options, PropEndOffset, value.EndOffset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropPayload, value.Payload, null, null);
 		writer.WriteProperty(options, PropPosition, value.Position, null, null);
-		writer.WriteProperty(options, PropStartOffset, value.StartOffset, null, null);
+		writer.WriteProperty(options, PropStartOffset, value.StartOffset, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }

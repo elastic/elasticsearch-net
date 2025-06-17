@@ -48,7 +48,7 @@ internal sealed partial class FunctionScoreConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propWeight.TryReadProperty(ref reader, options, PropWeight, null))
+			if (propWeight.TryReadProperty(ref reader, options, PropWeight, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -150,7 +150,7 @@ internal sealed partial class FunctionScoreConverter : System.Text.Json.Serializ
 		}
 
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropWeight, value.Weight, null, null);
+		writer.WriteProperty(options, PropWeight, value.Weight, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

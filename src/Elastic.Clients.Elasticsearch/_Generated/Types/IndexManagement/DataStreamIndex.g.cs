@@ -56,12 +56,12 @@ internal sealed partial class DataStreamIndexConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propManagedBy.TryReadProperty(ref reader, options, PropManagedBy, null))
+			if (propManagedBy.TryReadProperty(ref reader, options, PropManagedBy, static Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy>(o)))
 			{
 				continue;
 			}
 
-			if (propPreferIlm.TryReadProperty(ref reader, options, PropPreferIlm, null))
+			if (propPreferIlm.TryReadProperty(ref reader, options, PropPreferIlm, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -92,8 +92,8 @@ internal sealed partial class DataStreamIndexConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropIlmPolicy, value.IlmPolicy, null, null);
 		writer.WriteProperty(options, PropIndexName, value.IndexName, null, null);
 		writer.WriteProperty(options, PropIndexUuid, value.IndexUuid, null, null);
-		writer.WriteProperty(options, PropManagedBy, value.ManagedBy, null, null);
-		writer.WriteProperty(options, PropPreferIlm, value.PreferIlm, null, null);
+		writer.WriteProperty(options, PropManagedBy, value.ManagedBy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy>(o, v));
+		writer.WriteProperty(options, PropPreferIlm, value.PreferIlm, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

@@ -48,7 +48,7 @@ internal sealed partial class FileSystemTotalConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propAvailableInBytes.TryReadProperty(ref reader, options, PropAvailableInBytes, null))
+			if (propAvailableInBytes.TryReadProperty(ref reader, options, PropAvailableInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -58,7 +58,7 @@ internal sealed partial class FileSystemTotalConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propFreeInBytes.TryReadProperty(ref reader, options, PropFreeInBytes, null))
+			if (propFreeInBytes.TryReadProperty(ref reader, options, PropFreeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -68,7 +68,7 @@ internal sealed partial class FileSystemTotalConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, null))
+			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -98,11 +98,11 @@ internal sealed partial class FileSystemTotalConverter : System.Text.Json.Serial
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
-		writer.WriteProperty(options, PropAvailableInBytes, value.AvailableInBytes, null, null);
+		writer.WriteProperty(options, PropAvailableInBytes, value.AvailableInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropFree, value.Free, null, null);
-		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, null);
+		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTotal, value.Total, null, null);
-		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, null);
+		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }

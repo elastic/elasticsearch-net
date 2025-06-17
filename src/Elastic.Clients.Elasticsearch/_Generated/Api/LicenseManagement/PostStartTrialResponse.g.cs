@@ -54,7 +54,7 @@ internal sealed partial class PostStartTrialResponseConverter : System.Text.Json
 				continue;
 			}
 
-			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			if (propType.TryReadProperty(ref reader, options, PropType, static Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType>(o)))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class PostStartTrialResponseConverter : System.Text.Json
 		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
 		writer.WriteProperty(options, PropErrorMessage, value.ErrorMessage, null, null);
 		writer.WriteProperty(options, PropTrialWasStarted, value.TrialWasStarted, null, null);
-		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.LicenseManagement.LicenseType>(o, v));
 		writer.WriteEndObject();
 	}
 }

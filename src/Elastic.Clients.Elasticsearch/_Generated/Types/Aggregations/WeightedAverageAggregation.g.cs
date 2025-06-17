@@ -49,7 +49,7 @@ internal sealed partial class WeightedAverageAggregationConverter : System.Text.
 				continue;
 			}
 
-			if (propValueType.TryReadProperty(ref reader, options, PropValueType, null))
+			if (propValueType.TryReadProperty(ref reader, options, PropValueType, static Elastic.Clients.Elasticsearch.Aggregations.ValueType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.ValueType>(o)))
 			{
 				continue;
 			}
@@ -83,7 +83,7 @@ internal sealed partial class WeightedAverageAggregationConverter : System.Text.
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropValue, value.Value, null, null);
-		writer.WriteProperty(options, PropValueType, value.ValueType, null, null);
+		writer.WriteProperty(options, PropValueType, value.ValueType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ValueType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.ValueType>(o, v));
 		writer.WriteProperty(options, PropWeight, value.Weight, null, null);
 		writer.WriteEndObject();
 	}

@@ -279,12 +279,12 @@ internal sealed partial class UpdateByQueryRequestConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propConflicts.TryReadProperty(ref reader, options, PropConflicts, null))
+			if (propConflicts.TryReadProperty(ref reader, options, PropConflicts, static Elastic.Clients.Elasticsearch.Conflicts? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Conflicts>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, null))
+			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -327,8 +327,8 @@ internal sealed partial class UpdateByQueryRequestConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.UpdateByQueryRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConflicts, value.Conflicts, null, null);
-		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, null);
+		writer.WriteProperty(options, PropConflicts, value.Conflicts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Conflicts? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Conflicts>(o, v));
+		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteProperty(options, PropSlice, value.Slice, null, null);

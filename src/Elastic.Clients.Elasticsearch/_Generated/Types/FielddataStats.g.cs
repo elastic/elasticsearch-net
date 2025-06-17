@@ -39,7 +39,7 @@ internal sealed partial class FielddataStatsConverter : System.Text.Json.Seriali
 		LocalJsonValue<long> propMemorySizeInBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propEvictions.TryReadProperty(ref reader, options, PropEvictions, null))
+			if (propEvictions.TryReadProperty(ref reader, options, PropEvictions, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class FielddataStatsConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.FielddataStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEvictions, value.Evictions, null, null);
+		writer.WriteProperty(options, PropEvictions, value.Evictions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldMemoryUsage>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.FieldMemoryUsage>(o, v, null, null));
 		writer.WriteProperty(options, PropMemorySize, value.MemorySize, null, null);
 		writer.WriteProperty(options, PropMemorySizeInBytes, value.MemorySizeInBytes, null, null);

@@ -41,12 +41,12 @@ internal sealed partial class InferenceConfigClassificationConverter : System.Te
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTopClassesResultsField = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNumTopClasses.TryReadProperty(ref reader, options, PropNumTopClasses, null))
+			if (propNumTopClasses.TryReadProperty(ref reader, options, PropNumTopClasses, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propNumTopFeatureImportanceValues.TryReadProperty(ref reader, options, PropNumTopFeatureImportanceValues, null))
+			if (propNumTopFeatureImportanceValues.TryReadProperty(ref reader, options, PropNumTopFeatureImportanceValues, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -89,8 +89,8 @@ internal sealed partial class InferenceConfigClassificationConverter : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNumTopClasses, value.NumTopClasses, null, null);
-		writer.WriteProperty(options, PropNumTopFeatureImportanceValues, value.NumTopFeatureImportanceValues, null, null);
+		writer.WriteProperty(options, PropNumTopClasses, value.NumTopClasses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropNumTopFeatureImportanceValues, value.NumTopFeatureImportanceValues, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropPredictionFieldType, value.PredictionFieldType, null, null);
 		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
 		writer.WriteProperty(options, PropTopClassesResultsField, value.TopClassesResultsField, null, null);

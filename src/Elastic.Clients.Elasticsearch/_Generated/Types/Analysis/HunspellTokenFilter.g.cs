@@ -44,7 +44,7 @@ internal sealed partial class HunspellTokenFilterConverter : System.Text.Json.Se
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDedup.TryReadProperty(ref reader, options, PropDedup, null))
+			if (propDedup.TryReadProperty(ref reader, options, PropDedup, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -59,7 +59,7 @@ internal sealed partial class HunspellTokenFilterConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propLongestOnly.TryReadProperty(ref reader, options, PropLongestOnly, null))
+			if (propLongestOnly.TryReadProperty(ref reader, options, PropLongestOnly, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -98,10 +98,10 @@ internal sealed partial class HunspellTokenFilterConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDedup, value.Dedup, null, null);
+		writer.WriteProperty(options, PropDedup, value.Dedup, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDictionary, value.Dictionary, null, null);
 		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
-		writer.WriteProperty(options, PropLongestOnly, value.LongestOnly, null, null);
+		writer.WriteProperty(options, PropLongestOnly, value.LongestOnly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();

@@ -41,22 +41,22 @@ internal sealed partial class AzureAiStudioTaskSettingsConverter : System.Text.J
 		LocalJsonValue<string?> propUser = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDoSample.TryReadProperty(ref reader, options, PropDoSample, null))
+			if (propDoSample.TryReadProperty(ref reader, options, PropDoSample, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propMaxNewTokens.TryReadProperty(ref reader, options, PropMaxNewTokens, null))
+			if (propMaxNewTokens.TryReadProperty(ref reader, options, PropMaxNewTokens, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propTemperature.TryReadProperty(ref reader, options, PropTemperature, null))
+			if (propTemperature.TryReadProperty(ref reader, options, PropTemperature, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
 
-			if (propTopP.TryReadProperty(ref reader, options, PropTopP, null))
+			if (propTopP.TryReadProperty(ref reader, options, PropTopP, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -89,10 +89,10 @@ internal sealed partial class AzureAiStudioTaskSettingsConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDoSample, value.DoSample, null, null);
-		writer.WriteProperty(options, PropMaxNewTokens, value.MaxNewTokens, null, null);
-		writer.WriteProperty(options, PropTemperature, value.Temperature, null, null);
-		writer.WriteProperty(options, PropTopP, value.TopP, null, null);
+		writer.WriteProperty(options, PropDoSample, value.DoSample, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropMaxNewTokens, value.MaxNewTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTemperature, value.Temperature, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropTopP, value.TopP, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropUser, value.User, null, null);
 		writer.WriteEndObject();
 	}

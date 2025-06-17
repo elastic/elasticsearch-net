@@ -64,42 +64,42 @@ internal sealed partial class WordDelimiterGraphTokenFilterConverter : System.Te
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAdjustOffsets.TryReadProperty(ref reader, options, PropAdjustOffsets, null))
+			if (propAdjustOffsets.TryReadProperty(ref reader, options, PropAdjustOffsets, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propCatenateAll.TryReadProperty(ref reader, options, PropCatenateAll, null))
+			if (propCatenateAll.TryReadProperty(ref reader, options, PropCatenateAll, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propCatenateNumbers.TryReadProperty(ref reader, options, PropCatenateNumbers, null))
+			if (propCatenateNumbers.TryReadProperty(ref reader, options, PropCatenateNumbers, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propCatenateWords.TryReadProperty(ref reader, options, PropCatenateWords, null))
+			if (propCatenateWords.TryReadProperty(ref reader, options, PropCatenateWords, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propGenerateNumberParts.TryReadProperty(ref reader, options, PropGenerateNumberParts, null))
+			if (propGenerateNumberParts.TryReadProperty(ref reader, options, PropGenerateNumberParts, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propGenerateWordParts.TryReadProperty(ref reader, options, PropGenerateWordParts, null))
+			if (propGenerateWordParts.TryReadProperty(ref reader, options, PropGenerateWordParts, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIgnoreKeywords.TryReadProperty(ref reader, options, PropIgnoreKeywords, null))
+			if (propIgnoreKeywords.TryReadProperty(ref reader, options, PropIgnoreKeywords, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propPreserveOriginal.TryReadProperty(ref reader, options, PropPreserveOriginal, null))
+			if (propPreserveOriginal.TryReadProperty(ref reader, options, PropPreserveOriginal, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -114,17 +114,17 @@ internal sealed partial class WordDelimiterGraphTokenFilterConverter : System.Te
 				continue;
 			}
 
-			if (propSplitOnCaseChange.TryReadProperty(ref reader, options, PropSplitOnCaseChange, null))
+			if (propSplitOnCaseChange.TryReadProperty(ref reader, options, PropSplitOnCaseChange, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propSplitOnNumerics.TryReadProperty(ref reader, options, PropSplitOnNumerics, null))
+			if (propSplitOnNumerics.TryReadProperty(ref reader, options, PropSplitOnNumerics, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propStemEnglishPossessive.TryReadProperty(ref reader, options, PropStemEnglishPossessive, null))
+			if (propStemEnglishPossessive.TryReadProperty(ref reader, options, PropStemEnglishPossessive, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -184,19 +184,19 @@ internal sealed partial class WordDelimiterGraphTokenFilterConverter : System.Te
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.WordDelimiterGraphTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAdjustOffsets, value.AdjustOffsets, null, null);
-		writer.WriteProperty(options, PropCatenateAll, value.CatenateAll, null, null);
-		writer.WriteProperty(options, PropCatenateNumbers, value.CatenateNumbers, null, null);
-		writer.WriteProperty(options, PropCatenateWords, value.CatenateWords, null, null);
-		writer.WriteProperty(options, PropGenerateNumberParts, value.GenerateNumberParts, null, null);
-		writer.WriteProperty(options, PropGenerateWordParts, value.GenerateWordParts, null, null);
-		writer.WriteProperty(options, PropIgnoreKeywords, value.IgnoreKeywords, null, null);
-		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal, null, null);
+		writer.WriteProperty(options, PropAdjustOffsets, value.AdjustOffsets, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropCatenateAll, value.CatenateAll, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropCatenateNumbers, value.CatenateNumbers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropCatenateWords, value.CatenateWords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropGenerateNumberParts, value.GenerateNumberParts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropGenerateWordParts, value.GenerateWordParts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIgnoreKeywords, value.IgnoreKeywords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropProtectedWords, value.ProtectedWords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropProtectedWordsPath, value.ProtectedWordsPath, null, null);
-		writer.WriteProperty(options, PropSplitOnCaseChange, value.SplitOnCaseChange, null, null);
-		writer.WriteProperty(options, PropSplitOnNumerics, value.SplitOnNumerics, null, null);
-		writer.WriteProperty(options, PropStemEnglishPossessive, value.StemEnglishPossessive, null, null);
+		writer.WriteProperty(options, PropSplitOnCaseChange, value.SplitOnCaseChange, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropSplitOnNumerics, value.SplitOnNumerics, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropStemEnglishPossessive, value.StemEnglishPossessive, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropTypeTable, value.TypeTable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropTypeTablePath, value.TypeTablePath, null, null);

@@ -51,12 +51,12 @@ internal sealed partial class AnomalyExplanationConverter : System.Text.Json.Ser
 		LocalJsonValue<double?> propUpperConfidenceBound = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAnomalyCharacteristicsImpact.TryReadProperty(ref reader, options, PropAnomalyCharacteristicsImpact, null))
+			if (propAnomalyCharacteristicsImpact.TryReadProperty(ref reader, options, PropAnomalyCharacteristicsImpact, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propAnomalyLength.TryReadProperty(ref reader, options, PropAnomalyLength, null))
+			if (propAnomalyLength.TryReadProperty(ref reader, options, PropAnomalyLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -66,37 +66,37 @@ internal sealed partial class AnomalyExplanationConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propHighVariancePenalty.TryReadProperty(ref reader, options, PropHighVariancePenalty, null))
+			if (propHighVariancePenalty.TryReadProperty(ref reader, options, PropHighVariancePenalty, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propIncompleteBucketPenalty.TryReadProperty(ref reader, options, PropIncompleteBucketPenalty, null))
+			if (propIncompleteBucketPenalty.TryReadProperty(ref reader, options, PropIncompleteBucketPenalty, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
-			if (propLowerConfidenceBound.TryReadProperty(ref reader, options, PropLowerConfidenceBound, null))
+			if (propLowerConfidenceBound.TryReadProperty(ref reader, options, PropLowerConfidenceBound, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propMultiBucketImpact.TryReadProperty(ref reader, options, PropMultiBucketImpact, null))
+			if (propMultiBucketImpact.TryReadProperty(ref reader, options, PropMultiBucketImpact, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propSingleBucketImpact.TryReadProperty(ref reader, options, PropSingleBucketImpact, null))
+			if (propSingleBucketImpact.TryReadProperty(ref reader, options, PropSingleBucketImpact, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propTypicalValue.TryReadProperty(ref reader, options, PropTypicalValue, null))
+			if (propTypicalValue.TryReadProperty(ref reader, options, PropTypicalValue, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
 
-			if (propUpperConfidenceBound.TryReadProperty(ref reader, options, PropUpperConfidenceBound, null))
+			if (propUpperConfidenceBound.TryReadProperty(ref reader, options, PropUpperConfidenceBound, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -129,16 +129,16 @@ internal sealed partial class AnomalyExplanationConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.AnomalyExplanation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnomalyCharacteristicsImpact, value.AnomalyCharacteristicsImpact, null, null);
-		writer.WriteProperty(options, PropAnomalyLength, value.AnomalyLength, null, null);
+		writer.WriteProperty(options, PropAnomalyCharacteristicsImpact, value.AnomalyCharacteristicsImpact, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropAnomalyLength, value.AnomalyLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropAnomalyType, value.AnomalyType, null, null);
-		writer.WriteProperty(options, PropHighVariancePenalty, value.HighVariancePenalty, null, null);
-		writer.WriteProperty(options, PropIncompleteBucketPenalty, value.IncompleteBucketPenalty, null, null);
-		writer.WriteProperty(options, PropLowerConfidenceBound, value.LowerConfidenceBound, null, null);
-		writer.WriteProperty(options, PropMultiBucketImpact, value.MultiBucketImpact, null, null);
-		writer.WriteProperty(options, PropSingleBucketImpact, value.SingleBucketImpact, null, null);
-		writer.WriteProperty(options, PropTypicalValue, value.TypicalValue, null, null);
-		writer.WriteProperty(options, PropUpperConfidenceBound, value.UpperConfidenceBound, null, null);
+		writer.WriteProperty(options, PropHighVariancePenalty, value.HighVariancePenalty, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIncompleteBucketPenalty, value.IncompleteBucketPenalty, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropLowerConfidenceBound, value.LowerConfidenceBound, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropMultiBucketImpact, value.MultiBucketImpact, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSingleBucketImpact, value.SingleBucketImpact, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTypicalValue, value.TypicalValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropUpperConfidenceBound, value.UpperConfidenceBound, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteEndObject();
 	}
 }

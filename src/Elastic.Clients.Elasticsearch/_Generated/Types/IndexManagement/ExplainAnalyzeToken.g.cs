@@ -60,7 +60,7 @@ internal sealed partial class ExplainAnalyzeTokenConverter : System.Text.Json.Se
 				continue;
 			}
 
-			if (propKeyword.TryReadProperty(ref reader, options, PropKeyword, null))
+			if (propKeyword.TryReadProperty(ref reader, options, PropKeyword, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -96,7 +96,7 @@ internal sealed partial class ExplainAnalyzeTokenConverter : System.Text.Json.Se
 			}
 
 			propAttributes ??= new System.Collections.Generic.Dictionary<string, object>();
-			reader.ReadProperty(options, out string key, out object value, null, null);
+			reader.ReadProperty(options, out string key, out object value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<object>(o)!);
 			propAttributes[key] = value;
 		}
 
@@ -121,7 +121,7 @@ internal sealed partial class ExplainAnalyzeTokenConverter : System.Text.Json.Se
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBytes, value.Bytes, null, null);
 		writer.WriteProperty(options, PropEndOffset, value.EndOffset, null, null);
-		writer.WriteProperty(options, PropKeyword, value.Keyword, null, null);
+		writer.WriteProperty(options, PropKeyword, value.Keyword, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPosition, value.Position, null, null);
 		writer.WriteProperty(options, PropPositionLength, value.PositionLength, null, null);
 		writer.WriteProperty(options, PropStartOffset, value.StartOffset, null, null);
@@ -132,7 +132,7 @@ internal sealed partial class ExplainAnalyzeTokenConverter : System.Text.Json.Se
 		{
 			foreach (var item in value.Attributes)
 			{
-				writer.WriteProperty(options, item.Key, item.Value, null, null);
+				writer.WriteProperty(options, item.Key, item.Value, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), null);
 			}
 		}
 

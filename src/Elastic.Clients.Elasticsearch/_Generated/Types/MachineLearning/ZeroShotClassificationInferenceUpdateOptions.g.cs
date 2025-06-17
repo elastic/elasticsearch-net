@@ -44,7 +44,7 @@ internal sealed partial class ZeroShotClassificationInferenceUpdateOptionsConver
 				continue;
 			}
 
-			if (propMultiLabel.TryReadProperty(ref reader, options, PropMultiLabel, null))
+			if (propMultiLabel.TryReadProperty(ref reader, options, PropMultiLabel, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class ZeroShotClassificationInferenceUpdateOptionsConver
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropLabels, value.Labels, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropMultiLabel, value.MultiLabel, null, null);
+		writer.WriteProperty(options, PropMultiLabel, value.MultiLabel, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
 		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);
 		writer.WriteEndObject();
