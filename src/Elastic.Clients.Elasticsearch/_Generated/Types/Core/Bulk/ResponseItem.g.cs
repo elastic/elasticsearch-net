@@ -23,6 +23,145 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
+internal sealed partial class ResponseItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
+	private static readonly System.Text.Json.JsonEncodedText PropFailureStore = System.Text.Json.JsonEncodedText.Encode("failure_store");
+	private static readonly System.Text.Json.JsonEncodedText PropForcedRefresh = System.Text.Json.JsonEncodedText.Encode("forced_refresh");
+	private static readonly System.Text.Json.JsonEncodedText PropGet = System.Text.Json.JsonEncodedText.Encode("get");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result");
+	private static readonly System.Text.Json.JsonEncodedText PropSeqNo = System.Text.Json.JsonEncodedText.Encode("_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("_version");
+
+	public override Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propError = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus?> propFailureStore = default;
+		LocalJsonValue<bool?> propForcedRefresh = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.InlineGet<System.Collections.Generic.IReadOnlyDictionary<string, object>>?> propGet = default;
+		LocalJsonValue<string?> propId = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<long?> propPrimaryTerm = default;
+		LocalJsonValue<string?> propResult = default;
+		LocalJsonValue<long?> propSeqNo = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ShardStatistics?> propShards = default;
+		LocalJsonValue<int> propStatus = default;
+		LocalJsonValue<long?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propError.TryReadProperty(ref reader, options, PropError, null))
+			{
+				continue;
+			}
+
+			if (propFailureStore.TryReadProperty(ref reader, options, PropFailureStore, static Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus>(o)))
+			{
+				continue;
+			}
+
+			if (propForcedRefresh.TryReadProperty(ref reader, options, PropForcedRefresh, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propGet.TryReadProperty(ref reader, options, PropGet, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propResult.TryReadProperty(ref reader, options, PropResult, null))
+			{
+				continue;
+			}
+
+			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Error = propError.Value,
+			FailureStore = propFailureStore.Value,
+			ForcedRefresh = propForcedRefresh.Value,
+			Get = propGet.Value,
+			Id = propId.Value,
+			Index = propIndex.Value,
+			PrimaryTerm = propPrimaryTerm.Value,
+			Result = propResult.Value,
+			SeqNo = propSeqNo.Value,
+			Shards = propShards.Value,
+			Status = propStatus.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropError, value.Error, null, null);
+		writer.WriteProperty(options, PropFailureStore, value.FailureStore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus>(o, v));
+		writer.WriteProperty(options, PropForcedRefresh, value.ForcedRefresh, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropGet, value.Get, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropResult, value.Result, null, null);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Bulk.ResponseItemConverter))]
 public abstract partial class ResponseItem
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
