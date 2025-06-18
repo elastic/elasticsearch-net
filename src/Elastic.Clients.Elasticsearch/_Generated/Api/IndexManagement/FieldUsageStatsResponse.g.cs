@@ -40,7 +40,7 @@ internal sealed partial class FieldUsageStatsResponseConverter : System.Text.Jso
 			}
 
 			propStats ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.UsageStatsIndex>();
-			reader.ReadProperty(options, out string key, out Elastic.Clients.Elasticsearch.IndexManagement.UsageStatsIndex value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static Elastic.Clients.Elasticsearch.IndexManagement.UsageStatsIndex (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.IndexManagement.UsageStatsIndex>(o)!);
+			reader.ReadProperty(options, out string key, out Elastic.Clients.Elasticsearch.IndexManagement.UsageStatsIndex value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, null);
 			propStats[key] = value;
 		}
 
