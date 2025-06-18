@@ -23,6 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.PropertiesConverter))]
 public partial class Properties : Elastic.Clients.Elasticsearch.IsADictionary<Elastic.Clients.Elasticsearch.PropertyName, Elastic.Clients.Elasticsearch.Mapping.IProperty>
 {
 	public Properties()
