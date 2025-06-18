@@ -40,7 +40,7 @@ internal sealed partial class SuggesterConverter : System.Text.Json.Serializatio
 			}
 
 			propSuggesters ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>();
-			reader.ReadProperty(options, out string key, out Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester>(o)!);
+			reader.ReadProperty(options, out string key, out Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, null);
 			propSuggesters[key] = value;
 		}
 

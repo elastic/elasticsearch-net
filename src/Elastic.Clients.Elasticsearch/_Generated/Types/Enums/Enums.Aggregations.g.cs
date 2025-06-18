@@ -519,6 +519,63 @@ internal sealed partial class GapPolicyConverter : System.Text.Json.Serializatio
 	}
 }
 
+internal sealed partial class TDigestExecutionHintConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberDefault = System.Text.Json.JsonEncodedText.Encode("default");
+	private static readonly System.Text.Json.JsonEncodedText MemberHighAccuracy = System.Text.Json.JsonEncodedText.Encode("high_accuracy");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberDefault))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint.Default;
+		}
+
+		if (reader.ValueTextEquals(MemberHighAccuracy))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint.HighAccuracy;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDefault.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint.Default;
+		}
+
+		if (string.Equals(value, MemberHighAccuracy.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint.HighAccuracy;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint.Default:
+				writer.WriteStringValue(MemberDefault);
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint.HighAccuracy:
+				writer.WriteStringValue(MemberHighAccuracy);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class CalendarIntervalConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberDay = System.Text.Json.JsonEncodedText.Encode("day");
@@ -1275,6 +1332,15 @@ public enum GapPolicy
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "skip")]
 	Skip
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHintConverter))]
+public enum TDigestExecutionHint
+{
+	[System.Runtime.Serialization.EnumMember(Value = "default")]
+	Default,
+	[System.Runtime.Serialization.EnumMember(Value = "high_accuracy")]
+	HighAccuracy
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.CalendarIntervalConverter))]

@@ -82,7 +82,7 @@ internal sealed partial class IngestDocumentSimulationConverter : System.Text.Js
 			}
 
 			propMetadata ??= new System.Collections.Generic.Dictionary<string, string>();
-			reader.ReadProperty(options, out string key, out string value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!);
+			reader.ReadProperty(options, out string key, out string value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, null);
 			propMetadata[key] = value;
 		}
 
