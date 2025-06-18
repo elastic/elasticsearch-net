@@ -21,9 +21,58 @@ public partial class GeoLocation
 internal sealed class GeoLocationConverter :
 	JsonConverter<GeoLocation>
 {
+	// LatitudeLongitude.
+
+	private static readonly JsonEncodedText PropLat = JsonEncodedText.Encode("lat");
+	private static readonly JsonEncodedText PropLon = JsonEncodedText.Encode("lon");
+
+	// GeoHash.
+
+	private static readonly JsonEncodedText PropGeoHash = JsonEncodedText.Encode("geohash");
+
 	public override GeoLocation? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		throw new InvalidOperationException();
+		if (reader.TokenType is JsonTokenType.String)
+		{
+			return new GeoLocation(reader.GetString()!);
+		}
+
+		if (reader.TokenType is JsonTokenType.StartArray)
+		{
+			return new GeoLocation(reader.ReadCollectionValue<double>(options, null)!);
+		}
+
+		if (reader.TokenType is JsonTokenType.StartObject)
+		{
+			var readerSnapshot = reader;
+			reader.Read();
+
+			GeoLocation.Kind? kind = null;
+			if (reader.TokenType is JsonTokenType.PropertyName)
+			{
+				if (reader.ValueTextEquals(PropLat) || reader.ValueTextEquals(PropLon))
+				{
+					kind = GeoLocation.Kind.LatitudeLongitude;
+				}
+
+				if (reader.ValueTextEquals(PropGeoHash))
+				{
+					kind = GeoLocation.Kind.GeoHash;
+				}
+			}
+
+			reader = readerSnapshot;
+
+			return kind switch
+			{
+				GeoLocation.Kind.LatitudeLongitude => new(reader.ReadValue<LatLonGeoLocation>(options)),
+				GeoLocation.Kind.GeoHash => new(reader.ReadValue<GeoHashLocation>(options)),
+				null => throw new JsonException($"Unrecognized '{typeof(GeoLocation)}' variant."),
+				_ => throw new InvalidOperationException("unreachable")
+			};
+		}
+
+		throw new JsonException($"Unrecognized '{typeof(GeoLocation)}' variant.");
 	}
 
 	public override void Write(Utf8JsonWriter writer, GeoLocation value, JsonSerializerOptions options)
