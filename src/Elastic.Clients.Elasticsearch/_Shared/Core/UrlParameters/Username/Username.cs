@@ -79,16 +79,16 @@ public class Username :
 }
 
 internal sealed class UsernameConverter :
-	JsonConverter<Name>
+	JsonConverter<Username>
 {
-	public override Name? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Username? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		reader.ValidateToken(JsonTokenType.String);
 
 		return reader.GetString()!;
 	}
 
-	public override Name ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert,
+	public override Username ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert,
 		JsonSerializerOptions options)
 	{
 		reader.ValidateToken(JsonTokenType.PropertyName);
@@ -96,7 +96,7 @@ internal sealed class UsernameConverter :
 		return reader.GetString()!;
 	}
 
-	public override void Write(Utf8JsonWriter writer, Name value, JsonSerializerOptions options)
+	public override void Write(Utf8JsonWriter writer, Username value, JsonSerializerOptions options)
 	{
 		if (value?.Value is null)
 		{
@@ -106,7 +106,7 @@ internal sealed class UsernameConverter :
 		writer.WriteStringValue(value.Value);
 	}
 
-	public override void WriteAsPropertyName(Utf8JsonWriter writer, Name value, JsonSerializerOptions options)
+	public override void WriteAsPropertyName(Utf8JsonWriter writer, Username value, JsonSerializerOptions options)
 	{
 		if (value?.Value is null)
 		{
