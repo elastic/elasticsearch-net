@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 internal sealed partial class BoxplotAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropCompression = System.Text.Json.JsonEncodedText.Encode("compression");
+	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint");
 	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
 	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
 	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
@@ -34,12 +35,18 @@ internal sealed partial class BoxplotAggregationConverter : System.Text.Json.Ser
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<double?> propCompression = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint?> propExecutionHint = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
 		LocalJsonValue<object?> propMissing = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propCompression.TryReadProperty(ref reader, options, PropCompression, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
+			{
+				continue;
+			}
+
+			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, static Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint>(o)))
 			{
 				continue;
 			}
@@ -72,6 +79,7 @@ internal sealed partial class BoxplotAggregationConverter : System.Text.Json.Ser
 		return new Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Compression = propCompression.Value,
+			ExecutionHint = propExecutionHint.Value,
 			Field = propField.Value,
 			Missing = propMissing.Value,
 			Script = propScript.Value
@@ -82,6 +90,7 @@ internal sealed partial class BoxplotAggregationConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCompression, value.Compression, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
@@ -114,6 +123,14 @@ public sealed partial class BoxplotAggregation
 	/// </para>
 	/// </summary>
 	public double? Compression { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
+	/// To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? ExecutionHint { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -159,6 +176,18 @@ public readonly partial struct BoxplotAggregationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor<TDocument> Compression(double? value)
 	{
 		Instance.Compression = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
+	/// To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? value)
+	{
+		Instance.ExecutionHint = value;
 		return this;
 	}
 
@@ -255,6 +284,18 @@ public readonly partial struct BoxplotAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor Compression(double? value)
 	{
 		Instance.Compression = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
+	/// To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? value)
+	{
+		Instance.ExecutionHint = value;
 		return this;
 	}
 

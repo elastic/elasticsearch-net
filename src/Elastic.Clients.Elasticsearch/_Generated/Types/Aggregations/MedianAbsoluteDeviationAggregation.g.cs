@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 internal sealed partial class MedianAbsoluteDeviationAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropCompression = System.Text.Json.JsonEncodedText.Encode("compression");
+	private static readonly System.Text.Json.JsonEncodedText PropExecutionHint = System.Text.Json.JsonEncodedText.Encode("execution_hint");
 	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
 	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
 	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
@@ -35,6 +36,7 @@ internal sealed partial class MedianAbsoluteDeviationAggregationConverter : Syst
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<double?> propCompression = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint?> propExecutionHint = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
 		LocalJsonValue<string?> propFormat = default;
 		LocalJsonValue<object?> propMissing = default;
@@ -42,6 +44,11 @@ internal sealed partial class MedianAbsoluteDeviationAggregationConverter : Syst
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propCompression.TryReadProperty(ref reader, options, PropCompression, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
+			{
+				continue;
+			}
+
+			if (propExecutionHint.TryReadProperty(ref reader, options, PropExecutionHint, static Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint>(o)))
 			{
 				continue;
 			}
@@ -79,6 +86,7 @@ internal sealed partial class MedianAbsoluteDeviationAggregationConverter : Syst
 		return new Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Compression = propCompression.Value,
+			ExecutionHint = propExecutionHint.Value,
 			Field = propField.Value,
 			Format = propFormat.Value,
 			Missing = propMissing.Value,
@@ -90,6 +98,7 @@ internal sealed partial class MedianAbsoluteDeviationAggregationConverter : Syst
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCompression, value.Compression, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropExecutionHint, value.ExecutionHint, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
@@ -123,6 +132,14 @@ public sealed partial class MedianAbsoluteDeviationAggregation
 	/// </para>
 	/// </summary>
 	public double? Compression { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
+	/// To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? ExecutionHint { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -169,6 +186,18 @@ public readonly partial struct MedianAbsoluteDeviationAggregationDescriptor<TDoc
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument> Compression(double? value)
 	{
 		Instance.Compression = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
+	/// To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor<TDocument> ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? value)
+	{
+		Instance.ExecutionHint = value;
 		return this;
 	}
 
@@ -271,6 +300,18 @@ public readonly partial struct MedianAbsoluteDeviationAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor Compression(double? value)
 	{
 		Instance.Compression = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The default implementation of TDigest is optimized for performance, scaling to millions or even billions of sample values while maintaining acceptable accuracy levels (close to 1% relative error for millions of samples in some cases).
+	/// To use an implementation optimized for accuracy, set this parameter to high_accuracy instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregationDescriptor ExecutionHint(Elastic.Clients.Elasticsearch.Aggregations.TDigestExecutionHint? value)
+	{
+		Instance.ExecutionHint = value;
 		return this;
 	}
 
