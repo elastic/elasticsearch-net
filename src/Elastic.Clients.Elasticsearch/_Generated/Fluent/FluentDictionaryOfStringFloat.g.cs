@@ -23,43 +23,31 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Fluent;
 
-public readonly partial struct FluentCollectionOfKeyValuePairOfStringFloat
+public readonly partial struct FluentDictionaryOfStringFloat
 {
-	private readonly System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, float>> _items = new();
+	private readonly System.Collections.Generic.Dictionary<string, float> _items = new();
 
-	private System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, float>> Value => _items;
+	private System.Collections.Generic.IDictionary<string, float> Value => _items;
 
-	public FluentCollectionOfKeyValuePairOfStringFloat()
+	public FluentDictionaryOfStringFloat()
 	{
 	}
 
-	public Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringFloat Add(System.Collections.Generic.KeyValuePair<string, float> value)
+	public Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat Add(string key, float value)
 	{
-		_items.Add(value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringFloat Add(params System.Collections.Generic.KeyValuePair<string, float>[] values)
-	{
-		_items.AddRange(values);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringFloat Add(string key, float value)
-	{
-		_items.Add(new System.Collections.Generic.KeyValuePair<string, float>(key, value));
+		_items.Add(key, value);
 		return this;
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, float>> Build(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringFloat>? action)
+	internal static System.Collections.Generic.IDictionary<string, float> Build(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat>? action)
 	{
 		if (action is null)
 		{
-			return [];
+			return new System.Collections.Generic.Dictionary<string, float>();
 		}
 
-		var builder = new Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringFloat();
+		var builder = new Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringFloat();
 		action.Invoke(builder);
 		return builder.Value;
 	}
