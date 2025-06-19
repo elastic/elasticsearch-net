@@ -32,6 +32,18 @@ internal sealed partial class SortOptionsConverter : System.Text.Json.Serializat
 
 	public override Elastic.Clients.Elasticsearch.SortOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.TokenType is System.Text.Json.JsonTokenType.String)
+		{
+			return new Elastic.Clients.Elasticsearch.SortOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+			{
+				VariantType = "",
+				Variant = new Elastic.Clients.Elasticsearch.FieldSort(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+				{
+					Field = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options, null)
+				}
+			};
+		}
+
 		var readerSnapshot = reader;
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		string? variantType = null;
