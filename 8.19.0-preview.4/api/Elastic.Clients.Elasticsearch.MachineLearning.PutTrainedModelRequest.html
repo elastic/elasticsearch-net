@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class PutTrainedModelRequest | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PutTrainedModelRequest | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create a trained model. Enable you to supply a trained model that is not created by data frame analytics.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.0-preview.4/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest" class="text-break">
+Class PutTrainedModelRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L181"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create a trained model.
+Enable you to supply a trained model that is not created by data frame analytics.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(PutTrainedModelRequestConverter))]
+public sealed class PutTrainedModelRequest : PlainRequest&lt;PutTrainedModelRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestParameters.html">PutTrainedModelRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestParameters.html">PutTrainedModelRequestParameters</a>&gt;</div>
+      <div><span class="xref">PutTrainedModelRequest</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;PutTrainedModelRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;PutTrainedModelRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;PutTrainedModelRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;PutTrainedModelRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;PutTrainedModelRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RequestConfiguration">Request.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest__ctor_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.#ctor(Elastic.Clients.Elasticsearch.Id)">
+  PutTrainedModelRequest(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L184"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequest(Id modelId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>modelId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_CompressedDefinition_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.CompressedDefinition*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_CompressedDefinition" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.CompressedDefinition">
+  CompressedDefinition
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The compressed (GZipped and Base64 encoded) inference definition of the
+model. If compressed_definition is specified, then definition cannot be
+specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? CompressedDefinition { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_DeferDefinitionDecompression_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.DeferDefinitionDecompression*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_DeferDefinitionDecompression" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.DeferDefinitionDecompression">
+  DeferDefinitionDecompression
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L225"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If set to <code>true</code> and a <code>compressed_definition</code> is provided,
+the request defers definition decompression and skips relevant
+validations.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? DeferDefinitionDecompression { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_Definition_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.Definition*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_Definition" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.Definition">
+  Definition
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L250"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The inference definition for the model. If definition is specified, then
+compressed_definition cannot be specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Definition? Definition { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.Definition.html">Definition</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_Description_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_Description" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.Description">
+  Description
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L257"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A human-readable description of the inference trained model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Description { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_InferenceConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.InferenceConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_InferenceConfig" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.InferenceConfig">
+  InferenceConfig
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The default configuration for inference. This can be either a regression
+or classification configuration. It must match the underlying
+definition.trained_model's target_type. For pre-packaged models such as
+ELSER the config is not required.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InferenceConfigCreate? InferenceConfig { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate.html">InferenceConfigCreate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_Input_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.Input*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_Input" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.Input">
+  Input
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The input field names for the model definition.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Input? Input { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.Input.html">Input</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_Metadata_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_Metadata" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.Metadata">
+  Metadata
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L281"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An object map that contains metadata about the model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object? Metadata { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_ModelId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.ModelId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_ModelId" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.ModelId">
+  ModelId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L212"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The unique identifier of the trained model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Id ModelId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_ModelSizeBytes_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.ModelSizeBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_ModelSizeBytes" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.ModelSizeBytes">
+  ModelSizeBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L290"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The estimated memory usage in bytes to keep the trained model in memory.
+This property is supported only if defer_definition_decompression is true
+or the model definition is not supplied.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? ModelSizeBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_ModelType_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.ModelType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_ModelType" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.ModelType">
+  ModelType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L297"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The model type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TrainedModelType? ModelType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.html">TrainedModelType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_PlatformArchitecture_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.PlatformArchitecture*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_PlatformArchitecture" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.PlatformArchitecture">
+  PlatformArchitecture
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The platform architecture (if applicable) of the trained mode. If the model
+only works on one platform, because it is heavily optimized for a particular
+processor architecture and OS combination, then this field specifies which.
+The format of the string must match the platform identifiers used by Elasticsearch,
+so one of, <code>linux-x86_64</code>, <code>linux-aarch64</code>, <code>darwin-x86_64</code>, <code>darwin-aarch64</code>,
+or <code>windows-x86_64</code>. For portable models (those that work independent of processor
+architecture or OS features), leave this field unset.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? PlatformArchitecture { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_PrefixStrings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.PrefixStrings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_PrefixStrings" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.PrefixStrings">
+  PrefixStrings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Optional prefix strings applied at inference
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TrainedModelPrefixStrings? PrefixStrings { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings.html">TrainedModelPrefixStrings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L201"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.0-preview.4/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_Tags_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.Tags*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_Tags" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.Tags">
+  Tags
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L324"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of tags to organize the model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;string&gt;? Tags { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_WaitForCompletion_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.WaitForCompletion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_WaitForCompletion" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.WaitForCompletion">
+  WaitForCompletion
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L233"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Whether to wait for all child operations (e.g. model download)
+to complete.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? WaitForCompletion { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
