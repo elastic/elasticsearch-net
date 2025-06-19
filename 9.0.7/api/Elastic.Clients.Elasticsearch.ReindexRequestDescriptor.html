@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct ReindexRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct ReindexRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Reindex documents.   Copy documents from a source to a destination. You can copy all documents to the destination index or reindex a subset of the documents. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.   IMPORTANT: Reindex requires _source to be enabled for all documents in the source. The destination should be configured as wanted before calling the reindex API. Reindex does not copy the settings from the source or its associated template. Mappings, shard counts, and replicas, for example, must be configured ahead of time.   If the Elasticsearch security features are enabled, you must have the following security privileges:    The read index privilege for the source data stream, index, or alias.    The write index privilege for the destination data stream, index, or index alias.    To automatically create a data stream or index with a reindex API request, you must have the auto_configure, create_index, or manage index privilege for the destination data stream, index, or alias.    If reindexing from a remote cluster, the source.remote.user must have the monitor cluster privilege and the read index privilege for the source data stream, index, or alias.    If reindexing from a remote cluster, you must explicitly allow the remote host in the reindex.remote.whitelist setting. Automatic data stream creation requires a matching index template with data stream enabled.   The dest element can be configured like the index API to control optimistic concurrency control. Omitting version_type or setting it to internal causes Elasticsearch to blindly dump documents into the destination, overwriting any that happen to have the same ID.   Setting version_type to external causes Elasticsearch to preserve the version from the source, create any documents that are missing, and update any documents that have an older version in the destination than they do in the source.   Setting op_type to create causes the reindex API to create only missing documents in the destination. All existing documents will cause a version conflict.   IMPORTANT: Because data streams are append-only, any reindex request to a destination data stream must have an op_type of create. A reindex can only add new documents to a destination data stream. It cannot update existing documents in a destination data stream.   By default, version conflicts abort the reindex process. To continue reindexing if there are conflicts, set the conflicts request body property to proceed. In this case, the response includes a count of the version conflicts that were encountered. Note that the handling of other error types is unaffected by the conflicts property. Additionally, if you opt to count version conflicts, the operation could attempt to reindex more documents from the source than max_docs until it has successfully indexed max_docs documents into the target or it has gone through every document in the source query.   Refer to the linked documentation for examples of how to reindex documents.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.7/apiSpec/new?filename=Elastic_Clients_Elasticsearch_ReindexRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.ReindexRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor" class="text-break">
+Struct ReindexRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L491"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Reindex documents.
+</p>
+<p>
+Copy documents from a source to a destination.
+You can copy all documents to the destination index or reindex a subset of the documents.
+The source can be any existing index, alias, or data stream.
+The destination must differ from the source.
+For example, you cannot reindex a data stream into itself.
+</p>
+<p>
+IMPORTANT: Reindex requires <code>_source</code> to be enabled for all documents in the source.
+The destination should be configured as wanted before calling the reindex API.
+Reindex does not copy the settings from the source or its associated template.
+Mappings, shard counts, and replicas, for example, must be configured ahead of time.
+</p>
+<p>
+If the Elasticsearch security features are enabled, you must have the following security privileges:
+</p>
+<ul><li>
+<p>
+The <code>read</code> index privilege for the source data stream, index, or alias.
+</p>
+</li><li>
+<p>
+The <code>write</code> index privilege for the destination data stream, index, or index alias.
+</p>
+</li><li>
+<p>
+To automatically create a data stream or index with a reindex API request, you must have the <code>auto_configure</code>, <code>create_index</code>, or <code>manage</code> index privilege for the destination data stream, index, or alias.
+</p>
+</li><li>
+<p>
+If reindexing from a remote cluster, the <code>source.remote.user</code> must have the <code>monitor</code> cluster privilege and the <code>read</code> index privilege for the source data stream, index, or alias.
+</p>
+</li></ul>
+<p>
+If reindexing from a remote cluster, you must explicitly allow the remote host in the <code>reindex.remote.whitelist</code> setting.
+Automatic data stream creation requires a matching index template with data stream enabled.
+</p>
+<p>
+The <code>dest</code> element can be configured like the index API to control optimistic concurrency control.
+Omitting <code>version_type</code> or setting it to <code>internal</code> causes Elasticsearch to blindly dump documents into the destination, overwriting any that happen to have the same ID.
+</p>
+<p>
+Setting <code>version_type</code> to <code>external</code> causes Elasticsearch to preserve the <code>version</code> from the source, create any documents that are missing, and update any documents that have an older version in the destination than they do in the source.
+</p>
+<p>
+Setting <code>op_type</code> to <code>create</code> causes the reindex API to create only missing documents in the destination.
+All existing documents will cause a version conflict.
+</p>
+<p>
+IMPORTANT: Because data streams are append-only, any reindex request to a destination data stream must have an <code>op_type</code> of <code>create</code>.
+A reindex can only add new documents to a destination data stream.
+It cannot update existing documents in a destination data stream.
+</p>
+<p>
+By default, version conflicts abort the reindex process.
+To continue reindexing if there are conflicts, set the <code>conflicts</code> request body property to <code>proceed</code>.
+In this case, the response includes a count of the version conflicts that were encountered.
+Note that the handling of other error types is unaffected by the <code>conflicts</code> property.
+Additionally, if you opt to count version conflicts, the operation could attempt to reindex more documents from the source than <code>max_docs</code> until it has successfully indexed <code>max_docs</code> documents into the target or it has gone through every document in the source query.
+</p>
+<p>
+Refer to the linked documentation for examples of how to reindex documents.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct ReindexRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.#ctor">
+  ReindexRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L501"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_ReindexRequest_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.ReindexRequest)">
+  ReindexRequestDescriptor(ReindexRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L495"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor(ReindexRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequest.html">ReindexRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Conflicts_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Conflicts*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Conflicts_System_Nullable_Elastic_Clients_Elasticsearch_Conflicts__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Conflicts(System.Nullable{Elastic.Clients.Elasticsearch.Conflicts})">
+  Conflicts(Conflicts?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L644"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether to continue reindexing even when there are conflicts.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Conflicts(Conflicts? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Conflicts.html">Conflicts</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Dest_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Dest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Dest_Elastic_Clients_Elasticsearch_Core_Reindex_Destination_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination)">
+  Dest(Destination)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L655"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The destination you are copying to.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Dest(Destination value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Reindex.Destination.html">Destination</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Dest_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Dest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Dest_System_Action_Elastic_Clients_Elasticsearch_Core_Reindex_DestinationDescriptor__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Dest(System.Action{Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor})">
+  Dest(Action&lt;DestinationDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L666"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The destination you are copying to.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Dest(Action&lt;DestinationDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor.html">DestinationDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L768"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L774"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L780"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_MaxDocs_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.MaxDocs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_MaxDocs_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.MaxDocs(System.Nullable{System.Int64})">
+  MaxDocs(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L682"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of documents to reindex.
+By default, all documents are reindexed.
+If it is a value less then or equal to <code>scroll_size</code>, a scroll will not be used to retrieve the results for the operation.
+</p>
+<p>
+If <code>conflicts</code> is set to <code>proceed</code>, the reindex operation could attempt to reindex more documents from the source than <code>max_docs</code> until it has successfully indexed <code>max_docs</code> documents into the target or it has gone through every document in the source query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor MaxDocs(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L786"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Refresh_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Refresh_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Refresh(System.Nullable{System.Boolean})">
+  Refresh(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L514"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request refreshes affected shards to make this operation visible to search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Refresh(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L798"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.7/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L804"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.7/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.7/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_RequestsPerSecond_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.RequestsPerSecond*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_RequestsPerSecond_System_Nullable_System_Single__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.RequestsPerSecond(System.Nullable{System.Single})">
+  RequestsPerSecond(float?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L526"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The throttle for this request in sub-requests per second.
+By default, there is no throttle.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor RequestsPerSecond(float? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_RequireAlias_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.RequireAlias*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_RequireAlias_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.RequireAlias(System.Nullable{System.Boolean})">
+  RequireAlias(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L537"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the destination must be an index alias.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor RequireAlias(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Script" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Script">
+  Script()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L704"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The script to run to update the document source or metadata when reindexing.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Script()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Script_Elastic_Clients_Elasticsearch_Script_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Script(Elastic.Clients.Elasticsearch.Script)">
+  Script(Script?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L693"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The script to run to update the document source or metadata when reindexing.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Script(Script? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Script.html">Script</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Script_System_Action_Elastic_Clients_Elasticsearch_ScriptDescriptor__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Script(System.Action{Elastic.Clients.Elasticsearch.ScriptDescriptor})">
+  Script(Action&lt;ScriptDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L715"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The script to run to update the document source or metadata when reindexing.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Script(Action&lt;ScriptDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ScriptDescriptor.html">ScriptDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Scroll_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Scroll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Scroll_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Scroll(Elastic.Clients.Elasticsearch.Duration)">
+  Scroll(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L548"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period of time that a consistent view of the index should be maintained for scrolled search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Scroll(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Size_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Size_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Size(System.Nullable{System.Int64})">
+  Size(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L721"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Size(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Slices_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Slices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Slices_Elastic_Clients_Elasticsearch_Slices_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Slices(Elastic.Clients.Elasticsearch.Slices)">
+  Slices(Slices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L572"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of slices this task should be divided into.
+It defaults to one slice, which means the task isn't sliced into subtasks.
+</p>
+<p>
+Reindex supports sliced scroll to parallelize the reindexing process.
+This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+</p>
+<p>
+NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+</p>
+<p>
+If set to <code>auto</code>, Elasticsearch chooses the number of slices to use.
+This setting will use one slice per shard, up to a certain limit.
+If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Slices(Slices? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Slices.html">Slices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Slices_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Slices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Slices_System_Func_Elastic_Clients_Elasticsearch_SlicesFactory_Elastic_Clients_Elasticsearch_Slices__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Slices(System.Func{Elastic.Clients.Elasticsearch.SlicesFactory,Elastic.Clients.Elasticsearch.Slices})">
+  Slices(Func&lt;SlicesFactory, Slices&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L596"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of slices this task should be divided into.
+It defaults to one slice, which means the task isn't sliced into subtasks.
+</p>
+<p>
+Reindex supports sliced scroll to parallelize the reindexing process.
+This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+</p>
+<p>
+NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+</p>
+<p>
+If set to <code>auto</code>, Elasticsearch chooses the number of slices to use.
+This setting will use one slice per shard, up to a certain limit.
+If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Slices(Func&lt;SlicesFactory, Slices&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SlicesFactory.html">SlicesFactory</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Slices.html">Slices</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Source_Elastic_Clients_Elasticsearch_Core_Reindex_Source_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source)">
+  Source(Source)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L732"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The source you are copying from.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Source(Source value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Reindex.Source.html">Source</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Source_System_Action_Elastic_Clients_Elasticsearch_Core_Reindex_SourceDescriptor__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Source(System.Action{Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor})">
+  Source(Action&lt;SourceDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L743"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The source you are copying from.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Source(Action&lt;SourceDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor.html">SourceDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L792"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Source__1_System_Action_Elastic_Clients_Elasticsearch_Core_Reindex_SourceDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Source``1(System.Action{Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor{``0}})">
+  Source&lt;T&gt;(Action&lt;SourceDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L754"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The source you are copying from.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Source&lt;T&gt;(Action&lt;SourceDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor-1.html">SourceDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Timeout_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_Timeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.Timeout(Elastic.Clients.Elasticsearch.Duration)">
+  Timeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L609"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+By default, Elasticsearch waits for at least one minute before failing.
+The actual wait time could be longer, particularly when multiple waits occur.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor Timeout(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_WaitForActiveShards_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.WaitForActiveShards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_WaitForActiveShards_System_Nullable_Elastic_Clients_Elasticsearch_WaitForActiveShards__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.WaitForActiveShards(System.Nullable{Elastic.Clients.Elasticsearch.WaitForActiveShards})">
+  WaitForActiveShards(WaitForActiveShards?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L622"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of shard copies that must be active before proceeding with the operation.
+Set it to <code>all</code> or any positive integer up to the total number of shards in the index (<code>number_of_replicas+1</code>).
+The default value is one, which means it waits for each primary shard to be active.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor WaitForActiveShards(WaitForActiveShards? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.WaitForActiveShards.html">WaitForActiveShards</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_WaitForCompletion_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.WaitForCompletion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_WaitForCompletion_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.WaitForCompletion(System.Nullable{System.Boolean})">
+  WaitForCompletion(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L633"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request blocks until the operation is complete.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReindexRequestDescriptor WaitForCompletion(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_ReindexRequest__Elastic_Clients_Elasticsearch_ReindexRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.ReindexRequest)~Elastic.Clients.Elasticsearch.ReindexRequestDescriptor">
+  explicit operator ReindexRequestDescriptor(ReindexRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L506"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator ReindexRequestDescriptor(ReindexRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequest.html">ReindexRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_ReindexRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_ReindexRequestDescriptor__Elastic_Clients_Elasticsearch_ReindexRequest" data-uid="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.ReindexRequestDescriptor)~Elastic.Clients.Elasticsearch.ReindexRequest">
+  implicit operator ReindexRequest(ReindexRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/ReindexRequest.g.cs/#L507"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator ReindexRequest(ReindexRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequestDescriptor.html">ReindexRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ReindexRequest.html">ReindexRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

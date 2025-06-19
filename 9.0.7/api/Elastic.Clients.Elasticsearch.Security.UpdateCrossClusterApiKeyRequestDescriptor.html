@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct UpdateCrossClusterApiKeyRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct UpdateCrossClusterApiKeyRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Update a cross-cluster API key.   Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.   To use this API, you must have at least the manage_security cluster privilege. Users can only update API keys that they created. To update another user&#39;s API key, use the run_as feature to submit a request on behalf of another user.   IMPORTANT: It&#39;s not possible to use an API key as the authentication credential for this API. To update an API key, the owner user&#39;s credentials are required.   It&#39;s not possible to update expired API keys, or API keys that have been invalidated by the invalidate API key API.   This API supports updates to an API key&#39;s access scope, metadata, and expiration. The owner user&#39;s information, such as the username and realm, is also updated automatically on every call.   NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.7/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor" class="text-break">
+Struct UpdateCrossClusterApiKeyRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L218"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Update a cross-cluster API key.
+</p>
+<p>
+Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
+</p>
+<p>
+To use this API, you must have at least the <code>manage_security</code> cluster privilege.
+Users can only update API keys that they created.
+To update another user's API key, use the <code>run_as</code> feature to submit a request on behalf of another user.
+</p>
+<p>
+IMPORTANT: It's not possible to use an API key as the authentication credential for this API.
+To update an API key, the owner user's credentials are required.
+</p>
+<p>
+It's not possible to update expired API keys, or API keys that have been invalidated by the invalidate API key API.
+</p>
+<p>
+This API supports updates to an API key's access scope, metadata, and expiration.
+The owner user's information, such as the <code>username</code> and <code>realm</code>, is also updated automatically on every call.
+</p>
+<p>
+NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct UpdateCrossClusterApiKeyRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.#ctor">
+  UpdateCrossClusterApiKeyRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L235"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public UpdateCrossClusterApiKeyRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Id)">
+  UpdateCrossClusterApiKeyRequestDescriptor(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L228"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequest_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest)">
+  UpdateCrossClusterApiKeyRequestDescriptor(UpdateCrossClusterApiKeyRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L222"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor(UpdateCrossClusterApiKeyRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest.html">UpdateCrossClusterApiKeyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Access_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Access*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Access" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Access">
+  Access()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L277"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The access to be granted to this API key.
+The access is composed of permissions for cross cluster search and cross cluster replication.
+At least one of them must be specified.
+When specified, the new access assignment fully replaces the previously assigned access.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor Access()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Access_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Access*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Access_Elastic_Clients_Elasticsearch_Security_Access_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Access(Elastic.Clients.Elasticsearch.Security.Access)">
+  Access(Access)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L263"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The access to be granted to this API key.
+The access is composed of permissions for cross cluster search and cross cluster replication.
+At least one of them must be specified.
+When specified, the new access assignment fully replaces the previously assigned access.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor Access(Access value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.Access.html">Access</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Access_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Access*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Access_System_Action_Elastic_Clients_Elasticsearch_Security_AccessDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Access(System.Action{Elastic.Clients.Elasticsearch.Security.AccessDescriptor})">
+  Access(Action&lt;AccessDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L291"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The access to be granted to this API key.
+The access is composed of permissions for cross cluster search and cross cluster replication.
+At least one of them must be specified.
+When specified, the new access assignment fully replaces the previously assigned access.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor Access(Action&lt;AccessDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.AccessDescriptor.html">AccessDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Access_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Access*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Access__1_System_Action_Elastic_Clients_Elasticsearch_Security_AccessDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Access``1(System.Action{Elastic.Clients.Elasticsearch.Security.AccessDescriptor{``0}})">
+  Access&lt;T&gt;(Action&lt;AccessDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The access to be granted to this API key.
+The access is composed of permissions for cross cluster search and cross cluster replication.
+At least one of them must be specified.
+When specified, the new access assignment fully replaces the previously assigned access.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor Access&lt;T&gt;(Action&lt;AccessDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.AccessDescriptor-1.html">AccessDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_AddMetadatum_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.AddMetadatum*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_AddMetadatum_System_String_System_Object_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.AddMetadatum(System.String,System.Object)">
+  AddMetadatum(string, object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L365"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor AddMetadatum(string key, object value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L380"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Expiration_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Expiration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Expiration_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Expiration(Elastic.Clients.Elasticsearch.Duration)">
+  Expiration(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The expiration time for the API key.
+By default, API keys never expire. This property can be omitted to leave the value unchanged.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor Expiration(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L386"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L392"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Id_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Id*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Id_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Id(Elastic.Clients.Elasticsearch.Id)">
+  Id(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L249"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The ID of the cross-cluster API key to update.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor Id(Id value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Metadata" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Metadata">
+  Metadata()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L345"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Arbitrary metadata that you want to associate with the API key.
+It supports nested data structure.
+Within the metadata object, keys beginning with <code>_</code> are reserved for system usage.
+When specified, this information fully replaces metadata previously associated with the API key.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor Metadata()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Metadata_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringObject__" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Metadata(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject})">
+  Metadata(Action&lt;FluentDictionaryOfStringObject&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L359"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Arbitrary metadata that you want to associate with the API key.
+It supports nested data structure.
+Within the metadata object, keys beginning with <code>_</code> are reserved for system usage.
+When specified, this information fully replaces metadata previously associated with the API key.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor Metadata(Action&lt;FluentDictionaryOfStringObject&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.html">FluentDictionaryOfStringObject</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Metadata_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Metadata(System.Collections.Generic.IDictionary{System.String,System.Object})">
+  Metadata(IDictionary&lt;string, object&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L331"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Arbitrary metadata that you want to associate with the API key.
+It supports nested data structure.
+Within the metadata object, keys beginning with <code>_</code> are reserved for system usage.
+When specified, this information fully replaces metadata previously associated with the API key.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor Metadata(IDictionary&lt;string, object&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L398"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L410"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.7/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L416"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.7/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.7/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L404"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateCrossClusterApiKeyRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequest__Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest)~Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor">
+  explicit operator UpdateCrossClusterApiKeyRequestDescriptor(UpdateCrossClusterApiKeyRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L241"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator UpdateCrossClusterApiKeyRequestDescriptor(UpdateCrossClusterApiKeyRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest.html">UpdateCrossClusterApiKeyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequestDescriptor__Elastic_Clients_Elasticsearch_Security_UpdateCrossClusterApiKeyRequest" data-uid="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor)~Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest">
+  implicit operator UpdateCrossClusterApiKeyRequest(UpdateCrossClusterApiKeyRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.7/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/UpdateCrossClusterApiKeyRequest.g.cs/#L242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator UpdateCrossClusterApiKeyRequest(UpdateCrossClusterApiKeyRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor.html">UpdateCrossClusterApiKeyRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest.html">UpdateCrossClusterApiKeyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
