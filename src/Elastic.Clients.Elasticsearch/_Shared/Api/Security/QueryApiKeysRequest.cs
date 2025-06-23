@@ -2,11 +2,17 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-namespace Elastic.Clients.Elasticsearch.AsyncSearch;
+namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class GetAsyncSearchRequest
+public partial class QueryApiKeysRequest
 {
 	// Any request may contain aggregations so we force `typed_keys` in order to successfully
 	// deserialize them.
-	internal override void BeforeRequest() => TypedKeys ??= true;
+	internal override void BeforeRequest()
+	{
+		if (Aggregations is { Count: > 0 })
+		{
+			TypedKeys ??= true;
+		}
+	}
 }

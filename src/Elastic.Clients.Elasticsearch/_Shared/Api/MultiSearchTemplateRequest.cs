@@ -22,7 +22,7 @@ public partial class MultiSearchTemplateResponse<TDocument>
 
 public partial class MultiSearchTemplateRequest : IStreamSerializable
 {
-	internal override void BeforeRequest() => TypedKeys = true;
+	internal override void BeforeRequest() => TypedKeys ??= true;
 
 	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{
