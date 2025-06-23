@@ -22,7 +22,15 @@ public partial class MultiSearchResponse<TDocument>
 
 public partial class MultiSearchRequest : IStreamSerializable
 {
-	internal override void BeforeRequest() => TypedKeys = true;
+	// Any request may contain aggregations so we force `typed_keys` in order to successfully
+	// deserialize them.
+	internal override void BeforeRequest()
+	{
+		if (Searches.Any(x => x.Body.Aggregations is { Count: > 0 } || x.Body.Suggest is { Suggesters: { Count: > 0 } }))
+		{
+			TypedKeys ??= true;
+		}
+	}
 
 	void IStreamSerializable.Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
 	{

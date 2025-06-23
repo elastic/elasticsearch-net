@@ -9,8 +9,9 @@ namespace Elastic.Clients.Elasticsearch.AsyncSearch;
 
 public partial class SubmitAsyncSearchRequest
 {
-	// Any request may contain aggregations so we force typed_keys in order to successfully deserialize them.
-	internal override void BeforeRequest() => TypedKeys = true;
+	// Any request may contain aggregations so we force `typed_keys` in order to successfully
+	// // deserialize them.
+	internal override void BeforeRequest() => TypedKeys ??= true;
 }
 
 public readonly partial struct SubmitAsyncSearchRequestDescriptor
