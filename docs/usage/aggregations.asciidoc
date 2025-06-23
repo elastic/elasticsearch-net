@@ -4,6 +4,22 @@
 This page demonstrates how to use aggregations.
 
 [discrete]
+=== Using Aggregations with Search Templates
+
+[IMPORTANT]
+.A Note on `typed_keys` and `SearchTemplateAsync`
+====
+When using aggregations with the `SearchTemplateAsync` API, it is **mandatory** to include the `typed_keys: true` parameter in your request.
+
+Unlike the `SearchAsync` API, which adds the `typed_keys=true` parameter to requests automatically, the `SearchTemplateAsync` API cannot do so due to the flexible nature of search templates.
+
+If this parameter is omitted, the client's deserializer will fail with a `JsonException` as it cannot determine the aggregation types from the response.
+====
+
+To correctly receive aggregations from a search template, you must explicitly include `typed_keys: true` in the parameters you provide to the `SearchTemplateAsync` call.
+
+
+[discrete]
 === Top-level aggreggation
 
 [discrete]
