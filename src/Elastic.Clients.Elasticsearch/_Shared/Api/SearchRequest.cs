@@ -16,9 +16,9 @@ public partial class SearchRequest
 {
 	internal override void BeforeRequest()
 	{
-		if (Aggregations is not null || Suggest is not null)
+		if (Aggregations is { Count: > 0 } || Suggest is { Suggesters: { Count: > 0 } })
 		{
-			TypedKeys = true;
+			TypedKeys ??= true;
 		}
 	}
 
