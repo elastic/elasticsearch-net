@@ -125,6 +125,14 @@ public sealed partial class GetSnapshotRequestParameters : Elastic.Transport.Req
 
 	/// <summary>
 	/// <para>
+	/// Only return snapshots with a state found in the given comma-separated list of snapshot states.
+	/// The default is all snapshot states.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotState>? State { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotState>?>("state"); set => Q("state", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, returns additional information about each snapshot such as the version of Elasticsearch which took the snapshot, the start and end times of the snapshot, and the number of shards snapshotted.
 	/// </para>
 	/// <para>
@@ -332,6 +340,14 @@ public sealed partial class GetSnapshotRequest : Elastic.Clients.Elasticsearch.R
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort? Sort { get => Q<Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort?>("sort"); set => Q("sort", value); }
+
+	/// <summary>
+	/// <para>
+	/// Only return snapshots with a state found in the given comma-separated list of snapshot states.
+	/// The default is all snapshot states.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotState>? State { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotState>?>("state"); set => Q("state", value); }
 
 	/// <summary>
 	/// <para>
@@ -557,6 +573,30 @@ public readonly partial struct GetSnapshotRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestDescriptor Sort(Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort? value)
 	{
 		Instance.Sort = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only return snapshots with a state found in the given comma-separated list of snapshot states.
+	/// The default is all snapshot states.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestDescriptor State(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotState>? value)
+	{
+		Instance.State = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only return snapshots with a state found in the given comma-separated list of snapshot states.
+	/// The default is all snapshot states.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotRequestDescriptor State(params Elastic.Clients.Elasticsearch.Snapshot.SnapshotState[] values)
+	{
+		Instance.State = [.. values];
 		return this;
 	}
 

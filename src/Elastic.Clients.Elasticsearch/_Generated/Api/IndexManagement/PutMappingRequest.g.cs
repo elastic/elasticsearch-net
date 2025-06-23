@@ -38,7 +38,6 @@ public sealed partial class PutMappingRequestParameters : Elastic.Transport.Requ
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -300,7 +299,6 @@ public sealed partial class PutMappingRequest : Elastic.Clients.Elasticsearch.Re
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -533,7 +531,6 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -547,7 +544,6 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
@@ -1168,7 +1164,6 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -1182,7 +1177,6 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
