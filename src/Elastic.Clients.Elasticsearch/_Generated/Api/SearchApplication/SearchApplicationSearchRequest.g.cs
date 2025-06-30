@@ -80,7 +80,7 @@ internal sealed partial class SearchApplicationSearchRequestConverter : System.T
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestConverter))]
-public sealed partial class SearchApplicationSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>
+public partial class SearchApplicationSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SearchApplicationSearchRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))

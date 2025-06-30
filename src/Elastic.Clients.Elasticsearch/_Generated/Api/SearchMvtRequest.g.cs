@@ -218,54 +218,6 @@ internal sealed partial class SearchMvtRequestConverter : System.Text.Json.Seria
 /// </item>
 /// </list>
 /// <para>
-/// For example, Elasticsearch may translate a vector tile search API request with a <c>grid_agg</c> argument of <c>geotile</c> and an <c>exact_bounds</c> argument of <c>true</c> into the following search
-/// </para>
-/// <code>
-/// GET my-index/_search
-/// {
-///   "size": 10000,
-///   "query": {
-///     "geo_bounding_box": {
-///       "my-geo-field": {
-///         "top_left": {
-///           "lat": -40.979898069620134,
-///           "lon": -45
-///         },
-///         "bottom_right": {
-///           "lat": -66.51326044311186,
-///           "lon": 0
-///         }
-///       }
-///     }
-///   },
-///   "aggregations": {
-///     "grid": {
-///       "geotile_grid": {
-///         "field": "my-geo-field",
-///         "precision": 11,
-///         "size": 65536,
-///         "bounds": {
-///           "top_left": {
-///             "lat": -40.979898069620134,
-///             "lon": -45
-///           },
-///           "bottom_right": {
-///             "lat": -66.51326044311186,
-///             "lon": 0
-///           }
-///         }
-///       }
-///     },
-///     "bounds": {
-///       "geo_bounds": {
-///         "field": "my-geo-field",
-///         "wrap_longitude": false
-///       }
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
 /// The API returns results as a binary Mapbox vector tile.
 /// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
 /// </para>
@@ -376,6 +328,9 @@ internal sealed partial class SearchMvtRequestConverter : System.Text.Json.Seria
 /// Some cells may intersect more than one vector tile.
 /// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 /// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
+/// </para>
+/// <para>
+/// Learn how to use the vector tile search API with practical examples in the <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/vector-tile-search">Vector tile search examples</a> guide.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchMvtRequestConverter))]
@@ -706,54 +661,6 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 /// </item>
 /// </list>
 /// <para>
-/// For example, Elasticsearch may translate a vector tile search API request with a <c>grid_agg</c> argument of <c>geotile</c> and an <c>exact_bounds</c> argument of <c>true</c> into the following search
-/// </para>
-/// <code>
-/// GET my-index/_search
-/// {
-///   "size": 10000,
-///   "query": {
-///     "geo_bounding_box": {
-///       "my-geo-field": {
-///         "top_left": {
-///           "lat": -40.979898069620134,
-///           "lon": -45
-///         },
-///         "bottom_right": {
-///           "lat": -66.51326044311186,
-///           "lon": 0
-///         }
-///       }
-///     }
-///   },
-///   "aggregations": {
-///     "grid": {
-///       "geotile_grid": {
-///         "field": "my-geo-field",
-///         "precision": 11,
-///         "size": 65536,
-///         "bounds": {
-///           "top_left": {
-///             "lat": -40.979898069620134,
-///             "lon": -45
-///           },
-///           "bottom_right": {
-///             "lat": -66.51326044311186,
-///             "lon": 0
-///           }
-///         }
-///       }
-///     },
-///     "bounds": {
-///       "geo_bounds": {
-///         "field": "my-geo-field",
-///         "wrap_longitude": false
-///       }
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
 /// The API returns results as a binary Mapbox vector tile.
 /// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
 /// </para>
@@ -864,6 +771,9 @@ public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Req
 /// Some cells may intersect more than one vector tile.
 /// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 /// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
+/// </para>
+/// <para>
+/// Learn how to use the vector tile search API with practical examples in the <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/vector-tile-search">Vector tile search examples</a> guide.
 /// </para>
 /// </summary>
 public readonly partial struct SearchMvtRequestDescriptor
@@ -1745,54 +1655,6 @@ public readonly partial struct SearchMvtRequestDescriptor
 /// </item>
 /// </list>
 /// <para>
-/// For example, Elasticsearch may translate a vector tile search API request with a <c>grid_agg</c> argument of <c>geotile</c> and an <c>exact_bounds</c> argument of <c>true</c> into the following search
-/// </para>
-/// <code>
-/// GET my-index/_search
-/// {
-///   "size": 10000,
-///   "query": {
-///     "geo_bounding_box": {
-///       "my-geo-field": {
-///         "top_left": {
-///           "lat": -40.979898069620134,
-///           "lon": -45
-///         },
-///         "bottom_right": {
-///           "lat": -66.51326044311186,
-///           "lon": 0
-///         }
-///       }
-///     }
-///   },
-///   "aggregations": {
-///     "grid": {
-///       "geotile_grid": {
-///         "field": "my-geo-field",
-///         "precision": 11,
-///         "size": 65536,
-///         "bounds": {
-///           "top_left": {
-///             "lat": -40.979898069620134,
-///             "lon": -45
-///           },
-///           "bottom_right": {
-///             "lat": -66.51326044311186,
-///             "lon": 0
-///           }
-///         }
-///       }
-///     },
-///     "bounds": {
-///       "geo_bounds": {
-///         "field": "my-geo-field",
-///         "wrap_longitude": false
-///       }
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
 /// The API returns results as a binary Mapbox vector tile.
 /// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
 /// </para>
@@ -1903,6 +1765,9 @@ public readonly partial struct SearchMvtRequestDescriptor
 /// Some cells may intersect more than one vector tile.
 /// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 /// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
+/// </para>
+/// <para>
+/// Learn how to use the vector tile search API with practical examples in the <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/vector-tile-search">Vector tile search examples</a> guide.
 /// </para>
 /// </summary>
 public readonly partial struct SearchMvtRequestDescriptor<TDocument>
