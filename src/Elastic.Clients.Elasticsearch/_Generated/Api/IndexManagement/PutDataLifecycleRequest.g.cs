@@ -29,7 +29,6 @@ public sealed partial class PutDataLifecycleRequestParameters : Elastic.Transpor
 	/// <para>
 	/// Type of data stream that wildcard patterns can match.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>hidden</c>, <c>open</c>, <c>closed</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -158,7 +157,6 @@ public sealed partial class PutDataLifecycleRequest : Elastic.Clients.Elasticsea
 	/// <para>
 	/// Type of data stream that wildcard patterns can match.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>hidden</c>, <c>open</c>, <c>closed</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -252,7 +250,6 @@ public readonly partial struct PutDataLifecycleRequestDescriptor
 	/// <para>
 	/// Type of data stream that wildcard patterns can match.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>hidden</c>, <c>open</c>, <c>closed</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -265,7 +262,6 @@ public readonly partial struct PutDataLifecycleRequestDescriptor
 	/// <para>
 	/// Type of data stream that wildcard patterns can match.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>hidden</c>, <c>open</c>, <c>closed</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)

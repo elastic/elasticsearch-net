@@ -150,7 +150,7 @@ internal sealed partial class QueryApiKeysRequestConverter : System.Text.Json.Se
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestConverter))]
-public sealed partial class QueryApiKeysRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>
+public partial class QueryApiKeysRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>
 {
 #if NET7_0_OR_GREATER
 	public QueryApiKeysRequest()

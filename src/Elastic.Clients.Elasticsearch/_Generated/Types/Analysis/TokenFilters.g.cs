@@ -109,6 +109,24 @@ public readonly partial struct TokenFiltersDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ArabicStem(string key, Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ArabicStem(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ArabicStem(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor AsciiFolding(string key, Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter value)
 	{
 		_items.Add(key, value);
@@ -124,6 +142,42 @@ public readonly partial struct TokenFiltersDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor AsciiFolding(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor>? action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor BengaliNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor BengaliNormalization(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor BengaliNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor BrazilianStem(string key, Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor BrazilianStem(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor BrazilianStem(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilterDescriptor.Build(action));
 		return this;
 	}
 
@@ -211,6 +265,24 @@ public readonly partial struct TokenFiltersDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CzechStem(string key, Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CzechStem(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CzechStem(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DecimalDigit(string key, Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilter value)
 	{
 		_items.Add(key, value);
@@ -262,6 +334,24 @@ public readonly partial struct TokenFiltersDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DictionaryDecompounder(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor>? action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DutchStem(string key, Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DutchStem(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DutchStem(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilterDescriptor.Build(action));
 		return this;
 	}
 
@@ -337,6 +427,24 @@ public readonly partial struct TokenFiltersDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor FrenchStem(string key, Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor FrenchStem(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor FrenchStem(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor GermanNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilter value)
 	{
 		_items.Add(key, value);
@@ -352,6 +460,24 @@ public readonly partial struct TokenFiltersDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor GermanNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilterDescriptor>? action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor GermanStem(string key, Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor GermanStem(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor GermanStem(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilterDescriptor.Build(action));
 		return this;
 	}
 
@@ -769,6 +895,24 @@ public readonly partial struct TokenFiltersDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PersianStem(string key, Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PersianStem(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PersianStem(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Phonetic(string key, Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter value)
 	{
 		_items.Add(key, value);
@@ -844,6 +988,24 @@ public readonly partial struct TokenFiltersDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Reverse(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor>? action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor RussianStem(string key, Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor RussianStem(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor RussianStem(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilterDescriptor.Build(action));
 		return this;
 	}
 

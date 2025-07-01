@@ -41,7 +41,7 @@ internal sealed partial class PinnedRetrieverConverter : System.Text.Json.Serial
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIds = default;
 		LocalJsonValue<float?> propMinScore = default;
 		LocalJsonValue<string?> propName = default;
-		LocalJsonValue<int> propRankWindowSize = default;
+		LocalJsonValue<int?> propRankWindowSize = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever> propRetriever = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -70,7 +70,7 @@ internal sealed partial class PinnedRetrieverConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -110,7 +110,7 @@ internal sealed partial class PinnedRetrieverConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropIds, value.Ids, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropMinScore, value.MinScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
 		writer.WriteEndObject();
 	}
@@ -120,9 +120,8 @@ internal sealed partial class PinnedRetrieverConverter : System.Text.Json.Serial
 public sealed partial class PinnedRetriever
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PinnedRetriever(int rankWindowSize, Elastic.Clients.Elasticsearch.Retriever retriever)
+	public PinnedRetriever(Elastic.Clients.Elasticsearch.Retriever retriever)
 	{
-		RankWindowSize = rankWindowSize;
 		Retriever = retriever;
 	}
 #if NET7_0_OR_GREATER
@@ -165,11 +164,7 @@ public sealed partial class PinnedRetriever
 	/// </para>
 	/// </summary>
 	public string? Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int RankWindowSize { get; set; }
+	public int? RankWindowSize { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -299,7 +294,7 @@ public readonly partial struct PinnedRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument> RankWindowSize(int value)
+	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor<TDocument> RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;
@@ -469,7 +464,7 @@ public readonly partial struct PinnedRetrieverDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor RankWindowSize(int value)
+	public Elastic.Clients.Elasticsearch.PinnedRetrieverDescriptor RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;

@@ -36,7 +36,7 @@ internal sealed partial class NodeInfoSettingsClusterConverter : System.Text.Jso
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.DeprecationIndexing?> propDeprecationIndexing = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsClusterElection> propElection = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propInitialMasterNodes = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propInitialMasterNodes = default;
 		LocalJsonValue<string> propName = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRouting?> propRouting = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -51,7 +51,7 @@ internal sealed partial class NodeInfoSettingsClusterConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propInitialMasterNodes.TryReadProperty(ref reader, options, PropInitialMasterNodes, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			if (propInitialMasterNodes.TryReadProperty(ref reader, options, PropInitialMasterNodes, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class NodeInfoSettingsClusterConverter : System.Text.Jso
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDeprecationIndexing, value.DeprecationIndexing, null, null);
 		writer.WriteProperty(options, PropElection, value.Election, null, null);
-		writer.WriteProperty(options, PropInitialMasterNodes, value.InitialMasterNodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropInitialMasterNodes, value.InitialMasterNodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteEndObject();
@@ -130,7 +130,7 @@ public sealed partial class NodeInfoSettingsCluster
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsClusterElection Election { get; set; }
-	public System.Collections.Generic.IReadOnlyCollection<string>? InitialMasterNodes { get; set; }
+	public System.Collections.Generic.ICollection<string>? InitialMasterNodes { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

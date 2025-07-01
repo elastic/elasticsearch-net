@@ -47,20 +47,27 @@ internal sealed partial class ITokenFilterConverter : System.Text.Json.Serializa
 		{
 			"apostrophe" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilter>(options, null),
 			"arabic_normalization" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilter>(options, null),
+			"arabic_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilter>(options, null),
 			"asciifolding" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter>(options, null),
+			"bengali_normalization" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilter>(options, null),
+			"brazilian_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilter>(options, null),
 			"cjk_bigram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter>(options, null),
 			"cjk_width" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilter>(options, null),
 			"classic" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilter>(options, null),
 			"common_grams" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter>(options, null),
 			"condition" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter>(options, null),
+			"czech_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilter>(options, null),
 			"decimal_digit" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilter>(options, null),
 			"delimited_payload" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter>(options, null),
 			"dictionary_decompounder" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter>(options, null),
+			"dutch_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilter>(options, null),
 			"edge_ngram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter>(options, null),
 			"elision" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter>(options, null),
 			"fingerprint" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter>(options, null),
 			"flatten_graph" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilter>(options, null),
+			"french_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilter>(options, null),
 			"german_normalization" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilter>(options, null),
+			"german_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilter>(options, null),
 			"hindi_normalization" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilter>(options, null),
 			"hunspell" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter>(options, null),
 			"hyphenation_decompounder" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter>(options, null),
@@ -88,11 +95,13 @@ internal sealed partial class ITokenFilterConverter : System.Text.Json.Serializa
 			"pattern_capture" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter>(options, null),
 			"pattern_replace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter>(options, null),
 			"persian_normalization" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilter>(options, null),
+			"persian_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilter>(options, null),
 			"phonetic" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter>(options, null),
 			"porter_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PorterStemTokenFilter>(options, null),
 			"predicate_token_filter" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PredicateTokenFilter>(options, null),
 			"remove_duplicates" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter>(options, null),
 			"reverse" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter>(options, null),
+			"russian_stem" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilter>(options, null),
 			"scandinavian_folding" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilter>(options, null),
 			"scandinavian_normalization" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilter>(options, null),
 			"serbian_normalization" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilter>(options, null),
@@ -124,8 +133,17 @@ internal sealed partial class ITokenFilterConverter : System.Text.Json.Serializa
 			case "arabic_normalization":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilter)value, null);
 				break;
+			case "arabic_stem":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilter)value, null);
+				break;
 			case "asciifolding":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter)value, null);
+				break;
+			case "bengali_normalization":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilter)value, null);
+				break;
+			case "brazilian_stem":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilter)value, null);
 				break;
 			case "cjk_bigram":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter)value, null);
@@ -142,6 +160,9 @@ internal sealed partial class ITokenFilterConverter : System.Text.Json.Serializa
 			case "condition":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter)value, null);
 				break;
+			case "czech_stem":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilter)value, null);
+				break;
 			case "decimal_digit":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilter)value, null);
 				break;
@@ -150,6 +171,9 @@ internal sealed partial class ITokenFilterConverter : System.Text.Json.Serializa
 				break;
 			case "dictionary_decompounder":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter)value, null);
+				break;
+			case "dutch_stem":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilter)value, null);
 				break;
 			case "edge_ngram":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter)value, null);
@@ -163,8 +187,14 @@ internal sealed partial class ITokenFilterConverter : System.Text.Json.Serializa
 			case "flatten_graph":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilter)value, null);
 				break;
+			case "french_stem":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilter)value, null);
+				break;
 			case "german_normalization":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilter)value, null);
+				break;
+			case "german_stem":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilter)value, null);
 				break;
 			case "hindi_normalization":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilter)value, null);
@@ -247,6 +277,9 @@ internal sealed partial class ITokenFilterConverter : System.Text.Json.Serializa
 			case "persian_normalization":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilter)value, null);
 				break;
+			case "persian_stem":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilter)value, null);
+				break;
 			case "phonetic":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter)value, null);
 				break;
@@ -261,6 +294,9 @@ internal sealed partial class ITokenFilterConverter : System.Text.Json.Serializa
 				break;
 			case "reverse":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter)value, null);
+				break;
+			case "russian_stem":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilter)value, null);
 				break;
 			case "scandinavian_folding":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilter)value, null);
@@ -357,6 +393,21 @@ public readonly partial struct TokenFilterFactory
 		return Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilterDescriptor.Build(action);
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter ArabicStem(Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilter value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter ArabicStem()
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilterDescriptor.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter ArabicStem(System.Action<Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilterDescriptor>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.ArabicStemTokenFilterDescriptor.Build(action);
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter AsciiFolding(Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter value)
 	{
 		return value;
@@ -370,6 +421,36 @@ public readonly partial struct TokenFilterFactory
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter AsciiFolding(System.Action<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor>? action)
 	{
 		return Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter BengaliNormalization(Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilter value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter BengaliNormalization()
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilterDescriptor.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter BengaliNormalization(System.Action<Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilterDescriptor>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.BengaliNormalizationTokenFilterDescriptor.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter BrazilianStem(Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilter value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter BrazilianStem()
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilterDescriptor.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter BrazilianStem(System.Action<Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilterDescriptor>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.BrazilianStemTokenFilterDescriptor.Build(action);
 	}
 
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter CjkBigram(Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter value)
@@ -442,6 +523,21 @@ public readonly partial struct TokenFilterFactory
 		return Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor.Build(action);
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter CzechStem(Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilter value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter CzechStem()
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilterDescriptor.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter CzechStem(System.Action<Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilterDescriptor>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.CzechStemTokenFilterDescriptor.Build(action);
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter DecimalDigit(Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilter value)
 	{
 		return value;
@@ -485,6 +581,21 @@ public readonly partial struct TokenFilterFactory
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter DictionaryDecompounder(System.Action<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor>? action)
 	{
 		return Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter DutchStem(Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilter value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter DutchStem()
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilterDescriptor.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter DutchStem(System.Action<Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilterDescriptor>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.DutchStemTokenFilterDescriptor.Build(action);
 	}
 
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter EdgeNGram(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenFilter value)
@@ -547,6 +658,21 @@ public readonly partial struct TokenFilterFactory
 		return Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilterDescriptor.Build(action);
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter FrenchStem(Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilter value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter FrenchStem()
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilterDescriptor.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter FrenchStem(System.Action<Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilterDescriptor>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.FrenchStemTokenFilterDescriptor.Build(action);
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter GermanNormalization(Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilter value)
 	{
 		return value;
@@ -560,6 +686,21 @@ public readonly partial struct TokenFilterFactory
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter GermanNormalization(System.Action<Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilterDescriptor>? action)
 	{
 		return Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilterDescriptor.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter GermanStem(Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilter value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter GermanStem()
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilterDescriptor.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter GermanStem(System.Action<Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilterDescriptor>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.GermanStemTokenFilterDescriptor.Build(action);
 	}
 
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter HindiNormalization(Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilter value)
@@ -907,6 +1048,21 @@ public readonly partial struct TokenFilterFactory
 		return Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilterDescriptor.Build(action);
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter PersianStem(Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilter value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter PersianStem()
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilterDescriptor.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter PersianStem(System.Action<Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilterDescriptor>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.PersianStemTokenFilterDescriptor.Build(action);
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter Phonetic(Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter value)
 	{
 		return value;
@@ -970,6 +1126,21 @@ public readonly partial struct TokenFilterFactory
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter Reverse(System.Action<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor>? action)
 	{
 		return Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter RussianStem(Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilter value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter RussianStem()
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilterDescriptor.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter RussianStem(System.Action<Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilterDescriptor>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Analysis.RussianStemTokenFilterDescriptor.Build(action);
 	}
 
 	public Elastic.Clients.Elasticsearch.Analysis.ITokenFilter ScandinavianFolding(Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilter value)
