@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 internal sealed partial class NodeInfoSettingsTransportConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreDeserializationErrors = System.Text.Json.JsonEncodedText.Encode("ignore_deserialization_errors");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 	private static readonly System.Text.Json.JsonEncodedText PropTypeDefault = System.Text.Json.JsonEncodedText.Encode("type.default");
 
@@ -33,11 +34,17 @@ internal sealed partial class NodeInfoSettingsTransportConverter : System.Text.J
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportFeatures?> propFeatures = default;
+		LocalJsonValue<bool?> propIgnoreDeserializationErrors = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportType> propType = default;
 		LocalJsonValue<string?> propTypeDefault = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propFeatures.TryReadProperty(ref reader, options, PropFeatures, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreDeserializationErrors.TryReadProperty(ref reader, options, PropIgnoreDeserializationErrors, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -65,6 +72,7 @@ internal sealed partial class NodeInfoSettingsTransportConverter : System.Text.J
 		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Features = propFeatures.Value,
+			IgnoreDeserializationErrors = propIgnoreDeserializationErrors.Value,
 			Type = propType.Value,
 			TypeDefault = propTypeDefault.Value
 		};
@@ -74,6 +82,7 @@ internal sealed partial class NodeInfoSettingsTransportConverter : System.Text.J
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFeatures, value.Features, null, null);
+		writer.WriteProperty(options, PropIgnoreDeserializationErrors, value.IgnoreDeserializationErrors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropTypeDefault, value.TypeDefault, null, null);
 		writer.WriteEndObject();
@@ -106,6 +115,13 @@ public sealed partial class NodeInfoSettingsTransport
 	}
 
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportFeatures? Features { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Only used in unit tests
+	/// </para>
+	/// </summary>
+	public bool? IgnoreDeserializationErrors { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

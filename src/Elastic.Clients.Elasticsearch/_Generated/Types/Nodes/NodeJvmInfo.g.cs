@@ -32,7 +32,6 @@ internal sealed partial class NodeJvmInfoConverter : System.Text.Json.Serializat
 	private static readonly System.Text.Json.JsonEncodedText PropPid = System.Text.Json.JsonEncodedText.Encode("pid");
 	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropUsingBundledJdk = System.Text.Json.JsonEncodedText.Encode("using_bundled_jdk");
-	private static readonly System.Text.Json.JsonEncodedText PropUsingBundledJdk1 = System.Text.Json.JsonEncodedText.Encode("bundled_jdk");
 	private static readonly System.Text.Json.JsonEncodedText PropUsingCompressedOrdinaryObjectPointers = System.Text.Json.JsonEncodedText.Encode("using_compressed_ordinary_object_pointers");
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 	private static readonly System.Text.Json.JsonEncodedText PropVmName = System.Text.Json.JsonEncodedText.Encode("vm_name");
@@ -86,7 +85,7 @@ internal sealed partial class NodeJvmInfoConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propUsingBundledJdk.TryReadProperty(ref reader, options, PropUsingBundledJdk, null) || propUsingBundledJdk.TryReadProperty(ref reader, options, PropUsingBundledJdk1, null))
+			if (propUsingBundledJdk.TryReadProperty(ref reader, options, PropUsingBundledJdk, null))
 			{
 				continue;
 			}
