@@ -29,6 +29,7 @@ internal sealed partial class AggregateMetricDoublePropertyConverter : System.Te
 	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
 	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
 	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
 	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
@@ -43,6 +44,7 @@ internal sealed partial class AggregateMetricDoublePropertyConverter : System.Te
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
 		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIgnoreMalformed = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>> propMetrics = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
@@ -66,6 +68,11 @@ internal sealed partial class AggregateMetricDoublePropertyConverter : System.Te
 			}
 
 			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propIgnoreMalformed.TryReadProperty(ref reader, options, PropIgnoreMalformed, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -117,6 +124,7 @@ internal sealed partial class AggregateMetricDoublePropertyConverter : System.Te
 			Dynamic = propDynamic.Value,
 			Fields = propFields.Value,
 			IgnoreAbove = propIgnoreAbove.Value,
+			IgnoreMalformed = propIgnoreMalformed.Value,
 			Meta = propMeta.Value,
 			Metrics = propMetrics.Value,
 			Properties = propProperties.Value,
@@ -132,6 +140,7 @@ internal sealed partial class AggregateMetricDoublePropertyConverter : System.Te
 		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, null);
 		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropIgnoreMalformed, value.IgnoreMalformed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropMetrics, value.Metrics, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
@@ -176,6 +185,7 @@ public sealed partial class AggregateMetricDoubleProperty : Elastic.Clients.Elas
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
+	public bool? IgnoreMalformed { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -241,6 +251,12 @@ public readonly partial struct AggregateMetricDoublePropertyDescriptor<TDocument
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument> IgnoreAbove(int? value)
 	{
 		Instance.IgnoreAbove = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor<TDocument> IgnoreMalformed(bool? value = true)
+	{
+		Instance.IgnoreMalformed = value;
 		return this;
 	}
 
@@ -381,6 +397,12 @@ public readonly partial struct AggregateMetricDoublePropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor IgnoreAbove(int? value)
 	{
 		Instance.IgnoreAbove = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.AggregateMetricDoublePropertyDescriptor IgnoreMalformed(bool? value = true)
+	{
+		Instance.IgnoreMalformed = value;
 		return this;
 	}
 
