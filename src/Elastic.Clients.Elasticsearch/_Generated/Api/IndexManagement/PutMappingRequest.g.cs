@@ -38,7 +38,6 @@ public sealed partial class PutMappingRequestParameters : Elastic.Transport.Requ
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -207,42 +206,47 @@ internal sealed partial class PutMappingRequestConverter : System.Text.Json.Seri
 /// <para>
 /// Update field mappings.
 /// Add new fields to an existing data stream or index.
-/// You can also use this API to change the search settings of existing fields and add new properties to existing object fields.
-/// For data streams, these changes are applied to all backing indices by default.
+/// You can use the update mapping API to:
 /// </para>
+/// <list type="bullet">
+/// <item>
 /// <para>
-/// <strong>Add multi-fields to an existing field</strong>
+/// Add a new field to an existing index
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// Multi-fields let you index the same field in different ways.
-/// You can use this API to update the fields mapping parameter and enable multi-fields for an existing field.
-/// WARNING: If an index (or data stream) contains documents when you add a multi-field, those documents will not have values for the new multi-field.
-/// You can populate the new multi-field with the update by query API.
+/// Update mappings for multiple indices in a single request
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// <strong>Change supported mapping parameters for an existing field</strong>
+/// Add new properties to an object field
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// The documentation for each mapping parameter indicates whether you can update it for an existing field using this API.
-/// For example, you can use the update mapping API to update the <c>ignore_above</c> parameter.
+/// Enable multi-fields for an existing field
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// <strong>Change the mapping of an existing field</strong>
+/// Update supported mapping parameters
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// Except for supported mapping parameters, you can't change the mapping or field type of an existing field.
-/// Changing an existing field could invalidate data that's already indexed.
+/// Change a field's mapping using reindexing
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// If you need to change the mapping of a field in a data stream's backing indices, refer to documentation about modifying data streams.
-/// If you need to change the mapping of a field in other indices, create a new index with the correct mapping and reindex your data into that index.
+/// Rename a field using a field alias
 /// </para>
+/// </item>
+/// </list>
 /// <para>
-/// <strong>Rename a field</strong>
-/// </para>
-/// <para>
-/// Renaming a field would invalidate data already indexed under the old field name.
-/// Instead, add an alias field to create an alternate field name.
+/// Learn how to use the update mapping API with practical examples in the <a href="https://www.elastic.co/docs//manage-data/data-store/mapping/update-mappings-examples">Update mapping API examples</a> guide.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestConverter))]
@@ -295,7 +299,6 @@ public sealed partial class PutMappingRequest : Elastic.Clients.Elasticsearch.Re
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
@@ -433,42 +436,47 @@ public sealed partial class PutMappingRequest : Elastic.Clients.Elasticsearch.Re
 /// <para>
 /// Update field mappings.
 /// Add new fields to an existing data stream or index.
-/// You can also use this API to change the search settings of existing fields and add new properties to existing object fields.
-/// For data streams, these changes are applied to all backing indices by default.
+/// You can use the update mapping API to:
 /// </para>
+/// <list type="bullet">
+/// <item>
 /// <para>
-/// <strong>Add multi-fields to an existing field</strong>
+/// Add a new field to an existing index
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// Multi-fields let you index the same field in different ways.
-/// You can use this API to update the fields mapping parameter and enable multi-fields for an existing field.
-/// WARNING: If an index (or data stream) contains documents when you add a multi-field, those documents will not have values for the new multi-field.
-/// You can populate the new multi-field with the update by query API.
+/// Update mappings for multiple indices in a single request
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// <strong>Change supported mapping parameters for an existing field</strong>
+/// Add new properties to an object field
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// The documentation for each mapping parameter indicates whether you can update it for an existing field using this API.
-/// For example, you can use the update mapping API to update the <c>ignore_above</c> parameter.
+/// Enable multi-fields for an existing field
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// <strong>Change the mapping of an existing field</strong>
+/// Update supported mapping parameters
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// Except for supported mapping parameters, you can't change the mapping or field type of an existing field.
-/// Changing an existing field could invalidate data that's already indexed.
+/// Change a field's mapping using reindexing
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// If you need to change the mapping of a field in a data stream's backing indices, refer to documentation about modifying data streams.
-/// If you need to change the mapping of a field in other indices, create a new index with the correct mapping and reindex your data into that index.
+/// Rename a field using a field alias
 /// </para>
+/// </item>
+/// </list>
 /// <para>
-/// <strong>Rename a field</strong>
-/// </para>
-/// <para>
-/// Renaming a field would invalidate data already indexed under the old field name.
-/// Instead, add an alias field to create an alternate field name.
+/// Learn how to use the update mapping API with practical examples in the <a href="https://www.elastic.co/docs//manage-data/data-store/mapping/update-mappings-examples">Update mapping API examples</a> guide.
 /// </para>
 /// </summary>
 public readonly partial struct PutMappingRequestDescriptor
@@ -523,7 +531,6 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -537,7 +544,6 @@ public readonly partial struct PutMappingRequestDescriptor
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
@@ -1064,42 +1070,47 @@ public readonly partial struct PutMappingRequestDescriptor
 /// <para>
 /// Update field mappings.
 /// Add new fields to an existing data stream or index.
-/// You can also use this API to change the search settings of existing fields and add new properties to existing object fields.
-/// For data streams, these changes are applied to all backing indices by default.
+/// You can use the update mapping API to:
 /// </para>
+/// <list type="bullet">
+/// <item>
 /// <para>
-/// <strong>Add multi-fields to an existing field</strong>
+/// Add a new field to an existing index
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// Multi-fields let you index the same field in different ways.
-/// You can use this API to update the fields mapping parameter and enable multi-fields for an existing field.
-/// WARNING: If an index (or data stream) contains documents when you add a multi-field, those documents will not have values for the new multi-field.
-/// You can populate the new multi-field with the update by query API.
+/// Update mappings for multiple indices in a single request
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// <strong>Change supported mapping parameters for an existing field</strong>
+/// Add new properties to an object field
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// The documentation for each mapping parameter indicates whether you can update it for an existing field using this API.
-/// For example, you can use the update mapping API to update the <c>ignore_above</c> parameter.
+/// Enable multi-fields for an existing field
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// <strong>Change the mapping of an existing field</strong>
+/// Update supported mapping parameters
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// Except for supported mapping parameters, you can't change the mapping or field type of an existing field.
-/// Changing an existing field could invalidate data that's already indexed.
+/// Change a field's mapping using reindexing
 /// </para>
+/// </item>
+/// <item>
 /// <para>
-/// If you need to change the mapping of a field in a data stream's backing indices, refer to documentation about modifying data streams.
-/// If you need to change the mapping of a field in other indices, create a new index with the correct mapping and reindex your data into that index.
+/// Rename a field using a field alias
 /// </para>
+/// </item>
+/// </list>
 /// <para>
-/// <strong>Rename a field</strong>
-/// </para>
-/// <para>
-/// Renaming a field would invalidate data already indexed under the old field name.
-/// Instead, add an alias field to create an alternate field name.
+/// Learn how to use the update mapping API with practical examples in the <a href="https://www.elastic.co/docs//manage-data/data-store/mapping/update-mappings-examples">Update mapping API examples</a> guide.
 /// </para>
 /// </summary>
 public readonly partial struct PutMappingRequestDescriptor<TDocument>
@@ -1153,7 +1164,6 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
@@ -1167,7 +1177,6 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)

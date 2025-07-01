@@ -32,13 +32,13 @@ internal sealed partial class NodeInfoDiscoverConverter : System.Text.Json.Seria
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoDiscover Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propSeedHosts = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propSeedHosts = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propSeedProviders = default;
 		System.Collections.Generic.Dictionary<string, object>? propSettings = default;
 		LocalJsonValue<string?> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propSeedHosts.TryReadProperty(ref reader, options, PropSeedHosts, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			if (propSeedHosts.TryReadProperty(ref reader, options, PropSeedHosts, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -71,7 +71,7 @@ internal sealed partial class NodeInfoDiscoverConverter : System.Text.Json.Seria
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoDiscover value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSeedHosts, value.SeedHosts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSeedHosts, value.SeedHosts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropSeedProviders, value.SeedProviders, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		if (value.Settings is not null)
@@ -105,7 +105,7 @@ public sealed partial class NodeInfoDiscover
 		_ = sentinel;
 	}
 
-	public System.Collections.Generic.IReadOnlyCollection<string>? SeedHosts { get; set; }
+	public System.Collections.Generic.ICollection<string>? SeedHosts { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? SeedProviders { get; set; }
 
 	/// <summary>

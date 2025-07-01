@@ -38,7 +38,7 @@ internal sealed partial class EdgeNGramTokenizerConverter : System.Text.Json.Ser
 		LocalJsonValue<string?> propCustomTokenChars = default;
 		LocalJsonValue<int?> propMaxGram = default;
 		LocalJsonValue<int?> propMinGram = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>?> propTokenChars = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>>?> propTokenChars = default;
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -57,7 +57,7 @@ internal sealed partial class EdgeNGramTokenizerConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propTokenChars.TryReadProperty(ref reader, options, PropTokenChars, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Analysis.TokenChar>(o, null)))
+			if (propTokenChars.TryReadProperty(ref reader, options, PropTokenChars, static Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Analysis.TokenChar>(o, null)!)))
 			{
 				continue;
 			}
@@ -99,7 +99,7 @@ internal sealed partial class EdgeNGramTokenizerConverter : System.Text.Json.Ser
 		writer.WriteProperty(options, PropCustomTokenChars, value.CustomTokenChars, null, null);
 		writer.WriteProperty(options, PropMaxGram, value.MaxGram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMinGram, value.MinGram, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropTokenChars, value.TokenChars, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Analysis.TokenChar>(o, v, null));
+		writer.WriteProperty(options, PropTokenChars, value.TokenChars, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>>? v) => w.WriteUnionValue<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Analysis.TokenChar>(o, v, null)));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
@@ -128,7 +128,7 @@ public sealed partial class EdgeNGramTokenizer : Elastic.Clients.Elasticsearch.A
 	public string? CustomTokenChars { get; set; }
 	public int? MaxGram { get; set; }
 	public int? MinGram { get; set; }
-	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? TokenChars { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>>? TokenChars { get; set; }
 
 	public string Type => "edge_ngram";
 
@@ -172,15 +172,9 @@ public readonly partial struct EdgeNGramTokenizerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor TokenChars(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>? value)
+	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor TokenChars(Elastic.Clients.Elasticsearch.Union<string, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Analysis.TokenChar>>? value)
 	{
 		Instance.TokenChars = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramTokenizerDescriptor TokenChars(params Elastic.Clients.Elasticsearch.Analysis.TokenChar[] values)
-	{
-		Instance.TokenChars = [.. values];
 		return this;
 	}
 

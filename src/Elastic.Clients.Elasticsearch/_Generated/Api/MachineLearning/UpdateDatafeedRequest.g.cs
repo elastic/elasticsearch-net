@@ -36,35 +36,8 @@ public sealed partial class UpdateDatafeedRequestParameters : Elastic.Transport.
 	/// <summary>
 	/// <para>
 	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
@@ -291,35 +264,8 @@ public sealed partial class UpdateDatafeedRequest : Elastic.Clients.Elasticsearc
 	/// <summary>
 	/// <para>
 	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
@@ -511,35 +457,8 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
@@ -550,35 +469,8 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
@@ -1151,35 +1043,8 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
@@ -1190,35 +1055,8 @@ public readonly partial struct UpdateDatafeedRequestDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
-	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>all</c>: Match any data stream or index, including hidden ones.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>none</c>: Wildcard patterns are not accepted.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
-	/// </para>
-	/// </item>
-	/// </list>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
 	{
