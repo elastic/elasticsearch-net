@@ -85,6 +85,7 @@ internal sealed partial class IPropertyConverter : System.Text.Json.Serializatio
 			"point" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.PointProperty>(options, null),
 			"rank_feature" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.RankFeatureProperty>(options, null),
 			"rank_features" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty>(options, null),
+			"rank_vectors" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty>(options, null),
 			"scaled_float" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty>(options, null),
 			"search_as_you_type" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.SearchAsYouTypeProperty>(options, null),
 			"semantic_text" => reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty>(options, null),
@@ -223,6 +224,9 @@ internal sealed partial class IPropertyConverter : System.Text.Json.Serializatio
 				break;
 			case "rank_features":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.RankFeaturesProperty)value, null);
+				break;
+			case "rank_vectors":
+				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty)value, null);
 				break;
 			case "scaled_float":
 				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty)value, null);
@@ -864,6 +868,21 @@ public readonly partial struct PropertyFactory<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.IProperty RankFeatures(System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>>? action)
 	{
 		return Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<TDocument>.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty RankVector(Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty RankVector()
+	{
+		return Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument>.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty RankVector(System.Action<Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument>>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument>.Build(action);
 	}
 
 	public Elastic.Clients.Elasticsearch.Mapping.IProperty ScaledFloatNumber(Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty value)
@@ -1834,6 +1853,26 @@ public readonly partial struct PropertyFactory
 	public Elastic.Clients.Elasticsearch.Mapping.IProperty RankFeatures<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<T>>? action)
 	{
 		return Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<T>.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty RankVector(Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty value)
+	{
+		return value;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty RankVector()
+	{
+		return Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor.Build(null);
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty RankVector(System.Action<Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor.Build(action);
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.IProperty RankVector<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<T>>? action)
+	{
+		return Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<T>.Build(action);
 	}
 
 	public Elastic.Clients.Elasticsearch.Mapping.IProperty ScaledFloatNumber(Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty value)

@@ -150,6 +150,105 @@ internal sealed partial class SnapshotSortConverter : System.Text.Json.Serializa
 	}
 }
 
+internal sealed partial class SnapshotStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotState>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("FAILED");
+	private static readonly System.Text.Json.JsonEncodedText MemberInProgress = System.Text.Json.JsonEncodedText.Encode("IN_PROGRESS");
+	private static readonly System.Text.Json.JsonEncodedText MemberIncompatible = System.Text.Json.JsonEncodedText.Encode("INCOMPATIBLE");
+	private static readonly System.Text.Json.JsonEncodedText MemberPartial = System.Text.Json.JsonEncodedText.Encode("PARTIAL");
+	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("SUCCESS");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberFailed))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Failed;
+		}
+
+		if (reader.ValueTextEquals(MemberInProgress))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.InProgress;
+		}
+
+		if (reader.ValueTextEquals(MemberIncompatible))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Incompatible;
+		}
+
+		if (reader.ValueTextEquals(MemberPartial))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Partial;
+		}
+
+		if (reader.ValueTextEquals(MemberSuccess))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Success;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberFailed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Failed;
+		}
+
+		if (string.Equals(value, MemberInProgress.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.InProgress;
+		}
+
+		if (string.Equals(value, MemberIncompatible.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Incompatible;
+		}
+
+		if (string.Equals(value, MemberPartial.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Partial;
+		}
+
+		if (string.Equals(value, MemberSuccess.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Success;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Snapshot.SnapshotState)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SnapshotState value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Failed:
+				writer.WriteStringValue(MemberFailed);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.InProgress:
+				writer.WriteStringValue(MemberInProgress);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Incompatible:
+				writer.WriteStringValue(MemberIncompatible);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Partial:
+				writer.WriteStringValue(MemberPartial);
+				break;
+			case Elastic.Clients.Elasticsearch.Snapshot.SnapshotState.Success:
+				writer.WriteStringValue(MemberSuccess);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Snapshot.SnapshotState)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotState ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SnapshotState value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class ShardsStatsStageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberDone = System.Text.Json.JsonEncodedText.Encode("DONE");
@@ -266,6 +365,46 @@ public enum SnapshotSort
 	ShardCount,
 	[System.Runtime.Serialization.EnumMember(Value = "start_time")]
 	StartTime
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.SnapshotStateConverter))]
+public enum SnapshotState
+{
+	/// <summary>
+	/// <para>
+	/// The snapshot failed.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "FAILED")]
+	Failed,
+	/// <summary>
+	/// <para>
+	/// The snapshot process has started.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "IN_PROGRESS")]
+	InProgress,
+	/// <summary>
+	/// <para>
+	/// The snapshot is incompatible with the current version of the cluster.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "INCOMPATIBLE")]
+	Incompatible,
+	/// <summary>
+	/// <para>
+	/// The snapshot was partially successful.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "PARTIAL")]
+	Partial,
+	/// <summary>
+	/// <para>
+	/// The snapshot process completed successfully.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "SUCCESS")]
+	Success
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStageConverter))]

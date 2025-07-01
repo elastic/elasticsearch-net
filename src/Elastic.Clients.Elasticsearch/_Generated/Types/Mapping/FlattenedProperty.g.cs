@@ -40,6 +40,7 @@ internal sealed partial class FlattenedPropertyConverter : System.Text.Json.Seri
 	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity");
 	private static readonly System.Text.Json.JsonEncodedText PropSplitQueriesOnWhitespace = System.Text.Json.JsonEncodedText.Encode("split_queries_on_whitespace");
 	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesDimensions = System.Text.Json.JsonEncodedText.Encode("time_series_dimensions");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.FlattenedProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -60,6 +61,7 @@ internal sealed partial class FlattenedPropertyConverter : System.Text.Json.Seri
 		LocalJsonValue<string?> propSimilarity = default;
 		LocalJsonValue<bool?> propSplitQueriesOnWhitespace = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propTimeSeriesDimensions = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propBoost.TryReadProperty(ref reader, options, PropBoost, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
@@ -137,6 +139,11 @@ internal sealed partial class FlattenedPropertyConverter : System.Text.Json.Seri
 				continue;
 			}
 
+			if (propTimeSeriesDimensions.TryReadProperty(ref reader, options, PropTimeSeriesDimensions, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
 			if (reader.ValueTextEquals(PropType))
 			{
 				reader.Skip();
@@ -169,7 +176,8 @@ internal sealed partial class FlattenedPropertyConverter : System.Text.Json.Seri
 			Properties = propProperties.Value,
 			Similarity = propSimilarity.Value,
 			SplitQueriesOnWhitespace = propSplitQueriesOnWhitespace.Value,
-			SyntheticSourceKeep = propSyntheticSourceKeep.Value
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value,
+			TimeSeriesDimensions = propTimeSeriesDimensions.Value
 		};
 	}
 
@@ -191,6 +199,7 @@ internal sealed partial class FlattenedPropertyConverter : System.Text.Json.Seri
 		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, null);
 		writer.WriteProperty(options, PropSplitQueriesOnWhitespace, value.SplitQueriesOnWhitespace, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum>(o, v));
+		writer.WriteProperty(options, PropTimeSeriesDimensions, value.TimeSeriesDimensions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
@@ -236,6 +245,7 @@ public sealed partial class FlattenedProperty : Elastic.Clients.Elasticsearch.Ma
 	public string? Similarity { get; set; }
 	public bool? SplitQueriesOnWhitespace { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
+	public System.Collections.Generic.ICollection<string>? TimeSeriesDimensions { get; set; }
 
 	public string Type => "flattened";
 }
@@ -392,6 +402,18 @@ public readonly partial struct FlattenedPropertyDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
 		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> TimeSeriesDimensions(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.TimeSeriesDimensions = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor<TDocument> TimeSeriesDimensions(params string[] values)
+	{
+		Instance.TimeSeriesDimensions = [.. values];
 		return this;
 	}
 
@@ -573,6 +595,18 @@ public readonly partial struct FlattenedPropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
 		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor TimeSeriesDimensions(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.TimeSeriesDimensions = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.FlattenedPropertyDescriptor TimeSeriesDimensions(params string[] values)
+	{
+		Instance.TimeSeriesDimensions = [.. values];
 		return this;
 	}
 

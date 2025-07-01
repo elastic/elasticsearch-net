@@ -1487,6 +1487,42 @@ public readonly partial struct PropertiesDescriptor<TDocument>
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankVector(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankVector(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankVector(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankVector(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankVector(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> RankVector(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> ScaledFloatNumber(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty value)
 	{
 		_items.Add(key, value);
@@ -3812,6 +3848,54 @@ public readonly partial struct PropertiesDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankFeatures<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<T>>? action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankFeaturesPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankVector(Elastic.Clients.Elasticsearch.PropertyName key, Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RankVectorProperty value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankVector(Elastic.Clients.Elasticsearch.PropertyName key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankVector(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankVector<T>(Elastic.Clients.Elasticsearch.PropertyName key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor RankVector<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<T>>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Mapping.RankVectorPropertyDescriptor<T>.Build(action));
 		return this;
 	}
 

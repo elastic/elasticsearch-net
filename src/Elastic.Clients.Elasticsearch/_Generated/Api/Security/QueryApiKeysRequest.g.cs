@@ -147,10 +147,11 @@ internal sealed partial class QueryApiKeysRequestConverter : System.Text.Json.Se
 /// To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
 /// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 /// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
+/// Refer to the linked documentation for examples of how to find API keys:
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestConverter))]
-public sealed partial class QueryApiKeysRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>
+public partial class QueryApiKeysRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>
 {
 #if NET7_0_OR_GREATER
 	public QueryApiKeysRequest()
@@ -278,6 +279,7 @@ public sealed partial class QueryApiKeysRequest : Elastic.Clients.Elasticsearch.
 /// To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
 /// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 /// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
+/// Refer to the linked documentation for examples of how to find API keys:
 /// </para>
 /// </summary>
 public readonly partial struct QueryApiKeysRequestDescriptor
@@ -661,6 +663,7 @@ public readonly partial struct QueryApiKeysRequestDescriptor
 /// To use this API, you must have at least the <c>manage_own_api_key</c> or the <c>read_security</c> cluster privileges.
 /// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 /// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
+/// Refer to the linked documentation for examples of how to find API keys:
 /// </para>
 /// </summary>
 public readonly partial struct QueryApiKeysRequestDescriptor<TDocument>
