@@ -324,7 +324,18 @@ public readonly partial struct RetrieverDescriptor<TDocument>
 	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Linear(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>> action)
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Linear()
+	{
+		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument> Linear(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>>? action)
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>.Build(action);
 		return this;
@@ -552,7 +563,18 @@ public readonly partial struct RetrieverDescriptor
 	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor> action)
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear()
+	{
+		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor>? action)
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor.Build(action);
 		return this;
@@ -563,7 +585,7 @@ public readonly partial struct RetrieverDescriptor
 	/// A retriever that supports the combination of different retrievers through a weighted linear combination.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear<T>(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<T>> action)
+	public Elastic.Clients.Elasticsearch.RetrieverDescriptor Linear<T>(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<T>>? action)
 	{
 		Instance.Linear = Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<T>.Build(action);
 		return this;

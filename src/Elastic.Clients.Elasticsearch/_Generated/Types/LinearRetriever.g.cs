@@ -37,7 +37,7 @@ internal sealed partial class LinearRetrieverConverter : System.Text.Json.Serial
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
 		LocalJsonValue<float?> propMinScore = default;
 		LocalJsonValue<string?> propName = default;
-		LocalJsonValue<int> propRankWindowSize = default;
+		LocalJsonValue<int?> propRankWindowSize = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.InnerRetriever>?> propRetrievers = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -56,7 +56,7 @@ internal sealed partial class LinearRetrieverConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, null))
+			if (propRankWindowSize.TryReadProperty(ref reader, options, PropRankWindowSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -92,7 +92,7 @@ internal sealed partial class LinearRetrieverConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
 		writer.WriteProperty(options, PropMinScore, value.MinScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, null);
+		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRetrievers, value.Retrievers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.InnerRetriever>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.InnerRetriever>(o, v, null));
 		writer.WriteEndObject();
 	}
@@ -101,18 +101,12 @@ internal sealed partial class LinearRetrieverConverter : System.Text.Json.Serial
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LinearRetrieverConverter))]
 public sealed partial class LinearRetriever
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public LinearRetriever(int rankWindowSize)
-	{
-		RankWindowSize = rankWindowSize;
-	}
 #if NET7_0_OR_GREATER
 	public LinearRetriever()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public LinearRetriever()
 	{
 	}
@@ -143,11 +137,7 @@ public sealed partial class LinearRetriever
 	/// </para>
 	/// </summary>
 	public string? Name { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int RankWindowSize { get; set; }
+	public int? RankWindowSize { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -237,7 +227,7 @@ public readonly partial struct LinearRetrieverDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> RankWindowSize(int value)
+	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;
@@ -283,8 +273,13 @@ public readonly partial struct LinearRetrieverDescriptor<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.LinearRetriever Build(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>> action)
+	internal static Elastic.Clients.Elasticsearch.LinearRetriever Build(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.LinearRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
 		var builder = new Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.LinearRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;
@@ -388,7 +383,7 @@ public readonly partial struct LinearRetrieverDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor RankWindowSize(int value)
+	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor RankWindowSize(int? value)
 	{
 		Instance.RankWindowSize = value;
 		return this;
@@ -451,8 +446,13 @@ public readonly partial struct LinearRetrieverDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.LinearRetriever Build(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor> action)
+	internal static Elastic.Clients.Elasticsearch.LinearRetriever Build(System.Action<Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.LinearRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
 		var builder = new Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor(new Elastic.Clients.Elasticsearch.LinearRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

@@ -37,10 +37,10 @@ internal sealed partial class TextSimilarityRerankerConverter : System.Text.Json
 	public override Elastic.Clients.Elasticsearch.TextSimilarityReranker Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propField = default;
+		LocalJsonValue<string> propField = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
 		LocalJsonValue<string?> propInferenceId = default;
-		LocalJsonValue<string?> propInferenceText = default;
+		LocalJsonValue<string> propInferenceText = default;
 		LocalJsonValue<float?> propMinScore = default;
 		LocalJsonValue<string?> propName = default;
 		LocalJsonValue<int?> propRankWindowSize = default;
@@ -129,8 +129,10 @@ internal sealed partial class TextSimilarityRerankerConverter : System.Text.Json
 public sealed partial class TextSimilarityReranker
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TextSimilarityReranker(Elastic.Clients.Elasticsearch.Retriever retriever)
+	public TextSimilarityReranker(string field, string inferenceText, Elastic.Clients.Elasticsearch.Retriever retriever)
 	{
+		Field = field;
+		InferenceText = inferenceText;
 		Retriever = retriever;
 	}
 #if NET7_0_OR_GREATER
@@ -155,7 +157,11 @@ public sealed partial class TextSimilarityReranker
 	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
 	/// </para>
 	/// </summary>
-	public string? Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -176,7 +182,11 @@ public sealed partial class TextSimilarityReranker
 	/// The text snippet used as the basis for similarity comparison
 	/// </para>
 	/// </summary>
-	public string? InferenceText { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string InferenceText { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -235,7 +245,7 @@ public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>
 	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Field(string? value)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Field(string value)
 	{
 		Instance.Field = value;
 		return this;
@@ -296,7 +306,7 @@ public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>
 	/// The text snippet used as the basis for similarity comparison
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> InferenceText(string? value)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> InferenceText(string value)
 	{
 		Instance.InferenceText = value;
 		return this;
@@ -390,7 +400,7 @@ public readonly partial struct TextSimilarityRerankerDescriptor
 	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Field(string? value)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Field(string value)
 	{
 		Instance.Field = value;
 		return this;
@@ -468,7 +478,7 @@ public readonly partial struct TextSimilarityRerankerDescriptor
 	/// The text snippet used as the basis for similarity comparison
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor InferenceText(string? value)
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor InferenceText(string value)
 	{
 		Instance.InferenceText = value;
 		return this;

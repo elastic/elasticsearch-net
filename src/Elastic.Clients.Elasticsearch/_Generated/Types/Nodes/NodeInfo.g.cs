@@ -30,17 +30,19 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 	private static readonly System.Text.Json.JsonEncodedText PropBuildFlavor = System.Text.Json.JsonEncodedText.Encode("build_flavor");
 	private static readonly System.Text.Json.JsonEncodedText PropBuildHash = System.Text.Json.JsonEncodedText.Encode("build_hash");
 	private static readonly System.Text.Json.JsonEncodedText PropBuildType = System.Text.Json.JsonEncodedText.Encode("build_type");
+	private static readonly System.Text.Json.JsonEncodedText PropComponentVersions = System.Text.Json.JsonEncodedText.Encode("component_versions");
 	private static readonly System.Text.Json.JsonEncodedText PropHost = System.Text.Json.JsonEncodedText.Encode("host");
 	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexVersion = System.Text.Json.JsonEncodedText.Encode("index_version");
 	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
 	private static readonly System.Text.Json.JsonEncodedText PropIp = System.Text.Json.JsonEncodedText.Encode("ip");
 	private static readonly System.Text.Json.JsonEncodedText PropJvm = System.Text.Json.JsonEncodedText.Encode("jvm");
 	private static readonly System.Text.Json.JsonEncodedText PropModules = System.Text.Json.JsonEncodedText.Encode("modules");
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropNetwork = System.Text.Json.JsonEncodedText.Encode("network");
 	private static readonly System.Text.Json.JsonEncodedText PropOs = System.Text.Json.JsonEncodedText.Encode("os");
 	private static readonly System.Text.Json.JsonEncodedText PropPlugins = System.Text.Json.JsonEncodedText.Encode("plugins");
 	private static readonly System.Text.Json.JsonEncodedText PropProcess = System.Text.Json.JsonEncodedText.Encode("process");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteClusterServer = System.Text.Json.JsonEncodedText.Encode("remote_cluster_server");
 	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
 	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
 	private static readonly System.Text.Json.JsonEncodedText PropThreadPool = System.Text.Json.JsonEncodedText.Encode("thread_pool");
@@ -48,6 +50,7 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 	private static readonly System.Text.Json.JsonEncodedText PropTotalIndexingBufferInBytes = System.Text.Json.JsonEncodedText.Encode("total_indexing_buffer_in_bytes");
 	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport");
 	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportVersion = System.Text.Json.JsonEncodedText.Encode("transport_version");
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -58,17 +61,19 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 		LocalJsonValue<string> propBuildFlavor = default;
 		LocalJsonValue<string> propBuildHash = default;
 		LocalJsonValue<string> propBuildType = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>> propComponentVersions = default;
 		LocalJsonValue<string> propHost = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp?> propHttp = default;
+		LocalJsonValue<long> propIndexVersion = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngest?> propIngest = default;
 		LocalJsonValue<string> propIp = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeJvmInfo?> propJvm = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>?> propModules = default;
 		LocalJsonValue<string> propName = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetwork?> propNetwork = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo?> propOs = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>?> propPlugins = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo?> propProcess = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.RemoveClusterServer?> propRemoteClusterServer = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>> propRoles = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettings?> propSettings = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo>?> propThreadPool = default;
@@ -76,6 +81,7 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalIndexingBufferInBytes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoTransport?> propTransport = default;
 		LocalJsonValue<string> propTransportAddress = default;
+		LocalJsonValue<long> propTransportVersion = default;
 		LocalJsonValue<string> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -104,12 +110,22 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 				continue;
 			}
 
+			if (propComponentVersions.TryReadProperty(ref reader, options, PropComponentVersions, static System.Collections.Generic.IReadOnlyDictionary<string, int> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)!))
+			{
+				continue;
+			}
+
 			if (propHost.TryReadProperty(ref reader, options, PropHost, null))
 			{
 				continue;
 			}
 
 			if (propHttp.TryReadProperty(ref reader, options, PropHttp, null))
+			{
+				continue;
+			}
+
+			if (propIndexVersion.TryReadProperty(ref reader, options, PropIndexVersion, null))
 			{
 				continue;
 			}
@@ -139,11 +155,6 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propNetwork.TryReadProperty(ref reader, options, PropNetwork, null))
-			{
-				continue;
-			}
-
 			if (propOs.TryReadProperty(ref reader, options, PropOs, null))
 			{
 				continue;
@@ -155,6 +166,11 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 			}
 
 			if (propProcess.TryReadProperty(ref reader, options, PropProcess, null))
+			{
+				continue;
+			}
+
+			if (propRemoteClusterServer.TryReadProperty(ref reader, options, PropRemoteClusterServer, null))
 			{
 				continue;
 			}
@@ -194,6 +210,11 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 				continue;
 			}
 
+			if (propTransportVersion.TryReadProperty(ref reader, options, PropTransportVersion, null))
+			{
+				continue;
+			}
+
 			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
 			{
 				continue;
@@ -216,17 +237,19 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 			BuildFlavor = propBuildFlavor.Value,
 			BuildHash = propBuildHash.Value,
 			BuildType = propBuildType.Value,
+			ComponentVersions = propComponentVersions.Value,
 			Host = propHost.Value,
 			Http = propHttp.Value,
+			IndexVersion = propIndexVersion.Value,
 			Ingest = propIngest.Value,
 			Ip = propIp.Value,
 			Jvm = propJvm.Value,
 			Modules = propModules.Value,
 			Name = propName.Value,
-			Network = propNetwork.Value,
 			Os = propOs.Value,
 			Plugins = propPlugins.Value,
 			Process = propProcess.Value,
+			RemoteClusterServer = propRemoteClusterServer.Value,
 			Roles = propRoles.Value,
 			Settings = propSettings.Value,
 			ThreadPool = propThreadPool.Value,
@@ -234,6 +257,7 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 			TotalIndexingBufferInBytes = propTotalIndexingBufferInBytes.Value,
 			Transport = propTransport.Value,
 			TransportAddress = propTransportAddress.Value,
+			TransportVersion = propTransportVersion.Value,
 			Version = propVersion.Value
 		};
 	}
@@ -246,17 +270,19 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropBuildFlavor, value.BuildFlavor, null, null);
 		writer.WriteProperty(options, PropBuildHash, value.BuildHash, null, null);
 		writer.WriteProperty(options, PropBuildType, value.BuildType, null, null);
+		writer.WriteProperty(options, PropComponentVersions, value.ComponentVersions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int> v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
 		writer.WriteProperty(options, PropHost, value.Host, null, null);
 		writer.WriteProperty(options, PropHttp, value.Http, null, null);
+		writer.WriteProperty(options, PropIndexVersion, value.IndexVersion, null, null);
 		writer.WriteProperty(options, PropIngest, value.Ingest, null, null);
 		writer.WriteProperty(options, PropIp, value.Ip, null, null);
 		writer.WriteProperty(options, PropJvm, value.Jvm, null, null);
 		writer.WriteProperty(options, PropModules, value.Modules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.PluginStats>(o, v, null));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropNetwork, value.Network, null, null);
 		writer.WriteProperty(options, PropOs, value.Os, null, null);
 		writer.WriteProperty(options, PropPlugins, value.Plugins, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.PluginStats>(o, v, null));
 		writer.WriteProperty(options, PropProcess, value.Process, null, null);
+		writer.WriteProperty(options, PropRemoteClusterServer, value.RemoteClusterServer, null, null);
 		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, v, null));
 		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
 		writer.WriteProperty(options, PropThreadPool, value.ThreadPool, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.NodeThreadPoolInfo>(o, v, null, null));
@@ -264,6 +290,7 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropTotalIndexingBufferInBytes, value.TotalIndexingBufferInBytes, null, null);
 		writer.WriteProperty(options, PropTransport, value.Transport, null, null);
 		writer.WriteProperty(options, PropTransportAddress, value.TransportAddress, null, null);
+		writer.WriteProperty(options, PropTransportVersion, value.TransportVersion, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
@@ -273,17 +300,20 @@ internal sealed partial class NodeInfoConverter : System.Text.Json.Serialization
 public sealed partial class NodeInfo
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public NodeInfo(System.Collections.Generic.IReadOnlyDictionary<string, string> attributes, string buildFlavor, string buildHash, string buildType, string host, string ip, string name, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> roles, string transportAddress, string version)
+	public NodeInfo(System.Collections.Generic.IReadOnlyDictionary<string, string> attributes, string buildFlavor, string buildHash, string buildType, System.Collections.Generic.IReadOnlyDictionary<string, int> componentVersions, string host, long indexVersion, string ip, string name, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> roles, string transportAddress, long transportVersion, string version)
 	{
 		Attributes = attributes;
 		BuildFlavor = buildFlavor;
 		BuildHash = buildHash;
 		BuildType = buildType;
+		ComponentVersions = componentVersions;
 		Host = host;
+		IndexVersion = indexVersion;
 		Ip = ip;
 		Name = name;
 		Roles = roles;
 		TransportAddress = transportAddress;
+		TransportVersion = transportVersion;
 		Version = version;
 	}
 #if NET7_0_OR_GREATER
@@ -330,6 +360,11 @@ public sealed partial class NodeInfo
 	required
 #endif
 	string BuildType { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, int> ComponentVersions { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -342,6 +377,11 @@ public sealed partial class NodeInfo
 #endif
 	string Host { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp? Http { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long IndexVersion { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoIngest? Ingest { get; set; }
 
 	/// <summary>
@@ -367,10 +407,10 @@ public sealed partial class NodeInfo
 	required
 #endif
 	string Name { get; set; }
-	public Elastic.Clients.Elasticsearch.Nodes.NodeInfoNetwork? Network { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeOperatingSystemInfo? Os { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.PluginStats>? Plugins { get; set; }
 	public Elastic.Clients.Elasticsearch.Nodes.NodeProcessInfo? Process { get; set; }
+	public Elastic.Clients.Elasticsearch.Nodes.RemoveClusterServer? RemoteClusterServer { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
@@ -404,6 +444,11 @@ public sealed partial class NodeInfo
 	required
 #endif
 	string TransportAddress { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TransportVersion { get; set; }
 
 	/// <summary>
 	/// <para>
