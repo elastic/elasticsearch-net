@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 internal sealed partial class SemanticTextPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropChunkingSettings = System.Text.Json.JsonEncodedText.Encode("chunking_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options");
 	private static readonly System.Text.Json.JsonEncodedText PropInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
 	private static readonly System.Text.Json.JsonEncodedText PropSearchInferenceId = System.Text.Json.JsonEncodedText.Encode("search_inference_id");
@@ -35,12 +36,18 @@ internal sealed partial class SemanticTextPropertyConverter : System.Text.Json.S
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings?> propChunkingSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions?> propIndexOptions = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propInferenceId = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propSearchInferenceId = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propChunkingSettings.TryReadProperty(ref reader, options, PropChunkingSettings, null))
+			{
+				continue;
+			}
+
+			if (propIndexOptions.TryReadProperty(ref reader, options, PropIndexOptions, null))
 			{
 				continue;
 			}
@@ -79,6 +86,7 @@ internal sealed partial class SemanticTextPropertyConverter : System.Text.Json.S
 		return new Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
+			IndexOptions = propIndexOptions.Value,
 			InferenceId = propInferenceId.Value,
 			Meta = propMeta.Value,
 			SearchInferenceId = propSearchInferenceId.Value
@@ -89,6 +97,7 @@ internal sealed partial class SemanticTextPropertyConverter : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropChunkingSettings, value.ChunkingSettings, null, null);
+		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions, null, null);
 		writer.WriteProperty(options, PropInferenceId, value.InferenceId, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropSearchInferenceId, value.SearchInferenceId, null, null);
@@ -124,6 +133,14 @@ public sealed partial class SemanticTextProperty : Elastic.Clients.Elasticsearch
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings? ChunkingSettings { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Settings for index_options that override any defaults used by semantic_text, for example
+	/// specific quantization settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions? IndexOptions { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -189,6 +206,42 @@ public readonly partial struct SemanticTextPropertyDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor> action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for index_options that override any defaults used by semantic_text, for example
+	/// specific quantization settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions? value)
+	{
+		Instance.IndexOptions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for index_options that override any defaults used by semantic_text, for example
+	/// specific quantization settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> IndexOptions()
+	{
+		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for index_options that override any defaults used by semantic_text, for example
+	/// specific quantization settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> IndexOptions(System.Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor>? action)
+	{
+		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor.Build(action);
 		return this;
 	}
 
@@ -299,6 +352,42 @@ public readonly partial struct SemanticTextPropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor> action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for index_options that override any defaults used by semantic_text, for example
+	/// specific quantization settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions? value)
+	{
+		Instance.IndexOptions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for index_options that override any defaults used by semantic_text, for example
+	/// specific quantization settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor IndexOptions()
+	{
+		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for index_options that override any defaults used by semantic_text, for example
+	/// specific quantization settings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor IndexOptions(System.Action<Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor>? action)
+	{
+		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor.Build(action);
 		return this;
 	}
 

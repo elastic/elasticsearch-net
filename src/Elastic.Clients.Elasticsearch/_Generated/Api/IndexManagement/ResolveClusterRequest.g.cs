@@ -41,7 +41,6 @@ public sealed partial class ResolveClusterRequestParameters : Elastic.Transport.
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
 	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
@@ -264,7 +263,6 @@ public sealed partial class ResolveClusterRequest : Elastic.Clients.Elasticsearc
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
 	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
@@ -459,7 +457,6 @@ public readonly partial struct ResolveClusterRequestDescriptor
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
 	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
@@ -475,7 +472,6 @@ public readonly partial struct ResolveClusterRequestDescriptor
 	/// Type of index that wildcard patterns can match.
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
-	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
 	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
 	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
