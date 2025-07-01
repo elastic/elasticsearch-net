@@ -40,6 +40,7 @@ internal sealed partial class GeoPointPropertyConverter : System.Text.Json.Seria
 	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
 	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
 	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesMetric = System.Text.Json.JsonEncodedText.Encode("time_series_metric");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.GeoPointProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -60,6 +61,7 @@ internal sealed partial class GeoPointPropertyConverter : System.Text.Json.Seria
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
 		LocalJsonValue<bool?> propStore = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType?> propTimeSeriesMetric = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
@@ -137,6 +139,11 @@ internal sealed partial class GeoPointPropertyConverter : System.Text.Json.Seria
 				continue;
 			}
 
+			if (propTimeSeriesMetric.TryReadProperty(ref reader, options, PropTimeSeriesMetric, static Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType>(o)))
+			{
+				continue;
+			}
+
 			if (reader.ValueTextEquals(PropType))
 			{
 				reader.Skip();
@@ -169,7 +176,8 @@ internal sealed partial class GeoPointPropertyConverter : System.Text.Json.Seria
 			Properties = propProperties.Value,
 			Script = propScript.Value,
 			Store = propStore.Value,
-			SyntheticSourceKeep = propSyntheticSourceKeep.Value
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value,
+			TimeSeriesMetric = propTimeSeriesMetric.Value
 		};
 	}
 
@@ -191,6 +199,7 @@ internal sealed partial class GeoPointPropertyConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteProperty(options, PropStore, value.Store, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum>(o, v));
+		writer.WriteProperty(options, PropTimeSeriesMetric, value.TimeSeriesMetric, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
@@ -236,6 +245,7 @@ public sealed partial class GeoPointProperty : Elastic.Clients.Elasticsearch.Map
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	public bool? Store { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType? TimeSeriesMetric { get; set; }
 
 	public string Type => "geo_point";
 }
@@ -416,6 +426,12 @@ public readonly partial struct GeoPointPropertyDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
 		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType? value)
+	{
+		Instance.TimeSeriesMetric = value;
 		return this;
 	}
 
@@ -621,6 +637,12 @@ public readonly partial struct GeoPointPropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
 		Instance.SyntheticSourceKeep = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.GeoPointPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType? value)
+	{
+		Instance.TimeSeriesMetric = value;
 		return this;
 	}
 

@@ -1081,6 +1081,148 @@ internal sealed partial class DenseVectorSimilarityConverter : System.Text.Json.
 	}
 }
 
+internal sealed partial class RankVectorElementTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberBit = System.Text.Json.JsonEncodedText.Encode("bit");
+	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte");
+	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberBit))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Bit;
+		}
+
+		if (reader.ValueTextEquals(MemberByte))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Byte;
+		}
+
+		if (reader.ValueTextEquals(MemberFloat))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Float;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberBit.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Bit;
+		}
+
+		if (string.Equals(value, MemberByte.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Byte;
+		}
+
+		if (string.Equals(value, MemberFloat.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Float;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Bit:
+				writer.WriteStringValue(MemberBit);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Byte:
+				writer.WriteStringValue(MemberByte);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType.Float:
+				writer.WriteStringValue(MemberFloat);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.RankVectorElementType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class GeoPointMetricTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCounter = System.Text.Json.JsonEncodedText.Encode("counter");
+	private static readonly System.Text.Json.JsonEncodedText MemberGauge = System.Text.Json.JsonEncodedText.Encode("gauge");
+	private static readonly System.Text.Json.JsonEncodedText MemberPosition = System.Text.Json.JsonEncodedText.Encode("position");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCounter))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Counter;
+		}
+
+		if (reader.ValueTextEquals(MemberGauge))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Gauge;
+		}
+
+		if (reader.ValueTextEquals(MemberPosition))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Position;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCounter.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Counter;
+		}
+
+		if (string.Equals(value, MemberGauge.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Gauge;
+		}
+
+		if (string.Equals(value, MemberPosition.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Position;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Counter:
+				writer.WriteStringValue(MemberCounter);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Gauge:
+				writer.WriteStringValue(MemberGauge);
+				break;
+			case Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType.Position:
+				writer.WriteStringValue(MemberPosition);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class GeoOrientationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.GeoOrientation>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberLeft = System.Text.Json.JsonEncodedText.Encode("left");
@@ -2304,6 +2446,28 @@ public enum DenseVectorSimilarity
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "max_inner_product")]
 	MaxInnerProduct
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.RankVectorElementTypeConverter))]
+public enum RankVectorElementType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "bit")]
+	Bit,
+	[System.Runtime.Serialization.EnumMember(Value = "byte")]
+	Byte,
+	[System.Runtime.Serialization.EnumMember(Value = "float")]
+	Float
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricTypeConverter))]
+public enum GeoPointMetricType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "counter")]
+	Counter,
+	[System.Runtime.Serialization.EnumMember(Value = "gauge")]
+	Gauge,
+	[System.Runtime.Serialization.EnumMember(Value = "position")]
+	Position
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.GeoOrientationConverter))]

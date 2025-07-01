@@ -35,6 +35,13 @@ public sealed partial class AsyncQueryGetRequestParameters : Elastic.Transport.R
 
 	/// <summary>
 	/// <para>
+	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
+
+	/// <summary>
+	/// <para>
 	/// The period for which the query and its results are stored in the cluster.
 	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
 	/// </para>
@@ -137,6 +144,13 @@ public sealed partial class AsyncQueryGetRequest : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
+	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
+
+	/// <summary>
+	/// <para>
 	/// The period for which the query and its results are stored in the cluster.
 	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
 	/// </para>
@@ -207,6 +221,17 @@ public readonly partial struct AsyncQueryGetRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor DropNullColumns(bool? value = true)
 	{
 		Instance.DropNullColumns = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryGetRequestDescriptor Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
+	{
+		Instance.Format = value;
 		return this;
 	}
 

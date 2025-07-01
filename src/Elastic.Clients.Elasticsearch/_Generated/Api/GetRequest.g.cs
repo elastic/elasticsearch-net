@@ -28,7 +28,7 @@ public sealed partial class GetRequestParameters : Elastic.Transport.RequestPara
 	/// <summary>
 	/// <para>
 	/// Indicates whether the request forces synthetic <c>_source</c>.
-	/// Use this paramater to test if the mapping supports synthetic <c>_source</c> and to get a sense of the worst case performance.
+	/// Use this parameter to test if the mapping supports synthetic <c>_source</c> and to get a sense of the worst case performance.
 	/// Fetches with this parameter enabled will be slower than enabling synthetic source natively in the index.
 	/// </para>
 	/// </summary>
@@ -101,8 +101,8 @@ public sealed partial class GetRequestParameters : Elastic.Transport.RequestPara
 	/// A comma-separated list of stored fields to return as part of a hit.
 	/// If no fields are specified, no stored fields are included in the response.
 	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// Only leaf fields can be retrieved with the <c>stored_field</c> option.
-	/// Object fields can't be returned;​if specified, the request fails.
+	/// Only leaf fields can be retrieved with the <c>stored_fields</c> option.
+	/// Object fields can't be returned; if specified, the request fails.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
@@ -275,7 +275,7 @@ public sealed partial class GetRequest : Elastic.Clients.Elasticsearch.Requests.
 	/// <summary>
 	/// <para>
 	/// Indicates whether the request forces synthetic <c>_source</c>.
-	/// Use this paramater to test if the mapping supports synthetic <c>_source</c> and to get a sense of the worst case performance.
+	/// Use this parameter to test if the mapping supports synthetic <c>_source</c> and to get a sense of the worst case performance.
 	/// Fetches with this parameter enabled will be slower than enabling synthetic source natively in the index.
 	/// </para>
 	/// </summary>
@@ -348,8 +348,8 @@ public sealed partial class GetRequest : Elastic.Clients.Elasticsearch.Requests.
 	/// A comma-separated list of stored fields to return as part of a hit.
 	/// If no fields are specified, no stored fields are included in the response.
 	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// Only leaf fields can be retrieved with the <c>stored_field</c> option.
-	/// Object fields can't be returned;​if specified, the request fails.
+	/// Only leaf fields can be retrieved with the <c>stored_fields</c> option.
+	/// Object fields can't be returned; if specified, the request fails.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
@@ -491,7 +491,7 @@ public readonly partial struct GetRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// Indicates whether the request forces synthetic <c>_source</c>.
-	/// Use this paramater to test if the mapping supports synthetic <c>_source</c> and to get a sense of the worst case performance.
+	/// Use this parameter to test if the mapping supports synthetic <c>_source</c> and to get a sense of the worst case performance.
 	/// Fetches with this parameter enabled will be slower than enabling synthetic source natively in the index.
 	/// </para>
 	/// </summary>
@@ -645,8 +645,8 @@ public readonly partial struct GetRequestDescriptor
 	/// A comma-separated list of stored fields to return as part of a hit.
 	/// If no fields are specified, no stored fields are included in the response.
 	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// Only leaf fields can be retrieved with the <c>stored_field</c> option.
-	/// Object fields can't be returned;​if specified, the request fails.
+	/// Only leaf fields can be retrieved with the <c>stored_fields</c> option.
+	/// Object fields can't be returned; if specified, the request fails.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.GetRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
@@ -660,8 +660,8 @@ public readonly partial struct GetRequestDescriptor
 	/// A comma-separated list of stored fields to return as part of a hit.
 	/// If no fields are specified, no stored fields are included in the response.
 	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// Only leaf fields can be retrieved with the <c>stored_field</c> option.
-	/// Object fields can't be returned;​if specified, the request fails.
+	/// Only leaf fields can be retrieved with the <c>stored_fields</c> option.
+	/// Object fields can't be returned; if specified, the request fails.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.GetRequestDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
@@ -885,7 +885,7 @@ public readonly partial struct GetRequestDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Indicates whether the request forces synthetic <c>_source</c>.
-	/// Use this paramater to test if the mapping supports synthetic <c>_source</c> and to get a sense of the worst case performance.
+	/// Use this parameter to test if the mapping supports synthetic <c>_source</c> and to get a sense of the worst case performance.
 	/// Fetches with this parameter enabled will be slower than enabling synthetic source natively in the index.
 	/// </para>
 	/// </summary>
@@ -1028,8 +1028,8 @@ public readonly partial struct GetRequestDescriptor<TDocument>
 	/// A comma-separated list of stored fields to return as part of a hit.
 	/// If no fields are specified, no stored fields are included in the response.
 	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// Only leaf fields can be retrieved with the <c>stored_field</c> option.
-	/// Object fields can't be returned;​if specified, the request fails.
+	/// Only leaf fields can be retrieved with the <c>stored_fields</c> option.
+	/// Object fields can't be returned; if specified, the request fails.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
@@ -1043,8 +1043,8 @@ public readonly partial struct GetRequestDescriptor<TDocument>
 	/// A comma-separated list of stored fields to return as part of a hit.
 	/// If no fields are specified, no stored fields are included in the response.
 	/// If this field is specified, the <c>_source</c> parameter defaults to <c>false</c>.
-	/// Only leaf fields can be retrieved with the <c>stored_field</c> option.
-	/// Object fields can't be returned;​if specified, the request fails.
+	/// Only leaf fields can be retrieved with the <c>stored_fields</c> option.
+	/// Object fields can't be returned; if specified, the request fails.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.GetRequestDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)

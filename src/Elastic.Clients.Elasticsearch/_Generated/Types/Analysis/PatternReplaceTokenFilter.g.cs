@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 internal sealed partial class PatternReplaceTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("all");
+	private static readonly System.Text.Json.JsonEncodedText PropFlags = System.Text.Json.JsonEncodedText.Encode("flags");
 	private static readonly System.Text.Json.JsonEncodedText PropPattern = System.Text.Json.JsonEncodedText.Encode("pattern");
 	private static readonly System.Text.Json.JsonEncodedText PropReplacement = System.Text.Json.JsonEncodedText.Encode("replacement");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
@@ -35,12 +36,18 @@ internal sealed partial class PatternReplaceTokenFilterConverter : System.Text.J
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propAll = default;
+		LocalJsonValue<string?> propFlags = default;
 		LocalJsonValue<string> propPattern = default;
 		LocalJsonValue<string?> propReplacement = default;
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAll.TryReadProperty(ref reader, options, PropAll, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propFlags.TryReadProperty(ref reader, options, PropFlags, null))
 			{
 				continue;
 			}
@@ -79,6 +86,7 @@ internal sealed partial class PatternReplaceTokenFilterConverter : System.Text.J
 		return new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			All = propAll.Value,
+			Flags = propFlags.Value,
 			Pattern = propPattern.Value,
 			Replacement = propReplacement.Value,
 			Version = propVersion.Value
@@ -89,6 +97,7 @@ internal sealed partial class PatternReplaceTokenFilterConverter : System.Text.J
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAll, value.All, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropFlags, value.Flags, null, null);
 		writer.WriteProperty(options, PropPattern, value.Pattern, null, null);
 		writer.WriteProperty(options, PropReplacement, value.Replacement, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
@@ -128,6 +137,7 @@ public sealed partial class PatternReplaceTokenFilter : Elastic.Clients.Elastics
 	/// </para>
 	/// </summary>
 	public bool? All { get; set; }
+	public string? Flags { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -179,6 +189,12 @@ public readonly partial struct PatternReplaceTokenFilterDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor All(bool? value = true)
 	{
 		Instance.All = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor Flags(string? value)
+	{
+		Instance.Flags = value;
 		return this;
 	}
 
