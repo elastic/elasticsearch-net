@@ -221,7 +221,7 @@ public readonly partial struct BulkRequestDescriptor
 			return this;
 
 		var objectsList = @objects.ToList();
-		var operations = new List<IBulkOperation>(objectsList.Count());
+		var operations = new List<IBulkOperation>(objectsList.Count);
 
 		foreach (var o in objectsList)
 		{

@@ -17,7 +17,7 @@ public partial class MultiSearchTemplateResponse<TDocument>
 	public override bool IsValidResponse => base.IsValidResponse && (Responses?.All(b => b.Value1 is not null && b.Value1.Status == 200) ?? true);
 
 	[JsonIgnore]
-	public int TotalResponses => Responses.HasAny() ? Responses.Count() : 0;
+	public int TotalResponses => Responses.Count > 0 ? Responses.Count : 0;
 }
 
 public partial class MultiSearchTemplateRequest : IStreamSerializable
