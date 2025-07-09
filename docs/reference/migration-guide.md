@@ -5,7 +5,7 @@ mapped_pages:
 
 # Migration guide: From NEST v7 to .NET Client v8 [migration-guide]
 
-The following migration guide explains the current state of the client, missing features, breaking changes and our rationale for some of the design choices we have introduced.
+The following migration guide explains the state of .NET client v8, missing features, breaking changes and our rationale for some of the design choices we have introduced. Note that this guide only covers the migration from NEST v7 to .NET client v8. The migration from .NET client v8 to .NET client v9 is covered [in the 9.0.0 release notes](https://www.elastic.co/docs/release-notes/elasticsearch/clients/dotnet#elasticsearch-net-client-900-release-notes).
 
 
 ## Version 8 is a refresh [_version_8_is_a_refresh]
