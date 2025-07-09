@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>annotations</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Elastic.Transport" Version="0.9.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Elastic.Clients.Elasticsearch\**\*.cs" LinkBase="Client" />
+    <Compile Remove="..\Elastic.Clients.Elasticsearch\obj\**" />
+  </ItemGroup>
+
+</Project>

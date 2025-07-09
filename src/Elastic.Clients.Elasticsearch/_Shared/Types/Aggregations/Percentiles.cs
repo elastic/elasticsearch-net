@@ -1,0 +1,115 @@
+// Licensed to Elasticsearch B.V under one or more agreements.
+// Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
+// See the LICENSE file in the project root for more information.
+
+using System;
+
+using Elastic.Clients.Elasticsearch.Serialization;
+
+namespace Elastic.Clients.Elasticsearch.Aggregations;
+
+public sealed class Percentiles
+{
+}
+
+internal sealed partial class PercentilesItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
+	private static readonly System.Text.Json.JsonEncodedText PropValueAsString = System.Text.Json.JsonEncodedText.Encode("value_as_string");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propKey = default;
+		LocalJsonValue<double?> propValue = default;
+		LocalJsonValue<string?> propValueAsString = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
+			{
+				continue;
+			}
+
+			if (propValue.TryReadProperty(ref reader, options, PropValue, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
+			{
+				continue;
+			}
+
+			if (propValueAsString.TryReadProperty(ref reader, options, PropValueAsString, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Key = propKey.Value,
+			Value = propValue.Value,
+			ValueAsString = propValueAsString.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
+		writer.WriteProperty(options, PropValueAsString, value.ValueAsString, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.PercentilesItemConverter))]
+public sealed class PercentilesItem
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PercentilesItem(string key, double? value)
+	{
+		Key = key;
+		Value = value;
+	}
+
+#if NET7_0_OR_GREATER
+
+	public PercentilesItem()
+	{
+	}
+
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ArrayPercentilesItem()
+	{
+	}
+#endif
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PercentilesItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Key { get; set; }
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? Value { get; set; }
+
+	public string? ValueAsString { get; set; }
+}
