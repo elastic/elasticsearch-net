@@ -56,7 +56,7 @@ var response = await client.Transport
 The `OnBeforeRequest` callback in `IElasticsearchClientSettings` can be used to dynamically modify requests.
 
 ```csharp
-var settings = new ElasticsearchClientSettings(new Uri("http://localhost:9200))
+var settings = new ElasticsearchClientSettings(new Uri("http://localhost:9200"))
     .OnBeforeRequest(OnBeforeRequest); <1>
 
 RequestConfiguration? globalRequestConfiguration = null;
