@@ -27,6 +27,7 @@ internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberGreen = System.Text.Json.JsonEncodedText.Encode("green");
 	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red");
+	private static readonly System.Text.Json.JsonEncodedText MemberUnavailable = System.Text.Json.JsonEncodedText.Encode("unavailable");
 	private static readonly System.Text.Json.JsonEncodedText MemberUnknown = System.Text.Json.JsonEncodedText.Encode("unknown");
 	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow");
 
@@ -40,6 +41,11 @@ internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.
 		if (reader.ValueTextEquals(MemberRed))
 		{
 			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Red;
+		}
+
+		if (reader.ValueTextEquals(MemberUnavailable))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unavailable;
 		}
 
 		if (reader.ValueTextEquals(MemberUnknown))
@@ -61,6 +67,11 @@ internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.
 		if (string.Equals(value, MemberRed.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Red;
+		}
+
+		if (string.Equals(value, MemberUnavailable.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unavailable;
 		}
 
 		if (string.Equals(value, MemberUnknown.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -85,6 +96,9 @@ internal sealed partial class IndicatorHealthStatusConverter : System.Text.Json.
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Red:
 				writer.WriteStringValue(MemberRed);
+				break;
+			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unavailable:
+				writer.WriteStringValue(MemberUnavailable);
 				break;
 			case Elastic.Clients.Elasticsearch.Core.HealthReport.IndicatorHealthStatus.Unknown:
 				writer.WriteStringValue(MemberUnknown);
@@ -200,6 +214,8 @@ public enum IndicatorHealthStatus
 	Green,
 	[System.Runtime.Serialization.EnumMember(Value = "red")]
 	Red,
+	[System.Runtime.Serialization.EnumMember(Value = "unavailable")]
+	Unavailable,
 	[System.Runtime.Serialization.EnumMember(Value = "unknown")]
 	Unknown,
 	[System.Runtime.Serialization.EnumMember(Value = "yellow")]

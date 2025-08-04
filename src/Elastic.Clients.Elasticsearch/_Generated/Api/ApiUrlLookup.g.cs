@@ -115,6 +115,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementGetDataLifecycle = new ApiUrls(new[] { "_data_stream/{name}/_lifecycle" });
 	internal static ApiUrls IndexManagementGetDataLifecycleStats = new ApiUrls(new[] { "_lifecycle/stats" });
 	internal static ApiUrls IndexManagementGetDataStream = new ApiUrls(new[] { "_data_stream", "_data_stream/{name}" });
+	internal static ApiUrls IndexManagementGetDataStreamMappings = new ApiUrls(new[] { "_data_stream/{name}/_mappings" });
 	internal static ApiUrls IndexManagementGetDataStreamOptions = new ApiUrls(new[] { "_data_stream/{name}/_options" });
 	internal static ApiUrls IndexManagementGetDataStreamSettings = new ApiUrls(new[] { "_data_stream/{name}/_settings" });
 	internal static ApiUrls IndexManagementGetFieldMapping = new ApiUrls(new[] { "_mapping/field/{fields}", "{index}/_mapping/field/{fields}" });
@@ -130,6 +131,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementPromoteDataStream = new ApiUrls(new[] { "_data_stream/_promote/{name}" });
 	internal static ApiUrls IndexManagementPutAlias = new ApiUrls(new[] { "{index}/_alias/{name}" });
 	internal static ApiUrls IndexManagementPutDataLifecycle = new ApiUrls(new[] { "_data_stream/{name}/_lifecycle" });
+	internal static ApiUrls IndexManagementPutDataStreamMappings = new ApiUrls(new[] { "_data_stream/{name}/_mappings" });
 	internal static ApiUrls IndexManagementPutDataStreamOptions = new ApiUrls(new[] { "_data_stream/{name}/_options" });
 	internal static ApiUrls IndexManagementPutDataStreamSettings = new ApiUrls(new[] { "_data_stream/{name}/_settings" });
 	internal static ApiUrls IndexManagementPutIndexTemplate = new ApiUrls(new[] { "_index_template/{name}" });
@@ -139,6 +141,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementRecovery = new ApiUrls(new[] { "_recovery", "{index}/_recovery" });
 	internal static ApiUrls IndexManagementRefresh = new ApiUrls(new[] { "_refresh", "{index}/_refresh" });
 	internal static ApiUrls IndexManagementReloadSearchAnalyzers = new ApiUrls(new[] { "{index}/_reload_search_analyzers" });
+	internal static ApiUrls IndexManagementRemoveBlock = new ApiUrls(new[] { "{index}/_block/{block}" });
 	internal static ApiUrls IndexManagementResolveCluster = new ApiUrls(new[] { "_resolve/cluster", "_resolve/cluster/{name}" });
 	internal static ApiUrls IndexManagementResolveIndex = new ApiUrls(new[] { "_resolve/index/{name}" });
 	internal static ApiUrls IndexManagementRollover = new ApiUrls(new[] { "{alias}/_rollover", "{alias}/_rollover/{new_index}" });
@@ -159,10 +162,13 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferencePut = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferencePutAlibabacloud = new ApiUrls(new[] { "_inference/{task_type}/{alibabacloud_inference_id}" });
 	internal static ApiUrls InferencePutAmazonbedrock = new ApiUrls(new[] { "_inference/{task_type}/{amazonbedrock_inference_id}" });
+	internal static ApiUrls InferencePutAmazonsagemaker = new ApiUrls(new[] { "_inference/{task_type}/{amazonsagemaker_inference_id}" });
 	internal static ApiUrls InferencePutAnthropic = new ApiUrls(new[] { "_inference/{task_type}/{anthropic_inference_id}" });
 	internal static ApiUrls InferencePutAzureaistudio = new ApiUrls(new[] { "_inference/{task_type}/{azureaistudio_inference_id}" });
 	internal static ApiUrls InferencePutAzureopenai = new ApiUrls(new[] { "_inference/{task_type}/{azureopenai_inference_id}" });
 	internal static ApiUrls InferencePutCohere = new ApiUrls(new[] { "_inference/{task_type}/{cohere_inference_id}" });
+	internal static ApiUrls InferencePutCustom = new ApiUrls(new[] { "_inference/{task_type}/{custom_inference_id}" });
+	internal static ApiUrls InferencePutDeepseek = new ApiUrls(new[] { "_inference/{task_type}/{deepseek_inference_id}" });
 	internal static ApiUrls InferencePutElasticsearch = new ApiUrls(new[] { "_inference/{task_type}/{elasticsearch_inference_id}" });
 	internal static ApiUrls InferencePutElser = new ApiUrls(new[] { "_inference/{task_type}/{elser_inference_id}" });
 	internal static ApiUrls InferencePutGoogleaistudio = new ApiUrls(new[] { "_inference/{task_type}/{googleaistudio_inference_id}" });

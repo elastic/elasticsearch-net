@@ -60,6 +60,7 @@ internal sealed partial class InfoRequestConverter : System.Text.Json.Serializat
 /// <para>
 /// Get cluster info.
 /// Get basic build, version, and cluster information.
+/// ::: In Serverless, this API is retained for backward compatibility only. Some response fields, such as the version number, should be ignored.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.InfoRequestConverter))]
@@ -94,6 +95,7 @@ public sealed partial class InfoRequest : Elastic.Clients.Elasticsearch.Requests
 /// <para>
 /// Get cluster info.
 /// Get basic build, version, and cluster information.
+/// ::: In Serverless, this API is retained for backward compatibility only. Some response fields, such as the version number, should be ignored.
 /// </para>
 /// </summary>
 public readonly partial struct InfoRequestDescriptor

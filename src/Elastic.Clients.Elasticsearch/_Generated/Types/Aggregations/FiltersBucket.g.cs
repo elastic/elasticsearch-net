@@ -26,15 +26,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 internal sealed partial class FiltersBucketConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.FiltersBucket>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.FiltersBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>? propAggregations = default;
 		LocalJsonValue<long> propDocCount = default;
+		LocalJsonValue<string?> propKey = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
+			{
+				continue;
+			}
+
+			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
 			{
 				continue;
 			}
@@ -48,7 +55,8 @@ internal sealed partial class FiltersBucketConverter : System.Text.Json.Serializ
 		return new Elastic.Clients.Elasticsearch.Aggregations.FiltersBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(propAggregations),
-			DocCount = propDocCount.Value
+			DocCount = propDocCount.Value,
+			Key = propKey.Value
 		};
 	}
 
@@ -56,6 +64,7 @@ internal sealed partial class FiltersBucketConverter : System.Text.Json.Serializ
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
+		writer.WriteProperty(options, PropKey, value.Key, null, null);
 		if (value.Aggregations is not null)
 		{
 			foreach (var item in value.Aggregations)
@@ -104,4 +113,5 @@ public sealed partial class FiltersBucket
 	required
 #endif
 	long DocCount { get; set; }
+	public string? Key { get; set; }
 }

@@ -55,6 +55,9 @@ public sealed partial class EsqlQueryRequestParameters : Elastic.Transport.Reque
 	/// <para>
 	/// A short version of the Accept header, e.g. json, yaml.
 	/// </para>
+	/// <para>
+	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 }
@@ -221,6 +224,9 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 	/// <para>
 	/// A short version of the Accept header, e.g. json, yaml.
 	/// </para>
+	/// <para>
+	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
+	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
 
@@ -342,6 +348,9 @@ public readonly partial struct EsqlQueryRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// A short version of the Accept header, e.g. json, yaml.
+	/// </para>
+	/// <para>
+	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
@@ -576,6 +585,9 @@ public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// A short version of the Accept header, e.g. json, yaml.
+	/// </para>
+	/// <para>
+	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)

@@ -38,7 +38,7 @@ internal sealed partial class RemoteClusterInfoConverter : System.Text.Json.Seri
 	private static readonly System.Text.Json.JsonEncodedText PropShardsCount = System.Text.Json.JsonEncodedText.Encode("shards_count");
 	private static readonly System.Text.Json.JsonEncodedText PropSkipUnavailable = System.Text.Json.JsonEncodedText.Encode("skip_unavailable");
 	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportCompress = System.Text.Json.JsonEncodedText.Encode("transport_compress");
+	private static readonly System.Text.Json.JsonEncodedText PropTransportCompress = System.Text.Json.JsonEncodedText.Encode("transport.compress");
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
 	public override Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)

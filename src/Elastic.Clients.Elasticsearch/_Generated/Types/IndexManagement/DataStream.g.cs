@@ -33,6 +33,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 	private static readonly System.Text.Json.JsonEncodedText PropIndexMode = System.Text.Json.JsonEncodedText.Encode("index_mode");
 	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
 	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle");
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
 	private static readonly System.Text.Json.JsonEncodedText PropNextGenerationManagedBy = System.Text.Json.JsonEncodedText.Encode("next_generation_managed_by");
@@ -56,6 +57,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode?> propIndexMode = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex>> propIndices = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover?> propLifecycle = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappings = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMeta = default;
 		LocalJsonValue<string> propName = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy> propNextGenerationManagedBy = default;
@@ -105,6 +107,11 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 			}
 
 			if (propLifecycle.TryReadProperty(ref reader, options, PropLifecycle, null))
+			{
+				continue;
+			}
+
+			if (propMappings.TryReadProperty(ref reader, options, PropMappings, null))
 			{
 				continue;
 			}
@@ -184,6 +191,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 			IndexMode = propIndexMode.Value,
 			Indices = propIndices.Value,
 			Lifecycle = propLifecycle.Value,
+			Mappings = propMappings.Value,
 			Meta = propMeta.Value,
 			Name = propName.Value,
 			NextGenerationManagedBy = propNextGenerationManagedBy.Value,
@@ -209,6 +217,7 @@ internal sealed partial class DataStreamConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropIndexMode, value.IndexMode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.IndexMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>(o, v));
 		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex>(o, v, null));
 		writer.WriteProperty(options, PropLifecycle, value.Lifecycle, null, null);
+		writer.WriteProperty(options, PropMappings, value.Mappings, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropNextGenerationManagedBy, value.NextGenerationManagedBy, null, null);
@@ -330,6 +339,14 @@ public sealed partial class DataStream
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleWithRollover? Lifecycle { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The mappings specific to this data stream that will take precedence over the mappings in the matching index
+	/// template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -32,17 +32,23 @@ internal sealed partial class FieldTypesConverter : System.Text.Json.Serializati
 	private static readonly System.Text.Json.JsonEncodedText PropIndexedVectorDimMin = System.Text.Json.JsonEncodedText.Encode("indexed_vector_dim_min");
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
 	private static readonly System.Text.Json.JsonEncodedText PropScriptCount = System.Text.Json.JsonEncodedText.Encode("script_count");
+	private static readonly System.Text.Json.JsonEncodedText PropVectorElementTypeCount = System.Text.Json.JsonEncodedText.Encode("vector_element_type_count");
+	private static readonly System.Text.Json.JsonEncodedText PropVectorIndexTypeCount = System.Text.Json.JsonEncodedText.Encode("vector_index_type_count");
+	private static readonly System.Text.Json.JsonEncodedText PropVectorSimilarityTypeCount = System.Text.Json.JsonEncodedText.Encode("vector_similarity_type_count");
 
 	public override Elastic.Clients.Elasticsearch.Cluster.FieldTypes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<int> propCount = default;
 		LocalJsonValue<int> propIndexCount = default;
-		LocalJsonValue<long?> propIndexedVectorCount = default;
-		LocalJsonValue<long?> propIndexedVectorDimMax = default;
-		LocalJsonValue<long?> propIndexedVectorDimMin = default;
+		LocalJsonValue<int?> propIndexedVectorCount = default;
+		LocalJsonValue<int?> propIndexedVectorDimMax = default;
+		LocalJsonValue<int?> propIndexedVectorDimMin = default;
 		LocalJsonValue<string> propName = default;
 		LocalJsonValue<int?> propScriptCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>?> propVectorElementTypeCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>?> propVectorIndexTypeCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>?> propVectorSimilarityTypeCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
@@ -55,17 +61,17 @@ internal sealed partial class FieldTypesConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propIndexedVectorCount.TryReadProperty(ref reader, options, PropIndexedVectorCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			if (propIndexedVectorCount.TryReadProperty(ref reader, options, PropIndexedVectorCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propIndexedVectorDimMax.TryReadProperty(ref reader, options, PropIndexedVectorDimMax, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			if (propIndexedVectorDimMax.TryReadProperty(ref reader, options, PropIndexedVectorDimMax, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
 
-			if (propIndexedVectorDimMin.TryReadProperty(ref reader, options, PropIndexedVectorDimMin, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			if (propIndexedVectorDimMin.TryReadProperty(ref reader, options, PropIndexedVectorDimMin, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -76,6 +82,21 @@ internal sealed partial class FieldTypesConverter : System.Text.Json.Serializati
 			}
 
 			if (propScriptCount.TryReadProperty(ref reader, options, PropScriptCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propVectorElementTypeCount.TryReadProperty(ref reader, options, PropVectorElementTypeCount, static System.Collections.Generic.IReadOnlyDictionary<string, int>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propVectorIndexTypeCount.TryReadProperty(ref reader, options, PropVectorIndexTypeCount, static System.Collections.Generic.IReadOnlyDictionary<string, int>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propVectorSimilarityTypeCount.TryReadProperty(ref reader, options, PropVectorSimilarityTypeCount, static System.Collections.Generic.IReadOnlyDictionary<string, int>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)))
 			{
 				continue;
 			}
@@ -98,7 +119,10 @@ internal sealed partial class FieldTypesConverter : System.Text.Json.Serializati
 			IndexedVectorDimMax = propIndexedVectorDimMax.Value,
 			IndexedVectorDimMin = propIndexedVectorDimMin.Value,
 			Name = propName.Value,
-			ScriptCount = propScriptCount.Value
+			ScriptCount = propScriptCount.Value,
+			VectorElementTypeCount = propVectorElementTypeCount.Value,
+			VectorIndexTypeCount = propVectorIndexTypeCount.Value,
+			VectorSimilarityTypeCount = propVectorSimilarityTypeCount.Value
 		};
 	}
 
@@ -107,11 +131,14 @@ internal sealed partial class FieldTypesConverter : System.Text.Json.Serializati
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
 		writer.WriteProperty(options, PropIndexCount, value.IndexCount, null, null);
-		writer.WriteProperty(options, PropIndexedVectorCount, value.IndexedVectorCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropIndexedVectorDimMax, value.IndexedVectorDimMax, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropIndexedVectorDimMin, value.IndexedVectorDimMin, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropIndexedVectorCount, value.IndexedVectorCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropIndexedVectorDimMax, value.IndexedVectorDimMax, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropIndexedVectorDimMin, value.IndexedVectorDimMin, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropScriptCount, value.ScriptCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropVectorElementTypeCount, value.VectorElementTypeCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int>? v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
+		writer.WriteProperty(options, PropVectorIndexTypeCount, value.VectorIndexTypeCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int>? v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
+		writer.WriteProperty(options, PropVectorSimilarityTypeCount, value.VectorSimilarityTypeCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int>? v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }
@@ -170,21 +197,21 @@ public sealed partial class FieldTypes
 	/// For dense_vector field types, number of indexed vector types in selected nodes.
 	/// </para>
 	/// </summary>
-	public long? IndexedVectorCount { get; set; }
+	public int? IndexedVectorCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// For dense_vector field types, the maximum dimension of all indexed vector types in selected nodes.
 	/// </para>
 	/// </summary>
-	public long? IndexedVectorDimMax { get; set; }
+	public int? IndexedVectorDimMax { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// For dense_vector field types, the minimum dimension of all indexed vector types in selected nodes.
 	/// </para>
 	/// </summary>
-	public long? IndexedVectorDimMin { get; set; }
+	public int? IndexedVectorDimMin { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -203,4 +230,25 @@ public sealed partial class FieldTypes
 	/// </para>
 	/// </summary>
 	public int? ScriptCount { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For dense_vector field types, count of mappings by element type
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IReadOnlyDictionary<string, int>? VectorElementTypeCount { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For dense_vector field types, count of mappings by index type
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IReadOnlyDictionary<string, int>? VectorIndexTypeCount { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For dense_vector field types, count of mappings by similarity
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IReadOnlyDictionary<string, int>? VectorSimilarityTypeCount { get; set; }
 }

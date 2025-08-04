@@ -2732,6 +2732,104 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse GetDataStreamMappings(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse GetDataStreamMappings(Elastic.Clients.Elasticsearch.Indices name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse GetDataStreamMappings(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse GetDataStreamMappings<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse GetDataStreamMappings<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse GetDataStreamMappings<TDocument>(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse> GetDataStreamMappingsAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse> GetDataStreamMappingsAsync(Elastic.Clients.Elasticsearch.Indices name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse> GetDataStreamMappingsAsync(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse> GetDataStreamMappingsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse> GetDataStreamMappingsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse> GetDataStreamMappingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestDescriptor<TDocument>(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsResponse GetDataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.GetDataStreamOptionsRequest request)
 	{
 		request.BeforeRequest();
@@ -4090,6 +4188,104 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse PutDataStreamMappings(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse PutDataStreamMappings(Elastic.Clients.Elasticsearch.Indices name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse PutDataStreamMappings(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse PutDataStreamMappings<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse PutDataStreamMappings<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse PutDataStreamMappings<TDocument>(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse> PutDataStreamMappingsAsync(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse> PutDataStreamMappingsAsync(Elastic.Clients.Elasticsearch.Indices name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse> PutDataStreamMappingsAsync(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse> PutDataStreamMappingsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse> PutDataStreamMappingsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse> PutDataStreamMappingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestDescriptor<TDocument>(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsResponse PutDataStreamOptions(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamOptionsRequest request)
 	{
 		request.BeforeRequest();
@@ -4926,6 +5122,70 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse RemoveBlock(Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse RemoveBlock(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor(index, block);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse RemoveBlock(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor(index, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse RemoveBlock<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument>(index, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse> RemoveBlockAsync(Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse> RemoveBlockAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor(index, block);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse> RemoveBlockAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor(index, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse> RemoveBlockAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument>(index, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse ResolveCluster(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest request)

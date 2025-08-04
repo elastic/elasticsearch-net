@@ -27,7 +27,9 @@ internal sealed partial class AzureAiStudioTaskSettingsConverter : System.Text.J
 {
 	private static readonly System.Text.Json.JsonEncodedText PropDoSample = System.Text.Json.JsonEncodedText.Encode("do_sample");
 	private static readonly System.Text.Json.JsonEncodedText PropMaxNewTokens = System.Text.Json.JsonEncodedText.Encode("max_new_tokens");
+	private static readonly System.Text.Json.JsonEncodedText PropReturnDocuments = System.Text.Json.JsonEncodedText.Encode("return_documents");
 	private static readonly System.Text.Json.JsonEncodedText PropTemperature = System.Text.Json.JsonEncodedText.Encode("temperature");
+	private static readonly System.Text.Json.JsonEncodedText PropTopN = System.Text.Json.JsonEncodedText.Encode("top_n");
 	private static readonly System.Text.Json.JsonEncodedText PropTopP = System.Text.Json.JsonEncodedText.Encode("top_p");
 	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user");
 
@@ -36,7 +38,9 @@ internal sealed partial class AzureAiStudioTaskSettingsConverter : System.Text.J
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<float?> propDoSample = default;
 		LocalJsonValue<int?> propMaxNewTokens = default;
+		LocalJsonValue<bool?> propReturnDocuments = default;
 		LocalJsonValue<float?> propTemperature = default;
+		LocalJsonValue<int?> propTopN = default;
 		LocalJsonValue<float?> propTopP = default;
 		LocalJsonValue<string?> propUser = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -51,7 +55,17 @@ internal sealed partial class AzureAiStudioTaskSettingsConverter : System.Text.J
 				continue;
 			}
 
+			if (propReturnDocuments.TryReadProperty(ref reader, options, PropReturnDocuments, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
 			if (propTemperature.TryReadProperty(ref reader, options, PropTemperature, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
+			{
+				continue;
+			}
+
+			if (propTopN.TryReadProperty(ref reader, options, PropTopN, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -80,7 +94,9 @@ internal sealed partial class AzureAiStudioTaskSettingsConverter : System.Text.J
 		{
 			DoSample = propDoSample.Value,
 			MaxNewTokens = propMaxNewTokens.Value,
+			ReturnDocuments = propReturnDocuments.Value,
 			Temperature = propTemperature.Value,
+			TopN = propTopN.Value,
 			TopP = propTopP.Value,
 			User = propUser.Value
 		};
@@ -91,7 +107,9 @@ internal sealed partial class AzureAiStudioTaskSettingsConverter : System.Text.J
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDoSample, value.DoSample, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropMaxNewTokens, value.MaxNewTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTemperature, value.Temperature, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropTopN, value.TopN, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTopP, value.TopP, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropUser, value.User, null, null);
 		writer.WriteEndObject();
@@ -134,12 +152,27 @@ public sealed partial class AzureAiStudioTaskSettings
 
 	/// <summary>
 	/// <para>
+	/// For a <c>rerank</c> task, return doc text within the results.
+	/// </para>
+	/// </summary>
+	public bool? ReturnDocuments { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// For a <c>completion</c> task, control the apparent creativity of generated completions with a sampling temperature.
 	/// It must be a number in the range of 0.0 to 2.0.
 	/// It should not be used if <c>top_p</c> is specified.
 	/// </para>
 	/// </summary>
 	public float? Temperature { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For a <c>rerank</c> task, the number of most relevant documents to return.
+	/// It defaults to the number of the documents.
+	/// </para>
+	/// </summary>
+	public int? TopN { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -203,6 +236,17 @@ public readonly partial struct AzureAiStudioTaskSettingsDescriptor
 
 	/// <summary>
 	/// <para>
+	/// For a <c>rerank</c> task, return doc text within the results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor ReturnDocuments(bool? value = true)
+	{
+		Instance.ReturnDocuments = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// For a <c>completion</c> task, control the apparent creativity of generated completions with a sampling temperature.
 	/// It must be a number in the range of 0.0 to 2.0.
 	/// It should not be used if <c>top_p</c> is specified.
@@ -211,6 +255,18 @@ public readonly partial struct AzureAiStudioTaskSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor Temperature(float? value)
 	{
 		Instance.Temperature = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For a <c>rerank</c> task, the number of most relevant documents to return.
+	/// It defaults to the number of the documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskSettingsDescriptor TopN(int? value)
+	{
+		Instance.TopN = value;
 		return this;
 	}
 

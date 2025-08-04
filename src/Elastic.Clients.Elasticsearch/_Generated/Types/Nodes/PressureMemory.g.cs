@@ -32,7 +32,9 @@ internal sealed partial class PressureMemoryConverter : System.Text.Json.Seriali
 	private static readonly System.Text.Json.JsonEncodedText PropCoordinating = System.Text.Json.JsonEncodedText.Encode("coordinating");
 	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingInBytes = System.Text.Json.JsonEncodedText.Encode("coordinating_in_bytes");
 	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingRejections = System.Text.Json.JsonEncodedText.Encode("coordinating_rejections");
+	private static readonly System.Text.Json.JsonEncodedText PropLargeOperationRejections = System.Text.Json.JsonEncodedText.Encode("large_operation_rejections");
 	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryDocumentRejections = System.Text.Json.JsonEncodedText.Encode("primary_document_rejections");
 	private static readonly System.Text.Json.JsonEncodedText PropPrimaryInBytes = System.Text.Json.JsonEncodedText.Encode("primary_in_bytes");
 	private static readonly System.Text.Json.JsonEncodedText PropPrimaryRejections = System.Text.Json.JsonEncodedText.Encode("primary_rejections");
 	private static readonly System.Text.Json.JsonEncodedText PropReplica = System.Text.Json.JsonEncodedText.Encode("replica");
@@ -49,7 +51,9 @@ internal sealed partial class PressureMemoryConverter : System.Text.Json.Seriali
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propCoordinating = default;
 		LocalJsonValue<long?> propCoordinatingInBytes = default;
 		LocalJsonValue<long?> propCoordinatingRejections = default;
+		LocalJsonValue<long?> propLargeOperationRejections = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propPrimary = default;
+		LocalJsonValue<long?> propPrimaryDocumentRejections = default;
 		LocalJsonValue<long?> propPrimaryInBytes = default;
 		LocalJsonValue<long?> propPrimaryRejections = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propReplica = default;
@@ -92,7 +96,17 @@ internal sealed partial class PressureMemoryConverter : System.Text.Json.Seriali
 				continue;
 			}
 
+			if (propLargeOperationRejections.TryReadProperty(ref reader, options, PropLargeOperationRejections, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
 			if (propPrimary.TryReadProperty(ref reader, options, PropPrimary, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryDocumentRejections.TryReadProperty(ref reader, options, PropPrimaryDocumentRejections, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -141,7 +155,9 @@ internal sealed partial class PressureMemoryConverter : System.Text.Json.Seriali
 			Coordinating = propCoordinating.Value,
 			CoordinatingInBytes = propCoordinatingInBytes.Value,
 			CoordinatingRejections = propCoordinatingRejections.Value,
+			LargeOperationRejections = propLargeOperationRejections.Value,
 			Primary = propPrimary.Value,
+			PrimaryDocumentRejections = propPrimaryDocumentRejections.Value,
 			PrimaryInBytes = propPrimaryInBytes.Value,
 			PrimaryRejections = propPrimaryRejections.Value,
 			Replica = propReplica.Value,
@@ -160,7 +176,9 @@ internal sealed partial class PressureMemoryConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropCoordinating, value.Coordinating, null, null);
 		writer.WriteProperty(options, PropCoordinatingInBytes, value.CoordinatingInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropCoordinatingRejections, value.CoordinatingRejections, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLargeOperationRejections, value.LargeOperationRejections, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropPrimary, value.Primary, null, null);
+		writer.WriteProperty(options, PropPrimaryDocumentRejections, value.PrimaryDocumentRejections, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropPrimaryInBytes, value.PrimaryInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropPrimaryRejections, value.PrimaryRejections, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropReplica, value.Replica, null, null);
@@ -239,6 +257,7 @@ public sealed partial class PressureMemory
 	/// </para>
 	/// </summary>
 	public long? CoordinatingRejections { get; set; }
+	public long? LargeOperationRejections { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -246,6 +265,7 @@ public sealed partial class PressureMemory
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? Primary { get; set; }
+	public long? PrimaryDocumentRejections { get; set; }
 
 	/// <summary>
 	/// <para>

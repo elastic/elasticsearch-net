@@ -31,7 +31,6 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropFileSizes = System.Text.Json.JsonEncodedText.Encode("file_sizes");
 	private static readonly System.Text.Json.JsonEncodedText PropFixedBitSet = System.Text.Json.JsonEncodedText.Encode("fixed_bit_set");
 	private static readonly System.Text.Json.JsonEncodedText PropFixedBitSetMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("fixed_bit_set_memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexWriterMaxMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("index_writer_max_memory_in_bytes");
 	private static readonly System.Text.Json.JsonEncodedText PropIndexWriterMemory = System.Text.Json.JsonEncodedText.Encode("index_writer_memory");
 	private static readonly System.Text.Json.JsonEncodedText PropIndexWriterMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("index_writer_memory_in_bytes");
 	private static readonly System.Text.Json.JsonEncodedText PropMaxUnsafeAutoIdTimestamp = System.Text.Json.JsonEncodedText.Encode("max_unsafe_auto_id_timestamp");
@@ -41,12 +40,12 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropNormsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("norms_memory_in_bytes");
 	private static readonly System.Text.Json.JsonEncodedText PropPointsMemory = System.Text.Json.JsonEncodedText.Encode("points_memory");
 	private static readonly System.Text.Json.JsonEncodedText PropPointsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("points_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFieldsMemory = System.Text.Json.JsonEncodedText.Encode("stored_fields_memory");
 	private static readonly System.Text.Json.JsonEncodedText PropStoredFieldsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("stored_fields_memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropStoredMemory = System.Text.Json.JsonEncodedText.Encode("stored_memory");
 	private static readonly System.Text.Json.JsonEncodedText PropTermsMemory = System.Text.Json.JsonEncodedText.Encode("terms_memory");
 	private static readonly System.Text.Json.JsonEncodedText PropTermsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("terms_memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTermVectorsMemory = System.Text.Json.JsonEncodedText.Encode("term_vectors_memory");
 	private static readonly System.Text.Json.JsonEncodedText PropTermVectorsMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("term_vectors_memory_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTermVectoryMemory = System.Text.Json.JsonEncodedText.Encode("term_vectory_memory");
 	private static readonly System.Text.Json.JsonEncodedText PropVersionMapMemory = System.Text.Json.JsonEncodedText.Encode("version_map_memory");
 	private static readonly System.Text.Json.JsonEncodedText PropVersionMapMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("version_map_memory_in_bytes");
 
@@ -59,7 +58,6 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo>> propFileSizes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propFixedBitSet = default;
 		LocalJsonValue<long> propFixedBitSetMemoryInBytes = default;
-		LocalJsonValue<long?> propIndexWriterMaxMemoryInBytes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propIndexWriterMemory = default;
 		LocalJsonValue<long> propIndexWriterMemoryInBytes = default;
 		LocalJsonValue<long> propMaxUnsafeAutoIdTimestamp = default;
@@ -69,12 +67,12 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 		LocalJsonValue<long> propNormsMemoryInBytes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propPointsMemory = default;
 		LocalJsonValue<long> propPointsMemoryInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propStoredFieldsMemory = default;
 		LocalJsonValue<long> propStoredFieldsMemoryInBytes = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propStoredMemory = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTermsMemory = default;
 		LocalJsonValue<long> propTermsMemoryInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTermVectorsMemory = default;
 		LocalJsonValue<long> propTermVectorsMemoryInBytes = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTermVectoryMemory = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propVersionMapMemory = default;
 		LocalJsonValue<long> propVersionMapMemoryInBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -105,11 +103,6 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 			}
 
 			if (propFixedBitSetMemoryInBytes.TryReadProperty(ref reader, options, PropFixedBitSetMemoryInBytes, null))
-			{
-				continue;
-			}
-
-			if (propIndexWriterMaxMemoryInBytes.TryReadProperty(ref reader, options, PropIndexWriterMaxMemoryInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -159,12 +152,12 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propStoredFieldsMemoryInBytes.TryReadProperty(ref reader, options, PropStoredFieldsMemoryInBytes, null))
+			if (propStoredFieldsMemory.TryReadProperty(ref reader, options, PropStoredFieldsMemory, null))
 			{
 				continue;
 			}
 
-			if (propStoredMemory.TryReadProperty(ref reader, options, PropStoredMemory, null))
+			if (propStoredFieldsMemoryInBytes.TryReadProperty(ref reader, options, PropStoredFieldsMemoryInBytes, null))
 			{
 				continue;
 			}
@@ -179,12 +172,12 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propTermVectorsMemoryInBytes.TryReadProperty(ref reader, options, PropTermVectorsMemoryInBytes, null))
+			if (propTermVectorsMemory.TryReadProperty(ref reader, options, PropTermVectorsMemory, null))
 			{
 				continue;
 			}
 
-			if (propTermVectoryMemory.TryReadProperty(ref reader, options, PropTermVectoryMemory, null))
+			if (propTermVectorsMemoryInBytes.TryReadProperty(ref reader, options, PropTermVectorsMemoryInBytes, null))
 			{
 				continue;
 			}
@@ -217,7 +210,6 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 			FileSizes = propFileSizes.Value,
 			FixedBitSet = propFixedBitSet.Value,
 			FixedBitSetMemoryInBytes = propFixedBitSetMemoryInBytes.Value,
-			IndexWriterMaxMemoryInBytes = propIndexWriterMaxMemoryInBytes.Value,
 			IndexWriterMemory = propIndexWriterMemory.Value,
 			IndexWriterMemoryInBytes = propIndexWriterMemoryInBytes.Value,
 			MaxUnsafeAutoIdTimestamp = propMaxUnsafeAutoIdTimestamp.Value,
@@ -227,12 +219,12 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 			NormsMemoryInBytes = propNormsMemoryInBytes.Value,
 			PointsMemory = propPointsMemory.Value,
 			PointsMemoryInBytes = propPointsMemoryInBytes.Value,
+			StoredFieldsMemory = propStoredFieldsMemory.Value,
 			StoredFieldsMemoryInBytes = propStoredFieldsMemoryInBytes.Value,
-			StoredMemory = propStoredMemory.Value,
 			TermsMemory = propTermsMemory.Value,
 			TermsMemoryInBytes = propTermsMemoryInBytes.Value,
+			TermVectorsMemory = propTermVectorsMemory.Value,
 			TermVectorsMemoryInBytes = propTermVectorsMemoryInBytes.Value,
-			TermVectoryMemory = propTermVectoryMemory.Value,
 			VersionMapMemory = propVersionMapMemory.Value,
 			VersionMapMemoryInBytes = propVersionMapMemoryInBytes.Value
 		};
@@ -247,7 +239,6 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropFileSizes, value.FileSizes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo>(o, v, null, null));
 		writer.WriteProperty(options, PropFixedBitSet, value.FixedBitSet, null, null);
 		writer.WriteProperty(options, PropFixedBitSetMemoryInBytes, value.FixedBitSetMemoryInBytes, null, null);
-		writer.WriteProperty(options, PropIndexWriterMaxMemoryInBytes, value.IndexWriterMaxMemoryInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropIndexWriterMemory, value.IndexWriterMemory, null, null);
 		writer.WriteProperty(options, PropIndexWriterMemoryInBytes, value.IndexWriterMemoryInBytes, null, null);
 		writer.WriteProperty(options, PropMaxUnsafeAutoIdTimestamp, value.MaxUnsafeAutoIdTimestamp, null, null);
@@ -257,12 +248,12 @@ internal sealed partial class SegmentsStatsConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropNormsMemoryInBytes, value.NormsMemoryInBytes, null, null);
 		writer.WriteProperty(options, PropPointsMemory, value.PointsMemory, null, null);
 		writer.WriteProperty(options, PropPointsMemoryInBytes, value.PointsMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropStoredFieldsMemory, value.StoredFieldsMemory, null, null);
 		writer.WriteProperty(options, PropStoredFieldsMemoryInBytes, value.StoredFieldsMemoryInBytes, null, null);
-		writer.WriteProperty(options, PropStoredMemory, value.StoredMemory, null, null);
 		writer.WriteProperty(options, PropTermsMemory, value.TermsMemory, null, null);
 		writer.WriteProperty(options, PropTermsMemoryInBytes, value.TermsMemoryInBytes, null, null);
+		writer.WriteProperty(options, PropTermVectorsMemory, value.TermVectorsMemory, null, null);
 		writer.WriteProperty(options, PropTermVectorsMemoryInBytes, value.TermVectorsMemoryInBytes, null, null);
-		writer.WriteProperty(options, PropTermVectoryMemory, value.TermVectoryMemory, null, null);
 		writer.WriteProperty(options, PropVersionMapMemory, value.VersionMapMemory, null, null);
 		writer.WriteProperty(options, PropVersionMapMemoryInBytes, value.VersionMapMemoryInBytes, null, null);
 		writer.WriteEndObject();
@@ -365,7 +356,6 @@ public sealed partial class SegmentsStats
 	required
 #endif
 	long FixedBitSetMemoryInBytes { get; set; }
-	public long? IndexWriterMaxMemoryInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -452,6 +442,13 @@ public sealed partial class SegmentsStats
 
 	/// <summary>
 	/// <para>
+	/// Total amount of memory used for stored fields across all shards assigned to selected nodes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? StoredFieldsMemory { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Total amount, in bytes, of memory used for stored fields across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
@@ -460,7 +457,6 @@ public sealed partial class SegmentsStats
 	required
 #endif
 	long StoredFieldsMemoryInBytes { get; set; }
-	public Elastic.Clients.Elasticsearch.ByteSize? StoredMemory { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -482,6 +478,13 @@ public sealed partial class SegmentsStats
 
 	/// <summary>
 	/// <para>
+	/// Total amount of memory used for term vectors across all shards assigned to selected nodes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? TermVectorsMemory { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Total amount, in bytes, of memory used for term vectors across all shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
@@ -490,13 +493,6 @@ public sealed partial class SegmentsStats
 	required
 #endif
 	long TermVectorsMemoryInBytes { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Total amount of memory used for term vectors across all shards assigned to selected nodes.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.ByteSize? TermVectoryMemory { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -25,25 +25,43 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 internal sealed partial class OperatingSystemMemoryInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotal = System.Text.Json.JsonEncodedText.Encode("adjusted_total");
 	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotalInBytes = System.Text.Json.JsonEncodedText.Encode("adjusted_total_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free");
 	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes");
 	private static readonly System.Text.Json.JsonEncodedText PropFreePercent = System.Text.Json.JsonEncodedText.Encode("free_percent");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
 	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropUsed = System.Text.Json.JsonEncodedText.Encode("used");
 	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes");
 	private static readonly System.Text.Json.JsonEncodedText PropUsedPercent = System.Text.Json.JsonEncodedText.Encode("used_percent");
 
 	public override Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propAdjustedTotal = default;
 		LocalJsonValue<long?> propAdjustedTotalInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propFree = default;
 		LocalJsonValue<long> propFreeInBytes = default;
 		LocalJsonValue<int> propFreePercent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotal = default;
 		LocalJsonValue<long> propTotalInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propUsed = default;
 		LocalJsonValue<long> propUsedInBytes = default;
 		LocalJsonValue<int> propUsedPercent = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propAdjustedTotal.TryReadProperty(ref reader, options, PropAdjustedTotal, null))
+			{
+				continue;
+			}
+
 			if (propAdjustedTotalInBytes.TryReadProperty(ref reader, options, PropAdjustedTotalInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propFree.TryReadProperty(ref reader, options, PropFree, null))
 			{
 				continue;
 			}
@@ -58,7 +76,17 @@ internal sealed partial class OperatingSystemMemoryInfoConverter : System.Text.J
 				continue;
 			}
 
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
 			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, null))
+			{
+				continue;
+			}
+
+			if (propUsed.TryReadProperty(ref reader, options, PropUsed, null))
 			{
 				continue;
 			}
@@ -85,10 +113,14 @@ internal sealed partial class OperatingSystemMemoryInfoConverter : System.Text.J
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			AdjustedTotal = propAdjustedTotal.Value,
 			AdjustedTotalInBytes = propAdjustedTotalInBytes.Value,
+			Free = propFree.Value,
 			FreeInBytes = propFreeInBytes.Value,
 			FreePercent = propFreePercent.Value,
+			Total = propTotal.Value,
 			TotalInBytes = propTotalInBytes.Value,
+			Used = propUsed.Value,
 			UsedInBytes = propUsedInBytes.Value,
 			UsedPercent = propUsedPercent.Value
 		};
@@ -97,10 +129,14 @@ internal sealed partial class OperatingSystemMemoryInfoConverter : System.Text.J
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAdjustedTotal, value.AdjustedTotal, null, null);
 		writer.WriteProperty(options, PropAdjustedTotalInBytes, value.AdjustedTotalInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropFree, value.Free, null, null);
 		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, null);
 		writer.WriteProperty(options, PropFreePercent, value.FreePercent, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
 		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, null);
+		writer.WriteProperty(options, PropUsed, value.Used, null, null);
 		writer.WriteProperty(options, PropUsedInBytes, value.UsedInBytes, null, null);
 		writer.WriteProperty(options, PropUsedPercent, value.UsedPercent, null, null);
 		writer.WriteEndObject();
@@ -138,10 +174,24 @@ public sealed partial class OperatingSystemMemoryInfo
 
 	/// <summary>
 	/// <para>
+	/// Total amount of memory across all selected nodes, but using the value specified using the <c>es.total_memory_bytes</c> system property instead of measured total memory for those nodes where that system property was set.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? AdjustedTotal { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Total amount, in bytes, of memory across all selected nodes, but using the value specified using the <c>es.total_memory_bytes</c> system property instead of measured total memory for those nodes where that system property was set.
 	/// </para>
 	/// </summary>
 	public long? AdjustedTotalInBytes { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Amount of free physical memory across all selected nodes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? Free { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -167,6 +217,13 @@ public sealed partial class OperatingSystemMemoryInfo
 
 	/// <summary>
 	/// <para>
+	/// Total amount of physical memory across all selected nodes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? Total { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Total amount, in bytes, of physical memory across all selected nodes.
 	/// </para>
 	/// </summary>
@@ -175,6 +232,13 @@ public sealed partial class OperatingSystemMemoryInfo
 	required
 #endif
 	long TotalInBytes { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Amount of physical memory in use across all selected nodes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? Used { get; set; }
 
 	/// <summary>
 	/// <para>

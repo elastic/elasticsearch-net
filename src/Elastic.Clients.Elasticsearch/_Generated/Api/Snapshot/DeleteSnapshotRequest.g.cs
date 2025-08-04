@@ -33,6 +33,14 @@ public sealed partial class DeleteSnapshotRequestParameters : Elastic.Transport.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request returns a response when the matching snapshots are all deleted.
+	/// If <c>false</c>, the request returns a response as soon as the deletes are scheduled.
+	/// </para>
+	/// </summary>
+	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 internal sealed partial class DeleteSnapshotRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest>
@@ -126,6 +134,14 @@ public sealed partial class DeleteSnapshotRequest : Elastic.Clients.Elasticsearc
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request returns a response when the matching snapshots are all deleted.
+	/// If <c>false</c>, the request returns a response as soon as the deletes are scheduled.
+	/// </para>
+	/// </summary>
+	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
 /// <summary>
@@ -190,6 +206,18 @@ public readonly partial struct DeleteSnapshotRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request returns a response when the matching snapshots are all deleted.
+	/// If <c>false</c>, the request returns a response as soon as the deletes are scheduled.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
 		return this;
 	}
 
