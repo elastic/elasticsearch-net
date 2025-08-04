@@ -25,6 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class GrantApiKeyRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
+	/// visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', nothing is done with refreshes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
 internal sealed partial class GrantApiKeyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest>
@@ -191,6 +200,16 @@ public sealed partial class GrantApiKeyRequest : Elastic.Clients.Elasticsearch.R
 
 	/// <summary>
 	/// <para>
+	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
+	/// visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', nothing is done with refreshes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+
+	/// <summary>
+	/// <para>
 	/// The user's access token.
 	/// If you specify the <c>access_token</c> grant type, this parameter is required.
 	/// It is not valid with other grant types.
@@ -307,6 +326,20 @@ public readonly partial struct GrantApiKeyRequestDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
+	/// visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', nothing is done with refreshes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -514,6 +547,20 @@ public readonly partial struct GrantApiKeyRequestDescriptor<TDocument>
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If 'true', Elasticsearch refreshes the affected shards to make this operation
+	/// visible to search.
+	/// If 'wait_for', it waits for a refresh to make this operation visible to search.
+	/// If 'false', nothing is done with refreshes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>

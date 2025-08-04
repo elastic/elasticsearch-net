@@ -36,7 +36,7 @@ internal sealed partial class CohereServiceSettingsConverter : System.Text.Json.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propApiKey = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType?> propEmbeddingType = default;
-		LocalJsonValue<string?> propModelId = default;
+		LocalJsonValue<string> propModelId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.RateLimitSetting?> propRateLimit = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType?> propSimilarity = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -102,9 +102,10 @@ internal sealed partial class CohereServiceSettingsConverter : System.Text.Json.
 public sealed partial class CohereServiceSettings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CohereServiceSettings(string apiKey)
+	public CohereServiceSettings(string apiKey, string modelId)
 	{
 		ApiKey = apiKey;
+		ModelId = modelId;
 	}
 #if NET7_0_OR_GREATER
 	public CohereServiceSettings()
@@ -174,11 +175,12 @@ public sealed partial class CohereServiceSettings
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para>
-	/// The default value for a text embedding task is <c>embed-english-v2.0</c>.
-	/// </para>
 	/// </summary>
-	public string? ModelId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -272,11 +274,8 @@ public readonly partial struct CohereServiceSettingsDescriptor
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para>
-	/// The default value for a text embedding task is <c>embed-english-v2.0</c>.
-	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor ModelId(string? value)
+	public Elastic.Clients.Elasticsearch.Inference.CohereServiceSettingsDescriptor ModelId(string value)
 	{
 		Instance.ModelId = value;
 		return this;

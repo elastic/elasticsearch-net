@@ -38,7 +38,13 @@ public sealed partial class PostStartTrialRequestParameters : Elastic.Transport.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	public string? TypeQueryString { get => Q<string?>("type_query_string"); set => Q("type_query_string", value); }
+
+	/// <summary>
+	/// <para>
+	/// The type of trial license to generate (default: "trial")
+	/// </para>
+	/// </summary>
+	public string? Type { get => Q<string?>("type"); set => Q("type", value); }
 }
 
 internal sealed partial class PostStartTrialRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest>
@@ -123,7 +129,13 @@ public sealed partial class PostStartTrialRequest : Elastic.Clients.Elasticsearc
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	public string? TypeQueryString { get => Q<string?>("type_query_string"); set => Q("type_query_string", value); }
+
+	/// <summary>
+	/// <para>
+	/// The type of trial license to generate (default: "trial")
+	/// </para>
+	/// </summary>
+	public string? Type { get => Q<string?>("type"); set => Q("type", value); }
 }
 
 /// <summary>
@@ -179,9 +191,14 @@ public readonly partial struct PostStartTrialRequestDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor TypeQueryString(string? value)
+	/// <summary>
+	/// <para>
+	/// The type of trial license to generate (default: "trial")
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor Type(string? value)
 	{
-		Instance.TypeQueryString = value;
+		Instance.Type = value;
 		return this;
 	}
 

@@ -4928,6 +4928,70 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersResponse, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse RemoveBlock(Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse RemoveBlock(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor(index, block);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse RemoveBlock(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor(index, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse RemoveBlock<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument>(index, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse> RemoveBlockAsync(Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse> RemoveBlockAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor(index, block);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse> RemoveBlockAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor(index, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse> RemoveBlockAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument>(index, block);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockResponse, Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse ResolveCluster(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest request)
 	{
 		request.BeforeRequest();
