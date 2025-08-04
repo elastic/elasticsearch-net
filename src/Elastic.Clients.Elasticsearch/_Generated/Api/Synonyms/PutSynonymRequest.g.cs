@@ -83,6 +83,9 @@ internal sealed partial class PutSynonymRequestConverter : System.Text.Json.Seri
 /// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
 /// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
 /// </para>
+/// <para>
+/// For practical examples of how to create or update a synonyms set, refer to the External documentation.
+/// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestConverter))]
 public sealed partial class PutSynonymRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>
@@ -157,6 +160,9 @@ public sealed partial class PutSynonymRequest : Elastic.Clients.Elasticsearch.Re
 /// <para>
 /// When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
 /// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+/// </para>
+/// <para>
+/// For practical examples of how to create or update a synonyms set, refer to the External documentation.
 /// </para>
 /// </summary>
 public readonly partial struct PutSynonymRequestDescriptor

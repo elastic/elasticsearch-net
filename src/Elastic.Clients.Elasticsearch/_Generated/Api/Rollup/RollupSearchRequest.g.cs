@@ -113,43 +113,7 @@ internal sealed partial class RollupSearchRequestConverter : System.Text.Json.Se
 /// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
 /// </para>
 /// <para>
-/// <strong>Searching both historical rollup and non-rollup data</strong>
-/// </para>
-/// <para>
-/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-/// This is done by simply adding the live indices to the URI. For example:
-/// </para>
-/// <code>
-/// GET sensor-1,sensor_rollup/_rollup_search
-/// {
-///   "size": 0,
-///   "aggregations": {
-///      "max_temperature": {
-///       "max": {
-///         "field": "temperature"
-///       }
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
-/// The rollup search endpoint does two things when the search runs:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The original request is sent to the non-rollup index unaltered.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A rewritten version of the original request is sent to the rollup index.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+/// For more detailed examples of using the rollup search API, including querying rolled-up data only or combining rolled-up and live data, refer to the External documentation.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestConverter))]
@@ -263,43 +227,7 @@ public partial class RollupSearchRequest : Elastic.Clients.Elasticsearch.Request
 /// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
 /// </para>
 /// <para>
-/// <strong>Searching both historical rollup and non-rollup data</strong>
-/// </para>
-/// <para>
-/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-/// This is done by simply adding the live indices to the URI. For example:
-/// </para>
-/// <code>
-/// GET sensor-1,sensor_rollup/_rollup_search
-/// {
-///   "size": 0,
-///   "aggregations": {
-///      "max_temperature": {
-///       "max": {
-///         "field": "temperature"
-///       }
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
-/// The rollup search endpoint does two things when the search runs:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The original request is sent to the non-rollup index unaltered.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A rewritten version of the original request is sent to the rollup index.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+/// For more detailed examples of using the rollup search API, including querying rolled-up data only or combining rolled-up and live data, refer to the External documentation.
 /// </para>
 /// </summary>
 public readonly partial struct RollupSearchRequestDescriptor
@@ -557,43 +485,7 @@ public readonly partial struct RollupSearchRequestDescriptor
 /// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
 /// </para>
 /// <para>
-/// <strong>Searching both historical rollup and non-rollup data</strong>
-/// </para>
-/// <para>
-/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
-/// This is done by simply adding the live indices to the URI. For example:
-/// </para>
-/// <code>
-/// GET sensor-1,sensor_rollup/_rollup_search
-/// {
-///   "size": 0,
-///   "aggregations": {
-///      "max_temperature": {
-///       "max": {
-///         "field": "temperature"
-///       }
-///     }
-///   }
-/// }
-/// </code>
-/// <para>
-/// The rollup search endpoint does two things when the search runs:
-/// </para>
-/// <list type="bullet">
-/// <item>
-/// <para>
-/// The original request is sent to the non-rollup index unaltered.
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// A rewritten version of the original request is sent to the rollup index.
-/// </para>
-/// </item>
-/// </list>
-/// <para>
-/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
-/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
+/// For more detailed examples of using the rollup search API, including querying rolled-up data only or combining rolled-up and live data, refer to the External documentation.
 /// </para>
 /// </summary>
 public readonly partial struct RollupSearchRequestDescriptor<TDocument>

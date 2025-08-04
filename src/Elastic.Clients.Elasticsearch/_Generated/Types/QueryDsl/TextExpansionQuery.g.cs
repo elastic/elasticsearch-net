@@ -42,7 +42,7 @@ internal sealed partial class TextExpansionQueryConverter : System.Text.Json.Ser
 		LocalJsonValue<float?> propBoost = default;
 		LocalJsonValue<string> propModelId = default;
 		LocalJsonValue<string> propModelText = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig?> propPruningConfig = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TokenPruningConfig?> propPruningConfig = default;
 		LocalJsonValue<string?> propQueryName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -178,7 +178,7 @@ public sealed partial class TextExpansionQuery
 	/// Token pruning configurations
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? PruningConfig { get; set; }
+	public Elastic.Clients.Elasticsearch.TokenPruningConfig? PruningConfig { get; set; }
 	public string? QueryName { get; set; }
 }
 
@@ -254,7 +254,7 @@ public readonly partial struct TextExpansionQueryDescriptor<TDocument>
 	/// Token pruning configurations
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> PruningConfig(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> PruningConfig(Elastic.Clients.Elasticsearch.TokenPruningConfig? value)
 	{
 		Instance.PruningConfig = value;
 		return this;
@@ -267,7 +267,7 @@ public readonly partial struct TextExpansionQueryDescriptor<TDocument>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> PruningConfig()
 	{
-		Instance.PruningConfig = Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor.Build(null);
+		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(null);
 		return this;
 	}
 
@@ -276,9 +276,9 @@ public readonly partial struct TextExpansionQueryDescriptor<TDocument>
 	/// Token pruning configurations
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> PruningConfig(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor<TDocument> PruningConfig(System.Action<Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor>? action)
 	{
-		Instance.PruningConfig = Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor.Build(action);
+		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(action);
 		return this;
 	}
 
@@ -369,7 +369,7 @@ public readonly partial struct TextExpansionQueryDescriptor
 	/// Token pruning configurations
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor PruningConfig(Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfig? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor PruningConfig(Elastic.Clients.Elasticsearch.TokenPruningConfig? value)
 	{
 		Instance.PruningConfig = value;
 		return this;
@@ -382,7 +382,7 @@ public readonly partial struct TextExpansionQueryDescriptor
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor PruningConfig()
 	{
-		Instance.PruningConfig = Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor.Build(null);
+		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(null);
 		return this;
 	}
 
@@ -391,9 +391,9 @@ public readonly partial struct TextExpansionQueryDescriptor
 	/// Token pruning configurations
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor PruningConfig(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TextExpansionQueryDescriptor PruningConfig(System.Action<Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor>? action)
 	{
-		Instance.PruningConfig = Elastic.Clients.Elasticsearch.QueryDsl.TokenPruningConfigDescriptor.Build(action);
+		Instance.PruningConfig = Elastic.Clients.Elasticsearch.TokenPruningConfigDescriptor.Build(action);
 		return this;
 	}
 

@@ -36,6 +36,7 @@ public sealed partial class InferenceRequestParameters : Elastic.Transport.Reque
 internal sealed partial class InferenceRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.InferenceRequest>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropInput = System.Text.Json.JsonEncodedText.Encode("input");
+	private static readonly System.Text.Json.JsonEncodedText PropInputType = System.Text.Json.JsonEncodedText.Encode("input_type");
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
 	private static readonly System.Text.Json.JsonEncodedText PropTaskSettings = System.Text.Json.JsonEncodedText.Encode("task_settings");
 
@@ -43,11 +44,17 @@ internal sealed partial class InferenceRequestConverter : System.Text.Json.Seria
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.ICollection<string>> propInput = default;
+		LocalJsonValue<string?> propInputType = default;
 		LocalJsonValue<string?> propQuery = default;
 		LocalJsonValue<object?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propInput.TryReadProperty(ref reader, options, PropInput, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propInputType.TryReadProperty(ref reader, options, PropInputType, null))
 			{
 				continue;
 			}
@@ -75,6 +82,7 @@ internal sealed partial class InferenceRequestConverter : System.Text.Json.Seria
 		return new Elastic.Clients.Elasticsearch.Inference.InferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Input = propInput.Value,
+			InputType = propInputType.Value,
 			Query = propQuery.Value,
 			TaskSettings = propTaskSettings.Value
 		};
@@ -84,6 +92,7 @@ internal sealed partial class InferenceRequestConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropInput, value.Input, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropInputType, value.InputType, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings, null, null);
 		writer.WriteEndObject();
@@ -192,6 +201,41 @@ public sealed partial class InferenceRequest : Elastic.Clients.Elasticsearch.Req
 	required
 #endif
 	System.Collections.Generic.ICollection<string> Input { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Specifies the input data type for the text embedding model. The <c>input_type</c> parameter only applies to Inference Endpoints with the <c>text_embedding</c> task type. Possible values include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>SEARCH</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>INGEST</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>CLASSIFICATION</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>CLUSTERING</c>
+	/// Not all services support all values. Unsupported values will trigger a validation exception.
+	/// Accepted values depend on the configured inference service, refer to the relevant service-specific documentation for more info.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// info
+	/// The <c>input_type</c> parameter specified on the root level of the request body will take precedence over the <c>input_type</c> parameter specified in <c>task_settings</c>.
+	/// </para>
+	/// </summary>
+	public string? InputType { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -322,6 +366,45 @@ public readonly partial struct InferenceRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the input data type for the text embedding model. The <c>input_type</c> parameter only applies to Inference Endpoints with the <c>text_embedding</c> task type. Possible values include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>SEARCH</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>INGEST</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>CLASSIFICATION</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>CLUSTERING</c>
+	/// Not all services support all values. Unsupported values will trigger a validation exception.
+	/// Accepted values depend on the configured inference service, refer to the relevant service-specific documentation for more info.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// info
+	/// The <c>input_type</c> parameter specified on the root level of the request body will take precedence over the <c>input_type</c> parameter specified in <c>task_settings</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor InputType(string? value)
+	{
+		Instance.InputType = value;
 		return this;
 	}
 

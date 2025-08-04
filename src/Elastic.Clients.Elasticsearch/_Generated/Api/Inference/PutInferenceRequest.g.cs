@@ -25,6 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public sealed partial class PutInferenceRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 internal sealed partial class PutInferenceRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest>
@@ -65,6 +71,11 @@ internal sealed partial class PutInferenceRequestConverter : System.Text.Json.Se
 /// </item>
 /// <item>
 /// <para>
+/// Amazon SageMaker (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>sparse_embedding</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
 /// Anthropic (<c>completion</c>)
 /// </para>
 /// </item>
@@ -81,6 +92,11 @@ internal sealed partial class PutInferenceRequestConverter : System.Text.Json.Se
 /// <item>
 /// <para>
 /// Cohere (<c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// DeepSeek (<c>completion</c>, <c>chat_completion</c>)
 /// </para>
 /// </item>
 /// <item>
@@ -197,6 +213,13 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.TaskType? TaskType { get => P<Elastic.Clients.Elasticsearch.Inference.TaskType?>("task_type"); set => PO("task_type", value); }
+
+	/// <summary>
+	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	public
 #if NET7_0_OR_GREATER
 	required
@@ -229,6 +252,11 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 /// </item>
 /// <item>
 /// <para>
+/// Amazon SageMaker (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>sparse_embedding</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
 /// Anthropic (<c>completion</c>)
 /// </para>
 /// </item>
@@ -245,6 +273,11 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 /// <item>
 /// <para>
 /// Cohere (<c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// DeepSeek (<c>completion</c>, <c>chat_completion</c>)
 /// </para>
 /// </item>
 /// <item>
@@ -351,6 +384,17 @@ public readonly partial struct PutInferenceRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? value)
 	{
 		Instance.TaskType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
 		return this;
 	}
 

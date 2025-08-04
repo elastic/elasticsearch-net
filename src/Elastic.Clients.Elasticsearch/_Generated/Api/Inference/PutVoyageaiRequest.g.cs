@@ -25,6 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public sealed partial class PutVoyageaiRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 internal sealed partial class PutVoyageaiRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequest>
@@ -160,6 +166,13 @@ public sealed partial class PutVoyageaiRequest : Elastic.Clients.Elasticsearch.R
 
 	/// <summary>
 	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// The chunking configuration object.
 	/// </para>
 	/// </summary>
@@ -253,6 +266,17 @@ public readonly partial struct PutVoyageaiRequestDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The chunking configuration object.
 	/// </para>
 	/// </summary>
@@ -267,18 +291,7 @@ public readonly partial struct PutVoyageaiRequestDescriptor
 	/// The chunking configuration object.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor ChunkingSettings()
-	{
-		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor> action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;

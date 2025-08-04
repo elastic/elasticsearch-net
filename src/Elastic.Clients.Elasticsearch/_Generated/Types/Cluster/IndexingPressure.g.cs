@@ -30,7 +30,7 @@ internal sealed partial class IndexingPressureConverter : System.Text.Json.Seria
 	public override Elastic.Clients.Elasticsearch.Cluster.IndexingPressure Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.IndexingPressureMemory> propMemory = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory> propMemory = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propMemory.TryReadProperty(ref reader, options, PropMemory, null))
@@ -66,7 +66,7 @@ internal sealed partial class IndexingPressureConverter : System.Text.Json.Seria
 public sealed partial class IndexingPressure
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndexingPressure(Elastic.Clients.Elasticsearch.Cluster.IndexingPressureMemory memory)
+	public IndexingPressure(Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory memory)
 	{
 		Memory = memory;
 	}
@@ -91,5 +91,5 @@ public sealed partial class IndexingPressure
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.Cluster.IndexingPressureMemory Memory { get; set; }
+	Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory Memory { get; set; }
 }
