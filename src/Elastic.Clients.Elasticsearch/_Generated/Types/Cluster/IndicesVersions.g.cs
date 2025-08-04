@@ -28,6 +28,7 @@ internal sealed partial class IndicesVersionsConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
 	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardCount = System.Text.Json.JsonEncodedText.Encode("primary_shard_count");
 	private static readonly System.Text.Json.JsonEncodedText PropTotalPrimaryBytes = System.Text.Json.JsonEncodedText.Encode("total_primary_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalPrimarySize = System.Text.Json.JsonEncodedText.Encode("total_primary_size");
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
 	public override Elastic.Clients.Elasticsearch.Cluster.IndicesVersions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -36,6 +37,7 @@ internal sealed partial class IndicesVersionsConverter : System.Text.Json.Serial
 		LocalJsonValue<int> propIndexCount = default;
 		LocalJsonValue<int> propPrimaryShardCount = default;
 		LocalJsonValue<long> propTotalPrimaryBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalPrimarySize = default;
 		LocalJsonValue<string> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -50,6 +52,11 @@ internal sealed partial class IndicesVersionsConverter : System.Text.Json.Serial
 			}
 
 			if (propTotalPrimaryBytes.TryReadProperty(ref reader, options, PropTotalPrimaryBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalPrimarySize.TryReadProperty(ref reader, options, PropTotalPrimarySize, null))
 			{
 				continue;
 			}
@@ -74,6 +81,7 @@ internal sealed partial class IndicesVersionsConverter : System.Text.Json.Serial
 			IndexCount = propIndexCount.Value,
 			PrimaryShardCount = propPrimaryShardCount.Value,
 			TotalPrimaryBytes = propTotalPrimaryBytes.Value,
+			TotalPrimarySize = propTotalPrimarySize.Value,
 			Version = propVersion.Value
 		};
 	}
@@ -84,6 +92,7 @@ internal sealed partial class IndicesVersionsConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropIndexCount, value.IndexCount, null, null);
 		writer.WriteProperty(options, PropPrimaryShardCount, value.PrimaryShardCount, null, null);
 		writer.WriteProperty(options, PropTotalPrimaryBytes, value.TotalPrimaryBytes, null, null);
+		writer.WriteProperty(options, PropTotalPrimarySize, value.TotalPrimarySize, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
@@ -132,6 +141,7 @@ public sealed partial class IndicesVersions
 	required
 #endif
 	long TotalPrimaryBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalPrimarySize { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

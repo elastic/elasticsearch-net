@@ -435,6 +435,91 @@ internal sealed partial class ShardRoutingStateConverter : System.Text.Json.Seri
 	}
 }
 
+internal sealed partial class IndicesBlockOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText MemberRead = System.Text.Json.JsonEncodedText.Encode("read");
+	private static readonly System.Text.Json.JsonEncodedText MemberReadOnly = System.Text.Json.JsonEncodedText.Encode("read_only");
+	private static readonly System.Text.Json.JsonEncodedText MemberWrite = System.Text.Json.JsonEncodedText.Encode("write");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberMetadata))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Metadata;
+		}
+
+		if (reader.ValueTextEquals(MemberRead))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Read;
+		}
+
+		if (reader.ValueTextEquals(MemberReadOnly))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.ReadOnly;
+		}
+
+		if (reader.ValueTextEquals(MemberWrite))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Write;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberMetadata.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Metadata;
+		}
+
+		if (string.Equals(value, MemberRead.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Read;
+		}
+
+		if (string.Equals(value, MemberReadOnly.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.ReadOnly;
+		}
+
+		if (string.Equals(value, MemberWrite.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Write;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Metadata:
+				writer.WriteStringValue(MemberMetadata);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Read:
+				writer.WriteStringValue(MemberRead);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.ReadOnly:
+				writer.WriteStringValue(MemberReadOnly);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions.Write:
+				writer.WriteStringValue(MemberWrite);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class IndexCheckOnStartupConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberChecksum = System.Text.Json.JsonEncodedText.Encode("checksum");
@@ -1294,6 +1379,39 @@ public enum ShardRoutingState
 	Started,
 	[System.Runtime.Serialization.EnumMember(Value = "UNASSIGNED")]
 	Unassigned
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptionsConverter))]
+public enum IndicesBlockOptions
+{
+	/// <summary>
+	/// <para>
+	/// Disable metadata changes, such as closing the index.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "metadata")]
+	Metadata,
+	/// <summary>
+	/// <para>
+	/// Disable read operations.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "read")]
+	Read,
+	/// <summary>
+	/// <para>
+	/// Disable write operations and metadata changes.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "read_only")]
+	ReadOnly,
+	/// <summary>
+	/// <para>
+	/// Disable write operations. However, metadata changes are still allowed.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "write")]
+	Write
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartupConverter))]

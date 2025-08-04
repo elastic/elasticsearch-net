@@ -27,6 +27,13 @@ public sealed partial class PutComponentTemplateRequestParameters : Elastic.Tran
 {
 	/// <summary>
 	/// <para>
+	/// User defined reason for create the component template.
+	/// </para>
+	/// </summary>
+	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, this request cannot replace or update existing component templates.
 	/// </para>
 	/// </summary>
@@ -187,6 +194,13 @@ public sealed partial class PutComponentTemplateRequest : Elastic.Clients.Elasti
 
 	/// <summary>
 	/// <para>
+	/// User defined reason for create the component template.
+	/// </para>
+	/// </summary>
+	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, this request cannot replace or update existing component templates.
 	/// </para>
 	/// </summary>
@@ -307,6 +321,17 @@ public readonly partial struct PutComponentTemplateRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// User defined reason for create the component template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor Cause(string? value)
+	{
+		Instance.Cause = value;
 		return this;
 	}
 
@@ -570,6 +595,17 @@ public readonly partial struct PutComponentTemplateRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
 	{
 		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// User defined reason for create the component template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor<TDocument> Cause(string? value)
+	{
+		Instance.Cause = value;
 		return this;
 	}
 

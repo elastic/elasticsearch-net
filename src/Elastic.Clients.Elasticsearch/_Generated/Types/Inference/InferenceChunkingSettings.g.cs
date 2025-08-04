@@ -28,6 +28,8 @@ internal sealed partial class InferenceChunkingSettingsConverter : System.Text.J
 	private static readonly System.Text.Json.JsonEncodedText PropMaxChunkSize = System.Text.Json.JsonEncodedText.Encode("max_chunk_size");
 	private static readonly System.Text.Json.JsonEncodedText PropOverlap = System.Text.Json.JsonEncodedText.Encode("overlap");
 	private static readonly System.Text.Json.JsonEncodedText PropSentenceOverlap = System.Text.Json.JsonEncodedText.Encode("sentence_overlap");
+	private static readonly System.Text.Json.JsonEncodedText PropSeparatorGroup = System.Text.Json.JsonEncodedText.Encode("separator_group");
+	private static readonly System.Text.Json.JsonEncodedText PropSeparators = System.Text.Json.JsonEncodedText.Encode("separators");
 	private static readonly System.Text.Json.JsonEncodedText PropStrategy = System.Text.Json.JsonEncodedText.Encode("strategy");
 
 	public override Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -36,6 +38,8 @@ internal sealed partial class InferenceChunkingSettingsConverter : System.Text.J
 		LocalJsonValue<int?> propMaxChunkSize = default;
 		LocalJsonValue<int?> propOverlap = default;
 		LocalJsonValue<int?> propSentenceOverlap = default;
+		LocalJsonValue<string> propSeparatorGroup = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propSeparators = default;
 		LocalJsonValue<string?> propStrategy = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -50,6 +54,16 @@ internal sealed partial class InferenceChunkingSettingsConverter : System.Text.J
 			}
 
 			if (propSentenceOverlap.TryReadProperty(ref reader, options, PropSentenceOverlap, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propSeparatorGroup.TryReadProperty(ref reader, options, PropSeparatorGroup, null))
+			{
+				continue;
+			}
+
+			if (propSeparators.TryReadProperty(ref reader, options, PropSeparators, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -74,6 +88,8 @@ internal sealed partial class InferenceChunkingSettingsConverter : System.Text.J
 			MaxChunkSize = propMaxChunkSize.Value,
 			Overlap = propOverlap.Value,
 			SentenceOverlap = propSentenceOverlap.Value,
+			SeparatorGroup = propSeparatorGroup.Value,
+			Separators = propSeparators.Value,
 			Strategy = propStrategy.Value
 		};
 	}
@@ -84,6 +100,8 @@ internal sealed partial class InferenceChunkingSettingsConverter : System.Text.J
 		writer.WriteProperty(options, PropMaxChunkSize, value.MaxChunkSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropOverlap, value.Overlap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSentenceOverlap, value.SentenceOverlap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropSeparatorGroup, value.SeparatorGroup, null, null);
+		writer.WriteProperty(options, PropSeparators, value.Separators, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropStrategy, value.Strategy, null, null);
 		writer.WriteEndObject();
 	}
@@ -97,12 +115,19 @@ internal sealed partial class InferenceChunkingSettingsConverter : System.Text.J
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsConverter))]
 public sealed partial class InferenceChunkingSettings
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceChunkingSettings(string separatorGroup, System.Collections.Generic.ICollection<string> separators)
+	{
+		SeparatorGroup = separatorGroup;
+		Separators = separators;
+	}
 #if NET7_0_OR_GREATER
 	public InferenceChunkingSettings()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public InferenceChunkingSettings()
 	{
 	}
@@ -141,7 +166,66 @@ public sealed partial class InferenceChunkingSettings
 
 	/// <summary>
 	/// <para>
-	/// The chunking strategy: <c>sentence</c> or <c>word</c>.
+	/// This parameter is only applicable when using the <c>recursive</c> chunking strategy.
+	/// </para>
+	/// <para>
+	/// Sets a predefined list of separators in the saved chunking settings based on the selected text type.
+	/// Values can be <c>markdown</c> or <c>plaintext</c>.
+	/// </para>
+	/// <para>
+	/// Using this parameter is an alternative to manually specifying a custom <c>separators</c> list.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string SeparatorGroup { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of strings used as possible split points when chunking text with the <c>recursive</c> strategy.
+	/// </para>
+	/// <para>
+	/// Each string can be a plain string or a regular expression (regex) pattern.
+	/// The system tries each separator in order to split the text, starting from the first item in the list.
+	/// </para>
+	/// <para>
+	/// After splitting, it attempts to recombine smaller pieces into larger chunks that stay within
+	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Separators { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The chunking strategy: <c>sentence</c>, <c>word</c>, <c>none</c> or <c>recursive</c>.
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// If <c>strategy</c> is set to <c>recursive</c>, you must also specify:
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>max_chunk_size</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// either <c>separators</c> or<c>separator_group</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// Learn more about different chunking strategies in the linked documentation.
 	/// </para>
 	/// </summary>
 	public string? Strategy { get; set; }
@@ -211,7 +295,85 @@ public readonly partial struct InferenceChunkingSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The chunking strategy: <c>sentence</c> or <c>word</c>.
+	/// This parameter is only applicable when using the <c>recursive</c> chunking strategy.
+	/// </para>
+	/// <para>
+	/// Sets a predefined list of separators in the saved chunking settings based on the selected text type.
+	/// Values can be <c>markdown</c> or <c>plaintext</c>.
+	/// </para>
+	/// <para>
+	/// Using this parameter is an alternative to manually specifying a custom <c>separators</c> list.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor SeparatorGroup(string value)
+	{
+		Instance.SeparatorGroup = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of strings used as possible split points when chunking text with the <c>recursive</c> strategy.
+	/// </para>
+	/// <para>
+	/// Each string can be a plain string or a regular expression (regex) pattern.
+	/// The system tries each separator in order to split the text, starting from the first item in the list.
+	/// </para>
+	/// <para>
+	/// After splitting, it attempts to recombine smaller pieces into larger chunks that stay within
+	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Separators(System.Collections.Generic.ICollection<string> value)
+	{
+		Instance.Separators = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of strings used as possible split points when chunking text with the <c>recursive</c> strategy.
+	/// </para>
+	/// <para>
+	/// Each string can be a plain string or a regular expression (regex) pattern.
+	/// The system tries each separator in order to split the text, starting from the first item in the list.
+	/// </para>
+	/// <para>
+	/// After splitting, it attempts to recombine smaller pieces into larger chunks that stay within
+	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Separators(params string[] values)
+	{
+		Instance.Separators = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The chunking strategy: <c>sentence</c>, <c>word</c>, <c>none</c> or <c>recursive</c>.
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// If <c>strategy</c> is set to <c>recursive</c>, you must also specify:
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>max_chunk_size</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// either <c>separators</c> or<c>separator_group</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// Learn more about different chunking strategies in the linked documentation.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Strategy(string? value)
@@ -221,13 +383,8 @@ public readonly partial struct InferenceChunkingSettingsDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings Build(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings Build(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor(new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

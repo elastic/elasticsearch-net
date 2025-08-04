@@ -33,13 +33,13 @@ internal sealed partial class CohereTaskSettingsConverter : System.Text.Json.Ser
 	public override Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CohereInputType?> propInputType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CohereInputType> propInputType = default;
 		LocalJsonValue<bool?> propReturnDocuments = default;
 		LocalJsonValue<int?> propTopN = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.CohereTruncateType?> propTruncate = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propInputType.TryReadProperty(ref reader, options, PropInputType, static Elastic.Clients.Elasticsearch.Inference.CohereInputType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.CohereInputType>(o)))
+			if (propInputType.TryReadProperty(ref reader, options, PropInputType, null))
 			{
 				continue;
 			}
@@ -81,7 +81,7 @@ internal sealed partial class CohereTaskSettingsConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropInputType, value.InputType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.CohereInputType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.CohereInputType>(o, v));
+		writer.WriteProperty(options, PropInputType, value.InputType, null, null);
 		writer.WriteProperty(options, PropReturnDocuments, value.ReturnDocuments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTopN, value.TopN, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropTruncate, value.Truncate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.CohereTruncateType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.CohereTruncateType>(o, v));
@@ -92,12 +92,18 @@ internal sealed partial class CohereTaskSettingsConverter : System.Text.Json.Ser
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsConverter))]
 public sealed partial class CohereTaskSettings
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CohereTaskSettings(Elastic.Clients.Elasticsearch.Inference.CohereInputType inputType)
+	{
+		InputType = inputType;
+	}
 #if NET7_0_OR_GREATER
 	public CohereTaskSettings()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public CohereTaskSettings()
 	{
 	}
@@ -139,7 +145,11 @@ public sealed partial class CohereTaskSettings
 	/// IMPORTANT: The <c>input_type</c> field is required when using embedding models <c>v3</c> and higher.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.CohereInputType? InputType { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Inference.CohereInputType InputType { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -233,7 +243,7 @@ public readonly partial struct CohereTaskSettingsDescriptor
 	/// IMPORTANT: The <c>input_type</c> field is required when using embedding models <c>v3</c> and higher.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor InputType(Elastic.Clients.Elasticsearch.Inference.CohereInputType? value)
+	public Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor InputType(Elastic.Clients.Elasticsearch.Inference.CohereInputType value)
 	{
 		Instance.InputType = value;
 		return this;
@@ -293,13 +303,8 @@ public readonly partial struct CohereTaskSettingsDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings Build(System.Action<Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings Build(System.Action<Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor(new Elastic.Clients.Elasticsearch.Inference.CohereTaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

@@ -25,6 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public sealed partial class PutCohereRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 internal sealed partial class PutCohereRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.PutCohereRequest>
@@ -157,6 +163,13 @@ public sealed partial class PutCohereRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// The chunking configuration object.
 	/// </para>
 	/// </summary>
@@ -248,6 +261,17 @@ public readonly partial struct PutCohereRequestDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The chunking configuration object.
 	/// </para>
 	/// </summary>
@@ -262,18 +286,7 @@ public readonly partial struct PutCohereRequestDescriptor
 	/// The chunking configuration object.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor ChunkingSettings()
-	{
-		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor> action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
@@ -321,19 +334,7 @@ public readonly partial struct PutCohereRequestDescriptor
 	/// These settings are specific to the task type you specified.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor TaskSettings()
-	{
-		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Settings to configure the inference task.
-	/// These settings are specific to the task type you specified.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor TaskSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor> action)
 	{
 		Instance.TaskSettings = Elastic.Clients.Elasticsearch.Inference.CohereTaskSettingsDescriptor.Build(action);
 		return this;

@@ -35,6 +35,7 @@ internal sealed partial class SearchStatsConverter : System.Text.Json.Serializat
 	private static readonly System.Text.Json.JsonEncodedText PropQueryTime = System.Text.Json.JsonEncodedText.Encode("query_time");
 	private static readonly System.Text.Json.JsonEncodedText PropQueryTimeInMillis = System.Text.Json.JsonEncodedText.Encode("query_time_in_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropQueryTotal = System.Text.Json.JsonEncodedText.Encode("query_total");
+	private static readonly System.Text.Json.JsonEncodedText PropRecentSearchLoad = System.Text.Json.JsonEncodedText.Encode("recent_search_load");
 	private static readonly System.Text.Json.JsonEncodedText PropScrollCurrent = System.Text.Json.JsonEncodedText.Encode("scroll_current");
 	private static readonly System.Text.Json.JsonEncodedText PropScrollTime = System.Text.Json.JsonEncodedText.Encode("scroll_time");
 	private static readonly System.Text.Json.JsonEncodedText PropScrollTimeInMillis = System.Text.Json.JsonEncodedText.Encode("scroll_time_in_millis");
@@ -57,6 +58,7 @@ internal sealed partial class SearchStatsConverter : System.Text.Json.Serializat
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propQueryTime = default;
 		LocalJsonValue<System.TimeSpan> propQueryTimeInMillis = default;
 		LocalJsonValue<long> propQueryTotal = default;
+		LocalJsonValue<double?> propRecentSearchLoad = default;
 		LocalJsonValue<long> propScrollCurrent = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propScrollTime = default;
 		LocalJsonValue<System.TimeSpan> propScrollTimeInMillis = default;
@@ -113,6 +115,11 @@ internal sealed partial class SearchStatsConverter : System.Text.Json.Serializat
 			}
 
 			if (propQueryTotal.TryReadProperty(ref reader, options, PropQueryTotal, null))
+			{
+				continue;
+			}
+
+			if (propRecentSearchLoad.TryReadProperty(ref reader, options, PropRecentSearchLoad, static double? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<double>(o)))
 			{
 				continue;
 			}
@@ -179,6 +186,7 @@ internal sealed partial class SearchStatsConverter : System.Text.Json.Serializat
 			QueryTime = propQueryTime.Value,
 			QueryTimeInMillis = propQueryTimeInMillis.Value,
 			QueryTotal = propQueryTotal.Value,
+			RecentSearchLoad = propRecentSearchLoad.Value,
 			ScrollCurrent = propScrollCurrent.Value,
 			ScrollTime = propScrollTime.Value,
 			ScrollTimeInMillis = propScrollTimeInMillis.Value,
@@ -203,6 +211,7 @@ internal sealed partial class SearchStatsConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropQueryTime, value.QueryTime, null, null);
 		writer.WriteProperty(options, PropQueryTimeInMillis, value.QueryTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropQueryTotal, value.QueryTotal, null, null);
+		writer.WriteProperty(options, PropRecentSearchLoad, value.RecentSearchLoad, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropScrollCurrent, value.ScrollCurrent, null, null);
 		writer.WriteProperty(options, PropScrollTime, value.ScrollTime, null, null);
 		writer.WriteProperty(options, PropScrollTimeInMillis, value.ScrollTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
@@ -285,6 +294,7 @@ public sealed partial class SearchStats
 	required
 #endif
 	long QueryTotal { get; set; }
+	public double? RecentSearchLoad { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

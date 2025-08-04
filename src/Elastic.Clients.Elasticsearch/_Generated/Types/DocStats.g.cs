@@ -27,12 +27,16 @@ internal sealed partial class DocStatsConverter : System.Text.Json.Serialization
 {
 	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
 	private static readonly System.Text.Json.JsonEncodedText PropDeleted = System.Text.Json.JsonEncodedText.Encode("deleted");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_size_in_bytes");
 
 	public override Elastic.Clients.Elasticsearch.DocStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<long> propCount = default;
 		LocalJsonValue<long?> propDeleted = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalSize = default;
+		LocalJsonValue<long> propTotalSizeInBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
@@ -41,6 +45,16 @@ internal sealed partial class DocStatsConverter : System.Text.Json.Serialization
 			}
 
 			if (propDeleted.TryReadProperty(ref reader, options, PropDeleted, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propTotalSize.TryReadProperty(ref reader, options, PropTotalSize, null))
+			{
+				continue;
+			}
+
+			if (propTotalSizeInBytes.TryReadProperty(ref reader, options, PropTotalSizeInBytes, null))
 			{
 				continue;
 			}
@@ -58,7 +72,9 @@ internal sealed partial class DocStatsConverter : System.Text.Json.Serialization
 		return new Elastic.Clients.Elasticsearch.DocStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Count = propCount.Value,
-			Deleted = propDeleted.Value
+			Deleted = propDeleted.Value,
+			TotalSize = propTotalSize.Value,
+			TotalSizeInBytes = propTotalSizeInBytes.Value
 		};
 	}
 
@@ -67,6 +83,8 @@ internal sealed partial class DocStatsConverter : System.Text.Json.Serialization
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
 		writer.WriteProperty(options, PropDeleted, value.Deleted, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropTotalSize, value.TotalSize, null, null);
+		writer.WriteProperty(options, PropTotalSizeInBytes, value.TotalSizeInBytes, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -75,9 +93,10 @@ internal sealed partial class DocStatsConverter : System.Text.Json.Serialization
 public sealed partial class DocStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DocStats(long count)
+	public DocStats(long count, long totalSizeInBytes)
 	{
 		Count = count;
+		TotalSizeInBytes = totalSizeInBytes;
 	}
 #if NET7_0_OR_GREATER
 	public DocStats()
@@ -116,4 +135,23 @@ public sealed partial class DocStats
 	/// </para>
 	/// </summary>
 	public long? Deleted { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Human readable total_size_in_bytes
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? TotalSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Returns the total size in bytes of all documents in this stats.
+	/// This value may be more reliable than store_stats.size_in_bytes in estimating the index size.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalSizeInBytes { get; set; }
 }

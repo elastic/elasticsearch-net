@@ -117,6 +117,7 @@ internal sealed partial class AllocationExplainRequestConverter : System.Text.Js
 /// <para>
 /// Explain the shard allocations.
 /// Get explanations for shard allocations in the cluster.
+/// This API accepts the current_node, index, primary and shard parameters in the request body or in query parameters, but not in both at the same time.
 /// For unassigned shards, it provides an explanation for why the shard is unassigned.
 /// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 /// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
@@ -173,28 +174,28 @@ public sealed partial class AllocationExplainRequest : Elastic.Clients.Elasticse
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node ID or the name of the node to only explain a shard that is currently located on the specified node.
+	/// Explain a shard only if it is currently located on the specified node name or node ID.
 	/// </para>
 	/// </summary>
 	public string? CurrentNode { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Specifies the name of the index that you would like an explanation for.
+	/// The name of the index that you would like an explanation for.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// If true, returns explanation for the primary shard for the given shard ID.
+	/// If true, returns an explanation for the primary shard for the specified shard ID.
 	/// </para>
 	/// </summary>
 	public bool? Primary { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Specifies the ID of the shard that you would like an explanation for.
+	/// An identifier for the shard that you would like an explanation for.
 	/// </para>
 	/// </summary>
 	public int? Shard { get; set; }
@@ -204,6 +205,7 @@ public sealed partial class AllocationExplainRequest : Elastic.Clients.Elasticse
 /// <para>
 /// Explain the shard allocations.
 /// Get explanations for shard allocations in the cluster.
+/// This API accepts the current_node, index, primary and shard parameters in the request body or in query parameters, but not in both at the same time.
 /// For unassigned shards, it provides an explanation for why the shard is unassigned.
 /// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 /// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
@@ -263,7 +265,7 @@ public readonly partial struct AllocationExplainRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specifies the node ID or the name of the node to only explain a shard that is currently located on the specified node.
+	/// Explain a shard only if it is currently located on the specified node name or node ID.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor CurrentNode(string? value)
@@ -274,7 +276,7 @@ public readonly partial struct AllocationExplainRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specifies the name of the index that you would like an explanation for.
+	/// The name of the index that you would like an explanation for.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
@@ -285,7 +287,7 @@ public readonly partial struct AllocationExplainRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If true, returns explanation for the primary shard for the given shard ID.
+	/// If true, returns an explanation for the primary shard for the specified shard ID.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor Primary(bool? value = true)
@@ -296,7 +298,7 @@ public readonly partial struct AllocationExplainRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specifies the ID of the shard that you would like an explanation for.
+	/// An identifier for the shard that you would like an explanation for.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor Shard(int? value)

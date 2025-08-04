@@ -281,6 +281,13 @@ public sealed partial class SearchRequestParameters : Elastic.Transport.RequestP
 
 	/// <summary>
 	/// <para>
+	/// Whether vectors should be excluded from _source
+	/// </para>
+	/// </summary>
+	public bool? SourceExcludeVectors { get => Q<bool?>("_source_exclude_vectors"); set => Q("_source_exclude_vectors", value); }
+
+	/// <summary>
+	/// <para>
 	/// A comma-separated list of source fields to include in the response.
 	/// If this parameter is specified, only these source fields are returned.
 	/// You can exclude fields from this subset using the <c>_source_excludes</c> query parameter.
@@ -987,6 +994,13 @@ public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceExcludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_excludes"); set => Q("_source_excludes", value); }
+
+	/// <summary>
+	/// <para>
+	/// Whether vectors should be excluded from _source
+	/// </para>
+	/// </summary>
+	public bool? SourceExcludeVectors { get => Q<bool?>("_source_exclude_vectors"); set => Q("_source_exclude_vectors", value); }
 
 	/// <summary>
 	/// <para>
@@ -1753,6 +1767,17 @@ public readonly partial struct SearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SourceExcludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether vectors should be excluded from _source
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor SourceExcludeVectors(bool? value = true)
+	{
+		Instance.SourceExcludeVectors = value;
 		return this;
 	}
 
@@ -3497,6 +3522,17 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SourceExcludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceExcludes = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether vectors should be excluded from _source
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> SourceExcludeVectors(bool? value = true)
+	{
+		Instance.SourceExcludeVectors = value;
 		return this;
 	}
 

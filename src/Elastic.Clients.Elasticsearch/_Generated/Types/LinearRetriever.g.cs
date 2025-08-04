@@ -25,22 +25,33 @@ namespace Elastic.Clients.Elasticsearch;
 
 internal sealed partial class LinearRetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LinearRetriever>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
 	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
 	private static readonly System.Text.Json.JsonEncodedText PropMinScore = System.Text.Json.JsonEncodedText.Encode("min_score");
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropNormalizer = System.Text.Json.JsonEncodedText.Encode("normalizer");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
 	private static readonly System.Text.Json.JsonEncodedText PropRankWindowSize = System.Text.Json.JsonEncodedText.Encode("rank_window_size");
 	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers");
 
 	public override Elastic.Clients.Elasticsearch.LinearRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propFields = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
 		LocalJsonValue<float?> propMinScore = default;
 		LocalJsonValue<string?> propName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ScoreNormalizer?> propNormalizer = default;
+		LocalJsonValue<string?> propQuery = default;
 		LocalJsonValue<int?> propRankWindowSize = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.InnerRetriever>?> propRetrievers = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
 			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
 			{
 				continue;
@@ -52,6 +63,16 @@ internal sealed partial class LinearRetrieverConverter : System.Text.Json.Serial
 			}
 
 			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propNormalizer.TryReadProperty(ref reader, options, PropNormalizer, static Elastic.Clients.Elasticsearch.ScoreNormalizer? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.ScoreNormalizer>(o)))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
 			{
 				continue;
 			}
@@ -78,9 +99,12 @@ internal sealed partial class LinearRetrieverConverter : System.Text.Json.Serial
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.LinearRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Fields = propFields.Value,
 			Filter = propFilter.Value,
 			MinScore = propMinScore.Value,
 			Name = propName.Value,
+			Normalizer = propNormalizer.Value,
+			Query = propQuery.Value,
 			RankWindowSize = propRankWindowSize.Value,
 			Retrievers = propRetrievers.Value
 		};
@@ -89,9 +113,12 @@ internal sealed partial class LinearRetrieverConverter : System.Text.Json.Serial
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.LinearRetriever value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
 		writer.WriteProperty(options, PropMinScore, value.MinScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropNormalizer, value.Normalizer, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.ScoreNormalizer? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.ScoreNormalizer>(o, v));
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRetrievers, value.Retrievers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.InnerRetriever>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.InnerRetriever>(o, v, null));
 		writer.WriteEndObject();
@@ -117,6 +144,8 @@ public sealed partial class LinearRetriever
 		_ = sentinel;
 	}
 
+	public System.Collections.Generic.ICollection<string>? Fields { get; set; }
+
 	/// <summary>
 	/// <para>
 	/// Query to filter the documents that can match.
@@ -137,6 +166,8 @@ public sealed partial class LinearRetriever
 	/// </para>
 	/// </summary>
 	public string? Name { get; set; }
+	public Elastic.Clients.Elasticsearch.ScoreNormalizer? Normalizer { get; set; }
+	public string? Query { get; set; }
 	public int? RankWindowSize { get; set; }
 
 	/// <summary>
@@ -165,6 +196,18 @@ public readonly partial struct LinearRetrieverDescriptor<TDocument>
 
 	public static explicit operator Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>(Elastic.Clients.Elasticsearch.LinearRetriever instance) => new Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.LinearRetriever(Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Fields(params string[] values)
+	{
+		Instance.Fields = [.. values];
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -224,6 +267,18 @@ public readonly partial struct LinearRetrieverDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Name(string? value)
 	{
 		Instance.Name = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Normalizer(Elastic.Clients.Elasticsearch.ScoreNormalizer? value)
+	{
+		Instance.Normalizer = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor<TDocument> Query(string? value)
+	{
+		Instance.Query = value;
 		return this;
 	}
 
@@ -305,6 +360,18 @@ public readonly partial struct LinearRetrieverDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor(Elastic.Clients.Elasticsearch.LinearRetriever instance) => new Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.LinearRetriever(Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor descriptor) => descriptor.Instance;
 
+	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Fields(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Fields(params string[] values)
+	{
+		Instance.Fields = [.. values];
+		return this;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Query to filter the documents that can match.
@@ -380,6 +447,18 @@ public readonly partial struct LinearRetrieverDescriptor
 	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Name(string? value)
 	{
 		Instance.Name = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Normalizer(Elastic.Clients.Elasticsearch.ScoreNormalizer? value)
+	{
+		Instance.Normalizer = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LinearRetrieverDescriptor Query(string? value)
+	{
+		Instance.Query = value;
 		return this;
 	}
 
