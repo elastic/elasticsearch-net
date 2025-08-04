@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class CategorizeTextAggregation | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class CategorizeTextAggregation | Elasticsearch.NET ">
+      
+      <meta name="description" content="A multi-bucket aggregation that groups semi-structured text into buckets. Each text field is re-analyzed using a custom analyzer. The resulting tokens are then categorized creating buckets of similarly formatted text values. This aggregation works best with machine generated text like system logs. Only the first 100 analyzed tokens are used to categorize the text.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation" class="text-break">
+Class CategorizeTextAggregation  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.html">Aggregations</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+A multi-bucket aggregation that groups semi-structured text into buckets. Each text
+field is re-analyzed using a custom analyzer. The resulting tokens are then categorized
+creating buckets of similarly formatted text values. This aggregation works best with machine
+generated text like system logs. Only the first 100 analyzed tokens are used to categorize the text.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(CategorizeTextAggregationConverter))]
+public sealed class CategorizeTextAggregation</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">CategorizeTextAggregation</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation__ctor_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation__ctor" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.#ctor">
+  CategorizeTextAggregation()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L168"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public CategorizeTextAggregation()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation__ctor_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation__ctor_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.#ctor(Elastic.Clients.Elasticsearch.Field)">
+  CategorizeTextAggregation(Field)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L157"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CategorizeTextAggregation(Field field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_CategorizationAnalyzer_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.CategorizationAnalyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_CategorizationAnalyzer" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.CategorizationAnalyzer">
+  CategorizationAnalyzer
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L186"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The categorization analyzer specifies how the text is analyzed and tokenized before being categorized.
+The syntax is very similar to that used to define the analyzer in the analyze API. This property
+cannot be used at the same time as <code>categorization_filters</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CategorizeTextAnalyzer? CategorizationAnalyzer { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer.html">CategorizeTextAnalyzer</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_CategorizationFilters_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.CategorizationFilters*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_CategorizationFilters" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.CategorizationFilters">
+  CategorizationFilters
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L199"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+This property expects an array of regular expressions. The expressions are used to filter out matching
+sequences from the categorization field values. You can use this functionality to fine tune the categorization
+by excluding sequences from consideration when categories are defined. For example, you can exclude SQL
+statements that appear in your log files. This property cannot be used at the same time as categorization_analyzer.
+If you only want to define simple regular expression filters that are applied prior to tokenization, setting
+this property is the easiest method. If you also want to customize the tokenizer or post-tokenization filtering,
+use the categorization_analyzer property instead and include the filters as pattern_replace character filters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;string&gt;? CategorizationFilters { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_Field_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_Field" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.Field">
+  Field
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L206"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The semi-structured text field to categorize.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Field Field { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_MaxMatchedTokens_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.MaxMatchedTokens*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_MaxMatchedTokens" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.MaxMatchedTokens">
+  MaxMatchedTokens
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L218"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of token positions to match on before attempting to merge categories. Larger
+values will use more memory and create narrower categories. Max allowed value is 100.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxMatchedTokens { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_MaxUniqueTokens_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.MaxUniqueTokens*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_MaxUniqueTokens" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.MaxUniqueTokens">
+  MaxUniqueTokens
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of unique tokens at any position up to max_matched_tokens. Must be larger than 1.
+Smaller values use less memory and create fewer categories. Larger values will use more memory and
+create narrower categories. Max allowed value is 100.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxUniqueTokens { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_MinDocCount_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.MinDocCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_MinDocCount" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.MinDocCount">
+  MinDocCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L234"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The minimum number of documents in a bucket to be returned to the results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MinDocCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_ShardMinDocCount_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.ShardMinDocCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_ShardMinDocCount" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.ShardMinDocCount">
+  ShardMinDocCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L241"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The minimum number of documents in a bucket to be returned from the shard before merging.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? ShardMinDocCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_ShardSize_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.ShardSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_ShardSize" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.ShardSize">
+  ShardSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of categorization buckets to return from each shard before merging all the results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? ShardSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_SimilarityThreshold_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.SimilarityThreshold*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_SimilarityThreshold" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.SimilarityThreshold">
+  SimilarityThreshold
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L257"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The minimum percentage of tokens that must match for text to be added to the category bucket. Must
+be between 1 and 100. The larger the value the narrower the categories. Larger values will increase memory
+usage and create narrower categories.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? SimilarityThreshold { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_Size_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_CategorizeTextAggregation_Size" data-uid="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation.Size">
+  Size
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/CategorizeTextAggregation.g.cs/#L264"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of buckets to return.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Size { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
