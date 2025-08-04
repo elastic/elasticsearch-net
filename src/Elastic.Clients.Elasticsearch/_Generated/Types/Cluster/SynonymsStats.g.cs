@@ -23,17 +23,24 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-internal sealed partial class IndexingPressureConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.IndexingPressure>
+internal sealed partial class SynonymsStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.SynonymsStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMemory = System.Text.Json.JsonEncodedText.Encode("memory");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
 
-	public override Elastic.Clients.Elasticsearch.Cluster.IndexingPressure Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Cluster.SynonymsStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory> propMemory = default;
+		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<int> propIndexCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMemory.TryReadProperty(ref reader, options, PropMemory, null))
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propIndexCount.TryReadProperty(ref reader, options, PropIndexCount, null))
 			{
 				continue;
 			}
@@ -48,41 +55,44 @@ internal sealed partial class IndexingPressureConverter : System.Text.Json.Seria
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Cluster.IndexingPressure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.Cluster.SynonymsStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Memory = propMemory.Value
+			Count = propCount.Value,
+			IndexCount = propIndexCount.Value
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.IndexingPressure value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.SynonymsStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMemory, value.Memory, null, null);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropIndexCount, value.IndexCount, null, null);
 		writer.WriteEndObject();
 	}
 }
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.IndexingPressureConverter))]
-public sealed partial class IndexingPressure
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.SynonymsStatsConverter))]
+public sealed partial class SynonymsStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndexingPressure(Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory memory)
+	public SynonymsStats(int count, int indexCount)
 	{
-		Memory = memory;
+		Count = count;
+		IndexCount = indexCount;
 	}
 #if NET7_0_OR_GREATER
-	public IndexingPressure()
+	public SynonymsStats()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
 	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndexingPressure()
+	public SynonymsStats()
 	{
 	}
 #endif
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal IndexingPressure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal SynonymsStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
@@ -91,5 +101,10 @@ public sealed partial class IndexingPressure
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory Memory { get; set; }
+	int Count { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int IndexCount { get; set; }
 }

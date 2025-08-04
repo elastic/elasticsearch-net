@@ -25,20 +25,6 @@ namespace Elastic.Clients.Elasticsearch.Security;
 
 public sealed partial class GetUserPrivilegesRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The name of the application. Application privileges are always associated with exactly one application. If you do not specify this parameter, the API returns information about all privileges for all applications.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Name? Application { get => Q<Elastic.Clients.Elasticsearch.Name?>("application"); set => Q("application", value); }
-
-	/// <summary>
-	/// <para>
-	/// The name of the privilege. If you do not specify this parameter, the API returns information about all privileges for the requested application.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Name? Priviledge { get => Q<Elastic.Clients.Elasticsearch.Name?>("priviledge"); set => Q("priviledge", value); }
-	public Elastic.Clients.Elasticsearch.Name? Username { get => Q<Elastic.Clients.Elasticsearch.Name?>("username"); set => Q("username", value); }
 }
 
 internal sealed partial class GetUserPrivilegesRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest>
@@ -107,21 +93,6 @@ public sealed partial class GetUserPrivilegesRequest : Elastic.Clients.Elasticse
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.get_user_privileges";
-
-	/// <summary>
-	/// <para>
-	/// The name of the application. Application privileges are always associated with exactly one application. If you do not specify this parameter, the API returns information about all privileges for all applications.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Name? Application { get => Q<Elastic.Clients.Elasticsearch.Name?>("application"); set => Q("application", value); }
-
-	/// <summary>
-	/// <para>
-	/// The name of the privilege. If you do not specify this parameter, the API returns information about all privileges for the requested application.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Name? Priviledge { get => Q<Elastic.Clients.Elasticsearch.Name?>("priviledge"); set => Q("priviledge", value); }
-	public Elastic.Clients.Elasticsearch.Name? Username { get => Q<Elastic.Clients.Elasticsearch.Name?>("username"); set => Q("username", value); }
 }
 
 /// <summary>
@@ -152,34 +123,6 @@ public readonly partial struct GetUserPrivilegesRequestDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest(Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor descriptor) => descriptor.Instance;
-
-	/// <summary>
-	/// <para>
-	/// The name of the application. Application privileges are always associated with exactly one application. If you do not specify this parameter, the API returns information about all privileges for all applications.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor Application(Elastic.Clients.Elasticsearch.Name? value)
-	{
-		Instance.Application = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The name of the privilege. If you do not specify this parameter, the API returns information about all privileges for the requested application.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor Priviledge(Elastic.Clients.Elasticsearch.Name? value)
-	{
-		Instance.Priviledge = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor Username(Elastic.Clients.Elasticsearch.Name? value)
-	{
-		Instance.Username = value;
-		return this;
-	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	internal static Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor>? action)

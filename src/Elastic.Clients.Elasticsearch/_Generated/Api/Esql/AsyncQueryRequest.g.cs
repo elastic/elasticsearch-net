@@ -43,7 +43,14 @@ public sealed partial class AsyncQueryRequestParameters : Elastic.Transport.Requ
 
 	/// <summary>
 	/// <para>
-	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
+	/// A short version of the Accept header, e.g. json, yaml.
+	/// </para>
+	/// <para>
+	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
+	/// </para>
+	/// <para>
+	/// For async requests, nothing will be returned if the async query doesn't finish within the timeout.
+	/// The query ID and running status are available in the <c>X-Elasticsearch-Async-Id</c> and <c>X-Elasticsearch-Async-Is-Running</c> HTTP headers of the response, respectively.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
@@ -229,7 +236,14 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
+	/// A short version of the Accept header, e.g. json, yaml.
+	/// </para>
+	/// <para>
+	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
+	/// </para>
+	/// <para>
+	/// For async requests, nothing will be returned if the async query doesn't finish within the timeout.
+	/// The query ID and running status are available in the <c>X-Elasticsearch-Async-Id</c> and <c>X-Elasticsearch-Async-Is-Running</c> HTTP headers of the response, respectively.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Esql.EsqlFormat?>("format"); set => Q("format", value); }
@@ -368,7 +382,14 @@ public readonly partial struct AsyncQueryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
+	/// A short version of the Accept header, e.g. json, yaml.
+	/// </para>
+	/// <para>
+	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
+	/// </para>
+	/// <para>
+	/// For async requests, nothing will be returned if the async query doesn't finish within the timeout.
+	/// The query ID and running status are available in the <c>X-Elasticsearch-Async-Id</c> and <c>X-Elasticsearch-Async-Is-Running</c> HTTP headers of the response, respectively.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)
@@ -631,7 +652,14 @@ public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// A short version of the Accept header, for example <c>json</c> or <c>yaml</c>.
+	/// A short version of the Accept header, e.g. json, yaml.
+	/// </para>
+	/// <para>
+	/// <c>csv</c>, <c>tsv</c>, and <c>txt</c> formats will return results in a tabular format, excluding other metadata fields from the response.
+	/// </para>
+	/// <para>
+	/// For async requests, nothing will be returned if the async query doesn't finish within the timeout.
+	/// The query ID and running status are available in the <c>X-Elasticsearch-Async-Id</c> and <c>X-Elasticsearch-Async-Is-Running</c> HTTP headers of the response, respectively.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? value)

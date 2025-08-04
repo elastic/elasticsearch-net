@@ -360,6 +360,8 @@ internal sealed partial class HealthStatusConverter : System.Text.Json.Serializa
 	private static readonly System.Text.Json.JsonEncodedText MemberGreen1 = System.Text.Json.JsonEncodedText.Encode("GREEN");
 	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red");
 	private static readonly System.Text.Json.JsonEncodedText MemberRed1 = System.Text.Json.JsonEncodedText.Encode("RED");
+	private static readonly System.Text.Json.JsonEncodedText MemberUnavailable = System.Text.Json.JsonEncodedText.Encode("unavailable");
+	private static readonly System.Text.Json.JsonEncodedText MemberUnknown = System.Text.Json.JsonEncodedText.Encode("unknown");
 	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow");
 	private static readonly System.Text.Json.JsonEncodedText MemberYellow1 = System.Text.Json.JsonEncodedText.Encode("YELLOW");
 
@@ -373,6 +375,16 @@ internal sealed partial class HealthStatusConverter : System.Text.Json.Serializa
 		if (reader.ValueTextEquals(MemberRed) || reader.ValueTextEquals(MemberRed1))
 		{
 			return Elastic.Clients.Elasticsearch.HealthStatus.Red;
+		}
+
+		if (reader.ValueTextEquals(MemberUnavailable))
+		{
+			return Elastic.Clients.Elasticsearch.HealthStatus.Unavailable;
+		}
+
+		if (reader.ValueTextEquals(MemberUnknown))
+		{
+			return Elastic.Clients.Elasticsearch.HealthStatus.Unknown;
 		}
 
 		if (reader.ValueTextEquals(MemberYellow) || reader.ValueTextEquals(MemberYellow1))
@@ -389,6 +401,16 @@ internal sealed partial class HealthStatusConverter : System.Text.Json.Serializa
 		if (string.Equals(value, MemberRed.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberRed1.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.HealthStatus.Red;
+		}
+
+		if (string.Equals(value, MemberUnavailable.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.HealthStatus.Unavailable;
+		}
+
+		if (string.Equals(value, MemberUnknown.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.HealthStatus.Unknown;
 		}
 
 		if (string.Equals(value, MemberYellow.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberYellow1.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -408,6 +430,12 @@ internal sealed partial class HealthStatusConverter : System.Text.Json.Serializa
 				break;
 			case Elastic.Clients.Elasticsearch.HealthStatus.Red:
 				writer.WriteStringValue(MemberRed);
+				break;
+			case Elastic.Clients.Elasticsearch.HealthStatus.Unavailable:
+				writer.WriteStringValue(MemberUnavailable);
+				break;
+			case Elastic.Clients.Elasticsearch.HealthStatus.Unknown:
+				writer.WriteStringValue(MemberUnknown);
 				break;
 			case Elastic.Clients.Elasticsearch.HealthStatus.Yellow:
 				writer.WriteStringValue(MemberYellow);
@@ -612,63 +640,6 @@ internal sealed partial class WaitForEventsConverter : System.Text.Json.Serializ
 	}
 }
 
-internal sealed partial class OpTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.OpType>
-{
-	private static readonly System.Text.Json.JsonEncodedText MemberCreate = System.Text.Json.JsonEncodedText.Encode("create");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("index");
-
-	public override Elastic.Clients.Elasticsearch.OpType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		if (reader.ValueTextEquals(MemberCreate))
-		{
-			return Elastic.Clients.Elasticsearch.OpType.Create;
-		}
-
-		if (reader.ValueTextEquals(MemberIndex))
-		{
-			return Elastic.Clients.Elasticsearch.OpType.Index;
-		}
-
-		var value = reader.GetString()!;
-		if (string.Equals(value, MemberCreate.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.OpType.Create;
-		}
-
-		if (string.Equals(value, MemberIndex.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.OpType.Index;
-		}
-
-		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.OpType)}'.");
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.OpType value, System.Text.Json.JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case Elastic.Clients.Elasticsearch.OpType.Create:
-				writer.WriteStringValue(MemberCreate);
-				break;
-			case Elastic.Clients.Elasticsearch.OpType.Index:
-				writer.WriteStringValue(MemberIndex);
-				break;
-			default:
-				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.OpType)}'.");
-		}
-	}
-
-	public override Elastic.Clients.Elasticsearch.OpType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return Read(ref reader, typeToConvert, options);
-	}
-
-	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.OpType value, System.Text.Json.JsonSerializerOptions options)
-	{
-		Write(writer, value, options);
-	}
-}
-
 internal sealed partial class VersionTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.VersionType>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberExternal = System.Text.Json.JsonEncodedText.Encode("external");
@@ -806,6 +777,63 @@ internal sealed partial class ConflictsConverter : System.Text.Json.Serializatio
 	}
 
 	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Conflicts value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class OpTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.OpType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCreate = System.Text.Json.JsonEncodedText.Encode("create");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("index");
+
+	public override Elastic.Clients.Elasticsearch.OpType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCreate))
+		{
+			return Elastic.Clients.Elasticsearch.OpType.Create;
+		}
+
+		if (reader.ValueTextEquals(MemberIndex))
+		{
+			return Elastic.Clients.Elasticsearch.OpType.Index;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCreate.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.OpType.Create;
+		}
+
+		if (string.Equals(value, MemberIndex.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.OpType.Index;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.OpType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.OpType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.OpType.Create:
+				writer.WriteStringValue(MemberCreate);
+				break;
+			case Elastic.Clients.Elasticsearch.OpType.Index:
+				writer.WriteStringValue(MemberIndex);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.OpType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.OpType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.OpType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		Write(writer, value, options);
 	}
@@ -2955,6 +2983,10 @@ public enum HealthStatus
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "red")]
 	Red,
+	[System.Runtime.Serialization.EnumMember(Value = "unavailable")]
+	Unavailable,
+	[System.Runtime.Serialization.EnumMember(Value = "unknown")]
+	Unknown,
 	/// <summary>
 	/// <para>
 	/// All primary shards are assigned, but one or more replica shards are unassigned. If a node in the cluster fails, some data could be unavailable until that node is repaired.
@@ -2990,25 +3022,6 @@ public enum WaitForEvents
 	Normal,
 	[System.Runtime.Serialization.EnumMember(Value = "urgent")]
 	Urgent
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.OpTypeConverter))]
-public enum OpType
-{
-	/// <summary>
-	/// <para>
-	/// Only index documents that do not already exist.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "create")]
-	Create,
-	/// <summary>
-	/// <para>
-	/// Overwrite any documents that already exist.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "index")]
-	Index
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.VersionTypeConverter))]
@@ -3063,6 +3076,25 @@ public enum Conflicts
 	/// </summary>
 	[System.Runtime.Serialization.EnumMember(Value = "proceed")]
 	Proceed
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.OpTypeConverter))]
+public enum OpType
+{
+	/// <summary>
+	/// <para>
+	/// Only index documents that do not already exist.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "create")]
+	Create,
+	/// <summary>
+	/// <para>
+	/// Overwrite any documents that already exist.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "index")]
+	Index
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ThreadTypeConverter))]

@@ -25,6 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public sealed partial class PutMistralRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 internal sealed partial class PutMistralRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.PutMistralRequest>
@@ -149,6 +155,13 @@ public sealed partial class PutMistralRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// The chunking configuration object.
 	/// </para>
 	/// </summary>
@@ -227,6 +240,17 @@ public readonly partial struct PutMistralRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.MistralTaskType value)
 	{
 		Instance.TaskType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
 		return this;
 	}
 

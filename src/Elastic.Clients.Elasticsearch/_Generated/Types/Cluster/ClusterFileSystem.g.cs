@@ -25,29 +25,127 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 internal sealed partial class ClusterFileSystemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
 	private static readonly System.Text.Json.JsonEncodedText PropAvailableInBytes = System.Text.Json.JsonEncodedText.Encode("available_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFloodStageFreeSpace = System.Text.Json.JsonEncodedText.Encode("flood_stage_free_space");
+	private static readonly System.Text.Json.JsonEncodedText PropFloodStageFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("flood_stage_free_space_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free");
 	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFrozenFloodStageFreeSpace = System.Text.Json.JsonEncodedText.Encode("frozen_flood_stage_free_space");
+	private static readonly System.Text.Json.JsonEncodedText PropFrozenFloodStageFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("frozen_flood_stage_free_space_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropHighWatermarkFreeSpace = System.Text.Json.JsonEncodedText.Encode("high_watermark_free_space");
+	private static readonly System.Text.Json.JsonEncodedText PropHighWatermarkFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("high_watermark_free_space_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropLowWatermarkFreeSpace = System.Text.Json.JsonEncodedText.Encode("low_watermark_free_space");
+	private static readonly System.Text.Json.JsonEncodedText PropLowWatermarkFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("low_watermark_free_space_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropMount = System.Text.Json.JsonEncodedText.Encode("mount");
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
 	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long> propAvailableInBytes = default;
-		LocalJsonValue<long> propFreeInBytes = default;
-		LocalJsonValue<long> propTotalInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propAvailable = default;
+		LocalJsonValue<long?> propAvailableInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propFloodStageFreeSpace = default;
+		LocalJsonValue<long?> propFloodStageFreeSpaceInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propFree = default;
+		LocalJsonValue<long?> propFreeInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propFrozenFloodStageFreeSpace = default;
+		LocalJsonValue<long?> propFrozenFloodStageFreeSpaceInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propHighWatermarkFreeSpace = default;
+		LocalJsonValue<long?> propHighWatermarkFreeSpaceInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propLowWatermarkFreeSpace = default;
+		LocalJsonValue<long?> propLowWatermarkFreeSpaceInBytes = default;
+		LocalJsonValue<string?> propMount = default;
+		LocalJsonValue<string?> propPath = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotal = default;
+		LocalJsonValue<long?> propTotalInBytes = default;
+		LocalJsonValue<string?> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAvailableInBytes.TryReadProperty(ref reader, options, PropAvailableInBytes, null))
+			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
 			{
 				continue;
 			}
 
-			if (propFreeInBytes.TryReadProperty(ref reader, options, PropFreeInBytes, null))
+			if (propAvailableInBytes.TryReadProperty(ref reader, options, PropAvailableInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
 
-			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, null))
+			if (propFloodStageFreeSpace.TryReadProperty(ref reader, options, PropFloodStageFreeSpace, null))
+			{
+				continue;
+			}
+
+			if (propFloodStageFreeSpaceInBytes.TryReadProperty(ref reader, options, PropFloodStageFreeSpaceInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propFree.TryReadProperty(ref reader, options, PropFree, null))
+			{
+				continue;
+			}
+
+			if (propFreeInBytes.TryReadProperty(ref reader, options, PropFreeInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propFrozenFloodStageFreeSpace.TryReadProperty(ref reader, options, PropFrozenFloodStageFreeSpace, null))
+			{
+				continue;
+			}
+
+			if (propFrozenFloodStageFreeSpaceInBytes.TryReadProperty(ref reader, options, PropFrozenFloodStageFreeSpaceInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propHighWatermarkFreeSpace.TryReadProperty(ref reader, options, PropHighWatermarkFreeSpace, null))
+			{
+				continue;
+			}
+
+			if (propHighWatermarkFreeSpaceInBytes.TryReadProperty(ref reader, options, PropHighWatermarkFreeSpaceInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propLowWatermarkFreeSpace.TryReadProperty(ref reader, options, PropLowWatermarkFreeSpace, null))
+			{
+				continue;
+			}
+
+			if (propLowWatermarkFreeSpaceInBytes.TryReadProperty(ref reader, options, PropLowWatermarkFreeSpaceInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propMount.TryReadProperty(ref reader, options, PropMount, null))
+			{
+				continue;
+			}
+
+			if (propPath.TryReadProperty(ref reader, options, PropPath, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
 			{
 				continue;
 			}
@@ -64,18 +162,46 @@ internal sealed partial class ClusterFileSystemConverter : System.Text.Json.Seri
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Available = propAvailable.Value,
 			AvailableInBytes = propAvailableInBytes.Value,
+			FloodStageFreeSpace = propFloodStageFreeSpace.Value,
+			FloodStageFreeSpaceInBytes = propFloodStageFreeSpaceInBytes.Value,
+			Free = propFree.Value,
 			FreeInBytes = propFreeInBytes.Value,
-			TotalInBytes = propTotalInBytes.Value
+			FrozenFloodStageFreeSpace = propFrozenFloodStageFreeSpace.Value,
+			FrozenFloodStageFreeSpaceInBytes = propFrozenFloodStageFreeSpaceInBytes.Value,
+			HighWatermarkFreeSpace = propHighWatermarkFreeSpace.Value,
+			HighWatermarkFreeSpaceInBytes = propHighWatermarkFreeSpaceInBytes.Value,
+			LowWatermarkFreeSpace = propLowWatermarkFreeSpace.Value,
+			LowWatermarkFreeSpaceInBytes = propLowWatermarkFreeSpaceInBytes.Value,
+			Mount = propMount.Value,
+			Path = propPath.Value,
+			Total = propTotal.Value,
+			TotalInBytes = propTotalInBytes.Value,
+			Type = propType.Value
 		};
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAvailableInBytes, value.AvailableInBytes, null, null);
-		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, null);
-		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, null);
+		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
+		writer.WriteProperty(options, PropAvailableInBytes, value.AvailableInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropFloodStageFreeSpace, value.FloodStageFreeSpace, null, null);
+		writer.WriteProperty(options, PropFloodStageFreeSpaceInBytes, value.FloodStageFreeSpaceInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropFree, value.Free, null, null);
+		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropFrozenFloodStageFreeSpace, value.FrozenFloodStageFreeSpace, null, null);
+		writer.WriteProperty(options, PropFrozenFloodStageFreeSpaceInBytes, value.FrozenFloodStageFreeSpaceInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropHighWatermarkFreeSpace, value.HighWatermarkFreeSpace, null, null);
+		writer.WriteProperty(options, PropHighWatermarkFreeSpaceInBytes, value.HighWatermarkFreeSpaceInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropLowWatermarkFreeSpace, value.LowWatermarkFreeSpace, null, null);
+		writer.WriteProperty(options, PropLowWatermarkFreeSpaceInBytes, value.LowWatermarkFreeSpaceInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropMount, value.Mount, null, null);
+		writer.WriteProperty(options, PropPath, value.Path, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -83,20 +209,12 @@ internal sealed partial class ClusterFileSystemConverter : System.Text.Json.Seri
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystemConverter))]
 public sealed partial class ClusterFileSystem
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ClusterFileSystem(long availableInBytes, long freeInBytes, long totalInBytes)
-	{
-		AvailableInBytes = availableInBytes;
-		FreeInBytes = freeInBytes;
-		TotalInBytes = totalInBytes;
-	}
 #if NET7_0_OR_GREATER
 	public ClusterFileSystem()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public ClusterFileSystem()
 	{
 	}
@@ -114,31 +232,53 @@ public sealed partial class ClusterFileSystem
 	/// This is the actual amount of free disk space the selected Elasticsearch nodes can use.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long AvailableInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? Available { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Total number of bytes available to JVM in file stores across all selected nodes.
+	/// Depending on operating system or process-level restrictions, this number may be less than <c>nodes.fs.free_in_byes</c>.
+	/// This is the actual amount of free disk space the selected Elasticsearch nodes can use.
+	/// </para>
+	/// </summary>
+	public long? AvailableInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? FloodStageFreeSpace { get; set; }
+	public long? FloodStageFreeSpaceInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of unallocated bytes in file stores across all selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long FreeInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? Free { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Total number, in bytes, of unallocated bytes in file stores across all selected nodes.
+	/// </para>
+	/// </summary>
+	public long? FreeInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? FrozenFloodStageFreeSpace { get; set; }
+	public long? FrozenFloodStageFreeSpaceInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? HighWatermarkFreeSpace { get; set; }
+	public long? HighWatermarkFreeSpaceInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? LowWatermarkFreeSpace { get; set; }
+	public long? LowWatermarkFreeSpaceInBytes { get; set; }
+	public string? Mount { get; set; }
+	public string? Path { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Total size of all file stores across all selected nodes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? Total { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total size, in bytes, of all file stores across all selected nodes.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long TotalInBytes { get; set; }
+	public long? TotalInBytes { get; set; }
+	public string? Type { get; set; }
 }

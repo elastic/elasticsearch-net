@@ -265,6 +265,7 @@ internal sealed partial class UpdateRequestConverterFactory : System.Text.Json.S
 /// <para>
 /// The <c>_source</c> field must be enabled to use this API.
 /// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
+/// For usage examples such as partial updates, upserts, and scripted updates, see the External documentation.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.UpdateRequestConverterFactory))]
@@ -499,6 +500,7 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : Elastic
 /// <para>
 /// The <c>_source</c> field must be enabled to use this API.
 /// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
+/// For usage examples such as partial updates, upserts, and scripted updates, see the External documentation.
 /// </para>
 /// </summary>
 public readonly partial struct UpdateRequestDescriptor<TDocument, TPartialDocument>

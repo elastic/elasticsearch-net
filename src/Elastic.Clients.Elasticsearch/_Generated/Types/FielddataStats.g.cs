@@ -27,6 +27,7 @@ internal sealed partial class FielddataStatsConverter : System.Text.Json.Seriali
 {
 	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions");
 	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("global_ordinals");
 	private static readonly System.Text.Json.JsonEncodedText PropMemorySize = System.Text.Json.JsonEncodedText.Encode("memory_size");
 	private static readonly System.Text.Json.JsonEncodedText PropMemorySizeInBytes = System.Text.Json.JsonEncodedText.Encode("memory_size_in_bytes");
 
@@ -35,6 +36,7 @@ internal sealed partial class FielddataStatsConverter : System.Text.Json.Seriali
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<long?> propEvictions = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldMemoryUsage>?> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GlobalOrdinalsStats> propGlobalOrdinals = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMemorySize = default;
 		LocalJsonValue<long> propMemorySizeInBytes = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -45,6 +47,11 @@ internal sealed partial class FielddataStatsConverter : System.Text.Json.Seriali
 			}
 
 			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldMemoryUsage>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.FieldMemoryUsage>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propGlobalOrdinals.TryReadProperty(ref reader, options, PropGlobalOrdinals, null))
 			{
 				continue;
 			}
@@ -73,6 +80,7 @@ internal sealed partial class FielddataStatsConverter : System.Text.Json.Seriali
 		{
 			Evictions = propEvictions.Value,
 			Fields = propFields.Value,
+			GlobalOrdinals = propGlobalOrdinals.Value,
 			MemorySize = propMemorySize.Value,
 			MemorySizeInBytes = propMemorySizeInBytes.Value
 		};
@@ -83,6 +91,7 @@ internal sealed partial class FielddataStatsConverter : System.Text.Json.Seriali
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropEvictions, value.Evictions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldMemoryUsage>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.FieldMemoryUsage>(o, v, null, null));
+		writer.WriteProperty(options, PropGlobalOrdinals, value.GlobalOrdinals, null, null);
 		writer.WriteProperty(options, PropMemorySize, value.MemorySize, null, null);
 		writer.WriteProperty(options, PropMemorySizeInBytes, value.MemorySizeInBytes, null, null);
 		writer.WriteEndObject();
@@ -93,8 +102,9 @@ internal sealed partial class FielddataStatsConverter : System.Text.Json.Seriali
 public sealed partial class FielddataStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public FielddataStats(long memorySizeInBytes)
+	public FielddataStats(Elastic.Clients.Elasticsearch.GlobalOrdinalsStats globalOrdinals, long memorySizeInBytes)
 	{
+		GlobalOrdinals = globalOrdinals;
 		MemorySizeInBytes = memorySizeInBytes;
 	}
 #if NET7_0_OR_GREATER
@@ -116,6 +126,11 @@ public sealed partial class FielddataStats
 
 	public long? Evictions { get; set; }
 	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldMemoryUsage>? Fields { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.GlobalOrdinalsStats GlobalOrdinals { get; set; }
 	public Elastic.Clients.Elasticsearch.ByteSize? MemorySize { get; set; }
 	public
 #if NET7_0_OR_GREATER
