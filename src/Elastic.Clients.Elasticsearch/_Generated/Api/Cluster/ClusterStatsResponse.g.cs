@@ -31,6 +31,8 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
 	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
 	private static readonly System.Text.Json.JsonEncodedText PropNodeStats = System.Text.Json.JsonEncodedText.Encode("_nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropRepositories = System.Text.Json.JsonEncodedText.Encode("repositories");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshots = System.Text.Json.JsonEncodedText.Encode("snapshots");
 	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
 	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
 
@@ -43,7 +45,9 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterIndices> propIndices = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterNodes> propNodes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeStatistics?> propNodeStats = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.HealthStatus> propStatus = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>> propRepositories = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats> propSnapshots = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.HealthStatus?> propStatus = default;
 		LocalJsonValue<long> propTimestamp = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -77,7 +81,17 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			if (propRepositories.TryReadProperty(ref reader, options, PropRepositories, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>(o, null, static System.Collections.Generic.IReadOnlyDictionary<string, long> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, long>(o, null, null)!)!))
+			{
+				continue;
+			}
+
+			if (propSnapshots.TryReadProperty(ref reader, options, PropSnapshots, null))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, static Elastic.Clients.Elasticsearch.HealthStatus? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.HealthStatus>(o)))
 			{
 				continue;
 			}
@@ -105,6 +119,8 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 			Indices = propIndices.Value,
 			Nodes = propNodes.Value,
 			NodeStats = propNodeStats.Value,
+			Repositories = propRepositories.Value,
+			Snapshots = propSnapshots.Value,
 			Status = propStatus.Value,
 			Timestamp = propTimestamp.Value
 		};
@@ -119,7 +135,9 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
 		writer.WriteProperty(options, PropNodes, value.Nodes, null, null);
 		writer.WriteProperty(options, PropNodeStats, value.NodeStats, null, null);
-		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropRepositories, value.Repositories, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>> v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyDictionary<string, long>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, long> v) => w.WriteDictionaryValue<string, long>(o, v, null, null)));
+		writer.WriteProperty(options, PropSnapshots, value.Snapshots, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.HealthStatus? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.HealthStatus>(o, v));
 		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
 		writer.WriteEndObject();
 	}
@@ -203,14 +221,32 @@ public sealed partial class ClusterStatsResponse : Elastic.Transport.Products.El
 
 	/// <summary>
 	/// <para>
-	/// Health status of the cluster, based on the state of its primary and replica shards.
+	/// Contains stats on repository feature usage exposed in cluster stats for telemetry.
 	/// </para>
 	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
+	System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyDictionary<string, long>> Repositories { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Contains stats cluster snapshots.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats Snapshots { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Health status of the cluster, based on the state of its primary and replica shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.HealthStatus? Status { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -25,6 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public sealed partial class StreamCompletionRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The amount of time to wait for the inference request to complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 internal sealed partial class StreamCompletionRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest>
@@ -134,6 +140,13 @@ public sealed partial class StreamCompletionRequest : Elastic.Clients.Elasticsea
 
 	/// <summary>
 	/// <para>
+	/// The amount of time to wait for the inference request to complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// The text on which you want to perform the inference task.
 	/// It can be a single string or an array.
 	/// </para>
@@ -202,6 +215,17 @@ public readonly partial struct StreamCompletionRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id value)
 	{
 		Instance.InferenceId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The amount of time to wait for the inference request to complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
 		return this;
 	}
 

@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 internal sealed partial class ClusterJvmConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterJvm>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropMaxUptime = System.Text.Json.JsonEncodedText.Encode("max_uptime");
 	private static readonly System.Text.Json.JsonEncodedText PropMaxUptimeInMillis = System.Text.Json.JsonEncodedText.Encode("max_uptime_in_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropMem = System.Text.Json.JsonEncodedText.Encode("mem");
 	private static readonly System.Text.Json.JsonEncodedText PropThreads = System.Text.Json.JsonEncodedText.Encode("threads");
@@ -33,12 +34,18 @@ internal sealed partial class ClusterJvmConverter : System.Text.Json.Serializati
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterJvm Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propMaxUptime = default;
 		LocalJsonValue<System.TimeSpan> propMaxUptimeInMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory> propMem = default;
 		LocalJsonValue<long> propThreads = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion>> propVersions = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propMaxUptime.TryReadProperty(ref reader, options, PropMaxUptime, null))
+			{
+				continue;
+			}
+
 			if (propMaxUptimeInMillis.TryReadProperty(ref reader, options, PropMaxUptimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
@@ -71,6 +78,7 @@ internal sealed partial class ClusterJvmConverter : System.Text.Json.Serializati
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Cluster.ClusterJvm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			MaxUptime = propMaxUptime.Value,
 			MaxUptimeInMillis = propMaxUptimeInMillis.Value,
 			Mem = propMem.Value,
 			Threads = propThreads.Value,
@@ -81,6 +89,7 @@ internal sealed partial class ClusterJvmConverter : System.Text.Json.Serializati
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterJvm value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxUptime, value.MaxUptime, null, null);
 		writer.WriteProperty(options, PropMaxUptimeInMillis, value.MaxUptimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropMem, value.Mem, null, null);
 		writer.WriteProperty(options, PropThreads, value.Threads, null, null);
@@ -116,6 +125,13 @@ public sealed partial class ClusterJvm
 	{
 		_ = sentinel;
 	}
+
+	/// <summary>
+	/// <para>
+	/// Uptime duration since JVM last started.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MaxUptime { get; set; }
 
 	/// <summary>
 	/// <para>

@@ -54,6 +54,13 @@ public sealed partial class GetComponentTemplateRequestParameters : Elastic.Tran
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Filter out results, for example to filter out sensitive information. Supports wildcards or full settings keys
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<string>? SettingsFilter { get => Q<System.Collections.Generic.ICollection<string>?>("settings_filter"); set => Q("settings_filter", value); }
 }
 
 internal sealed partial class GetComponentTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest>
@@ -158,6 +165,13 @@ public sealed partial class GetComponentTemplateRequest : Elastic.Clients.Elasti
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// Filter out results, for example to filter out sensitive information. Supports wildcards or full settings keys
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<string>? SettingsFilter { get => Q<System.Collections.Generic.ICollection<string>?>("settings_filter"); set => Q("settings_filter", value); }
 }
 
 /// <summary>
@@ -244,6 +258,28 @@ public readonly partial struct GetComponentTemplateRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Filter out results, for example to filter out sensitive information. Supports wildcards or full settings keys
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor SettingsFilter(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.SettingsFilter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Filter out results, for example to filter out sensitive information. Supports wildcards or full settings keys
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor SettingsFilter(params string[] values)
+	{
+		Instance.SettingsFilter = [.. values];
 		return this;
 	}
 

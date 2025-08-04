@@ -152,10 +152,13 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferencePut = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferencePutAlibabacloud = new ApiUrls(new[] { "_inference/{task_type}/{alibabacloud_inference_id}" });
 	internal static ApiUrls InferencePutAmazonbedrock = new ApiUrls(new[] { "_inference/{task_type}/{amazonbedrock_inference_id}" });
+	internal static ApiUrls InferencePutAmazonsagemaker = new ApiUrls(new[] { "_inference/{task_type}/{amazonsagemaker_inference_id}" });
 	internal static ApiUrls InferencePutAnthropic = new ApiUrls(new[] { "_inference/{task_type}/{anthropic_inference_id}" });
 	internal static ApiUrls InferencePutAzureaistudio = new ApiUrls(new[] { "_inference/{task_type}/{azureaistudio_inference_id}" });
 	internal static ApiUrls InferencePutAzureopenai = new ApiUrls(new[] { "_inference/{task_type}/{azureopenai_inference_id}" });
 	internal static ApiUrls InferencePutCohere = new ApiUrls(new[] { "_inference/{task_type}/{cohere_inference_id}" });
+	internal static ApiUrls InferencePutCustom = new ApiUrls(new[] { "_inference/{task_type}/{custom_inference_id}" });
+	internal static ApiUrls InferencePutDeepseek = new ApiUrls(new[] { "_inference/{task_type}/{deepseek_inference_id}" });
 	internal static ApiUrls InferencePutElasticsearch = new ApiUrls(new[] { "_inference/{task_type}/{elasticsearch_inference_id}" });
 	internal static ApiUrls InferencePutElser = new ApiUrls(new[] { "_inference/{task_type}/{elser_inference_id}" });
 	internal static ApiUrls InferencePutGoogleaistudio = new ApiUrls(new[] { "_inference/{task_type}/{googleaistudio_inference_id}" });

@@ -85,6 +85,13 @@ public sealed partial class IndexRequestParameters : Elastic.Transport.RequestPa
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
+	/// </para>
+	/// </summary>
+	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
+
+	/// <summary>
+	/// <para>
 	/// A custom value that is used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
@@ -447,6 +454,13 @@ public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
+	/// </para>
+	/// </summary>
+	public bool? RequireDataStream { get => Q<bool?>("require_data_stream"); set => Q("require_data_stream", value); }
+
+	/// <summary>
+	/// <para>
 	/// A custom value that is used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
@@ -806,6 +820,17 @@ public readonly partial struct IndexRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> RequireAlias(bool? value = true)
 	{
 		Instance.RequireAlias = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request's actions must target a data stream (existing or to be created).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexRequestDescriptor<TDocument> RequireDataStream(bool? value = true)
+	{
+		Instance.RequireDataStream = value;
 		return this;
 	}
 

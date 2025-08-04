@@ -69,7 +69,7 @@ internal sealed partial class QueryRequestConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propKeepAlive = default;
 		LocalJsonValue<bool?> propKeepOnCompletion = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propPageTimeout = default;
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<object>?> propParams = default;
 		LocalJsonValue<string?> propQuery = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propRequestTimeout = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
@@ -132,7 +132,7 @@ internal sealed partial class QueryRequestConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.ICollection<object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, null)))
 			{
 				continue;
 			}
@@ -208,7 +208,7 @@ internal sealed partial class QueryRequestConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
 		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropPageTimeout, value.PageTimeout, null, null);
-		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<object>? v) => w.WriteCollectionValue<object>(o, v, null));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropRequestTimeout, value.RequestTimeout, null, null);
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
@@ -351,7 +351,7 @@ public sealed partial class QueryRequest : Elastic.Clients.Elasticsearch.Request
 	/// The values for parameters in the query.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
+	public System.Collections.Generic.ICollection<object>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -589,7 +589,7 @@ public readonly partial struct QueryRequestDescriptor
 	/// The values for parameters in the query.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Params(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Params = value;
 		return this;
@@ -600,27 +600,9 @@ public readonly partial struct QueryRequestDescriptor
 	/// The values for parameters in the query.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Params()
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Params(params object[] values)
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The values for parameters in the query.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
-	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor AddParam(string key, object value)
-	{
-		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
-		Instance.Params.Add(key, value);
+		Instance.Params = [.. values];
 		return this;
 	}
 
@@ -1002,7 +984,7 @@ public readonly partial struct QueryRequestDescriptor<TDocument>
 	/// The values for parameters in the query.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Params(System.Collections.Generic.IDictionary<string, object>? value)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Params(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Params = value;
 		return this;
@@ -1013,27 +995,9 @@ public readonly partial struct QueryRequestDescriptor<TDocument>
 	/// The values for parameters in the query.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Params()
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Params(params object[] values)
 	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The values for parameters in the query.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
-	{
-		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> AddParam(string key, object value)
-	{
-		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
-		Instance.Params.Add(key, value);
+		Instance.Params = [.. values];
 		return this;
 	}
 

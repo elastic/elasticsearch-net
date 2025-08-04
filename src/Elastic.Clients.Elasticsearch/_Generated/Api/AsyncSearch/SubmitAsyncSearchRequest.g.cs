@@ -131,7 +131,6 @@ public sealed partial class SubmitAsyncSearchRequestParameters : Elastic.Transpo
 	/// </para>
 	/// </summary>
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
 	/// <para>
@@ -710,7 +709,6 @@ public partial class SubmitAsyncSearchRequest : Elastic.Clients.Elasticsearch.Re
 	/// </para>
 	/// </summary>
 	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
-	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
 	/// <para>
@@ -1223,12 +1221,6 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor MaxConcurrentShardRequests(long? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor MinCompatibleShardNode(string? value)
-	{
-		Instance.MinCompatibleShardNode = value;
 		return this;
 	}
 
@@ -2608,12 +2600,6 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> MinCompatibleShardNode(string? value)
-	{
-		Instance.MinCompatibleShardNode = value;
 		return this;
 	}
 

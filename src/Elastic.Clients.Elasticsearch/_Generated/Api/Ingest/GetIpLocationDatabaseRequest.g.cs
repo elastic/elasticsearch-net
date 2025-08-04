@@ -25,14 +25,6 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 public sealed partial class GetIpLocationDatabaseRequestParameters : Elastic.Transport.RequestParameters
 {
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 internal sealed partial class GetIpLocationDatabaseRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest>
@@ -107,15 +99,6 @@ public sealed partial class GetIpLocationDatabaseRequest : Elastic.Clients.Elast
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ids? Id { get => P<Elastic.Clients.Elasticsearch.Ids?>("id"); set => PO("id", value); }
-
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -156,19 +139,6 @@ public readonly partial struct GetIpLocationDatabaseRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor Id(Elastic.Clients.Elasticsearch.Ids? value)
 	{
 		Instance.Id = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// A value of <c>-1</c> indicates that the request should never time out.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
-	{
-		Instance.MasterTimeout = value;
 		return this;
 	}
 
