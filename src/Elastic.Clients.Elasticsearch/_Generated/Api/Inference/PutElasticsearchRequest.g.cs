@@ -25,6 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 
 public sealed partial class PutElasticsearchRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 internal sealed partial class PutElasticsearchRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest>
@@ -175,6 +181,13 @@ public sealed partial class PutElasticsearchRequest : Elastic.Clients.Elasticsea
 
 	/// <summary>
 	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// The chunking configuration object.
 	/// </para>
 	/// </summary>
@@ -278,6 +291,17 @@ public readonly partial struct PutElasticsearchRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType value)
 	{
 		Instance.TaskType = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the amount of time to wait for the inference endpoint to be created.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
 		return this;
 	}
 

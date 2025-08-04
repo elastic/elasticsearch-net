@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes;
 internal sealed partial class JvmMemoryStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.JvmMemoryStats>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropHeapCommittedInBytes = System.Text.Json.JsonEncodedText.Encode("heap_committed_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropHeapMax = System.Text.Json.JsonEncodedText.Encode("heap_max");
 	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes");
 	private static readonly System.Text.Json.JsonEncodedText PropHeapUsedInBytes = System.Text.Json.JsonEncodedText.Encode("heap_used_in_bytes");
 	private static readonly System.Text.Json.JsonEncodedText PropHeapUsedPercent = System.Text.Json.JsonEncodedText.Encode("heap_used_percent");
@@ -37,6 +38,7 @@ internal sealed partial class JvmMemoryStatsConverter : System.Text.Json.Seriali
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<long?> propHeapCommittedInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propHeapMax = default;
 		LocalJsonValue<long?> propHeapMaxInBytes = default;
 		LocalJsonValue<long?> propHeapUsedInBytes = default;
 		LocalJsonValue<long?> propHeapUsedPercent = default;
@@ -46,6 +48,11 @@ internal sealed partial class JvmMemoryStatsConverter : System.Text.Json.Seriali
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propHeapCommittedInBytes.TryReadProperty(ref reader, options, PropHeapCommittedInBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			{
+				continue;
+			}
+
+			if (propHeapMax.TryReadProperty(ref reader, options, PropHeapMax, null))
 			{
 				continue;
 			}
@@ -93,6 +100,7 @@ internal sealed partial class JvmMemoryStatsConverter : System.Text.Json.Seriali
 		return new Elastic.Clients.Elasticsearch.Nodes.JvmMemoryStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			HeapCommittedInBytes = propHeapCommittedInBytes.Value,
+			HeapMax = propHeapMax.Value,
 			HeapMaxInBytes = propHeapMaxInBytes.Value,
 			HeapUsedInBytes = propHeapUsedInBytes.Value,
 			HeapUsedPercent = propHeapUsedPercent.Value,
@@ -106,6 +114,7 @@ internal sealed partial class JvmMemoryStatsConverter : System.Text.Json.Seriali
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropHeapCommittedInBytes, value.HeapCommittedInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropHeapMax, value.HeapMax, null, null);
 		writer.WriteProperty(options, PropHeapMaxInBytes, value.HeapMaxInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropHeapUsedInBytes, value.HeapUsedInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropHeapUsedPercent, value.HeapUsedPercent, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
@@ -141,6 +150,13 @@ public sealed partial class JvmMemoryStats
 	/// </para>
 	/// </summary>
 	public long? HeapCommittedInBytes { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Maximum amount of memory, available for use by the heap.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ByteSize? HeapMax { get; set; }
 
 	/// <summary>
 	/// <para>

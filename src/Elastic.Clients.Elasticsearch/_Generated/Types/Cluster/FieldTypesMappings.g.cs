@@ -27,6 +27,7 @@ internal sealed partial class FieldTypesMappingsConverter : System.Text.Json.Ser
 {
 	private static readonly System.Text.Json.JsonEncodedText PropFieldTypes = System.Text.Json.JsonEncodedText.Encode("field_types");
 	private static readonly System.Text.Json.JsonEncodedText PropRuntimeFieldTypes = System.Text.Json.JsonEncodedText.Encode("runtime_field_types");
+	private static readonly System.Text.Json.JsonEncodedText PropSourceModes = System.Text.Json.JsonEncodedText.Encode("source_modes");
 	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedFieldCount = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_field_count");
 	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedMappingSize = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_mapping_size");
 	private static readonly System.Text.Json.JsonEncodedText PropTotalDeduplicatedMappingSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_deduplicated_mapping_size_in_bytes");
@@ -36,11 +37,12 @@ internal sealed partial class FieldTypesMappingsConverter : System.Text.Json.Ser
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>> propFieldTypes = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>?> propRuntimeFieldTypes = default;
-		LocalJsonValue<int?> propTotalDeduplicatedFieldCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>> propRuntimeFieldTypes = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>> propSourceModes = default;
+		LocalJsonValue<long?> propTotalDeduplicatedFieldCount = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalDeduplicatedMappingSize = default;
 		LocalJsonValue<long?> propTotalDeduplicatedMappingSizeInBytes = default;
-		LocalJsonValue<int?> propTotalFieldCount = default;
+		LocalJsonValue<long?> propTotalFieldCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propFieldTypes.TryReadProperty(ref reader, options, PropFieldTypes, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, null)!))
@@ -48,12 +50,17 @@ internal sealed partial class FieldTypesMappingsConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propRuntimeFieldTypes.TryReadProperty(ref reader, options, PropRuntimeFieldTypes, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>(o, null)))
+			if (propRuntimeFieldTypes.TryReadProperty(ref reader, options, PropRuntimeFieldTypes, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>(o, null)!))
 			{
 				continue;
 			}
 
-			if (propTotalDeduplicatedFieldCount.TryReadProperty(ref reader, options, PropTotalDeduplicatedFieldCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			if (propSourceModes.TryReadProperty(ref reader, options, PropSourceModes, static System.Collections.Generic.IReadOnlyDictionary<string, int> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propTotalDeduplicatedFieldCount.TryReadProperty(ref reader, options, PropTotalDeduplicatedFieldCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -68,7 +75,7 @@ internal sealed partial class FieldTypesMappingsConverter : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propTotalFieldCount.TryReadProperty(ref reader, options, PropTotalFieldCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			if (propTotalFieldCount.TryReadProperty(ref reader, options, PropTotalFieldCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -87,6 +94,7 @@ internal sealed partial class FieldTypesMappingsConverter : System.Text.Json.Ser
 		{
 			FieldTypes = propFieldTypes.Value,
 			RuntimeFieldTypes = propRuntimeFieldTypes.Value,
+			SourceModes = propSourceModes.Value,
 			TotalDeduplicatedFieldCount = propTotalDeduplicatedFieldCount.Value,
 			TotalDeduplicatedMappingSize = propTotalDeduplicatedMappingSize.Value,
 			TotalDeduplicatedMappingSizeInBytes = propTotalDeduplicatedMappingSizeInBytes.Value,
@@ -98,11 +106,12 @@ internal sealed partial class FieldTypesMappingsConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFieldTypes, value.FieldTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.FieldTypes>(o, v, null));
-		writer.WriteProperty(options, PropRuntimeFieldTypes, value.RuntimeFieldTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>(o, v, null));
-		writer.WriteProperty(options, PropTotalDeduplicatedFieldCount, value.TotalDeduplicatedFieldCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropRuntimeFieldTypes, value.RuntimeFieldTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>(o, v, null));
+		writer.WriteProperty(options, PropSourceModes, value.SourceModes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int> v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
+		writer.WriteProperty(options, PropTotalDeduplicatedFieldCount, value.TotalDeduplicatedFieldCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTotalDeduplicatedMappingSize, value.TotalDeduplicatedMappingSize, null, null);
 		writer.WriteProperty(options, PropTotalDeduplicatedMappingSizeInBytes, value.TotalDeduplicatedMappingSizeInBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropTotalFieldCount, value.TotalFieldCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropTotalFieldCount, value.TotalFieldCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
 	}
 }
@@ -111,9 +120,11 @@ internal sealed partial class FieldTypesMappingsConverter : System.Text.Json.Ser
 public sealed partial class FieldTypesMappings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public FieldTypesMappings(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> fieldTypes)
+	public FieldTypesMappings(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.FieldTypes> fieldTypes, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes> runtimeFieldTypes, System.Collections.Generic.IReadOnlyDictionary<string, int> sourceModes)
 	{
 		FieldTypes = fieldTypes;
+		RuntimeFieldTypes = runtimeFieldTypes;
+		SourceModes = sourceModes;
 	}
 #if NET7_0_OR_GREATER
 	public FieldTypesMappings()
@@ -148,14 +159,29 @@ public sealed partial class FieldTypesMappings
 	/// Contains statistics about runtime field data types used in selected nodes.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes>? RuntimeFieldTypes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes> RuntimeFieldTypes { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Source mode usage count.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, int> SourceModes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total number of fields in all non-system indices, accounting for mapping deduplication.
 	/// </para>
 	/// </summary>
-	public int? TotalDeduplicatedFieldCount { get; set; }
+	public long? TotalDeduplicatedFieldCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -176,5 +202,5 @@ public sealed partial class FieldTypesMappings
 	/// Total number of fields in all non-system indices.
 	/// </para>
 	/// </summary>
-	public int? TotalFieldCount { get; set; }
+	public long? TotalFieldCount { get; set; }
 }

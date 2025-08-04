@@ -78,13 +78,6 @@ public sealed partial class GetSourceRequestParameters : Elastic.Transport.Reque
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
-
-	/// <summary>
-	/// <para>
 	/// The version number for concurrency control.
 	/// It must match the current version of the document for the request to succeed.
 	/// </para>
@@ -244,13 +237,6 @@ public sealed partial class GetSourceRequest : Elastic.Clients.Elasticsearch.Req
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? SourceIncludes { get => Q<Elastic.Clients.Elasticsearch.Fields?>("_source_includes"); set => Q("_source_includes", value); }
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("stored_fields"); set => Q("stored_fields", value); }
 
 	/// <summary>
 	/// <para>
@@ -452,28 +438,6 @@ public readonly partial struct GetSourceRequestDescriptor
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor SourceIncludes<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
-	{
-		Instance.StoredFields = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
-	{
-		Instance.StoredFields = value;
 		return this;
 	}
 
@@ -744,28 +708,6 @@ public readonly partial struct GetSourceRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> SourceIncludes(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
 		Instance.SourceIncludes = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
-	{
-		Instance.StoredFields = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
-	{
-		Instance.StoredFields = value;
 		return this;
 	}
 

@@ -92,7 +92,7 @@ internal sealed partial class RerankRequestConverter : System.Text.Json.Serializ
 
 /// <summary>
 /// <para>
-/// Perform rereanking inference on the service
+/// Perform reranking inference on the service
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.RerankRequestConverter))]
@@ -185,7 +185,7 @@ public sealed partial class RerankRequest : Elastic.Clients.Elasticsearch.Reques
 
 /// <summary>
 /// <para>
-/// Perform rereanking inference on the service
+/// Perform reranking inference on the service
 /// </para>
 /// </summary>
 public readonly partial struct RerankRequestDescriptor

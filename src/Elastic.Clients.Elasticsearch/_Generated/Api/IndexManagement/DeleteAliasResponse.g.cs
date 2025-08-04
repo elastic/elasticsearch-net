@@ -26,14 +26,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 internal sealed partial class DeleteAliasResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool> propAcknowledged = default;
+		LocalJsonValue<bool?> propErrors = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
+			{
+				continue;
+			}
+
+			if (propErrors.TryReadProperty(ref reader, options, PropErrors, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -50,7 +57,8 @@ internal sealed partial class DeleteAliasResponseConverter : System.Text.Json.Se
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.IndexManagement.DeleteAliasResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Acknowledged = propAcknowledged.Value
+			Acknowledged = propAcknowledged.Value,
+			Errors = propErrors.Value
 		};
 	}
 
@@ -58,6 +66,7 @@ internal sealed partial class DeleteAliasResponseConverter : System.Text.Json.Se
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
+		writer.WriteProperty(options, PropErrors, value.Errors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }
@@ -86,4 +95,5 @@ public sealed partial class DeleteAliasResponse : Elastic.Transport.Products.Ela
 	required
 #endif
 	bool Acknowledged { get; set; }
+	public bool? Errors { get; set; }
 }

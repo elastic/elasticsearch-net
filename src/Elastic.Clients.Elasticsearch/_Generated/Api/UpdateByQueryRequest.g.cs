@@ -376,6 +376,36 @@ internal sealed partial class UpdateByQueryRequestConverter : System.Text.Json.S
 /// Any update requests that completed successfully still stick, they are not rolled back.
 /// </para>
 /// <para>
+/// <strong>Refreshing shards</strong>
+/// </para>
+/// <para>
+/// Specifying the <c>refresh</c> parameter refreshes all shards once the request completes.
+/// This is different to the update API's <c>refresh</c> parameter, which causes only the shard
+/// that received the request to be refreshed. Unlike the update API, it does not support
+/// <c>wait_for</c>.
+/// </para>
+/// <para>
+/// <strong>Running update by query asynchronously</strong>
+/// </para>
+/// <para>
+/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch
+/// performs some preflight checks, launches the request, and returns a
+/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-tasks">task</a> you can use to cancel or get the status of the task.
+/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
+/// </para>
+/// <para>
+/// <strong>Waiting for active shards</strong>
+/// </para>
+/// <para>
+/// <c>wait_for_active_shards</c> controls how many copies of a shard must be active
+/// before proceeding with the request. See <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-create#operation-create-wait_for_active_shards"><c>wait_for_active_shards</c></a>
+/// for details. <c>timeout</c> controls how long each write request waits for unavailable
+/// shards to become available. Both work exactly the way they work in the
+/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk">Bulk API</a>. Update by query uses scrolled searches, so you can also
+/// specify the <c>scroll</c> parameter to control how long it keeps the search context
+/// alive, for example <c>?scroll=10m</c>. The default is 5 minutes.
+/// </para>
+/// <para>
 /// <strong>Throttling update requests</strong>
 /// </para>
 /// <para>
@@ -470,27 +500,7 @@ internal sealed partial class UpdateByQueryRequestConverter : System.Text.Json.S
 /// </list>
 /// <para>
 /// Whether query or update performance dominates the runtime depends on the documents being reindexed and cluster resources.
-/// </para>
-/// <para>
-/// <strong>Update the document source</strong>
-/// </para>
-/// <para>
-/// Update by query supports scripts to update the document source.
-/// As with the update API, you can set <c>ctx.op</c> to change the operation that is performed.
-/// </para>
-/// <para>
-/// Set <c>ctx.op = "noop"</c> if your script decides that it doesn't have to make any changes.
-/// The update by query operation skips updating the document and increments the <c>noop</c> counter.
-/// </para>
-/// <para>
-/// Set <c>ctx.op = "delete"</c> if your script decides that the document should be deleted.
-/// The update by query operation deletes the document and increments the <c>deleted</c> counter.
-/// </para>
-/// <para>
-/// Update by query supports only <c>index</c>, <c>noop</c>, and <c>delete</c>.
-/// Setting <c>ctx.op</c> to anything else is an error.
-/// Setting any other field in <c>ctx</c> is an error.
-/// This API enables you to only modify the source of matching documents; you cannot move them.
+/// Refer to the linked documentation for examples of how to update documents using the <c>_update_by_query</c> API:
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.UpdateByQueryRequestConverter))]
@@ -843,6 +853,36 @@ public sealed partial class UpdateByQueryRequest : Elastic.Clients.Elasticsearch
 /// Any update requests that completed successfully still stick, they are not rolled back.
 /// </para>
 /// <para>
+/// <strong>Refreshing shards</strong>
+/// </para>
+/// <para>
+/// Specifying the <c>refresh</c> parameter refreshes all shards once the request completes.
+/// This is different to the update API's <c>refresh</c> parameter, which causes only the shard
+/// that received the request to be refreshed. Unlike the update API, it does not support
+/// <c>wait_for</c>.
+/// </para>
+/// <para>
+/// <strong>Running update by query asynchronously</strong>
+/// </para>
+/// <para>
+/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch
+/// performs some preflight checks, launches the request, and returns a
+/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-tasks">task</a> you can use to cancel or get the status of the task.
+/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
+/// </para>
+/// <para>
+/// <strong>Waiting for active shards</strong>
+/// </para>
+/// <para>
+/// <c>wait_for_active_shards</c> controls how many copies of a shard must be active
+/// before proceeding with the request. See <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-create#operation-create-wait_for_active_shards"><c>wait_for_active_shards</c></a>
+/// for details. <c>timeout</c> controls how long each write request waits for unavailable
+/// shards to become available. Both work exactly the way they work in the
+/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk">Bulk API</a>. Update by query uses scrolled searches, so you can also
+/// specify the <c>scroll</c> parameter to control how long it keeps the search context
+/// alive, for example <c>?scroll=10m</c>. The default is 5 minutes.
+/// </para>
+/// <para>
 /// <strong>Throttling update requests</strong>
 /// </para>
 /// <para>
@@ -937,27 +977,7 @@ public sealed partial class UpdateByQueryRequest : Elastic.Clients.Elasticsearch
 /// </list>
 /// <para>
 /// Whether query or update performance dominates the runtime depends on the documents being reindexed and cluster resources.
-/// </para>
-/// <para>
-/// <strong>Update the document source</strong>
-/// </para>
-/// <para>
-/// Update by query supports scripts to update the document source.
-/// As with the update API, you can set <c>ctx.op</c> to change the operation that is performed.
-/// </para>
-/// <para>
-/// Set <c>ctx.op = "noop"</c> if your script decides that it doesn't have to make any changes.
-/// The update by query operation skips updating the document and increments the <c>noop</c> counter.
-/// </para>
-/// <para>
-/// Set <c>ctx.op = "delete"</c> if your script decides that the document should be deleted.
-/// The update by query operation deletes the document and increments the <c>deleted</c> counter.
-/// </para>
-/// <para>
-/// Update by query supports only <c>index</c>, <c>noop</c>, and <c>delete</c>.
-/// Setting <c>ctx.op</c> to anything else is an error.
-/// Setting any other field in <c>ctx</c> is an error.
-/// This API enables you to only modify the source of matching documents; you cannot move them.
+/// Refer to the linked documentation for examples of how to update documents using the <c>_update_by_query</c> API:
 /// </para>
 /// </summary>
 public readonly partial struct UpdateByQueryRequestDescriptor
@@ -1606,6 +1626,36 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 /// Any update requests that completed successfully still stick, they are not rolled back.
 /// </para>
 /// <para>
+/// <strong>Refreshing shards</strong>
+/// </para>
+/// <para>
+/// Specifying the <c>refresh</c> parameter refreshes all shards once the request completes.
+/// This is different to the update API's <c>refresh</c> parameter, which causes only the shard
+/// that received the request to be refreshed. Unlike the update API, it does not support
+/// <c>wait_for</c>.
+/// </para>
+/// <para>
+/// <strong>Running update by query asynchronously</strong>
+/// </para>
+/// <para>
+/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch
+/// performs some preflight checks, launches the request, and returns a
+/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-tasks">task</a> you can use to cancel or get the status of the task.
+/// Elasticsearch creates a record of this task as a document at <c>.tasks/task/${taskId}</c>.
+/// </para>
+/// <para>
+/// <strong>Waiting for active shards</strong>
+/// </para>
+/// <para>
+/// <c>wait_for_active_shards</c> controls how many copies of a shard must be active
+/// before proceeding with the request. See <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-create#operation-create-wait_for_active_shards"><c>wait_for_active_shards</c></a>
+/// for details. <c>timeout</c> controls how long each write request waits for unavailable
+/// shards to become available. Both work exactly the way they work in the
+/// <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk">Bulk API</a>. Update by query uses scrolled searches, so you can also
+/// specify the <c>scroll</c> parameter to control how long it keeps the search context
+/// alive, for example <c>?scroll=10m</c>. The default is 5 minutes.
+/// </para>
+/// <para>
 /// <strong>Throttling update requests</strong>
 /// </para>
 /// <para>
@@ -1700,27 +1750,7 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 /// </list>
 /// <para>
 /// Whether query or update performance dominates the runtime depends on the documents being reindexed and cluster resources.
-/// </para>
-/// <para>
-/// <strong>Update the document source</strong>
-/// </para>
-/// <para>
-/// Update by query supports scripts to update the document source.
-/// As with the update API, you can set <c>ctx.op</c> to change the operation that is performed.
-/// </para>
-/// <para>
-/// Set <c>ctx.op = "noop"</c> if your script decides that it doesn't have to make any changes.
-/// The update by query operation skips updating the document and increments the <c>noop</c> counter.
-/// </para>
-/// <para>
-/// Set <c>ctx.op = "delete"</c> if your script decides that the document should be deleted.
-/// The update by query operation deletes the document and increments the <c>deleted</c> counter.
-/// </para>
-/// <para>
-/// Update by query supports only <c>index</c>, <c>noop</c>, and <c>delete</c>.
-/// Setting <c>ctx.op</c> to anything else is an error.
-/// Setting any other field in <c>ctx</c> is an error.
-/// This API enables you to only modify the source of matching documents; you cannot move them.
+/// Refer to the linked documentation for examples of how to update documents using the <c>_update_by_query</c> API:
 /// </para>
 /// </summary>
 public readonly partial struct UpdateByQueryRequestDescriptor<TDocument>

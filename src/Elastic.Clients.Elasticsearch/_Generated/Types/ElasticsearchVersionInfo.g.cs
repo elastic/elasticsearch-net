@@ -261,6 +261,10 @@ public sealed partial class ElasticsearchVersionInfo
 	/// <para>
 	/// The Elasticsearch version number.
 	/// </para>
+	/// <para>
+	/// ::: IMPORTANT: For Serverless deployments, this static value is always <c>8.11.0</c> and is used solely for backward compatibility with legacy clients.
+	/// Serverless environments are versionless and automatically upgraded, so this value can be safely ignored.
+	/// </para>
 	/// </summary>
 	public
 #if NET7_0_OR_GREATER

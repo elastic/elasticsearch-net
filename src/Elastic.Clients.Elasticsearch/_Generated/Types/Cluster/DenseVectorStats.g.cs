@@ -23,17 +23,24 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-internal sealed partial class IndexingPressureConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.IndexingPressure>
+internal sealed partial class DenseVectorStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMemory = System.Text.Json.JsonEncodedText.Encode("memory");
+	private static readonly System.Text.Json.JsonEncodedText PropOffHeap = System.Text.Json.JsonEncodedText.Encode("off_heap");
+	private static readonly System.Text.Json.JsonEncodedText PropValueCount = System.Text.Json.JsonEncodedText.Encode("value_count");
 
-	public override Elastic.Clients.Elasticsearch.Cluster.IndexingPressure Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory> propMemory = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats?> propOffHeap = default;
+		LocalJsonValue<long> propValueCount = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMemory.TryReadProperty(ref reader, options, PropMemory, null))
+			if (propOffHeap.TryReadProperty(ref reader, options, PropOffHeap, null))
+			{
+				continue;
+			}
+
+			if (propValueCount.TryReadProperty(ref reader, options, PropValueCount, null))
 			{
 				continue;
 			}
@@ -48,48 +55,51 @@ internal sealed partial class IndexingPressureConverter : System.Text.Json.Seria
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Cluster.IndexingPressure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Memory = propMemory.Value
+			OffHeap = propOffHeap.Value,
+			ValueCount = propValueCount.Value
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.IndexingPressure value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMemory, value.Memory, null, null);
+		writer.WriteProperty(options, PropOffHeap, value.OffHeap, null, null);
+		writer.WriteProperty(options, PropValueCount, value.ValueCount, null, null);
 		writer.WriteEndObject();
 	}
 }
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.IndexingPressureConverter))]
-public sealed partial class IndexingPressure
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.DenseVectorStatsConverter))]
+public sealed partial class DenseVectorStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndexingPressure(Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory memory)
+	public DenseVectorStats(long valueCount)
 	{
-		Memory = memory;
+		ValueCount = valueCount;
 	}
 #if NET7_0_OR_GREATER
-	public IndexingPressure()
+	public DenseVectorStats()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
 	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public IndexingPressure()
+	public DenseVectorStats()
 	{
 	}
 #endif
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal IndexingPressure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal DenseVectorStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
+	public Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats? OffHeap { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.Nodes.IndexingPressureMemory Memory { get; set; }
+	long ValueCount { get; set; }
 }
