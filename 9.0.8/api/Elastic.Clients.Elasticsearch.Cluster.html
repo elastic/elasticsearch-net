@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Elastic.Clients.Elasticsearch.Cluster | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Elastic.Clients.Elasticsearch.Cluster | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Cluster">
+
+  <h1 id="Elastic_Clients_Elasticsearch_Cluster" data-uid="Elastic.Clients.Elasticsearch.Cluster" class="text-break">Namespace Elastic.Clients.Elasticsearch.Cluster</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationDecision.html">AllocationDecision</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest.html">AllocationExplainRequest</a></dt>
+      <dd><p>
+Explain the shard allocations.
+Get explanations for shard allocations in the cluster.
+For unassigned shards, it provides an explanation for why the shard is unassigned.
+For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
+This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
+Refer to the linked documentation for examples of how to troubleshoot allocation issues using this API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters.html">AllocationExplainRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse.html">AllocationExplainResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationStore.html">AllocationStore</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.CCSStats.html">CCSStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.CCSUsageClusterStats.html">CCSUsageClusterStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.CCSUsageStats.html">CCSUsageStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.CCSUsageTimeValue.html">CCSUsageTimeValue</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.CharFilterTypes.html">CharFilterTypes</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.html">ClusterFileSystem</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterIndices.html">ClusterIndices</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards.html">ClusterIndicesShards</a></dt>
+      <dd><p>
+Contains statistics about shards assigned to selected nodes.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShardsIndex.html">ClusterIndicesShardsIndex</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfo.html">ClusterInfo</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest.html">ClusterInfoRequest</a></dt>
+      <dd><p>
+Get cluster info.
+Returns basic information about the cluster.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters.html">ClusterInfoRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse.html">ClusterInfoResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterIngest.html">ClusterIngest</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterJvm.html">ClusterJvm</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory.html">ClusterJvmMemory</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterJvmVersion.html">ClusterJvmVersion</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.html">ClusterNamespacedClient</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes.html">ClusterNetworkTypes</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount.html">ClusterNodeCount</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterNodes.html">ClusterNodes</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystem.html">ClusterOperatingSystem</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystemArchitecture.html">ClusterOperatingSystemArchitecture</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystemName.html">ClusterOperatingSystemName</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterOperatingSystemPrettyName.html">ClusterOperatingSystemPrettyName</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterProcess.html">ClusterProcess</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterProcessCpu.html">ClusterProcessCpu</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors.html">ClusterProcessOpenFileDescriptors</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor.html">ClusterProcessor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterShardMetrics.html">ClusterShardMetrics</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats.html">ClusterSnapshotStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest.html">ClusterStatsRequest</a></dt>
+      <dd><p>
+Get cluster statistics.
+Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestParameters.html">ClusterStatsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse.html">ClusterStatsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplate.html">ComponentTemplate</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode.html">ComponentTemplateNode</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary.html">ComponentTemplateSummary</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.CurrentNode.html">CurrentNode</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest.html">DeleteComponentTemplateRequest</a></dt>
+      <dd><p>
+Delete component templates.
+Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestParameters.html">DeleteComponentTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse.html">DeleteComponentTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest.html">DeleteVotingConfigExclusionsRequest</a></dt>
+      <dd><p>
+Clear cluster voting config exclusions.
+Remove master-eligible nodes from the voting configuration exclusion list.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestParameters.html">DeleteVotingConfigExclusionsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse.html">DeleteVotingConfigExclusionsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DenseVectorOffHeapStats.html">DenseVectorOffHeapStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DenseVectorStats.html">DenseVectorStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DiskUsage.html">DiskUsage</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest.html">ExistsComponentTemplateRequest</a></dt>
+      <dd><p>
+Check component templates.
+Returns information about whether a particular component template exists.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestParameters.html">ExistsComponentTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse.html">ExistsComponentTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.FieldTypes.html">FieldTypes</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.FieldTypesMappings.html">FieldTypesMappings</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest.html">GetClusterSettingsRequest</a></dt>
+      <dd><p>
+Get cluster-wide settings.
+By default, it returns only settings that have been explicitly defined.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestParameters.html">GetClusterSettingsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse.html">GetClusterSettingsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest.html">GetComponentTemplateRequest</a></dt>
+      <dd><p>
+Get component templates.
+Get information about component templates.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters.html">GetComponentTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse.html">GetComponentTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequest.html">HealthRequest</a></dt>
+      <dd><p>
+Get the cluster health status.
+</p>
+<p>
+You can also use the API to get the health status of only specified data streams and indices.
+For data streams, the API retrieves the health status of the stream’s backing indices.
+</p>
+<p>
+The cluster health status is: green, yellow or red.
+On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
+The index level status is controlled by the worst shard status.
+</p>
+<p>
+One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
+The cluster status is controlled by the worst index status.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequestParameters.html">HealthRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats.html">IndexHealthStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.IndexingPressure.html">IndexingPressure</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.IndicesVersions.html">IndicesVersions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation.html">NodeAllocationExplanation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.NodeDiskUsage.html">NodeDiskUsage</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.NodePackagingType.html">NodePackagingType</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.OperatingSystemMemoryInfo.html">OperatingSystemMemoryInfo</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTask.html">PendingTask</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest.html">PendingTasksRequest</a></dt>
+      <dd><p>
+Get the pending cluster tasks.
+Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
+</p>
+<p>
+NOTE: This API returns a list of any pending updates to the cluster state.
+These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
+However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestParameters.html">PendingTasksRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse.html">PendingTasksResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats.html">PerRepositoryStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest.html">PostVotingConfigExclusionsRequest</a></dt>
+      <dd><p>
+Update voting configuration exclusions.
+Update the cluster voting config exclusions by node IDs or node names.
+By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
+If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
+The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
+It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
+</p>
+<p>
+Clusters should have no voting configuration exclusions in normal operation.
+Once the excluded nodes have stopped, clear the voting configuration exclusions with <code>DELETE /_cluster/voting_config_exclusions</code>.
+This API waits for the nodes to be fully removed from the cluster before it returns.
+If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <code>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</code> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
+</p>
+<p>
+A response to <code>POST /_cluster/voting_config_exclusions</code> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <code>DELETE /_cluster/voting_config_exclusions</code>.
+If the call to <code>POST /_cluster/voting_config_exclusions</code> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
+In that case, you may safely retry the call.
+</p>
+<p>
+NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
+They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters.html">PostVotingConfigExclusionsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse.html">PostVotingConfigExclusionsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest.html">PutComponentTemplateRequest</a></dt>
+      <dd><p>
+Create or update a component template.
+Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+</p>
+<p>
+An index template can be composed of multiple component templates.
+To use a component template, specify it in an index template’s <code>composed_of</code> list.
+Component templates are only applied to new data streams and indices as part of a matching index template.
+</p>
+<p>
+Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
+</p>
+<p>
+Component templates are only used during index creation.
+For data streams, this includes data stream creation and the creation of a stream’s backing indices.
+Changes to component templates do not affect existing indices, including a stream’s backing indices.
+</p>
+<p>
+You can use C-style <code>/* *\/</code> block comments in component templates.
+You can include comments anywhere in the request body except before the opening curly bracket.
+</p>
+<p>
+<strong>Applying component templates</strong>
+</p>
+<p>
+You cannot directly apply a component template to a data stream or index.
+To be applied, a component template must be included in an index template's <code>composed_of</code> list.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters.html">PutComponentTemplateRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse.html">PutComponentTemplateResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.html">RemoteClusterInfo</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.RepositoryStatsCurrentCounts.html">RepositoryStatsCurrentCounts</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.RepositoryStatsShards.html">RepositoryStatsShards</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ReservedSize.html">ReservedSize</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.RuntimeFieldTypes.html">RuntimeFieldTypes</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.SearchUsageStats.html">SearchUsageStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ShardHealthStats.html">ShardHealthStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.SnapshotCurrentCounts.html">SnapshotCurrentCounts</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.SparseVectorStats.html">SparseVectorStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.SynonymsStats.html">SynonymsStats</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.UnassignedInformation.html">UnassignedInformation</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor.html">AllocationExplainRequestDescriptor</a></dt>
+      <dd><p>
+Explain the shard allocations.
+Get explanations for shard allocations in the cluster.
+For unassigned shards, it provides an explanation for why the shard is unassigned.
+For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
+This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
+Refer to the linked documentation for examples of how to troubleshoot allocation issues using this API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor.html">ClusterInfoRequestDescriptor</a></dt>
+      <dd><p>
+Get cluster info.
+Returns basic information about the cluster.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor.html">ClusterStatsRequestDescriptor</a></dt>
+      <dd><p>
+Get cluster statistics.
+Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor.html">ComponentTemplateNodeDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor-1.html">ComponentTemplateNodeDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor.html">ComponentTemplateSummaryDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor-1.html">ComponentTemplateSummaryDescriptor&lt;TDocument&gt;</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor.html">DeleteComponentTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Delete component templates.
+Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor.html">DeleteVotingConfigExclusionsRequestDescriptor</a></dt>
+      <dd><p>
+Clear cluster voting config exclusions.
+Remove master-eligible nodes from the voting configuration exclusion list.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor.html">ExistsComponentTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Check component templates.
+Returns information about whether a particular component template exists.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor.html">GetClusterSettingsRequestDescriptor</a></dt>
+      <dd><p>
+Get cluster-wide settings.
+By default, it returns only settings that have been explicitly defined.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor.html">GetComponentTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Get component templates.
+Get information about component templates.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor.html">HealthRequestDescriptor</a></dt>
+      <dd><p>
+Get the cluster health status.
+</p>
+<p>
+You can also use the API to get the health status of only specified data streams and indices.
+For data streams, the API retrieves the health status of the stream’s backing indices.
+</p>
+<p>
+The cluster health status is: green, yellow or red.
+On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
+The index level status is controlled by the worst shard status.
+</p>
+<p>
+One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
+The cluster status is controlled by the worst index status.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor-1.html">HealthRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Get the cluster health status.
+</p>
+<p>
+You can also use the API to get the health status of only specified data streams and indices.
+For data streams, the API retrieves the health status of the stream’s backing indices.
+</p>
+<p>
+The cluster health status is: green, yellow or red.
+On the shard level, a red status indicates that the specific shard is not allocated in the cluster. Yellow means that the primary shard is allocated but replicas are not. Green means that all shards are allocated.
+The index level status is controlled by the worst shard status.
+</p>
+<p>
+One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
+The cluster status is controlled by the worst index status.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor.html">PendingTasksRequestDescriptor</a></dt>
+      <dd><p>
+Get the pending cluster tasks.
+Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
+</p>
+<p>
+NOTE: This API returns a list of any pending updates to the cluster state.
+These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
+However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor.html">PostVotingConfigExclusionsRequestDescriptor</a></dt>
+      <dd><p>
+Update voting configuration exclusions.
+Update the cluster voting config exclusions by node IDs or node names.
+By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
+If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
+The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
+It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
+</p>
+<p>
+Clusters should have no voting configuration exclusions in normal operation.
+Once the excluded nodes have stopped, clear the voting configuration exclusions with <code>DELETE /_cluster/voting_config_exclusions</code>.
+This API waits for the nodes to be fully removed from the cluster before it returns.
+If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <code>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</code> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
+</p>
+<p>
+A response to <code>POST /_cluster/voting_config_exclusions</code> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <code>DELETE /_cluster/voting_config_exclusions</code>.
+If the call to <code>POST /_cluster/voting_config_exclusions</code> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
+In that case, you may safely retry the call.
+</p>
+<p>
+NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
+They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor.html">PutComponentTemplateRequestDescriptor</a></dt>
+      <dd><p>
+Create or update a component template.
+Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+</p>
+<p>
+An index template can be composed of multiple component templates.
+To use a component template, specify it in an index template’s <code>composed_of</code> list.
+Component templates are only applied to new data streams and indices as part of a matching index template.
+</p>
+<p>
+Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
+</p>
+<p>
+Component templates are only used during index creation.
+For data streams, this includes data stream creation and the creation of a stream’s backing indices.
+Changes to component templates do not affect existing indices, including a stream’s backing indices.
+</p>
+<p>
+You can use C-style <code>/* *\/</code> block comments in component templates.
+You can include comments anywhere in the request body except before the opening curly bracket.
+</p>
+<p>
+<strong>Applying component templates</strong>
+</p>
+<p>
+You cannot directly apply a component template to a data stream or index.
+To be applied, a component template must be included in an index template's <code>composed_of</code> list.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor-1.html">PutComponentTemplateRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Create or update a component template.
+Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+</p>
+<p>
+An index template can be composed of multiple component templates.
+To use a component template, specify it in an index template’s <code>composed_of</code> list.
+Component templates are only applied to new data streams and indices as part of a matching index template.
+</p>
+<p>
+Settings and mappings specified directly in the index template or the create index request override any settings or mappings specified in a component template.
+</p>
+<p>
+Component templates are only used during index creation.
+For data streams, this includes data stream creation and the creation of a stream’s backing indices.
+Changes to component templates do not affect existing indices, including a stream’s backing indices.
+</p>
+<p>
+You can use C-style <code>/* *\/</code> block comments in component templates.
+You can include comments anywhere in the request body except before the opening curly bracket.
+</p>
+<p>
+<strong>Applying component templates</strong>
+</p>
+<p>
+You cannot directly apply a component template to a data stream or index.
+To be applied, a component template must be included in an index template's <code>composed_of</code> list.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.WaitForNodes.html">WaitForNodes</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainDecision.html">AllocationExplainDecision</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.Decision.html">Decision</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ShardState.html">ShardState</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.UnassignedInformationReason.html">UnassignedInformationReason</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.WaitForNodesCondition.html">WaitForNodesCondition</a></dt>
+      <dd></dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class DateMathTime | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class DateMathTime | Elasticsearch.NET ">
+      
+      <meta name="description" content="A time representation for use within  expressions.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.8/apiSpec/new?filename=Elastic_Clients_Elasticsearch_DateMathTime.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.DateMathTime%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.DateMathTime">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_DateMathTime" data-uid="Elastic.Clients.Elasticsearch.DateMathTime" class="text-break">
+Class DateMathTime  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>A time representation for use within <a class="xref" href="Elastic.Clients.Elasticsearch.DateMath.html">DateMath</a> expressions.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(DateMathTimeConverter))]
+public class DateMathTime : IComparable&lt;DateMathTime&gt;, IEquatable&lt;DateMathTime&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">DateMathTime</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icomparable-1">IComparable</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime__ctor_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime__ctor_System_Double_System_MidpointRounding_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.#ctor(System.Double,System.MidpointRounding)">
+  DateMathTime(double, MidpointRounding)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Instantiates a new instance of <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a> from a milliseconds value.
+Rounding can be specified to determine how fractional second values should be rounded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateMathTime(double milliseconds, MidpointRounding rounding = MidpointRounding.AwayFromZero)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>milliseconds</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>rounding</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.midpointrounding">MidpointRounding</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime__ctor_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime__ctor_System_Int32_Elastic_Clients_Elasticsearch_DateMathTimeUnit_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.#ctor(System.Int32,Elastic.Clients.Elasticsearch.DateMathTimeUnit)">
+  DateMathTime(int, DateMathTimeUnit)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Instantiates a new instance of <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a> from a factor and interval.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateMathTime(int factor, DateMathTimeUnit interval)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>factor</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>interval</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTimeUnit.html">DateMathTimeUnit</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime__ctor_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime__ctor_System_String_System_MidpointRounding_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.#ctor(System.String,System.MidpointRounding)">
+  DateMathTime(string, MidpointRounding)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Instantiates a new instance of <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a> from the timeUnit string expression.
+Rounding can be specified to determine how fractional second values should be rounded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateMathTime(string timeUnit, MidpointRounding rounding = MidpointRounding.AwayFromZero)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>timeUnit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>rounding</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.midpointrounding">MidpointRounding</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime__ctor_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime__ctor_System_TimeSpan_System_MidpointRounding_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.#ctor(System.TimeSpan,System.MidpointRounding)">
+  DateMathTime(TimeSpan, MidpointRounding)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Instantiates a new instance of <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a> from a TimeSpan.
+Rounding can be specified to determine how fractional second values should be rounded.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateMathTime(TimeSpan timeSpan, MidpointRounding rounding = MidpointRounding.AwayFromZero)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>timeSpan</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
+    <dd></dd>
+    <dt><code>rounding</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.midpointrounding">MidpointRounding</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_Factor_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.Factor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_Factor" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.Factor">
+  Factor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The numeric time factor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Factor { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_Interval_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.Interval*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_Interval" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.Interval">
+  Interval
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The time units</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateMathTimeUnit Interval { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTimeUnit.html">DateMathTimeUnit</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_CompareTo_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.CompareTo*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_CompareTo_Elastic_Clients_Elasticsearch_DateMathTime_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.CompareTo(Elastic.Clients.Elasticsearch.DateMathTime)">
+  CompareTo(DateMathTime)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(DateMathTime other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_Equals_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.Equals*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_Equals_Elastic_Clients_Elasticsearch_DateMathTime_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.Equals(Elastic.Clients.Elasticsearch.DateMathTime)">
+  Equals(DateMathTime)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(DateMathTime other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_Equals_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.Equals*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_Equals_System_Object_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.Equals(System.Object)">
+  Equals(object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L308"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_GetHashCode_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.GetHashCode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_GetHashCode" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.GetHashCode">
+  GetHashCode()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L318"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_ToString_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.ToString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_ToString" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.ToString">
+  ToString()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L306"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_op_Equality_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_Equality*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_op_Equality_Elastic_Clients_Elasticsearch_DateMathTime_Elastic_Clients_Elasticsearch_DateMathTime_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_Equality(Elastic.Clients.Elasticsearch.DateMathTime,Elastic.Clients.Elasticsearch.DateMathTime)">
+  operator ==(DateMathTime, DateMathTime)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L301"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(DateMathTime left, DateMathTime right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_op_GreaterThan_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_GreaterThan*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_op_GreaterThan_Elastic_Clients_Elasticsearch_DateMathTime_Elastic_Clients_Elasticsearch_DateMathTime_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_GreaterThan(Elastic.Clients.Elasticsearch.DateMathTime,Elastic.Clients.Elasticsearch.DateMathTime)">
+  operator &gt;(DateMathTime, DateMathTime)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L297"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &gt;(DateMathTime left, DateMathTime right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_op_GreaterThanOrEqual_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_GreaterThanOrEqual*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_op_GreaterThanOrEqual_Elastic_Clients_Elasticsearch_DateMathTime_Elastic_Clients_Elasticsearch_DateMathTime_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_GreaterThanOrEqual(Elastic.Clients.Elasticsearch.DateMathTime,Elastic.Clients.Elasticsearch.DateMathTime)">
+  operator &gt;=(DateMathTime, DateMathTime)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L299"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &gt;=(DateMathTime left, DateMathTime right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_op_Implicit_System_Double__Elastic_Clients_Elasticsearch_DateMathTime" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_Implicit(System.Double)~Elastic.Clients.Elasticsearch.DateMathTime">
+  implicit operator DateMathTime(double)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator DateMathTime(double milliseconds)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>milliseconds</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_op_Implicit_System_String__Elastic_Clients_Elasticsearch_DateMathTime" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_Implicit(System.String)~Elastic.Clients.Elasticsearch.DateMathTime">
+  implicit operator DateMathTime(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator DateMathTime(string expression)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>expression</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_op_Implicit_System_TimeSpan__Elastic_Clients_Elasticsearch_DateMathTime" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_Implicit(System.TimeSpan)~Elastic.Clients.Elasticsearch.DateMathTime">
+  implicit operator DateMathTime(TimeSpan)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator DateMathTime(TimeSpan span)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>span</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_op_Inequality_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_Inequality*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_op_Inequality_Elastic_Clients_Elasticsearch_DateMathTime_Elastic_Clients_Elasticsearch_DateMathTime_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_Inequality(Elastic.Clients.Elasticsearch.DateMathTime,Elastic.Clients.Elasticsearch.DateMathTime)">
+  operator !=(DateMathTime, DateMathTime)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L304"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(DateMathTime left, DateMathTime right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_op_LessThan_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_LessThan*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_op_LessThan_Elastic_Clients_Elasticsearch_DateMathTime_Elastic_Clients_Elasticsearch_DateMathTime_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_LessThan(Elastic.Clients.Elasticsearch.DateMathTime,Elastic.Clients.Elasticsearch.DateMathTime)">
+  operator &lt;(DateMathTime, DateMathTime)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L293"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(DateMathTime left, DateMathTime right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DateMathTime_op_LessThanOrEqual_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_LessThanOrEqual*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DateMathTime_op_LessThanOrEqual_Elastic_Clients_Elasticsearch_DateMathTime_Elastic_Clients_Elasticsearch_DateMathTime_" data-uid="Elastic.Clients.Elasticsearch.DateMathTime.op_LessThanOrEqual(Elastic.Clients.Elasticsearch.DateMathTime,Elastic.Clients.Elasticsearch.DateMathTime)">
+  operator &lt;=(DateMathTime, DateMathTime)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Core/DateTime/DateMath/DateMathTime.cs/#L295"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;=(DateMathTime left, DateMathTime right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Elastic.Clients.Elasticsearch.DateMathTime.html">DateMathTime</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

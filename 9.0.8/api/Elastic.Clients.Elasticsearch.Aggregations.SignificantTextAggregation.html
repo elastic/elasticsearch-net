@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SignificantTextAggregation | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SignificantTextAggregation | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.8/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation" class="text-break">
+Class SignificantTextAggregation  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L209"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.html">Aggregations</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(SignificantTextAggregationConverter))]
+public sealed class SignificantTextAggregation</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">SignificantTextAggregation</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation__ctor_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation__ctor" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.#ctor">
+  SignificantTextAggregation()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L218"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SignificantTextAggregation()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_BackgroundFilter_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.BackgroundFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_BackgroundFilter" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.BackgroundFilter">
+  BackgroundFilter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L233"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A background filter that can be used to focus in on significant terms within a narrower context, instead of the entire index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Query? BackgroundFilter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_ChiSquare_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.ChiSquare*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_ChiSquare" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.ChiSquare">
+  ChiSquare
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L240"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Use Chi square, as described in "Information Retrieval", Manning et al., Chapter 13.5.2, as the significance score.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ChiSquareHeuristic? ChiSquare { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ChiSquareHeuristic.html">ChiSquareHeuristic</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Exclude_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Exclude*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Exclude" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Exclude">
+  Exclude
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L247"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Values to exclude.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermsExclude? Exclude { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TermsExclude.html">TermsExclude</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_ExecutionHint_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.ExecutionHint*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_ExecutionHint" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.ExecutionHint">
+  ExecutionHint
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L254"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Determines whether the aggregation will use field values directly or global ordinals.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermsAggregationExecutionHint? ExecutionHint { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationExecutionHint.html">TermsAggregationExecutionHint</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Field_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Field" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Field">
+  Field
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L261"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field from which to return significant text.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Field? Field { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_FilterDuplicateText_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.FilterDuplicateText*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_FilterDuplicateText" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.FilterDuplicateText">
+  FilterDuplicateText
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L268"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Whether to out duplicate text to deal with noisy data.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? FilterDuplicateText { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Gnd_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Gnd*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Gnd" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Gnd">
+  Gnd
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Use Google normalized distance as described in "The Google Similarity Distance", Cilibrasi and Vitanyi, 2007, as the significance score.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GoogleNormalizedDistanceHeuristic? Gnd { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GoogleNormalizedDistanceHeuristic.html">GoogleNormalizedDistanceHeuristic</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Include_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Include*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Include" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Include">
+  Include
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L282"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Values to include.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermsInclude? Include { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TermsInclude.html">TermsInclude</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Jlh_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Jlh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Jlh" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Jlh">
+  Jlh
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L289"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Use JLH score as the significance score.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EmptyObject? Jlh { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.EmptyObject.html">EmptyObject</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_MinDocCount_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.MinDocCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_MinDocCount" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.MinDocCount">
+  MinDocCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L296"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only return values that are found in more than <code>min_doc_count</code> hits.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? MinDocCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_MutualInformation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.MutualInformation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_MutualInformation" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.MutualInformation">
+  MutualInformation
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L303"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Use mutual information as described in "Information Retrieval", Manning et al., Chapter 13.5.1, as the significance score.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MutualInformationHeuristic? MutualInformation { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic.html">MutualInformationHeuristic</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Percentage_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Percentage*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Percentage" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Percentage">
+  Percentage
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A simple calculation of the number of documents in the foreground sample with a term divided by the number of documents in the background with the term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PercentageScoreHeuristic? Percentage { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic.html">PercentageScoreHeuristic</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_ScriptHeuristic_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.ScriptHeuristic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_ScriptHeuristic" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.ScriptHeuristic">
+  ScriptHeuristic
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Customized score, implemented via a script.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ScriptedHeuristic? ScriptHeuristic { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic.html">ScriptedHeuristic</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_ShardMinDocCount_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.ShardMinDocCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_ShardMinDocCount" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.ShardMinDocCount">
+  ShardMinDocCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L325"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Regulates the certainty a shard has if the values should actually be added to the candidate list or not with respect to the min_doc_count.
+Values will only be considered if their local shard frequency within the set is higher than the <code>shard_min_doc_count</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? ShardMinDocCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_ShardSize_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.ShardSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_ShardSize" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.ShardSize">
+  ShardSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L333"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of candidate terms produced by each shard.
+By default, <code>shard_size</code> will be automatically estimated based on the number of shards and the <code>size</code> parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? ShardSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Size_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_Size" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.Size">
+  Size
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L340"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of buckets returned out of the overall terms list.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Size { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_SourceFields_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.SourceFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_SignificantTextAggregation_SourceFields" data-uid="Elastic.Clients.Elasticsearch.Aggregations.SignificantTextAggregation.SourceFields">
+  SourceFields
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/SignificantTextAggregation.g.cs/#L347"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Overrides the JSON <code>_source</code> fields from which text will be analyzed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Fields? SourceFields { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

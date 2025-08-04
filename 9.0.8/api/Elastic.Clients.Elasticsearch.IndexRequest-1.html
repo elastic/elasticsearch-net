@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class IndexRequest&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class IndexRequest&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create or update a document in an index.   Add a JSON document to the specified data stream or index and make it searchable. If the target is an index and the document already exists, the request updates the document and increments its version.   NOTE: You cannot use this API to send update requests for existing documents in a data stream.   If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:    To add or overwrite a document using the PUT /&amp;lt;target&amp;gt;/_doc/&amp;lt;_id&amp;gt; request format, you must have the create, index, or write index privilege.    To add a document using the POST /&amp;lt;target&amp;gt;/_doc/ request format, you must have the create_doc, create, index, or write index privilege.    To automatically create a data stream or index with this API request, you must have the auto_configure, create_index, or manage index privilege.    Automatic data stream creation requires a matching index template with data stream enabled.   NOTE: Replica shards might not all be started when an indexing operation returns successfully. By default, only the primary is required. Set wait_for_active_shards to change this default behavior.   Automatically create data streams and indices   If the request&#39;s target doesn&#39;t exist and matches an index template with a data_stream definition, the index operation automatically creates the data stream.   If the target doesn&#39;t exist and doesn&#39;t match a data stream template, the operation automatically creates the index and applies any matching index templates.   NOTE: Elasticsearch includes several built-in index templates. To avoid naming collisions with these templates, refer to index pattern documentation.   If no mapping exists, the index operation creates a dynamic mapping. By default, new fields and objects are automatically added to the mapping if needed.   Automatic index creation is controlled by the action.auto_create_index setting. If it is true, any index can be created automatically. You can modify this setting to explicitly allow or block automatic creation of indices that match specified patterns or set it to false to turn off automatic index creation entirely. Specify a comma-separated list of patterns you want to allow or prefix each pattern with + or - to indicate whether it should be allowed or blocked. When a list is specified, the default behaviour is to disallow.   NOTE: The action.auto_create_index setting affects the automatic creation of indices only. It does not affect the creation of data streams.   Optimistic concurrency control   Index operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number and primary term specified by the if_seq_no and if_primary_term parameters. If a mismatch is detected, the operation will result in a VersionConflictException and a status code of 409.   Routing   By default, shard placement — or routing — is controlled by using a hash of the document&#39;s ID value. For more explicit control, the value fed into the hash function used by the router can be directly specified on a per-operation basis using the routing parameter.   When setting up explicit mapping, you can also use the _routing field to direct the index operation to extract the routing value from the document itself. This does come at the (very minimal) cost of an additional document parsing pass. If the _routing mapping is defined and set to be required, the index operation will fail if no routing value is provided or extracted.   NOTE: Data streams do not support custom routing unless they were created with the allow_custom_routing setting enabled in the template.   Distributed   The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard. After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.   Active shards   To improve the resiliency of writes to the system, indexing operations can be configured to wait for a certain number of active shard copies before proceeding with the operation. If the requisite number of active shard copies are not available, then the write operation must wait and retry, until either the requisite shard copies have started or a timeout occurs. By default, write operations only wait for the primary shards to be active before proceeding (that is to say wait_for_active_shards is 1). This default can be overridden in the index settings dynamically by setting index.write.wait_for_active_shards. To alter this behavior per operation, use the wait_for_active_shards request parameter.   Valid values are all or any positive integer up to the total number of configured copies per shard in the index (which is number_of_replicas+1). Specifying a negative value or a number greater than the number of shard copies will throw an error.   For example, suppose you have a cluster of three nodes, A, B, and C and you create an index index with the number of replicas set to 3 (resulting in 4 shard copies, one more copy than there are nodes). If you attempt an indexing operation, by default the operation will only ensure the primary copy of each shard is available before proceeding. This means that even if B and C went down and A hosted the primary shard copies, the indexing operation would still proceed with only one copy of the data. If wait_for_active_shards is set on the request to 3 (and all three nodes are up), the indexing operation will require 3 active shard copies before proceeding. This requirement should be met because there are 3 active nodes in the cluster, each one holding a copy of the shard. However, if you set wait_for_active_shards to all (or to 4, which is the same in this situation), the indexing operation will not proceed as you do not have all 4 copies of each shard active in the index. The operation will timeout unless a new node is brought up in the cluster to host the fourth copy of the shard.   It is important to note that this setting greatly reduces the chances of the write operation not writing to the requisite number of shard copies, but it does not completely eliminate the possibility, because this check occurs before the write operation starts. After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary. The _shards section of the API response reveals the number of shard copies on which replication succeeded and failed.   No operation (noop) updates   When updating a document by using this API, a new version of the document is always created even if the document hasn&#39;t changed. If this isn&#39;t acceptable use the _update API with detect_noop set to true. The detect_noop option isn&#39;t available on this API because it doesn’t fetch the old source and isn&#39;t able to compare it against the new source.   There isn&#39;t a definitive rule for when noop updates aren&#39;t acceptable. It&#39;s a combination of lots of factors like how frequently your data source sends updates that are actually noops and how many queries per second Elasticsearch runs on the shard receiving the updates.   Versioning   Each indexed document is given a version number. By default, internal versioning is used that starts at 1 and increments with each update, deletes included. Optionally, the version number can be set to an external value (for example, if maintained in a database). To enable this functionality, version_type should be set to external. The value provided must be a numeric, long value greater than or equal to 0, and less than around 9.2e+18.   NOTE: Versioning is completely real time, and is not affected by the near real time aspects of search operations. If no version is provided, the operation runs without any version checks.   When using the external version type, the system checks to see if the version number passed to the index request is greater than the version of the currently stored document. If true, the document will be indexed and the new version number used. If the value provided is less than or equal to the stored document&#39;s version number, a version conflict will occur and the index operation will fail. For example:  PUT my-index-000001/_doc/1?version=2&amp;amp;version_type=external {   &quot;user&quot;: {     &quot;id&quot;: &quot;elkbee&quot;   } }  In this example, the operation will succeed since the supplied version of 2 is higher than the current document version of 1. If the document was already updated and its version was set to 2 or higher, the indexing command will fail and result in a conflict (409 HTTP status code).  A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used. Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.8/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexRequest_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexRequest%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexRequest_1" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1" class="text-break">
+Class IndexRequest&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Api/IndexRequest.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create or update a document in an index.
+</p>
+<p>
+Add a JSON document to the specified data stream or index and make it searchable.
+If the target is an index and the document already exists, the request updates the document and increments its version.
+</p>
+<p>
+NOTE: You cannot use this API to send update requests for existing documents in a data stream.
+</p>
+<p>
+If the Elasticsearch security features are enabled, you must have the following index privileges for the target data stream, index, or index alias:
+</p>
+<ul><li>
+<p>
+To add or overwrite a document using the <code>PUT /&lt;target&gt;/_doc/&lt;_id&gt;</code> request format, you must have the <code>create</code>, <code>index</code>, or <code>write</code> index privilege.
+</p>
+</li><li>
+<p>
+To add a document using the <code>POST /&lt;target&gt;/_doc/</code> request format, you must have the <code>create_doc</code>, <code>create</code>, <code>index</code>, or <code>write</code> index privilege.
+</p>
+</li><li>
+<p>
+To automatically create a data stream or index with this API request, you must have the <code>auto_configure</code>, <code>create_index</code>, or <code>manage</code> index privilege.
+</p>
+</li></ul>
+<p>
+Automatic data stream creation requires a matching index template with data stream enabled.
+</p>
+<p>
+NOTE: Replica shards might not all be started when an indexing operation returns successfully.
+By default, only the primary is required. Set <code>wait_for_active_shards</code> to change this default behavior.
+</p>
+<p>
+<strong>Automatically create data streams and indices</strong>
+</p>
+<p>
+If the request's target doesn't exist and matches an index template with a <code>data_stream</code> definition, the index operation automatically creates the data stream.
+</p>
+<p>
+If the target doesn't exist and doesn't match a data stream template, the operation automatically creates the index and applies any matching index templates.
+</p>
+<p>
+NOTE: Elasticsearch includes several built-in index templates. To avoid naming collisions with these templates, refer to index pattern documentation.
+</p>
+<p>
+If no mapping exists, the index operation creates a dynamic mapping.
+By default, new fields and objects are automatically added to the mapping if needed.
+</p>
+<p>
+Automatic index creation is controlled by the <code>action.auto_create_index</code> setting.
+If it is <code>true</code>, any index can be created automatically.
+You can modify this setting to explicitly allow or block automatic creation of indices that match specified patterns or set it to <code>false</code> to turn off automatic index creation entirely.
+Specify a comma-separated list of patterns you want to allow or prefix each pattern with <code>+</code> or <code>-</code> to indicate whether it should be allowed or blocked.
+When a list is specified, the default behaviour is to disallow.
+</p>
+<p>
+NOTE: The <code>action.auto_create_index</code> setting affects the automatic creation of indices only.
+It does not affect the creation of data streams.
+</p>
+<p>
+<strong>Optimistic concurrency control</strong>
+</p>
+<p>
+Index operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number and primary term specified by the <code>if_seq_no</code> and <code>if_primary_term</code> parameters.
+If a mismatch is detected, the operation will result in a <code>VersionConflictException</code> and a status code of <code>409</code>.
+</p>
+<p>
+<strong>Routing</strong>
+</p>
+<p>
+By default, shard placement — or routing — is controlled by using a hash of the document's ID value.
+For more explicit control, the value fed into the hash function used by the router can be directly specified on a per-operation basis using the <code>routing</code> parameter.
+</p>
+<p>
+When setting up explicit mapping, you can also use the <code>_routing</code> field to direct the index operation to extract the routing value from the document itself.
+This does come at the (very minimal) cost of an additional document parsing pass.
+If the <code>_routing</code> mapping is defined and set to be required, the index operation will fail if no routing value is provided or extracted.
+</p>
+<p>
+NOTE: Data streams do not support custom routing unless they were created with the <code>allow_custom_routing</code> setting enabled in the template.
+</p>
+<p>
+<strong>Distributed</strong>
+</p>
+<p>
+The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
+After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
+</p>
+<p>
+<strong>Active shards</strong>
+</p>
+<p>
+To improve the resiliency of writes to the system, indexing operations can be configured to wait for a certain number of active shard copies before proceeding with the operation.
+If the requisite number of active shard copies are not available, then the write operation must wait and retry, until either the requisite shard copies have started or a timeout occurs.
+By default, write operations only wait for the primary shards to be active before proceeding (that is to say <code>wait_for_active_shards</code> is <code>1</code>).
+This default can be overridden in the index settings dynamically by setting <code>index.write.wait_for_active_shards</code>.
+To alter this behavior per operation, use the <code>wait_for_active_shards request</code> parameter.
+</p>
+<p>
+Valid values are all or any positive integer up to the total number of configured copies per shard in the index (which is <code>number_of_replicas</code>+1).
+Specifying a negative value or a number greater than the number of shard copies will throw an error.
+</p>
+<p>
+For example, suppose you have a cluster of three nodes, A, B, and C and you create an index index with the number of replicas set to 3 (resulting in 4 shard copies, one more copy than there are nodes).
+If you attempt an indexing operation, by default the operation will only ensure the primary copy of each shard is available before proceeding.
+This means that even if B and C went down and A hosted the primary shard copies, the indexing operation would still proceed with only one copy of the data.
+If <code>wait_for_active_shards</code> is set on the request to <code>3</code> (and all three nodes are up), the indexing operation will require 3 active shard copies before proceeding.
+This requirement should be met because there are 3 active nodes in the cluster, each one holding a copy of the shard.
+However, if you set <code>wait_for_active_shards</code> to <code>all</code> (or to <code>4</code>, which is the same in this situation), the indexing operation will not proceed as you do not have all 4 copies of each shard active in the index.
+The operation will timeout unless a new node is brought up in the cluster to host the fourth copy of the shard.
+</p>
+<p>
+It is important to note that this setting greatly reduces the chances of the write operation not writing to the requisite number of shard copies, but it does not completely eliminate the possibility, because this check occurs before the write operation starts.
+After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
+The <code>_shards</code> section of the API response reveals the number of shard copies on which replication succeeded and failed.
+</p>
+<p>
+<strong>No operation (noop) updates</strong>
+</p>
+<p>
+When updating a document by using this API, a new version of the document is always created even if the document hasn't changed.
+If this isn't acceptable use the <code>_update</code> API with <code>detect_noop</code> set to <code>true</code>.
+The <code>detect_noop</code> option isn't available on this API because it doesn’t fetch the old source and isn't able to compare it against the new source.
+</p>
+<p>
+There isn't a definitive rule for when noop updates aren't acceptable.
+It's a combination of lots of factors like how frequently your data source sends updates that are actually noops and how many queries per second Elasticsearch runs on the shard receiving the updates.
+</p>
+<p>
+<strong>Versioning</strong>
+</p>
+<p>
+Each indexed document is given a version number.
+By default, internal versioning is used that starts at 1 and increments with each update, deletes included.
+Optionally, the version number can be set to an external value (for example, if maintained in a database).
+To enable this functionality, <code>version_type</code> should be set to <code>external</code>.
+The value provided must be a numeric, long value greater than or equal to 0, and less than around <code>9.2e+18</code>.
+</p>
+<p>
+NOTE: Versioning is completely real time, and is not affected by the near real time aspects of search operations.
+If no version is provided, the operation runs without any version checks.
+</p>
+<p>
+When using the external version type, the system checks to see if the version number passed to the index request is greater than the version of the currently stored document.
+If true, the document will be indexed and the new version number used.
+If the value provided is less than or equal to the stored document's version number, a version conflict will occur and the index operation will fail. For example:
+</p>
+<pre><code class="lang-csharp">PUT my-index-000001/_doc/1?version=2&amp;version_type=external
+{
+  "user": {
+    "id": "elkbee"
+  }
+}
+
+In this example, the operation will succeed since the supplied version of 2 is higher than the current document version of 1.
+If the document was already updated and its version was set to 2 or higher, the indexing command will fail and result in a conflict (409 HTTP status code).
+
+A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
+Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.</code></pre>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(IndexRequestConverterFactory))]
+public class IndexRequest&lt;TDocument&gt; : PlainRequest&lt;IndexRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexRequestParameters.html">IndexRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexRequestParameters.html">IndexRequestParameters</a>&gt;</div>
+      <div><span class="xref">IndexRequest&lt;TDocument&gt;</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;IndexRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;IndexRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;IndexRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;IndexRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;IndexRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q__1_System_String_">Request&lt;IndexRequestParameters&gt;.Q&lt;TOut&gt;(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q_System_String_System_Object_">Request&lt;IndexRequestParameters&gt;.Q(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q_System_String_Elastic_Transport_IStringable_">Request&lt;IndexRequestParameters&gt;.Q(string, IStringable)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RequestConfiguration">Request.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RouteValues">Request.RouteValues</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_ResolveUrl_Elastic_Clients_Elasticsearch_Requests_RouteValues_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_">Request.ResolveUrl(RouteValues, IElasticsearchClientSettings)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_P__1_System_String_">Request.P&lt;TOut&gt;(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_PR_System_String_System_Object_">Request.PR(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_PO_System_String_System_Object_">Request.PO(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1__ctor__0_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.#ctor(`0)">
+  IndexRequest(TDocument)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L351"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexRequest(TDocument document)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>document</code> <span class="xref">TDocument</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1__ctor__0_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.#ctor(`0,Elastic.Clients.Elasticsearch.Id)">
+  IndexRequest(TDocument, Id?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L345"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexRequest(TDocument document, Id? id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>document</code> <span class="xref">TDocument</span></dt>
+    <dd></dd>
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1__ctor__0_Elastic_Clients_Elasticsearch_IndexName_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.#ctor(`0,Elastic.Clients.Elasticsearch.IndexName,Elastic.Clients.Elasticsearch.Id)">
+  IndexRequest(TDocument, IndexName, Id?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L339"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexRequest(TDocument document, IndexName index, Id? id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>document</code> <span class="xref">TDocument</span></dt>
+    <dd></dd>
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_Document_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Document*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_Document" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Document">
+  Document
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L505"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TDocument Document { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">TDocument</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_DynamicHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.DynamicHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_DynamicHttpMethod" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.DynamicHttpMethod">
+  DynamicHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Shared/Api/IndexRequest.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Allows for per request replacement of the specified HTTP method, including scenarios such as indexing which
+require access to the document to determine the correct URL path and method combination to choose.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod? DynamicHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.8/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_Id_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Id*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_Id" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Id">
+  Id
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L381"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A unique identifier for the document.
+To automatically generate a document ID, use the <code>POST /&lt;target&gt;/_doc/</code> request format and omit this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Id? Id { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_IfPrimaryTerm_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.IfPrimaryTerm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_IfPrimaryTerm" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.IfPrimaryTerm">
+  IfPrimaryTerm
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L402"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only perform the operation if the document has this primary term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? IfPrimaryTerm { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_IfSeqNo_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.IfSeqNo*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_IfSeqNo" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.IfSeqNo">
+  IfSeqNo
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L409"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only perform the operation if the document has this sequence number.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? IfSeqNo { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_IncludeSourceOnError_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.IncludeSourceOnError*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_IncludeSourceOnError" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.IncludeSourceOnError">
+  IncludeSourceOnError
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L416"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+True or false if to include the document source in the error message in case of parsing errors.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IncludeSourceOnError { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_Index_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_Index" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Index">
+  Index
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L391"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the data stream or index to target.
+If the target doesn't exist and matches the name or wildcard (<code>*</code>) pattern of an index template with a <code>data_stream</code> definition, this request creates the data stream.
+If the target doesn't exist and doesn't match a data stream template, this request creates the index.
+You can check for existing targets with the resolve index API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexName Index { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_OpType_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.OpType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_OpType" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.OpType">
+  OpType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L428"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Set to <code>create</code> to only index the document if it does not already exist (put if absent).
+If a document with the specified <code>_id</code> already exists, the indexing operation will fail.
+The behavior is the same as using the <code>&lt;index&gt;/_create</code> endpoint.
+If a document ID is specified, this paramater defaults to <code>index</code>.
+Otherwise, it defaults to <code>create</code>.
+If the request targets a data stream, an <code>op_type</code> of <code>create</code> is required.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpType? OpType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpType.html">OpType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_Pipeline_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Pipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_Pipeline" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Pipeline">
+  Pipeline
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L437"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The ID of the pipeline to use to preprocess incoming documents.
+If the index has a default ingest pipeline specified, then setting the value to <code>_none</code> disables the default ingest pipeline for this request.
+If a final pipeline is configured it will always run, regardless of the value of this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Pipeline { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_Refresh_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_Refresh" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Refresh">
+  Refresh
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L446"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, Elasticsearch refreshes the affected shards to make this operation visible to search.
+If <code>wait_for</code>, it waits for a refresh to make this operation visible to search.
+If <code>false</code>, it does nothing with refreshes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Refresh? Refresh { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Refresh.html">Refresh</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_RequireAlias_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.RequireAlias*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_RequireAlias" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.RequireAlias">
+  RequireAlias
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L453"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the destination must be an index alias.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? RequireAlias { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_RequireDataStream_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.RequireDataStream*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_RequireDataStream" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.RequireDataStream">
+  RequireDataStream
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L460"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request's actions must target a data stream (existing or to be created).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? RequireDataStream { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_Routing_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_Routing" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Routing">
+  Routing
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L467"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A custom value that is used to route operations to a specific shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Routing? Routing { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Routing.html">Routing</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L369"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.8/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_Timeout_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_Timeout" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Timeout">
+  Timeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L480"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
+</p>
+<p>
+This parameter is useful for situations where the primary shard assigned to perform the operation might not be available when the operation runs.
+Some reasons for this might be that the primary shard is currently recovering from a gateway or undergoing relocation.
+By default, the operation will wait on the primary shard to become available for at least 1 minute before failing and responding with an error.
+The actual wait time could be longer, particularly when multiple waits occur.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? Timeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_Version_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_Version" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.Version">
+  Version
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L488"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An explicit version number for concurrency control.
+It must be a non-negative long number.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? Version { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_VersionType_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.VersionType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_VersionType" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.VersionType">
+  VersionType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L495"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The version type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public VersionType? VersionType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.VersionType.html">VersionType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexRequest_1_WaitForActiveShards_" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.WaitForActiveShards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexRequest_1_WaitForActiveShards" data-uid="Elastic.Clients.Elasticsearch.IndexRequest`1.WaitForActiveShards">
+  WaitForActiveShards
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexRequest.g.cs/#L504"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of shard copies that must be active before proceeding with the operation.
+You can set it to <code>all</code> or any positive integer up to the total number of shards in the index (<code>number_of_replicas+1</code>).
+The default value of <code>1</code> means it waits for each primary shard to be active.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WaitForActiveShards? WaitForActiveShards { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.WaitForActiveShards.html">WaitForActiveShards</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
