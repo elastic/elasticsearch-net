@@ -28,6 +28,7 @@ internal sealed partial class SparseVectorPropertyConverter : System.Text.Json.S
 	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
 	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
 	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
 	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
@@ -40,6 +41,7 @@ internal sealed partial class SparseVectorPropertyConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
 		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions?> propIndexOptions = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
 		LocalJsonValue<bool?> propStore = default;
@@ -57,6 +59,11 @@ internal sealed partial class SparseVectorPropertyConverter : System.Text.Json.S
 			}
 
 			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propIndexOptions.TryReadProperty(ref reader, options, PropIndexOptions, null))
 			{
 				continue;
 			}
@@ -102,6 +109,7 @@ internal sealed partial class SparseVectorPropertyConverter : System.Text.Json.S
 			Dynamic = propDynamic.Value,
 			Fields = propFields.Value,
 			IgnoreAbove = propIgnoreAbove.Value,
+			IndexOptions = propIndexOptions.Value,
 			Meta = propMeta.Value,
 			Properties = propProperties.Value,
 			Store = propStore.Value,
@@ -115,6 +123,7 @@ internal sealed partial class SparseVectorPropertyConverter : System.Text.Json.S
 		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping>(o, v));
 		writer.WriteProperty(options, PropFields, value.Fields, null, null);
 		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
 		writer.WriteProperty(options, PropStore, value.Store, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
@@ -146,6 +155,14 @@ public sealed partial class SparseVectorProperty : Elastic.Clients.Elasticsearch
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	public int? IgnoreAbove { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Additional index options for the sparse vector field that controls the
+	/// token pruning behavior of the sparse vector field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions? IndexOptions { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -200,6 +217,42 @@ public readonly partial struct SparseVectorPropertyDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument> IgnoreAbove(int? value)
 	{
 		Instance.IgnoreAbove = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Additional index options for the sparse vector field that controls the
+	/// token pruning behavior of the sparse vector field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions? value)
+	{
+		Instance.IndexOptions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Additional index options for the sparse vector field that controls the
+	/// token pruning behavior of the sparse vector field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument> IndexOptions()
+	{
+		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Additional index options for the sparse vector field that controls the
+	/// token pruning behavior of the sparse vector field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor<TDocument> IndexOptions(System.Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor>? action)
+	{
+		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor.Build(action);
 		return this;
 	}
 
@@ -327,6 +380,42 @@ public readonly partial struct SparseVectorPropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor IgnoreAbove(int? value)
 	{
 		Instance.IgnoreAbove = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Additional index options for the sparse vector field that controls the
+	/// token pruning behavior of the sparse vector field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions? value)
+	{
+		Instance.IndexOptions = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Additional index options for the sparse vector field that controls the
+	/// token pruning behavior of the sparse vector field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor IndexOptions()
+	{
+		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Additional index options for the sparse vector field that controls the
+	/// token pruning behavior of the sparse vector field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorPropertyDescriptor IndexOptions(System.Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor>? action)
+	{
+		Instance.IndexOptions = Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor.Build(action);
 		return this;
 	}
 

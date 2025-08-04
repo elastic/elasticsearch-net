@@ -27,36 +27,10 @@ public sealed partial class CreateRequestParameters : Elastic.Transport.RequestP
 {
 	/// <summary>
 	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
-	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
-
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
-	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
-
-	/// <summary>
-	/// <para>
 	/// True or false if to include the document source in the error message in case of parsing errors.
 	/// </para>
 	/// </summary>
 	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
-
-	/// <summary>
-	/// <para>
-	/// Set to <c>create</c> to only index the document if it does not already exist (put if absent).
-	/// If a document with the specified <c>_id</c> already exists, the indexing operation will fail.
-	/// The behavior is the same as using the <c>&lt;index>/_create</c> endpoint.
-	/// If a document ID is specified, this paramater defaults to <c>index</c>.
-	/// Otherwise, it defaults to <c>create</c>.
-	/// If the request targets a data stream, an <c>op_type</c> of <c>create</c> is required.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.OpType? OpType { get => Q<Elastic.Clients.Elasticsearch.OpType?>("op_type"); set => Q("op_type", value); }
 
 	/// <summary>
 	/// <para>
@@ -339,36 +313,10 @@ public sealed partial class CreateRequest<TDocument> : Elastic.Clients.Elasticse
 
 	/// <summary>
 	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
-	public long? IfPrimaryTerm { get => Q<long?>("if_primary_term"); set => Q("if_primary_term", value); }
-
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
-	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
-
-	/// <summary>
-	/// <para>
 	/// True or false if to include the document source in the error message in case of parsing errors.
 	/// </para>
 	/// </summary>
 	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
-
-	/// <summary>
-	/// <para>
-	/// Set to <c>create</c> to only index the document if it does not already exist (put if absent).
-	/// If a document with the specified <c>_id</c> already exists, the indexing operation will fail.
-	/// The behavior is the same as using the <c>&lt;index>/_create</c> endpoint.
-	/// If a document ID is specified, this paramater defaults to <c>index</c>.
-	/// Otherwise, it defaults to <c>create</c>.
-	/// If the request targets a data stream, an <c>op_type</c> of <c>create</c> is required.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.OpType? OpType { get => Q<Elastic.Clients.Elasticsearch.OpType?>("op_type"); set => Q("op_type", value); }
 
 	/// <summary>
 	/// <para>
@@ -621,50 +569,12 @@ public readonly partial struct CreateRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Only perform the operation if the document has this primary term.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> IfPrimaryTerm(long? value)
-	{
-		Instance.IfPrimaryTerm = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Only perform the operation if the document has this sequence number.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> IfSeqNo(long? value)
-	{
-		Instance.IfSeqNo = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
 	/// True or false if to include the document source in the error message in case of parsing errors.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> IncludeSourceOnError(bool? value = true)
 	{
 		Instance.IncludeSourceOnError = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Set to <c>create</c> to only index the document if it does not already exist (put if absent).
-	/// If a document with the specified <c>_id</c> already exists, the indexing operation will fail.
-	/// The behavior is the same as using the <c>&lt;index>/_create</c> endpoint.
-	/// If a document ID is specified, this paramater defaults to <c>index</c>.
-	/// Otherwise, it defaults to <c>create</c>.
-	/// If the request targets a data stream, an <c>op_type</c> of <c>create</c> is required.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.CreateRequestDescriptor<TDocument> OpType(Elastic.Clients.Elasticsearch.OpType? value)
-	{
-		Instance.OpType = value;
 		return this;
 	}
 
