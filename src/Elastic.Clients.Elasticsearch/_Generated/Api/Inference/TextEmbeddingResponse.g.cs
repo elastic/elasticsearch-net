@@ -27,12 +27,12 @@ internal sealed partial class TextEmbeddingResponseConverter : System.Text.Json.
 {
 	public override Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Value = reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingInferenceResult>(options, null) };
+		return new Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { InferenceResult = reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingInferenceResult>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Value, null);
+		writer.WriteValue(options, value.InferenceResult, null);
 	}
 }
 
@@ -54,5 +54,5 @@ public sealed partial class TextEmbeddingResponse : Elastic.Transport.Products.E
 #if NET7_0_OR_GREATER
 required
 #endif
-Elastic.Clients.Elasticsearch.Inference.TextEmbeddingInferenceResult Value { get; set; }
+Elastic.Clients.Elasticsearch.Inference.TextEmbeddingInferenceResult InferenceResult { get; set; }
 }

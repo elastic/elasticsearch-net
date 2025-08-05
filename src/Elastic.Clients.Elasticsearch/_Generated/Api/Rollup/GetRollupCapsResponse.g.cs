@@ -27,12 +27,12 @@ internal sealed partial class GetRollupCapsResponseConverter : System.Text.Json.
 {
 	public override Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Values = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities>(o, null, null)!) };
+		return new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Capabilities = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities>(o, null, null)!) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Values, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities>(o, v, null, null));
+		writer.WriteValue(options, value.Capabilities, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities>(o, v, null, null));
 	}
 }
 
@@ -54,5 +54,5 @@ public sealed partial class GetRollupCapsResponse : Elastic.Transport.Products.E
 #if NET7_0_OR_GREATER
 required
 #endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities> Values { get; set; }
+System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.RollupCapabilities> Capabilities { get; set; }
 }

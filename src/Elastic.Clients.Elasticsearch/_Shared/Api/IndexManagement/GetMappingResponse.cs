@@ -13,6 +13,6 @@ public static class GetMappingResponseExtensions
 		if (index.IsNullOrEmpty())
 			return null;
 
-		return response.Values.TryGetValue(index, out var indexMappings) ? indexMappings.Mappings : null;
+		return response.Mappings.TryGetValue(index, out var indexMappings) ? indexMappings.Mappings : null;
 	}
 }

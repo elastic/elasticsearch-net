@@ -27,12 +27,12 @@ internal sealed partial class InferenceResponseConverter : System.Text.Json.Seri
 {
 	public override Elastic.Clients.Elasticsearch.Inference.InferenceResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.Inference.InferenceResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Value = reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.InferenceResult>(options, null) };
+		return new Elastic.Clients.Elasticsearch.Inference.InferenceResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Result = reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.InferenceResult>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.InferenceResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Value, null);
+		writer.WriteValue(options, value.Result, null);
 	}
 }
 
@@ -54,5 +54,5 @@ public sealed partial class InferenceResponse : Elastic.Transport.Products.Elast
 #if NET7_0_OR_GREATER
 required
 #endif
-Elastic.Clients.Elasticsearch.Inference.InferenceResult Value { get; set; }
+Elastic.Clients.Elasticsearch.Inference.InferenceResult Result { get; set; }
 }

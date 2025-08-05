@@ -27,12 +27,12 @@ internal sealed partial class GetFieldMappingResponseConverter : System.Text.Jso
 {
 	public override Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Values = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings>(o, null, null)!) };
+		return new Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { FieldMappings = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings>(o, null, null)!) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.GetFieldMappingResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Values, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings>(o, v, null, null));
+		writer.WriteValue(options, value.FieldMappings, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings>(o, v, null, null));
 	}
 }
 
@@ -54,5 +54,5 @@ public partial class GetFieldMappingResponse : Elastic.Transport.Products.Elasti
 #if NET7_0_OR_GREATER
 required
 #endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings> Values { get; set; }
+System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.TypeFieldMappings> FieldMappings { get; set; }
 }
