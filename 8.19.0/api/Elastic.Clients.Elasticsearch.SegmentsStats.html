@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SegmentsStats | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SegmentsStats | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_SegmentsStats.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.SegmentsStats%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.SegmentsStats">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_SegmentsStats" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats" class="text-break">
+Class SegmentsStats  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L263"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(SegmentsStatsConverter))]
+public sealed class SegmentsStats</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">SegmentsStats</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats__ctor_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats__ctor" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.#ctor">
+  SegmentsStats()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L289"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public SegmentsStats()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats__ctor_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats__ctor_System_Int32_System_Int64_System_Collections_Generic_IReadOnlyDictionary_System_String_Elastic_Clients_Elasticsearch_IndexManagement_ShardFileSizeInfo__System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_System_Int64_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.#ctor(System.Int32,System.Int64,System.Collections.Generic.IReadOnlyDictionary{System.String,Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo},System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64)">
+  SegmentsStats(int, long, IReadOnlyDictionary&lt;string, ShardFileSizeInfo&gt;, long, long, long, long, long, long, long, long, long, long)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L266"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SegmentsStats(int count, long docValuesMemoryInBytes, IReadOnlyDictionary&lt;string, ShardFileSizeInfo&gt; fileSizes, long fixedBitSetMemoryInBytes, long indexWriterMemoryInBytes, long maxUnsafeAutoIdTimestamp, long memoryInBytes, long normsMemoryInBytes, long pointsMemoryInBytes, long storedFieldsMemoryInBytes, long termsMemoryInBytes, long termVectorsMemoryInBytes, long versionMapMemoryInBytes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>count</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>docValuesMemoryInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>fileSizes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo.html">ShardFileSizeInfo</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>fixedBitSetMemoryInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>indexWriterMemoryInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>maxUnsafeAutoIdTimestamp</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>memoryInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>normsMemoryInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>pointsMemoryInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>storedFieldsMemoryInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>termsMemoryInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>termVectorsMemoryInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>versionMapMemoryInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_Count_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.Count*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_Count" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.Count">
+  Count
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total number of segments across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Count { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_DocValuesMemory_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.DocValuesMemory*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_DocValuesMemory" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.DocValuesMemory">
+  DocValuesMemory
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L316"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of memory used for doc values across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? DocValuesMemory { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_DocValuesMemoryInBytes_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.DocValuesMemoryInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_DocValuesMemoryInBytes" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.DocValuesMemoryInBytes">
+  DocValuesMemoryInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L323"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount, in bytes, of memory used for doc values across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long DocValuesMemoryInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_FileSizes_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.FileSizes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_FileSizes" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.FileSizes">
+  FileSizes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L335"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+This object is not populated by the cluster stats API.
+To get information on segment files, use the node stats API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyDictionary&lt;string, ShardFileSizeInfo&gt; FileSizes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardFileSizeInfo.html">ShardFileSizeInfo</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_FixedBitSet_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.FixedBitSet*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_FixedBitSet" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.FixedBitSet">
+  FixedBitSet
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L347"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of memory used by fixed bit sets across all shards assigned to selected nodes.
+Fixed bit sets are used for nested object field types and type filters for join fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? FixedBitSet { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_FixedBitSetMemoryInBytes_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.FixedBitSetMemoryInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_FixedBitSetMemoryInBytes" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.FixedBitSetMemoryInBytes">
+  FixedBitSetMemoryInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L354"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of memory, in bytes, used by fixed bit sets across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long FixedBitSetMemoryInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_IndexWriterMemory_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.IndexWriterMemory*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_IndexWriterMemory" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.IndexWriterMemory">
+  IndexWriterMemory
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L365"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of memory used by all index writers across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? IndexWriterMemory { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_IndexWriterMemoryInBytes_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.IndexWriterMemoryInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_IndexWriterMemoryInBytes" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.IndexWriterMemoryInBytes">
+  IndexWriterMemoryInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L372"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount, in bytes, of memory used by all index writers across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long IndexWriterMemoryInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_MaxUnsafeAutoIdTimestamp_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.MaxUnsafeAutoIdTimestamp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_MaxUnsafeAutoIdTimestamp" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.MaxUnsafeAutoIdTimestamp">
+  MaxUnsafeAutoIdTimestamp
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L383"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Unix timestamp, in milliseconds, of the most recently retried indexing request.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MaxUnsafeAutoIdTimestamp { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_Memory_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.Memory*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_Memory" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.Memory">
+  Memory
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L394"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of memory used for segments across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? Memory { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_MemoryInBytes_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.MemoryInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_MemoryInBytes" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.MemoryInBytes">
+  MemoryInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L401"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount, in bytes, of memory used for segments across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MemoryInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_NormsMemory_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.NormsMemory*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_NormsMemory" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.NormsMemory">
+  NormsMemory
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L412"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of memory used for normalization factors across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? NormsMemory { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_NormsMemoryInBytes_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.NormsMemoryInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_NormsMemoryInBytes" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.NormsMemoryInBytes">
+  NormsMemoryInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L419"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount, in bytes, of memory used for normalization factors across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long NormsMemoryInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_PointsMemory_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.PointsMemory*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_PointsMemory" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.PointsMemory">
+  PointsMemory
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L430"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of memory used for points across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? PointsMemory { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_PointsMemoryInBytes_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.PointsMemoryInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_PointsMemoryInBytes" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.PointsMemoryInBytes">
+  PointsMemoryInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L437"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount, in bytes, of memory used for points across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long PointsMemoryInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_StoredFieldsMemory_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.StoredFieldsMemory*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_StoredFieldsMemory" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.StoredFieldsMemory">
+  StoredFieldsMemory
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L448"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of memory used for stored fields across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? StoredFieldsMemory { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_StoredFieldsMemoryInBytes_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.StoredFieldsMemoryInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_StoredFieldsMemoryInBytes" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.StoredFieldsMemoryInBytes">
+  StoredFieldsMemoryInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L455"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount, in bytes, of memory used for stored fields across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long StoredFieldsMemoryInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_TermVectorsMemory_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.TermVectorsMemory*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_TermVectorsMemory" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.TermVectorsMemory">
+  TermVectorsMemory
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L484"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of memory used for term vectors across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? TermVectorsMemory { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_TermVectorsMemoryInBytes_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.TermVectorsMemoryInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_TermVectorsMemoryInBytes" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.TermVectorsMemoryInBytes">
+  TermVectorsMemoryInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L491"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount, in bytes, of memory used for term vectors across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long TermVectorsMemoryInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_TermsMemory_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.TermsMemory*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_TermsMemory" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.TermsMemory">
+  TermsMemory
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L466"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of memory used for terms across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? TermsMemory { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_TermsMemoryInBytes_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.TermsMemoryInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_TermsMemoryInBytes" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.TermsMemoryInBytes">
+  TermsMemoryInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L473"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount, in bytes, of memory used for terms across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long TermsMemoryInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_VersionMapMemory_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.VersionMapMemory*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_VersionMapMemory" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.VersionMapMemory">
+  VersionMapMemory
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L502"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of memory used by all version maps across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? VersionMapMemory { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SegmentsStats_VersionMapMemoryInBytes_" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.VersionMapMemoryInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SegmentsStats_VersionMapMemoryInBytes" data-uid="Elastic.Clients.Elasticsearch.SegmentsStats.VersionMapMemoryInBytes">
+  VersionMapMemoryInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/SegmentsStats.g.cs/#L509"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount, in bytes, of memory used by all version maps across all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long VersionMapMemoryInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
