@@ -19,8 +19,8 @@
 
 using System;
 using System.Linq;
-using System.Collections.Frozen;
 using Elastic.Clients.Elasticsearch.Serialization;
+using System.Collections.Frozen;
 
 namespace RequestConverter;
 
@@ -20965,6 +20965,22 @@ internal static partial class RequestFactory
 							}
 
 							request.Sort = Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotSort>.Parse(parameter.Value);
+							continue;
+						}
+
+						if (string.Equals(parameter.Key, "state", System.StringComparison.OrdinalIgnoreCase))
+						{
+							if (parameter.Value is null)
+							{
+								continue;
+							}
+
+							if (Elastic.Clients.Elasticsearch.Extensions.IsNullOrEmptyCommaSeparatedList(parameter.Value, out var list))
+							{
+								continue;
+							}
+
+							request.State = list.Select(x => Elastic.Clients.Elasticsearch.EnumValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotState>.Parse(x)).ToList();
 							continue;
 						}
 

@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Aggregations;
 
 namespace RequestConverter.Console;
 
@@ -233,6 +235,9 @@ internal class Program
 
 	public static void Main(string[] args)
 	{
+		new SearchRequest().FormatToSource();
+		new TermsAggregation().FormatToSource();
+
 		var converter = new RequestConverter();
 
 		//var b = new ArrayBufferWriter<byte>();

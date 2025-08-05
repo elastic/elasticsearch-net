@@ -11,8 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Elastic.Clients.Elasticsearch\**\*.cs" LinkBase="Client" />
-    <Compile Remove="..\Elastic.Clients.Elasticsearch\obj\**" />
+    <Compile Include="..\Elastic.Clients.Elasticsearch\**\*.cs" Exclude="**\bin\**;**\obj\**" LinkBase="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RequestConverter.SourceGenerator\RequestConverter.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>

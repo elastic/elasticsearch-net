@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestConverter", "src\Req
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestConverter.Console", "src\RequestConverter.Console\RequestConverter.Console.csproj", "{2242D4E1-4AD6-4DCA-BF94-6E7573737F73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestConverter.SourceGenerator", "src\RequestConverter.SourceGenerator\RequestConverter.SourceGenerator.csproj", "{EF9D7FD7-3633-49F3-ABF0-C768A22614A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elastic.SourceGenerator.Roslyn", "src\Elastic.SourceGenerator.Roslyn\Elastic.SourceGenerator.Roslyn.csproj", "{EAA8D527-1F8B-4838-8E58-4D329C9572E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,19 @@ Global
 		{2242D4E1-4AD6-4DCA-BF94-6E7573737F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2242D4E1-4AD6-4DCA-BF94-6E7573737F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2242D4E1-4AD6-4DCA-BF94-6E7573737F73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9D7FD7-3633-49F3-ABF0-C768A22614A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9D7FD7-3633-49F3-ABF0-C768A22614A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9D7FD7-3633-49F3-ABF0-C768A22614A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9D7FD7-3633-49F3-ABF0-C768A22614A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAA8D527-1F8B-4838-8E58-4D329C9572E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAA8D527-1F8B-4838-8E58-4D329C9572E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAA8D527-1F8B-4838-8E58-4D329C9572E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAA8D527-1F8B-4838-8E58-4D329C9572E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {095F0539-5FD8-455E-8537-54A7997493B2}
 	EndGlobalSection
 EndGlobal
