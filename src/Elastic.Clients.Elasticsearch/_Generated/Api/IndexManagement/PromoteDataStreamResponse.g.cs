@@ -27,12 +27,12 @@ internal sealed partial class PromoteDataStreamResponseConverter : System.Text.J
 {
 	public override Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Value = reader.ReadValue<object>(options, null) };
+		return new Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Result = reader.ReadValue<object>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.PromoteDataStreamResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Value, null);
+		writer.WriteValue(options, value.Result, null);
 	}
 }
 
@@ -54,5 +54,5 @@ public sealed partial class PromoteDataStreamResponse : Elastic.Transport.Produc
 #if NET7_0_OR_GREATER
 required
 #endif
-object Value { get; set; }
+object Result { get; set; }
 }
