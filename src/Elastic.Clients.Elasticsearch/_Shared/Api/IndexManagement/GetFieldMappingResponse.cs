@@ -60,7 +60,7 @@ public partial class GetFieldMappingResponse
 
 	private IReadOnlyDictionary<string, FieldMapping>? MappingsFor(string index)
 	{
-		if (Values!.TryGetValue(index, out var indexMapping))
+		if (!FieldMappings.TryGetValue(index, out var indexMapping))
 			return null;
 
 		return indexMapping.Mappings;
