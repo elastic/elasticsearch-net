@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct PutMappingRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct PutMappingRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Update field mappings. Add new fields to an existing data stream or index. You can use the update mapping API to:    Add a new field to an existing index    Update mappings for multiple indices in a single request    Add new properties to an object field    Enable multi-fields for an existing field    Update supported mapping parameters    Change a field&#39;s mapping using reindexing    Rename a field using a field alias    Learn how to use the update mapping API with practical examples in the Update mapping API examples guide.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor" class="text-break">
+Struct PutMappingRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L482"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Update field mappings.
+Add new fields to an existing data stream or index.
+You can use the update mapping API to:
+</p>
+<ul><li>
+<p>
+Add a new field to an existing index
+</p>
+</li><li>
+<p>
+Update mappings for multiple indices in a single request
+</p>
+</li><li>
+<p>
+Add new properties to an object field
+</p>
+</li><li>
+<p>
+Enable multi-fields for an existing field
+</p>
+</li><li>
+<p>
+Update supported mapping parameters
+</p>
+</li><li>
+<p>
+Change a field's mapping using reindexing
+</p>
+</li><li>
+<p>
+Rename a field using a field alias
+</p>
+</li></ul>
+<p>
+Learn how to use the update mapping API with practical examples in the <a href="https://www.elastic.co/docs/manage-data/data-store/mapping/update-mappings-examples">Update mapping API examples</a> guide.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct PutMappingRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.#ctor">
+  PutMappingRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L497"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public PutMappingRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequest_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest)">
+  PutMappingRequestDescriptor(PutMappingRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L486"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor(PutMappingRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest.html">PutMappingRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Indices)">
+  PutMappingRequestDescriptor(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L492"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor(Indices indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddDynamicTemplate_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddDynamicTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddDynamicTemplate_System_String_Elastic_Clients_Elasticsearch_Mapping_DynamicTemplate_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddDynamicTemplate(System.String,Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate)">
+  AddDynamicTemplate(string, DynamicTemplate)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L693"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor AddDynamicTemplate(string key, DynamicTemplate value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate.html">DynamicTemplate</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddDynamicTemplate_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddDynamicTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddDynamicTemplate_System_String_System_Action_Elastic_Clients_Elasticsearch_Mapping_DynamicTemplateDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddDynamicTemplate(System.String,System.Action{Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor})">
+  AddDynamicTemplate(string, Action&lt;DynamicTemplateDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L700"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor AddDynamicTemplate(string key, Action&lt;DynamicTemplateDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor.html">DynamicTemplateDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddDynamicTemplate_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddDynamicTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddDynamicTemplate__1_System_String_System_Action_Elastic_Clients_Elasticsearch_Mapping_DynamicTemplateDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddDynamicTemplate``1(System.String,System.Action{Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor{``0}})">
+  AddDynamicTemplate&lt;T&gt;(string, Action&lt;DynamicTemplateDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L707"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor AddDynamicTemplate&lt;T&gt;(string key, Action&lt;DynamicTemplateDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicTemplateDescriptor-1.html">DynamicTemplateDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddMeta_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddMeta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddMeta_System_String_System_Object_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddMeta(System.String,System.Object)">
+  AddMeta(string, object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L775"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor AddMeta(string key, object value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeField_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime(Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeField)">
+  AddRuntime(Field, RuntimeField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L943"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor AddRuntime(Field key, RuntimeField value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime_Elastic_Clients_Elasticsearch_Field_System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime(Elastic.Clients.Elasticsearch.Field,System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor})">
+  AddRuntime(Field, Action&lt;RuntimeFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L957"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor AddRuntime(Field key, Action&lt;RuntimeFieldDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.html">RuntimeFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime__1_Elastic_Clients_Elasticsearch_Field_System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime``1(Elastic.Clients.Elasticsearch.Field,System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor{``0}})">
+  AddRuntime&lt;T&gt;(Field, Action&lt;RuntimeFieldDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L971"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor AddRuntime&lt;T&gt;(Field key, Action&lt;RuntimeFieldDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor-1.html">RuntimeFieldDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___Elastic_Clients_Elasticsearch_Mapping_RuntimeField_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},Elastic.Clients.Elasticsearch.Mapping.RuntimeField)">
+  AddRuntime&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;, RuntimeField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L950"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor AddRuntime&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; key, RuntimeField value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor{``0}})">
+  AddRuntime&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;, Action&lt;RuntimeFieldDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L978"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor AddRuntime&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; key, Action&lt;RuntimeFieldDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor-1.html">RuntimeFieldDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AddRuntime__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AddRuntime``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor})">
+  AddRuntime&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;, Action&lt;RuntimeFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L964"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor AddRuntime&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; key, Action&lt;RuntimeFieldDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.html">RuntimeFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AllowNoIndices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AllowNoIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_AllowNoIndices_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.AllowNoIndices(System.Nullable{System.Boolean})">
+  AllowNoIndices(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L523"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>false</code>, the request returns an error if any wildcard expression, index alias, or <code>_all</code> value targets only missing or closed indices.
+This behavior applies even if the request targets other open indices.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor AllowNoIndices(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DateDetection_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DateDetection*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DateDetection_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DateDetection(System.Nullable{System.Boolean})">
+  DateDetection(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L606"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Controls whether dynamic date detection is enabled.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor DateDetection(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Dynamic_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Dynamic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Dynamic_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_DynamicMapping__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Dynamic(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.DynamicMapping})">
+  Dynamic(DynamicMapping?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L617"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Controls whether new fields are added dynamically.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Dynamic(DynamicMapping? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.html">DynamicMapping</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicDateFormats_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicDateFormats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicDateFormats_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicDateFormats(System.Collections.Generic.ICollection{System.String})">
+  DynamicDateFormats(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L630"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If date detection is enabled then new string fields are checked
+against 'dynamic_date_formats' and if the value matches then
+a new date field is added instead of string.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor DynamicDateFormats(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicDateFormats_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicDateFormats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicDateFormats_System_String___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicDateFormats(System.String[])">
+  DynamicDateFormats(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L643"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If date detection is enabled then new string fields are checked
+against 'dynamic_date_formats' and if the value matches then
+a new date field is added instead of string.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor DynamicDateFormats(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicTemplates_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicTemplates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicTemplates" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicTemplates">
+  DynamicTemplates()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L665"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specify dynamic templates for the mapping.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor DynamicTemplates()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicTemplates_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicTemplates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicTemplates_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentCollectionOfKeyValuePairOfStringDynamicTemplate__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicTemplates(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate})">
+  DynamicTemplates(Action&lt;FluentCollectionOfKeyValuePairOfStringDynamicTemplate&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L676"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specify dynamic templates for the mapping.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor DynamicTemplates(Action&lt;FluentCollectionOfKeyValuePairOfStringDynamicTemplate&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate.html">FluentCollectionOfKeyValuePairOfStringDynamicTemplate</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicTemplates_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicTemplates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicTemplates_System_Collections_Generic_ICollection_System_Collections_Generic_KeyValuePair_System_String_Elastic_Clients_Elasticsearch_Mapping_DynamicTemplate___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicTemplates(System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.String,Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate}})">
+  DynamicTemplates(ICollection&lt;KeyValuePair&lt;string, DynamicTemplate&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L654"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specify dynamic templates for the mapping.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor DynamicTemplates(ICollection&lt;KeyValuePair&lt;string, DynamicTemplate&gt;&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate.html">DynamicTemplate</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicTemplates_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicTemplates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_DynamicTemplates__1_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentCollectionOfKeyValuePairOfStringDynamicTemplate___0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.DynamicTemplates``1(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate{``0}})">
+  DynamicTemplates&lt;T&gt;(Action&lt;FluentCollectionOfKeyValuePairOfStringDynamicTemplate&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L687"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specify dynamic templates for the mapping.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor DynamicTemplates&lt;T&gt;(Action&lt;FluentCollectionOfKeyValuePairOfStringDynamicTemplate&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringDynamicTemplate-1.html">FluentCollectionOfKeyValuePairOfStringDynamicTemplate</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L1026"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_ExpandWildcards_Elastic_Clients_Elasticsearch_ExpandWildcard___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcard[])">
+  ExpandWildcards(params ExpandWildcard[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L549"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <code>open,hidden</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor ExpandWildcards(params ExpandWildcard[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_ExpandWildcards_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ExpandWildcard__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.ExpandWildcards(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ExpandWildcard})">
+  ExpandWildcards(ICollection&lt;ExpandWildcard&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L536"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <code>open,hidden</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor ExpandWildcards(ICollection&lt;ExpandWildcard&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_FieldNames_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.FieldNames*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_FieldNames_Elastic_Clients_Elasticsearch_Mapping_FieldNamesField_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField)">
+  FieldNames(FieldNamesField?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L719"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Control whether field names are enabled for the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor FieldNames(FieldNamesField? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FieldNamesField.html">FieldNamesField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_FieldNames_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.FieldNames*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_FieldNames_System_Action_Elastic_Clients_Elasticsearch_Mapping_FieldNamesFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.FieldNames(System.Action{Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor})">
+  FieldNames(Action&lt;FieldNamesFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L730"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Control whether field names are enabled for the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor FieldNames(Action&lt;FieldNamesFieldDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor.html">FieldNamesFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L1032"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L1038"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_IgnoreUnavailable_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.IgnoreUnavailable(System.Nullable{System.Boolean})">
+  IgnoreUnavailable(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L560"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>false</code>, the request returns an error if it targets a missing or closed index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor IgnoreUnavailable(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Indices_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Indices(Elastic.Clients.Elasticsearch.Indices)">
+  Indices(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L511"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of index names the mapping should be added to (supports wildcards); use <code>_all</code> or omit to add the mapping on all indices.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Indices(Indices value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_MasterTimeout_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.MasterTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_MasterTimeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.MasterTimeout(Elastic.Clients.Elasticsearch.Duration)">
+  MasterTimeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L572"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor MasterTimeout(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Meta_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Meta" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Meta">
+  Meta()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L756"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A mapping type can have custom meta data associated with it. These are
+not used at all by Elasticsearch, but can be used to store
+application-specific metadata.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Meta()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Meta_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Meta_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringObject__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Meta(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject})">
+  Meta(Action&lt;FluentDictionaryOfStringObject&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L769"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A mapping type can have custom meta data associated with it. These are
+not used at all by Elasticsearch, but can be used to store
+application-specific metadata.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Meta(Action&lt;FluentDictionaryOfStringObject&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.html">FluentDictionaryOfStringObject</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Meta_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Meta_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Meta(System.Collections.Generic.IDictionary{System.String,System.Object})">
+  Meta(IDictionary&lt;string, object&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L743"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A mapping type can have custom meta data associated with it. These are
+not used at all by Elasticsearch, but can be used to store
+application-specific metadata.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Meta(IDictionary&lt;string, object&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_NumericDetection_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.NumericDetection*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_NumericDetection_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.NumericDetection(System.Nullable{System.Boolean})">
+  NumericDetection(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L787"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Automatically map strings into numeric data types for all fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor NumericDetection(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L1044"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Properties_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Properties_Elastic_Clients_Elasticsearch_Mapping_Properties_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Properties(Elastic.Clients.Elasticsearch.Mapping.Properties)">
+  Properties(Properties?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L815"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping for a field. For new fields, this mapping can include:
+</p>
+<ul><li>
+<p>
+Field name
+</p>
+</li><li>
+<p>
+Field data type
+</p>
+</li><li>
+<p>
+Mapping parameters
+</p>
+</li></ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Properties(Properties? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.Properties.html">Properties</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Properties_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Properties_System_Action_Elastic_Clients_Elasticsearch_Mapping_PropertiesDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Properties(System.Action{Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor})">
+  Properties(Action&lt;PropertiesDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L843"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping for a field. For new fields, this mapping can include:
+</p>
+<ul><li>
+<p>
+Field name
+</p>
+</li><li>
+<p>
+Field data type
+</p>
+</li><li>
+<p>
+Mapping parameters
+</p>
+</li></ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Properties(Action&lt;PropertiesDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.html">PropertiesDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Properties_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Properties__1_System_Action_Elastic_Clients_Elasticsearch_Mapping_PropertiesDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Properties``1(System.Action{Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor{``0}})">
+  Properties&lt;T&gt;(Action&lt;PropertiesDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L871"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping for a field. For new fields, this mapping can include:
+</p>
+<ul><li>
+<p>
+Field name
+</p>
+</li><li>
+<p>
+Field data type
+</p>
+</li><li>
+<p>
+Mapping parameters
+</p>
+</li></ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Properties&lt;T&gt;(Action&lt;PropertiesDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor-1.html">PropertiesDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L1056"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.3/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L1062"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.3/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.3/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Routing_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Routing_Elastic_Clients_Elasticsearch_Mapping_RoutingField_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField)">
+  Routing(RoutingField?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L882"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Enable making a routing value required on indexed documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Routing(RoutingField? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RoutingField.html">RoutingField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Routing_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Routing_System_Action_Elastic_Clients_Elasticsearch_Mapping_RoutingFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Routing(System.Action{Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor})">
+  Routing(Action&lt;RoutingFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L893"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Enable making a routing value required on indexed documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Routing(Action&lt;RoutingFieldDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor.html">RoutingFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Runtime_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Runtime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Runtime" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Runtime">
+  Runtime()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L915"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping of runtime fields for the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Runtime()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Runtime_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Runtime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Runtime_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfFieldRuntimeField__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Runtime(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField})">
+  Runtime(Action&lt;FluentDictionaryOfFieldRuntimeField&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L926"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping of runtime fields for the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Runtime(Action&lt;FluentDictionaryOfFieldRuntimeField&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.html">FluentDictionaryOfFieldRuntimeField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Runtime_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Runtime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Runtime_System_Collections_Generic_IDictionary_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeField__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Runtime(System.Collections.Generic.IDictionary{Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeField})">
+  Runtime(IDictionary&lt;Field, RuntimeField&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L904"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping of runtime fields for the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Runtime(IDictionary&lt;Field, RuntimeField&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Runtime_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Runtime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Runtime__1_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfFieldRuntimeField___0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Runtime``1(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField{``0}})">
+  Runtime&lt;T&gt;(Action&lt;FluentDictionaryOfFieldRuntimeField&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L937"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping of runtime fields for the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Runtime&lt;T&gt;(Action&lt;FluentDictionaryOfFieldRuntimeField&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField-1.html">FluentDictionaryOfFieldRuntimeField</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Source" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Source">
+  Source()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L1001"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Control whether the _source field is enabled on the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Source()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Source_Elastic_Clients_Elasticsearch_Mapping_SourceField_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Source(Elastic.Clients.Elasticsearch.Mapping.SourceField)">
+  Source(SourceField?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L990"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Control whether the _source field is enabled on the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Source(SourceField? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SourceField.html">SourceField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Source_System_Action_Elastic_Clients_Elasticsearch_Mapping_SourceFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Source(System.Action{Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor})">
+  Source(Action&lt;SourceFieldDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L1012"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Control whether the _source field is enabled on the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Source(Action&lt;SourceFieldDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.html">SourceFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L1050"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Timeout_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_Timeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.Timeout(Elastic.Clients.Elasticsearch.Duration)">
+  Timeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L584"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor Timeout(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_WriteIndexOnly_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.WriteIndexOnly*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_WriteIndexOnly_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.WriteIndexOnly(System.Nullable{System.Boolean})">
+  WriteIndexOnly(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L595"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the mappings are applied only to the current write index for the target.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutMappingRequestDescriptor WriteIndexOnly(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequest__Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest)~Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor">
+  explicit operator PutMappingRequestDescriptor(PutMappingRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L503"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator PutMappingRequestDescriptor(PutMappingRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest.html">PutMappingRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequestDescriptor__Elastic_Clients_Elasticsearch_IndexManagement_PutMappingRequest" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor)~Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest">
+  implicit operator PutMappingRequest(PutMappingRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/PutMappingRequest.g.cs/#L504"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator PutMappingRequest(PutMappingRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor.html">PutMappingRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest.html">PutMappingRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

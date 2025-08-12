@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct UpdateJobRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct UpdateJobRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Update an anomaly detection job. Updates certain properties of an anomaly detection job.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1" class="text-break">
+Struct UpdateJobRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L772"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Update an anomaly detection job.
+Updates certain properties of an anomaly detection job.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct UpdateJobRequestDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.#ctor">
+  UpdateJobRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L787"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public UpdateJobRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.Id)">
+  UpdateJobRequestDescriptor(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L782"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor(Id jobId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>jobId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequest_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest)">
+  UpdateJobRequestDescriptor(UpdateJobRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L776"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor(UpdateJobRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest.html">UpdateJobRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_AddCustomSetting_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.AddCustomSetting*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_AddCustomSetting_System_String_System_Object_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.AddCustomSetting(System.String,System.Object)">
+  AddCustomSetting(string, object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L909"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; AddCustomSetting(string key, object value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_AllowLazyOpen_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.AllowLazyOpen*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_AllowLazyOpen_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.AllowLazyOpen(System.Nullable{System.Boolean})">
+  AllowLazyOpen(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L820"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Specifies whether this job can open when
+there is insufficient machine learning node capacity for it to be
+immediately assigned to a node. If <code>false</code> and a machine learning node
+with capacity to run the job cannot immediately be found, the open
+anomaly detection jobs API returns an error. However, this is also
+subject to the cluster-wide <code>xpack.ml.max_lazy_ml_nodes</code> setting. If this
+option is set to <code>true</code>, the open anomaly detection jobs API does not
+return an error and the job waits in the opening state until sufficient
+machine learning node capacity is available.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; AllowLazyOpen(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_AnalysisLimits_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.AnalysisLimits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_AnalysisLimits_Elastic_Clients_Elasticsearch_MachineLearning_AnalysisMemoryLimit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit)">
+  AnalysisLimits(AnalysisMemoryLimit?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L826"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; AnalysisLimits(AnalysisMemoryLimit? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit.html">AnalysisMemoryLimit</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_AnalysisLimits_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.AnalysisLimits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_AnalysisLimits_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_AnalysisMemoryLimitDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.AnalysisLimits(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor})">
+  AnalysisLimits(Action&lt;AnalysisMemoryLimitDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L832"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; AnalysisLimits(Action&lt;AnalysisMemoryLimitDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor.html">AnalysisMemoryLimitDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_BackgroundPersistInterval_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.BackgroundPersistInterval*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_BackgroundPersistInterval_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration)">
+  BackgroundPersistInterval(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L852"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. The time between each periodic persistence
+of the model.
+The default value is a randomized value between 3 to 4 hours, which
+avoids all jobs persisting at exactly the same time. The smallest allowed
+value is 1 hour.
+For very large models (several GB), persistence could take 10-20 minutes,
+so do not set the value too low.
+If the job is open when you make the update, you must stop the datafeed,
+close the job, then reopen the job and restart the datafeed for the
+changes to take effect.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; BackgroundPersistInterval(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_CategorizationFilters_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.CategorizationFilters*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_CategorizationFilters_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.CategorizationFilters(System.Collections.Generic.ICollection{System.String})">
+  CategorizationFilters(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L858"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; CategorizationFilters(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_CategorizationFilters_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.CategorizationFilters*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_CategorizationFilters_System_String___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.CategorizationFilters(System.String[])">
+  CategorizationFilters(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L864"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; CategorizationFilters(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_CustomSettings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.CustomSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_CustomSettings" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.CustomSettings">
+  CustomSettings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L890"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Contains custom meta data about the job.
+For example, it can contain custom URL information as shown in Adding
+custom URLs to machine learning results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; CustomSettings()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_CustomSettings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.CustomSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_CustomSettings_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringObject__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.CustomSettings(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject})">
+  CustomSettings(Action&lt;FluentDictionaryOfStringObject&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L903"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Contains custom meta data about the job.
+For example, it can contain custom URL information as shown in Adding
+custom URLs to machine learning results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; CustomSettings(Action&lt;FluentDictionaryOfStringObject&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.html">FluentDictionaryOfStringObject</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_CustomSettings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.CustomSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_CustomSettings_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.CustomSettings(System.Collections.Generic.IDictionary{System.String,System.Object})">
+  CustomSettings(IDictionary&lt;string, object&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L877"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Contains custom meta data about the job.
+For example, it can contain custom URL information as shown in Adding
+custom URLs to machine learning results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; CustomSettings(IDictionary&lt;string, object&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_DailyModelSnapshotRetentionAfterDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.DailyModelSnapshotRetentionAfterDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_DailyModelSnapshotRetentionAfterDays_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.DailyModelSnapshotRetentionAfterDays(System.Nullable{System.Int64})">
+  DailyModelSnapshotRetentionAfterDays(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L927"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option, which affects the automatic removal of old
+model snapshots for this job. It specifies a period of time (in days)
+after which only the first snapshot per day is retained. This period is
+relative to the timestamp of the most recent snapshot for this job. Valid
+values range from 0 to <code>model_snapshot_retention_days</code>. For jobs created
+before version 7.8.0, the default value matches
+<code>model_snapshot_retention_days</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; DailyModelSnapshotRetentionAfterDays(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Description_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Description_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Description(System.String)">
+  Description(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L938"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A description of the job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; Description(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Detectors_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Detectors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Detectors_Elastic_Clients_Elasticsearch_MachineLearning_DetectorUpdate___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Detectors(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate[])">
+  Detectors(params DetectorUpdate[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L960"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of detector update objects.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; Detectors(params DetectorUpdate[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate.html">DetectorUpdate</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Detectors_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Detectors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Detectors_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_DetectorUpdateDescriptor__0_____" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Detectors(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor{`0}}[])">
+  Detectors(params Action&lt;DetectorUpdateDescriptor&lt;TDocument&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L971"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of detector update objects.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; Detectors(params Action&lt;DetectorUpdateDescriptor&lt;TDocument&gt;&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor-1.html">DetectorUpdateDescriptor</a>&lt;TDocument&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Detectors_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Detectors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Detectors_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_MachineLearning_DetectorUpdate__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Detectors(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate})">
+  Detectors(ICollection&lt;DetectorUpdate&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L949"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of detector update objects.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; Detectors(ICollection&lt;DetectorUpdate&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate.html">DetectorUpdate</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Groups_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Groups*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Groups_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Groups(System.Collections.Generic.ICollection{System.String})">
+  Groups(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L988"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of job groups. A job can belong to no groups or many.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; Groups(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Groups_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Groups*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Groups_System_String___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Groups(System.String[])">
+  Groups(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L999"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of job groups. A job can belong to no groups or many.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; Groups(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Human_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_JobId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.JobId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_JobId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.JobId(Elastic.Clients.Elasticsearch.Id)">
+  JobId(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L801"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Identifier for the job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; JobId(Id value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ModelPlotConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ModelPlotConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ModelPlotConfig" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ModelPlotConfig">
+  ModelPlotConfig()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1011"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; ModelPlotConfig()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ModelPlotConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ModelPlotConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ModelPlotConfig_Elastic_Clients_Elasticsearch_MachineLearning_ModelPlotConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig)">
+  ModelPlotConfig(ModelPlotConfig?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1005"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; ModelPlotConfig(ModelPlotConfig? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig.html">ModelPlotConfig</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ModelPlotConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ModelPlotConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ModelPlotConfig_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_ModelPlotConfigDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ModelPlotConfig(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor{`0}})">
+  ModelPlotConfig(Action&lt;ModelPlotConfigDescriptor&lt;TDocument&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1017"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; ModelPlotConfig(Action&lt;ModelPlotConfigDescriptor&lt;TDocument&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor-1.html">ModelPlotConfigDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ModelPruneWindow_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ModelPruneWindow*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ModelPruneWindow_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ModelPruneWindow(Elastic.Clients.Elasticsearch.Duration)">
+  ModelPruneWindow(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1023"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; ModelPruneWindow(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ModelSnapshotRetentionDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ModelSnapshotRetentionDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ModelSnapshotRetentionDays_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ModelSnapshotRetentionDays(System.Nullable{System.Int64})">
+  ModelSnapshotRetentionDays(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1037"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option, which affects the automatic removal of old
+model snapshots for this job. It specifies the maximum period of time (in
+days) that snapshots are retained. This period is relative to the
+timestamp of the most recent snapshot for this job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; ModelSnapshotRetentionDays(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_PerPartitionCategorization_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.PerPartitionCategorization*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_PerPartitionCategorization" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.PerPartitionCategorization">
+  PerPartitionCategorization()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1059"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Settings related to how categorization interacts with partition fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; PerPartitionCategorization()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_PerPartitionCategorization_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.PerPartitionCategorization*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_PerPartitionCategorization_Elastic_Clients_Elasticsearch_MachineLearning_PerPartitionCategorization_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization)">
+  PerPartitionCategorization(PerPartitionCategorization?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1048"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Settings related to how categorization interacts with partition fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; PerPartitionCategorization(PerPartitionCategorization? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization.html">PerPartitionCategorization</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_PerPartitionCategorization_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.PerPartitionCategorization*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_PerPartitionCategorization_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_PerPartitionCategorizationDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.PerPartitionCategorization(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor})">
+  PerPartitionCategorization(Action&lt;PerPartitionCategorizationDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1070"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Settings related to how categorization interacts with partition fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; PerPartitionCategorization(Action&lt;PerPartitionCategorizationDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.html">PerPartitionCategorizationDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Pretty_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1130"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_RenormalizationWindowDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.RenormalizationWindowDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_RenormalizationWindowDays_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.RenormalizationWindowDays(System.Nullable{System.Int64})">
+  RenormalizationWindowDays(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1082"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. The period over which adjustments to the
+score are applied, as new data is seen.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; RenormalizationWindowDays(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1142"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.3/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1148"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.3/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.3/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ResultsRetentionDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ResultsRetentionDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_ResultsRetentionDays_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.ResultsRetentionDays(System.Nullable{System.Int64})">
+  ResultsRetentionDays(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1098"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. The period of time (in days) that results
+are retained. Age is calculated relative to the timestamp of the latest
+bucket result. If this property has a non-null value, once per day at
+00:30 (server time), results that are the specified number of days older
+than the latest bucket result are deleted from Elasticsearch. The default
+value is null, which means all results are retained.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; ResultsRetentionDays(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L1136"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateJobRequestDescriptor&lt;TDocument&gt; SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequest__Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest)~Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor{`0}">
+  explicit operator UpdateJobRequestDescriptor&lt;TDocument&gt;(UpdateJobRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L793"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator UpdateJobRequestDescriptor&lt;TDocument&gt;(UpdateJobRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest.html">UpdateJobRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequestDescriptor__0___Elastic_Clients_Elasticsearch_MachineLearning_UpdateJobRequest" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor{`0})~Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest">
+  implicit operator UpdateJobRequest(UpdateJobRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateJobRequest.g.cs/#L794"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator UpdateJobRequest(UpdateJobRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor-1.html">UpdateJobRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest.html">UpdateJobRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
