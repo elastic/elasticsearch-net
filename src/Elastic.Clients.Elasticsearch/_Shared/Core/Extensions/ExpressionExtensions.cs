@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -87,7 +88,10 @@ public static class ExpressionExtensions
 
 		public SuffixExpressionVisitor(string suffix) => _suffix = suffix;
 
+		[RequiresDynamicCode("Use of Expression.Call requires dynamic code generation.")]
+#pragma warning disable IL3051
 		public override Expression Visit(Expression node) => Expression.Call(
+#pragma warning restore IL3051
 			typeof(SuffixExtensions),
 			nameof(SuffixExtensions.Suffix),
 			null,

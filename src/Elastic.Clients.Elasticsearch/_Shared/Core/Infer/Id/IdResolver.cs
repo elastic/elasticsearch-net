@@ -6,6 +6,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using static System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -16,12 +17,11 @@ public class IdResolver
 	private readonly IElasticsearchClientSettings _settings;
 	private readonly ConcurrentDictionary<Type, Func<object, string?>?> _localDelegateCache = new();
 
-	public IdResolver(IElasticsearchClientSettings settings)
-	{
-		_settings = settings;
-	}
+	public IdResolver(IElasticsearchClientSettings settings) => _settings = settings;
 
-	public string? Resolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] T>(T instance)
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Call to object.GetType()")]
+	[UnconditionalSuppressMessage("AOT", "IL2072:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Call to object.GetType()")]
+	public string? Resolve<[DynamicallyAccessedMembers(PublicProperties | NonPublicProperties)] T>(T instance)
 	{
 		if (_settings.DefaultDisableIdInference || (instance is null))
 		{
@@ -31,7 +31,7 @@ public class IdResolver
 		return Resolve(instance.GetType(), instance);
 	}
 
-	public string? Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type, object instance)
+	public string? Resolve([DynamicallyAccessedMembers(PublicProperties | NonPublicProperties)] Type type, object instance)
 	{
 		if (type is null)
 		{
