@@ -98,7 +98,7 @@ internal sealed partial class PutTrainedModelRequestConverter : System.Text.Json
 				continue;
 			}
 
-			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, null))
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -162,7 +162,7 @@ internal sealed partial class PutTrainedModelRequestConverter : System.Text.Json
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropInferenceConfig, value.InferenceConfig, null, null);
 		writer.WriteProperty(options, PropInput, value.Input, null, null);
-		writer.WriteProperty(options, PropMetadata, value.Metadata, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteProperty(options, PropModelSizeBytes, value.ModelSizeBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropModelType, value.ModelType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType>(o, v));
 		writer.WriteProperty(options, PropPlatformArchitecture, value.PlatformArchitecture, null, null);

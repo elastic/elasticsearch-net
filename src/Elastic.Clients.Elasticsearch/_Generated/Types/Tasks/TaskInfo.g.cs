@@ -112,7 +112,7 @@ internal sealed partial class TaskInfoConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -164,7 +164,7 @@ internal sealed partial class TaskInfoConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropRunningTime, value.RunningTime, null, null);
 		writer.WriteProperty(options, PropRunningTimeInNanos, value.RunningTimeInNanos, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanNanosMarker)));
 		writer.WriteProperty(options, PropStartTimeInMillis, value.StartTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}

@@ -54,7 +54,7 @@ internal sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodin
 				continue;
 			}
 
-			if (propTargetMap.TryReadProperty(ref reader, options, PropTargetMap, static System.Collections.Generic.IDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			if (propTargetMap.TryReadProperty(ref reader, options, PropTargetMap, static System.Collections.Generic.IDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)!))
 			{
 				continue;
 			}
@@ -84,7 +84,7 @@ internal sealed partial class DataframeAnalysisFeatureProcessorTargetMeanEncodin
 		writer.WriteProperty(options, PropDefaultValue, value.DefaultValue, null, null);
 		writer.WriteProperty(options, PropFeatureName, value.FeatureName, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropTargetMap, value.TargetMap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropTargetMap, value.TargetMap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteEndObject();
 	}
 }

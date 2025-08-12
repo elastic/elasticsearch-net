@@ -50,7 +50,7 @@ internal sealed partial class RuleRetrieverConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propMatchCriteria.TryReadProperty(ref reader, options, PropMatchCriteria, null))
+			if (propMatchCriteria.TryReadProperty(ref reader, options, PropMatchCriteria, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!))
 			{
 				continue;
 			}
@@ -106,7 +106,7 @@ internal sealed partial class RuleRetrieverConverter : System.Text.Json.Serializ
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
-		writer.WriteProperty(options, PropMatchCriteria, value.MatchCriteria, null, null);
+		writer.WriteProperty(options, PropMatchCriteria, value.MatchCriteria, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
 		writer.WriteProperty(options, PropMinScore, value.MinScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));

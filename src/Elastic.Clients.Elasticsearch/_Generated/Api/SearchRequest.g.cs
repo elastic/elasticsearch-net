@@ -433,7 +433,7 @@ internal sealed partial class SearchRequestConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propExt.TryReadProperty(ref reader, options, PropExt, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			if (propExt.TryReadProperty(ref reader, options, PropExt, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
 			{
 				continue;
 			}
@@ -639,7 +639,7 @@ internal sealed partial class SearchRequestConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropCollapse, value.Collapse, null, null);
 		writer.WriteProperty(options, PropDocvalueFields, value.DocvalueFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, v, null));
 		writer.WriteProperty(options, PropExplain, value.Explain, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropExt, value.Ext, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropExt, value.Ext, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, v, null));
 		writer.WriteProperty(options, PropFrom, value.From, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropHighlight, value.Highlight, null, null);

@@ -103,7 +103,7 @@ internal sealed partial class SetProcessorConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			if (propValue.TryReadProperty(ref reader, options, PropValue, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -147,7 +147,7 @@ internal sealed partial class SetProcessorConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
 		writer.WriteProperty(options, PropOverride, value.Override, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTag, value.Tag, null, null);
-		writer.WriteProperty(options, PropValue, value.Value, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteEndObject();
 	}
 }
