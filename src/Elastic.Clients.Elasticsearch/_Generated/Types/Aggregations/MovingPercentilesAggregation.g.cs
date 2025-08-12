@@ -28,6 +28,7 @@ internal sealed partial class MovingPercentilesAggregationConverter : System.Tex
 	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path");
 	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
 	private static readonly System.Text.Json.JsonEncodedText PropGapPolicy = System.Text.Json.JsonEncodedText.Encode("gap_policy");
+	private static readonly System.Text.Json.JsonEncodedText PropKeyed = System.Text.Json.JsonEncodedText.Encode("keyed");
 	private static readonly System.Text.Json.JsonEncodedText PropShift = System.Text.Json.JsonEncodedText.Encode("shift");
 	private static readonly System.Text.Json.JsonEncodedText PropWindow = System.Text.Json.JsonEncodedText.Encode("window");
 
@@ -53,6 +54,12 @@ internal sealed partial class MovingPercentilesAggregationConverter : System.Tex
 
 			if (propGapPolicy.TryReadProperty(ref reader, options, PropGapPolicy, static Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>(o)))
 			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropKeyed))
+			{
+				reader.Skip();
 				continue;
 			}
 
@@ -92,6 +99,7 @@ internal sealed partial class MovingPercentilesAggregationConverter : System.Tex
 		writer.WriteProperty(options, PropBucketsPath, value.BucketsPath, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropGapPolicy, value.GapPolicy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy>(o, v));
+		writer.WriteProperty(options, PropKeyed, value.Keyed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropShift, value.Shift, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropWindow, value.Window, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
@@ -138,6 +146,8 @@ public sealed partial class MovingPercentilesAggregation
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.GapPolicy? GapPolicy { get; set; }
+
+	public bool? Keyed => false;
 
 	/// <summary>
 	/// <para>

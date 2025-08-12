@@ -32,7 +32,7 @@ internal sealed partial class HdrPercentilesAggregateConverter : System.Text.Jso
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMeta = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.Percentiles> propValues = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem>> propValues = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
@@ -40,7 +40,7 @@ internal sealed partial class HdrPercentilesAggregateConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propValues.TryReadProperty(ref reader, options, PropValues, null))
+			if (propValues.TryReadProperty(ref reader, options, PropValues, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem>(o, null)!))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class HdrPercentilesAggregateConverter : System.Text.Jso
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
-		writer.WriteProperty(options, PropValues, value.Values, null, null);
+		writer.WriteProperty(options, PropValues, value.Values, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem>(o, v, null));
 		writer.WriteEndObject();
 	}
 }
@@ -75,7 +75,7 @@ internal sealed partial class HdrPercentilesAggregateConverter : System.Text.Jso
 public sealed partial class HdrPercentilesAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public HdrPercentilesAggregate(Elastic.Clients.Elasticsearch.Aggregations.Percentiles values)
+	public HdrPercentilesAggregate(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem> values)
 	{
 		Values = values;
 	}
@@ -104,5 +104,5 @@ public sealed partial class HdrPercentilesAggregate : Elastic.Clients.Elasticsea
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.Aggregations.Percentiles Values { get; set; }
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem> Values { get; set; }
 }

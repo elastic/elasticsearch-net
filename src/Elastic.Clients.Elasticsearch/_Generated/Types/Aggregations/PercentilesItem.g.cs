@@ -23,13 +23,13 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class ArrayPercentilesItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>
+internal sealed partial class PercentilesItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
 	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
 	private static readonly System.Text.Json.JsonEncodedText PropValueAsString = System.Text.Json.JsonEncodedText.Encode("value_as_string");
 
-	public override Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propKey = default;
@@ -62,7 +62,7 @@ internal sealed partial class ArrayPercentilesItemConverter : System.Text.Json.S
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Key = propKey.Value,
 			Value = propValue.Value,
@@ -70,7 +70,7 @@ internal sealed partial class ArrayPercentilesItemConverter : System.Text.Json.S
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropKey, value.Key, null, null);
@@ -80,28 +80,28 @@ internal sealed partial class ArrayPercentilesItemConverter : System.Text.Json.S
 	}
 }
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItemConverter))]
-public sealed partial class ArrayPercentilesItem
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.PercentilesItemConverter))]
+public sealed partial class PercentilesItem
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ArrayPercentilesItem(string key, double? value)
+	public PercentilesItem(string key, double? value)
 	{
 		Key = key;
 		Value = value;
 	}
 #if NET7_0_OR_GREATER
-	public ArrayPercentilesItem()
+	public PercentilesItem()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
 	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ArrayPercentilesItem()
+	public PercentilesItem()
 	{
 	}
 #endif
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal ArrayPercentilesItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal PercentilesItem(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
