@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class MultiSearchRequest | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class MultiSearchRequest | Elasticsearch.NET ">
+      
+      <meta name="description" content="Run multiple searches.   The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format. The structure is as follows:  header\n body\n header\n body\n  This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.   IMPORTANT: The final line of data must end with a newline character \n. Each newline character may be preceded by a carriage return \r. When sending requests to this endpoint the Content-Type header should be set to application/x-ndjson.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MultiSearchRequest.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MultiSearchRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MultiSearchRequest" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest" class="text-break">
+Class MultiSearchRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Shared/Api/MultiSearchRequest.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Run multiple searches.
+</p>
+<p>
+The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format.
+The structure is as follows:
+</p>
+<pre><code class="lang-csharp">header\n
+body\n
+header\n
+body\n</code></pre>
+<p>
+This structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node.
+</p>
+<p>
+IMPORTANT: The final line of data must end with a newline character <code>\n</code>.
+Each newline character may be preceded by a carriage return <code>\r</code>.
+When sending requests to this endpoint the <code>Content-Type</code> header should be set to <code>application/x-ndjson</code>.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(MultiSearchRequestConverter))]
+public class MultiSearchRequest : PlainRequest&lt;MultiSearchRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchRequestParameters.html">MultiSearchRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MultiSearchRequestParameters.html">MultiSearchRequestParameters</a>&gt;</div>
+      <div><span class="xref">MultiSearchRequest</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;MultiSearchRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;MultiSearchRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;MultiSearchRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;MultiSearchRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;MultiSearchRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q__1_System_String_">Request&lt;MultiSearchRequestParameters&gt;.Q&lt;TOut&gt;(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q_System_String_System_Object_">Request&lt;MultiSearchRequestParameters&gt;.Q(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q_System_String_Elastic_Transport_IStringable_">Request&lt;MultiSearchRequestParameters&gt;.Q(string, IStringable)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RequestConfiguration">Request.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RouteValues">Request.RouteValues</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_DynamicHttpMethod">Request.DynamicHttpMethod</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_ResolveUrl_Elastic_Clients_Elasticsearch_Requests_RouteValues_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_">Request.ResolveUrl(RouteValues, IElasticsearchClientSettings)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_P__1_System_String_">Request.P&lt;TOut&gt;(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_PR_System_String_System_Object_">Request.PR(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_PO_System_String_System_Object_">Request.PO(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest__ctor" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.#ctor">
+  MultiSearchRequest()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public MultiSearchRequest()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest__ctor_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.#ctor(Elastic.Clients.Elasticsearch.Indices)">
+  MultiSearchRequest(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L165"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public MultiSearchRequest(Indices? indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest__ctor_Elastic_Clients_Elasticsearch_Indices_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Core_MSearch_SearchRequestItem__" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.#ctor(Elastic.Clients.Elasticsearch.Indices,System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem})">
+  MultiSearchRequest(Indices?, ICollection&lt;SearchRequestItem&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L171"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiSearchRequest(Indices? indices, ICollection&lt;SearchRequestItem&gt; searches)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>searches</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem.html">SearchRequestItem</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest__ctor_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Core_MSearch_SearchRequestItem__" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.#ctor(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem})">
+  MultiSearchRequest(ICollection&lt;SearchRequestItem&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L177"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiSearchRequest(ICollection&lt;SearchRequestItem&gt; searches)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>searches</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem.html">SearchRequestItem</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_AllowNoIndices_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.AllowNoIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_AllowNoIndices" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.AllowNoIndices">
+  AllowNoIndices
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? AllowNoIndices { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_CcsMinimizeRoundtrips_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.CcsMinimizeRoundtrips*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_CcsMinimizeRoundtrips" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.CcsMinimizeRoundtrips">
+  CcsMinimizeRoundtrips
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L226"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? CcsMinimizeRoundtrips { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_ExpandWildcards" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.ExpandWildcards">
+  ExpandWildcards
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L233"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;ExpandWildcard&gt;? ExpandWildcards { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_IgnoreThrottled_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.IgnoreThrottled*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_IgnoreThrottled" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.IgnoreThrottled">
+  IgnoreThrottled
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L240"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, concrete, expanded or aliased indices are ignored when frozen.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IgnoreThrottled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_IgnoreUnavailable" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.IgnoreUnavailable">
+  IgnoreUnavailable
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L247"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, missing or closed indices are not included in the response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IgnoreUnavailable { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_IncludeNamedQueriesScore_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.IncludeNamedQueriesScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_IncludeNamedQueriesScore" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.IncludeNamedQueriesScore">
+  IncludeNamedQueriesScore
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether hit.matched_queries should be rendered as a map that includes
+the name of the matched query associated with its score (true)
+or as an array containing the name of the matched queries (false)
+This functionality reruns each named query on every hit in a search response.
+Typically, this adds a small overhead to a request.
+However, using computationally expensive named queries on a large number of hits may add significant overhead.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IncludeNamedQueriesScore { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_Indices_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_Indices" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.Indices">
+  Indices
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L212"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Comma-separated list of data streams, indices, and index aliases to search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Indices? Indices { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_MaxConcurrentSearches_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.MaxConcurrentSearches*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_MaxConcurrentSearches" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.MaxConcurrentSearches">
+  MaxConcurrentSearches
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum number of concurrent searches the multi search API can execute.
+Defaults to <code>max(1, (# of data nodes * min(search thread pool size, 10)))</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxConcurrentSearches { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_MaxConcurrentShardRequests_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.MaxConcurrentShardRequests*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_MaxConcurrentShardRequests" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.MaxConcurrentShardRequests">
+  MaxConcurrentShardRequests
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum number of concurrent shard requests that each sub-search request executes per node.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxConcurrentShardRequests { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_PreFilterShardSize_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.PreFilterShardSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_PreFilterShardSize" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.PreFilterShardSize">
+  PreFilterShardSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L281"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? PreFilterShardSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_RestTotalHitsAsInt_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.RestTotalHitsAsInt*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_RestTotalHitsAsInt" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.RestTotalHitsAsInt">
+  RestTotalHitsAsInt
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L288"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? RestTotalHitsAsInt { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_Routing_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_Routing" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.Routing">
+  Routing
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L295"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Custom routing value used to route search operations to a specific shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Routing? Routing { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Routing.html">Routing</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_SearchType_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.SearchType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_SearchType" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.SearchType">
+  SearchType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L302"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether global term and document frequencies should be used when scoring returned documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchType? SearchType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchType.html">SearchType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_Searches_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.Searches*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_Searches" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.Searches">
+  Searches
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;SearchRequestItem&gt; Searches { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem.html">SearchRequestItem</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L201"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.2/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiSearchRequest_TypedKeys_" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.TypedKeys*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiSearchRequest_TypedKeys" data-uid="Elastic.Clients.Elasticsearch.MultiSearchRequest.TypedKeys">
+  TypedKeys
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiSearchRequest.g.cs/#L309"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? TypedKeys { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
