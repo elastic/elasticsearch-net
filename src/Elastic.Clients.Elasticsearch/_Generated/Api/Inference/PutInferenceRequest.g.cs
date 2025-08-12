@@ -96,7 +96,7 @@ internal sealed partial class PutInferenceRequestConverter : System.Text.Json.Se
 /// </item>
 /// <item>
 /// <para>
-/// DeepSeek (<c>completion</c>, <c>chat_completion</c>)
+/// DeepSeek (<c>chat_completion</c>, <c>completion</c>)
 /// </para>
 /// </item>
 /// <item>
@@ -116,12 +116,22 @@ internal sealed partial class PutInferenceRequestConverter : System.Text.Json.Se
 /// </item>
 /// <item>
 /// <para>
-/// Google Vertex AI (<c>rerank</c>, <c>text_embedding</c>)
+/// Google Vertex AI (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// <item>
 /// <para>
 /// Hugging Face (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// JinaAI (<c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Llama (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// <item>
@@ -136,17 +146,12 @@ internal sealed partial class PutInferenceRequestConverter : System.Text.Json.Se
 /// </item>
 /// <item>
 /// <para>
-/// VoyageAI (<c>text_embedding</c>, <c>rerank</c>)
+/// VoyageAI (<c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// <item>
 /// <para>
 /// Watsonx inference integration (<c>text_embedding</c>)
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// JinaAI (<c>text_embedding</c>, <c>rerank</c>)
 /// </para>
 /// </item>
 /// </list>
@@ -277,7 +282,7 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 /// </item>
 /// <item>
 /// <para>
-/// DeepSeek (<c>completion</c>, <c>chat_completion</c>)
+/// DeepSeek (<c>chat_completion</c>, <c>completion</c>)
 /// </para>
 /// </item>
 /// <item>
@@ -297,12 +302,22 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 /// </item>
 /// <item>
 /// <para>
-/// Google Vertex AI (<c>rerank</c>, <c>text_embedding</c>)
+/// Google Vertex AI (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// <item>
 /// <para>
 /// Hugging Face (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// JinaAI (<c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Llama (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// <item>
@@ -317,17 +332,12 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 /// </item>
 /// <item>
 /// <para>
-/// VoyageAI (<c>text_embedding</c>, <c>rerank</c>)
+/// VoyageAI (<c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// <item>
 /// <para>
 /// Watsonx inference integration (<c>text_embedding</c>)
-/// </para>
-/// </item>
-/// <item>
-/// <para>
-/// JinaAI (<c>text_embedding</c>, <c>rerank</c>)
 /// </para>
 /// </item>
 /// </list>
