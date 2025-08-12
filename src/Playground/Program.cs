@@ -37,7 +37,7 @@ var idByType = IdByType(person.GetType(), person);
 Console.WriteLine(id);
 Console.WriteLine(idByType);
 // This still errors on AOT compilation
-//Console.WriteLine(client.SourceSerializer.SerializeToString(person));
+Console.WriteLine(client.SourceSerializer.SerializeToString(person));
 
 [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Can only annotate our implementation")]
 [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = "Can only annotate our implementation")]
