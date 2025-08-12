@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 
 using Elastic.Transport;
+using static System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -40,15 +41,15 @@ public sealed class Inferrer
 
 	public string IndexName(IndexName index) => IndexNameResolver.Resolve(index);
 
-	public string? Id<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] T>(T instance) => IdResolver.Resolve(instance);
+	public string? Id<[DynamicallyAccessedMembers(PublicProperties | NonPublicProperties)] T>(T instance) => IdResolver.Resolve(instance);
 
-	public string? Id([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type, object instance) => IdResolver.Resolve(type, instance);
+	public string? Id([DynamicallyAccessedMembers(PublicProperties | NonPublicProperties)] Type type, object instance) => IdResolver.Resolve(type, instance);
 
 	public string RelationName<T>() => RelationNameResolver.Resolve<T>();
 
 	public string RelationName(RelationName type) => RelationNameResolver.Resolve(type);
 
-	public string? Routing<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] T>(T document) => RoutingResolver.Resolve(document);
+	public string? Routing<[DynamicallyAccessedMembers(PublicProperties | NonPublicProperties)] T>(T document) => RoutingResolver.Resolve(document);
 
-	public string? Routing([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type, object instance) => RoutingResolver.Resolve(type, instance);
+	public string? Routing([DynamicallyAccessedMembers(PublicProperties | NonPublicProperties)] Type type, object instance) => RoutingResolver.Resolve(type, instance);
 }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -61,6 +62,8 @@ internal class FieldExpressionVisitor : ExpressionVisitor
 		return base.VisitMember(expression);
 	}
 
+	[RequiresDynamicCode("Use of Expression.Lambda")]
+	[UnconditionalSuppressMessage("Trimming", "IL3051", Justification = "Can only annotate our implementation")]
 	protected override Expression VisitMethodCall(MethodCallExpression methodCall)
 	{
 		if (methodCall.Method.Name == nameof(SuffixExtensions.Suffix) && methodCall.Arguments.Any())
@@ -97,6 +100,7 @@ internal class FieldExpressionVisitor : ExpressionVisitor
 		return base.VisitMethodCall(methodCall);
 	}
 
+	[RequiresDynamicCode("Use of Expression.Lambda")]
 	private static void VisitConstantOrVariable(MethodCallExpression methodCall, Stack<string> stack)
 	{
 		var lastArg = methodCall.Arguments.Last();

@@ -51,8 +51,10 @@ internal static class DynamicPropertyAccessor
 		// Build compiled getter delegate.
 
 #pragma warning disable IL3050
+#pragma warning disable IL2060
 		var getterDelegateFactory = MakeDelegateMethodInfo.MakeGenericMethod(type, getterMethod.ReturnType);
 #pragma warning restore IL3050
+#pragma warning restore IL2060
 		var genericGetterDelegate = (Func<object, object>)getterDelegateFactory.Invoke(null, [getterMethod])!;
 
 		return instance => retrieverFunc(genericGetterDelegate, instance);
