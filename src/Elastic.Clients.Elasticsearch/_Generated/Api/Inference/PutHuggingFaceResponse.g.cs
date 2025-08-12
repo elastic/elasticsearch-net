@@ -58,12 +58,12 @@ internal sealed partial class PutHuggingFaceResponseConverter : System.Text.Json
 				continue;
 			}
 
-			if (propServiceSettings.TryReadProperty(ref reader, options, PropServiceSettings, null))
+			if (propServiceSettings.TryReadProperty(ref reader, options, PropServiceSettings, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!))
 			{
 				continue;
 			}
 
-			if (propTaskSettings.TryReadProperty(ref reader, options, PropTaskSettings, null))
+			if (propTaskSettings.TryReadProperty(ref reader, options, PropTaskSettings, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -100,8 +100,8 @@ internal sealed partial class PutHuggingFaceResponseConverter : System.Text.Json
 		writer.WriteProperty(options, PropChunkingSettings, value.ChunkingSettings, null, null);
 		writer.WriteProperty(options, PropInferenceId, value.InferenceId, null, null);
 		writer.WriteProperty(options, PropService, value.Service, null, null);
-		writer.WriteProperty(options, PropServiceSettings, value.ServiceSettings, null, null);
-		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings, null, null);
+		writer.WriteProperty(options, PropServiceSettings, value.ServiceSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
+		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteProperty(options, PropTaskType, value.TaskType, null, null);
 		writer.WriteEndObject();
 	}

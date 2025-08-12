@@ -41,7 +41,7 @@ internal sealed partial class HitsEventConverter<TEvent> : System.Text.Json.Seri
 		LocalJsonValue<TEvent> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<object>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<object>>(o, null, static System.Collections.Generic.IReadOnlyCollection<object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, null)!)))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<object>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<object>>(o, null, static System.Collections.Generic.IReadOnlyCollection<object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)!)))
 			{
 				continue;
 			}
@@ -89,7 +89,7 @@ internal sealed partial class HitsEventConverter<TEvent> : System.Text.Json.Seri
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<object>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<object>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<object> v) => w.WriteCollectionValue<object>(o, v, null)));
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<object>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<object>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<object> v) => w.WriteCollectionValue<object>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)))));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropMissing, value.Missing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
@@ -105,12 +105,11 @@ internal sealed partial class HitsEventConverterFactory : System.Text.Json.Seria
 		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(HitsEvent<>);
 	}
 
+	[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'")]
 	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		var args = typeToConvert.GetGenericArguments();
-#pragma warning disable IL3050
 		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(HitsEventConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
-#pragma warning restore IL3050
 		return converter;
 	}
 }

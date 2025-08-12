@@ -69,7 +69,7 @@ internal sealed partial class SearchTemplateResponseConverter<TDocument> : Syste
 				continue;
 			}
 
-			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
 			{
 				continue;
 			}
@@ -163,7 +163,7 @@ internal sealed partial class SearchTemplateResponseConverter<TDocument> : Syste
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, null);
 		writer.WriteProperty(options, PropClusters, value.Clusters, null, null);
-		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropHits, value.Hits, null, null);
 		writer.WriteProperty(options, PropMaxScore, value.MaxScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropNumReducePhases, value.NumReducePhases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
@@ -186,12 +186,11 @@ internal sealed partial class SearchTemplateResponseConverterFactory : System.Te
 		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(SearchTemplateResponse<>);
 	}
 
+	[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'")]
 	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		var args = typeToConvert.GetGenericArguments();
-#pragma warning disable IL3050
 		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(SearchTemplateResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
-#pragma warning restore IL3050
 		return converter;
 	}
 }
@@ -215,9 +214,9 @@ public sealed partial class SearchTemplateResponse<TDocument> : Elastic.Transpor
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> Hits { get; set; }
+		Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> Hits { get; set; }
 	public double? MaxScore { get; set; }
 	public long? NumReducePhases { get; set; }
 	public string? PitId { get; set; }
@@ -225,19 +224,19 @@ Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> Hits { get; se
 	public Elastic.Clients.Elasticsearch.ScrollId? ScrollId { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
+		Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>? Suggest { get; set; }
 	public bool? TerminatedEarly { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-bool TimedOut { get; set; }
+		bool TimedOut { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-long Took { get; set; }
+		long Took { get; set; }
 }

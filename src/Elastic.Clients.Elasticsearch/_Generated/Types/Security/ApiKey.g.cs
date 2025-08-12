@@ -98,7 +98,7 @@ internal sealed partial class ApiKeyConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
-			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)!))
 			{
 				continue;
 			}
@@ -184,7 +184,7 @@ internal sealed partial class ApiKeyConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropInvalidated, value.Invalidated, null, null);
 		writer.WriteProperty(options, PropInvalidation, value.Invalidation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropLimitedBy, value.LimitedBy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>? v) => w.WriteCollectionValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>(o, v, null, null)));
-		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropProfileUid, value.ProfileUid, null, null);
 		writer.WriteProperty(options, PropRealm, value.Realm, null, null);

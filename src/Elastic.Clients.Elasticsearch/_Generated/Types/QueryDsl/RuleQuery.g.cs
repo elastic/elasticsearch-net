@@ -48,7 +48,7 @@ internal sealed partial class RuleQueryConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (propMatchCriteria.TryReadProperty(ref reader, options, PropMatchCriteria, null))
+			if (propMatchCriteria.TryReadProperty(ref reader, options, PropMatchCriteria, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!))
 			{
 				continue;
 			}
@@ -98,7 +98,7 @@ internal sealed partial class RuleQueryConverter : System.Text.Json.Serializatio
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
-		writer.WriteProperty(options, PropMatchCriteria, value.MatchCriteria, null, null);
+		writer.WriteProperty(options, PropMatchCriteria, value.MatchCriteria, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
 		writer.WriteProperty(options, PropOrganic, value.Organic, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteProperty(options, PropRulesetId, value.RulesetId, null, null);

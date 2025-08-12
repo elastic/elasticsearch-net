@@ -96,7 +96,7 @@ internal sealed partial class ExplainAnalyzeTokenConverter : System.Text.Json.Se
 			}
 
 			propAttributes ??= new System.Collections.Generic.Dictionary<string, object>();
-			reader.ReadProperty(options, out string key, out object value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, null);
+			reader.ReadProperty(options, out string key, out object value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!);
 			propAttributes[key] = value;
 		}
 
@@ -132,7 +132,7 @@ internal sealed partial class ExplainAnalyzeTokenConverter : System.Text.Json.Se
 		{
 			foreach (var item in value.Attributes)
 			{
-				writer.WriteProperty(options, item.Key, item.Value, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), null);
+				writer.WriteProperty(options, item.Key, item.Value, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
 			}
 		}
 

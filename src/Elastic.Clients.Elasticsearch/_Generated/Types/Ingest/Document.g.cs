@@ -47,7 +47,7 @@ internal sealed partial class DocumentConverter : System.Text.Json.Serialization
 				continue;
 			}
 
-			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			if (propSource.TryReadProperty(ref reader, options, PropSource, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class DocumentConverter : System.Text.Json.Serialization
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
 		writer.WriteEndObject();
 	}
 }

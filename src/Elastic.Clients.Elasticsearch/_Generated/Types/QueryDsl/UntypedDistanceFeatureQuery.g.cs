@@ -51,12 +51,12 @@ internal sealed partial class UntypedDistanceFeatureQueryConverter : System.Text
 				continue;
 			}
 
-			if (propOrigin.TryReadProperty(ref reader, options, PropOrigin, null))
+			if (propOrigin.TryReadProperty(ref reader, options, PropOrigin, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!))
 			{
 				continue;
 			}
 
-			if (propPivot.TryReadProperty(ref reader, options, PropPivot, null))
+			if (propPivot.TryReadProperty(ref reader, options, PropPivot, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!))
 			{
 				continue;
 			}
@@ -91,8 +91,8 @@ internal sealed partial class UntypedDistanceFeatureQueryConverter : System.Text
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBoost, value.Boost, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropOrigin, value.Origin, null, null);
-		writer.WriteProperty(options, PropPivot, value.Pivot, null, null);
+		writer.WriteProperty(options, PropOrigin, value.Origin, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
+		writer.WriteProperty(options, PropPivot, value.Pivot, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteEndObject();
 	}

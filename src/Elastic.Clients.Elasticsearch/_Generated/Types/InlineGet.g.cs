@@ -44,7 +44,7 @@ internal sealed partial class InlineGetConverter<TDocument> : System.Text.Json.S
 		LocalJsonValue<TDocument?> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class InlineGetConverter<TDocument> : System.Text.Json.S
 			}
 
 			propMetadata ??= new System.Collections.Generic.Dictionary<string, object>();
-			reader.ReadProperty(options, out string key, out object value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, null);
+			reader.ReadProperty(options, out string key, out object value, static string (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<string>(o)!, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!);
 			propMetadata[key] = value;
 		}
 
@@ -95,7 +95,7 @@ internal sealed partial class InlineGetConverter<TDocument> : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.InlineGet<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropFound, value.Found, null, null);
 		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
@@ -105,7 +105,7 @@ internal sealed partial class InlineGetConverter<TDocument> : System.Text.Json.S
 		{
 			foreach (var item in value.Metadata)
 			{
-				writer.WriteProperty(options, item.Key, item.Value, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), null);
+				writer.WriteProperty(options, item.Key, item.Value, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
 			}
 		}
 
@@ -120,12 +120,11 @@ internal sealed partial class InlineGetConverterFactory : System.Text.Json.Seria
 		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(InlineGet<>);
 	}
 
+	[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'")]
 	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		var args = typeToConvert.GetGenericArguments();
-#pragma warning disable IL3050
 		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(InlineGetConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
-#pragma warning restore IL3050
 		return converter;
 	}
 }
