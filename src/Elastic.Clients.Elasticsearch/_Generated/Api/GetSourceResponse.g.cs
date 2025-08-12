@@ -43,12 +43,11 @@ internal sealed partial class GetSourceResponseConverterFactory : System.Text.Js
 		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(GetSourceResponse<>);
 	}
 
+	[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'")]
 	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		var args = typeToConvert.GetGenericArguments();
-#pragma warning disable IL3050
 		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(GetSourceResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
-#pragma warning restore IL3050
 		return converter;
 	}
 }
