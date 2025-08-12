@@ -284,6 +284,11 @@ internal sealed partial class BulkRequestConverter : System.Text.Json.Serializat
 /// PHP: Check out bulk indexing.
 /// </para>
 /// </item>
+/// <item>
+/// <para>
+/// Ruby: Check out <c>Elasticsearch::Helpers::BulkHelper</c>
+/// </para>
+/// </item>
 /// </list>
 /// <para>
 /// <strong>Submitting bulk requests with cURL</strong>
@@ -612,6 +617,11 @@ public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainR
 /// <item>
 /// <para>
 /// PHP: Check out bulk indexing.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Ruby: Check out <c>Elasticsearch::Helpers::BulkHelper</c>
 /// </para>
 /// </item>
 /// </list>
@@ -1091,6 +1101,11 @@ public readonly partial struct BulkRequestDescriptor
 /// <item>
 /// <para>
 /// PHP: Check out bulk indexing.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Ruby: Check out <c>Elasticsearch::Helpers::BulkHelper</c>
 /// </para>
 /// </item>
 /// </list>
