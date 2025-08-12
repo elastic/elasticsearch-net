@@ -19,6 +19,28 @@ Breaking changes can impact your Elastic applications, potentially disrupting no
 %
 % ::::
 
+## 9.1.1 [elasticsearch-net-client-911-breaking-changes]
+
+### Overview
+
+- [1. Improved usability of `Percentiles` aggregation results](#1-percentiles-aggregate)
+
+### Breaking changes
+
+#### 1. Improved usability of `Percentiles` aggregation results [#1-percentiles-aggregate]
+
+**Impact**: Low.
+
+The type of the `Values` property for the following classes got changed from the `Percentiles` union to a simple `PercentilesItem` collection:
+
+- `HdrPercentilesAggregate`
+- `HdrPercentileRanksAggregate`
+- `TDigestPercentilesAggregate`
+- `TDigestPercentileRanksAggregate`
+- `PercentilesBucketAggregate`
+
+The `Percentiles` union type got removed as it's no longer used.
+
 ## 9.0.0 [elasticsearch-net-client-900-breaking-changes]
 
 ### Overview
