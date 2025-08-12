@@ -78,12 +78,11 @@ internal sealed partial class MultiSearchResponseConverterFactory : System.Text.
 		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(MultiSearchResponse<>);
 	}
 
+	[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'")]
 	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		var args = typeToConvert.GetGenericArguments();
-#pragma warning disable IL3050
 		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(MultiSearchResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
-#pragma warning restore IL3050
 		return converter;
 	}
 }
@@ -104,12 +103,12 @@ public partial class MultiSearchResponse<TDocument> : Elastic.Transport.Products
 
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>> Responses { get; set; }
+		System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem<TDocument>> Responses { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-long Took { get; set; }
+		long Took { get; set; }
 }
