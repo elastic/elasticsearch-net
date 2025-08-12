@@ -3,7 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch;
+using Playground;
 
 namespace Playground
 {
@@ -16,7 +18,7 @@ namespace Playground
 		public string? FirstName { get; init; }
 		public string? LastName { get; init; }
 		public int? Age { get; init; }
-		public bool IsDeleted { get; init; }	
+		public bool IsDeleted { get; init; }
 		public Routing? Routing { get; init; }
 
 		public Id Idv3 => "testing";
@@ -37,3 +39,8 @@ namespace Playground
 		public Guid SecondaryId { get; set; } = Guid.NewGuid();
 	}
 }
+
+
+
+[JsonSerializable(typeof(Person))]
+internal partial class ExampleJsonSerializerContext : JsonSerializerContext;
