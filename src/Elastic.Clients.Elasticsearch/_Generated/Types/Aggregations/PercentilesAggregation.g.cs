@@ -28,6 +28,7 @@ internal sealed partial class PercentilesAggregationConverter : System.Text.Json
 	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
 	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
 	private static readonly System.Text.Json.JsonEncodedText PropHdr = System.Text.Json.JsonEncodedText.Encode("hdr");
+	private static readonly System.Text.Json.JsonEncodedText PropKeyed = System.Text.Json.JsonEncodedText.Encode("keyed");
 	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
 	private static readonly System.Text.Json.JsonEncodedText PropPercents = System.Text.Json.JsonEncodedText.Encode("percents");
 	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
@@ -57,6 +58,12 @@ internal sealed partial class PercentilesAggregationConverter : System.Text.Json
 
 			if (propHdr.TryReadProperty(ref reader, options, PropHdr, null))
 			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropKeyed))
+			{
+				reader.Skip();
 				continue;
 			}
 
@@ -108,6 +115,7 @@ internal sealed partial class PercentilesAggregationConverter : System.Text.Json
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFormat, value.Format, null, null);
 		writer.WriteProperty(options, PropHdr, value.Hdr, null, null);
+		writer.WriteProperty(options, PropKeyed, value.Keyed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
 		writer.WriteProperty(options, PropPercents, value.Percents, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<double>? v) => w.WriteCollectionValue<double>(o, v, null));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
@@ -149,6 +157,14 @@ public sealed partial class PercentilesAggregation
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.HdrMethod? Hdr { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// By default, the aggregation associates a unique string key with each bucket and returns the ranges as a hash rather than an array.
+	/// Set to <c>false</c> to disable this behavior.
+	/// </para>
+	/// </summary>
+	public bool? Keyed => false;
 
 	/// <summary>
 	/// <para>
