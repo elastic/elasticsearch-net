@@ -9,9 +9,9 @@ using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Json;
 
-internal sealed class IdConverter : JsonConverter<Id>
+public sealed class IdConverter : JsonConverter<Id>
 {
 	private IElasticsearchClientSettings? _settings;
 

@@ -9,7 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
+using Elastic.Clients.Elasticsearch.Json;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
