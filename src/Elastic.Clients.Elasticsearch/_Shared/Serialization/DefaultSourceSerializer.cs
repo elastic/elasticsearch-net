@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
@@ -79,23 +80,23 @@ internal sealed class DefaultSourceSerializerOptionsProvider :
 	/// <summary>
 	/// Returns an array of the built-in <see cref="JsonConverter"/>s that are registered with the source serializer by default.
 	/// </summary>
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	private static IReadOnlyCollection<JsonConverter> CreateDefaultBuiltInConverters(IElasticsearchClientSettings settings) =>
 	[
 		// For context aware JsonConverter/JsonConverterFactory implementations.
 		new ContextProvider<IElasticsearchClientSettings>(settings),
 
-#pragma warning disable IL3050
 		new JsonStringEnumConverter(),
-#pragma warning restore IL3050
 		new DoubleWithFractionalPortionConverter(),
 		new SingleWithFractionalPortionConverter()
 	];
 
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	private static void MutateOptions(JsonSerializerOptions options, IJsonTypeInfoResolver? typeInfoResolver, Action<JsonSerializerOptions>? configureOptions)
 	{
-#pragma warning disable IL2026, IL3050
 		options.TypeInfoResolver = typeInfoResolver ?? new DefaultJsonTypeInfoResolver();
-#pragma warning restore IL2026, IL3050
 
 		options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 		options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
