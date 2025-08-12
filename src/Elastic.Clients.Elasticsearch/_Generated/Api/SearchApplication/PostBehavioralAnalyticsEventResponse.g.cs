@@ -40,7 +40,7 @@ internal sealed partial class PostBehavioralAnalyticsEventResponseConverter : Sy
 				continue;
 			}
 
-			if (propEvent.TryReadProperty(ref reader, options, PropEvent, null))
+			if (propEvent.TryReadProperty(ref reader, options, PropEvent, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class PostBehavioralAnalyticsEventResponseConverter : Sy
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAccepted, value.Accepted, null, null);
-		writer.WriteProperty(options, PropEvent, value.Event, null, null);
+		writer.WriteProperty(options, PropEvent, value.Event, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteEndObject();
 	}
 }

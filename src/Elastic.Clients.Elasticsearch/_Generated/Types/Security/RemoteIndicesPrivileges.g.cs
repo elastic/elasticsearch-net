@@ -68,7 +68,7 @@ internal sealed partial class RemoteIndicesPrivilegesConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -102,7 +102,7 @@ internal sealed partial class RemoteIndicesPrivilegesConverter : System.Text.Jso
 		writer.WriteProperty(options, PropFieldSecurity, value.FieldSecurity, null, null);
 		writer.WriteProperty(options, PropNames, value.Names, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexName>(o, v, null));
 		writer.WriteProperty(options, PropPrivileges, value.Privileges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.IndexPrivilege>(o, v, null));
-		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteEndObject();
 	}
 }

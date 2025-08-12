@@ -47,7 +47,7 @@ internal sealed partial class LikeDocumentConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDoc.TryReadProperty(ref reader, options, PropDoc, null))
+			if (propDoc.TryReadProperty(ref reader, options, PropDoc, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -113,7 +113,7 @@ internal sealed partial class LikeDocumentConverter : System.Text.Json.Serializa
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDoc, value.Doc, null, null);
+		writer.WriteProperty(options, PropDoc, value.Doc, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteProperty(options, PropFields, value.Fields, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);

@@ -49,7 +49,7 @@ internal sealed partial class GetTasksResponseConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propResponse.TryReadProperty(ref reader, options, PropResponse, null))
+			if (propResponse.TryReadProperty(ref reader, options, PropResponse, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -83,7 +83,7 @@ internal sealed partial class GetTasksResponseConverter : System.Text.Json.Seria
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCompleted, value.Completed, null, null);
 		writer.WriteProperty(options, PropError, value.Error, null, null);
-		writer.WriteProperty(options, PropResponse, value.Response, null, null);
+		writer.WriteProperty(options, PropResponse, value.Response, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteProperty(options, PropTask, value.Task, null, null);
 		writer.WriteEndObject();
 	}

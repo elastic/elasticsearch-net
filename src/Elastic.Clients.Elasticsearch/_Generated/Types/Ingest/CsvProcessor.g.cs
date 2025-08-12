@@ -60,7 +60,7 @@ internal sealed partial class CsvProcessorConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propEmptyValue.TryReadProperty(ref reader, options, PropEmptyValue, null))
+			if (propEmptyValue.TryReadProperty(ref reader, options, PropEmptyValue, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -146,7 +146,7 @@ internal sealed partial class CsvProcessorConverter : System.Text.Json.Serializa
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropEmptyValue, value.EmptyValue, null, null);
+		writer.WriteProperty(options, PropEmptyValue, value.EmptyValue, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropIf, value.If, null, null);
 		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));

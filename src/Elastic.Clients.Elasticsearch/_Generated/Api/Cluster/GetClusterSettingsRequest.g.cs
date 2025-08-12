@@ -34,7 +34,12 @@ public sealed partial class GetClusterSettingsRequestParameters : Elastic.Transp
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, returns default cluster settings from the local node.
+	/// If <c>true</c>, also returns default values for all other cluster settings, reflecting the values
+	/// in the <c>elasticsearch.yml</c> file of one of the nodes in the cluster. If the nodes in your
+	/// cluster do not all have the same values in their <c>elasticsearch.yml</c> config files then the
+	/// values returned by this API may vary from invocation to invocation and may not reflect the
+	/// values that Elasticsearch uses in all situations. Use the <c>GET _nodes/settings</c> API to
+	/// fetch the settings for each individual node in your cluster.
 	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
@@ -127,7 +132,12 @@ public sealed partial class GetClusterSettingsRequest : Elastic.Clients.Elastics
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, returns default cluster settings from the local node.
+	/// If <c>true</c>, also returns default values for all other cluster settings, reflecting the values
+	/// in the <c>elasticsearch.yml</c> file of one of the nodes in the cluster. If the nodes in your
+	/// cluster do not all have the same values in their <c>elasticsearch.yml</c> config files then the
+	/// values returned by this API may vary from invocation to invocation and may not reflect the
+	/// values that Elasticsearch uses in all situations. Use the <c>GET _nodes/settings</c> API to
+	/// fetch the settings for each individual node in your cluster.
 	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
@@ -186,7 +196,12 @@ public readonly partial struct GetClusterSettingsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, returns default cluster settings from the local node.
+	/// If <c>true</c>, also returns default values for all other cluster settings, reflecting the values
+	/// in the <c>elasticsearch.yml</c> file of one of the nodes in the cluster. If the nodes in your
+	/// cluster do not all have the same values in their <c>elasticsearch.yml</c> config files then the
+	/// values returned by this API may vary from invocation to invocation and may not reflect the
+	/// values that Elasticsearch uses in all situations. Use the <c>GET _nodes/settings</c> API to
+	/// fetch the settings for each individual node in your cluster.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor IncludeDefaults(bool? value = true)

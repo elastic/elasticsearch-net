@@ -37,7 +37,7 @@ internal sealed partial class LearningToRankConfigConverter : System.Text.Json.S
 		LocalJsonValue<int> propNumTopFeatureImportanceValues = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDefaultParams.TryReadProperty(ref reader, options, PropDefaultParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			if (propDefaultParams.TryReadProperty(ref reader, options, PropDefaultParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
 			{
 				continue;
 			}
@@ -73,7 +73,7 @@ internal sealed partial class LearningToRankConfigConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDefaultParams, value.DefaultParams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropDefaultParams, value.DefaultParams, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropFeatureExtractors, value.FeatureExtractors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor>>? v) => w.WriteCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor>(o, v, null, null)));
 		writer.WriteProperty(options, PropNumTopFeatureImportanceValues, value.NumTopFeatureImportanceValues, null, null);
 		writer.WriteEndObject();
