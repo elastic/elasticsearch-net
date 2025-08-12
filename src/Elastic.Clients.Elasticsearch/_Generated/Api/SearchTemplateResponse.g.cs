@@ -186,12 +186,11 @@ internal sealed partial class SearchTemplateResponseConverterFactory : System.Te
 		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(SearchTemplateResponse<>);
 	}
 
+	[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'")]
 	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		var args = typeToConvert.GetGenericArguments();
-#pragma warning disable IL3050
 		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(SearchTemplateResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
-#pragma warning restore IL3050
 		return converter;
 	}
 }
@@ -215,9 +214,9 @@ public sealed partial class SearchTemplateResponse<TDocument> : Elastic.Transpor
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> Hits { get; set; }
+		Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> Hits { get; set; }
 	public double? MaxScore { get; set; }
 	public long? NumReducePhases { get; set; }
 	public string? PitId { get; set; }
@@ -225,19 +224,19 @@ Elastic.Clients.Elasticsearch.Core.Search.HitsMetadata<TDocument> Hits { get; se
 	public Elastic.Clients.Elasticsearch.ScrollId? ScrollId { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
+		Elastic.Clients.Elasticsearch.ShardStatistics Shards { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestDictionary<TDocument>? Suggest { get; set; }
 	public bool? TerminatedEarly { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-bool TimedOut { get; set; }
+		bool TimedOut { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-long Took { get; set; }
+		long Took { get; set; }
 }

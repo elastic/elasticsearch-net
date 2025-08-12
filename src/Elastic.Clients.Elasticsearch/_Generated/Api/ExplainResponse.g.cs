@@ -105,12 +105,11 @@ internal sealed partial class ExplainResponseConverterFactory : System.Text.Json
 		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(ExplainResponse<>);
 	}
 
+	[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'")]
 	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		var args = typeToConvert.GetGenericArguments();
-#pragma warning disable IL3050
 		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(ExplainResponseConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
-#pragma warning restore IL3050
 		return converter;
 	}
 }
@@ -133,17 +132,17 @@ public sealed partial class ExplainResponse<TDocument> : Elastic.Transport.Produ
 	public Elastic.Clients.Elasticsearch.InlineGet<TDocument>? Get { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-string Id { get; set; }
+		string Id { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-string Index { get; set; }
+		string Index { get; set; }
 	public
 #if NET7_0_OR_GREATER
-required
+		required
 #endif
-bool Matched { get; set; }
+		bool Matched { get; set; }
 }
