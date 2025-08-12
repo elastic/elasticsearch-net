@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct MultiMatchQueryDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct MultiMatchQueryDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor" class="text-break">
+Struct MultiMatchQueryDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L646"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.html">QueryDsl</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct MultiMatchQueryDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.#ctor">
+  MultiMatchQueryDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L656"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor__ctor_Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.#ctor(Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery)">
+  MultiMatchQueryDescriptor(MultiMatchQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L650"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor(MultiMatchQuery instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery.html">MultiMatchQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Analyzer_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Analyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Analyzer_System_String_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Analyzer(System.String)">
+  Analyzer(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L670"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Analyzer used to convert the text in the query value into tokens.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor Analyzer(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_AutoGenerateSynonymsPhraseQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.AutoGenerateSynonymsPhraseQuery*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_AutoGenerateSynonymsPhraseQuery_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.AutoGenerateSynonymsPhraseQuery(System.Nullable{System.Boolean})">
+  AutoGenerateSynonymsPhraseQuery(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L681"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, match phrase queries are automatically created for multi-term synonyms.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Boost_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Boost*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Boost_System_Nullable_System_Single__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Boost(System.Nullable{System.Single})">
+  Boost(float?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L695"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Floating point number used to decrease or increase the relevance scores of the query.
+Boost values are relative to the default value of 1.0.
+A boost value between 0 and 1.0 decreases the relevance score.
+A value greater than 1.0 increases the relevance score.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor Boost(float? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_CutoffFrequency_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.CutoffFrequency*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_CutoffFrequency_System_Nullable_System_Double__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.CutoffFrequency(System.Nullable{System.Double})">
+  CutoffFrequency(double?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L701"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;7.3.0&#39;.&quot;)]
+public MultiMatchQueryDescriptor CutoffFrequency(double? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Fields_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Fields(Elastic.Clients.Elasticsearch.Fields)">
+  Fields(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L714"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The fields to be queried.
+Defaults to the <code>index.query.default_field</code> index settings, which in turn defaults to <code>*</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor Fields(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Fields__1_System_Linq_Expressions_Expression_System_Func___0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Fields``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+  Fields&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L726"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The fields to be queried.
+Defaults to the <code>index.query.default_field</code> index settings, which in turn defaults to <code>*</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor Fields&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Fuzziness_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Fuzziness*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Fuzziness_Elastic_Clients_Elasticsearch_Fuzziness_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Fuzziness(Elastic.Clients.Elasticsearch.Fuzziness)">
+  Fuzziness(Fuzziness?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L737"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum edit distance allowed for matching.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor Fuzziness(Fuzziness? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fuzziness.html">Fuzziness</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Fuzziness_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Fuzziness*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Fuzziness_System_Func_Elastic_Clients_Elasticsearch_FuzzinessFactory_Elastic_Clients_Elasticsearch_Fuzziness__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Fuzziness(System.Func{Elastic.Clients.Elasticsearch.FuzzinessFactory,Elastic.Clients.Elasticsearch.Fuzziness})">
+  Fuzziness(Func&lt;FuzzinessFactory, Fuzziness&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L748"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum edit distance allowed for matching.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor Fuzziness(Func&lt;FuzzinessFactory, Fuzziness&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FuzzinessFactory.html">FuzzinessFactory</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Fuzziness.html">Fuzziness</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_FuzzyRewrite_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.FuzzyRewrite*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_FuzzyRewrite_System_String_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.FuzzyRewrite(System.String)">
+  FuzzyRewrite(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L759"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Method used to rewrite the query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor FuzzyRewrite(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_FuzzyTranspositions_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.FuzzyTranspositions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_FuzzyTranspositions_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.FuzzyTranspositions(System.Nullable{System.Boolean})">
+  FuzzyTranspositions(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L771"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <code>ab</code> to <code>ba</code>).
+Can be applied to the term subqueries constructed for all terms but the final term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor FuzzyTranspositions(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Lenient_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Lenient*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Lenient_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Lenient(System.Nullable{System.Boolean})">
+  Lenient(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L782"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, format-based errors, such as providing a text query value for a numeric field, are ignored.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor Lenient(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_MaxExpansions_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.MaxExpansions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_MaxExpansions_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.MaxExpansions(System.Nullable{System.Int32})">
+  MaxExpansions(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L793"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum number of terms to which the query will expand.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor MaxExpansions(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_MinimumShouldMatch_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.MinimumShouldMatch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_MinimumShouldMatch_Elastic_Clients_Elasticsearch_MinimumShouldMatch_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch)">
+  MinimumShouldMatch(MinimumShouldMatch?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L804"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Minimum number of clauses that must match for a document to be returned.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor MinimumShouldMatch(MinimumShouldMatch? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MinimumShouldMatch.html">MinimumShouldMatch</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Operator_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Operator*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Operator_System_Nullable_Elastic_Clients_Elasticsearch_QueryDsl_Operator__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Operator(System.Nullable{Elastic.Clients.Elasticsearch.QueryDsl.Operator})">
+  Operator(Operator?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L815"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Boolean logic used to interpret text in the query value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor Operator(Operator? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Operator.html">Operator</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_PrefixLength_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.PrefixLength*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_PrefixLength_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.PrefixLength(System.Nullable{System.Int32})">
+  PrefixLength(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L826"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Number of beginning characters left unchanged for fuzzy matching.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor PrefixLength(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Query_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Query_System_String_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Query(System.String)">
+  Query(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L837"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Text, number, boolean value or date you wish to find in the provided field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor Query(string value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_QueryName_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.QueryName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_QueryName_System_String_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.QueryName(System.String)">
+  QueryName(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L843"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor QueryName(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Slop_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Slop*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Slop_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Slop(System.Nullable{System.Int32})">
+  Slop(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L854"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum number of positions allowed between matching tokens.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor Slop(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_TieBreaker_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.TieBreaker*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_TieBreaker_System_Nullable_System_Double__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.TieBreaker(System.Nullable{System.Double})">
+  TieBreaker(double?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L865"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Determines how scores for each per-term blended query and scores across groups are combined.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor TieBreaker(double? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Type_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Type*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_Type_System_Nullable_Elastic_Clients_Elasticsearch_QueryDsl_TextQueryType__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.Type(System.Nullable{Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType})">
+  Type(TextQueryType?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L876"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+How <code>the</code> multi_match query is executed internally.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor Type(TextQueryType? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TextQueryType.html">TextQueryType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_ZeroTermsQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.ZeroTermsQuery*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_ZeroTermsQuery_System_Nullable_Elastic_Clients_Elasticsearch_QueryDsl_ZeroTermsQuery__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.ZeroTermsQuery(System.Nullable{Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery})">
+  ZeroTermsQuery(ZeroTermsQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L887"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether no documents are returned if the <code>analyzer</code> removes all tokens, such as when using a <code>stop</code> filter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiMatchQueryDescriptor ZeroTermsQuery(ZeroTermsQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ZeroTermsQuery.html">ZeroTermsQuery</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQuery__Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery)~Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor">
+  explicit operator MultiMatchQueryDescriptor(MultiMatchQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L662"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator MultiMatchQueryDescriptor(MultiMatchQuery instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery.html">MultiMatchQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQueryDescriptor__Elastic_Clients_Elasticsearch_QueryDsl_MultiMatchQuery" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor)~Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery">
+  implicit operator MultiMatchQuery(MultiMatchQueryDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MultiMatchQuery.g.cs/#L663"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator MultiMatchQuery(MultiMatchQueryDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQueryDescriptor.html">MultiMatchQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MultiMatchQuery.html">MultiMatchQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

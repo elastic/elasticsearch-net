@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct CreateSnapshotRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct CreateSnapshotRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create a snapshot. Take a snapshot of a cluster or of data streams and indices.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor" class="text-break">
+Struct CreateSnapshotRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L244"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.html">Snapshot</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create a snapshot.
+Take a snapshot of a cluster or of data streams and indices.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct CreateSnapshotRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.#ctor">
+  CreateSnapshotRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public CreateSnapshotRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Name_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Name,Elastic.Clients.Elasticsearch.Name)">
+  CreateSnapshotRequestDescriptor(Name, Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L254"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor(Name repository, Name snapshot)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>repository</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>snapshot</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequest_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest)">
+  CreateSnapshotRequestDescriptor(CreateSnapshotRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor(CreateSnapshotRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest.html">CreateSnapshotRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_AddMetadatum_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.AddMetadatum*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_AddMetadatum_System_String_System_Object_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.AddMetadatum(System.String,System.Object)">
+  AddMetadatum(string, object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L400"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor AddMetadatum(string key, object value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L426"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_FeatureStates_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.FeatureStates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_FeatureStates_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.FeatureStates(System.Collections.Generic.ICollection{System.String})">
+  FeatureStates(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Feature states to include in the snapshot. Each feature state includes one or more system indices containing related data. You can view a list of eligible features using the get features API. If <code>include_global_state</code> is <code>true</code>, all current feature states are included by default. If <code>include_global_state</code> is <code>false</code>, no feature states are included by default.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor FeatureStates(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_FeatureStates_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.FeatureStates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_FeatureStates_System_String___" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.FeatureStates(System.String[])">
+  FeatureStates(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L328"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Feature states to include in the snapshot. Each feature state includes one or more system indices containing related data. You can view a list of eligible features using the get features API. If <code>include_global_state</code> is <code>true</code>, all current feature states are included by default. If <code>include_global_state</code> is <code>false</code>, no feature states are included by default.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor FeatureStates(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L432"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L438"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_IgnoreUnavailable_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.IgnoreUnavailable(System.Nullable{System.Boolean})">
+  IgnoreUnavailable(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L339"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request ignores data streams and indices in <code>indices</code> that are missing or closed. If <code>false</code>, the request returns an error for any data stream or index that is missing or closed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor IgnoreUnavailable(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_IncludeGlobalState_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.IncludeGlobalState*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_IncludeGlobalState_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.IncludeGlobalState(System.Nullable{System.Boolean})">
+  IncludeGlobalState(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L350"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the current cluster state is included in the snapshot. The cluster state includes persistent cluster settings, composable index templates, legacy index templates, ingest pipelines, and ILM policies. It also includes data stored in system indices, such as Watches and task records (configurable via <code>feature_states</code>).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor IncludeGlobalState(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Indices_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Indices_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Indices(Elastic.Clients.Elasticsearch.Indices)">
+  Indices(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L361"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Data streams and indices to include in the snapshot. Supports multi-target syntax. Includes all data streams and indices by default.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor Indices(Indices? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_MasterTimeout_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.MasterTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_MasterTimeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.MasterTimeout(Elastic.Clients.Elasticsearch.Duration)">
+  MasterTimeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L295"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor MasterTimeout(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Metadata" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Metadata">
+  Metadata()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L383"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Optional metadata for the snapshot. May have any contents. Must be less than 1024 bytes. This map is not automatically generated by Elasticsearch.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor Metadata()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Metadata_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringObject__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Metadata(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject})">
+  Metadata(Action&lt;FluentDictionaryOfStringObject&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L394"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Optional metadata for the snapshot. May have any contents. Must be less than 1024 bytes. This map is not automatically generated by Elasticsearch.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor Metadata(Action&lt;FluentDictionaryOfStringObject&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.html">FluentDictionaryOfStringObject</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Metadata_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Metadata(System.Collections.Generic.IDictionary{System.String,System.Object})">
+  Metadata(IDictionary&lt;string, object&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L372"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Optional metadata for the snapshot. May have any contents. Must be less than 1024 bytes. This map is not automatically generated by Elasticsearch.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor Metadata(IDictionary&lt;string, object&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Partial_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Partial*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Partial_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Partial(System.Nullable{System.Boolean})">
+  Partial(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L412"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, allows restoring a partial snapshot of indices with unavailable shards. Only shards that were successfully included in the snapshot will be restored. All missing shards will be recreated as empty. If <code>false</code>, the entire restore operation will fail if one or more indices included in the snapshot do not have all primary shards available.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor Partial(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L444"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Repository_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Repository*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Repository_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Repository(Elastic.Clients.Elasticsearch.Name)">
+  Repository(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L273"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Repository for the snapshot.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor Repository(Name value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L456"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.1/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L462"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.1/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.1/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Snapshot_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Snapshot*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_Snapshot_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.Snapshot(Elastic.Clients.Elasticsearch.Name)">
+  Snapshot(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L284"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Name of the snapshot. Must be unique in the repository.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor Snapshot(Name value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L450"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_WaitForCompletion_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.WaitForCompletion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_WaitForCompletion_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.WaitForCompletion(System.Nullable{System.Boolean})">
+  WaitForCompletion(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L306"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request returns a response when the snapshot is complete. If <code>false</code>, the request returns a response when the snapshot initializes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateSnapshotRequestDescriptor WaitForCompletion(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequest__Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest)~Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor">
+  explicit operator CreateSnapshotRequestDescriptor(CreateSnapshotRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L265"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator CreateSnapshotRequestDescriptor(CreateSnapshotRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest.html">CreateSnapshotRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequestDescriptor__Elastic_Clients_Elasticsearch_Snapshot_CreateSnapshotRequest" data-uid="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor)~Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest">
+  implicit operator CreateSnapshotRequest(CreateSnapshotRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.1/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/CreateSnapshotRequest.g.cs/#L266"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator CreateSnapshotRequest(CreateSnapshotRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequestDescriptor.html">CreateSnapshotRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.CreateSnapshotRequest.html">CreateSnapshotRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
