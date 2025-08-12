@@ -33,7 +33,7 @@ internal sealed partial class CustomTaskSettingsConverter : System.Text.Json.Ser
 		LocalJsonValue<object?> propParameters = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propParameters.TryReadProperty(ref reader, options, PropParameters, null))
+			if (propParameters.TryReadProperty(ref reader, options, PropParameters, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -57,7 +57,7 @@ internal sealed partial class CustomTaskSettingsConverter : System.Text.Json.Ser
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CustomTaskSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropParameters, value.Parameters, null, null);
+		writer.WriteProperty(options, PropParameters, value.Parameters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteEndObject();
 	}
 }

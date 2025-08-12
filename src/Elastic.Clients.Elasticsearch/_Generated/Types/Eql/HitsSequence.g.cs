@@ -40,7 +40,7 @@ internal sealed partial class HitsSequenceConverter<TEvent> : System.Text.Json.S
 				continue;
 			}
 
-			if (propJoinKeys.TryReadProperty(ref reader, options, PropJoinKeys, static System.Collections.Generic.IReadOnlyCollection<object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, null)))
+			if (propJoinKeys.TryReadProperty(ref reader, options, PropJoinKeys, static System.Collections.Generic.IReadOnlyCollection<object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
 			{
 				continue;
 			}
@@ -66,7 +66,7 @@ internal sealed partial class HitsSequenceConverter<TEvent> : System.Text.Json.S
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropEvents, value.Events, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Eql.HitsEvent<TEvent>>(o, v, null));
-		writer.WriteProperty(options, PropJoinKeys, value.JoinKeys, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<object>? v) => w.WriteCollectionValue<object>(o, v, null));
+		writer.WriteProperty(options, PropJoinKeys, value.JoinKeys, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<object>? v) => w.WriteCollectionValue<object>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteEndObject();
 	}
 }
