@@ -47,7 +47,7 @@ internal sealed partial class QueryRuleCriteriaConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propValues.TryReadProperty(ref reader, options, PropValues, static System.Collections.Generic.ICollection<object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, null)))
+			if (propValues.TryReadProperty(ref reader, options, PropValues, static System.Collections.Generic.ICollection<object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<object>(o, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class QueryRuleCriteriaConverter : System.Text.Json.Seri
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMetadata, value.Metadata, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteProperty(options, PropValues, value.Values, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<object>? v) => w.WriteCollectionValue<object>(o, v, null));
+		writer.WriteProperty(options, PropValues, value.Values, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<object>? v) => w.WriteCollectionValue<object>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteEndObject();
 	}
 }

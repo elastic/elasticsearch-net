@@ -254,6 +254,23 @@ internal sealed partial class ReindexRequestConverter : System.Text.Json.Seriali
 /// Additionally, if you opt to count version conflicts, the operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
 /// </para>
 /// <para>
+/// It's recommended to reindex on indices with a green status. Reindexing can fail when a node shuts down or crashes.
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// When requested with <c>wait_for_completion=true</c> (default), the request fails if the node shuts down.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// When requested with <c>wait_for_completion=false</c>, a task id is returned, which can be used via the task management API to monitor, debug, or cancel the task. The task may disappear or fail if the node shuts down.
+/// When retrying a failed reindex operation, it might be necessary to set <c>conflicts=proceed</c> or to first delete the partial destination index.
+/// Additionally, dry runs, checking disk space, and fetching index recovery information can help address the root cause.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
 /// Refer to the linked documentation for examples of how to reindex documents.
 /// </para>
 /// </summary>
@@ -484,6 +501,23 @@ public sealed partial class ReindexRequest : Elastic.Clients.Elasticsearch.Reque
 /// Note that the handling of other error types is unaffected by the <c>conflicts</c> property.
 /// Additionally, if you opt to count version conflicts, the operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
 /// </para>
+/// <para>
+/// It's recommended to reindex on indices with a green status. Reindexing can fail when a node shuts down or crashes.
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// When requested with <c>wait_for_completion=true</c> (default), the request fails if the node shuts down.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// When requested with <c>wait_for_completion=false</c>, a task id is returned, which can be used via the task management API to monitor, debug, or cancel the task. The task may disappear or fail if the node shuts down.
+/// When retrying a failed reindex operation, it might be necessary to set <c>conflicts=proceed</c> or to first delete the partial destination index.
+/// Additionally, dry runs, checking disk space, and fetching index recovery information can help address the root cause.
+/// </para>
+/// </item>
+/// </list>
 /// <para>
 /// Refer to the linked documentation for examples of how to reindex documents.
 /// </para>
@@ -877,6 +911,23 @@ public readonly partial struct ReindexRequestDescriptor
 /// Note that the handling of other error types is unaffected by the <c>conflicts</c> property.
 /// Additionally, if you opt to count version conflicts, the operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
 /// </para>
+/// <para>
+/// It's recommended to reindex on indices with a green status. Reindexing can fail when a node shuts down or crashes.
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// When requested with <c>wait_for_completion=true</c> (default), the request fails if the node shuts down.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// When requested with <c>wait_for_completion=false</c>, a task id is returned, which can be used via the task management API to monitor, debug, or cancel the task. The task may disappear or fail if the node shuts down.
+/// When retrying a failed reindex operation, it might be necessary to set <c>conflicts=proceed</c> or to first delete the partial destination index.
+/// Additionally, dry runs, checking disk space, and fetching index recovery information can help address the root cause.
+/// </para>
+/// </item>
+/// </list>
 /// <para>
 /// Refer to the linked documentation for examples of how to reindex documents.
 /// </para>
