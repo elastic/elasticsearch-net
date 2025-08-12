@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -141,15 +142,15 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 		new StringifiedDoubleConverter(),
 	];
 
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	private static void MutateOptions(JsonSerializerOptions options)
 	{
-#pragma warning disable IL2026, IL3050
 		options.TypeInfoResolver = JsonTypeInfoResolver.Combine(
 			RequestResponseSerializerContext.Default,
 			ElasticsearchTransportSerializerContext.Default,
 			new DefaultJsonTypeInfoResolver()
 		);
-#pragma warning restore IL2026, IL3050
 
 		options.MaxDepth = 512;
 		options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;

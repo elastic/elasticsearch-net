@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -27,6 +28,7 @@ internal sealed class IdConverter : JsonConverter<Id>
 			? new Id(reader.GetInt64())
 			: new Id(reader.GetString());
 
+	[UnconditionalSuppressMessage("AOT", "IL2072:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Call to object.GetType()")]
 	public override void Write(Utf8JsonWriter writer, Id value, JsonSerializerOptions options)
 	{
 		if (value is null)
