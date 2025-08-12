@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ClusterFileSystem | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ClusterFileSystem | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem" class="text-break">
+Class ClusterFileSystem  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L209"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.html">Cluster</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(ClusterFileSystemConverter))]
+public sealed class ClusterFileSystem</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ClusterFileSystem</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem__ctor_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem__ctor" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.#ctor">
+  ClusterFileSystem()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L218"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ClusterFileSystem()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Available_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Available*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Available" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Available">
+  Available
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L235"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total number of bytes available to JVM in file stores across all selected nodes.
+Depending on operating system or process-level restrictions, this number may be less than <code>nodes.fs.free_in_byes</code>.
+This is the actual amount of free disk space the selected Elasticsearch nodes can use.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? Available { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_AvailableInBytes_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.AvailableInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_AvailableInBytes" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.AvailableInBytes">
+  AvailableInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L244"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total number of bytes available to JVM in file stores across all selected nodes.
+Depending on operating system or process-level restrictions, this number may be less than <code>nodes.fs.free_in_byes</code>.
+This is the actual amount of free disk space the selected Elasticsearch nodes can use.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? AvailableInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_FloodStageFreeSpace_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.FloodStageFreeSpace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_FloodStageFreeSpace" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.FloodStageFreeSpace">
+  FloodStageFreeSpace
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L245"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? FloodStageFreeSpace { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_FloodStageFreeSpaceInBytes_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.FloodStageFreeSpaceInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_FloodStageFreeSpaceInBytes" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.FloodStageFreeSpaceInBytes">
+  FloodStageFreeSpaceInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L246"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? FloodStageFreeSpaceInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Free_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Free*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Free" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Free">
+  Free
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L253"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total number of unallocated bytes in file stores across all selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? Free { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_FreeInBytes_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.FreeInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_FreeInBytes" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.FreeInBytes">
+  FreeInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L260"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total number, in bytes, of unallocated bytes in file stores across all selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? FreeInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_FrozenFloodStageFreeSpace_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.FrozenFloodStageFreeSpace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_FrozenFloodStageFreeSpace" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.FrozenFloodStageFreeSpace">
+  FrozenFloodStageFreeSpace
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L261"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? FrozenFloodStageFreeSpace { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_FrozenFloodStageFreeSpaceInBytes_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.FrozenFloodStageFreeSpaceInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_FrozenFloodStageFreeSpaceInBytes" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.FrozenFloodStageFreeSpaceInBytes">
+  FrozenFloodStageFreeSpaceInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? FrozenFloodStageFreeSpaceInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_HighWatermarkFreeSpace_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.HighWatermarkFreeSpace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_HighWatermarkFreeSpace" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.HighWatermarkFreeSpace">
+  HighWatermarkFreeSpace
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L263"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? HighWatermarkFreeSpace { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_HighWatermarkFreeSpaceInBytes_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.HighWatermarkFreeSpaceInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_HighWatermarkFreeSpaceInBytes" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.HighWatermarkFreeSpaceInBytes">
+  HighWatermarkFreeSpaceInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L264"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? HighWatermarkFreeSpaceInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_LowWatermarkFreeSpace_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.LowWatermarkFreeSpace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_LowWatermarkFreeSpace" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.LowWatermarkFreeSpace">
+  LowWatermarkFreeSpace
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L265"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? LowWatermarkFreeSpace { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_LowWatermarkFreeSpaceInBytes_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.LowWatermarkFreeSpaceInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_LowWatermarkFreeSpaceInBytes" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.LowWatermarkFreeSpaceInBytes">
+  LowWatermarkFreeSpaceInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L266"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? LowWatermarkFreeSpaceInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Mount_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Mount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Mount" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Mount">
+  Mount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Mount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Path_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Path*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Path" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Path">
+  Path
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L268"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Path { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Total_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Total*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Total" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Total">
+  Total
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total size of all file stores across all selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? Total { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_TotalInBytes_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.TotalInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_TotalInBytes" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.TotalInBytes">
+  TotalInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L282"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total size, in bytes, of all file stores across all selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? TotalInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Type_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Type*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterFileSystem_Type" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem.Type">
+  Type
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/ClusterFileSystem.g.cs/#L283"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Type { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
