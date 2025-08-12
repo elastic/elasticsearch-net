@@ -82,7 +82,7 @@ internal sealed partial class ConstantKeywordPropertyConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
+			if (propValue.TryReadProperty(ref reader, options, PropValue, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -119,7 +119,7 @@ internal sealed partial class ConstantKeywordPropertyConverter : System.Text.Jso
 		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
 		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteProperty(options, PropValue, value.Value, null, null);
+		writer.WriteProperty(options, PropValue, value.Value, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteEndObject();
 	}
 }

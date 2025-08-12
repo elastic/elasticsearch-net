@@ -57,7 +57,7 @@ internal sealed partial class RerankRequestConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propTaskSettings.TryReadProperty(ref reader, options, PropTaskSettings, null))
+			if (propTaskSettings.TryReadProperty(ref reader, options, PropTaskSettings, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -85,7 +85,7 @@ internal sealed partial class RerankRequestConverter : System.Text.Json.Serializ
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropInput, value.Input, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings, null, null);
+		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteEndObject();
 	}
 }

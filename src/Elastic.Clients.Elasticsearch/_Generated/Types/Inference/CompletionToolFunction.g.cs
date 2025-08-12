@@ -49,7 +49,7 @@ internal sealed partial class CompletionToolFunctionConverter : System.Text.Json
 				continue;
 			}
 
-			if (propParameters.TryReadProperty(ref reader, options, PropParameters, null))
+			if (propParameters.TryReadProperty(ref reader, options, PropParameters, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
 			}
@@ -83,7 +83,7 @@ internal sealed partial class CompletionToolFunctionConverter : System.Text.Json
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropParameters, value.Parameters, null, null);
+		writer.WriteProperty(options, PropParameters, value.Parameters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteProperty(options, PropStrict, value.Strict, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
