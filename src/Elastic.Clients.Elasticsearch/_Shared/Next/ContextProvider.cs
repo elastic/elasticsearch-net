@@ -33,11 +33,11 @@ internal sealed class ContextProvider<TContext> :
 	/// If no <see cref="ContextProvider{TContext}"/> for <typeparamref name="TContext"/> is registered to the given
 	/// <see cref="JsonSerializerOptions"/> instance.
 	/// </exception>
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	public static TContext GetContext(JsonSerializerOptions options)
 	{
-#pragma warning disable IL2026, IL3050
 		if (options.GetConverter(typeof(Marker)) is not Converter provider)
-#pragma warning restore IL2026, IL3050
 		{
 			throw new InvalidOperationException($"No context provider for type '{typeof(TContext).Name}' is " +
 												$"registered for the given 'JsonSerializerOptions' instance.");
@@ -55,11 +55,11 @@ internal sealed class ContextProvider<TContext> :
 	/// <see langword="true"/> if the context was successfully retrieved from the given <see cref="JsonSerializerOptions"/>
 	/// or <see langword="false"/>, if not.
 	/// </returns>
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	public static bool TryGetContext(JsonSerializerOptions options, [MaybeNullWhen(false)] out TContext context)
 	{
-#pragma warning disable IL2026, IL3050
 		if (options.GetConverter(typeof(Marker)) is not Converter provider)
-#pragma warning restore IL2026, IL3050
 		{
 			context = default;
 			return false;
