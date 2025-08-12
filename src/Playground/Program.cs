@@ -2,8 +2,11 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Transport;
+using Elastic.Transport.Extensions;
+using static System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
 
 using Playground;
 
@@ -18,3 +21,24 @@ var settings = new ElasticsearchClientSettings(new Uri("https://primary.es.europ
 
 var client = new ElasticsearchClient(settings);
 
+var person = new Person
+{
+	FirstName = "Steve",
+	LastName = "Jobs",
+	Age = 35,
+	IsDeleted = false,
+	Routing = "1234567890",
+	Id = 1,
+	Enum = DateTimeKind.Utc,
+};
+
+var id = client.Infer.Id(person);
+var idByType = IdByType(person.GetType(), person);
+Console.WriteLine(id);
+Console.WriteLine(idByType);
+// This still errors on AOT compilation
+//Console.WriteLine(client.SourceSerializer.SerializeToString(person));
+
+[UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Can only annotate our implementation")]
+[UnconditionalSuppressMessage("Trimming", "IL2067", Justification = "Can only annotate our implementation")]
+string? IdByType(Type type, object instance) => client.Infer.Id(type, instance);

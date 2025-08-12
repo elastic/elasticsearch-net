@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Linq;
 using System.Globalization;
+using static System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -23,7 +24,9 @@ public class RoutingResolver
 		_settings = settings;
 	}
 
-	public string? Resolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] T>(T instance)
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Call to object.GetType()")]
+	[UnconditionalSuppressMessage("AOT", "IL2072:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Call to object.GetType()")]
+	public string? Resolve<[DynamicallyAccessedMembers(PublicProperties | None | NonPublicProperties)] T>(T instance)
 	{
 		if (instance is null)
 		{
@@ -33,7 +36,8 @@ public class RoutingResolver
 		return Resolve(instance.GetType(), instance);
 	}
 
-	public string? Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type, object instance)
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Call to object.GetType()")]
+	public string? Resolve([DynamicallyAccessedMembers(PublicProperties | None | NonPublicProperties)] Type type, object instance)
 	{
 		if (type is null)
 		{
@@ -59,7 +63,7 @@ public class RoutingResolver
 	}
 
 	private bool TryGetConnectionSettingsRoute(
-		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type,
+		[DynamicallyAccessedMembers(PublicProperties | NonPublicProperties)] Type type,
 		object instance,
 		out string? route)
 	{
@@ -83,7 +87,7 @@ public class RoutingResolver
 	}
 
 	private static JoinField? GetJoinFieldFromObject(
-		[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type,
+		[DynamicallyAccessedMembers(PublicProperties | NonPublicProperties)] Type type,
 		object instance)
 	{
 		if (JoinFieldDelegateCache.TryGetValue(type, out var getterDelegate))
@@ -105,7 +109,7 @@ public class RoutingResolver
 
 		return getterDelegate(instance);
 
-		static PropertyInfo? GetJoinFieldProperty([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type type)
+		static PropertyInfo? GetJoinFieldProperty([DynamicallyAccessedMembers(PublicProperties)] Type type)
 		{
 			var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public);
 			try
