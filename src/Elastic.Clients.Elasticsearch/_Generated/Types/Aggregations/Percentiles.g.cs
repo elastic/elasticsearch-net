@@ -30,7 +30,7 @@ internal sealed partial class PercentilesConverter : System.Text.Json.Serializat
 		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray);
 		return selector(ref reader, options) switch
 		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Aggregations.Percentiles(reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Union<string, long>>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Union<string, long>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Union<string, long>>(o, null, static Elastic.Clients.Elasticsearch.Union<string, long> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<string, long>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number), null, null)!)!)),
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Aggregations.Percentiles(reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Union<string, double>>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Union<string, double>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Union<string, double>>(o, null, static Elastic.Clients.Elasticsearch.Union<string, double> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<string, double>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number), null, null)!)!)),
 			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Aggregations.Percentiles(reader.ReadValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>>(options, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>(o, null)!)),
 			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.Percentiles)}")
 		};
@@ -42,7 +42,7 @@ internal sealed partial class PercentilesConverter : System.Text.Json.Serializat
 		{
 			case Elastic.Clients.Elasticsearch.UnionTag.T1:
 				{
-					writer.WriteValue(options, value.Value1, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Union<string, long>> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Union<string, long>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<string, long> v) => w.WriteUnionValue<string, long>(o, v, null, null)));
+					writer.WriteValue(options, value.Value1, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Union<string, double>> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Union<string, double>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<string, double> v) => w.WriteUnionValue<string, double>(o, v, null, null)));
 					break;
 				}
 
@@ -59,9 +59,9 @@ internal sealed partial class PercentilesConverter : System.Text.Json.Serializat
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.PercentilesConverter))]
-public sealed partial class Percentiles : Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Union<string, long>>, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>>
+public sealed partial class Percentiles : Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Union<string, double>>, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem>>
 {
-	public Percentiles(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Union<string, long>> value) : base(value)
+	public Percentiles(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Union<string, double>> value) : base(value)
 	{
 	}
 
@@ -69,6 +69,6 @@ public sealed partial class Percentiles : Elastic.Clients.Elasticsearch.Union<Sy
 	{
 	}
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Percentiles(System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Union<string, long>> value) => new Elastic.Clients.Elasticsearch.Aggregations.Percentiles(value);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Percentiles(System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Union<string, double>> value) => new Elastic.Clients.Elasticsearch.Aggregations.Percentiles(value);
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Percentiles(Elastic.Clients.Elasticsearch.Aggregations.ArrayPercentilesItem[] value) => new Elastic.Clients.Elasticsearch.Aggregations.Percentiles(value);
 }

@@ -149,6 +149,11 @@ public sealed partial class RateLimitSetting
 	/// </item>
 	/// <item>
 	/// <para>
+	/// <c>llama</c> service: <c>3000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>mistral</c> service: <c>240</c>
 	/// </para>
 	/// </item>
@@ -260,6 +265,11 @@ public readonly partial struct RateLimitSettingDescriptor
 	/// <item>
 	/// <para>
 	/// <c>jinaai</c> service: <c>2000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>llama</c> service: <c>3000</c>
 	/// </para>
 	/// </item>
 	/// <item>

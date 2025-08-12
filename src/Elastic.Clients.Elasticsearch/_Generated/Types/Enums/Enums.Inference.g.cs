@@ -122,6 +122,63 @@ internal sealed partial class TaskTypeConverter : System.Text.Json.Serialization
 	}
 }
 
+internal sealed partial class Ai21TaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.Ai21TaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+
+	public override Elastic.Clients.Elasticsearch.Inference.Ai21TaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberChatCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.Ai21TaskType.ChatCompletion;
+		}
+
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.Ai21TaskType.Completion;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.Ai21TaskType.ChatCompletion;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.Ai21TaskType.Completion;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.Ai21TaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.Ai21TaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.Ai21TaskType.ChatCompletion:
+				writer.WriteStringValue(MemberChatCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.Ai21TaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.Ai21TaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.Ai21TaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.Ai21TaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class AlibabaCloudTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
@@ -1145,6 +1202,77 @@ internal sealed partial class JinaAITaskTypeConverter : System.Text.Json.Seriali
 	}
 }
 
+internal sealed partial class LlamaTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.LlamaTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.LlamaTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberChatCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.ChatCompletion;
+		}
+
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.ChatCompletion;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.LlamaTaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.LlamaTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.ChatCompletion:
+				writer.WriteStringValue(MemberChatCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.LlamaTaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.LlamaTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.LlamaTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.LlamaTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class MistralTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.MistralTaskType>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
@@ -1410,6 +1538,63 @@ internal sealed partial class WatsonxTaskTypeConverter : System.Text.Json.Serial
 	}
 
 	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class TaskTypeAi21Converter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+
+	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21 Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberChatCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21.ChatCompletion;
+		}
+
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21.Completion;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21.ChatCompletion;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21.Completion;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21 value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21.ChatCompletion:
+				writer.WriteStringValue(MemberChatCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21 ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21 value, System.Text.Json.JsonSerializerOptions options)
 	{
 		Write(writer, value, options);
 	}
@@ -2254,6 +2439,77 @@ internal sealed partial class TaskTypeJinaAiConverter : System.Text.Json.Seriali
 	}
 }
 
+internal sealed partial class TaskTypeLlamaConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberChatCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama.ChatCompletion;
+		}
+
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama.ChatCompletion;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama.Completion;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama.ChatCompletion:
+				writer.WriteStringValue(MemberChatCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskTypeLlama value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class TaskTypeMistralConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskTypeMistral>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
@@ -3063,6 +3319,77 @@ internal sealed partial class JinaAITextEmbeddingTaskConverter : System.Text.Jso
 	}
 }
 
+internal sealed partial class LlamaSimilarityTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCosine = System.Text.Json.JsonEncodedText.Encode("cosine");
+	private static readonly System.Text.Json.JsonEncodedText MemberDotProduct = System.Text.Json.JsonEncodedText.Encode("dot_product");
+	private static readonly System.Text.Json.JsonEncodedText MemberL2Norm = System.Text.Json.JsonEncodedText.Encode("l2_norm");
+
+	public override Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCosine))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.Cosine;
+		}
+
+		if (reader.ValueTextEquals(MemberDotProduct))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.DotProduct;
+		}
+
+		if (reader.ValueTextEquals(MemberL2Norm))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.L2Norm;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCosine.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.Cosine;
+		}
+
+		if (string.Equals(value, MemberDotProduct.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.DotProduct;
+		}
+
+		if (string.Equals(value, MemberL2Norm.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.L2Norm;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.Cosine:
+				writer.WriteStringValue(MemberCosine);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.DotProduct:
+				writer.WriteStringValue(MemberDotProduct);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType.L2Norm:
+				writer.WriteStringValue(MemberL2Norm);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.TaskTypeConverter))]
 public enum TaskType
 {
@@ -3076,6 +3403,15 @@ public enum TaskType
 	SparseEmbedding,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
 	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Ai21TaskTypeConverter))]
+public enum Ai21TaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
+	ChatCompletion,
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskTypeConverter))]
@@ -3237,6 +3573,17 @@ public enum JinaAITaskType
 	TextEmbedding
 }
 
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.LlamaTaskTypeConverter))]
+public enum LlamaTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
+	ChatCompletion,
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.MistralTaskTypeConverter))]
 public enum MistralTaskType
 {
@@ -3277,6 +3624,15 @@ public enum WatsonxTaskType
 	Completion,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
 	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.TaskTypeAi21Converter))]
+public enum TaskTypeAi21
+{
+	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
+	ChatCompletion,
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion
 }
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAIConverter))]
@@ -3410,6 +3766,17 @@ public enum TaskTypeJinaAi
 	TextEmbedding
 }
 
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.TaskTypeLlamaConverter))]
+public enum TaskTypeLlama
+{
+	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
+	ChatCompletion,
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.TaskTypeMistralConverter))]
 public enum TaskTypeMistral
 {
@@ -3533,4 +3900,15 @@ public enum JinaAITextEmbeddingTask
 	Ingest,
 	[System.Runtime.Serialization.EnumMember(Value = "search")]
 	Search
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.LlamaSimilarityTypeConverter))]
+public enum LlamaSimilarityType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "cosine")]
+	Cosine,
+	[System.Runtime.Serialization.EnumMember(Value = "dot_product")]
+	DotProduct,
+	[System.Runtime.Serialization.EnumMember(Value = "l2_norm")]
+	L2Norm
 }

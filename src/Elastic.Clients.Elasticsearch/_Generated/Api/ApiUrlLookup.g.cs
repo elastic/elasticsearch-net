@@ -160,6 +160,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferenceGet = new ApiUrls(new[] { "_inference", "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferenceInference = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
 	internal static ApiUrls InferencePut = new ApiUrls(new[] { "_inference/{inference_id}", "_inference/{task_type}/{inference_id}" });
+	internal static ApiUrls InferencePutAi21 = new ApiUrls(new[] { "_inference/{task_type}/{ai21_inference_id}" });
 	internal static ApiUrls InferencePutAlibabacloud = new ApiUrls(new[] { "_inference/{task_type}/{alibabacloud_inference_id}" });
 	internal static ApiUrls InferencePutAmazonbedrock = new ApiUrls(new[] { "_inference/{task_type}/{amazonbedrock_inference_id}" });
 	internal static ApiUrls InferencePutAmazonsagemaker = new ApiUrls(new[] { "_inference/{task_type}/{amazonsagemaker_inference_id}" });
@@ -175,6 +176,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferencePutGooglevertexai = new ApiUrls(new[] { "_inference/{task_type}/{googlevertexai_inference_id}" });
 	internal static ApiUrls InferencePutHuggingFace = new ApiUrls(new[] { "_inference/{task_type}/{huggingface_inference_id}" });
 	internal static ApiUrls InferencePutJinaai = new ApiUrls(new[] { "_inference/{task_type}/{jinaai_inference_id}" });
+	internal static ApiUrls InferencePutLlama = new ApiUrls(new[] { "_inference/{task_type}/{llama_inference_id}" });
 	internal static ApiUrls InferencePutMistral = new ApiUrls(new[] { "_inference/{task_type}/{mistral_inference_id}" });
 	internal static ApiUrls InferencePutOpenai = new ApiUrls(new[] { "_inference/{task_type}/{openai_inference_id}" });
 	internal static ApiUrls InferencePutVoyageai = new ApiUrls(new[] { "_inference/{task_type}/{voyageai_inference_id}" });

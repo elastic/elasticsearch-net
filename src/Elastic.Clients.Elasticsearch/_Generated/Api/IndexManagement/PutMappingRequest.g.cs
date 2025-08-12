@@ -246,7 +246,7 @@ internal sealed partial class PutMappingRequestConverter : System.Text.Json.Seri
 /// </item>
 /// </list>
 /// <para>
-/// Learn how to use the update mapping API with practical examples in the <a href="https://www.elastic.co/docs//manage-data/data-store/mapping/update-mappings-examples">Update mapping API examples</a> guide.
+/// Learn how to use the update mapping API with practical examples in the <a href="https://www.elastic.co/docs/manage-data/data-store/mapping/update-mappings-examples">Update mapping API examples</a> guide.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestConverter))]
@@ -476,7 +476,7 @@ public sealed partial class PutMappingRequest : Elastic.Clients.Elasticsearch.Re
 /// </item>
 /// </list>
 /// <para>
-/// Learn how to use the update mapping API with practical examples in the <a href="https://www.elastic.co/docs//manage-data/data-store/mapping/update-mappings-examples">Update mapping API examples</a> guide.
+/// Learn how to use the update mapping API with practical examples in the <a href="https://www.elastic.co/docs/manage-data/data-store/mapping/update-mappings-examples">Update mapping API examples</a> guide.
 /// </para>
 /// </summary>
 public readonly partial struct PutMappingRequestDescriptor
@@ -1110,7 +1110,7 @@ public readonly partial struct PutMappingRequestDescriptor
 /// </item>
 /// </list>
 /// <para>
-/// Learn how to use the update mapping API with practical examples in the <a href="https://www.elastic.co/docs//manage-data/data-store/mapping/update-mappings-examples">Update mapping API examples</a> guide.
+/// Learn how to use the update mapping API with practical examples in the <a href="https://www.elastic.co/docs/manage-data/data-store/mapping/update-mappings-examples">Update mapping API examples</a> guide.
 /// </para>
 /// </summary>
 public readonly partial struct PutMappingRequestDescriptor<TDocument>
