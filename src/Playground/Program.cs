@@ -4,13 +4,16 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
-using static System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
-
 using Playground;
 
-var settings = new ElasticsearchClientSettings(new Uri("https://primary.es.europe-west3.gcp.cloud.es.io"))
+var pool = new SingleNodePool(new Uri("https://primary.es.europe-west3.gcp.cloud.es.io"));
+var settings = new ElasticsearchClientSettings(pool,
+		sourceSerializer: (_, settings) =>
+			new DefaultSourceSerializer(settings, [PlaygroundJsonSerializerContext.Default])
+		)
 	.Authentication(new BasicAuthentication("elastic", "Oov35Wtxj5DzpZNzYAzFb0KZ"))
 	.DisableDirectStreaming()
 	.EnableDebugMode(cd =>

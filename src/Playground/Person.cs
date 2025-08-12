@@ -6,15 +6,17 @@ using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch;
 using Playground;
-using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace Playground
 {
+	[JsonSerializable(typeof(Person))]
+	internal partial class PlaygroundJsonSerializerContext : JsonSerializerContext;
+
 	public class Person
 	{
 		public int Id { get; set; }
 
-		[System.Text.Json.Serialization.JsonPropertyName("id2")]
+		[JsonPropertyName("id2")]
 		public Guid SecondaryId { get; set; } = Guid.NewGuid();
 		public string? FirstName { get; init; }
 		public string? LastName { get; init; }
@@ -25,7 +27,7 @@ namespace Playground
 		public Id Idv3 => "testing";
 		//public Guid Routing { get; init; } = Guid.NewGuid();
 
-		[System.Text.Json.Serialization.JsonIgnore]
+		[JsonIgnore]
 		public string? Email { get; init; }
 
 		[DataMember(Name = "STEVE")]
@@ -33,8 +35,6 @@ namespace Playground
 		public string Data { get; init; } = "NOTHING";
 
 		public DateTimeKind Enum { get; init; }
-
-		public Query? Q { get; init; }
 	}
 
 	public class PersonV3
@@ -45,5 +45,3 @@ namespace Playground
 
 
 
-[JsonSerializable(typeof(Person))]
-internal partial class ExampleJsonSerializerContext : JsonSerializerContext;
