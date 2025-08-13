@@ -9,7 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
+using System.Text.Json.Serialization.Metadata;
 using Elastic.Clients.Elasticsearch.Esql;
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -86,10 +86,12 @@ public class ElasticsearchClientSettings : ElasticsearchClientSettingsBase<Elast
 	public ElasticsearchClientSettings(
 		NodePool nodePool,
 		IRequestInvoker requestInvoker,
-		SourceSerializerFactory sourceSerializer,
-		IPropertyMappingProvider propertyMappingProvider) : base(nodePool, requestInvoker, sourceSerializer, propertyMappingProvider)
+		SourceSerializerFactory? sourceSerializer,
+		IPropertyMappingProvider? propertyMappingProvider
+	) : base(nodePool, requestInvoker, sourceSerializer, propertyMappingProvider)
 	{
 	}
+
 }
 
 /// <inheritdoc cref="IElasticsearchClientSettings" />
@@ -121,9 +123,10 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 
 	protected ElasticsearchClientSettingsBase(
 		NodePool nodePool,
-		IRequestInvoker requestInvoker,
+		IRequestInvoker? requestInvoker,
 		ElasticsearchClientSettings.SourceSerializerFactory? sourceSerializerFactory,
-		IPropertyMappingProvider propertyMappingProvider)
+		IPropertyMappingProvider? propertyMappingProvider
+	)
 		: base(nodePool, requestInvoker, null, ElasticsearchClientProductRegistration.DefaultForElasticsearchClientsElasticsearch)
 	{
 		var requestResponseSerializer = new DefaultRequestResponseSerializer(this);
@@ -131,11 +134,12 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 
 		UseThisRequestResponseSerializer = requestResponseSerializer;
 
+		_propertyMappingProvider = propertyMappingProvider ?? new DefaultPropertyMappingProvider();
 		_sourceSerializer = sourceSerializerFactory?.Invoke(sourceSerializer, this) ?? sourceSerializer;
-		_propertyMappingProvider = propertyMappingProvider ?? sourceSerializer as IPropertyMappingProvider ?? new DefaultPropertyMappingProvider();
 		_defaultFieldNameInferrer = _sourceSerializer.TryGetJsonSerializerOptions(out var options)
 			? p => options.PropertyNamingPolicy?.ConvertName(p) ?? p
 			: p => p.ToCamelCase();
+
 		_defaultIndices = new FluentDictionary<Type, string>();
 		_defaultRelationNames = new FluentDictionary<Type, string>();
 		_inferrer = new Inferrer(this);
@@ -394,9 +398,12 @@ public abstract class ConnectionConfigurationBase<TConnectionConfiguration> :
 {
 	private bool _includeServerStackTraceOnError;
 
-	protected ConnectionConfigurationBase(NodePool nodePool, IRequestInvoker requestInvoker,
+	protected ConnectionConfigurationBase(
+		NodePool nodePool,
+		IRequestInvoker? requestInvoker,
 		Serializer? serializer,
-		ProductRegistration registration = null)
+		ProductRegistration? registration = null
+	)
 		: base(nodePool, requestInvoker, serializer, registration ?? new ElasticsearchProductRegistration(typeof(ElasticsearchClient)))
 	{
 		UserAgent(ConnectionConfiguration.DefaultUserAgent);
