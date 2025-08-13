@@ -25,9 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 
 internal sealed partial class PipelineConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.Pipeline>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedDate = System.Text.Json.JsonEncodedText.Encode("created_date");
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedDateMillis = System.Text.Json.JsonEncodedText.Encode("created_date_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropDeprecated = System.Text.Json.JsonEncodedText.Encode("deprecated");
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDate = System.Text.Json.JsonEncodedText.Encode("modified_date");
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDateMillis = System.Text.Json.JsonEncodedText.Encode("modified_date_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
 	private static readonly System.Text.Json.JsonEncodedText PropProcessors = System.Text.Json.JsonEncodedText.Encode("processors");
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
@@ -35,14 +39,28 @@ internal sealed partial class PipelineConverter : System.Text.Json.Serialization
 	public override Elastic.Clients.Elasticsearch.Ingest.Pipeline Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.DateTimeOffset?> propCreatedDate = default;
+		LocalJsonValue<System.DateTimeOffset?> propCreatedDateMillis = default;
 		LocalJsonValue<bool?> propDeprecated = default;
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<System.DateTimeOffset?> propModifiedDate = default;
+		LocalJsonValue<System.DateTimeOffset?> propModifiedDateMillis = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propProcessors = default;
 		LocalJsonValue<long?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propCreatedDate.TryReadProperty(ref reader, options, PropCreatedDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propCreatedDateMillis.TryReadProperty(ref reader, options, PropCreatedDateMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
 			if (propDeprecated.TryReadProperty(ref reader, options, PropDeprecated, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
@@ -54,6 +72,16 @@ internal sealed partial class PipelineConverter : System.Text.Json.Serialization
 			}
 
 			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
+			{
+				continue;
+			}
+
+			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -85,9 +113,13 @@ internal sealed partial class PipelineConverter : System.Text.Json.Serialization
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Ingest.Pipeline(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			CreatedDate = propCreatedDate.Value,
+			CreatedDateMillis = propCreatedDateMillis.Value,
 			Deprecated = propDeprecated.Value,
 			Description = propDescription.Value,
 			Meta = propMeta.Value,
+			ModifiedDate = propModifiedDate.Value,
+			ModifiedDateMillis = propModifiedDateMillis.Value,
 			OnFailure = propOnFailure.Value,
 			Processors = propProcessors.Value,
 			Version = propVersion.Value
@@ -97,9 +129,13 @@ internal sealed partial class PipelineConverter : System.Text.Json.Serialization
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.Pipeline value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCreatedDate, value.CreatedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreatedDateMillis, value.CreatedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
+		writer.WriteProperty(options, PropModifiedDate, value.ModifiedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropModifiedDateMillis, value.ModifiedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
 		writer.WriteProperty(options, PropProcessors, value.Processors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
 		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
@@ -128,6 +164,20 @@ public sealed partial class Pipeline
 
 	/// <summary>
 	/// <para>
+	/// Date and time when the pipeline was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? CreatedDate { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the pipeline was created, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? CreatedDateMillis { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Marks this ingest pipeline as deprecated.
 	/// When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
 	/// </para>
@@ -147,6 +197,20 @@ public sealed partial class Pipeline
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the pipeline was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? ModifiedDate { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the pipeline was last modified, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? ModifiedDateMillis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -189,6 +253,28 @@ public readonly partial struct PipelineDescriptor<TDocument>
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.Pipeline instance) => new Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the pipeline was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> CreatedDate(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the pipeline was created, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> CreatedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDateMillis = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -250,6 +336,28 @@ public readonly partial struct PipelineDescriptor<TDocument>
 	{
 		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
 		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the pipeline was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> ModifiedDate(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the pipeline was last modified, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> ModifiedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDateMillis = value;
 		return this;
 	}
 
@@ -380,6 +488,28 @@ public readonly partial struct PipelineDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Date and time when the pipeline was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor CreatedDate(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the pipeline was created, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor CreatedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDateMillis = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Marks this ingest pipeline as deprecated.
 	/// When a deprecated ingest pipeline is referenced as the default or final pipeline when creating or updating a non-deprecated index template, Elasticsearch will emit a deprecation warning.
 	/// </para>
@@ -438,6 +568,28 @@ public readonly partial struct PipelineDescriptor
 	{
 		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
 		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the pipeline was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor ModifiedDate(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the pipeline was last modified, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor ModifiedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDateMillis = value;
 		return this;
 	}
 
