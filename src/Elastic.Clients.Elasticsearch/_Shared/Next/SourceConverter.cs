@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -50,11 +51,10 @@ internal sealed class SourceMarkerConverterFactory(IElasticsearchClientSettings 
 			   typeToConvert.GetGenericTypeDefinition() == typeof(SourceMarker<>);
 	}
 
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
 	{
 		var args = typeToConvert.GetGenericArguments();
-
-#pragma warning disable IL3050 // SourceMarker<T> static constructor roots SourceMarkerConverter<T>.
 
 		var converter = (JsonConverter)Activator.CreateInstance(
 			typeof(SourceMarkerConverter<>).MakeGenericType(args[0]),
@@ -63,14 +63,11 @@ internal sealed class SourceMarkerConverterFactory(IElasticsearchClientSettings 
 			args: [settings],
 			culture: null)!;
 
-#pragma warning restore IL3050
-
 		return converter;
 	}
 }
 
-internal sealed class SourceConverter<T> :
-	JsonConverter<T>
+internal sealed class SourceConverter<T> : JsonConverter<T>
 {
 	private readonly IElasticsearchClientSettings _settings;
 
@@ -79,11 +76,15 @@ internal sealed class SourceConverter<T> :
 		_settings = settings;
 	}
 
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		return _settings.SourceSerializer.Deserialize<T>(ref reader);
 	}
 
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
 	{
 		_settings.SourceSerializer.Serialize(value, writer);
