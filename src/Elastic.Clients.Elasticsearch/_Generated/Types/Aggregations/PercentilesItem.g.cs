@@ -32,7 +32,7 @@ internal sealed partial class PercentilesItemConverter : System.Text.Json.Serial
 	public override Elastic.Clients.Elasticsearch.Aggregations.PercentilesItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propKey = default;
+		LocalJsonValue<double> propKey = default;
 		LocalJsonValue<double?> propValue = default;
 		LocalJsonValue<string?> propValueAsString = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -84,7 +84,7 @@ internal sealed partial class PercentilesItemConverter : System.Text.Json.Serial
 public sealed partial class PercentilesItem
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PercentilesItem(string key, double? value)
+	public PercentilesItem(double key, double? value)
 	{
 		Key = key;
 		Value = value;
@@ -110,7 +110,7 @@ public sealed partial class PercentilesItem
 #if NET7_0_OR_GREATER
 	required
 #endif
-	string Key { get; set; }
+	double Key { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
