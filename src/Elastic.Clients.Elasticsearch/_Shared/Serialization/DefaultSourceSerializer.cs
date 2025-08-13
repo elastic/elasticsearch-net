@@ -10,7 +10,6 @@ using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 
 using Elastic.Transport;
-using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
@@ -38,12 +37,7 @@ public class DefaultSourceSerializer :
 	/// <param name="typeInfoResolver">A custom <see cref="IJsonTypeInfoResolver"/> to use.</param>
 	/// <param name="configureOptions">An optional <see cref="Action{T}"/> to customize the default <see cref="JsonSerializerOptions"/>.</param>
 	public DefaultSourceSerializer(IElasticsearchClientSettings settings, IJsonTypeInfoResolver typeInfoResolver, Action<JsonSerializerOptions>? configureOptions = null) :
-		base(new DefaultSourceSerializerOptionsProvider(settings, [typeInfoResolver], configureOptions))
-	{
-	}
-
-	public DefaultSourceSerializer(IElasticsearchClientSettings settings, IJsonTypeInfoResolver[] typeInfoResolvers, Action<JsonSerializerOptions>? configureOptions = null) :
-		base(new DefaultSourceSerializerOptionsProvider(settings, typeInfoResolvers, configureOptions))
+		base(new DefaultSourceSerializerOptionsProvider(settings, typeInfoResolver, configureOptions))
 	{
 	}
 }
@@ -74,11 +68,11 @@ internal sealed class DefaultSourceSerializerOptionsProvider :
 	/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> instance to which this serializer options will be linked.</param>
 	/// <param name="typeInfoResolver">A custom <see cref="IJsonTypeInfoResolver"/> to use.</param>
 	/// <param name="configureOptions">An optional <see cref="Action{T}"/> to customize the default <see cref="JsonSerializerOptions"/>.</param>
-	public DefaultSourceSerializerOptionsProvider(IElasticsearchClientSettings settings, IJsonTypeInfoResolver[] typeInfoResolvers, Action<JsonSerializerOptions>? configureOptions = null) :
+	public DefaultSourceSerializerOptionsProvider(IElasticsearchClientSettings settings, IJsonTypeInfoResolver typeInfoResolver, Action<JsonSerializerOptions>? configureOptions = null) :
 		base(
 			CreateDefaultBuiltInConverters(settings),
 			null,
-			options => MutateOptions(options, typeInfoResolvers, configureOptions)
+			options => MutateOptions(options, typeInfoResolver ?? throw new ArgumentNullException(nameof(typeInfoResolver)), configureOptions)
 		)
 	{
 	}
@@ -100,13 +94,10 @@ internal sealed class DefaultSourceSerializerOptionsProvider :
 
 	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
-	private static void MutateOptions(JsonSerializerOptions options, IJsonTypeInfoResolver[]? typeInfoResolvers, Action<JsonSerializerOptions>? configureOptions)
+	private static void MutateOptions(JsonSerializerOptions options, IJsonTypeInfoResolver? typeInfoResolver, Action<JsonSerializerOptions>? configureOptions)
 	{
-		var resolvers = typeInfoResolvers ?? [];
+		options.TypeInfoResolver = typeInfoResolver ?? new DefaultJsonTypeInfoResolver();
 
-		options.TypeInfoResolver = JsonTypeInfoResolver.Combine(
-			[new DefaultJsonTypeInfoResolver(), .. resolvers]
-		);
 		options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 		options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 

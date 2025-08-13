@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization.Metadata;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
@@ -12,7 +13,7 @@ using Playground;
 var pool = new SingleNodePool(new Uri("https://primary.es.europe-west3.gcp.cloud.es.io"));
 var settings = new ElasticsearchClientSettings(pool,
 		sourceSerializer: (_, settings) =>
-			new DefaultSourceSerializer(settings, [PlaygroundJsonSerializerContext.Default])
+			new DefaultSourceSerializer(settings, PlaygroundJsonSerializerContext.Default)
 		)
 	.Authentication(new BasicAuthentication("elastic", "Oov35Wtxj5DzpZNzYAzFb0KZ"))
 	.DisableDirectStreaming()
