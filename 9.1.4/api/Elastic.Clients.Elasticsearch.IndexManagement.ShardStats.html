@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ShardStats | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ShardStats | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.4/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_ShardStats.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.ShardStats%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats" class="text-break">
+Class ShardStats  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L290"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(ShardStatsConverter))]
+public sealed class ShardStats</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ShardStats</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats__ctor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.#ctor">
+  ShardStats()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L299"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShardStats()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Bulk_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Bulk*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Bulk" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Bulk">
+  Bulk
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L309"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BulkStats? Bulk { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.BulkStats.html">BulkStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Commit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Commit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Commit" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Commit">
+  Commit
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShardCommit? Commit { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardCommit.html">ShardCommit</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Completion_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Completion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Completion" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Completion">
+  Completion
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L311"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompletionStats? Completion { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.CompletionStats.html">CompletionStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Docs_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Docs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Docs" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Docs">
+  Docs
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L312"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DocStats? Docs { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.DocStats.html">DocStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Fielddata_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Fielddata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Fielddata" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Fielddata">
+  Fielddata
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L313"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FielddataStats? Fielddata { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FielddataStats.html">FielddataStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Flush_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Flush*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Flush" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Flush">
+  Flush
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L314"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FlushStats? Flush { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FlushStats.html">FlushStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Get_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Get" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Get">
+  Get
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L315"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetStats? Get { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetStats.html">GetStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Indexing_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Indexing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Indexing" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Indexing">
+  Indexing
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L316"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexingStats? Indexing { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexingStats.html">IndexingStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Indices" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Indices">
+  Indices
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStats? Indices { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats.html">IndicesStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Mappings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Mappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Mappings" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Mappings">
+  Mappings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L318"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MappingStats? Mappings { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.MappingStats.html">MappingStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Merges_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Merges*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Merges" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Merges">
+  Merges
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L319"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MergesStats? Merges { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MergesStats.html">MergesStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_QueryCache_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.QueryCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_QueryCache" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.QueryCache">
+  QueryCache
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L320"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShardQueryCache? QueryCache { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardQueryCache.html">ShardQueryCache</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Recovery_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Recovery*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Recovery" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Recovery">
+  Recovery
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L321"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RecoveryStats? Recovery { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RecoveryStats.html">RecoveryStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Refresh_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Refresh" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Refresh">
+  Refresh
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L322"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RefreshStats? Refresh { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RefreshStats.html">RefreshStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_RequestCache_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.RequestCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_RequestCache" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.RequestCache">
+  RequestCache
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L323"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RequestCacheStats? RequestCache { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.RequestCacheStats.html">RequestCacheStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_RetentionLeases_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.RetentionLeases*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_RetentionLeases" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.RetentionLeases">
+  RetentionLeases
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L324"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShardRetentionLeases? RetentionLeases { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardRetentionLeases.html">ShardRetentionLeases</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Routing_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Routing" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Routing">
+  Routing
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L325"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShardRouting? Routing { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardRouting.html">ShardRouting</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Search_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Search*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Search" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Search">
+  Search
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L326"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchStats? Search { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchStats.html">SearchStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Segments_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Segments*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Segments" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Segments">
+  Segments
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L327"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SegmentsStats? Segments { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SegmentsStats.html">SegmentsStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_SeqNo_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.SeqNo*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_SeqNo" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.SeqNo">
+  SeqNo
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L328"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShardSequenceNumber? SeqNo { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardSequenceNumber.html">ShardSequenceNumber</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_ShardPath_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.ShardPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_ShardPath" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.ShardPath">
+  ShardPath
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L329"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShardPath? ShardPath { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardPath.html">ShardPath</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_ShardStats2_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.ShardStats2*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_ShardStats2" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.ShardStats2">
+  ShardStats2
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L331"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ShardsTotalStats? ShardStats2 { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats.html">ShardsTotalStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Shards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Shards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Shards" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Shards">
+  Shards
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L330"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyDictionary&lt;string, object&gt;? Shards { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Store_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Store*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Store" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Store">
+  Store
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StoreStats? Store { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StoreStats.html">StoreStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Translog_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Translog*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Translog" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Translog">
+  Translog
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L333"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TranslogStats? Translog { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TranslogStats.html">TranslogStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Warmer_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Warmer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ShardStats_Warmer" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ShardStats.Warmer">
+  Warmer
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/IndexManagement/ShardStats.g.cs/#L334"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WarmerStats? Warmer { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.WarmerStats.html">WarmerStats</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
