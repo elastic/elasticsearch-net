@@ -105,7 +105,7 @@ internal sealed class DefaultSourceSerializerOptionsProvider :
 		var resolvers = typeInfoResolvers ?? [];
 
 		options.TypeInfoResolver = JsonTypeInfoResolver.Combine(
-			[new DefaultJsonTypeInfoResolver(), ElasticsearchTransportSerializerContext.Default, .. resolvers]
+			[new DefaultJsonTypeInfoResolver(), .. resolvers]
 		);
 		options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 		options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
