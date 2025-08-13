@@ -25,26 +25,54 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 internal sealed partial class ComponentTemplateNodeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedDate = System.Text.Json.JsonEncodedText.Encode("created_date");
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedDateMillis = System.Text.Json.JsonEncodedText.Encode("created_date_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropDeprecated = System.Text.Json.JsonEncodedText.Encode("deprecated");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDate = System.Text.Json.JsonEncodedText.Encode("modified_date");
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDateMillis = System.Text.Json.JsonEncodedText.Encode("modified_date_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.DateTimeOffset?> propCreatedDate = default;
+		LocalJsonValue<System.DateTimeOffset?> propCreatedDateMillis = default;
 		LocalJsonValue<bool?> propDeprecated = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<System.DateTimeOffset?> propModifiedDate = default;
+		LocalJsonValue<System.DateTimeOffset?> propModifiedDateMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary> propTemplate = default;
 		LocalJsonValue<long?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propCreatedDate.TryReadProperty(ref reader, options, PropCreatedDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propCreatedDateMillis.TryReadProperty(ref reader, options, PropCreatedDateMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
 			if (propDeprecated.TryReadProperty(ref reader, options, PropDeprecated, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
 
 			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
+			{
+				continue;
+			}
+
+			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -71,8 +99,12 @@ internal sealed partial class ComponentTemplateNodeConverter : System.Text.Json.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			CreatedDate = propCreatedDate.Value,
+			CreatedDateMillis = propCreatedDateMillis.Value,
 			Deprecated = propDeprecated.Value,
 			Meta = propMeta.Value,
+			ModifiedDate = propModifiedDate.Value,
+			ModifiedDateMillis = propModifiedDateMillis.Value,
 			Template = propTemplate.Value,
 			Version = propVersion.Value
 		};
@@ -81,8 +113,12 @@ internal sealed partial class ComponentTemplateNodeConverter : System.Text.Json.
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCreatedDate, value.CreatedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreatedDateMillis, value.CreatedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
+		writer.WriteProperty(options, PropModifiedDate, value.ModifiedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropModifiedDateMillis, value.ModifiedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteEndObject();
@@ -114,8 +150,35 @@ public sealed partial class ComponentTemplateNode
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? CreatedDate { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was created, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? CreatedDateMillis { get; set; }
 	public bool? Deprecated { get; set; }
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? ModifiedDate { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was last modified, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? ModifiedDateMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
@@ -142,6 +205,28 @@ public readonly partial struct ComponentTemplateNodeDescriptor<TDocument>
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode instance) => new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> CreatedDate(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was created, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> CreatedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDateMillis = value;
+		return this;
+	}
 
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> Deprecated(bool? value = true)
 	{
@@ -171,6 +256,28 @@ public readonly partial struct ComponentTemplateNodeDescriptor<TDocument>
 	{
 		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
 		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> ModifiedDate(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was last modified, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> ModifiedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDateMillis = value;
 		return this;
 	}
 
@@ -226,6 +333,28 @@ public readonly partial struct ComponentTemplateNodeDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode instance) => new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor CreatedDate(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was created, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor CreatedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDateMillis = value;
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor Deprecated(bool? value = true)
 	{
 		Instance.Deprecated = value;
@@ -254,6 +383,28 @@ public readonly partial struct ComponentTemplateNodeDescriptor
 	{
 		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
 		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor ModifiedDate(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the component template was last modified, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor ModifiedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDateMillis = value;
 		return this;
 	}
 

@@ -27,11 +27,15 @@ internal sealed partial class IndexTemplateConverter : System.Text.Json.Serializ
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAllowAutoCreate = System.Text.Json.JsonEncodedText.Encode("allow_auto_create");
 	private static readonly System.Text.Json.JsonEncodedText PropComposedOf = System.Text.Json.JsonEncodedText.Encode("composed_of");
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedDate = System.Text.Json.JsonEncodedText.Encode("created_date");
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedDateMillis = System.Text.Json.JsonEncodedText.Encode("created_date_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropDataStream = System.Text.Json.JsonEncodedText.Encode("data_stream");
 	private static readonly System.Text.Json.JsonEncodedText PropDeprecated = System.Text.Json.JsonEncodedText.Encode("deprecated");
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissingComponentTemplates = System.Text.Json.JsonEncodedText.Encode("ignore_missing_component_templates");
 	private static readonly System.Text.Json.JsonEncodedText PropIndexPatterns = System.Text.Json.JsonEncodedText.Encode("index_patterns");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDate = System.Text.Json.JsonEncodedText.Encode("modified_date");
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDateMillis = System.Text.Json.JsonEncodedText.Encode("modified_date_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
 	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
@@ -41,11 +45,15 @@ internal sealed partial class IndexTemplateConverter : System.Text.Json.Serializ
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propAllowAutoCreate = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>> propComposedOf = default;
+		LocalJsonValue<System.DateTimeOffset?> propCreatedDate = default;
+		LocalJsonValue<System.DateTimeOffset?> propCreatedDateMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration?> propDataStream = default;
 		LocalJsonValue<bool?> propDeprecated = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Names?> propIgnoreMissingComponentTemplates = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Names> propIndexPatterns = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<System.DateTimeOffset?> propModifiedDate = default;
+		LocalJsonValue<System.DateTimeOffset?> propModifiedDateMillis = default;
 		LocalJsonValue<long?> propPriority = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary?> propTemplate = default;
 		LocalJsonValue<long?> propVersion = default;
@@ -57,6 +65,16 @@ internal sealed partial class IndexTemplateConverter : System.Text.Json.Serializ
 			}
 
 			if (propComposedOf.TryReadProperty(ref reader, options, PropComposedOf, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Name>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propCreatedDate.TryReadProperty(ref reader, options, PropCreatedDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propCreatedDateMillis.TryReadProperty(ref reader, options, PropCreatedDateMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -82,6 +100,16 @@ internal sealed partial class IndexTemplateConverter : System.Text.Json.Serializ
 			}
 
 			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
+			{
+				continue;
+			}
+
+			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
 			{
 				continue;
 			}
@@ -115,11 +143,15 @@ internal sealed partial class IndexTemplateConverter : System.Text.Json.Serializ
 		{
 			AllowAutoCreate = propAllowAutoCreate.Value,
 			ComposedOf = propComposedOf.Value,
+			CreatedDate = propCreatedDate.Value,
+			CreatedDateMillis = propCreatedDateMillis.Value,
 			DataStream = propDataStream.Value,
 			Deprecated = propDeprecated.Value,
 			IgnoreMissingComponentTemplates = propIgnoreMissingComponentTemplates.Value,
 			IndexPatterns = propIndexPatterns.Value,
 			Meta = propMeta.Value,
+			ModifiedDate = propModifiedDate.Value,
+			ModifiedDateMillis = propModifiedDateMillis.Value,
 			Priority = propPriority.Value,
 			Template = propTemplate.Value,
 			Version = propVersion.Value
@@ -131,11 +163,15 @@ internal sealed partial class IndexTemplateConverter : System.Text.Json.Serializ
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAllowAutoCreate, value.AllowAutoCreate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropComposedOf, value.ComposedOf, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Name>(o, v, null));
+		writer.WriteProperty(options, PropCreatedDate, value.CreatedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCreatedDateMillis, value.CreatedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropDataStream, value.DataStream, null, null);
 		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropIgnoreMissingComponentTemplates, value.IgnoreMissingComponentTemplates, null, null);
 		writer.WriteProperty(options, PropIndexPatterns, value.IndexPatterns, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
+		writer.WriteProperty(options, PropModifiedDate, value.ModifiedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropModifiedDateMillis, value.ModifiedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropPriority, value.Priority, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
@@ -185,6 +221,20 @@ public sealed partial class IndexTemplate
 
 	/// <summary>
 	/// <para>
+	/// Date and time when the index template was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? CreatedDate { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the index template was created, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? CreatedDateMillis { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// If this object is included, the template is used to create data streams and their backing indices.
 	/// Supports an empty object.
 	/// Data streams require a matching index template with a <c>data_stream</c> object.
@@ -226,6 +276,20 @@ public sealed partial class IndexTemplate
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the index template was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? ModifiedDate { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the index template was last modified, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? ModifiedDateMillis { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -300,6 +364,28 @@ public readonly partial struct IndexTemplateDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> ComposedOf(params Elastic.Clients.Elasticsearch.Name[] values)
 	{
 		Instance.ComposedOf = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the index template was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> CreatedDate(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the index template was created, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> CreatedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDateMillis = value;
 		return this;
 	}
 
@@ -417,6 +503,28 @@ public readonly partial struct IndexTemplateDescriptor<TDocument>
 	{
 		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
 		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the index template was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> ModifiedDate(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the index template was last modified, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> ModifiedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDateMillis = value;
 		return this;
 	}
 
@@ -542,6 +650,28 @@ public readonly partial struct IndexTemplateDescriptor
 
 	/// <summary>
 	/// <para>
+	/// Date and time when the index template was created. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor CreatedDate(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the index template was created, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor CreatedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.CreatedDateMillis = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// If this object is included, the template is used to create data streams and their backing indices.
 	/// Supports an empty object.
 	/// Data streams require a matching index template with a <c>data_stream</c> object.
@@ -654,6 +784,28 @@ public readonly partial struct IndexTemplateDescriptor
 	{
 		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
 		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the index template was last modified. Only returned if the <c>human</c> query parameter is <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor ModifiedDate(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Date and time when the index template was last modified, in milliseconds since the epoch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor ModifiedDateMillis(System.DateTimeOffset? value)
+	{
+		Instance.ModifiedDateMillis = value;
 		return this;
 	}
 
