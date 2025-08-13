@@ -8,9 +8,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Json;
 
-internal sealed class RoutingConverter : JsonConverter<Routing>
+public sealed class RoutingConverter : JsonConverter<Routing>
 {
 	private IElasticsearchClientSettings _settings;
 
