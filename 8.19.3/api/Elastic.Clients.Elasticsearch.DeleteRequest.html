@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class DeleteRequest | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class DeleteRequest | Elasticsearch.NET ">
+      
+      <meta name="description" content="Delete a document.   Remove a JSON document from the specified index.   NOTE: You cannot send deletion requests directly to a data stream. To delete a document in a data stream, you must target the backing index containing the document.   Optimistic concurrency control   Delete operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number and primary term specified by the if_seq_no and if_primary_term parameters. If a mismatch is detected, the operation will result in a VersionConflictException and a status code of 409.   Versioning   Each document indexed is versioned. When deleting a document, the version can be specified to make sure the relevant document you are trying to delete is actually being deleted and it has not changed in the meantime. Every write operation run on a document, deletes included, causes its version to be incremented. The version number of a deleted document remains available for a short time after deletion to allow for control of concurrent operations. The length of time for which a deleted document&#39;s version remains available is determined by the index.gc_deletes index setting.   Routing   If routing is used during indexing, the routing value also needs to be specified to delete a document.   If the _routing mapping is set to required and no routing value is specified, the delete API throws a RoutingMissingException and rejects the request.   For example:  DELETE /my-index-000001/_doc/1?routing=shard-1  This request deletes the document with ID 1, but it is routed based on the user. The document is not deleted if the correct routing is not specified.   Distributed   The delete operation gets hashed into a specific shard ID. It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_DeleteRequest.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.DeleteRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.DeleteRequest">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_DeleteRequest" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest" class="text-break">
+Class DeleteRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Shared/Api/DeleteRequest.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Delete a document.
+</p>
+<p>
+Remove a JSON document from the specified index.
+</p>
+<p>
+NOTE: You cannot send deletion requests directly to a data stream.
+To delete a document in a data stream, you must target the backing index containing the document.
+</p>
+<p>
+<strong>Optimistic concurrency control</strong>
+</p>
+<p>
+Delete operations can be made conditional and only be performed if the last modification to the document was assigned the sequence number and primary term specified by the <code>if_seq_no</code> and <code>if_primary_term</code> parameters.
+If a mismatch is detected, the operation will result in a <code>VersionConflictException</code> and a status code of <code>409</code>.
+</p>
+<p>
+<strong>Versioning</strong>
+</p>
+<p>
+Each document indexed is versioned.
+When deleting a document, the version can be specified to make sure the relevant document you are trying to delete is actually being deleted and it has not changed in the meantime.
+Every write operation run on a document, deletes included, causes its version to be incremented.
+The version number of a deleted document remains available for a short time after deletion to allow for control of concurrent operations.
+The length of time for which a deleted document's version remains available is determined by the <code>index.gc_deletes</code> index setting.
+</p>
+<p>
+<strong>Routing</strong>
+</p>
+<p>
+If routing is used during indexing, the routing value also needs to be specified to delete a document.
+</p>
+<p>
+If the <code>_routing</code> mapping is set to <code>required</code> and no routing value is specified, the delete API throws a <code>RoutingMissingException</code> and rejects the request.
+</p>
+<p>
+For example:
+</p>
+<pre><code class="lang-csharp">DELETE /my-index-000001/_doc/1?routing=shard-1</code></pre>
+<p>
+This request deletes the document with ID 1, but it is routed based on the user.
+The document is not deleted if the correct routing is not specified.
+</p>
+<p>
+<strong>Distributed</strong>
+</p>
+<p>
+The delete operation gets hashed into a specific shard ID.
+It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(DeleteRequestConverter))]
+public class DeleteRequest : PlainRequest&lt;DeleteRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.DeleteRequestParameters.html">DeleteRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.DeleteRequestParameters.html">DeleteRequestParameters</a>&gt;</div>
+      <div><span class="xref">DeleteRequest</span></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.DeleteRequest-1.html">DeleteRequest&lt;TDocument&gt;</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;DeleteRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;DeleteRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;DeleteRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;DeleteRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;DeleteRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q__1_System_String_">Request&lt;DeleteRequestParameters&gt;.Q&lt;TOut&gt;(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q_System_String_System_Object_">Request&lt;DeleteRequestParameters&gt;.Q(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html#Elastic_Clients_Elasticsearch_Requests_Request_1_Q_System_String_Elastic_Transport_IStringable_">Request&lt;DeleteRequestParameters&gt;.Q(string, IStringable)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RequestConfiguration">Request.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RouteValues">Request.RouteValues</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_DynamicHttpMethod">Request.DynamicHttpMethod</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_ResolveUrl_Elastic_Clients_Elasticsearch_Requests_RouteValues_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_">Request.ResolveUrl(RouteValues, IElasticsearchClientSettings)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_P__1_System_String_">Request.P&lt;TOut&gt;(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_PR_System_String_System_Object_">Request.PR(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_PO_System_String_System_Object_">Request.PO(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest__ctor_Elastic_Clients_Elasticsearch_IndexName_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.#ctor(Elastic.Clients.Elasticsearch.IndexName,Elastic.Clients.Elasticsearch.Id)">
+  DeleteRequest(IndexName, Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L182"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeleteRequest(IndexName index, Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest_Id_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Id*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest_Id" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Id">
+  Id
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A unique identifier for the document.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Id Id { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest_IfPrimaryTerm_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.IfPrimaryTerm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest_IfPrimaryTerm" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.IfPrimaryTerm">
+  IfPrimaryTerm
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L232"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only perform the operation if the document has this primary term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? IfPrimaryTerm { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest_IfSeqNo_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.IfSeqNo*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest_IfSeqNo" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.IfSeqNo">
+  IfSeqNo
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L239"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only perform the operation if the document has this sequence number.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? IfSeqNo { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest_Index_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest_Index" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Index">
+  Index
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L221"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the target index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexName Index { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest_Refresh_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest_Refresh" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Refresh">
+  Refresh
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, Elasticsearch refreshes the affected shards to make this operation visible to search.
+If <code>wait_for</code>, it waits for a refresh to make this operation visible to search.
+If <code>false</code>, it does nothing with refreshes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Refresh? Refresh { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Refresh.html">Refresh</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest_Routing_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest_Routing" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Routing">
+  Routing
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A custom value used to route operations to a specific shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Routing? Routing { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Routing.html">Routing</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L199"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.3/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest_Timeout_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest_Timeout" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Timeout">
+  Timeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period to wait for active shards.
+</p>
+<p>
+This parameter is useful for situations where the primary shard assigned to perform the delete operation might not be available when the delete operation runs.
+Some reasons for this might be that the primary shard is currently recovering from a store or undergoing relocation.
+By default, the delete operation will wait on the primary shard to become available for up to 1 minute before failing and responding with an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? Timeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest_Version_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest_Version" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.Version">
+  Version
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An explicit version number for concurrency control.
+It must match the current version of the document for the request to succeed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? Version { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest_VersionType_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.VersionType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest_VersionType" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.VersionType">
+  VersionType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L282"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The version type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public VersionType? VersionType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.VersionType.html">VersionType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_DeleteRequest_WaitForActiveShards_" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.WaitForActiveShards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_DeleteRequest_WaitForActiveShards" data-uid="Elastic.Clients.Elasticsearch.DeleteRequest.WaitForActiveShards">
+  WaitForActiveShards
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.3/src/Elastic.Clients.Elasticsearch/_Generated/Api/DeleteRequest.g.cs/#L291"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The minimum number of shard copies that must be active before proceeding with the operation.
+You can set it to <code>all</code> or any positive integer up to the total number of shards in the index (<code>number_of_replicas+1</code>).
+The default value of <code>1</code> means it waits for each primary shard to be active.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WaitForActiveShards? WaitForActiveShards { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.WaitForActiveShards.html">WaitForActiveShards</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
