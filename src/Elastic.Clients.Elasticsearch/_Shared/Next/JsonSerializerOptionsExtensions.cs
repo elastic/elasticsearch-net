@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 using System.Text.Json.Serialization;
@@ -13,6 +13,8 @@ namespace Elastic.Clients.Elasticsearch.Serialization;
 
 internal static partial class JsonSerializerOptionsExtensions
 {
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static JsonConverter<T> GetConverter<T>(this JsonSerializerOptions options, Type? markerType)
 	{
@@ -20,13 +22,9 @@ internal static partial class JsonSerializerOptionsExtensions
 		// to directly use converters like we do.
 		// When getting a default generic converter from `JsonSerializerOptions` that are not read-only, a
 		// `NotSupportedException` is thrown as soon as we call `converter.Read()` or `converter.Write()`.
-#pragma warning disable IL2026, IL3050
 		options.MakeReadOnly(true);
-#pragma warning restore IL2026, IL3050
 
-#pragma warning disable IL2026, IL3050
 		var rawConverter = options.GetConverter(markerType ?? typeof(T));
-#pragma warning restore IL2026, IL3050
 
 		var converter = (JsonConverter<T>)(rawConverter is IMarkerTypeConverter markerTypeConverter
 			? markerTypeConverter.WrappedConverter
@@ -35,6 +33,8 @@ internal static partial class JsonSerializerOptionsExtensions
 		return converter;
 	}
 
+	[UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
+	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static TContext GetContext<TContext>(this JsonSerializerOptions options)
 	{

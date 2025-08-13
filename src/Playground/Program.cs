@@ -3,14 +3,18 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization.Metadata;
 using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
-using static System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes;
-
 using Playground;
 
-var settings = new ElasticsearchClientSettings(new Uri("https://primary.es.europe-west3.gcp.cloud.es.io"))
+var pool = new SingleNodePool(new Uri("https://primary.es.europe-west3.gcp.cloud.es.io"));
+var settings = new ElasticsearchClientSettings(pool,
+		sourceSerializer: (_, settings) =>
+			new DefaultSourceSerializer(settings, PlaygroundJsonSerializerContext.Default)
+		)
 	.Authentication(new BasicAuthentication("elastic", "Oov35Wtxj5DzpZNzYAzFb0KZ"))
 	.DisableDirectStreaming()
 	.EnableDebugMode(cd =>
@@ -37,7 +41,7 @@ var idByType = IdByType(person.GetType(), person);
 Console.WriteLine(id);
 Console.WriteLine(idByType);
 // This still errors on AOT compilation
-//Console.WriteLine(client.SourceSerializer.SerializeToString(person));
+Console.WriteLine(client.SourceSerializer.SerializeToString(person));
 
 [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Can only annotate our implementation")]
 [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = "Can only annotate our implementation")]
