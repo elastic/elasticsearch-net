@@ -124,35 +124,6 @@ public sealed partial class BulkRequestParameters : Elastic.Transport.RequestPar
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-internal sealed partial class BulkRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.BulkRequest>
-{
-	public override Elastic.Clients.Elasticsearch.BulkRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.BulkRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.BulkRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Bulk index or delete documents.
@@ -352,7 +323,6 @@ internal sealed partial class BulkRequestConverter : System.Text.Json.Serializat
 /// Refer to the linked documentation for step-by-step instructions using the index settings API.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.BulkRequestConverter))]
 public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.BulkRequestParameters>
 {
 	public BulkRequest(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))
