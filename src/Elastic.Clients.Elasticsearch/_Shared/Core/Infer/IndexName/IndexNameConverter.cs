@@ -8,12 +8,12 @@ using System.Text.Json.Serialization;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Json;
 
 /// <summary>
 /// Converts an <see cref="IndexName"/> to and from its JSON representation.
 /// </summary>
-internal class IndexNameConverter : JsonConverter<IndexName>
+public sealed class IndexNameConverter : JsonConverter<IndexName>
 {
 	private IElasticsearchClientSettings _settings;
 

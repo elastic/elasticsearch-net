@@ -8,9 +8,9 @@ using System.Text.Json.Serialization;
 
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Json;
 
-internal sealed class FieldConverter :
+public sealed class FieldConverter :
 	JsonConverter<Field>
 {
 	public override Field Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

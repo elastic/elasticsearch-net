@@ -3,9 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Text.Json.Serialization;
+
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
+[JsonConverter(typeof(JsonIncompatibleConverter))]
 public sealed class BulkUpdateOperationWithPartial<TPartialDocument> : BulkUpdateOperation
 {
 	public BulkUpdateOperationWithPartial(Id id, TPartialDocument partialDocument)

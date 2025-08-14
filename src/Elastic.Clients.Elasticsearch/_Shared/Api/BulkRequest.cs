@@ -12,9 +12,11 @@ using Elastic.Clients.Elasticsearch.Core.Bulk;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Clients.Elasticsearch.Requests;
 using System.Runtime.InteropServices;
+using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+[JsonConverter(typeof(JsonIncompatibleConverter))]
 public partial class BulkRequest : IStreamSerializable
 {
 	private static readonly IRequestConfiguration RequestConfigSingleton = new RequestConfiguration

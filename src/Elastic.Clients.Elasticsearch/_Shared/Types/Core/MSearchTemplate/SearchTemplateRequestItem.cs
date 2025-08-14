@@ -3,16 +3,18 @@
 // See the LICENSE file in the project root for more information.
 
 using System.IO;
-using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+
 using Elastic.Clients.Elasticsearch.Core.MSearch;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
-using Elastic.Transport.Extensions;
 
 namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
 
-public sealed class SearchTemplateRequestItem : IStreamSerializable
+[JsonConverter(typeof(JsonIncompatibleConverter))]
+public sealed class SearchTemplateRequestItem :
+	IStreamSerializable
 {
 	public SearchTemplateRequestItem(TemplateConfig body) => Body = body;
 

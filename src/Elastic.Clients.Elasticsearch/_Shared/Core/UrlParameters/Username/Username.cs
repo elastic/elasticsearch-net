@@ -5,16 +5,14 @@
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
-[JsonConverter(typeof(UsernameConverter))]
+[JsonConverter(typeof(Json.UsernameConverter))]
 public class Username :
 	IEquatable<Username>,
 	IUrlParameter
@@ -76,43 +74,4 @@ public class Username :
 	}
 
 	#endregion IParsable
-}
-
-internal sealed class UsernameConverter :
-	JsonConverter<Username>
-{
-	public override Username? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		reader.ValidateToken(JsonTokenType.String);
-
-		return reader.GetString()!;
-	}
-
-	public override Username ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert,
-		JsonSerializerOptions options)
-	{
-		reader.ValidateToken(JsonTokenType.PropertyName);
-
-		return reader.GetString()!;
-	}
-
-	public override void Write(Utf8JsonWriter writer, Username value, JsonSerializerOptions options)
-	{
-		if (value?.Value is null)
-		{
-			throw new ArgumentNullException(nameof(value));
-		}
-
-		writer.WriteStringValue(value.Value);
-	}
-
-	public override void WriteAsPropertyName(Utf8JsonWriter writer, Username value, JsonSerializerOptions options)
-	{
-		if (value?.Value is null)
-		{
-			throw new ArgumentNullException(nameof(value));
-		}
-
-		writer.WritePropertyName(value.Value);
-	}
 }

@@ -4,6 +4,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -37,13 +38,13 @@ internal sealed class ContextProvider<TContext> :
 	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	public static TContext GetContext(JsonSerializerOptions options)
 	{
-		if (options.GetConverter(typeof(Marker)) is not Converter provider)
+		if (!TryGetContext(options, out var context))
 		{
-			throw new InvalidOperationException($"No context provider for type '{typeof(TContext).Name}' is " +
-												$"registered for the given 'JsonSerializerOptions' instance.");
+			throw new InvalidOperationException(
+				$"No context provider for type '{typeof(TContext).Name}' is registered for the given 'JsonSerializerOptions' instance.");
 		}
 
-		return provider.Context;
+		return context;
 	}
 
 	/// <summary>
@@ -59,6 +60,12 @@ internal sealed class ContextProvider<TContext> :
 	[UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute'", Justification = "Always using explicit TypeInfoResolver")]
 	public static bool TryGetContext(JsonSerializerOptions options, [MaybeNullWhen(false)] out TContext context)
 	{
+		if (options.Converters.FirstOrDefault(x => x.CanConvert(typeof(Marker))) is ContextProvider<TContext> global)
+		{
+			context = global._converter.Context;
+			return true;
+		}
+
 		if (options.GetConverter(typeof(Marker)) is not Converter provider)
 		{
 			context = default;
@@ -71,7 +78,7 @@ internal sealed class ContextProvider<TContext> :
 
 	public override bool CanConvert(Type typeToConvert)
 	{
-		return typeToConvert == typeof(Marker);
+		return (typeToConvert == typeof(Marker));
 	}
 
 	public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)

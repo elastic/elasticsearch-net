@@ -5,14 +5,13 @@
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(DataStreamNameConverter))]
+[JsonConverter(typeof(Json.DataStreamNameConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
 public sealed class DataStreamName :
 	IEquatable<DataStreamName>,
@@ -80,24 +79,4 @@ public sealed class DataStreamName :
 	}
 
 	#endregion IParsable
-}
-
-internal sealed class DataStreamNameConverter : JsonConverter<DataStreamName>
-{
-	public override DataStreamName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		reader.ValidateToken(JsonTokenType.String);
-
-		return reader.GetString();
-	}
-
-	public override void Write(Utf8JsonWriter writer, DataStreamName value, JsonSerializerOptions options)
-	{
-		if (value?.Name is null)
-		{
-			throw new ArgumentNullException(nameof(value));
-		}
-
-		writer.WriteStringValue(value.Name);
-	}
 }

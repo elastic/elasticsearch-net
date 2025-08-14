@@ -17,6 +17,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 /// Represents a bulk operation to create a document.
 /// </summary>
 /// <typeparam name="T">The type representing the document being created.</typeparam>
+[JsonConverter(typeof(JsonIncompatibleConverter))]
 public sealed class BulkCreateOperation<T> : BulkOperation
 {
 	private static readonly System.Text.Json.JsonEncodedText PropDynamicTemplates = System.Text.Json.JsonEncodedText.Encode("dynamic_templates");

@@ -8,15 +8,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(DataStreamNamesConverter))]
+[JsonConverter(typeof(Json.DataStreamNamesConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
 public sealed class DataStreamNames :
 	IUrlParameter,
@@ -143,24 +141,4 @@ public sealed class DataStreamNames :
 	}
 
 	#endregion IParsable
-}
-
-internal sealed class DataStreamNamesConverter : JsonConverter<DataStreamNames>
-{
-	public override DataStreamNames Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var fields = reader.ReadCollectionValue<DataStreamName>(options, null)!;
-
-		return new DataStreamNames(fields);
-	}
-
-	public override void Write(Utf8JsonWriter writer, DataStreamNames value, JsonSerializerOptions options)
-	{
-		if (value is null)
-		{
-			throw new ArgumentNullException(nameof(value));
-		}
-
-		writer.WriteCollectionValue(options, value.Names, null);
-	}
 }

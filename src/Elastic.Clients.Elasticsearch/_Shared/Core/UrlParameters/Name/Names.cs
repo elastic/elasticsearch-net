@@ -7,16 +7,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
-[JsonConverter(typeof(NamesConverter))]
+[JsonConverter(typeof(Json.NamesConverter))]
 public sealed class Names :
 	IEquatable<Names>,
 	IUrlParameter
@@ -115,29 +113,4 @@ public sealed class Names :
 	}
 
 	#endregion IParsable
-}
-
-internal sealed class NamesConverter :
-	JsonConverter<Names>
-{
-	public override Names Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		return reader.TokenType switch
-		{
-			JsonTokenType.String => new Names([reader.ReadValue<Name>(options)]),
-			JsonTokenType.StartArray => new Names(reader.ReadValue<List<Name>>(options)),
-			_ => throw reader.UnexpectedTokenException(JsonTokenType.String, JsonTokenType.StartArray)
-		};
-	}
-
-	public override void Write(Utf8JsonWriter writer, Names value, JsonSerializerOptions options)
-	{
-		if (value.Values is [{ } single])
-		{
-			writer.WriteValue(options, single);
-			return;
-		}
-
-		writer.WriteValue(options, value.Values);
-	}
 }

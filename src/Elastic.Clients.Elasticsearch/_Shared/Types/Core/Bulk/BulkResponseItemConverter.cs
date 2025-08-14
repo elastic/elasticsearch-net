@@ -8,9 +8,9 @@ using System.Text.Json.Serialization;
 
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Core.Bulk;
+namespace Elastic.Clients.Elasticsearch.Core.Bulk.Json;
 
-internal sealed class BulkResponseItemConverter : JsonConverter<ResponseItem>
+public sealed class BulkResponseItemConverter : JsonConverter<ResponseItem>
 {
 	private static readonly JsonEncodedText PropError = JsonEncodedText.Encode("error");
 	private static readonly JsonEncodedText PropForcedRefresh = JsonEncodedText.Encode("forced_refresh");

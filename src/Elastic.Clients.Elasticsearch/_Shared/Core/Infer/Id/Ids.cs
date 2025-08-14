@@ -14,7 +14,7 @@ using Elastic.Transport;
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
-[JsonConverter(typeof(IdsConverter))]
+[JsonConverter(typeof(Json.IdsConverter))]
 public class Ids :
 	IUrlParameter,
 	IEquatable<Ids>

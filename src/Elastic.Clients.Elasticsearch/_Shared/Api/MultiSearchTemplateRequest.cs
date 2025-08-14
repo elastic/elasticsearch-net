@@ -20,7 +20,9 @@ public partial class MultiSearchTemplateResponse<TDocument>
 	public int TotalResponses => Responses.Count > 0 ? Responses.Count : 0;
 }
 
-public partial class MultiSearchTemplateRequest : IStreamSerializable
+[JsonConverter(typeof(JsonIncompatibleConverter))]
+public partial class MultiSearchTemplateRequest :
+	IStreamSerializable
 {
 	internal override void BeforeRequest() => TypedKeys ??= true;
 

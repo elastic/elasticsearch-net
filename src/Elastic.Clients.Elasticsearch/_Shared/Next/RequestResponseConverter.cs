@@ -13,6 +13,11 @@ namespace Elastic.Clients.Elasticsearch.Serialization;
 public sealed class RequestResponseConverter<T> :
 	JsonConverter<T>
 {
+	public override bool CanConvert(Type typeToConvert)
+	{
+		return (typeToConvert == typeof(T));
+	}
+
 	public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
 		var settings = options.GetContext<IElasticsearchClientSettings>();

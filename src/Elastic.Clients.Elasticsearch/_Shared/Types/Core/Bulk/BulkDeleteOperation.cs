@@ -12,6 +12,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
+[JsonConverter(typeof(JsonIncompatibleConverter))]
 public class BulkDeleteOperation :
 	BulkOperation
 {

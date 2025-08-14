@@ -6,16 +6,14 @@ using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{" + nameof(DebugDisplay) + ",nq}")]
-[JsonConverter(typeof(PropertyNameConverter))]
+[JsonConverter(typeof(Json.PropertyNameConverter))]
 public sealed class PropertyName : IEquatable<PropertyName>, IUrlParameter
 {
 	private readonly object _comparisonValue;
@@ -117,37 +115,4 @@ public sealed class PropertyName : IEquatable<PropertyName>, IUrlParameter
 	public static bool operator ==(PropertyName left, PropertyName right) => Equals(left, right);
 
 	public static bool operator !=(PropertyName left, PropertyName right) => !Equals(left, right);
-}
-
-internal sealed class PropertyNameConverter :
-	JsonConverter<PropertyName>
-{
-	public override PropertyName Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		reader.ValidateToken(JsonTokenType.String);
-
-		return new PropertyName(reader.GetString()!);
-	}
-
-	public override void Write(Utf8JsonWriter writer, PropertyName value, JsonSerializerOptions options)
-	{
-		var settings = options.GetContext<IElasticsearchClientSettings>();
-		var fieldName = settings.Inferrer.PropertyName(value);
-
-		writer.WriteStringValue(fieldName);
-	}
-
-	public override PropertyName ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		reader.ValidateToken(JsonTokenType.PropertyName);
-
-		return new PropertyName(reader.GetString()!);
-	}
-
-	public override void WriteAsPropertyName(Utf8JsonWriter writer, PropertyName value, JsonSerializerOptions options)
-	{
-		var settings = options.GetContext<IElasticsearchClientSettings>();
-
-		writer.WritePropertyName(settings.Inferrer.PropertyName(value));
-	}
 }

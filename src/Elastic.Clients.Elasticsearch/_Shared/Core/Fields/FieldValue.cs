@@ -3,12 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Text.Json.Serialization;
-using System.Text.Json;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 using System.Globalization;
-using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -16,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// Represents a value for a field which depends on the field mapping and is only known at runtime,
 /// therefore cannot be specifically typed.
 /// </summary>
-[JsonConverter(typeof(FieldValueConverter))]
+[JsonConverter(typeof(Json.FieldValueConverter))]
 public readonly struct FieldValue :
 	IEquatable<FieldValue>
 {

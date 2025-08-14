@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
-[JsonConverter(typeof(BulkResponseItemConverter))]
+[JsonConverter(typeof(Json.BulkResponseItemConverter))]
 public abstract partial class ResponseItem
 {
 	public abstract string Operation { get; }

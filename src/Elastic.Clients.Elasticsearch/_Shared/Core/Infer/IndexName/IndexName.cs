@@ -14,7 +14,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// Represents the name of an index, which may be inferred from a <see cref="Type"/>.
 /// </summary>
-[JsonConverter(typeof(IndexNameConverter))]
+[JsonConverter(typeof(Json.IndexNameConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
 public class IndexName :
 	IEquatable<IndexName>,

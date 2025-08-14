@@ -4,21 +4,18 @@
 
 #nullable enable
 
-using Elastic.Clients.Elasticsearch.Core;
-
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.Json;
 using System.Text.Json.Serialization;
-using Elastic.Clients.Elasticsearch.Serialization;
+
+using Elastic.Clients.Elasticsearch.Core;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
 /// <para>Buckets path can be expressed in different ways, and an aggregation may accept some or all of these<br/>forms depending on its type. Please refer to each aggregation's documentation to know what buckets<br/>path forms they accept.</para>
 /// </summary>
-[JsonConverter(typeof(BucketsPathConverter))]
+[JsonConverter(typeof(Json.BucketsPathConverter))]
 public sealed class BucketsPath : IComplexUnion<BucketsPath.Kind>
 {
 	public enum Kind
@@ -94,40 +91,4 @@ public sealed class BucketsPath : IComplexUnion<BucketsPath.Kind>
 	}
 
 	public static implicit operator BucketsPath(Dictionary<string, string> dictionary) => BucketsPath.Dictionary(dictionary);
-}
-
-internal sealed class BucketsPathConverter : JsonConverter<BucketsPath>
-{
-	public override BucketsPath? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		return (reader.TokenType) switch
-		{
-			JsonTokenType.Null => null,
-			JsonTokenType.String => BucketsPath.Single(reader.ReadValue<string>(options)!),
-			JsonTokenType.StartArray => BucketsPath.Array(reader.ReadCollectionValue<string>(options, null)!.ToArray()),
-			JsonTokenType.StartObject => BucketsPath.Dictionary(reader.ReadDictionaryValue<string, string>(options, null, null)!),
-			_ => throw new JsonException($"Unexpected token '{reader.TokenType}'.")
-		};
-	}
-
-	public override void Write(Utf8JsonWriter writer, BucketsPath value, JsonSerializerOptions options)
-	{
-		switch (value._kind)
-		{
-			case BucketsPath.Kind.Single:
-				writer.WriteStringValue((string)value._value);
-				break;
-
-			case BucketsPath.Kind.Array:
-				writer.WriteCollectionValue(options, (string[])value._value, null);
-				break;
-
-			case BucketsPath.Kind.Dictionary:
-				writer.WriteDictionaryValue(options, (Dictionary<string, string>)value._value, null, null);
-				break;
-
-			default:
-				throw new ArgumentOutOfRangeException();
-		}
-	}
 }

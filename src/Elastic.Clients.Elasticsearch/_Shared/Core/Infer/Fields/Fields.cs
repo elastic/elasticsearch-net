@@ -12,12 +12,11 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(FieldsConverter))]
+[JsonConverter(typeof(Json.FieldsConverter))]
 [DebuggerDisplay($"{{{nameof(DebuggerDisplay)},nq}}")]
 public sealed class Fields :
 	IEquatable<Fields>,

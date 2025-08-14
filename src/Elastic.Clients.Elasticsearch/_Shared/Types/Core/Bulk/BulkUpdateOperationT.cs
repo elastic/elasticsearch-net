@@ -4,11 +4,14 @@
 
 using System;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 using Elastic.Clients.Elasticsearch.Core.Search;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
+[JsonConverter(typeof(JsonIncompatibleConverter))]
 public sealed class BulkUpdateOperation<TDocument, TPartialDocument> :
 	BulkUpdateOperation
 {

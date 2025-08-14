@@ -8,16 +8,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
-[JsonConverter(typeof(IndicesJsonConverter))]
+[JsonConverter(typeof(Json.IndicesJsonConverter))]
 public sealed class Indices :
 	IUrlParameter,
 	IEnumerable<IndexName>,
@@ -239,20 +237,4 @@ public sealed class Indices :
 	}
 
 	#endregion IParsable
-}
-
-internal sealed class IndicesJsonConverter :
-	JsonConverter<Indices>
-{
-	public override Indices Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var indices = reader.ReadSingleOrManyCollectionValue<IndexName>(options, null)!;
-
-		return new Indices(indices);
-	}
-
-	public override void Write(Utf8JsonWriter writer, Indices value, JsonSerializerOptions options)
-	{
-		writer.WriteSingleOrManyCollectionValue(options, value.IndexNames, null);
-	}
 }

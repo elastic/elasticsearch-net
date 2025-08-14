@@ -5,14 +5,13 @@
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(ScrollIdConverter))]
+[JsonConverter(typeof(Json.ScrollIdConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
 public sealed class ScrollId :
 	IEquatable<ScrollId>,
@@ -80,26 +79,4 @@ public sealed class ScrollId :
 	}
 
 	#endregion IParsable
-}
-
-internal sealed class ScrollIdConverter : JsonConverter<ScrollId>
-{
-	public override ScrollId? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.String)
-			throw new JsonException($"Unexpected token '{reader.TokenType}' for DataStreamName");
-
-		return reader.GetString();
-	}
-
-	public override void Write(Utf8JsonWriter writer, ScrollId value, JsonSerializerOptions options)
-	{
-		if (value is null || value.Id is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		writer.WriteStringValue(value.Id);
-	}
 }
