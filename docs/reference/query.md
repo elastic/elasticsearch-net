@@ -11,7 +11,7 @@ This page demonstrates how to perform a search request.
 
 ```csharp
 var response = await client.SearchAsync<Person>(search => search
-    .Index("persons")
+    .Indices("persons")
     .Query(query => query
         .Term(term => term
             .Field(x => x.FirstName)
