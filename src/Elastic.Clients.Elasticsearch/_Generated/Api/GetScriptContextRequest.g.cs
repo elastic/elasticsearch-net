@@ -27,35 +27,6 @@ public sealed partial class GetScriptContextRequestParameters : Elastic.Transpor
 {
 }
 
-internal sealed partial class GetScriptContextRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GetScriptContextRequest>
-{
-	public override Elastic.Clients.Elasticsearch.GetScriptContextRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.GetScriptContextRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.GetScriptContextRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Get script contexts.
@@ -64,7 +35,7 @@ internal sealed partial class GetScriptContextRequestConverter : System.Text.Jso
 /// Get a list of supported script contexts and their methods.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.GetScriptContextRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GetScriptContextRequestConverter))]
 public sealed partial class GetScriptContextRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.GetScriptContextRequestParameters>
 {
 #if NET7_0_OR_GREATER

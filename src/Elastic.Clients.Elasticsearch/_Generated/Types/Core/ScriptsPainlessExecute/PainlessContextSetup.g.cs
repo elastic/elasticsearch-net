@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute;
 
-internal sealed partial class PainlessContextSetupConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDocument = System.Text.Json.JsonEncodedText.Encode("document");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-
-	public override Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<object> propDocument = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDocument.TryReadProperty(ref reader, options, PropDocument, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!))
-			{
-				continue;
-			}
-
-			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
-			{
-				continue;
-			}
-
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Document = propDocument.Value,
-			Index = propIndex.Value,
-			Query = propQuery.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocument, value.Document, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
-		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.Json.PainlessContextSetupConverter))]
 public sealed partial class PainlessContextSetup
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

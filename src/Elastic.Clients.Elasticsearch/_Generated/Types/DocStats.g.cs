@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class DocStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DocStats>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleted = System.Text.Json.JsonEncodedText.Encode("deleted");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_size_in_bytes");
-
-	public override Elastic.Clients.Elasticsearch.DocStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long> propCount = default;
-		LocalJsonValue<long?> propDeleted = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propTotalSize = default;
-		LocalJsonValue<long> propTotalSizeInBytes = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
-			{
-				continue;
-			}
-
-			if (propDeleted.TryReadProperty(ref reader, options, PropDeleted, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propTotalSize.TryReadProperty(ref reader, options, PropTotalSize, null))
-			{
-				continue;
-			}
-
-			if (propTotalSizeInBytes.TryReadProperty(ref reader, options, PropTotalSizeInBytes, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.DocStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Count = propCount.Value,
-			Deleted = propDeleted.Value,
-			TotalSize = propTotalSize.Value,
-			TotalSizeInBytes = propTotalSizeInBytes.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.DocStats value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count, null, null);
-		writer.WriteProperty(options, PropDeleted, value.Deleted, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropTotalSize, value.TotalSize, null, null);
-		writer.WriteProperty(options, PropTotalSizeInBytes, value.TotalSizeInBytes, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DocStatsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.DocStatsConverter))]
 public sealed partial class DocStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

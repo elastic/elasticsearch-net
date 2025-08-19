@@ -23,46 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class NumericDecayFunctionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMultiValueMode = System.Text.Json.JsonEncodedText.Encode("multi_value_mode");
-
-	public override Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode?> propMultiValueMode = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.DecayPlacement<double?, double?>> propPlacement = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMultiValueMode.TryReadProperty(ref reader, options, PropMultiValueMode, static Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode>(o)))
-			{
-				continue;
-			}
-
-			propField.Initialized = propPlacement.Initialized = true;
-			reader.ReadProperty(options, out propField.Value, out propPlacement.Value, static Elastic.Clients.Elasticsearch.Field (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadPropertyName<Elastic.Clients.Elasticsearch.Field>(o), null);
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Field = propField.Value,
-			MultiValueMode = propMultiValueMode.Value,
-			Placement = propPlacement.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMultiValueMode, value.MultiValueMode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.QueryDsl.MultiValueMode>(o, v));
-		writer.WriteProperty(options, value.Field, value.Placement, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Field v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Field>(o, v), null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunctionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.NumericDecayFunctionConverter))]
 public sealed partial class NumericDecayFunction : Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

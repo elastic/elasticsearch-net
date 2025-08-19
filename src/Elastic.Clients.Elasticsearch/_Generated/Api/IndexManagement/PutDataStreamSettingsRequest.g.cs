@@ -52,19 +52,6 @@ public sealed partial class PutDataStreamSettingsRequestParameters : Elastic.Tra
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class PutDataStreamSettingsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest>
-{
-	public override Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Settings = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Settings, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Update data stream settings.
@@ -76,7 +63,7 @@ internal sealed partial class PutDataStreamSettingsRequestConverter : System.Tex
 /// backing indices. Otherwise, it will be applied when the data stream is next rolled over.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutDataStreamSettingsRequestConverter))]
 public sealed partial class PutDataStreamSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamSettingsRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

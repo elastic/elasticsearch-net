@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class MlInfoResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDefaults = System.Text.Json.JsonEncodedText.Encode("defaults");
-	private static readonly System.Text.Json.JsonEncodedText PropLimits = System.Text.Json.JsonEncodedText.Encode("limits");
-	private static readonly System.Text.Json.JsonEncodedText PropNativeCode = System.Text.Json.JsonEncodedText.Encode("native_code");
-	private static readonly System.Text.Json.JsonEncodedText PropUpgradeMode = System.Text.Json.JsonEncodedText.Encode("upgrade_mode");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Defaults> propDefaults = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Limits> propLimits = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.NativeCode> propNativeCode = default;
-		LocalJsonValue<bool> propUpgradeMode = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDefaults.TryReadProperty(ref reader, options, PropDefaults, null))
-			{
-				continue;
-			}
-
-			if (propLimits.TryReadProperty(ref reader, options, PropLimits, null))
-			{
-				continue;
-			}
-
-			if (propNativeCode.TryReadProperty(ref reader, options, PropNativeCode, null))
-			{
-				continue;
-			}
-
-			if (propUpgradeMode.TryReadProperty(ref reader, options, PropUpgradeMode, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Defaults = propDefaults.Value,
-			Limits = propLimits.Value,
-			NativeCode = propNativeCode.Value,
-			UpgradeMode = propUpgradeMode.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDefaults, value.Defaults, null, null);
-		writer.WriteProperty(options, PropLimits, value.Limits, null, null);
-		writer.WriteProperty(options, PropNativeCode, value.NativeCode, null, null);
-		writer.WriteProperty(options, PropUpgradeMode, value.UpgradeMode, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.MlInfoResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.MlInfoResponseConverter))]
 public sealed partial class MlInfoResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -105,22 +39,22 @@ public sealed partial class MlInfoResponse : Elastic.Transport.Products.Elastics
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		Elastic.Clients.Elasticsearch.MachineLearning.Defaults Defaults { get; set; }
+Elastic.Clients.Elasticsearch.MachineLearning.Defaults Defaults { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		Elastic.Clients.Elasticsearch.MachineLearning.Limits Limits { get; set; }
+Elastic.Clients.Elasticsearch.MachineLearning.Limits Limits { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		Elastic.Clients.Elasticsearch.MachineLearning.NativeCode NativeCode { get; set; }
+Elastic.Clients.Elasticsearch.MachineLearning.NativeCode NativeCode { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		bool UpgradeMode { get; set; }
+bool UpgradeMode { get; set; }
 }

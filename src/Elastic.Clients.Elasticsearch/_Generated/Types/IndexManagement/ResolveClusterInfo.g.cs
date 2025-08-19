@@ -23,87 +23,12 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-internal sealed partial class ResolveClusterInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropConnected = System.Text.Json.JsonEncodedText.Encode("connected");
-	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
-	private static readonly System.Text.Json.JsonEncodedText PropMatchingIndices = System.Text.Json.JsonEncodedText.Encode("matching_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropSkipUnavailable = System.Text.Json.JsonEncodedText.Encode("skip_unavailable");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-
-	public override Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool> propConnected = default;
-		LocalJsonValue<string?> propError = default;
-		LocalJsonValue<bool?> propMatchingIndices = default;
-		LocalJsonValue<bool> propSkipUnavailable = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo?> propVersion = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propConnected.TryReadProperty(ref reader, options, PropConnected, null))
-			{
-				continue;
-			}
-
-			if (propError.TryReadProperty(ref reader, options, PropError, null))
-			{
-				continue;
-			}
-
-			if (propMatchingIndices.TryReadProperty(ref reader, options, PropMatchingIndices, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propSkipUnavailable.TryReadProperty(ref reader, options, PropSkipUnavailable, null))
-			{
-				continue;
-			}
-
-			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Connected = propConnected.Value,
-			Error = propError.Value,
-			MatchingIndices = propMatchingIndices.Value,
-			SkipUnavailable = propSkipUnavailable.Value,
-			Version = propVersion.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConnected, value.Connected, null, null);
-		writer.WriteProperty(options, PropError, value.Error, null, null);
-		writer.WriteProperty(options, PropMatchingIndices, value.MatchingIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropSkipUnavailable, value.SkipUnavailable, null, null);
-		writer.WriteProperty(options, PropVersion, value.Version, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Provides information about each cluster request relevant to doing a cross-cluster search.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfoConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ResolveClusterInfoConverter))]
 public sealed partial class ResolveClusterInfo
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

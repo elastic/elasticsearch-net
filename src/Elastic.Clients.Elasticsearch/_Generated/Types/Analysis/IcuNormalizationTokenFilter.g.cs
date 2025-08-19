@@ -23,63 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-internal sealed partial class IcuNormalizationTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-
-	public override Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType> propName = default;
-		LocalJsonValue<string?> propVersion = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propName.TryReadProperty(ref reader, options, PropName, null))
-			{
-				continue;
-			}
-
-			if (reader.ValueTextEquals(PropType))
-			{
-				reader.Skip();
-				continue;
-			}
-
-			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Name = propName.Value,
-			Version = propVersion.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteProperty(options, PropVersion, value.Version, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilterConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.IcuNormalizationTokenFilterConverter))]
 public sealed partial class IcuNormalizationTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

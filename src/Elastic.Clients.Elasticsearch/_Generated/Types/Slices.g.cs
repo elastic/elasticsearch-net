@@ -23,47 +23,12 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class SlicesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Slices>
-{
-	public override Elastic.Clients.Elasticsearch.Slices Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String);
-		return selector(ref reader, options) switch
-		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Slices(reader.ReadValue<int>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Slices(reader.ReadValue<Elastic.Clients.Elasticsearch.SlicesCalculation>(options, null)),
-			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Slices)}")
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Slices value, System.Text.Json.JsonSerializerOptions options)
-	{
-		switch (value.Tag)
-		{
-			case Elastic.Clients.Elasticsearch.UnionTag.T1:
-				{
-					writer.WriteValue(options, value.Value1, null);
-					break;
-				}
-
-			case Elastic.Clients.Elasticsearch.UnionTag.T2:
-				{
-					writer.WriteValue(options, value.Value2, null);
-					break;
-				}
-
-			default:
-				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
-		}
-	}
-}
-
 /// <summary>
 /// <para>
 /// Slices configuration used to parallelize a process.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SlicesConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.SlicesConverter))]
 public sealed partial class Slices : Elastic.Clients.Elasticsearch.Union<int, Elastic.Clients.Elasticsearch.SlicesCalculation>
 {
 	public Slices(int value) : base(value)

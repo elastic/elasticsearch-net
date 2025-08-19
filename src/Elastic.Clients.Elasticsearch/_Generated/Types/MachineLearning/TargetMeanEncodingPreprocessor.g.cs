@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class TargetMeanEncodingPreprocessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDefaultValue = System.Text.Json.JsonEncodedText.Encode("default_value");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureName = System.Text.Json.JsonEncodedText.Encode("feature_name");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetMap = System.Text.Json.JsonEncodedText.Encode("target_map");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<double> propDefaultValue = default;
-		LocalJsonValue<string> propFeatureName = default;
-		LocalJsonValue<string> propField = default;
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, double>> propTargetMap = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDefaultValue.TryReadProperty(ref reader, options, PropDefaultValue, null))
-			{
-				continue;
-			}
-
-			if (propFeatureName.TryReadProperty(ref reader, options, PropFeatureName, null))
-			{
-				continue;
-			}
-
-			if (propField.TryReadProperty(ref reader, options, PropField, null))
-			{
-				continue;
-			}
-
-			if (propTargetMap.TryReadProperty(ref reader, options, PropTargetMap, static System.Collections.Generic.IDictionary<string, double> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, double>(o, null, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			DefaultValue = propDefaultValue.Value,
-			FeatureName = propFeatureName.Value,
-			Field = propField.Value,
-			TargetMap = propTargetMap.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessor value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDefaultValue, value.DefaultValue, null, null);
-		writer.WriteProperty(options, PropFeatureName, value.FeatureName, null, null);
-		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropTargetMap, value.TargetMap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, double> v) => w.WriteDictionaryValue<string, double>(o, v, null, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TargetMeanEncodingPreprocessorConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TargetMeanEncodingPreprocessorConverter))]
 public sealed partial class TargetMeanEncodingPreprocessor
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

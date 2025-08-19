@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-internal sealed partial class SummaryInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropRead = System.Text.Json.JsonEncodedText.Encode("read");
-	private static readonly System.Text.Json.JsonEncodedText PropWrite = System.Text.Json.JsonEncodedText.Encode("write");
-
-	public override Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.ReadSummaryInfo> propRead = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.WriteSummaryInfo> propWrite = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propRead.TryReadProperty(ref reader, options, PropRead, null))
-			{
-				continue;
-			}
-
-			if (propWrite.TryReadProperty(ref reader, options, PropWrite, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Read = propRead.Value,
-			Write = propWrite.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SummaryInfo value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRead, value.Read, null, null);
-		writer.WriteProperty(options, PropWrite, value.Write, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.SummaryInfoConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.SummaryInfoConverter))]
 public sealed partial class SummaryInfo
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

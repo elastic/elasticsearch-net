@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-internal sealed partial class RepositoryLocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropBasePath = System.Text.Json.JsonEncodedText.Encode("base_path");
-	private static readonly System.Text.Json.JsonEncodedText PropBucket = System.Text.Json.JsonEncodedText.Encode("bucket");
-	private static readonly System.Text.Json.JsonEncodedText PropContainer = System.Text.Json.JsonEncodedText.Encode("container");
-
-	public override Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propBasePath = default;
-		LocalJsonValue<string?> propBucket = default;
-		LocalJsonValue<string?> propContainer = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propBasePath.TryReadProperty(ref reader, options, PropBasePath, null))
-			{
-				continue;
-			}
-
-			if (propBucket.TryReadProperty(ref reader, options, PropBucket, null))
-			{
-				continue;
-			}
-
-			if (propContainer.TryReadProperty(ref reader, options, PropContainer, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			BasePath = propBasePath.Value,
-			Bucket = propBucket.Value,
-			Container = propContainer.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBasePath, value.BasePath, null, null);
-		writer.WriteProperty(options, PropBucket, value.Bucket, null, null);
-		writer.WriteProperty(options, PropContainer, value.Container, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.RepositoryLocationConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.RepositoryLocationConverter))]
 public sealed partial class RepositoryLocation
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

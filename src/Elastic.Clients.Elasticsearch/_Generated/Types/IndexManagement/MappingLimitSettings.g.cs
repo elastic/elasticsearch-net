@@ -23,124 +23,13 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-internal sealed partial class MappingLimitSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCoerce = System.Text.Json.JsonEncodedText.Encode("coerce");
-	private static readonly System.Text.Json.JsonEncodedText PropDepth = System.Text.Json.JsonEncodedText.Encode("depth");
-	private static readonly System.Text.Json.JsonEncodedText PropDimensionFields = System.Text.Json.JsonEncodedText.Encode("dimension_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropFieldNameLength = System.Text.Json.JsonEncodedText.Encode("field_name_length");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
-	private static readonly System.Text.Json.JsonEncodedText PropNestedFields = System.Text.Json.JsonEncodedText.Encode("nested_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropNestedObjects = System.Text.Json.JsonEncodedText.Encode("nested_objects");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalFields = System.Text.Json.JsonEncodedText.Encode("total_fields");
-
-	public override Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propCoerce = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth?> propDepth = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields?> propDimensionFields = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength?> propFieldNameLength = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<bool, string>?> propIgnoreMalformed = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields?> propNestedFields = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects?> propNestedObjects = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFields?> propSource = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields?> propTotalFields = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCoerce.TryReadProperty(ref reader, options, PropCoerce, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propDepth.TryReadProperty(ref reader, options, PropDepth, null))
-			{
-				continue;
-			}
-
-			if (propDimensionFields.TryReadProperty(ref reader, options, PropDimensionFields, null))
-			{
-				continue;
-			}
-
-			if (propFieldNameLength.TryReadProperty(ref reader, options, PropFieldNameLength, null))
-			{
-				continue;
-			}
-
-			if (propIgnoreMalformed.TryReadProperty(ref reader, options, PropIgnoreMalformed, static Elastic.Clients.Elasticsearch.Union<bool, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<bool, string>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String), null, null)))
-			{
-				continue;
-			}
-
-			if (propNestedFields.TryReadProperty(ref reader, options, PropNestedFields, null))
-			{
-				continue;
-			}
-
-			if (propNestedObjects.TryReadProperty(ref reader, options, PropNestedObjects, null))
-			{
-				continue;
-			}
-
-			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
-			{
-				continue;
-			}
-
-			if (propTotalFields.TryReadProperty(ref reader, options, PropTotalFields, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Coerce = propCoerce.Value,
-			Depth = propDepth.Value,
-			DimensionFields = propDimensionFields.Value,
-			FieldNameLength = propFieldNameLength.Value,
-			IgnoreMalformed = propIgnoreMalformed.Value,
-			NestedFields = propNestedFields.Value,
-			NestedObjects = propNestedObjects.Value,
-			Source = propSource.Value,
-			TotalFields = propTotalFields.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCoerce, value.Coerce, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropDepth, value.Depth, null, null);
-		writer.WriteProperty(options, PropDimensionFields, value.DimensionFields, null, null);
-		writer.WriteProperty(options, PropFieldNameLength, value.FieldNameLength, null, null);
-		writer.WriteProperty(options, PropIgnoreMalformed, value.IgnoreMalformed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<bool, string>? v) => w.WriteUnionValue<bool, string>(o, v, null, null));
-		writer.WriteProperty(options, PropNestedFields, value.NestedFields, null, null);
-		writer.WriteProperty(options, PropNestedObjects, value.NestedObjects, null, null);
-		writer.WriteProperty(options, PropSource, value.Source, null, null);
-		writer.WriteProperty(options, PropTotalFields, value.TotalFields, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Mapping Limit Settings
 /// </para>
 /// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/mapping-limit">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MappingLimitSettingsConverter))]
 public sealed partial class MappingLimitSettings
 {
 #if NET7_0_OR_GREATER

@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-internal sealed partial class NodeInfoXpackConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpack>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropLicense = System.Text.Json.JsonEncodedText.Encode("license");
-	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml");
-	private static readonly System.Text.Json.JsonEncodedText PropNotification = System.Text.Json.JsonEncodedText.Encode("notification");
-	private static readonly System.Text.Json.JsonEncodedText PropSecurity = System.Text.Json.JsonEncodedText.Encode("security");
-
-	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpack Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackLicense?> propLicense = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackMl?> propMl = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propNotification = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecurity> propSecurity = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propLicense.TryReadProperty(ref reader, options, PropLicense, null))
-			{
-				continue;
-			}
-
-			if (propMl.TryReadProperty(ref reader, options, PropMl, null))
-			{
-				continue;
-			}
-
-			if (propNotification.TryReadProperty(ref reader, options, PropNotification, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
-			{
-				continue;
-			}
-
-			if (propSecurity.TryReadProperty(ref reader, options, PropSecurity, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpack(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			License = propLicense.Value,
-			Ml = propMl.Value,
-			Notification = propNotification.Value,
-			Security = propSecurity.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpack value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLicense, value.License, null, null);
-		writer.WriteProperty(options, PropMl, value.Ml, null, null);
-		writer.WriteProperty(options, PropNotification, value.Notification, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
-		writer.WriteProperty(options, PropSecurity, value.Security, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoXpackConverter))]
 public sealed partial class NodeInfoXpack
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

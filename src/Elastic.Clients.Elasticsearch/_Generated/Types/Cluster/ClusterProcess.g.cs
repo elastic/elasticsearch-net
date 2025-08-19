@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-internal sealed partial class ClusterProcessConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterProcess>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCpu = System.Text.Json.JsonEncodedText.Encode("cpu");
-	private static readonly System.Text.Json.JsonEncodedText PropOpenFileDescriptors = System.Text.Json.JsonEncodedText.Encode("open_file_descriptors");
-
-	public override Elastic.Clients.Elasticsearch.Cluster.ClusterProcess Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterProcessCpu> propCpu = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterProcessOpenFileDescriptors> propOpenFileDescriptors = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCpu.TryReadProperty(ref reader, options, PropCpu, null))
-			{
-				continue;
-			}
-
-			if (propOpenFileDescriptors.TryReadProperty(ref reader, options, PropOpenFileDescriptors, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Cluster.ClusterProcess(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Cpu = propCpu.Value,
-			OpenFileDescriptors = propOpenFileDescriptors.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterProcess value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCpu, value.Cpu, null, null);
-		writer.WriteProperty(options, PropOpenFileDescriptors, value.OpenFileDescriptors, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterProcessConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterProcessConverter))]
 public sealed partial class ClusterProcess
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

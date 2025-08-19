@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-internal sealed partial class ClusterIngestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterIngest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfPipelines = System.Text.Json.JsonEncodedText.Encode("number_of_pipelines");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessorStats = System.Text.Json.JsonEncodedText.Encode("processor_stats");
-
-	public override Elastic.Clients.Elasticsearch.Cluster.ClusterIngest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int> propNumberOfPipelines = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor>> propProcessorStats = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propNumberOfPipelines.TryReadProperty(ref reader, options, PropNumberOfPipelines, null))
-			{
-				continue;
-			}
-
-			if (propProcessorStats.TryReadProperty(ref reader, options, PropProcessorStats, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor>(o, null, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Cluster.ClusterIngest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			NumberOfPipelines = propNumberOfPipelines.Value,
-			ProcessorStats = propProcessorStats.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterIngest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNumberOfPipelines, value.NumberOfPipelines, null, null);
-		writer.WriteProperty(options, PropProcessorStats, value.ProcessorStats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.ClusterProcessor>(o, v, null, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterIngestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterIngestConverter))]
 public sealed partial class ClusterIngest
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

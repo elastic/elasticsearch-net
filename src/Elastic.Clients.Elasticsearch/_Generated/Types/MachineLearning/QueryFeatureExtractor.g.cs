@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class QueryFeatureExtractorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDefaultScore = System.Text.Json.JsonEncodedText.Encode("default_score");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureName = System.Text.Json.JsonEncodedText.Encode("feature_name");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<float?> propDefaultScore = default;
-		LocalJsonValue<string> propFeatureName = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propQuery = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDefaultScore.TryReadProperty(ref reader, options, PropDefaultScore, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
-			{
-				continue;
-			}
-
-			if (propFeatureName.TryReadProperty(ref reader, options, PropFeatureName, null))
-			{
-				continue;
-			}
-
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			DefaultScore = propDefaultScore.Value,
-			FeatureName = propFeatureName.Value,
-			Query = propQuery.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractor value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDefaultScore, value.DefaultScore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
-		writer.WriteProperty(options, PropFeatureName, value.FeatureName, null, null);
-		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.QueryFeatureExtractorConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.QueryFeatureExtractorConverter))]
 public sealed partial class QueryFeatureExtractor
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

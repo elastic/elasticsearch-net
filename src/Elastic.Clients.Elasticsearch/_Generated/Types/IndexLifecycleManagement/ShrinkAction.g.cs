@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-internal sealed partial class ShrinkActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAllowWriteAfterShrink = System.Text.Json.JsonEncodedText.Encode("allow_write_after_shrink");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxPrimaryShardSize = System.Text.Json.JsonEncodedText.Encode("max_primary_shard_size");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfShards = System.Text.Json.JsonEncodedText.Encode("number_of_shards");
-
-	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propAllowWriteAfterShrink = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxPrimaryShardSize = default;
-		LocalJsonValue<int?> propNumberOfShards = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAllowWriteAfterShrink.TryReadProperty(ref reader, options, PropAllowWriteAfterShrink, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propMaxPrimaryShardSize.TryReadProperty(ref reader, options, PropMaxPrimaryShardSize, null))
-			{
-				continue;
-			}
-
-			if (propNumberOfShards.TryReadProperty(ref reader, options, PropNumberOfShards, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AllowWriteAfterShrink = propAllowWriteAfterShrink.Value,
-			MaxPrimaryShardSize = propMaxPrimaryShardSize.Value,
-			NumberOfShards = propNumberOfShards.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowWriteAfterShrink, value.AllowWriteAfterShrink, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropMaxPrimaryShardSize, value.MaxPrimaryShardSize, null, null);
-		writer.WriteProperty(options, PropNumberOfShards, value.NumberOfShards, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.ShrinkActionConverter))]
 public sealed partial class ShrinkAction
 {
 #if NET7_0_OR_GREATER

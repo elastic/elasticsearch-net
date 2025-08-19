@@ -57,35 +57,6 @@ public sealed partial class ShardStoresRequestParameters : Elastic.Transport.Req
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>? Status { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>?>("status"); set => Q("status", value); }
 }
 
-internal sealed partial class ShardStoresRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest>
-{
-	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Get index shard stores.
@@ -121,7 +92,7 @@ internal sealed partial class ShardStoresRequestConverter : System.Text.Json.Ser
 /// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ShardStoresRequestConverter))]
 public sealed partial class ShardStoresRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoresRequestParameters>
 {
 	public ShardStoresRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))

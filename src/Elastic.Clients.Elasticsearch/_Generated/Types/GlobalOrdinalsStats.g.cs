@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class GlobalOrdinalsStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GlobalOrdinalsStats>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropBuildTime = System.Text.Json.JsonEncodedText.Encode("build_time");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildTimeInMillis = System.Text.Json.JsonEncodedText.Encode("build_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-
-	public override Elastic.Clients.Elasticsearch.GlobalOrdinalsStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propBuildTime = default;
-		LocalJsonValue<long> propBuildTimeInMillis = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats>?> propFields = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propBuildTime.TryReadProperty(ref reader, options, PropBuildTime, null))
-			{
-				continue;
-			}
-
-			if (propBuildTimeInMillis.TryReadProperty(ref reader, options, PropBuildTimeInMillis, null))
-			{
-				continue;
-			}
-
-			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats>(o, null, null)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.GlobalOrdinalsStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			BuildTime = propBuildTime.Value,
-			BuildTimeInMillis = propBuildTimeInMillis.Value,
-			Fields = propFields.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.GlobalOrdinalsStats value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBuildTime, value.BuildTime, null, null);
-		writer.WriteProperty(options, PropBuildTimeInMillis, value.BuildTimeInMillis, null, null);
-		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats>(o, v, null, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.GlobalOrdinalsStatsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GlobalOrdinalsStatsConverter))]
 public sealed partial class GlobalOrdinalsStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

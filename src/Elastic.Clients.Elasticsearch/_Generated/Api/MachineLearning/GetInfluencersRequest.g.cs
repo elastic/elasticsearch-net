@@ -88,45 +88,6 @@ public sealed partial class GetInfluencersRequestParameters : Elastic.Transport.
 	public System.DateTimeOffset? Start { get => Q<System.DateTimeOffset?>("start"); set => Q("start", value); }
 }
 
-internal sealed partial class GetInfluencersRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropPage = System.Text.Json.JsonEncodedText.Encode("page");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Page?> propPage = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propPage.TryReadProperty(ref reader, options, PropPage, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Page = propPage.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPage, value.Page, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Get anomaly detection job results for influencers.
@@ -135,7 +96,7 @@ internal sealed partial class GetInfluencersRequestConverter : System.Text.Json.
 /// <c>influencer_field_name</c> is specified in the job configuration.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetInfluencersRequestConverter))]
 public sealed partial class GetInfluencersRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,20 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-internal sealed partial class AnalyzersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.Analyzers>
-{
-	public override Elastic.Clients.Elasticsearch.Analysis.Analyzers Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.Analysis.Analyzers(reader.ReadValue<System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>?>(options, static System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>(o, null, null)));
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.Analyzers value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.BackingDictionary, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>(o, v, null, null));
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.AnalyzersConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.AnalyzersConverter))]
 public sealed partial class Analyzers : Elastic.Clients.Elasticsearch.IsADictionary<string, Elastic.Clients.Elasticsearch.Analysis.IAnalyzer>
 {
 	public Analyzers()

@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class DataframeClassificationSummaryPrecisionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAvgPrecision = System.Text.Json.JsonEncodedText.Encode("avg_precision");
-	private static readonly System.Text.Json.JsonEncodedText PropClasses = System.Text.Json.JsonEncodedText.Encode("classes");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<double> propAvgPrecision = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClass>> propClasses = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAvgPrecision.TryReadProperty(ref reader, options, PropAvgPrecision, null))
-			{
-				continue;
-			}
-
-			if (propClasses.TryReadProperty(ref reader, options, PropClasses, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClass> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClass>(o, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AvgPrecision = propAvgPrecision.Value,
-			Classes = propClasses.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecision value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAvgPrecision, value.AvgPrecision, null, null);
-		writer.WriteProperty(options, PropClasses, value.Classes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClass> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClass>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryPrecisionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeClassificationSummaryPrecisionConverter))]
 public sealed partial class DataframeClassificationSummaryPrecision
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

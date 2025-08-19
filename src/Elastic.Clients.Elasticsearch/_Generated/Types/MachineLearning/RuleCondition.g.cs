@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class RuleConditionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAppliesTo = System.Text.Json.JsonEncodedText.Encode("applies_to");
-	private static readonly System.Text.Json.JsonEncodedText PropOperator = System.Text.Json.JsonEncodedText.Encode("operator");
-	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo> propAppliesTo = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator> propOperator = default;
-		LocalJsonValue<double> propValue = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAppliesTo.TryReadProperty(ref reader, options, PropAppliesTo, null))
-			{
-				continue;
-			}
-
-			if (propOperator.TryReadProperty(ref reader, options, PropOperator, null))
-			{
-				continue;
-			}
-
-			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AppliesTo = propAppliesTo.Value,
-			Operator = propOperator.Value,
-			Value = propValue.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.RuleCondition value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAppliesTo, value.AppliesTo, null, null);
-		writer.WriteProperty(options, PropOperator, value.Operator, null, null);
-		writer.WriteProperty(options, PropValue, value.Value, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.RuleConditionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.RuleConditionConverter))]
 public sealed partial class RuleCondition
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

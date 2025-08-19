@@ -27,61 +27,13 @@ public sealed partial class UpdateModelSnapshotRequestParameters : Elastic.Trans
 {
 }
 
-internal sealed partial class UpdateModelSnapshotRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropRetain = System.Text.Json.JsonEncodedText.Encode("retain");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propDescription = default;
-		LocalJsonValue<bool?> propRetain = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
-			{
-				continue;
-			}
-
-			if (propRetain.TryReadProperty(ref reader, options, PropRetain, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Description = propDescription.Value,
-			Retain = propRetain.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropRetain, value.Retain, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Update a snapshot.
 /// Updates certain properties of a snapshot.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.UpdateModelSnapshotRequestConverter))]
 public sealed partial class UpdateModelSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

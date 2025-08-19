@@ -33,71 +33,6 @@ public sealed partial class PutAnthropicRequestParameters : Elastic.Transport.Re
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class PutAnthropicRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropChunkingSettings = System.Text.Json.JsonEncodedText.Encode("chunking_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropService = System.Text.Json.JsonEncodedText.Encode("service");
-	private static readonly System.Text.Json.JsonEncodedText PropServiceSettings = System.Text.Json.JsonEncodedText.Encode("service_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropTaskSettings = System.Text.Json.JsonEncodedText.Encode("task_settings");
-
-	public override Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettings> propServiceSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings?> propTaskSettings = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propChunkingSettings.TryReadProperty(ref reader, options, PropChunkingSettings, null))
-			{
-				continue;
-			}
-
-			if (reader.ValueTextEquals(PropService))
-			{
-				reader.Skip();
-				continue;
-			}
-
-			if (propServiceSettings.TryReadProperty(ref reader, options, PropServiceSettings, null))
-			{
-				continue;
-			}
-
-			if (propTaskSettings.TryReadProperty(ref reader, options, PropTaskSettings, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ChunkingSettings = propChunkingSettings.Value,
-			ServiceSettings = propServiceSettings.Value,
-			TaskSettings = propTaskSettings.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropChunkingSettings, value.ChunkingSettings, null, null);
-		writer.WriteProperty(options, PropService, value.Service, null, null);
-		writer.WriteProperty(options, PropServiceSettings, value.ServiceSettings, null, null);
-		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create an Anthropic inference endpoint.
@@ -106,7 +41,7 @@ internal sealed partial class PutAnthropicRequestConverter : System.Text.Json.Se
 /// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutAnthropicRequestConverter))]
 public sealed partial class PutAnthropicRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

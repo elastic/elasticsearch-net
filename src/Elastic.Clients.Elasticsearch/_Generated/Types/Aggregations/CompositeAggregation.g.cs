@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class CompositeAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAfter = System.Text.Json.JsonEncodedText.Encode("after");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSources = System.Text.Json.JsonEncodedText.Encode("sources");
-
-	public override Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>?> propAfter = default;
-		LocalJsonValue<int?> propSize = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>?> propSources = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAfter.TryReadProperty(ref reader, options, PropAfter, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>(o, null, null)))
-			{
-				continue;
-			}
-
-			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propSources.TryReadProperty(ref reader, options, PropSources, static System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>(o, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>(o, null, null)!)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			After = propAfter.Value,
-			Size = propSize.Value,
-			Sources = propSources.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAfter, value.After, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.FieldValue>(o, v, null, null));
-		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropSources, value.Sources, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? v) => w.WriteCollectionValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>(o, v, null, null)));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CompositeAggregationConverter))]
 public sealed partial class CompositeAggregation
 {
 #if NET7_0_OR_GREATER
