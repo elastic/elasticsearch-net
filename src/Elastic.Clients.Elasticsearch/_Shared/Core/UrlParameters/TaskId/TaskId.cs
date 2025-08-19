@@ -6,15 +6,13 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(TaskIdConverter))]
+[JsonConverter(typeof(Json.TaskIdConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
 public sealed class TaskId :
 	IUrlParameter,
@@ -104,42 +102,4 @@ public sealed class TaskId :
 	}
 
 	#endregion IParsable
-}
-
-internal sealed class TaskIdConverter : JsonConverter<TaskId>
-{
-	public override void WriteAsPropertyName(Utf8JsonWriter writer, TaskId value, JsonSerializerOptions options)
-	{
-		if (options.TryGetClientSettings(out var settings))
-		{
-			writer.WritePropertyName(((IUrlParameter)value).GetString(settings));
-			return;
-		}
-
-		throw new JsonException("Unable to retrive client settings during property name serialization.");
-	}
-
-	public override TaskId ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => reader.GetString();
-
-	public override TaskId? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType == JsonTokenType.Null)
-			return null;
-
-		if (reader.TokenType == JsonTokenType.String)
-		{
-			var taskId = reader.GetString();
-			return new TaskId(taskId);
-		}
-
-		throw new JsonException("Unexpected JSON token");
-	}
-
-	public override void Write(Utf8JsonWriter writer, TaskId value, JsonSerializerOptions options)
-	{
-		if (value is null)
-			writer.WriteNullValue();
-
-		writer.WriteStringValue(value.FullyQualifiedId);
-	}
 }

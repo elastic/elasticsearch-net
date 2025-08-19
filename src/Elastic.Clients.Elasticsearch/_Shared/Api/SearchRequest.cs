@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 using Elastic.Clients.Elasticsearch.Requests;
@@ -33,12 +32,12 @@ public partial class SearchRequest
 	}
 }
 
-[JsonConverter(typeof(SearchRequestOfTConverterFactory))]
+[JsonConverter(typeof(Json.SearchRequestOfTConverterFactory))]
 public partial class SearchRequest<TInferDocument> : SearchRequest
 {
 	static SearchRequest()
 	{
-		DynamicallyAccessed.PublicConstructors(typeof(SearchRequestOfTConverter<TInferDocument>));
+		DynamicallyAccessed.PublicConstructors(typeof(Json.SearchRequestOfTConverter<TInferDocument>));
 	}
 
 	public SearchRequest(Indices? indices) : base(indices)
@@ -60,30 +59,4 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 		configure += a => a.Id(id);
 		return Pit(configure);
 	}
-}
-
-internal sealed class SearchRequestOfTConverterFactory :
-	JsonConverterFactory
-{
-	public override bool CanConvert(Type typeToConvert) =>
-		typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(SearchRequest<>);
-
-	public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-	{
-		var args = typeToConvert.GetGenericArguments();
-
-#pragma warning disable IL3050
-		return (JsonConverter)Activator.CreateInstance(typeof(SearchRequestOfTConverter<>).MakeGenericType(args[0]));
-#pragma warning restore IL3050
-	}
-}
-
-internal sealed class SearchRequestOfTConverter<T> :
-	JsonConverter<SearchRequest<T>>
-{
-	public override SearchRequest<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-		throw new NotSupportedException();
-
-	public override void Write(Utf8JsonWriter writer, SearchRequest<T> value, JsonSerializerOptions options) =>
-		writer.WriteValue(options, (SearchRequest)value);
 }

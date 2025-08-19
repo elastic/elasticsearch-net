@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.IO;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 using Elastic.Clients.Elasticsearch.Serialization;
@@ -12,7 +13,10 @@ using Elastic.Transport.Extensions;
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
 
 // POC - If we have more than one union doing this, can we autogenerate with correct ctors etc.
-public sealed class SearchRequestItem : IStreamSerializable
+
+[JsonConverter(typeof(JsonIncompatibleConverter))]
+public sealed class SearchRequestItem :
+	IStreamSerializable
 {
 	public SearchRequestItem(MultisearchBody body) => Body = body;
 

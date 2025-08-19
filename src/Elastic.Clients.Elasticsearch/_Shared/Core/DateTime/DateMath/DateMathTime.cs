@@ -4,7 +4,6 @@
 
 using System;
 using System.Globalization;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
@@ -13,7 +12,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// A time representation for use within <see cref="DateMath" /> expressions.
 /// </summary>
-[JsonConverter(typeof(DateMathTimeConverter))]
+[JsonConverter(typeof(Json.DateMathTimeConverter))]
 public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 {
 	private const double MillisecondsInADay = MillisecondsInAnHour * 24;
@@ -64,11 +63,14 @@ public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 	/// </summary>
 	public DateMathTime(string timeUnit, MidpointRounding rounding = MidpointRounding.AwayFromZero)
 	{
-		if (timeUnit == null) throw new ArgumentNullException(nameof(timeUnit));
-		if (timeUnit.Length == 0) throw new ArgumentException("Expression string is empty", nameof(timeUnit));
+		if (timeUnit == null)
+			throw new ArgumentNullException(nameof(timeUnit));
+		if (timeUnit.Length == 0)
+			throw new ArgumentException("Expression string is empty", nameof(timeUnit));
 
 		var match = ExpressionRegex.Match(timeUnit);
-		if (!match.Success) throw new ArgumentException($"Expression '{timeUnit}' string is invalid", nameof(timeUnit));
+		if (!match.Success)
+			throw new ArgumentException($"Expression '{timeUnit}' string is invalid", nameof(timeUnit));
 
 		var factor = match.Groups["factor"].Value;
 		if (!double.TryParse(factor, NumberStyles.Any, CultureInfo.InvariantCulture, out var fraction))
@@ -97,17 +99,22 @@ public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 
 	public int CompareTo(DateMathTime other)
 	{
-		if (other == null) return 1;
-		if (Math.Abs(_approximateSeconds - other._approximateSeconds) < double.Epsilon) return 0;
-		if (_approximateSeconds < other._approximateSeconds) return -1;
+		if (other == null)
+			return 1;
+		if (Math.Abs(_approximateSeconds - other._approximateSeconds) < double.Epsilon)
+			return 0;
+		if (_approximateSeconds < other._approximateSeconds)
+			return -1;
 
 		return 1;
 	}
 
 	public bool Equals(DateMathTime other)
 	{
-		if (other is null) return false;
-		if (ReferenceEquals(this, other)) return true;
+		if (other is null)
+			return false;
+		if (ReferenceEquals(this, other))
+			return true;
 
 		return Math.Abs(_approximateSeconds - other._approximateSeconds) < double.Epsilon;
 	}
@@ -133,24 +140,31 @@ public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 				case DateMathTimeUnit.Second:
 					_approximateSeconds = whole;
 					break;
+
 				case DateMathTimeUnit.Minute:
 					_approximateSeconds = whole * (MillisecondsInAMinute / MillisecondsInASecond);
 					break;
+
 				case DateMathTimeUnit.Hour:
 					_approximateSeconds = whole * (MillisecondsInAnHour / MillisecondsInASecond);
 					break;
+
 				case DateMathTimeUnit.Day:
 					_approximateSeconds = whole * (MillisecondsInADay / MillisecondsInASecond);
 					break;
+
 				case DateMathTimeUnit.Week:
 					_approximateSeconds = whole * (MillisecondsInAWeek / MillisecondsInASecond);
 					break;
+
 				case DateMathTimeUnit.Month:
 					_approximateSeconds = whole * (MillisecondsInAMonthApproximate / MillisecondsInASecond);
 					break;
+
 				case DateMathTimeUnit.Year:
 					_approximateSeconds = whole * (MillisecondsInAYearApproximate / MillisecondsInASecond);
 					break;
+
 				default:
 					throw new ArgumentOutOfRangeException(nameof(interval), interval, null);
 			}
@@ -162,18 +176,23 @@ public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 			case DateMathTimeUnit.Second:
 				milliseconds = factor * MillisecondsInASecond;
 				break;
+
 			case DateMathTimeUnit.Minute:
 				milliseconds = factor * MillisecondsInAMinute;
 				break;
+
 			case DateMathTimeUnit.Hour:
 				milliseconds = factor * MillisecondsInAnHour;
 				break;
+
 			case DateMathTimeUnit.Day:
 				milliseconds = factor * MillisecondsInADay;
 				break;
+
 			case DateMathTimeUnit.Week:
 				milliseconds = factor * MillisecondsInAWeek;
 				break;
+
 			case DateMathTimeUnit.Month:
 				if (TryGetIntegerGreaterThanZero(fraction, out whole))
 				{
@@ -185,6 +204,7 @@ public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 
 				milliseconds = factor * MillisecondsInAMonthApproximate;
 				break;
+
 			case DateMathTimeUnit.Year:
 				if (TryGetIntegerGreaterThanZero(fraction, out whole))
 				{
@@ -204,6 +224,7 @@ public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 				}
 				milliseconds = factor * MillisecondsInAYearApproximate;
 				break;
+
 			default:
 				throw new ArgumentOutOfRangeException(nameof(interval), interval, null);
 		}
@@ -307,34 +328,16 @@ public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 
 	public override bool Equals(object obj)
 	{
-		if (ReferenceEquals(null, obj)) return false;
-		if (ReferenceEquals(this, obj)) return true;
-		if (obj.GetType() != GetType()) return false;
+		if (ReferenceEquals(null, obj))
+			return false;
+		if (ReferenceEquals(this, obj))
+			return true;
+		if (obj.GetType() != GetType())
+			return false;
 
 		return Equals((DateMathTime)obj);
 	}
 
 	// ReSharper disable once NonReadonlyMemberInGetHashCode
 	public override int GetHashCode() => _approximateSeconds.GetHashCode();
-}
-
-internal sealed class DateMathTimeConverter : JsonConverter<DateMathTime>
-{
-	public override DateMathTime? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var value = reader.GetString();
-		reader.Read();
-		return value;
-	}
-
-	public override void Write(Utf8JsonWriter writer, DateMathTime value, JsonSerializerOptions options)
-	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		writer.WriteStringValue(value.ToString());
-	}
 }

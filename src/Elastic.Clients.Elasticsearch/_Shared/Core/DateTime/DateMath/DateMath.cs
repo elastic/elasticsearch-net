@@ -6,13 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(DateMathConverter))]
+[JsonConverter(typeof(Json.DateMathConverter))]
 public abstract class DateMath
 {
 	private static readonly Regex DateMathRegex =
@@ -172,28 +171,5 @@ public abstract class DateMath
 	{
 		result.Append((char)('0' + (val / 10)));
 		result.Append((char)('0' + (val % 10)));
-	}
-}
-
-internal sealed class DateMathConverter : JsonConverter<DateMath>
-{
-	public override DateMath? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.String)
-			return null;
-
-		// TODO: Performance - Review potential to avoid allocation on DateTime path and use Span<byte>
-
-		var value = reader.GetString();
-
-		if (!value.Contains("|") && DateTime.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var dateTime))
-			return DateMath.Anchored(dateTime);
-
-		return DateMath.Anchored(value);
-	}
-
-	public override void Write(Utf8JsonWriter writer, DateMath value, JsonSerializerOptions options)
-	{
-		writer.WriteStringValue(value.ToString());
 	}
 }

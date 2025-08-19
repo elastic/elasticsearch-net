@@ -8,9 +8,9 @@ using System.Text.Json;
 using Elastic.Transport;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Json;
 
-internal sealed class JoinFieldConverter : JsonConverter<JoinField>
+public sealed class JoinFieldConverter : JsonConverter<JoinField>
 {
 	private static readonly JsonEncodedText PropName = JsonEncodedText.Encode("name");
 	private static readonly JsonEncodedText PropParent = JsonEncodedText.Encode("parent");

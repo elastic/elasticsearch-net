@@ -122,19 +122,6 @@ public sealed partial class MultiSearchRequestParameters : Elastic.Transport.Req
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
-internal sealed partial class MultiSearchRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MultiSearchRequest>
-{
-	public override Elastic.Clients.Elasticsearch.MultiSearchRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.MultiSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Searches = reader.ReadValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem>>(options, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem>(o, null)!) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MultiSearchRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Searches, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.MSearch.SearchRequestItem>(o, v, null));
-	}
-}
-
 /// <summary>
 /// <para>
 /// Run multiple searches.
@@ -158,7 +145,6 @@ internal sealed partial class MultiSearchRequestConverter : System.Text.Json.Ser
 /// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MultiSearchRequestConverter))]
 public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
