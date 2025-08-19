@@ -33,54 +33,6 @@ public sealed partial class ScrollRequestParameters : Elastic.Transport.RequestP
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 }
 
-internal sealed partial class ScrollRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ScrollRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropScroll = System.Text.Json.JsonEncodedText.Encode("scroll");
-	private static readonly System.Text.Json.JsonEncodedText PropScrollId = System.Text.Json.JsonEncodedText.Encode("scroll_id");
-
-	public override Elastic.Clients.Elasticsearch.ScrollRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propScroll = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ScrollId> propScrollId = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propScroll.TryReadProperty(ref reader, options, PropScroll, null))
-			{
-				continue;
-			}
-
-			if (propScrollId.TryReadProperty(ref reader, options, PropScrollId, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.ScrollRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Scroll = propScroll.Value,
-			ScrollId = propScrollId.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ScrollRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropScroll, value.Scroll, null, null);
-		writer.WriteProperty(options, PropScrollId, value.ScrollId, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Run a scrolling search.
@@ -103,7 +55,7 @@ internal sealed partial class ScrollRequestConverter : System.Text.Json.Serializ
 /// IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ScrollRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ScrollRequestConverter))]
 public sealed partial class ScrollRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ScrollRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

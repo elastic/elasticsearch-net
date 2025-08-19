@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-internal sealed partial class ForceMergeActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropIndexCodec = System.Text.Json.JsonEncodedText.Encode("index_codec");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNumSegments = System.Text.Json.JsonEncodedText.Encode("max_num_segments");
-
-	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propIndexCodec = default;
-		LocalJsonValue<int> propMaxNumSegments = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propIndexCodec.TryReadProperty(ref reader, options, PropIndexCodec, null))
-			{
-				continue;
-			}
-
-			if (propMaxNumSegments.TryReadProperty(ref reader, options, PropMaxNumSegments, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			IndexCodec = propIndexCodec.Value,
-			MaxNumSegments = propMaxNumSegments.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIndexCodec, value.IndexCodec, null, null);
-		writer.WriteProperty(options, PropMaxNumSegments, value.MaxNumSegments, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.ForceMergeActionConverter))]
 public sealed partial class ForceMergeAction
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

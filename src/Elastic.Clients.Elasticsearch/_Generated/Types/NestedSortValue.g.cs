@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class NestedSortValueConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.NestedSortValue>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxChildren = System.Text.Json.JsonEncodedText.Encode("max_children");
-	private static readonly System.Text.Json.JsonEncodedText PropNested = System.Text.Json.JsonEncodedText.Encode("nested");
-	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
-
-	public override Elastic.Clients.Elasticsearch.NestedSortValue Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
-		LocalJsonValue<int?> propMaxChildren = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.NestedSortValue?> propNested = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propPath = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
-			{
-				continue;
-			}
-
-			if (propMaxChildren.TryReadProperty(ref reader, options, PropMaxChildren, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propNested.TryReadProperty(ref reader, options, PropNested, null))
-			{
-				continue;
-			}
-
-			if (propPath.TryReadProperty(ref reader, options, PropPath, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.NestedSortValue(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Filter = propFilter.Value,
-			MaxChildren = propMaxChildren.Value,
-			Nested = propNested.Value,
-			Path = propPath.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.NestedSortValue value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropMaxChildren, value.MaxChildren, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropNested, value.Nested, null, null);
-		writer.WriteProperty(options, PropPath, value.Path, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.NestedSortValueConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.NestedSortValueConverter))]
 public sealed partial class NestedSortValue
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

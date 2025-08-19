@@ -23,47 +23,12 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-internal sealed partial class SourceConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig>
-{
-	public override Elastic.Clients.Elasticsearch.Core.Search.SourceConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray);
-		return selector(ref reader, options) switch
-		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Core.Search.SourceConfig(reader.ReadValue<bool>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Core.Search.SourceConfig(reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.SourceFilter>(options, null)),
-			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig)}")
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig value, System.Text.Json.JsonSerializerOptions options)
-	{
-		switch (value.Tag)
-		{
-			case Elastic.Clients.Elasticsearch.UnionTag.T1:
-				{
-					writer.WriteValue(options, value.Value1, null);
-					break;
-				}
-
-			case Elastic.Clients.Elasticsearch.UnionTag.T2:
-				{
-					writer.WriteValue(options, value.Value2, null);
-					break;
-				}
-
-			default:
-				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
-		}
-	}
-}
-
 /// <summary>
 /// <para>
 /// Defines how to fetch a source. Fetching can be disabled entirely, or the source can be filtered.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.SourceConfigConverter))]
 public sealed partial class SourceConfig : Elastic.Clients.Elasticsearch.Union<bool, Elastic.Clients.Elasticsearch.Core.Search.SourceFilter>
 {
 	public SourceConfig(bool value) : base(value)

@@ -27,90 +27,6 @@ public sealed partial class GetTokenRequestParameters : Elastic.Transport.Reques
 {
 }
 
-internal sealed partial class GetTokenRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetTokenRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropGrantType = System.Text.Json.JsonEncodedText.Encode("grant_type");
-	private static readonly System.Text.Json.JsonEncodedText PropKerberosTicket = System.Text.Json.JsonEncodedText.Encode("kerberos_ticket");
-	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
-	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
-	private static readonly System.Text.Json.JsonEncodedText PropScope = System.Text.Json.JsonEncodedText.Encode("scope");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
-
-	public override Elastic.Clients.Elasticsearch.Security.GetTokenRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType?> propGrantType = default;
-		LocalJsonValue<string?> propKerberosTicket = default;
-		LocalJsonValue<string?> propPassword = default;
-		LocalJsonValue<string?> propRefreshToken = default;
-		LocalJsonValue<string?> propScope = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propGrantType.TryReadProperty(ref reader, options, PropGrantType, static Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType>(o)))
-			{
-				continue;
-			}
-
-			if (propKerberosTicket.TryReadProperty(ref reader, options, PropKerberosTicket, null))
-			{
-				continue;
-			}
-
-			if (propPassword.TryReadProperty(ref reader, options, PropPassword, null))
-			{
-				continue;
-			}
-
-			if (propRefreshToken.TryReadProperty(ref reader, options, PropRefreshToken, null))
-			{
-				continue;
-			}
-
-			if (propScope.TryReadProperty(ref reader, options, PropScope, null))
-			{
-				continue;
-			}
-
-			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.GetTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			GrantType = propGrantType.Value,
-			KerberosTicket = propKerberosTicket.Value,
-			Password = propPassword.Value,
-			RefreshToken = propRefreshToken.Value,
-			Scope = propScope.Value,
-			Username = propUsername.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetTokenRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropGrantType, value.GrantType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Security.AccessTokenGrantType>(o, v));
-		writer.WriteProperty(options, PropKerberosTicket, value.KerberosTicket, null, null);
-		writer.WriteProperty(options, PropPassword, value.Password, null, null);
-		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
-		writer.WriteProperty(options, PropScope, value.Scope, null, null);
-		writer.WriteProperty(options, PropUsername, value.Username, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Get a token.
@@ -133,7 +49,7 @@ internal sealed partial class GetTokenRequestConverter : System.Text.Json.Serial
 /// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GetTokenRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetTokenRequestConverter))]
 public sealed partial class GetTokenRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>
 {
 #if NET7_0_OR_GREATER

@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-internal sealed partial class CreateServiceTokenResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCreated = System.Text.Json.JsonEncodedText.Encode("created");
-	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
-
-	public override Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool> propCreated = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ServiceToken> propToken = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCreated.TryReadProperty(ref reader, options, PropCreated, null))
-			{
-				continue;
-			}
-
-			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Created = propCreated.Value,
-			Token = propToken.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCreated, value.Created, null, null);
-		writer.WriteProperty(options, PropToken, value.Token, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.CreateServiceTokenResponseConverter))]
 public sealed partial class CreateServiceTokenResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -87,12 +39,12 @@ public sealed partial class CreateServiceTokenResponse : Elastic.Transport.Produ
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		bool Created { get; set; }
+bool Created { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		Elastic.Clients.Elasticsearch.Security.ServiceToken Token { get; set; }
+Elastic.Clients.Elasticsearch.Security.ServiceToken Token { get; set; }
 }

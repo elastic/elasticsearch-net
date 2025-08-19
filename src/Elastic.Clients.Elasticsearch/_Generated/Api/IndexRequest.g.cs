@@ -135,35 +135,6 @@ public sealed partial class IndexRequestParameters : Elastic.Transport.RequestPa
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-internal sealed partial class IndexRequestConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexRequest<TDocument>>
-{
-	public override Elastic.Clients.Elasticsearch.IndexRequest<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.IndexRequest<TDocument>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Document = reader.ReadValue<TDocument>(options, static TDocument (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument>))!) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexRequest<TDocument> value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Document, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument v) => w.WriteValueEx<TDocument>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument>)));
-	}
-}
-
-internal sealed partial class IndexRequestConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
-{
-	public override bool CanConvert(System.Type typeToConvert)
-	{
-		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(IndexRequest<>);
-	}
-
-	[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'")]
-	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		var args = typeToConvert.GetGenericArguments();
-		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(IndexRequestConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
-		return converter;
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create or update a document in an index.
@@ -332,7 +303,7 @@ internal sealed partial class IndexRequestConverterFactory : System.Text.Json.Se
 /// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 /// </code>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexRequestConverterFactory))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.IndexRequestConverterFactory))]
 public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

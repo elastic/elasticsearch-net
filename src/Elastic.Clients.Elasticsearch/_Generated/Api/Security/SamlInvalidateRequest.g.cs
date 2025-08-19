@@ -27,63 +27,6 @@ public sealed partial class SamlInvalidateRequestParameters : Elastic.Transport.
 {
 }
 
-internal sealed partial class SamlInvalidateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAcs = System.Text.Json.JsonEncodedText.Encode("acs");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryString = System.Text.Json.JsonEncodedText.Encode("query_string");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-
-	public override Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propAcs = default;
-		LocalJsonValue<string> propQueryString = default;
-		LocalJsonValue<string?> propRealm = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAcs.TryReadProperty(ref reader, options, PropAcs, null))
-			{
-				continue;
-			}
-
-			if (propQueryString.TryReadProperty(ref reader, options, PropQueryString, null))
-			{
-				continue;
-			}
-
-			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Acs = propAcs.Value,
-			QueryString = propQueryString.Value,
-			Realm = propRealm.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcs, value.Acs, null, null);
-		writer.WriteProperty(options, PropQueryString, value.QueryString, null, null);
-		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Invalidate SAML.
@@ -102,7 +45,7 @@ internal sealed partial class SamlInvalidateRequestConverter : System.Text.Json.
 /// Thus the user can be redirected back to their IdP.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SamlInvalidateRequestConverter))]
 public sealed partial class SamlInvalidateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

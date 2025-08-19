@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
-internal sealed partial class ExploreControlsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.ExploreControls>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropSampleDiversity = System.Text.Json.JsonEncodedText.Encode("sample_diversity");
-	private static readonly System.Text.Json.JsonEncodedText PropSampleSize = System.Text.Json.JsonEncodedText.Encode("sample_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
-	private static readonly System.Text.Json.JsonEncodedText PropUseSignificance = System.Text.Json.JsonEncodedText.Encode("use_significance");
-
-	public override Elastic.Clients.Elasticsearch.Graph.ExploreControls Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Graph.SampleDiversity?> propSampleDiversity = default;
-		LocalJsonValue<int?> propSampleSize = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
-		LocalJsonValue<bool> propUseSignificance = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propSampleDiversity.TryReadProperty(ref reader, options, PropSampleDiversity, null))
-			{
-				continue;
-			}
-
-			if (propSampleSize.TryReadProperty(ref reader, options, PropSampleSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
-			{
-				continue;
-			}
-
-			if (propUseSignificance.TryReadProperty(ref reader, options, PropUseSignificance, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Graph.ExploreControls(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			SampleDiversity = propSampleDiversity.Value,
-			SampleSize = propSampleSize.Value,
-			Timeout = propTimeout.Value,
-			UseSignificance = propUseSignificance.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Graph.ExploreControls value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSampleDiversity, value.SampleDiversity, null, null);
-		writer.WriteProperty(options, PropSampleSize, value.SampleSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
-		writer.WriteProperty(options, PropUseSignificance, value.UseSignificance, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.ExploreControlsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.Json.ExploreControlsConverter))]
 public sealed partial class ExploreControls
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

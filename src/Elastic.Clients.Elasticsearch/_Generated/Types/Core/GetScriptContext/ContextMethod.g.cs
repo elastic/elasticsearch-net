@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.GetScriptContext;
 
-internal sealed partial class ContextMethodConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
-	private static readonly System.Text.Json.JsonEncodedText PropReturnType = System.Text.Json.JsonEncodedText.Encode("return_type");
-
-	public override Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propName = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethodParam>> propParams = default;
-		LocalJsonValue<string> propReturnType = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propName.TryReadProperty(ref reader, options, PropName, null))
-			{
-				continue;
-			}
-
-			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethodParam> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethodParam>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propReturnType.TryReadProperty(ref reader, options, PropReturnType, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Name = propName.Value,
-			Params = propParams.Value,
-			ReturnType = propReturnType.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethodParam> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethodParam>(o, v, null));
-		writer.WriteProperty(options, PropReturnType, value.ReturnType, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethodConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.GetScriptContext.Json.ContextMethodConverter))]
 public sealed partial class ContextMethod
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

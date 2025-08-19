@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
-internal sealed partial class ReadExceptionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropException = System.Text.Json.JsonEncodedText.Encode("exception");
-	private static readonly System.Text.Json.JsonEncodedText PropFromSeqNo = System.Text.Json.JsonEncodedText.Encode("from_seq_no");
-	private static readonly System.Text.Json.JsonEncodedText PropRetries = System.Text.Json.JsonEncodedText.Encode("retries");
-
-	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause> propException = default;
-		LocalJsonValue<long> propFromSeqNo = default;
-		LocalJsonValue<int> propRetries = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propException.TryReadProperty(ref reader, options, PropException, null))
-			{
-				continue;
-			}
-
-			if (propFromSeqNo.TryReadProperty(ref reader, options, PropFromSeqNo, null))
-			{
-				continue;
-			}
-
-			if (propRetries.TryReadProperty(ref reader, options, PropRetries, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Exception = propException.Value,
-			FromSeqNo = propFromSeqNo.Value,
-			Retries = propRetries.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropException, value.Exception, null, null);
-		writer.WriteProperty(options, PropFromSeqNo, value.FromSeqNo, null, null);
-		writer.WriteProperty(options, PropRetries, value.Retries, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadExceptionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.ReadExceptionConverter))]
 public sealed partial class ReadException
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

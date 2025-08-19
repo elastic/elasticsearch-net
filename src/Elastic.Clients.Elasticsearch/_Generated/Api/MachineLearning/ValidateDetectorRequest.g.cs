@@ -27,25 +27,12 @@ public sealed partial class ValidateDetectorRequestParameters : Elastic.Transpor
 {
 }
 
-internal sealed partial class ValidateDetectorRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest>
-{
-	public override Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Detector = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.Detector>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Detector, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Validate an anomaly detection job.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ValidateDetectorRequestConverter))]
 public sealed partial class ValidateDetectorRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ValidateDetectorRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

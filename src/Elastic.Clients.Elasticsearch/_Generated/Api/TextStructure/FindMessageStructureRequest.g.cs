@@ -250,45 +250,6 @@ public sealed partial class FindMessageStructureRequestParameters : Elastic.Tran
 	public string? TimestampFormat { get => Q<string?>("timestamp_format"); set => Q("timestamp_format", value); }
 }
 
-internal sealed partial class FindMessageStructureRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMessages = System.Text.Json.JsonEncodedText.Encode("messages");
-
-	public override Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.ICollection<string>> propMessages = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMessages.TryReadProperty(ref reader, options, PropMessages, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Messages = propMessages.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMessages, value.Messages, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Find the structure of text messages.
@@ -329,7 +290,7 @@ internal sealed partial class FindMessageStructureRequestConverter : System.Text
 /// It helps determine why the returned structure was chosen.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.Json.FindMessageStructureRequestConverter))]
 public sealed partial class FindMessageStructureRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

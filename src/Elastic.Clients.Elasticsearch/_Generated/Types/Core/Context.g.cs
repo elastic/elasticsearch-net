@@ -23,48 +23,13 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-internal sealed partial class ContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.Context>
-{
-	public override Elastic.Clients.Elasticsearch.Core.Search.Context Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByPropertyOfT1(ref r, o, "dummy");
-		return selector(ref reader, options) switch
-		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Core.Search.Context(reader.ReadValue<string>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Core.Search.Context(reader.ReadValue<Elastic.Clients.Elasticsearch.GeoLocation>(options, null)),
-			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.Context)}")
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.Context value, System.Text.Json.JsonSerializerOptions options)
-	{
-		switch (value.Tag)
-		{
-			case Elastic.Clients.Elasticsearch.UnionTag.T1:
-				{
-					writer.WriteValue(options, value.Value1, null);
-					break;
-				}
-
-			case Elastic.Clients.Elasticsearch.UnionTag.T2:
-				{
-					writer.WriteValue(options, value.Value2, null);
-					break;
-				}
-
-			default:
-				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
-		}
-	}
-}
-
 /// <summary>
 /// <para>
 /// Text or location that we want similar documents for or a lookup to a document's field for the text.
 /// </para>
 /// <para><see href="https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-mlt-query#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.ContextConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.ContextConverter))]
 public sealed partial class Context : Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.GeoLocation>
 {
 	public Context(string value) : base(value)

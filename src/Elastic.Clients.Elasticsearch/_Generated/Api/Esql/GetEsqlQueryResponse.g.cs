@@ -23,100 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Esql;
 
-internal sealed partial class GetEsqlQueryResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingNode = System.Text.Json.JsonEncodedText.Encode("coordinating_node");
-	private static readonly System.Text.Json.JsonEncodedText PropDataNodes = System.Text.Json.JsonEncodedText.Encode("data_nodes");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropRunningTimeNanos = System.Text.Json.JsonEncodedText.Encode("running_time_nanos");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTimeMillis = System.Text.Json.JsonEncodedText.Encode("start_time_millis");
-
-	public override Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propCoordinatingNode = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propDataNodes = default;
-		LocalJsonValue<long> propId = default;
-		LocalJsonValue<string> propNode = default;
-		LocalJsonValue<string> propQuery = default;
-		LocalJsonValue<long> propRunningTimeNanos = default;
-		LocalJsonValue<long> propStartTimeMillis = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCoordinatingNode.TryReadProperty(ref reader, options, PropCoordinatingNode, null))
-			{
-				continue;
-			}
-
-			if (propDataNodes.TryReadProperty(ref reader, options, PropDataNodes, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propId.TryReadProperty(ref reader, options, PropId, null))
-			{
-				continue;
-			}
-
-			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
-			{
-				continue;
-			}
-
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
-			{
-				continue;
-			}
-
-			if (propRunningTimeNanos.TryReadProperty(ref reader, options, PropRunningTimeNanos, null))
-			{
-				continue;
-			}
-
-			if (propStartTimeMillis.TryReadProperty(ref reader, options, PropStartTimeMillis, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CoordinatingNode = propCoordinatingNode.Value,
-			DataNodes = propDataNodes.Value,
-			Id = propId.Value,
-			Node = propNode.Value,
-			Query = propQuery.Value,
-			RunningTimeNanos = propRunningTimeNanos.Value,
-			StartTimeMillis = propStartTimeMillis.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCoordinatingNode, value.CoordinatingNode, null, null);
-		writer.WriteProperty(options, PropDataNodes, value.DataNodes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropId, value.Id, null, null);
-		writer.WriteProperty(options, PropNode, value.Node, null, null);
-		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteProperty(options, PropRunningTimeNanos, value.RunningTimeNanos, null, null);
-		writer.WriteProperty(options, PropStartTimeMillis, value.StartTimeMillis, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.GetEsqlQueryResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.GetEsqlQueryResponseConverter))]
 public sealed partial class GetEsqlQueryResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -132,37 +39,37 @@ public sealed partial class GetEsqlQueryResponse : Elastic.Transport.Products.El
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		string CoordinatingNode { get; set; }
+string CoordinatingNode { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		System.Collections.Generic.IReadOnlyCollection<string> DataNodes { get; set; }
+System.Collections.Generic.IReadOnlyCollection<string> DataNodes { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		long Id { get; set; }
+long Id { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		string Node { get; set; }
+string Node { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		string Query { get; set; }
+string Query { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		long RunningTimeNanos { get; set; }
+long RunningTimeNanos { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		long StartTimeMillis { get; set; }
+long StartTimeMillis { get; set; }
 }

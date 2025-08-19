@@ -323,6 +323,7 @@ public sealed partial class BulkRequestParameters : Elastic.Transport.RequestPar
 /// Refer to the linked documentation for step-by-step instructions using the index settings API.
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.BulkRequestConverter))]
 public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.BulkRequestParameters>
 {
 	public BulkRequest(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))

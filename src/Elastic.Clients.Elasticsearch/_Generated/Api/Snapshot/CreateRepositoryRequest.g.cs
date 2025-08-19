@@ -53,19 +53,6 @@ public sealed partial class CreateRepositoryRequestParameters : Elastic.Transpor
 	public bool? Verify { get => Q<bool?>("verify"); set => Q("verify", value); }
 }
 
-internal sealed partial class CreateRepositoryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Repository = reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.IRepository>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Repository, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create or update a snapshot repository.
@@ -78,7 +65,7 @@ internal sealed partial class CreateRepositoryRequestConverter : System.Text.Jso
 /// If both parameters are specified, only the query parameter is used.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.CreateRepositoryRequestConverter))]
 public sealed partial class CreateRepositoryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.CreateRepositoryRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

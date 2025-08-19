@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class DataframeEvaluationOutlierDetectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropActualField = System.Text.Json.JsonEncodedText.Encode("actual_field");
-	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictedProbabilityField = System.Text.Json.JsonEncodedText.Encode("predicted_probability_field");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propActualField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionMetrics?> propMetrics = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propPredictedProbabilityField = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propActualField.TryReadProperty(ref reader, options, PropActualField, null))
-			{
-				continue;
-			}
-
-			if (propMetrics.TryReadProperty(ref reader, options, PropMetrics, null))
-			{
-				continue;
-			}
-
-			if (propPredictedProbabilityField.TryReadProperty(ref reader, options, PropPredictedProbabilityField, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ActualField = propActualField.Value,
-			Metrics = propMetrics.Value,
-			PredictedProbabilityField = propPredictedProbabilityField.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetection value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropActualField, value.ActualField, null, null);
-		writer.WriteProperty(options, PropMetrics, value.Metrics, null, null);
-		writer.WriteProperty(options, PropPredictedProbabilityField, value.PredictedProbabilityField, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationOutlierDetectionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationOutlierDetectionConverter))]
 public sealed partial class DataframeEvaluationOutlierDetection
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

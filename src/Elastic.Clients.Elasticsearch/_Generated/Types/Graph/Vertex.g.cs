@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Graph;
 
-internal sealed partial class VertexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.Vertex>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDepth = System.Text.Json.JsonEncodedText.Encode("depth");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropTerm = System.Text.Json.JsonEncodedText.Encode("term");
-	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight");
-
-	public override Elastic.Clients.Elasticsearch.Graph.Vertex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long> propDepth = default;
-		LocalJsonValue<string> propField = default;
-		LocalJsonValue<string> propTerm = default;
-		LocalJsonValue<double> propWeight = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDepth.TryReadProperty(ref reader, options, PropDepth, null))
-			{
-				continue;
-			}
-
-			if (propField.TryReadProperty(ref reader, options, PropField, null))
-			{
-				continue;
-			}
-
-			if (propTerm.TryReadProperty(ref reader, options, PropTerm, null))
-			{
-				continue;
-			}
-
-			if (propWeight.TryReadProperty(ref reader, options, PropWeight, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Graph.Vertex(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Depth = propDepth.Value,
-			Field = propField.Value,
-			Term = propTerm.Value,
-			Weight = propWeight.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Graph.Vertex value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDepth, value.Depth, null, null);
-		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropTerm, value.Term, null, null);
-		writer.WriteProperty(options, PropWeight, value.Weight, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.VertexConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.Json.VertexConverter))]
 public sealed partial class Vertex
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

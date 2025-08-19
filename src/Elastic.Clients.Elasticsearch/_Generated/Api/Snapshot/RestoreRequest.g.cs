@@ -47,126 +47,6 @@ public sealed partial class RestoreRequestParameters : Elastic.Transport.Request
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-internal sealed partial class RestoreRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreIndexSettings = System.Text.Json.JsonEncodedText.Encode("ignore_index_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludeAliases = System.Text.Json.JsonEncodedText.Encode("include_aliases");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludeGlobalState = System.Text.Json.JsonEncodedText.Encode("include_global_state");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexSettings = System.Text.Json.JsonEncodedText.Encode("index_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropPartial = System.Text.Json.JsonEncodedText.Encode("partial");
-	private static readonly System.Text.Json.JsonEncodedText PropRenamePattern = System.Text.Json.JsonEncodedText.Encode("rename_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropRenameReplacement = System.Text.Json.JsonEncodedText.Encode("rename_replacement");
-
-	public override Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propFeatureStates = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIgnoreIndexSettings = default;
-		LocalJsonValue<bool?> propIgnoreUnavailable = default;
-		LocalJsonValue<bool?> propIncludeAliases = default;
-		LocalJsonValue<bool?> propIncludeGlobalState = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propIndexSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndices = default;
-		LocalJsonValue<bool?> propPartial = default;
-		LocalJsonValue<string?> propRenamePattern = default;
-		LocalJsonValue<string?> propRenameReplacement = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFeatureStates.TryReadProperty(ref reader, options, PropFeatureStates, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
-			{
-				continue;
-			}
-
-			if (propIgnoreIndexSettings.TryReadProperty(ref reader, options, PropIgnoreIndexSettings, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
-			{
-				continue;
-			}
-
-			if (propIgnoreUnavailable.TryReadProperty(ref reader, options, PropIgnoreUnavailable, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propIncludeAliases.TryReadProperty(ref reader, options, PropIncludeAliases, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propIncludeGlobalState.TryReadProperty(ref reader, options, PropIncludeGlobalState, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propIndexSettings.TryReadProperty(ref reader, options, PropIndexSettings, null))
-			{
-				continue;
-			}
-
-			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
-			{
-				continue;
-			}
-
-			if (propPartial.TryReadProperty(ref reader, options, PropPartial, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propRenamePattern.TryReadProperty(ref reader, options, PropRenamePattern, null))
-			{
-				continue;
-			}
-
-			if (propRenameReplacement.TryReadProperty(ref reader, options, PropRenameReplacement, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			FeatureStates = propFeatureStates.Value,
-			IgnoreIndexSettings = propIgnoreIndexSettings.Value,
-			IgnoreUnavailable = propIgnoreUnavailable.Value,
-			IncludeAliases = propIncludeAliases.Value,
-			IncludeGlobalState = propIncludeGlobalState.Value,
-			IndexSettings = propIndexSettings.Value,
-			Indices = propIndices.Value,
-			Partial = propPartial.Value,
-			RenamePattern = propRenamePattern.Value,
-			RenameReplacement = propRenameReplacement.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFeatureStates, value.FeatureStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropIgnoreIndexSettings, value.IgnoreIndexSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropIncludeAliases, value.IncludeAliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropIncludeGlobalState, value.IncludeGlobalState, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropIndexSettings, value.IndexSettings, null, null);
-		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
-		writer.WriteProperty(options, PropPartial, value.Partial, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropRenamePattern, value.RenamePattern, null, null);
-		writer.WriteProperty(options, PropRenameReplacement, value.RenameReplacement, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Restore a snapshot.
@@ -193,7 +73,7 @@ internal sealed partial class RestoreRequestConverter : System.Text.Json.Seriali
 /// If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.RestoreRequestConverter))]
 public sealed partial class RestoreRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
