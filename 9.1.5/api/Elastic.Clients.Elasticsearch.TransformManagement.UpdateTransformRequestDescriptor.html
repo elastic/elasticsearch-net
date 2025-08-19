@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct UpdateTransformRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct UpdateTransformRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Update a transform. Updates certain properties of a transform.   All updated properties except description do not take effect until after the transform starts the next checkpoint, thus there is data consistency in each checkpoint. To use this API, you must have read and view_index_metadata privileges for the source indices. You must also have index and read privileges for the destination index. When Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the time of update and runs with those privileges.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.5/apiSpec/new?filename=Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor" class="text-break">
+Struct UpdateTransformRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.html">TransformManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Update a transform.
+Updates certain properties of a transform.
+</p>
+<p>
+All updated properties except <code>description</code> do not take effect until after the transform starts the next checkpoint,
+thus there is data consistency in each checkpoint. To use this API, you must have <code>read</code> and <code>view_index_metadata</code>
+privileges for the source indices. You must also have <code>index</code> and <code>read</code> privileges for the destination index. When
+Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
+time of update and runs with those privileges.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct UpdateTransformRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.#ctor">
+  UpdateTransformRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public UpdateTransformRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Id)">
+  UpdateTransformRequestDescriptor(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L197"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor(Id transformId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>transformId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest)">
+  UpdateTransformRequestDescriptor(UpdateTransformRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L191"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor(UpdateTransformRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest.html">UpdateTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_AddMeta_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.AddMeta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_AddMeta_System_String_System_Object_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.AddMeta(System.String,System.Object)">
+  AddMeta(string, object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L338"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor AddMeta(string key, object value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_DeferValidation_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.DeferValidation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_DeferValidation_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.DeferValidation(System.Nullable{System.Boolean})">
+  DeferValidation(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L229"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+When true, deferrable validations are not run. This behavior may be
+desired if the source index does not exist until after the transform is
+created.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor DeferValidation(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Description_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Description_System_String_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Description(System.String)">
+  Description(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L252"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Free text description of the transform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Description(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Dest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Dest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Dest" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Dest">
+  Dest()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The destination for the transform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Dest()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Dest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Dest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Dest_Elastic_Clients_Elasticsearch_TransformManagement_Destination_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Dest(Elastic.Clients.Elasticsearch.TransformManagement.Destination)">
+  Dest(Destination?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L263"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The destination for the transform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Dest(Destination? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.Destination.html">Destination</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Dest_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Dest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Dest_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_DestinationDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Dest(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor})">
+  Dest(Action&lt;DestinationDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L285"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The destination for the transform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Dest(Action&lt;DestinationDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.DestinationDescriptor.html">DestinationDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L500"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L506"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Frequency_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Frequency*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Frequency_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Frequency(Elastic.Clients.Elasticsearch.Duration)">
+  Frequency(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L299"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The interval between checks for changes in the source indices when the
+transform is running continuously. Also determines the retry interval in
+the event of transient failures while the transform is searching or
+indexing. The minimum value is 1s and the maximum is 1h.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Frequency(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L512"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Meta_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Meta" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Meta">
+  Meta()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L321"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines optional transform metadata.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Meta()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Meta_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Meta_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringObject__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Meta(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject})">
+  Meta(Action&lt;FluentDictionaryOfStringObject&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines optional transform metadata.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Meta(Action&lt;FluentDictionaryOfStringObject&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.html">FluentDictionaryOfStringObject</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Meta_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Meta_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Meta(System.Collections.Generic.IDictionary{System.String,System.Object})">
+  Meta(IDictionary&lt;string, object&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines optional transform metadata.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Meta(IDictionary&lt;string, object&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L518"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L530"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.5/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L536"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.5/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.5/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RetentionPolicy_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RetentionPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RetentionPolicy" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RetentionPolicy">
+  RetentionPolicy()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L363"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a retention policy for the transform. Data that meets the defined
+criteria is deleted from the destination index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor RetentionPolicy()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RetentionPolicy_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RetentionPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RetentionPolicy_Elastic_Clients_Elasticsearch_TransformManagement_RetentionPolicy_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RetentionPolicy(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy)">
+  RetentionPolicy(RetentionPolicy?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L351"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a retention policy for the transform. Data that meets the defined
+criteria is deleted from the destination index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor RetentionPolicy(RetentionPolicy? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy.html">RetentionPolicy</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RetentionPolicy_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RetentionPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RetentionPolicy_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_RetentionPolicyDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RetentionPolicy(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor})">
+  RetentionPolicy(Action&lt;RetentionPolicyDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L375"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a retention policy for the transform. Data that meets the defined
+criteria is deleted from the destination index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor RetentionPolicy(Action&lt;RetentionPolicyDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor.html">RetentionPolicyDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RetentionPolicy_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RetentionPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_RetentionPolicy__1_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_RetentionPolicyDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.RetentionPolicy``1(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor{``0}})">
+  RetentionPolicy&lt;T&gt;(Action&lt;RetentionPolicyDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L387"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a retention policy for the transform. Data that meets the defined
+criteria is deleted from the destination index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor RetentionPolicy&lt;T&gt;(Action&lt;RetentionPolicyDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyDescriptor-1.html">RetentionPolicyDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Settings_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Settings" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Settings">
+  Settings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L409"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines optional transform settings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Settings()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Settings_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Settings_Elastic_Clients_Elasticsearch_TransformManagement_Settings_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Settings(Elastic.Clients.Elasticsearch.TransformManagement.Settings)">
+  Settings(Settings?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L398"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines optional transform settings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Settings(Settings? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.Settings.html">Settings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Settings_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Settings_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_SettingsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Settings(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor})">
+  Settings(Action&lt;SettingsDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L420"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines optional transform settings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Settings(Action&lt;SettingsDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor.html">SettingsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Source_Elastic_Clients_Elasticsearch_TransformManagement_Source_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Source(Elastic.Clients.Elasticsearch.TransformManagement.Source)">
+  Source(Source?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L431"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The source of the data for the transform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Source(Source? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.Source.html">Source</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Source_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_SourceDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Source(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor})">
+  Source(Action&lt;SourceDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L442"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The source of the data for the transform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Source(Action&lt;SourceDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor.html">SourceDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L524"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Source__1_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_SourceDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Source``1(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor{``0}})">
+  Source&lt;T&gt;(Action&lt;SourceDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L453"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The source of the data for the transform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Source&lt;T&gt;(Action&lt;SourceDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.SourceDescriptor-1.html">SourceDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Sync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Sync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Sync_Elastic_Clients_Elasticsearch_TransformManagement_Sync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Sync(Elastic.Clients.Elasticsearch.TransformManagement.Sync)">
+  Sync(Sync?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L464"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the properties transforms require to run continuously.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Sync(Sync? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.Sync.html">Sync</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Sync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Sync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Sync_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_SyncDescriptor__" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Sync(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor})">
+  Sync(Action&lt;SyncDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L475"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the properties transforms require to run continuously.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Sync(Action&lt;SyncDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor.html">SyncDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Sync_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Sync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Sync__1_System_Action_Elastic_Clients_Elasticsearch_TransformManagement_SyncDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Sync``1(System.Action{Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor{``0}})">
+  Sync&lt;T&gt;(Action&lt;SyncDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L486"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the properties transforms require to run continuously.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Sync&lt;T&gt;(Action&lt;SyncDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.SyncDescriptor-1.html">SyncDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Timeout_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_Timeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.Timeout(Elastic.Clients.Elasticsearch.Duration)">
+  Timeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L241"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Period to wait for a response. If no response is received before the
+timeout expires, the request fails and returns an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor Timeout(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_TransformId_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.TransformId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_TransformId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.TransformId(Elastic.Clients.Elasticsearch.Id)">
+  TransformId(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L216"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Identifier for the transform.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateTransformRequestDescriptor TransformId(Id value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequest__Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest)~Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor">
+  explicit operator UpdateTransformRequestDescriptor(UpdateTransformRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator UpdateTransformRequestDescriptor(UpdateTransformRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest.html">UpdateTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequestDescriptor__Elastic_Clients_Elasticsearch_TransformManagement_UpdateTransformRequest" data-uid="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor)~Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest">
+  implicit operator UpdateTransformRequest(UpdateTransformRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/TransformManagement/UpdateTransformRequest.g.cs/#L209"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator UpdateTransformRequest(UpdateTransformRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequestDescriptor.html">UpdateTransformRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.TransformManagement.UpdateTransformRequest.html">UpdateTransformRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct DynamicPropertyDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct DynamicPropertyDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.5/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor" class="text-break">
+Struct DynamicPropertyDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L381"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.html">Mapping</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct DynamicPropertyDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.#ctor">
+  DynamicPropertyDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L391"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor__ctor_Elastic_Clients_Elasticsearch_Mapping_DynamicProperty_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.#ctor(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty)">
+  DynamicPropertyDescriptor(DynamicProperty)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L385"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor(DynamicProperty instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicProperty.html">DynamicProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_AddMeta_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.AddMeta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_AddMeta_System_String_System_String_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.AddMeta(System.String,System.String)">
+  AddMeta(string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L565"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor AddMeta(string key, string value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Analyzer_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Analyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Analyzer_System_String_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Analyzer(System.String)">
+  Analyzer(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L400"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Analyzer(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Boost_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Boost*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Boost_System_Nullable_System_Double__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Boost(System.Nullable{System.Double})">
+  Boost(double?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L406"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Boost(double? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Coerce_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Coerce*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Coerce_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Coerce(System.Nullable{System.Boolean})">
+  Coerce(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L412"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Coerce(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_CopyTo_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.CopyTo*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_CopyTo_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.CopyTo(Elastic.Clients.Elasticsearch.Fields)">
+  CopyTo(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L418"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor CopyTo(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_CopyTo_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.CopyTo*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_CopyTo__1_System_Linq_Expressions_Expression_System_Func___0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.CopyTo``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+  CopyTo&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L424"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor CopyTo&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_DocValues_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.DocValues*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_DocValues_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.DocValues(System.Nullable{System.Boolean})">
+  DocValues(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L430"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor DocValues(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Dynamic_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Dynamic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Dynamic_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_DynamicMapping__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Dynamic(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.DynamicMapping})">
+  Dynamic(DynamicMapping?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L436"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Dynamic(DynamicMapping? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.html">DynamicMapping</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_EagerGlobalOrdinals_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.EagerGlobalOrdinals*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_EagerGlobalOrdinals_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.EagerGlobalOrdinals(System.Nullable{System.Boolean})">
+  EagerGlobalOrdinals(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L442"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor EagerGlobalOrdinals(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Enabled_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Enabled*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Enabled_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Enabled(System.Nullable{System.Boolean})">
+  Enabled(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L448"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Enabled(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Fields_Elastic_Clients_Elasticsearch_Mapping_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Fields(Elastic.Clients.Elasticsearch.Mapping.Properties)">
+  Fields(Properties?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L454"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Fields(Properties? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.Properties.html">Properties</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Fields_System_Action_Elastic_Clients_Elasticsearch_Mapping_PropertiesDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Fields(System.Action{Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor})">
+  Fields(Action&lt;PropertiesDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L460"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Fields(Action&lt;PropertiesDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.html">PropertiesDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Fields__1_System_Action_Elastic_Clients_Elasticsearch_Mapping_PropertiesDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Fields``1(System.Action{Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor{``0}})">
+  Fields&lt;T&gt;(Action&lt;PropertiesDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L466"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Fields&lt;T&gt;(Action&lt;PropertiesDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor-1.html">PropertiesDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Format_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Format*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Format_System_String_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Format(System.String)">
+  Format(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L472"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Format(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IgnoreAbove_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IgnoreAbove*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IgnoreAbove_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IgnoreAbove(System.Nullable{System.Int32})">
+  IgnoreAbove(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L478"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor IgnoreAbove(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IgnoreMalformed_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IgnoreMalformed*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IgnoreMalformed_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IgnoreMalformed(System.Nullable{System.Boolean})">
+  IgnoreMalformed(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L484"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor IgnoreMalformed(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Index_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Index_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Index(System.Nullable{System.Boolean})">
+  Index(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L490"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Index(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IndexOptions_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IndexOptions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IndexOptions_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_IndexOptions__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IndexOptions(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.IndexOptions})">
+  IndexOptions(IndexOptions?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L496"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor IndexOptions(IndexOptions? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IndexOptions.html">IndexOptions</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IndexPhrases_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IndexPhrases*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IndexPhrases_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IndexPhrases(System.Nullable{System.Boolean})">
+  IndexPhrases(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L502"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor IndexPhrases(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IndexPrefixes_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IndexPrefixes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IndexPrefixes" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IndexPrefixes">
+  IndexPrefixes()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L514"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor IndexPrefixes()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IndexPrefixes_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IndexPrefixes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IndexPrefixes_Elastic_Clients_Elasticsearch_Mapping_TextIndexPrefixes_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IndexPrefixes(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes)">
+  IndexPrefixes(TextIndexPrefixes?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L508"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor IndexPrefixes(TextIndexPrefixes? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes.html">TextIndexPrefixes</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IndexPrefixes_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IndexPrefixes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_IndexPrefixes_System_Action_Elastic_Clients_Elasticsearch_Mapping_TextIndexPrefixesDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.IndexPrefixes(System.Action{Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor})">
+  IndexPrefixes(Action&lt;TextIndexPrefixesDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L520"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor IndexPrefixes(Action&lt;TextIndexPrefixesDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor.html">TextIndexPrefixesDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Locale_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Locale*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Locale_System_String_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Locale(System.String)">
+  Locale(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L526"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Locale(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Meta_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Meta" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Meta">
+  Meta()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L548"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Metadata about the field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Meta()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Meta_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Meta_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringString__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Meta(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString})">
+  Meta(Action&lt;FluentDictionaryOfStringString&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L559"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Metadata about the field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Meta(Action&lt;FluentDictionaryOfStringString&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.html">FluentDictionaryOfStringString</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Meta_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Meta_System_Collections_Generic_IDictionary_System_String_System_String__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Meta(System.Collections.Generic.IDictionary{System.String,System.String})">
+  Meta(IDictionary&lt;string, string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L537"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Metadata about the field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Meta(IDictionary&lt;string, string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Norms_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Norms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Norms_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Norms(System.Nullable{System.Boolean})">
+  Norms(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L572"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Norms(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_NullValue_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.NullValue*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_NullValue_System_Nullable_Elastic_Clients_Elasticsearch_FieldValue__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.NullValue(System.Nullable{Elastic.Clients.Elasticsearch.FieldValue})">
+  NullValue(FieldValue?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L578"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor NullValue(FieldValue? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_OnScriptError_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.OnScriptError*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_OnScriptError_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_OnScriptError__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.OnScriptError(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.OnScriptError})">
+  OnScriptError(OnScriptError?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L584"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor OnScriptError(OnScriptError? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.OnScriptError.html">OnScriptError</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_PositionIncrementGap_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.PositionIncrementGap*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_PositionIncrementGap_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.PositionIncrementGap(System.Nullable{System.Int32})">
+  PositionIncrementGap(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L590"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor PositionIncrementGap(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_PrecisionStep_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.PrecisionStep*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_PrecisionStep_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.PrecisionStep(System.Nullable{System.Int32})">
+  PrecisionStep(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L596"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor PrecisionStep(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Properties_Elastic_Clients_Elasticsearch_Mapping_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Properties(Elastic.Clients.Elasticsearch.Mapping.Properties)">
+  Properties(Properties?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L602"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Properties(Properties? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.Properties.html">Properties</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Properties_System_Action_Elastic_Clients_Elasticsearch_Mapping_PropertiesDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Properties(System.Action{Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor})">
+  Properties(Action&lt;PropertiesDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L608"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Properties(Action&lt;PropertiesDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.html">PropertiesDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Properties__1_System_Action_Elastic_Clients_Elasticsearch_Mapping_PropertiesDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Properties``1(System.Action{Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor{``0}})">
+  Properties&lt;T&gt;(Action&lt;PropertiesDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L614"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Properties&lt;T&gt;(Action&lt;PropertiesDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor-1.html">PropertiesDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Script" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Script">
+  Script()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L626"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Script()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Script_Elastic_Clients_Elasticsearch_Script_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Script(Elastic.Clients.Elasticsearch.Script)">
+  Script(Script?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L620"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Script(Script? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Script.html">Script</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Script_System_Action_Elastic_Clients_Elasticsearch_ScriptDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Script(System.Action{Elastic.Clients.Elasticsearch.ScriptDescriptor})">
+  Script(Action&lt;ScriptDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L632"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Script(Action&lt;ScriptDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ScriptDescriptor.html">ScriptDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_SearchAnalyzer_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.SearchAnalyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_SearchAnalyzer_System_String_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.SearchAnalyzer(System.String)">
+  SearchAnalyzer(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L638"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor SearchAnalyzer(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_SearchQuoteAnalyzer_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.SearchQuoteAnalyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_SearchQuoteAnalyzer_System_String_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.SearchQuoteAnalyzer(System.String)">
+  SearchQuoteAnalyzer(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L644"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor SearchQuoteAnalyzer(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Store_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Store*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_Store_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.Store(System.Nullable{System.Boolean})">
+  Store(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L650"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor Store(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_SyntheticSourceKeep_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.SyntheticSourceKeep*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_SyntheticSourceKeep_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_SyntheticSourceKeepEnum__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.SyntheticSourceKeep(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum})">
+  SyntheticSourceKeep(SyntheticSourceKeepEnum?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L656"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor SyntheticSourceKeep(SyntheticSourceKeepEnum? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.html">SyntheticSourceKeepEnum</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_TermVector_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.TermVector*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_TermVector_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_TermVectorOption__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.TermVector(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.TermVectorOption})">
+  TermVector(TermVectorOption?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L662"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor TermVector(TermVectorOption? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TermVectorOption.html">TermVectorOption</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_TimeSeriesMetric_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.TimeSeriesMetric*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_TimeSeriesMetric_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_TimeSeriesMetricType__" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.TimeSeriesMetric(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType})">
+  TimeSeriesMetric(TimeSeriesMetricType?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L668"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicPropertyDescriptor TimeSeriesMetric(TimeSeriesMetricType? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.html">TimeSeriesMetricType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Mapping_DynamicProperty__Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty)~Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor">
+  explicit operator DynamicPropertyDescriptor(DynamicProperty)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L397"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator DynamicPropertyDescriptor(DynamicProperty instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicProperty.html">DynamicProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Mapping_DynamicPropertyDescriptor__Elastic_Clients_Elasticsearch_Mapping_DynamicProperty" data-uid="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor)~Elastic.Clients.Elasticsearch.Mapping.DynamicProperty">
+  implicit operator DynamicProperty(DynamicPropertyDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/DynamicProperty.g.cs/#L398"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator DynamicProperty(DynamicPropertyDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor.html">DynamicPropertyDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicProperty.html">DynamicProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

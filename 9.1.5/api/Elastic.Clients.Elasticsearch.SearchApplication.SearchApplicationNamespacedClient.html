@@ -1,0 +1,2669 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SearchApplicationNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SearchApplicationNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.5/apiSpec/new?filename=Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient" class="text-break">
+Class SearchApplicationNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.html">SearchApplication</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SearchApplicationNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">SearchApplicationNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.#ctor">
+  SearchApplicationNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.html">SearchApplicationNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SearchApplicationNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Delete_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Delete(Elastic.Clients.Elasticsearch.Name)">
+  Delete(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteSearchApplicationResponse Delete(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse.html">DeleteSearchApplicationResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Delete_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_DeleteSearchApplicationRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Delete(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor})">
+  Delete(Name, Action&lt;DeleteSearchApplicationRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteSearchApplicationResponse Delete(Name name, Action&lt;DeleteSearchApplicationRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor.html">DeleteSearchApplicationRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse.html">DeleteSearchApplicationResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Delete_Elastic_Clients_Elasticsearch_SearchApplication_DeleteSearchApplicationRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Delete(Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest)">
+  Delete(DeleteSearchApplicationRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteSearchApplicationResponse Delete(DeleteSearchApplicationRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest.html">DeleteSearchApplicationRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse.html">DeleteSearchApplicationResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_DeleteSearchApplicationRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteAsync(Name, Action&lt;DeleteSearchApplicationRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSearchApplicationResponse&gt; DeleteAsync(Name name, Action&lt;DeleteSearchApplicationRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor.html">DeleteSearchApplicationRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse.html">DeleteSearchApplicationResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  DeleteAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSearchApplicationResponse&gt; DeleteAsync(Name name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse.html">DeleteSearchApplicationResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_SearchApplication_DeleteSearchApplicationRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest,System.Threading.CancellationToken)">
+  DeleteAsync(DeleteSearchApplicationRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteSearchApplicationResponse&gt; DeleteAsync(DeleteSearchApplicationRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest.html">DeleteSearchApplicationRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse.html">DeleteSearchApplicationResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalytics_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalytics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalytics_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name)">
+  DeleteBehavioralAnalytics(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse.html">DeleteBehavioralAnalyticsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalytics_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalytics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalytics_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_DeleteBehavioralAnalyticsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor})">
+  DeleteBehavioralAnalytics(Name, Action&lt;DeleteBehavioralAnalyticsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(Name name, Action&lt;DeleteBehavioralAnalyticsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor.html">DeleteBehavioralAnalyticsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse.html">DeleteBehavioralAnalyticsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalytics_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalytics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalytics_Elastic_Clients_Elasticsearch_SearchApplication_DeleteBehavioralAnalyticsRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalytics(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest)">
+  DeleteBehavioralAnalytics(DeleteBehavioralAnalyticsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(DeleteBehavioralAnalyticsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest.html">DeleteBehavioralAnalyticsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse.html">DeleteBehavioralAnalyticsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalyticsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalyticsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalyticsAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_DeleteBehavioralAnalyticsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteBehavioralAnalyticsAsync(Name, Action&lt;DeleteBehavioralAnalyticsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual Task&lt;DeleteBehavioralAnalyticsResponse&gt; DeleteBehavioralAnalyticsAsync(Name name, Action&lt;DeleteBehavioralAnalyticsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor.html">DeleteBehavioralAnalyticsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse.html">DeleteBehavioralAnalyticsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalyticsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalyticsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalyticsAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  DeleteBehavioralAnalyticsAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual Task&lt;DeleteBehavioralAnalyticsResponse&gt; DeleteBehavioralAnalyticsAsync(Name name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse.html">DeleteBehavioralAnalyticsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalyticsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalyticsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_DeleteBehavioralAnalyticsAsync_Elastic_Clients_Elasticsearch_SearchApplication_DeleteBehavioralAnalyticsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.DeleteBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest,System.Threading.CancellationToken)">
+  DeleteBehavioralAnalyticsAsync(DeleteBehavioralAnalyticsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteBehavioralAnalyticsResponse&gt; DeleteBehavioralAnalyticsAsync(DeleteBehavioralAnalyticsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest.html">DeleteBehavioralAnalyticsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse.html">DeleteBehavioralAnalyticsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Get_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Get_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Get(Elastic.Clients.Elasticsearch.Name)">
+  Get(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L143"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetSearchApplicationResponse Get(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse.html">GetSearchApplicationResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Get_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Get_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_GetSearchApplicationRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Get(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor})">
+  Get(Name, Action&lt;GetSearchApplicationRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L151"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetSearchApplicationResponse Get(Name name, Action&lt;GetSearchApplicationRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor.html">GetSearchApplicationRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse.html">GetSearchApplicationResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Get_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Get_Elastic_Clients_Elasticsearch_SearchApplication_GetSearchApplicationRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Get(Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest)">
+  Get(GetSearchApplicationRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetSearchApplicationResponse Get(GetSearchApplicationRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest.html">GetSearchApplicationRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse.html">GetSearchApplicationResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_GetSearchApplicationRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor},System.Threading.CancellationToken)">
+  GetAsync(Name, Action&lt;GetSearchApplicationRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSearchApplicationResponse&gt; GetAsync(Name name, Action&lt;GetSearchApplicationRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor.html">GetSearchApplicationRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse.html">GetSearchApplicationResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  GetAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L166"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSearchApplicationResponse&gt; GetAsync(Name name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse.html">GetSearchApplicationResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetAsync_Elastic_Clients_Elasticsearch_SearchApplication_GetSearchApplicationRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetAsync(Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest,System.Threading.CancellationToken)">
+  GetAsync(GetSearchApplicationRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L160"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetSearchApplicationResponse&gt; GetAsync(GetSearchApplicationRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest.html">GetSearchApplicationRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse.html">GetSearchApplicationResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalytics_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalytics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalytics" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalytics">
+  GetBehavioralAnalytics()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L189"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse.html">GetBehavioralAnalyticsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalytics_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalytics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalytics_Elastic_Clients_Elasticsearch_SearchApplication_GetBehavioralAnalyticsRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalytics(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest)">
+  GetBehavioralAnalytics(GetBehavioralAnalyticsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L183"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics(GetBehavioralAnalyticsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest.html">GetBehavioralAnalyticsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse.html">GetBehavioralAnalyticsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalytics_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalytics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalytics_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_GetBehavioralAnalyticsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalytics(System.Action{Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor})">
+  GetBehavioralAnalytics(Action&lt;GetBehavioralAnalyticsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics(Action&lt;GetBehavioralAnalyticsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor.html">GetBehavioralAnalyticsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse.html">GetBehavioralAnalyticsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalytics_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalytics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalytics_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Name__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalytics(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Name})">
+  GetBehavioralAnalytics(ICollection&lt;Name&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics(ICollection&lt;Name&gt;? name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse.html">GetBehavioralAnalyticsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalytics_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalytics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalytics_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Name__System_Action_Elastic_Clients_Elasticsearch_SearchApplication_GetBehavioralAnalyticsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalytics(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Name},System.Action{Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor})">
+  GetBehavioralAnalytics(ICollection&lt;Name&gt;?, Action&lt;GetBehavioralAnalyticsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L217"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics(ICollection&lt;Name&gt;? name, Action&lt;GetBehavioralAnalyticsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor.html">GetBehavioralAnalyticsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse.html">GetBehavioralAnalyticsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalyticsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalyticsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalyticsAsync_Elastic_Clients_Elasticsearch_SearchApplication_GetBehavioralAnalyticsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest,System.Threading.CancellationToken)">
+  GetBehavioralAnalyticsAsync(GetBehavioralAnalyticsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetBehavioralAnalyticsResponse&gt; GetBehavioralAnalyticsAsync(GetBehavioralAnalyticsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest.html">GetBehavioralAnalyticsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse.html">GetBehavioralAnalyticsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalyticsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalyticsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalyticsAsync_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_GetBehavioralAnalyticsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalyticsAsync(System.Action{Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor},System.Threading.CancellationToken)">
+  GetBehavioralAnalyticsAsync(Action&lt;GetBehavioralAnalyticsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual Task&lt;GetBehavioralAnalyticsResponse&gt; GetBehavioralAnalyticsAsync(Action&lt;GetBehavioralAnalyticsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor.html">GetBehavioralAnalyticsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse.html">GetBehavioralAnalyticsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalyticsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalyticsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalyticsAsync_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Name__System_Action_Elastic_Clients_Elasticsearch_SearchApplication_GetBehavioralAnalyticsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalyticsAsync(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Name},System.Action{Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor},System.Threading.CancellationToken)">
+  GetBehavioralAnalyticsAsync(ICollection&lt;Name&gt;?, Action&lt;GetBehavioralAnalyticsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L261"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual Task&lt;GetBehavioralAnalyticsResponse&gt; GetBehavioralAnalyticsAsync(ICollection&lt;Name&gt;? name, Action&lt;GetBehavioralAnalyticsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor.html">GetBehavioralAnalyticsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse.html">GetBehavioralAnalyticsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalyticsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalyticsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalyticsAsync_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Name__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalyticsAsync(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Name},System.Threading.CancellationToken)">
+  GetBehavioralAnalyticsAsync(ICollection&lt;Name&gt;?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L252"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual Task&lt;GetBehavioralAnalyticsResponse&gt; GetBehavioralAnalyticsAsync(ICollection&lt;Name&gt;? name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse.html">GetBehavioralAnalyticsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalyticsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalyticsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_GetBehavioralAnalyticsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.GetBehavioralAnalyticsAsync(System.Threading.CancellationToken)">
+  GetBehavioralAnalyticsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L233"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual Task&lt;GetBehavioralAnalyticsResponse&gt; GetBehavioralAnalyticsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse.html">GetBehavioralAnalyticsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_List_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.List*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_List" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.List">
+  List()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L277"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ListResponse List()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.ListResponse.html">ListResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_List_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.List*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_List_Elastic_Clients_Elasticsearch_SearchApplication_ListRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.List(Elastic.Clients.Elasticsearch.SearchApplication.ListRequest)">
+  List(ListRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L271"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ListResponse List(ListRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.ListRequest.html">ListRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.ListResponse.html">ListResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_List_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.List*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_List_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_ListRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.List(System.Action{Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor})">
+  List(Action&lt;ListRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L285"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ListResponse List(Action&lt;ListRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor.html">ListRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.ListResponse.html">ListResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_ListAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.ListAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_ListAsync_Elastic_Clients_Elasticsearch_SearchApplication_ListRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.ListAsync(Elastic.Clients.Elasticsearch.SearchApplication.ListRequest,System.Threading.CancellationToken)">
+  ListAsync(ListRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L294"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListResponse&gt; ListAsync(ListRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.ListRequest.html">ListRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.ListResponse.html">ListResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_ListAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.ListAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_ListAsync_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_ListRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.ListAsync(System.Action{Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor},System.Threading.CancellationToken)">
+  ListAsync(Action&lt;ListRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L308"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListResponse&gt; ListAsync(Action&lt;ListRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor.html">ListRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.ListResponse.html">ListResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_ListAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.ListAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_ListAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.ListAsync(System.Threading.CancellationToken)">
+  ListAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L300"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ListResponse&gt; ListAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.ListResponse.html">ListResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEvent_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEvent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEvent_Elastic_Clients_Elasticsearch_Name_Elastic_Clients_Elasticsearch_SearchApplication_EventType_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEvent(Elastic.Clients.Elasticsearch.Name,Elastic.Clients.Elasticsearch.SearchApplication.EventType)">
+  PostBehavioralAnalyticsEvent(Name, EventType)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L323"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(Name collectionName, EventType eventType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>collectionName</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>eventType</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.EventType.html">EventType</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse.html">PostBehavioralAnalyticsEventResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEvent_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEvent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEvent_Elastic_Clients_Elasticsearch_Name_Elastic_Clients_Elasticsearch_SearchApplication_EventType_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_PostBehavioralAnalyticsEventRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEvent(Elastic.Clients.Elasticsearch.Name,Elastic.Clients.Elasticsearch.SearchApplication.EventType,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor})">
+  PostBehavioralAnalyticsEvent(Name, EventType, Action&lt;PostBehavioralAnalyticsEventRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(Name collectionName, EventType eventType, Action&lt;PostBehavioralAnalyticsEventRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>collectionName</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>eventType</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.EventType.html">EventType</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor.html">PostBehavioralAnalyticsEventRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse.html">PostBehavioralAnalyticsEventResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEvent_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEvent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEvent_Elastic_Clients_Elasticsearch_SearchApplication_PostBehavioralAnalyticsEventRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEvent(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest)">
+  PostBehavioralAnalyticsEvent(PostBehavioralAnalyticsEventRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(PostBehavioralAnalyticsEventRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest.html">PostBehavioralAnalyticsEventRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse.html">PostBehavioralAnalyticsEventResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEventAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEventAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEventAsync_Elastic_Clients_Elasticsearch_Name_Elastic_Clients_Elasticsearch_SearchApplication_EventType_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_PostBehavioralAnalyticsEventRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEventAsync(Elastic.Clients.Elasticsearch.Name,Elastic.Clients.Elasticsearch.SearchApplication.EventType,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor},System.Threading.CancellationToken)">
+  PostBehavioralAnalyticsEventAsync(Name, EventType, Action&lt;PostBehavioralAnalyticsEventRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L357"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual Task&lt;PostBehavioralAnalyticsEventResponse&gt; PostBehavioralAnalyticsEventAsync(Name collectionName, EventType eventType, Action&lt;PostBehavioralAnalyticsEventRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>collectionName</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>eventType</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.EventType.html">EventType</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor.html">PostBehavioralAnalyticsEventRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse.html">PostBehavioralAnalyticsEventResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEventAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEventAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEventAsync_Elastic_Clients_Elasticsearch_Name_Elastic_Clients_Elasticsearch_SearchApplication_EventType_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEventAsync(Elastic.Clients.Elasticsearch.Name,Elastic.Clients.Elasticsearch.SearchApplication.EventType,System.Threading.CancellationToken)">
+  PostBehavioralAnalyticsEventAsync(Name, EventType, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L348"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual Task&lt;PostBehavioralAnalyticsEventResponse&gt; PostBehavioralAnalyticsEventAsync(Name collectionName, EventType eventType, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>collectionName</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>eventType</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.EventType.html">EventType</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse.html">PostBehavioralAnalyticsEventResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEventAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEventAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PostBehavioralAnalyticsEventAsync_Elastic_Clients_Elasticsearch_SearchApplication_PostBehavioralAnalyticsEventRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PostBehavioralAnalyticsEventAsync(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest,System.Threading.CancellationToken)">
+  PostBehavioralAnalyticsEventAsync(PostBehavioralAnalyticsEventRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L342"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostBehavioralAnalyticsEventResponse&gt; PostBehavioralAnalyticsEventAsync(PostBehavioralAnalyticsEventRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest.html">PostBehavioralAnalyticsEventRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse.html">PostBehavioralAnalyticsEventResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Put_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Put*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Put_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Put(Elastic.Clients.Elasticsearch.Name)">
+  Put(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L373"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutSearchApplicationResponse Put(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse.html">PutSearchApplicationResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Put_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Put*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Put_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_PutSearchApplicationRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Put(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor})">
+  Put(Name, Action&lt;PutSearchApplicationRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L381"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutSearchApplicationResponse Put(Name name, Action&lt;PutSearchApplicationRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor.html">PutSearchApplicationRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse.html">PutSearchApplicationResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Put_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Put*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Put_Elastic_Clients_Elasticsearch_SearchApplication_PutSearchApplicationRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Put(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest)">
+  Put(PutSearchApplicationRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L367"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutSearchApplicationResponse Put(PutSearchApplicationRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest.html">PutSearchApplicationRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse.html">PutSearchApplicationResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_PutSearchApplicationRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor},System.Threading.CancellationToken)">
+  PutAsync(Name, Action&lt;PutSearchApplicationRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L404"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSearchApplicationResponse&gt; PutAsync(Name name, Action&lt;PutSearchApplicationRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor.html">PutSearchApplicationRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse.html">PutSearchApplicationResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  PutAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L396"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSearchApplicationResponse&gt; PutAsync(Name name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse.html">PutSearchApplicationResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutAsync_Elastic_Clients_Elasticsearch_SearchApplication_PutSearchApplicationRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest,System.Threading.CancellationToken)">
+  PutAsync(PutSearchApplicationRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L390"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutSearchApplicationResponse&gt; PutAsync(PutSearchApplicationRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest.html">PutSearchApplicationRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse.html">PutSearchApplicationResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalytics_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalytics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalytics_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name)">
+  PutBehavioralAnalytics(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L419"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual PutBehavioralAnalyticsResponse PutBehavioralAnalytics(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse.html">PutBehavioralAnalyticsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalytics_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalytics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalytics_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_PutBehavioralAnalyticsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor})">
+  PutBehavioralAnalytics(Name, Action&lt;PutBehavioralAnalyticsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L428"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual PutBehavioralAnalyticsResponse PutBehavioralAnalytics(Name name, Action&lt;PutBehavioralAnalyticsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor.html">PutBehavioralAnalyticsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse.html">PutBehavioralAnalyticsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalytics_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalytics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalytics_Elastic_Clients_Elasticsearch_SearchApplication_PutBehavioralAnalyticsRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalytics(Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest)">
+  PutBehavioralAnalytics(PutBehavioralAnalyticsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L413"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutBehavioralAnalyticsResponse PutBehavioralAnalytics(PutBehavioralAnalyticsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest.html">PutBehavioralAnalyticsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse.html">PutBehavioralAnalyticsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalyticsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalyticsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalyticsAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_PutBehavioralAnalyticsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor},System.Threading.CancellationToken)">
+  PutBehavioralAnalyticsAsync(Name, Action&lt;PutBehavioralAnalyticsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L453"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual Task&lt;PutBehavioralAnalyticsResponse&gt; PutBehavioralAnalyticsAsync(Name name, Action&lt;PutBehavioralAnalyticsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor.html">PutBehavioralAnalyticsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse.html">PutBehavioralAnalyticsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalyticsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalyticsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalyticsAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  PutBehavioralAnalyticsAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L444"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;9.0.0&#39;.&quot;)]
+public virtual Task&lt;PutBehavioralAnalyticsResponse&gt; PutBehavioralAnalyticsAsync(Name name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse.html">PutBehavioralAnalyticsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalyticsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalyticsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_PutBehavioralAnalyticsAsync_Elastic_Clients_Elasticsearch_SearchApplication_PutBehavioralAnalyticsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.PutBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest,System.Threading.CancellationToken)">
+  PutBehavioralAnalyticsAsync(PutBehavioralAnalyticsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L438"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutBehavioralAnalyticsResponse&gt; PutBehavioralAnalyticsAsync(PutBehavioralAnalyticsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest.html">PutBehavioralAnalyticsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse.html">PutBehavioralAnalyticsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQuery_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQuery*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQuery_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQuery(Elastic.Clients.Elasticsearch.Name)">
+  RenderQuery(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L469"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual RenderQueryResponse RenderQuery(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse.html">RenderQueryResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQuery_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQuery*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQuery_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_RenderQueryRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQuery(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor})">
+  RenderQuery(Name, Action&lt;RenderQueryRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L477"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual RenderQueryResponse RenderQuery(Name name, Action&lt;RenderQueryRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor.html">RenderQueryRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse.html">RenderQueryResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQuery_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQuery*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQuery_Elastic_Clients_Elasticsearch_SearchApplication_RenderQueryRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQuery(Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest)">
+  RenderQuery(RenderQueryRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L463"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual RenderQueryResponse RenderQuery(RenderQueryRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest.html">RenderQueryRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse.html">RenderQueryResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQueryAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQueryAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQueryAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_RenderQueryRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQueryAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor},System.Threading.CancellationToken)">
+  RenderQueryAsync(Name, Action&lt;RenderQueryRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L500"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;RenderQueryResponse&gt; RenderQueryAsync(Name name, Action&lt;RenderQueryRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor.html">RenderQueryRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse.html">RenderQueryResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQueryAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQueryAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQueryAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQueryAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  RenderQueryAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L492"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;RenderQueryResponse&gt; RenderQueryAsync(Name name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse.html">RenderQueryResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQueryAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQueryAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_RenderQueryAsync_Elastic_Clients_Elasticsearch_SearchApplication_RenderQueryRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.RenderQueryAsync(Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest,System.Threading.CancellationToken)">
+  RenderQueryAsync(RenderQueryRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L486"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;RenderQueryResponse&gt; RenderQueryAsync(RenderQueryRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest.html">RenderQueryRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse.html">RenderQueryResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_SearchAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.SearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_SearchAsync__1_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationSearchRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.SearchAsync``1(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor},System.Threading.CancellationToken)">
+  SearchAsync&lt;TDocument&gt;(Name, Action&lt;SearchApplicationSearchRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L546"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SearchApplicationSearchResponse&lt;TDocument&gt;&gt; SearchAsync&lt;TDocument&gt;(Name name, Action&lt;SearchApplicationSearchRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor.html">SearchApplicationSearchRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse-1.html">SearchApplicationSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_SearchAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.SearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_SearchAsync__1_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.SearchAsync``1(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  SearchAsync&lt;TDocument&gt;(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L538"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SearchApplicationSearchResponse&lt;TDocument&gt;&gt; SearchAsync&lt;TDocument&gt;(Name name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse-1.html">SearchApplicationSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_SearchAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.SearchAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_SearchAsync__1_Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationSearchRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.SearchAsync``1(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest,System.Threading.CancellationToken)">
+  SearchAsync&lt;TDocument&gt;(SearchApplicationSearchRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L532"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SearchApplicationSearchResponse&lt;TDocument&gt;&gt; SearchAsync&lt;TDocument&gt;(SearchApplicationSearchRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest.html">SearchApplicationSearchRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse-1.html">SearchApplicationSearchResponse</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Search_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Search*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Search__1_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Search``1(Elastic.Clients.Elasticsearch.Name)">
+  Search&lt;TDocument&gt;(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L515"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SearchApplicationSearchResponse&lt;TDocument&gt; Search&lt;TDocument&gt;(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse-1.html">SearchApplicationSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Search_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Search*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Search__1_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationSearchRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Search``1(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor})">
+  Search&lt;TDocument&gt;(Name, Action&lt;SearchApplicationSearchRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L523"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SearchApplicationSearchResponse&lt;TDocument&gt; Search&lt;TDocument&gt;(Name name, Action&lt;SearchApplicationSearchRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor.html">SearchApplicationSearchRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse-1.html">SearchApplicationSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Search_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Search*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationNamespacedClient_Search__1_Elastic_Clients_Elasticsearch_SearchApplication_SearchApplicationSearchRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient.Search``1(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest)">
+  Search&lt;TDocument&gt;(SearchApplicationSearchRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchApplication.g.cs/#L509"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SearchApplicationSearchResponse&lt;TDocument&gt; Search&lt;TDocument&gt;(SearchApplicationSearchRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest.html">SearchApplicationSearchRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse-1.html">SearchApplicationSearchResponse</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

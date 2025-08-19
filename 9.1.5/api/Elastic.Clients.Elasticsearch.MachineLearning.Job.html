@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Job | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Job | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.5/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_Job.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.Job%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_Job" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job" class="text-break">
+Class Job  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(JobConverter))]
+public sealed class Job</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Job</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job__ctor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.#ctor">
+  Job()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public Job()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job__ctor_System_Boolean_Elastic_Clients_Elasticsearch_MachineLearning_AnalysisConfig_Elastic_Clients_Elasticsearch_MachineLearning_DataDescription_System_String_System_Int64_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.#ctor(System.Boolean,Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig,Elastic.Clients.Elasticsearch.MachineLearning.DataDescription,System.String,System.Int64,System.String)">
+  Job(bool, AnalysisConfig, DataDescription, string, long, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Job(bool allowLazyOpen, AnalysisConfig analysisConfig, DataDescription dataDescription, string jobId, long modelSnapshotRetentionDays, string resultsIndexName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>allowLazyOpen</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>analysisConfig</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig.html">AnalysisConfig</a></dt>
+    <dd></dd>
+    <dt><code>dataDescription</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataDescription.html">DataDescription</a></dt>
+    <dd></dd>
+    <dt><code>jobId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>modelSnapshotRetentionDays</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>resultsIndexName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_AllowLazyOpen_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.AllowLazyOpen*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_AllowLazyOpen" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.AllowLazyOpen">
+  AllowLazyOpen
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option.
+Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AllowLazyOpen { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_AnalysisConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.AnalysisConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_AnalysisConfig" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.AnalysisConfig">
+  AnalysisConfig
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The analysis configuration, which specifies how to analyze the data.
+After you create a job, you cannot change the analysis configuration; all the properties are informational.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalysisConfig AnalysisConfig { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig.html">AnalysisConfig</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_AnalysisLimits_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.AnalysisLimits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_AnalysisLimits" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.AnalysisLimits">
+  AnalysisLimits
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Limits can be applied for the resources required to hold the mathematical models in memory.
+These limits are approximate and can be set per job.
+They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalysisLimits? AnalysisLimits { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits.html">AnalysisLimits</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_BackgroundPersistInterval_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.BackgroundPersistInterval*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_BackgroundPersistInterval" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.BackgroundPersistInterval">
+  BackgroundPersistInterval
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option.
+The time between each periodic persistence of the model.
+The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time.
+The smallest allowed value is 1 hour.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? BackgroundPersistInterval { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_Blocked_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.Blocked*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_Blocked" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.Blocked">
+  Blocked
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JobBlocked? Blocked { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.JobBlocked.html">JobBlocked</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_CreateTime_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.CreateTime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_CreateTime" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.CreateTime">
+  CreateTime
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTimeOffset? CreateTime { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_CustomSettings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.CustomSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_CustomSettings" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.CustomSettings">
+  CustomSettings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option.
+Contains custom metadata about the job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public object? CustomSettings { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_DailyModelSnapshotRetentionAfterDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.DailyModelSnapshotRetentionAfterDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_DailyModelSnapshotRetentionAfterDays" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.DailyModelSnapshotRetentionAfterDays">
+  DailyModelSnapshotRetentionAfterDays
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option, which affects the automatic removal of old model snapshots for this job.
+It specifies a period of time (in days) after which only the first snapshot per day is retained.
+This period is relative to the timestamp of the most recent snapshot for this job.
+Valid values range from 0 to <code>model_snapshot_retention_days</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? DailyModelSnapshotRetentionAfterDays { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_DataDescription_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.DataDescription*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_DataDescription" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.DataDescription">
+  DataDescription
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The data description defines the format of the input data when you send data to the job by using the post data API.
+Note that when configuring a datafeed, these properties are automatically set.
+When data is received via the post data API, it is not stored in Elasticsearch.
+Only the results for anomaly detection are retained.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataDescription DataDescription { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataDescription.html">DataDescription</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_DatafeedConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.DatafeedConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_DatafeedConfig" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.DatafeedConfig">
+  DatafeedConfig
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The datafeed, which retrieves data from Elasticsearch for analysis by the job.
+You can associate only one datafeed with each anomaly detection job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Datafeed? DatafeedConfig { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.Datafeed.html">Datafeed</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_Deleting_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.Deleting*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_Deleting" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.Deleting">
+  Deleting
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates that the process of deleting the job is in progress but not yet completed.
+It is only reported when <code>true</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Deleting { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_Description_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_Description" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.Description">
+  Description
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A description of the job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Description { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_FinishedTime_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.FinishedTime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_FinishedTime" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.FinishedTime">
+  FinishedTime
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If the job closed or failed, this is the time the job finished, otherwise it is <code>null</code>.
+This property is informational; you cannot change its value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTimeOffset? FinishedTime { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_Groups_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.Groups*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_Groups" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.Groups">
+  Groups
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of job groups.
+A job can belong to no groups or many.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyCollection&lt;string&gt;? Groups { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_JobId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.JobId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_JobId" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.JobId">
+  JobId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Identifier for the anomaly detection job.
+This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.
+It must start and end with alphanumeric characters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string JobId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_JobType_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.JobType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_JobType" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.JobType">
+  JobType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L190"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Reserved for future use, currently set to <code>anomaly_detector</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? JobType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_JobVersion_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.JobVersion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_JobVersion" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.JobVersion">
+  JobVersion
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L197"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The machine learning configuration version number at which the the job was created.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? JobVersion { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_ModelPlotConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.ModelPlotConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_ModelPlotConfig" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.ModelPlotConfig">
+  ModelPlotConfig
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L206"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+This advanced configuration option stores model information along with the results.
+It provides a more detailed view into anomaly detection.
+Model plot provides a simplified and indicative view of the model and its bounds.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ModelPlotConfig? ModelPlotConfig { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig.html">ModelPlotConfig</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_ModelSnapshotId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.ModelSnapshotId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_ModelSnapshotId" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.ModelSnapshotId">
+  ModelSnapshotId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L207"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? ModelSnapshotId { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_ModelSnapshotRetentionDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.ModelSnapshotRetentionDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_ModelSnapshotRetentionDays" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.ModelSnapshotRetentionDays">
+  ModelSnapshotRetentionDays
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L217"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option, which affects the automatic removal of old model snapshots for this job.
+It specifies the maximum period of time (in days) that snapshots are retained.
+This period is relative to the timestamp of the most recent snapshot for this job.
+By default, snapshots ten days older than the newest snapshot are deleted.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long ModelSnapshotRetentionDays { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_RenormalizationWindowDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.RenormalizationWindowDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_RenormalizationWindowDays" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.RenormalizationWindowDays">
+  RenormalizationWindowDays
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L230"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option.
+The period over which adjustments to the score are applied, as new data is seen.
+The default value is the longer of 30 days or 100 <code>bucket_spans</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? RenormalizationWindowDays { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_ResultsIndexName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.ResultsIndexName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_ResultsIndexName" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.ResultsIndexName">
+  ResultsIndexName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L238"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A text string that affects the name of the machine learning results index.
+The default value is <code>shared</code>, which generates an index named <code>.ml-anomalies-shared</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ResultsIndexName { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_Job_ResultsRetentionDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.ResultsRetentionDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_Job_ResultsRetentionDays" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.Job.ResultsRetentionDays">
+  ResultsRetentionDays
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/Job.g.cs/#L255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option.
+The period of time (in days) that results are retained.
+Age is calculated relative to the timestamp of the latest bucket result.
+If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch.
+The default value is null, which means all results are retained.
+Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results.
+Annotations added by users are retained forever.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? ResultsRetentionDays { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
