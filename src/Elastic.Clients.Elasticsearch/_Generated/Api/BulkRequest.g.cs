@@ -319,6 +319,7 @@ public sealed partial class BulkRequestParameters : Elastic.Transport.RequestPar
 /// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.BulkRequestConverter))]
 public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.BulkRequestParameters>
 {
 	public BulkRequest(Elastic.Clients.Elasticsearch.IndexName? index) : base(r => r.Optional("index", index))

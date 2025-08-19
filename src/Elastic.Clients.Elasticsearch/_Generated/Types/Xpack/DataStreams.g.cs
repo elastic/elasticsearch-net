@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-internal sealed partial class DataStreamsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.DataStreams>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropDataStreams2 = System.Text.Json.JsonEncodedText.Encode("data_streams");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropIndicesCount = System.Text.Json.JsonEncodedText.Encode("indices_count");
-
-	public override Elastic.Clients.Elasticsearch.Xpack.DataStreams Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool> propAvailable = default;
-		LocalJsonValue<long> propDataStreams2 = default;
-		LocalJsonValue<bool> propEnabled = default;
-		LocalJsonValue<long> propIndicesCount = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
-			{
-				continue;
-			}
-
-			if (propDataStreams2.TryReadProperty(ref reader, options, PropDataStreams2, null))
-			{
-				continue;
-			}
-
-			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
-			{
-				continue;
-			}
-
-			if (propIndicesCount.TryReadProperty(ref reader, options, PropIndicesCount, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Xpack.DataStreams(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Available = propAvailable.Value,
-			DataStreams2 = propDataStreams2.Value,
-			Enabled = propEnabled.Value,
-			IndicesCount = propIndicesCount.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.DataStreams value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
-		writer.WriteProperty(options, PropDataStreams2, value.DataStreams2, null, null);
-		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
-		writer.WriteProperty(options, PropIndicesCount, value.IndicesCount, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.DataStreamsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.DataStreamsConverter))]
 public sealed partial class DataStreams
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

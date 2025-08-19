@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-internal sealed partial class NodeInfoHttpConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropBoundAddress = System.Text.Json.JsonEncodedText.Encode("bound_address");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxContentLength = System.Text.Json.JsonEncodedText.Encode("max_content_length");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxContentLengthInBytes = System.Text.Json.JsonEncodedText.Encode("max_content_length_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPublishAddress = System.Text.Json.JsonEncodedText.Encode("publish_address");
-
-	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propBoundAddress = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxContentLength = default;
-		LocalJsonValue<long> propMaxContentLengthInBytes = default;
-		LocalJsonValue<string> propPublishAddress = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propBoundAddress.TryReadProperty(ref reader, options, PropBoundAddress, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propMaxContentLength.TryReadProperty(ref reader, options, PropMaxContentLength, null))
-			{
-				continue;
-			}
-
-			if (propMaxContentLengthInBytes.TryReadProperty(ref reader, options, PropMaxContentLengthInBytes, null))
-			{
-				continue;
-			}
-
-			if (propPublishAddress.TryReadProperty(ref reader, options, PropPublishAddress, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			BoundAddress = propBoundAddress.Value,
-			MaxContentLength = propMaxContentLength.Value,
-			MaxContentLengthInBytes = propMaxContentLengthInBytes.Value,
-			PublishAddress = propPublishAddress.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttp value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBoundAddress, value.BoundAddress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropMaxContentLength, value.MaxContentLength, null, null);
-		writer.WriteProperty(options, PropMaxContentLengthInBytes, value.MaxContentLengthInBytes, null, null);
-		writer.WriteProperty(options, PropPublishAddress, value.PublishAddress, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoHttpConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoHttpConverter))]
 public sealed partial class NodeInfoHttp
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

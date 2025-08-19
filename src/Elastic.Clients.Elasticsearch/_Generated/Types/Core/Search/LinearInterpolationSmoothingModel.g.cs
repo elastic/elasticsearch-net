@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-internal sealed partial class LinearInterpolationSmoothingModelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropBigramLambda = System.Text.Json.JsonEncodedText.Encode("bigram_lambda");
-	private static readonly System.Text.Json.JsonEncodedText PropTrigramLambda = System.Text.Json.JsonEncodedText.Encode("trigram_lambda");
-	private static readonly System.Text.Json.JsonEncodedText PropUnigramLambda = System.Text.Json.JsonEncodedText.Encode("unigram_lambda");
-
-	public override Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<double> propBigramLambda = default;
-		LocalJsonValue<double> propTrigramLambda = default;
-		LocalJsonValue<double> propUnigramLambda = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propBigramLambda.TryReadProperty(ref reader, options, PropBigramLambda, null))
-			{
-				continue;
-			}
-
-			if (propTrigramLambda.TryReadProperty(ref reader, options, PropTrigramLambda, null))
-			{
-				continue;
-			}
-
-			if (propUnigramLambda.TryReadProperty(ref reader, options, PropUnigramLambda, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			BigramLambda = propBigramLambda.Value,
-			TrigramLambda = propTrigramLambda.Value,
-			UnigramLambda = propUnigramLambda.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModel value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBigramLambda, value.BigramLambda, null, null);
-		writer.WriteProperty(options, PropTrigramLambda, value.TrigramLambda, null, null);
-		writer.WriteProperty(options, PropUnigramLambda, value.UnigramLambda, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.LinearInterpolationSmoothingModelConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.LinearInterpolationSmoothingModelConverter))]
 public sealed partial class LinearInterpolationSmoothingModel
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

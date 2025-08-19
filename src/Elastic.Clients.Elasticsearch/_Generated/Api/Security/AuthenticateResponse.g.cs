@@ -23,136 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-internal sealed partial class AuthenticateResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.AuthenticateResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
-	private static readonly System.Text.Json.JsonEncodedText PropAuthenticationRealm = System.Text.Json.JsonEncodedText.Encode("authentication_realm");
-	private static readonly System.Text.Json.JsonEncodedText PropAuthenticationType = System.Text.Json.JsonEncodedText.Encode("authentication_type");
-	private static readonly System.Text.Json.JsonEncodedText PropEmail = System.Text.Json.JsonEncodedText.Encode("email");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropFullName = System.Text.Json.JsonEncodedText.Encode("full_name");
-	private static readonly System.Text.Json.JsonEncodedText PropLookupRealm = System.Text.Json.JsonEncodedText.Encode("lookup_realm");
-	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
-	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
-
-	public override Elastic.Clients.Elasticsearch.Security.AuthenticateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.AuthenticateApiKey?> propApiKey = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.RealmInfo> propAuthenticationRealm = default;
-		LocalJsonValue<string> propAuthenticationType = default;
-		LocalJsonValue<string?> propEmail = default;
-		LocalJsonValue<bool> propEnabled = default;
-		LocalJsonValue<string?> propFullName = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.RealmInfo> propLookupRealm = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>> propMetadata = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propRoles = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.AuthenticateToken?> propToken = default;
-		LocalJsonValue<string> propUsername = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
-			{
-				continue;
-			}
-
-			if (propAuthenticationRealm.TryReadProperty(ref reader, options, PropAuthenticationRealm, null))
-			{
-				continue;
-			}
-
-			if (propAuthenticationType.TryReadProperty(ref reader, options, PropAuthenticationType, null))
-			{
-				continue;
-			}
-
-			if (propEmail.TryReadProperty(ref reader, options, PropEmail, null))
-			{
-				continue;
-			}
-
-			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
-			{
-				continue;
-			}
-
-			if (propFullName.TryReadProperty(ref reader, options, PropFullName, null))
-			{
-				continue;
-			}
-
-			if (propLookupRealm.TryReadProperty(ref reader, options, PropLookupRealm, null))
-			{
-				continue;
-			}
-
-			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)!))
-			{
-				continue;
-			}
-
-			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
-			{
-				continue;
-			}
-
-			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.AuthenticateResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ApiKey = propApiKey.Value,
-			AuthenticationRealm = propAuthenticationRealm.Value,
-			AuthenticationType = propAuthenticationType.Value,
-			Email = propEmail.Value,
-			Enabled = propEnabled.Value,
-			FullName = propFullName.Value,
-			LookupRealm = propLookupRealm.Value,
-			Metadata = propMetadata.Value,
-			Roles = propRoles.Value,
-			Token = propToken.Value,
-			Username = propUsername.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.AuthenticateResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
-		writer.WriteProperty(options, PropAuthenticationRealm, value.AuthenticationRealm, null, null);
-		writer.WriteProperty(options, PropAuthenticationType, value.AuthenticationType, null, null);
-		writer.WriteProperty(options, PropEmail, value.Email, null, null);
-		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
-		writer.WriteProperty(options, PropFullName, value.FullName, null, null);
-		writer.WriteProperty(options, PropLookupRealm, value.LookupRealm, null, null);
-		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
-		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropToken, value.Token, null, null);
-		writer.WriteProperty(options, PropUsername, value.Username, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.AuthenticateResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.AuthenticateResponseConverter))]
 public sealed partial class AuthenticateResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -169,40 +40,40 @@ public sealed partial class AuthenticateResponse : Elastic.Transport.Products.El
 	public Elastic.Clients.Elasticsearch.Security.AuthenticateApiKey? ApiKey { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		Elastic.Clients.Elasticsearch.Security.RealmInfo AuthenticationRealm { get; set; }
+Elastic.Clients.Elasticsearch.Security.RealmInfo AuthenticationRealm { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		string AuthenticationType { get; set; }
+string AuthenticationType { get; set; }
 	public string? Email { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		bool Enabled { get; set; }
+bool Enabled { get; set; }
 	public string? FullName { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		Elastic.Clients.Elasticsearch.Security.RealmInfo LookupRealm { get; set; }
+Elastic.Clients.Elasticsearch.Security.RealmInfo LookupRealm { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
+System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
+System.Collections.Generic.IReadOnlyCollection<string> Roles { get; set; }
 	public Elastic.Clients.Elasticsearch.Security.AuthenticateToken? Token { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		string Username { get; set; }
+string Username { get; set; }
 }

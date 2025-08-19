@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-internal sealed partial class AnthropicTaskSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMaxTokens = System.Text.Json.JsonEncodedText.Encode("max_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropTemperature = System.Text.Json.JsonEncodedText.Encode("temperature");
-	private static readonly System.Text.Json.JsonEncodedText PropTopK = System.Text.Json.JsonEncodedText.Encode("top_k");
-	private static readonly System.Text.Json.JsonEncodedText PropTopP = System.Text.Json.JsonEncodedText.Encode("top_p");
-
-	public override Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int> propMaxTokens = default;
-		LocalJsonValue<float?> propTemperature = default;
-		LocalJsonValue<int?> propTopK = default;
-		LocalJsonValue<float?> propTopP = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMaxTokens.TryReadProperty(ref reader, options, PropMaxTokens, null))
-			{
-				continue;
-			}
-
-			if (propTemperature.TryReadProperty(ref reader, options, PropTemperature, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
-			{
-				continue;
-			}
-
-			if (propTopK.TryReadProperty(ref reader, options, PropTopK, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propTopP.TryReadProperty(ref reader, options, PropTopP, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			MaxTokens = propMaxTokens.Value,
-			Temperature = propTemperature.Value,
-			TopK = propTopK.Value,
-			TopP = propTopP.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettings value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxTokens, value.MaxTokens, null, null);
-		writer.WriteProperty(options, PropTemperature, value.Temperature, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
-		writer.WriteProperty(options, PropTopK, value.TopK, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropTopP, value.TopP, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskSettingsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.AnthropicTaskSettingsConverter))]
 public sealed partial class AnthropicTaskSettings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

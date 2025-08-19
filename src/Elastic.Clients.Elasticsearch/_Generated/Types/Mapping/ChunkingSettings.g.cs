@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-internal sealed partial class ChunkingSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMaxChunkSize = System.Text.Json.JsonEncodedText.Encode("max_chunk_size");
-	private static readonly System.Text.Json.JsonEncodedText PropOverlap = System.Text.Json.JsonEncodedText.Encode("overlap");
-	private static readonly System.Text.Json.JsonEncodedText PropSentenceOverlap = System.Text.Json.JsonEncodedText.Encode("sentence_overlap");
-	private static readonly System.Text.Json.JsonEncodedText PropStrategy = System.Text.Json.JsonEncodedText.Encode("strategy");
-
-	public override Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int> propMaxChunkSize = default;
-		LocalJsonValue<int?> propOverlap = default;
-		LocalJsonValue<int?> propSentenceOverlap = default;
-		LocalJsonValue<string> propStrategy = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMaxChunkSize.TryReadProperty(ref reader, options, PropMaxChunkSize, null))
-			{
-				continue;
-			}
-
-			if (propOverlap.TryReadProperty(ref reader, options, PropOverlap, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propSentenceOverlap.TryReadProperty(ref reader, options, PropSentenceOverlap, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propStrategy.TryReadProperty(ref reader, options, PropStrategy, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			MaxChunkSize = propMaxChunkSize.Value,
-			Overlap = propOverlap.Value,
-			SentenceOverlap = propSentenceOverlap.Value,
-			Strategy = propStrategy.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxChunkSize, value.MaxChunkSize, null, null);
-		writer.WriteProperty(options, PropOverlap, value.Overlap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropSentenceOverlap, value.SentenceOverlap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropStrategy, value.Strategy, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.ChunkingSettingsConverter))]
 public sealed partial class ChunkingSettings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,36 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class IDecayFunctionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction>
-{
-	public override Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction>(options, null);
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction value, System.Text.Json.JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case Elastic.Clients.Elasticsearch.QueryDsl.DateDecayFunction v:
-				writer.WriteValue(options, v, null);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.GeoDecayFunction v:
-				writer.WriteValue(options, v, null);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.NumericDecayFunction v:
-				writer.WriteValue(options, v, null);
-				break;
-			case Elastic.Clients.Elasticsearch.QueryDsl.UntypedDecayFunction v:
-				writer.WriteValue(options, v, null);
-				break;
-			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunction)}'.");
-		}
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.IDecayFunctionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IDecayFunctionConverter))]
 public partial interface IDecayFunction
 {
 	public string Type { get; }

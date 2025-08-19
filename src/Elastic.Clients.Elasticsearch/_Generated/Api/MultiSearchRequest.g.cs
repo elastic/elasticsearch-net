@@ -145,6 +145,7 @@ public sealed partial class MultiSearchRequestParameters : Elastic.Transport.Req
 /// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.MultiSearchRequestConverter))]
 public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MultiSearchRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

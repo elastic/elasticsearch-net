@@ -27,63 +27,6 @@ public sealed partial class EstimateModelMemoryRequestParameters : Elastic.Trans
 {
 }
 
-internal sealed partial class EstimateModelMemoryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAnalysisConfig = System.Text.Json.JsonEncodedText.Encode("analysis_config");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxBucketCardinality = System.Text.Json.JsonEncodedText.Encode("max_bucket_cardinality");
-	private static readonly System.Text.Json.JsonEncodedText PropOverallCardinality = System.Text.Json.JsonEncodedText.Encode("overall_cardinality");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig?> propAnalysisConfig = default;
-		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>?> propMaxBucketCardinality = default;
-		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>?> propOverallCardinality = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAnalysisConfig.TryReadProperty(ref reader, options, PropAnalysisConfig, null))
-			{
-				continue;
-			}
-
-			if (propMaxBucketCardinality.TryReadProperty(ref reader, options, PropMaxBucketCardinality, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, long>(o, null, null)))
-			{
-				continue;
-			}
-
-			if (propOverallCardinality.TryReadProperty(ref reader, options, PropOverallCardinality, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, long>(o, null, null)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AnalysisConfig = propAnalysisConfig.Value,
-			MaxBucketCardinality = propMaxBucketCardinality.Value,
-			OverallCardinality = propOverallCardinality.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnalysisConfig, value.AnalysisConfig, null, null);
-		writer.WriteProperty(options, PropMaxBucketCardinality, value.MaxBucketCardinality, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, long>(o, v, null, null));
-		writer.WriteProperty(options, PropOverallCardinality, value.OverallCardinality, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, long>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, long>(o, v, null, null));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Estimate job model memory usage.
@@ -94,7 +37,7 @@ internal sealed partial class EstimateModelMemoryRequestConverter : System.Text.
 /// estimates for the fields it references.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.EstimateModelMemoryRequestConverter))]
 public sealed partial class EstimateModelMemoryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.EstimateModelMemoryRequestParameters>
 {
 #if NET7_0_OR_GREATER

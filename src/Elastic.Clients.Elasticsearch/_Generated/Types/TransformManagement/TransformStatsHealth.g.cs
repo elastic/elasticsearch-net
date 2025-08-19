@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-internal sealed partial class TransformStatsHealthConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealth>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropIssues = System.Text.Json.JsonEncodedText.Encode("issues");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-
-	public override Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealth Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.TransformHealthIssue>?> propIssues = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.HealthStatus> propStatus = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propIssues.TryReadProperty(ref reader, options, PropIssues, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.TransformHealthIssue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.TransformManagement.TransformHealthIssue>(o, null)))
-			{
-				continue;
-			}
-
-			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealth(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Issues = propIssues.Value,
-			Status = propStatus.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealth value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIssues, value.Issues, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.TransformHealthIssue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.TransformManagement.TransformHealthIssue>(o, v, null));
-		writer.WriteProperty(options, PropStatus, value.Status, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.TransformStatsHealthConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.TransformStatsHealthConverter))]
 public sealed partial class TransformStatsHealth
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

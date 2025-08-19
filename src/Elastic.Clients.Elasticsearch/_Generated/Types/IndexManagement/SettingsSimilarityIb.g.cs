@@ -23,72 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-internal sealed partial class SettingsSimilarityIbConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDistribution = System.Text.Json.JsonEncodedText.Encode("distribution");
-	private static readonly System.Text.Json.JsonEncodedText PropLambda = System.Text.Json.JsonEncodedText.Encode("lambda");
-	private static readonly System.Text.Json.JsonEncodedText PropNormalization = System.Text.Json.JsonEncodedText.Encode("normalization");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-
-	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IBDistribution> propDistribution = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IBLambda> propLambda = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Normalization> propNormalization = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDistribution.TryReadProperty(ref reader, options, PropDistribution, null))
-			{
-				continue;
-			}
-
-			if (propLambda.TryReadProperty(ref reader, options, PropLambda, null))
-			{
-				continue;
-			}
-
-			if (propNormalization.TryReadProperty(ref reader, options, PropNormalization, null))
-			{
-				continue;
-			}
-
-			if (reader.ValueTextEquals(PropType))
-			{
-				reader.Skip();
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Distribution = propDistribution.Value,
-			Lambda = propLambda.Value,
-			Normalization = propNormalization.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIb value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDistribution, value.Distribution, null, null);
-		writer.WriteProperty(options, PropLambda, value.Lambda, null, null);
-		writer.WriteProperty(options, PropNormalization, value.Normalization, null, null);
-		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityIbConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSimilarityIbConverter))]
 public sealed partial class SettingsSimilarityIb : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

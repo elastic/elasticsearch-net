@@ -33,41 +33,12 @@ public sealed partial class SearchableSnapshotsStatsRequestParameters : Elastic.
 	public Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel? Level { get => Q<Elastic.Clients.Elasticsearch.SearchableSnapshots.StatsLevel?>("level"); set => Q("level", value); }
 }
 
-internal sealed partial class SearchableSnapshotsStatsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest>
-{
-	public override Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Get searchable snapshot statistics.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchableSnapshots.Json.SearchableSnapshotsStatsRequestConverter))]
 public sealed partial class SearchableSnapshotsStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestParameters>
 {
 	public SearchableSnapshotsStatsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))

@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-internal sealed partial class CleanupRepositoryResultsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDeletedBlobs = System.Text.Json.JsonEncodedText.Encode("deleted_blobs");
-	private static readonly System.Text.Json.JsonEncodedText PropDeletedBytes = System.Text.Json.JsonEncodedText.Encode("deleted_bytes");
-
-	public override Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long> propDeletedBlobs = default;
-		LocalJsonValue<long> propDeletedBytes = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDeletedBlobs.TryReadProperty(ref reader, options, PropDeletedBlobs, null))
-			{
-				continue;
-			}
-
-			if (propDeletedBytes.TryReadProperty(ref reader, options, PropDeletedBytes, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			DeletedBlobs = propDeletedBlobs.Value,
-			DeletedBytes = propDeletedBytes.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResults value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDeletedBlobs, value.DeletedBlobs, null, null);
-		writer.WriteProperty(options, PropDeletedBytes, value.DeletedBytes, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryResultsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.CleanupRepositoryResultsConverter))]
 public sealed partial class CleanupRepositoryResults
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

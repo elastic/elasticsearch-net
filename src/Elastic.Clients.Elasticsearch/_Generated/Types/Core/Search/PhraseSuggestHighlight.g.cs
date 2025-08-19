@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-internal sealed partial class PhraseSuggestHighlightConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropPostTag = System.Text.Json.JsonEncodedText.Encode("post_tag");
-	private static readonly System.Text.Json.JsonEncodedText PropPreTag = System.Text.Json.JsonEncodedText.Encode("pre_tag");
-
-	public override Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propPostTag = default;
-		LocalJsonValue<string> propPreTag = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propPostTag.TryReadProperty(ref reader, options, PropPostTag, null))
-			{
-				continue;
-			}
-
-			if (propPreTag.TryReadProperty(ref reader, options, PropPreTag, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			PostTag = propPostTag.Value,
-			PreTag = propPreTag.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlight value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPostTag, value.PostTag, null, null);
-		writer.WriteProperty(options, PropPreTag, value.PreTag, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestHighlightConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.PhraseSuggestHighlightConverter))]
 public sealed partial class PhraseSuggestHighlight
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -27,72 +27,6 @@ public sealed partial class ActivateUserProfileRequestParameters : Elastic.Trans
 {
 }
 
-internal sealed partial class ActivateUserProfileRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
-	private static readonly System.Text.Json.JsonEncodedText PropGrantType = System.Text.Json.JsonEncodedText.Encode("grant_type");
-	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
-
-	public override Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propAccessToken = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.GrantType> propGrantType = default;
-		LocalJsonValue<string?> propPassword = default;
-		LocalJsonValue<string?> propUsername = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAccessToken.TryReadProperty(ref reader, options, PropAccessToken, null))
-			{
-				continue;
-			}
-
-			if (propGrantType.TryReadProperty(ref reader, options, PropGrantType, null))
-			{
-				continue;
-			}
-
-			if (propPassword.TryReadProperty(ref reader, options, PropPassword, null))
-			{
-				continue;
-			}
-
-			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AccessToken = propAccessToken.Value,
-			GrantType = propGrantType.Value,
-			Password = propPassword.Value,
-			Username = propUsername.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAccessToken, value.AccessToken, null, null);
-		writer.WriteProperty(options, PropGrantType, value.GrantType, null, null);
-		writer.WriteProperty(options, PropPassword, value.Password, null, null);
-		writer.WriteProperty(options, PropUsername, value.Username, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Activate a user profile.
@@ -115,7 +49,7 @@ internal sealed partial class ActivateUserProfileRequestConverter : System.Text.
 /// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ActivateUserProfileRequestConverter))]
 public sealed partial class ActivateUserProfileRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

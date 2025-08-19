@@ -95,52 +95,13 @@ public sealed partial class StartTrainedModelDeploymentRequestParameters : Elast
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState? WaitFor { get => Q<Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState?>("wait_for"); set => Q("wait_for", value); }
 }
 
-internal sealed partial class StartTrainedModelDeploymentRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings?> propAdaptiveAllocations = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAdaptiveAllocations.TryReadProperty(ref reader, options, PropAdaptiveAllocations, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AdaptiveAllocations = propAdaptiveAllocations.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAdaptiveAllocations, value.AdaptiveAllocations, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Start a trained model deployment.
 /// It allocates the model to every machine learning node.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.StartTrainedModelDeploymentRequestConverter))]
 public sealed partial class StartTrainedModelDeploymentRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

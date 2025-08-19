@@ -23,46 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.DanglingIndices;
 
-internal sealed partial class ListDanglingIndicesResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDanglingIndices = System.Text.Json.JsonEncodedText.Encode("dangling_indices");
-
-	public override Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex>> propDanglingIndices = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDanglingIndices.TryReadProperty(ref reader, options, PropDanglingIndices, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex>(o, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			DanglingIndices = propDanglingIndices.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDanglingIndices, value.DanglingIndices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DanglingIndices.ListDanglingIndicesResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DanglingIndices.Json.ListDanglingIndicesResponseConverter))]
 public sealed partial class ListDanglingIndicesResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -78,7 +39,7 @@ public sealed partial class ListDanglingIndicesResponse : Elastic.Transport.Prod
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex> DanglingIndices { get; set; }
+System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.DanglingIndices.DanglingIndex> DanglingIndices { get; set; }
 }

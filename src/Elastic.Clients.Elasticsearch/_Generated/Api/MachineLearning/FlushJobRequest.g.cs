@@ -27,81 +27,6 @@ public sealed partial class FlushJobRequestParameters : Elastic.Transport.Reques
 {
 }
 
-internal sealed partial class FlushJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAdvanceTime = System.Text.Json.JsonEncodedText.Encode("advance_time");
-	private static readonly System.Text.Json.JsonEncodedText PropCalcInterim = System.Text.Json.JsonEncodedText.Encode("calc_interim");
-	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end");
-	private static readonly System.Text.Json.JsonEncodedText PropSkipTime = System.Text.Json.JsonEncodedText.Encode("skip_time");
-	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.DateTimeOffset?> propAdvanceTime = default;
-		LocalJsonValue<bool?> propCalcInterim = default;
-		LocalJsonValue<System.DateTimeOffset?> propEnd = default;
-		LocalJsonValue<System.DateTimeOffset?> propSkipTime = default;
-		LocalJsonValue<System.DateTimeOffset?> propStart = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAdvanceTime.TryReadProperty(ref reader, options, PropAdvanceTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
-			{
-				continue;
-			}
-
-			if (propCalcInterim.TryReadProperty(ref reader, options, PropCalcInterim, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
-			{
-				continue;
-			}
-
-			if (propSkipTime.TryReadProperty(ref reader, options, PropSkipTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
-			{
-				continue;
-			}
-
-			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AdvanceTime = propAdvanceTime.Value,
-			CalcInterim = propCalcInterim.Value,
-			End = propEnd.Value,
-			SkipTime = propSkipTime.Value,
-			Start = propStart.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAdvanceTime, value.AdvanceTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropCalcInterim, value.CalcInterim, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropSkipTime, value.SkipTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Force buffered data to be processed.
@@ -115,7 +40,7 @@ internal sealed partial class FlushJobRequestConverter : System.Text.Json.Serial
 /// analyzing further data.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.FlushJobRequestConverter))]
 public sealed partial class FlushJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

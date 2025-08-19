@@ -35,54 +35,6 @@ public sealed partial class TestGrokPatternRequestParameters : Elastic.Transport
 	public string? EcsCompatibility { get => Q<string?>("ecs_compatibility"); set => Q("ecs_compatibility", value); }
 }
 
-internal sealed partial class TestGrokPatternRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropGrokPattern = System.Text.Json.JsonEncodedText.Encode("grok_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
-
-	public override Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propGrokPattern = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>> propText = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propGrokPattern.TryReadProperty(ref reader, options, PropGrokPattern, null))
-			{
-				continue;
-			}
-
-			if (propText.TryReadProperty(ref reader, options, PropText, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			GrokPattern = propGrokPattern.Value,
-			Text = propText.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropGrokPattern, value.GrokPattern, null, null);
-		writer.WriteProperty(options, PropText, value.Text, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Test a Grok pattern.
@@ -90,7 +42,7 @@ internal sealed partial class TestGrokPatternRequestConverter : System.Text.Json
 /// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.Json.TestGrokPatternRequestConverter))]
 public sealed partial class TestGrokPatternRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

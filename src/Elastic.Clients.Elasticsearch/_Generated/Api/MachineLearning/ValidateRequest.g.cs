@@ -27,123 +27,12 @@ public sealed partial class ValidateRequestParameters : Elastic.Transport.Reques
 {
 }
 
-internal sealed partial class ValidateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAnalysisConfig = System.Text.Json.JsonEncodedText.Encode("analysis_config");
-	private static readonly System.Text.Json.JsonEncodedText PropAnalysisLimits = System.Text.Json.JsonEncodedText.Encode("analysis_limits");
-	private static readonly System.Text.Json.JsonEncodedText PropDataDescription = System.Text.Json.JsonEncodedText.Encode("data_description");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
-	private static readonly System.Text.Json.JsonEncodedText PropModelPlot = System.Text.Json.JsonEncodedText.Encode("model_plot");
-	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshotId = System.Text.Json.JsonEncodedText.Encode("model_snapshot_id");
-	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshotRetentionDays = System.Text.Json.JsonEncodedText.Encode("model_snapshot_retention_days");
-	private static readonly System.Text.Json.JsonEncodedText PropResultsIndexName = System.Text.Json.JsonEncodedText.Encode("results_index_name");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig?> propAnalysisConfig = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits?> propAnalysisLimits = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataDescription?> propDataDescription = default;
-		LocalJsonValue<string?> propDescription = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propJobId = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig?> propModelPlot = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propModelSnapshotId = default;
-		LocalJsonValue<long?> propModelSnapshotRetentionDays = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propResultsIndexName = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAnalysisConfig.TryReadProperty(ref reader, options, PropAnalysisConfig, null))
-			{
-				continue;
-			}
-
-			if (propAnalysisLimits.TryReadProperty(ref reader, options, PropAnalysisLimits, null))
-			{
-				continue;
-			}
-
-			if (propDataDescription.TryReadProperty(ref reader, options, PropDataDescription, null))
-			{
-				continue;
-			}
-
-			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
-			{
-				continue;
-			}
-
-			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
-			{
-				continue;
-			}
-
-			if (propModelPlot.TryReadProperty(ref reader, options, PropModelPlot, null))
-			{
-				continue;
-			}
-
-			if (propModelSnapshotId.TryReadProperty(ref reader, options, PropModelSnapshotId, null))
-			{
-				continue;
-			}
-
-			if (propModelSnapshotRetentionDays.TryReadProperty(ref reader, options, PropModelSnapshotRetentionDays, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propResultsIndexName.TryReadProperty(ref reader, options, PropResultsIndexName, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AnalysisConfig = propAnalysisConfig.Value,
-			AnalysisLimits = propAnalysisLimits.Value,
-			DataDescription = propDataDescription.Value,
-			Description = propDescription.Value,
-			JobId = propJobId.Value,
-			ModelPlot = propModelPlot.Value,
-			ModelSnapshotId = propModelSnapshotId.Value,
-			ModelSnapshotRetentionDays = propModelSnapshotRetentionDays.Value,
-			ResultsIndexName = propResultsIndexName.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnalysisConfig, value.AnalysisConfig, null, null);
-		writer.WriteProperty(options, PropAnalysisLimits, value.AnalysisLimits, null, null);
-		writer.WriteProperty(options, PropDataDescription, value.DataDescription, null, null);
-		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
-		writer.WriteProperty(options, PropModelPlot, value.ModelPlot, null, null);
-		writer.WriteProperty(options, PropModelSnapshotId, value.ModelSnapshotId, null, null);
-		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropResultsIndexName, value.ResultsIndexName, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Validate an anomaly detection job.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ValidateRequestConverter))]
 public sealed partial class ValidateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ValidateRequestParameters>
 {
 #if NET7_0_OR_GREATER

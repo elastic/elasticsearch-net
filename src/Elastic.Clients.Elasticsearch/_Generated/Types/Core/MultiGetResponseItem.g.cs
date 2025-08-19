@@ -23,58 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.MGet;
 
-internal sealed partial class MultiGetResponseItemConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>>
-{
-	public override Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByPropertyOfT1(ref r, o, "found");
-		return selector(ref reader, options) switch
-		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>(reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument>>(options, null)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>(reader.ReadValue<Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError>(options, null)),
-			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument>)}")
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem<TDocument> value, System.Text.Json.JsonSerializerOptions options)
-	{
-		switch (value.Tag)
-		{
-			case Elastic.Clients.Elasticsearch.UnionTag.T1:
-				{
-					writer.WriteValue(options, value.Value1, null);
-					break;
-				}
-
-			case Elastic.Clients.Elasticsearch.UnionTag.T2:
-				{
-					writer.WriteValue(options, value.Value2, null);
-					break;
-				}
-
-			default:
-				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
-		}
-	}
-}
-
-internal sealed partial class MultiGetResponseItemConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
-{
-	public override bool CanConvert(System.Type typeToConvert)
-	{
-		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(MultiGetResponseItem<>);
-	}
-
-	[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'")]
-	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		var args = typeToConvert.GetGenericArguments();
-		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(MultiGetResponseItemConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
-		return converter;
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItemConverterFactory))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MGet.Json.MultiGetResponseItemConverterFactory))]
 public sealed partial class MultiGetResponseItem<TDocument> : Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument>, Elastic.Clients.Elasticsearch.Core.MGet.MultiGetError>
 {
 	public MultiGetResponseItem(Elastic.Clients.Elasticsearch.Core.Get.GetResult<TDocument> value) : base(value)

@@ -23,78 +23,12 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class FieldAndFormatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludeUnmapped = System.Text.Json.JsonEncodedText.Encode("include_unmapped");
-
-	public override Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
-		{
-			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options, null);
-			return new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-			{
-				Field = value
-			};
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
-		LocalJsonValue<string?> propFormat = default;
-		LocalJsonValue<bool?> propIncludeUnmapped = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propField.TryReadProperty(ref reader, options, PropField, null))
-			{
-				continue;
-			}
-
-			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
-			{
-				continue;
-			}
-
-			if (propIncludeUnmapped.TryReadProperty(ref reader, options, PropIncludeUnmapped, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Field = propField.Value,
-			Format = propFormat.Value,
-			IncludeUnmapped = propIncludeUnmapped.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteProperty(options, PropIncludeUnmapped, value.IncludeUnmapped, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// A reference to a field with formatting instructions on how to return the value
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.FieldAndFormatConverter))]
 public sealed partial class FieldAndFormat
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

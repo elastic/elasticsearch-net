@@ -23,61 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class QueryVectorBuilderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryVectorBuilder>
-{
-	private static readonly System.Text.Json.JsonEncodedText VariantTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
-
-	public override Elastic.Clients.Elasticsearch.QueryVectorBuilder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		string? variantType = null;
-		object? variant = null;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (reader.ValueTextEquals(VariantTextEmbedding))
-			{
-				variantType = VariantTextEmbedding.Value;
-				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TextEmbedding>(options, null);
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.QueryVectorBuilder(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			VariantType = variantType,
-			Variant = variant
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryVectorBuilder value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		switch (value.VariantType)
-		{
-			case null:
-				break;
-			case "text_embedding":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TextEmbedding)value.Variant, null, null);
-				break;
-			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.QueryVectorBuilder)}'.");
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryVectorBuilderConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.QueryVectorBuilderConverter))]
 public sealed partial class QueryVectorBuilder
 {
 	internal string? VariantType { get; set; }

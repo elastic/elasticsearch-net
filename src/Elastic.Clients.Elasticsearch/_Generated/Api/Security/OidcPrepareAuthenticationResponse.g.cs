@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-internal sealed partial class OidcPrepareAuthenticationResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropNonce = System.Text.Json.JsonEncodedText.Encode("nonce");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-	private static readonly System.Text.Json.JsonEncodedText PropRedirect = System.Text.Json.JsonEncodedText.Encode("redirect");
-	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
-
-	public override Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propNonce = default;
-		LocalJsonValue<string> propRealm = default;
-		LocalJsonValue<string> propRedirect = default;
-		LocalJsonValue<string> propState = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propNonce.TryReadProperty(ref reader, options, PropNonce, null))
-			{
-				continue;
-			}
-
-			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
-			{
-				continue;
-			}
-
-			if (propRedirect.TryReadProperty(ref reader, options, PropRedirect, null))
-			{
-				continue;
-			}
-
-			if (propState.TryReadProperty(ref reader, options, PropState, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Nonce = propNonce.Value,
-			Realm = propRealm.Value,
-			Redirect = propRedirect.Value,
-			State = propState.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNonce, value.Nonce, null, null);
-		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
-		writer.WriteProperty(options, PropRedirect, value.Redirect, null, null);
-		writer.WriteProperty(options, PropState, value.State, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.OidcPrepareAuthenticationResponseConverter))]
 public sealed partial class OidcPrepareAuthenticationResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -105,14 +39,14 @@ public sealed partial class OidcPrepareAuthenticationResponse : Elastic.Transpor
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		string Nonce { get; set; }
+string Nonce { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		string Realm { get; set; }
+string Realm { get; set; }
 
 	/// <summary>
 	/// <para>
