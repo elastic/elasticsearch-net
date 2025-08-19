@@ -3,11 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
-using System.Text.Json.Serialization.Metadata;
+
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 using Elastic.Transport.Extensions;
+
 using Playground;
 
 var pool = new SingleNodePool(new Uri("https://primary.es.europe-west3.gcp.cloud.es.io"));
