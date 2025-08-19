@@ -20,7 +20,9 @@ public partial class MultiSearchResponse<TDocument>
 	public int TotalResponses => Responses.Count > 0 ? Responses.Count : 0;
 }
 
-public partial class MultiSearchRequest : IStreamSerializable
+[JsonConverter(typeof(JsonIncompatibleConverter))]
+public partial class MultiSearchRequest :
+	IStreamSerializable
 {
 	// Any request may contain aggregations so we force `typed_keys` in order to successfully
 	// deserialize them.

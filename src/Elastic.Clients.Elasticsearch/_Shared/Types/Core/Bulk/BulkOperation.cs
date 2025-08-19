@@ -18,6 +18,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 /// <remarks>
 /// This is an abstract class.
 /// </remarks>
+[JsonConverter(typeof(JsonIncompatibleConverter))]
 public abstract class BulkOperation :
 	IBulkOperation,
 	IStreamSerializable

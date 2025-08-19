@@ -12,14 +12,9 @@ using System.Text.Json.Serialization;
 
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
-
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
-[JsonConverter(typeof(FieldConverter))]
+[JsonConverter(typeof(Json.FieldConverter))]
 [DebuggerDisplay($"{{{nameof(DebuggerDisplay)},nq}}")]
 public sealed class Field :
 	IEquatable<Field>,
