@@ -3,12 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -16,7 +15,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// <summary>
 /// Represents a duration value.
 /// </summary>
-[JsonConverter(typeof(DurationConverter))]
+[JsonConverter(typeof(Json.DurationConverter))]
 public sealed class Duration :
 	IComparable<Duration>,
 	IEquatable<Duration>,
@@ -125,24 +124,31 @@ public sealed class Duration :
 				case "m":
 					Interval = TimeUnit.Minutes;
 					break;
+
 				case "s":
 					Interval = TimeUnit.Seconds;
 					break;
+
 				case "ms":
 					Interval = TimeUnit.Milliseconds;
 					break;
+
 				case "ns":
 					Interval = TimeUnit.Nanoseconds;
 					break;
+
 				case "h":
 					Interval = TimeUnit.Hours;
 					break;
+
 				case "d":
 					Interval = TimeUnit.Days;
 					break;
+
 				case "micros":
 					Interval = TimeUnit.Microseconds;
 					break;
+
 				case "nanos":
 					Interval = TimeUnit.Nanoseconds;
 					break;
@@ -229,10 +235,12 @@ public sealed class Duration :
 				if (!Factor.HasValue)
 					throw new InvalidOperationException("Time is in microseconds but factor has no value, this is a bug please report!");
 				return TimeSpan.FromTicks((long)(Factor.Value / MicrosecondsInATick));
+
 			case TimeUnit.Nanoseconds:
 				if (!Factor.HasValue)
 					throw new InvalidOperationException("Time is in nanoseconds but factor has no value, this is a bug please report!");
 				return TimeSpan.FromTicks((long)(Factor.Value / NanosecondsInATick));
+
 			default:
 				if (!Milliseconds.HasValue)
 					throw new InvalidOperationException("Milliseconds is null so we have nothing to create a TimeSpan from, this is a bug please report!");
@@ -276,7 +284,6 @@ public sealed class Duration :
 			return false;
 		if (StaticTimeValue.HasValue && other.StaticTimeValue.HasValue)
 			return StaticTimeValue == other.StaticTimeValue;
-
 
 		if (Milliseconds == null && other.Milliseconds == null)
 			return true;
@@ -373,18 +380,25 @@ public sealed class Duration :
 		{
 			case TimeUnit.Days:
 				return factor * MillisecondsInADay;
+
 			case TimeUnit.Hours:
 				return factor * MillisecondsInAnHour;
+
 			case TimeUnit.Minutes:
 				return factor * MillisecondsInAMinute;
+
 			case TimeUnit.Seconds:
 				return factor * MillisecondsInASecond;
+
 			case TimeUnit.Milliseconds:
 				return factor;
+
 			case TimeUnit.Microseconds:
 				return factor * MillisecondsInAMicrosecond;
+
 			case TimeUnit.Nanoseconds:
 				return factor * MillisecondsInANanosecond;
+
 			default:
 				throw new ArgumentOutOfRangeException(nameof(interval), interval, null);
 		}
@@ -427,39 +441,4 @@ public sealed class Duration :
 	}
 
 	#endregion IParsable
-}
-
-internal sealed class DurationConverter : JsonConverter<Duration>
-{
-	public override Duration? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var token = reader.TokenType;
-
-		switch (token)
-		{
-			case JsonTokenType.String:
-				return new Duration(reader.GetString());
-			case JsonTokenType.Number:
-				var milliseconds = reader.GetInt64();
-				if (milliseconds == -1)
-					return Duration.MinusOne;
-				if (milliseconds == 0)
-					return Duration.Zero;
-				return new Duration(milliseconds);
-			default:
-				return null;
-		}
-	}
-
-	public override void Write(Utf8JsonWriter writer, Duration value, JsonSerializerOptions options)
-	{
-		if (value == Duration.MinusOne)
-			writer.WriteNumberValue(-1);
-		else if (value == Duration.Zero)
-			writer.WriteNumberValue(0);
-		else if (value.Factor.HasValue && value.Interval.HasValue)
-			writer.WriteStringValue(value.ToString());
-		else if (value.Milliseconds != null)
-			writer.WriteNumberValue((long)value.Milliseconds);
-	}
 }

@@ -6,12 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Elastic.Transport.Extensions;
+
 using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Transport.Extensions;
 
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 
+[JsonConverter(typeof(JsonIncompatibleConverter))]
 public sealed class BulkIndexOperation<T> : BulkOperation
 {
 	private static readonly System.Text.Json.JsonEncodedText PropDynamicTemplates = System.Text.Json.JsonEncodedText.Encode("dynamic_templates");

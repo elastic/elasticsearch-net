@@ -63,6 +63,7 @@ internal sealed class DefaultRequestResponseSerializer :
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(typeof(T)))
 		{
+			throw new NotSupportedException("Deserialization of 'IStreamSerializable' types is currently not supported.");
 		}
 
 		return base.Deserialize<T>(stream);
@@ -72,6 +73,7 @@ internal sealed class DefaultRequestResponseSerializer :
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(type))
 		{
+			throw new NotSupportedException("Deserialization of 'IStreamSerializable' types is currently not supported.");
 		}
 
 		return base.Deserialize(type, stream);
@@ -81,6 +83,7 @@ internal sealed class DefaultRequestResponseSerializer :
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(typeof(T)))
 		{
+			throw new NotSupportedException("Deserialization of 'IStreamSerializable' types is currently not supported.");
 		}
 
 		return base.DeserializeAsync<T>(stream, cancellationToken);
@@ -90,6 +93,7 @@ internal sealed class DefaultRequestResponseSerializer :
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(type))
 		{
+			throw new NotSupportedException("Deserialization of 'IStreamSerializable' types is currently not supported.");
 		}
 
 		return base.DeserializeAsync(type, stream, cancellationToken);

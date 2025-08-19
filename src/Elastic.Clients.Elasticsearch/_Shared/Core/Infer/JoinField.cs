@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(JoinFieldConverter))]
+[JsonConverter(typeof(Json.JoinFieldConverter))]
 public class JoinField
 {
 	internal Child ChildOption { get; }
@@ -51,8 +51,10 @@ public class JoinField
 		{
 			case 0:
 				return first(ParentOption);
+
 			case 1:
 				return second(ChildOption);
+
 			default:
 				throw new Exception($"Unrecognized tag value: {Tag}");
 		}
@@ -65,9 +67,11 @@ public class JoinField
 			case 0:
 				first(ParentOption);
 				break;
+
 			case 1:
 				second(ChildOption);
 				break;
+
 			default:
 				throw new Exception($"Unrecognized tag value: {Tag}");
 		}

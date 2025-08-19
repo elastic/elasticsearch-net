@@ -8,9 +8,9 @@ using System.Text.Json.Serialization;
 
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Json;
 
-internal sealed class IdsConverter : JsonConverter<Ids>
+public sealed class IdsConverter : JsonConverter<Ids>
 {
 	public override Ids? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
