@@ -27,72 +27,6 @@ public sealed partial class InvalidateTokenRequestParameters : Elastic.Transport
 {
 }
 
-internal sealed partial class InvalidateTokenRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropRealmName = System.Text.Json.JsonEncodedText.Encode("realm_name");
-	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
-	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
-
-	public override Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propRealmName = default;
-		LocalJsonValue<string?> propRefreshToken = default;
-		LocalJsonValue<string?> propToken = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propRealmName.TryReadProperty(ref reader, options, PropRealmName, null))
-			{
-				continue;
-			}
-
-			if (propRefreshToken.TryReadProperty(ref reader, options, PropRefreshToken, null))
-			{
-				continue;
-			}
-
-			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
-			{
-				continue;
-			}
-
-			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			RealmName = propRealmName.Value,
-			RefreshToken = propRefreshToken.Value,
-			Token = propToken.Value,
-			Username = propUsername.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRealmName, value.RealmName, null, null);
-		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
-		writer.WriteProperty(options, PropToken, value.Token, null, null);
-		writer.WriteProperty(options, PropUsername, value.Username, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Invalidate a token.
@@ -113,7 +47,7 @@ internal sealed partial class InvalidateTokenRequestConverter : System.Text.Json
 /// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.InvalidateTokenRequestConverter))]
 public sealed partial class InvalidateTokenRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>
 {
 #if NET7_0_OR_GREATER

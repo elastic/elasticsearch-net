@@ -27,63 +27,6 @@ public sealed partial class ScriptsPainlessExecuteRequestParameters : Elastic.Tr
 {
 }
 
-internal sealed partial class ScriptsPainlessExecuteRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropContext = System.Text.Json.JsonEncodedText.Encode("context");
-	private static readonly System.Text.Json.JsonEncodedText PropContextSetup = System.Text.Json.JsonEncodedText.Encode("context_setup");
-	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
-
-	public override Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext?> propContext = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup?> propContextSetup = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propContext.TryReadProperty(ref reader, options, PropContext, static Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext>(o)))
-			{
-				continue;
-			}
-
-			if (propContextSetup.TryReadProperty(ref reader, options, PropContextSetup, null))
-			{
-				continue;
-			}
-
-			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Context = propContext.Value,
-			ContextSetup = propContextSetup.Value,
-			Script = propScript.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropContext, value.Context, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext>(o, v));
-		writer.WriteProperty(options, PropContextSetup, value.ContextSetup, null, null);
-		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Run a script.
@@ -100,7 +43,7 @@ internal sealed partial class ScriptsPainlessExecuteRequestConverter : System.Te
 /// Each context requires a script, but additional parameters depend on the context you're using for that script.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ScriptsPainlessExecuteRequestConverter))]
 public sealed partial class ScriptsPainlessExecuteRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ScriptsPainlessExecuteRequestParameters>
 {
 #if NET7_0_OR_GREATER

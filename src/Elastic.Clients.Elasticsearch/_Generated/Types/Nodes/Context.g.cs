@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-internal sealed partial class ContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Context>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCacheEvictions = System.Text.Json.JsonEncodedText.Encode("cache_evictions");
-	private static readonly System.Text.Json.JsonEncodedText PropCompilationLimitTriggered = System.Text.Json.JsonEncodedText.Encode("compilation_limit_triggered");
-	private static readonly System.Text.Json.JsonEncodedText PropCompilations = System.Text.Json.JsonEncodedText.Encode("compilations");
-	private static readonly System.Text.Json.JsonEncodedText PropContext2 = System.Text.Json.JsonEncodedText.Encode("context");
-
-	public override Elastic.Clients.Elasticsearch.Nodes.Context Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long?> propCacheEvictions = default;
-		LocalJsonValue<long?> propCompilationLimitTriggered = default;
-		LocalJsonValue<long?> propCompilations = default;
-		LocalJsonValue<string?> propContext2 = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCacheEvictions.TryReadProperty(ref reader, options, PropCacheEvictions, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propCompilationLimitTriggered.TryReadProperty(ref reader, options, PropCompilationLimitTriggered, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propCompilations.TryReadProperty(ref reader, options, PropCompilations, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propContext2.TryReadProperty(ref reader, options, PropContext2, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Nodes.Context(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CacheEvictions = propCacheEvictions.Value,
-			CompilationLimitTriggered = propCompilationLimitTriggered.Value,
-			Compilations = propCompilations.Value,
-			Context2 = propContext2.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Context value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCacheEvictions, value.CacheEvictions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropCompilationLimitTriggered, value.CompilationLimitTriggered, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropCompilations, value.Compilations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropContext2, value.Context2, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.ContextConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ContextConverter))]
 public sealed partial class Context
 {
 #if NET7_0_OR_GREATER

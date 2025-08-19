@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-internal sealed partial class SparseVectorIndexOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropPrune = System.Text.Json.JsonEncodedText.Encode("prune");
-	private static readonly System.Text.Json.JsonEncodedText PropPruningConfig = System.Text.Json.JsonEncodedText.Encode("pruning_config");
-
-	public override Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propPrune = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.TokenPruningConfig?> propPruningConfig = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propPrune.TryReadProperty(ref reader, options, PropPrune, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propPruningConfig.TryReadProperty(ref reader, options, PropPruningConfig, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Prune = propPrune.Value,
-			PruningConfig = propPruningConfig.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPrune, value.Prune, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropPruningConfig, value.PruningConfig, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.SparseVectorIndexOptionsConverter))]
 public sealed partial class SparseVectorIndexOptions
 {
 #if NET7_0_OR_GREATER

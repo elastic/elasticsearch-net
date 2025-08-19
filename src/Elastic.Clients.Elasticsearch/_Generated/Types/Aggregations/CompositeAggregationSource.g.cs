@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class CompositeAggregationSourceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDateHistogram = System.Text.Json.JsonEncodedText.Encode("date_histogram");
-	private static readonly System.Text.Json.JsonEncodedText PropGeotileGrid = System.Text.Json.JsonEncodedText.Encode("geotile_grid");
-	private static readonly System.Text.Json.JsonEncodedText PropHistogram = System.Text.Json.JsonEncodedText.Encode("histogram");
-	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
-
-	public override Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation?> propDateHistogram = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation?> propGeotileGrid = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation?> propHistogram = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation?> propTerms = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDateHistogram.TryReadProperty(ref reader, options, PropDateHistogram, null))
-			{
-				continue;
-			}
-
-			if (propGeotileGrid.TryReadProperty(ref reader, options, PropGeotileGrid, null))
-			{
-				continue;
-			}
-
-			if (propHistogram.TryReadProperty(ref reader, options, PropHistogram, null))
-			{
-				continue;
-			}
-
-			if (propTerms.TryReadProperty(ref reader, options, PropTerms, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			DateHistogram = propDateHistogram.Value,
-			GeotileGrid = propGeotileGrid.Value,
-			Histogram = propHistogram.Value,
-			Terms = propTerms.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDateHistogram, value.DateHistogram, null, null);
-		writer.WriteProperty(options, PropGeotileGrid, value.GeotileGrid, null, null);
-		writer.WriteProperty(options, PropHistogram, value.Histogram, null, null);
-		writer.WriteProperty(options, PropTerms, value.Terms, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CompositeAggregationSourceConverter))]
 public sealed partial class CompositeAggregationSource
 {
 #if NET7_0_OR_GREATER

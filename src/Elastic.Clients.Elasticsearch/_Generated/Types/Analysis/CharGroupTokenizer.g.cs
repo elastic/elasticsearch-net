@@ -23,72 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-internal sealed partial class CharGroupTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMaxTokenLength = System.Text.Json.JsonEncodedText.Encode("max_token_length");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenizeOnChars = System.Text.Json.JsonEncodedText.Encode("tokenize_on_chars");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-
-	public override Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int?> propMaxTokenLength = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>> propTokenizeOnChars = default;
-		LocalJsonValue<string?> propVersion = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMaxTokenLength.TryReadProperty(ref reader, options, PropMaxTokenLength, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propTokenizeOnChars.TryReadProperty(ref reader, options, PropTokenizeOnChars, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
-			{
-				continue;
-			}
-
-			if (reader.ValueTextEquals(PropType))
-			{
-				reader.Skip();
-				continue;
-			}
-
-			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			MaxTokenLength = propMaxTokenLength.Value,
-			TokenizeOnChars = propTokenizeOnChars.Value,
-			Version = propVersion.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizer value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxTokenLength, value.MaxTokenLength, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropTokenizeOnChars, value.TokenizeOnChars, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteProperty(options, PropVersion, value.Version, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.CharGroupTokenizerConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.CharGroupTokenizerConverter))]
 public sealed partial class CharGroupTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

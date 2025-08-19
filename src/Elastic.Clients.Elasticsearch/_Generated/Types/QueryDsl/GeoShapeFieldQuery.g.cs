@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class GeoShapeFieldQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropIndexedShape = System.Text.Json.JsonEncodedText.Encode("indexed_shape");
-	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation");
-	private static readonly System.Text.Json.JsonEncodedText PropShape = System.Text.Json.JsonEncodedText.Encode("shape");
-
-	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldLookup?> propIndexedShape = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoShapeRelation?> propRelation = default;
-		LocalJsonValue<object?> propShape = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propIndexedShape.TryReadProperty(ref reader, options, PropIndexedShape, null))
-			{
-				continue;
-			}
-
-			if (propRelation.TryReadProperty(ref reader, options, PropRelation, static Elastic.Clients.Elasticsearch.GeoShapeRelation? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.GeoShapeRelation>(o)))
-			{
-				continue;
-			}
-
-			if (propShape.TryReadProperty(ref reader, options, PropShape, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			IndexedShape = propIndexedShape.Value,
-			Relation = propRelation.Value,
-			Shape = propShape.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQuery value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIndexedShape, value.IndexedShape, null, null);
-		writer.WriteProperty(options, PropRelation, value.Relation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.GeoShapeRelation? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.GeoShapeRelation>(o, v));
-		writer.WriteProperty(options, PropShape, value.Shape, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.GeoShapeFieldQueryConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.GeoShapeFieldQueryConverter))]
 public sealed partial class GeoShapeFieldQuery
 {
 #if NET7_0_OR_GREATER

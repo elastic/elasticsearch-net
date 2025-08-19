@@ -23,70 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class StringTermsBucketConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucket>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropDocCountErrorUpperBound = System.Text.Json.JsonEncodedText.Encode("doc_count_error_upper_bound");
-	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
-
-	public override Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>? propAggregations = default;
-		LocalJsonValue<long> propDocCount = default;
-		LocalJsonValue<long?> propDocCountErrorUpperBound = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.FieldValue> propKey = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
-			{
-				continue;
-			}
-
-			if (propDocCountErrorUpperBound.TryReadProperty(ref reader, options, PropDocCountErrorUpperBound, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propKey.TryReadProperty(ref reader, options, PropKey, null))
-			{
-				continue;
-			}
-
-			propAggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
-			Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.ReadItem(ref reader, options, out string key, out Elastic.Clients.Elasticsearch.Aggregations.IAggregate value);
-			propAggregations[key] = value;
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(propAggregations),
-			DocCount = propDocCount.Value,
-			DocCountErrorUpperBound = propDocCountErrorUpperBound.Value,
-			Key = propKey.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucket value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
-		writer.WriteProperty(options, PropDocCountErrorUpperBound, value.DocCountErrorUpperBound, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropKey, value.Key, null, null);
-		if (value.Aggregations is not null)
-		{
-			foreach (var item in value.Aggregations)
-			{
-				Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.WriteItem(writer, options, item.Key, item.Value);
-			}
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.StringTermsBucketConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.StringTermsBucketConverter))]
 public sealed partial class StringTermsBucket
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

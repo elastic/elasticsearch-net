@@ -27,54 +27,6 @@ public sealed partial class DeleteExpiredDataRequestParameters : Elastic.Transpo
 {
 }
 
-internal sealed partial class DeleteExpiredDataRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropRequestsPerSecond = System.Text.Json.JsonEncodedText.Encode("requests_per_second");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<float?> propRequestsPerSecond = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propRequestsPerSecond.TryReadProperty(ref reader, options, PropRequestsPerSecond, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
-			{
-				continue;
-			}
-
-			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			RequestsPerSecond = propRequestsPerSecond.Value,
-			Timeout = propTimeout.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRequestsPerSecond, value.RequestsPerSecond, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
-		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Delete expired ML data.
@@ -90,7 +42,7 @@ internal sealed partial class DeleteExpiredDataRequestConverter : System.Text.Js
 /// <c>&lt;job_id></c>.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DeleteExpiredDataRequestConverter))]
 public sealed partial class DeleteExpiredDataRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.DeleteExpiredDataRequestParameters>
 {
 	public DeleteExpiredDataRequest(Elastic.Clients.Elasticsearch.Id? jobId) : base(r => r.Optional("job_id", jobId))

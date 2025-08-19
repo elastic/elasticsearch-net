@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class TrainedModelDeploymentAllocationStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentAllocationStatus>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAllocationCount = System.Text.Json.JsonEncodedText.Encode("allocation_count");
-	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetAllocationCount = System.Text.Json.JsonEncodedText.Encode("target_allocation_count");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentAllocationStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int> propAllocationCount = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState> propState = default;
-		LocalJsonValue<int> propTargetAllocationCount = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAllocationCount.TryReadProperty(ref reader, options, PropAllocationCount, null))
-			{
-				continue;
-			}
-
-			if (propState.TryReadProperty(ref reader, options, PropState, null))
-			{
-				continue;
-			}
-
-			if (propTargetAllocationCount.TryReadProperty(ref reader, options, PropTargetAllocationCount, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentAllocationStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AllocationCount = propAllocationCount.Value,
-			State = propState.Value,
-			TargetAllocationCount = propTargetAllocationCount.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentAllocationStatus value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllocationCount, value.AllocationCount, null, null);
-		writer.WriteProperty(options, PropState, value.State, null, null);
-		writer.WriteProperty(options, PropTargetAllocationCount, value.TargetAllocationCount, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelDeploymentAllocationStatusConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelDeploymentAllocationStatusConverter))]
 public sealed partial class TrainedModelDeploymentAllocationStatus
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -111,35 +111,6 @@ public sealed partial class CreateRequestParameters : Elastic.Transport.RequestP
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
-internal sealed partial class CreateRequestConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CreateRequest<TDocument>>
-{
-	public override Elastic.Clients.Elasticsearch.CreateRequest<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.CreateRequest<TDocument>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Document = reader.ReadValue<TDocument>(options, static TDocument (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<TDocument>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument>))!) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CreateRequest<TDocument> value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Document, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument v) => w.WriteValueEx<TDocument>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument>)));
-	}
-}
-
-internal sealed partial class CreateRequestConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
-{
-	public override bool CanConvert(System.Type typeToConvert)
-	{
-		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(CreateRequest<>);
-	}
-
-	[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'")]
-	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		var args = typeToConvert.GetGenericArguments();
-		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(CreateRequestConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
-		return converter;
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create a new document in the index.
@@ -246,7 +217,7 @@ internal sealed partial class CreateRequestConverterFactory : System.Text.Json.S
 /// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CreateRequestConverterFactory))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.CreateRequestConverterFactory))]
 public sealed partial class CreateRequest<TDocument> : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CreateRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

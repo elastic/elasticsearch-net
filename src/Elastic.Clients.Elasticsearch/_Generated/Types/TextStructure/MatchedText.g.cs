@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TextStructure;
 
-internal sealed partial class MatchedTextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.MatchedText>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropMatched = System.Text.Json.JsonEncodedText.Encode("matched");
-
-	public override Elastic.Clients.Elasticsearch.TextStructure.MatchedText Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.MatchedField>>?> propFields = default;
-		LocalJsonValue<bool> propMatched = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.MatchedField>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.MatchedField>>(o, null, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.MatchedField> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.TextStructure.MatchedField>(o, null)!)))
-			{
-				continue;
-			}
-
-			if (propMatched.TryReadProperty(ref reader, options, PropMatched, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TextStructure.MatchedText(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Fields = propFields.Value,
-			Matched = propMatched.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextStructure.MatchedText value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.MatchedField>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.MatchedField>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.TextStructure.MatchedField> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.TextStructure.MatchedField>(o, v, null)));
-		writer.WriteProperty(options, PropMatched, value.Matched, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.MatchedTextConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.Json.MatchedTextConverter))]
 public sealed partial class MatchedText
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

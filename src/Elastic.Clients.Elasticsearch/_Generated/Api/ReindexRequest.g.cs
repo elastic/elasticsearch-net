@@ -100,90 +100,6 @@ public sealed partial class ReindexRequestParameters : Elastic.Transport.Request
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-internal sealed partial class ReindexRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ReindexRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropConflicts = System.Text.Json.JsonEncodedText.Encode("conflicts");
-	private static readonly System.Text.Json.JsonEncodedText PropDest = System.Text.Json.JsonEncodedText.Encode("dest");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxDocs = System.Text.Json.JsonEncodedText.Encode("max_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
-
-	public override Elastic.Clients.Elasticsearch.ReindexRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Conflicts?> propConflicts = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Destination> propDest = default;
-		LocalJsonValue<long?> propMaxDocs = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
-		LocalJsonValue<long?> propSize = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Source> propSource = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propConflicts.TryReadProperty(ref reader, options, PropConflicts, static Elastic.Clients.Elasticsearch.Conflicts? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Conflicts>(o)))
-			{
-				continue;
-			}
-
-			if (propDest.TryReadProperty(ref reader, options, PropDest, null))
-			{
-				continue;
-			}
-
-			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
-			{
-				continue;
-			}
-
-			if (propSize.TryReadProperty(ref reader, options, PropSize, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Conflicts = propConflicts.Value,
-			Dest = propDest.Value,
-			MaxDocs = propMaxDocs.Value,
-			Script = propScript.Value,
-			Size = propSize.Value,
-			Source = propSource.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ReindexRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConflicts, value.Conflicts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Conflicts? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Conflicts>(o, v));
-		writer.WriteProperty(options, PropDest, value.Dest, null, null);
-		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropSource, value.Source, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Reindex documents.
@@ -477,7 +393,7 @@ internal sealed partial class ReindexRequestConverter : System.Text.Json.Seriali
 /// It is not possible to configure SSL in the body of the reindex request.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ReindexRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ReindexRequestConverter))]
 public sealed partial class ReindexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ReindexRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

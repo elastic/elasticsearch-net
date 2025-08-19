@@ -27,72 +27,6 @@ public sealed partial class SamlCompleteLogoutRequestParameters : Elastic.Transp
 {
 }
 
-internal sealed partial class SamlCompleteLogoutRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropContent = System.Text.Json.JsonEncodedText.Encode("content");
-	private static readonly System.Text.Json.JsonEncodedText PropIds = System.Text.Json.JsonEncodedText.Encode("ids");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryString = System.Text.Json.JsonEncodedText.Encode("query_string");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-
-	public override Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propContent = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Ids> propIds = default;
-		LocalJsonValue<string?> propQueryString = default;
-		LocalJsonValue<string> propRealm = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propContent.TryReadProperty(ref reader, options, PropContent, null))
-			{
-				continue;
-			}
-
-			if (propIds.TryReadProperty(ref reader, options, PropIds, null))
-			{
-				continue;
-			}
-
-			if (propQueryString.TryReadProperty(ref reader, options, PropQueryString, null))
-			{
-				continue;
-			}
-
-			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Content = propContent.Value,
-			Ids = propIds.Value,
-			QueryString = propQueryString.Value,
-			Realm = propRealm.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropContent, value.Content, null, null);
-		writer.WriteProperty(options, PropIds, value.Ids, null, null);
-		writer.WriteProperty(options, PropQueryString, value.QueryString, null, null);
-		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Logout of SAML completely.
@@ -112,7 +46,7 @@ internal sealed partial class SamlCompleteLogoutRequestConverter : System.Text.J
 /// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SamlCompleteLogoutRequestConverter))]
 public sealed partial class SamlCompleteLogoutRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

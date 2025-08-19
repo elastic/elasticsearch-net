@@ -36,90 +36,6 @@ public sealed partial class GrantApiKeyRequestParameters : Elastic.Transport.Req
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-internal sealed partial class GrantApiKeyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
-	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
-	private static readonly System.Text.Json.JsonEncodedText PropGrantType = System.Text.Json.JsonEncodedText.Encode("grant_type");
-	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
-	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
-
-	public override Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propAccessToken = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.GrantApiKey> propApiKey = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType> propGrantType = default;
-		LocalJsonValue<string?> propPassword = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propRunAs = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAccessToken.TryReadProperty(ref reader, options, PropAccessToken, null))
-			{
-				continue;
-			}
-
-			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
-			{
-				continue;
-			}
-
-			if (propGrantType.TryReadProperty(ref reader, options, PropGrantType, null))
-			{
-				continue;
-			}
-
-			if (propPassword.TryReadProperty(ref reader, options, PropPassword, null))
-			{
-				continue;
-			}
-
-			if (propRunAs.TryReadProperty(ref reader, options, PropRunAs, null))
-			{
-				continue;
-			}
-
-			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AccessToken = propAccessToken.Value,
-			ApiKey = propApiKey.Value,
-			GrantType = propGrantType.Value,
-			Password = propPassword.Value,
-			RunAs = propRunAs.Value,
-			Username = propUsername.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAccessToken, value.AccessToken, null, null);
-		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
-		writer.WriteProperty(options, PropGrantType, value.GrantType, null, null);
-		writer.WriteProperty(options, PropPassword, value.Password, null, null);
-		writer.WriteProperty(options, PropRunAs, value.RunAs, null, null);
-		writer.WriteProperty(options, PropUsername, value.Username, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Grant an API key.
@@ -164,7 +80,7 @@ internal sealed partial class GrantApiKeyRequestConverter : System.Text.Json.Ser
 /// By default, API keys never expire. You can specify expiration information when you create the API keys.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GrantApiKeyRequestConverter))]
 public sealed partial class GrantApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

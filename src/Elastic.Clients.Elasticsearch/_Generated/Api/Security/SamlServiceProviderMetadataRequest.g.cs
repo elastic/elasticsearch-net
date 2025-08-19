@@ -27,35 +27,6 @@ public sealed partial class SamlServiceProviderMetadataRequestParameters : Elast
 {
 }
 
-internal sealed partial class SamlServiceProviderMetadataRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create SAML service provider metadata.
@@ -68,7 +39,7 @@ internal sealed partial class SamlServiceProviderMetadataRequestConverter : Syst
 /// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SamlServiceProviderMetadataRequestConverter))]
 public sealed partial class SamlServiceProviderMetadataRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,72 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-internal sealed partial class IcuTransformTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDir = System.Text.Json.JsonEncodedText.Encode("dir");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-
-	public override Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection?> propDir = default;
-		LocalJsonValue<string> propId = default;
-		LocalJsonValue<string?> propVersion = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDir.TryReadProperty(ref reader, options, PropDir, static Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection>(o)))
-			{
-				continue;
-			}
-
-			if (propId.TryReadProperty(ref reader, options, PropId, null))
-			{
-				continue;
-			}
-
-			if (reader.ValueTextEquals(PropType))
-			{
-				reader.Skip();
-				continue;
-			}
-
-			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Dir = propDir.Value,
-			Id = propId.Value,
-			Version = propVersion.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDir, value.Dir, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.IcuTransformDirection>(o, v));
-		writer.WriteProperty(options, PropId, value.Id, null, null);
-		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteProperty(options, PropVersion, value.Version, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.IcuTransformTokenFilterConverter))]
 public sealed partial class IcuTransformTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

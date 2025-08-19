@@ -44,25 +44,12 @@ public sealed partial class PutIpLocationDatabaseRequestParameters : Elastic.Tra
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class PutIpLocationDatabaseRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Configuration = reader.ReadValue<Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Configuration, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create or update an IP geolocation database configuration.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.PutIpLocationDatabaseRequestConverter))]
 public sealed partial class PutIpLocationDatabaseRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

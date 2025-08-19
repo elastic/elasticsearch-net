@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-internal sealed partial class MlInferenceIngestProcessorCountConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
-	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
-	private static readonly System.Text.Json.JsonEncodedText PropSum = System.Text.Json.JsonEncodedText.Encode("sum");
-
-	public override Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long> propMax = default;
-		LocalJsonValue<long> propMin = default;
-		LocalJsonValue<long> propSum = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
-			{
-				continue;
-			}
-
-			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
-			{
-				continue;
-			}
-
-			if (propSum.TryReadProperty(ref reader, options, PropSum, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Max = propMax.Value,
-			Min = propMin.Value,
-			Sum = propSum.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMax, value.Max, null, null);
-		writer.WriteProperty(options, PropMin, value.Min, null, null);
-		writer.WriteProperty(options, PropSum, value.Sum, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCountConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.MlInferenceIngestProcessorCountConverter))]
 public sealed partial class MlInferenceIngestProcessorCount
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

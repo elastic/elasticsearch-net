@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class DataframeEvaluationRegressionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropActualField = System.Text.Json.JsonEncodedText.Encode("actual_field");
-	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictedField = System.Text.Json.JsonEncodedText.Encode("predicted_field");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propActualField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics?> propMetrics = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propPredictedField = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propActualField.TryReadProperty(ref reader, options, PropActualField, null))
-			{
-				continue;
-			}
-
-			if (propMetrics.TryReadProperty(ref reader, options, PropMetrics, null))
-			{
-				continue;
-			}
-
-			if (propPredictedField.TryReadProperty(ref reader, options, PropPredictedField, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ActualField = propActualField.Value,
-			Metrics = propMetrics.Value,
-			PredictedField = propPredictedField.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegression value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropActualField, value.ActualField, null, null);
-		writer.WriteProperty(options, PropMetrics, value.Metrics, null, null);
-		writer.WriteProperty(options, PropPredictedField, value.PredictedField, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationRegressionConverter))]
 public sealed partial class DataframeEvaluationRegression
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

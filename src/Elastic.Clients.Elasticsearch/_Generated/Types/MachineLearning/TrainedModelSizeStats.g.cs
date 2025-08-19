@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class TrainedModelSizeStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropModelSizeBytes = System.Text.Json.JsonEncodedText.Encode("model_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropRequiredNativeMemoryBytes = System.Text.Json.JsonEncodedText.Encode("required_native_memory_bytes");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propModelSizeBytes = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize> propRequiredNativeMemoryBytes = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propModelSizeBytes.TryReadProperty(ref reader, options, PropModelSizeBytes, null))
-			{
-				continue;
-			}
-
-			if (propRequiredNativeMemoryBytes.TryReadProperty(ref reader, options, PropRequiredNativeMemoryBytes, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ModelSizeBytes = propModelSizeBytes.Value,
-			RequiredNativeMemoryBytes = propRequiredNativeMemoryBytes.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropModelSizeBytes, value.ModelSizeBytes, null, null);
-		writer.WriteProperty(options, PropRequiredNativeMemoryBytes, value.RequiredNativeMemoryBytes, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStatsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelSizeStatsConverter))]
 public sealed partial class TrainedModelSizeStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

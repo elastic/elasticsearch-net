@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-internal sealed partial class ClusterSnapshotStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentCounts = System.Text.Json.JsonEncodedText.Encode("current_counts");
-	private static readonly System.Text.Json.JsonEncodedText PropRepositories = System.Text.Json.JsonEncodedText.Encode("repositories");
-
-	public override Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.SnapshotCurrentCounts> propCurrentCounts = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats>> propRepositories = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCurrentCounts.TryReadProperty(ref reader, options, PropCurrentCounts, null))
-			{
-				continue;
-			}
-
-			if (propRepositories.TryReadProperty(ref reader, options, PropRepositories, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats>(o, null, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CurrentCounts = propCurrentCounts.Value,
-			Repositories = propRepositories.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStats value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCurrentCounts, value.CurrentCounts, null, null);
-		writer.WriteProperty(options, PropRepositories, value.Repositories, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats>(o, v, null, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterSnapshotStatsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterSnapshotStatsConverter))]
 public sealed partial class ClusterSnapshotStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

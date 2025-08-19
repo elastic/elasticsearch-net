@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-internal sealed partial class HttpRouteConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.HttpRoute>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropRequests = System.Text.Json.JsonEncodedText.Encode("requests");
-	private static readonly System.Text.Json.JsonEncodedText PropResponses = System.Text.Json.JsonEncodedText.Encode("responses");
-
-	public override Elastic.Clients.Elasticsearch.Nodes.HttpRoute Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.HttpRouteRequests> propRequests = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.HttpRouteResponses> propResponses = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propRequests.TryReadProperty(ref reader, options, PropRequests, null))
-			{
-				continue;
-			}
-
-			if (propResponses.TryReadProperty(ref reader, options, PropResponses, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Nodes.HttpRoute(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Requests = propRequests.Value,
-			Responses = propResponses.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.HttpRoute value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRequests, value.Requests, null, null);
-		writer.WriteProperty(options, PropResponses, value.Responses, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.HttpRouteConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.HttpRouteConverter))]
 public sealed partial class HttpRoute
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

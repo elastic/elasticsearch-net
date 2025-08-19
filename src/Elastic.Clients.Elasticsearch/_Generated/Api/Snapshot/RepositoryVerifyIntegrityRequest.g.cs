@@ -82,35 +82,6 @@ public sealed partial class RepositoryVerifyIntegrityRequestParameters : Elastic
 	public bool? VerifyBlobContents { get => Q<bool?>("verify_blob_contents"); set => Q("verify_blob_contents", value); }
 }
 
-internal sealed partial class RepositoryVerifyIntegrityRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Verify the repository integrity.
@@ -171,7 +142,7 @@ internal sealed partial class RepositoryVerifyIntegrityRequestConverter : System
 /// NOTE: This API may not work correctly in a mixed-version cluster.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.RepositoryVerifyIntegrityRequestConverter))]
 public sealed partial class RepositoryVerifyIntegrityRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.RepositoryVerifyIntegrityRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

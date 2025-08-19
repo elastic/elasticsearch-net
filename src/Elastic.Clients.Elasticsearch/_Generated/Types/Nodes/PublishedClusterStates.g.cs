@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-internal sealed partial class PublishedClusterStatesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCompatibleDiffs = System.Text.Json.JsonEncodedText.Encode("compatible_diffs");
-	private static readonly System.Text.Json.JsonEncodedText PropFullStates = System.Text.Json.JsonEncodedText.Encode("full_states");
-	private static readonly System.Text.Json.JsonEncodedText PropIncompatibleDiffs = System.Text.Json.JsonEncodedText.Encode("incompatible_diffs");
-
-	public override Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long?> propCompatibleDiffs = default;
-		LocalJsonValue<long?> propFullStates = default;
-		LocalJsonValue<long?> propIncompatibleDiffs = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCompatibleDiffs.TryReadProperty(ref reader, options, PropCompatibleDiffs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propFullStates.TryReadProperty(ref reader, options, PropFullStates, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propIncompatibleDiffs.TryReadProperty(ref reader, options, PropIncompatibleDiffs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CompatibleDiffs = propCompatibleDiffs.Value,
-			FullStates = propFullStates.Value,
-			IncompatibleDiffs = propIncompatibleDiffs.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStates value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCompatibleDiffs, value.CompatibleDiffs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropFullStates, value.FullStates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropIncompatibleDiffs, value.IncompatibleDiffs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.PublishedClusterStatesConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.PublishedClusterStatesConverter))]
 public sealed partial class PublishedClusterStates
 {
 #if NET7_0_OR_GREATER

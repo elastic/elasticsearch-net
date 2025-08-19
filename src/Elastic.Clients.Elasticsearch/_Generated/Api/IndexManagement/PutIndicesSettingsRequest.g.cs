@@ -94,19 +94,6 @@ public sealed partial class PutIndicesSettingsRequestParameters : Elastic.Transp
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class PutIndicesSettingsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest>
-{
-	public override Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Settings = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Settings, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Update index settings.
@@ -167,7 +154,7 @@ internal sealed partial class PutIndicesSettingsRequestConverter : System.Text.J
 /// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutIndicesSettingsRequestConverter))]
 public sealed partial class PutIndicesSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

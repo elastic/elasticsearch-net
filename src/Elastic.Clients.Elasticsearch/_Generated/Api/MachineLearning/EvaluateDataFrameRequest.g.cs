@@ -27,63 +27,6 @@ public sealed partial class EvaluateDataFrameRequestParameters : Elastic.Transpo
 {
 }
 
-internal sealed partial class EvaluateDataFrameRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropEvaluation = System.Text.Json.JsonEncodedText.Encode("evaluation");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation> propEvaluation = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propEvaluation.TryReadProperty(ref reader, options, PropEvaluation, null))
-			{
-				continue;
-			}
-
-			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
-			{
-				continue;
-			}
-
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Evaluation = propEvaluation.Value,
-			Index = propIndex.Value,
-			Query = propQuery.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEvaluation, value.Evaluation, null, null);
-		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Evaluate data frame analytics.
@@ -95,7 +38,7 @@ internal sealed partial class EvaluateDataFrameRequestConverter : System.Text.Js
 /// field and an analytics result field to be present.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.EvaluateDataFrameRequestConverter))]
 public sealed partial class EvaluateDataFrameRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

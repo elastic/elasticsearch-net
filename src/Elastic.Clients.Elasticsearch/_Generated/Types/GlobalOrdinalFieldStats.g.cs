@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class GlobalOrdinalFieldStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropBuildTime = System.Text.Json.JsonEncodedText.Encode("build_time");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildTimeInMillis = System.Text.Json.JsonEncodedText.Encode("build_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropShardMaxValueCount = System.Text.Json.JsonEncodedText.Encode("shard_max_value_count");
-
-	public override Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propBuildTime = default;
-		LocalJsonValue<long> propBuildTimeInMillis = default;
-		LocalJsonValue<long> propShardMaxValueCount = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propBuildTime.TryReadProperty(ref reader, options, PropBuildTime, null))
-			{
-				continue;
-			}
-
-			if (propBuildTimeInMillis.TryReadProperty(ref reader, options, PropBuildTimeInMillis, null))
-			{
-				continue;
-			}
-
-			if (propShardMaxValueCount.TryReadProperty(ref reader, options, PropShardMaxValueCount, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			BuildTime = propBuildTime.Value,
-			BuildTimeInMillis = propBuildTimeInMillis.Value,
-			ShardMaxValueCount = propShardMaxValueCount.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStats value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBuildTime, value.BuildTime, null, null);
-		writer.WriteProperty(options, PropBuildTimeInMillis, value.BuildTimeInMillis, null, null);
-		writer.WriteProperty(options, PropShardMaxValueCount, value.ShardMaxValueCount, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.GlobalOrdinalFieldStatsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GlobalOrdinalFieldStatsConverter))]
 public sealed partial class GlobalOrdinalFieldStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

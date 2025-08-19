@@ -27,54 +27,6 @@ public sealed partial class OidcLogoutRequestParameters : Elastic.Transport.Requ
 {
 }
 
-internal sealed partial class OidcLogoutRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
-	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
-
-	public override Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propRefreshToken = default;
-		LocalJsonValue<string> propToken = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propRefreshToken.TryReadProperty(ref reader, options, PropRefreshToken, null))
-			{
-				continue;
-			}
-
-			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			RefreshToken = propRefreshToken.Value,
-			Token = propToken.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
-		writer.WriteProperty(options, PropToken, value.Token, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Logout of OpenID Connect.
@@ -90,7 +42,7 @@ internal sealed partial class OidcLogoutRequestConverter : System.Text.Json.Seri
 /// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.OidcLogoutRequestConverter))]
 public sealed partial class OidcLogoutRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

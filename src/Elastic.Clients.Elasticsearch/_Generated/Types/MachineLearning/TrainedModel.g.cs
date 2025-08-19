@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class TrainedModelConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropEnsemble = System.Text.Json.JsonEncodedText.Encode("ensemble");
-	private static readonly System.Text.Json.JsonEncodedText PropTree = System.Text.Json.JsonEncodedText.Encode("tree");
-	private static readonly System.Text.Json.JsonEncodedText PropTreeNode = System.Text.Json.JsonEncodedText.Encode("tree_node");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Ensemble?> propEnsemble = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTree?> propTree = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelTreeNode?> propTreeNode = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propEnsemble.TryReadProperty(ref reader, options, PropEnsemble, null))
-			{
-				continue;
-			}
-
-			if (propTree.TryReadProperty(ref reader, options, PropTree, null))
-			{
-				continue;
-			}
-
-			if (propTreeNode.TryReadProperty(ref reader, options, PropTreeNode, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Ensemble = propEnsemble.Value,
-			Tree = propTree.Value,
-			TreeNode = propTreeNode.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModel value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEnsemble, value.Ensemble, null, null);
-		writer.WriteProperty(options, PropTree, value.Tree, null, null);
-		writer.WriteProperty(options, PropTreeNode, value.TreeNode, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelConverter))]
 public sealed partial class TrainedModel
 {
 #if NET7_0_OR_GREATER

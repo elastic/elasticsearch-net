@@ -23,70 +23,13 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
-internal sealed partial class RankEvalMetricPrecisionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnlabeled = System.Text.Json.JsonEncodedText.Encode("ignore_unlabeled");
-	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k");
-	private static readonly System.Text.Json.JsonEncodedText PropRelevantRatingThreshold = System.Text.Json.JsonEncodedText.Encode("relevant_rating_threshold");
-
-	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propIgnoreUnlabeled = default;
-		LocalJsonValue<int?> propK = default;
-		LocalJsonValue<int?> propRelevantRatingThreshold = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propIgnoreUnlabeled.TryReadProperty(ref reader, options, PropIgnoreUnlabeled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propK.TryReadProperty(ref reader, options, PropK, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propRelevantRatingThreshold.TryReadProperty(ref reader, options, PropRelevantRatingThreshold, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			IgnoreUnlabeled = propIgnoreUnlabeled.Value,
-			K = propK.Value,
-			RelevantRatingThreshold = propRelevantRatingThreshold.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecision value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIgnoreUnlabeled, value.IgnoreUnlabeled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropK, value.K, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropRelevantRatingThreshold, value.RelevantRatingThreshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Precision at K (P@k)
 /// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/search-rank-eval.html#k-precision">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricPrecisionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricPrecisionConverter))]
 public sealed partial class RankEvalMetricPrecision
 {
 #if NET7_0_OR_GREATER
