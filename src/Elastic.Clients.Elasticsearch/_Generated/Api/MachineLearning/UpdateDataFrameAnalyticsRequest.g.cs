@@ -27,78 +27,12 @@ public sealed partial class UpdateDataFrameAnalyticsRequestParameters : Elastic.
 {
 }
 
-internal sealed partial class UpdateDataFrameAnalyticsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyStart = System.Text.Json.JsonEncodedText.Encode("allow_lazy_start");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNumThreads = System.Text.Json.JsonEncodedText.Encode("max_num_threads");
-	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propAllowLazyStart = default;
-		LocalJsonValue<string?> propDescription = default;
-		LocalJsonValue<int?> propMaxNumThreads = default;
-		LocalJsonValue<string?> propModelMemoryLimit = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAllowLazyStart.TryReadProperty(ref reader, options, PropAllowLazyStart, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
-			{
-				continue;
-			}
-
-			if (propMaxNumThreads.TryReadProperty(ref reader, options, PropMaxNumThreads, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propModelMemoryLimit.TryReadProperty(ref reader, options, PropModelMemoryLimit, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AllowLazyStart = propAllowLazyStart.Value,
-			Description = propDescription.Value,
-			MaxNumThreads = propMaxNumThreads.Value,
-			ModelMemoryLimit = propModelMemoryLimit.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowLazyStart, value.AllowLazyStart, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropMaxNumThreads, value.MaxNumThreads, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Update a data frame analytics job.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.UpdateDataFrameAnalyticsRequestConverter))]
 public sealed partial class UpdateDataFrameAnalyticsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

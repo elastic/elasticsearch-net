@@ -33,62 +33,6 @@ public sealed partial class PutElserRequestParameters : Elastic.Transport.Reques
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class PutElserRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.PutElserRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropChunkingSettings = System.Text.Json.JsonEncodedText.Encode("chunking_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropService = System.Text.Json.JsonEncodedText.Encode("service");
-	private static readonly System.Text.Json.JsonEncodedText PropServiceSettings = System.Text.Json.JsonEncodedText.Encode("service_settings");
-
-	public override Elastic.Clients.Elasticsearch.Inference.PutElserRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings> propServiceSettings = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propChunkingSettings.TryReadProperty(ref reader, options, PropChunkingSettings, null))
-			{
-				continue;
-			}
-
-			if (reader.ValueTextEquals(PropService))
-			{
-				reader.Skip();
-				continue;
-			}
-
-			if (propServiceSettings.TryReadProperty(ref reader, options, PropServiceSettings, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Inference.PutElserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ChunkingSettings = propChunkingSettings.Value,
-			ServiceSettings = propServiceSettings.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.PutElserRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropChunkingSettings, value.ChunkingSettings, null, null);
-		writer.WriteProperty(options, PropService, value.Service, null, null);
-		writer.WriteProperty(options, PropServiceSettings, value.ServiceSettings, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create an ELSER inference endpoint.
@@ -115,7 +59,7 @@ internal sealed partial class PutElserRequestConverter : System.Text.Json.Serial
 /// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.PutElserRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutElserRequestConverter))]
 public sealed partial class PutElserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutElserRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

@@ -27,108 +27,6 @@ public sealed partial class PutJobRequestParameters : Elastic.Transport.RequestP
 {
 }
 
-internal sealed partial class PutJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.PutJobRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCron = System.Text.Json.JsonEncodedText.Encode("cron");
-	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups");
-	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexPattern = System.Text.Json.JsonEncodedText.Encode("index_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
-	private static readonly System.Text.Json.JsonEncodedText PropPageSize = System.Text.Json.JsonEncodedText.Encode("page_size");
-	private static readonly System.Text.Json.JsonEncodedText PropRollupIndex = System.Text.Json.JsonEncodedText.Encode("rollup_index");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
-
-	public override Elastic.Clients.Elasticsearch.Rollup.PutJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propCron = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Rollup.Groupings> propGroups = default;
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>?> propHeaders = default;
-		LocalJsonValue<string> propIndexPattern = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>?> propMetrics = default;
-		LocalJsonValue<int> propPageSize = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propRollupIndex = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCron.TryReadProperty(ref reader, options, PropCron, null))
-			{
-				continue;
-			}
-
-			if (propGroups.TryReadProperty(ref reader, options, PropGroups, null))
-			{
-				continue;
-			}
-
-			if (propHeaders.TryReadProperty(ref reader, options, PropHeaders, static System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!)))
-			{
-				continue;
-			}
-
-			if (propIndexPattern.TryReadProperty(ref reader, options, PropIndexPattern, null))
-			{
-				continue;
-			}
-
-			if (propMetrics.TryReadProperty(ref reader, options, PropMetrics, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>(o, null)))
-			{
-				continue;
-			}
-
-			if (propPageSize.TryReadProperty(ref reader, options, PropPageSize, null))
-			{
-				continue;
-			}
-
-			if (propRollupIndex.TryReadProperty(ref reader, options, PropRollupIndex, null))
-			{
-				continue;
-			}
-
-			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Rollup.PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Cron = propCron.Value,
-			Groups = propGroups.Value,
-			Headers = propHeaders.Value,
-			IndexPattern = propIndexPattern.Value,
-			Metrics = propMetrics.Value,
-			PageSize = propPageSize.Value,
-			RollupIndex = propRollupIndex.Value,
-			Timeout = propTimeout.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.PutJobRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCron, value.Cron, null, null);
-		writer.WriteProperty(options, PropGroups, value.Groups, null, null);
-		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>>? v) => w.WriteDictionaryValue<string, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null)));
-		writer.WriteProperty(options, PropIndexPattern, value.IndexPattern, null, null);
-		writer.WriteProperty(options, PropMetrics, value.Metrics, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>(o, v, null));
-		writer.WriteProperty(options, PropPageSize, value.PageSize, null, null);
-		writer.WriteProperty(options, PropRollupIndex, value.RollupIndex, null, null);
-		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create a rollup job.
@@ -146,7 +44,7 @@ internal sealed partial class PutJobRequestConverter : System.Text.Json.Serializ
 /// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.PutJobRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.PutJobRequestConverter))]
 public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.PutJobRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

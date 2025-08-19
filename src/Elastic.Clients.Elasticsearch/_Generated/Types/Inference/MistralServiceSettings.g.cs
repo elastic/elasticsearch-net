@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-internal sealed partial class MistralServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxInputTokens = System.Text.Json.JsonEncodedText.Encode("max_input_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model");
-	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit");
-
-	public override Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propApiKey = default;
-		LocalJsonValue<int?> propMaxInputTokens = default;
-		LocalJsonValue<string> propModel = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.RateLimitSetting?> propRateLimit = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
-			{
-				continue;
-			}
-
-			if (propMaxInputTokens.TryReadProperty(ref reader, options, PropMaxInputTokens, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propModel.TryReadProperty(ref reader, options, PropModel, null))
-			{
-				continue;
-			}
-
-			if (propRateLimit.TryReadProperty(ref reader, options, PropRateLimit, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ApiKey = propApiKey.Value,
-			MaxInputTokens = propMaxInputTokens.Value,
-			Model = propModel.Value,
-			RateLimit = propRateLimit.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.MistralServiceSettings value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
-		writer.WriteProperty(options, PropMaxInputTokens, value.MaxInputTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropModel, value.Model, null, null);
-		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.MistralServiceSettingsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.MistralServiceSettingsConverter))]
 public sealed partial class MistralServiceSettings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

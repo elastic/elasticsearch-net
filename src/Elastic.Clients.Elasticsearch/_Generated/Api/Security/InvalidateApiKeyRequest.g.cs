@@ -27,90 +27,6 @@ public sealed partial class InvalidateApiKeyRequestParameters : Elastic.Transpor
 {
 }
 
-internal sealed partial class InvalidateApiKeyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropIds = System.Text.Json.JsonEncodedText.Encode("ids");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropOwner = System.Text.Json.JsonEncodedText.Encode("owner");
-	private static readonly System.Text.Json.JsonEncodedText PropRealmName = System.Text.Json.JsonEncodedText.Encode("realm_name");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
-
-	public override Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>?> propIds = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propName = default;
-		LocalJsonValue<bool?> propOwner = default;
-		LocalJsonValue<string?> propRealmName = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propId.TryReadProperty(ref reader, options, PropId, null))
-			{
-				continue;
-			}
-
-			if (propIds.TryReadProperty(ref reader, options, PropIds, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, null)))
-			{
-				continue;
-			}
-
-			if (propName.TryReadProperty(ref reader, options, PropName, null))
-			{
-				continue;
-			}
-
-			if (propOwner.TryReadProperty(ref reader, options, PropOwner, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propRealmName.TryReadProperty(ref reader, options, PropRealmName, null))
-			{
-				continue;
-			}
-
-			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Id = propId.Value,
-			Ids = propIds.Value,
-			Name = propName.Value,
-			Owner = propOwner.Value,
-			RealmName = propRealmName.Value,
-			Username = propUsername.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropId, value.Id, null, null);
-		writer.WriteProperty(options, PropIds, value.Ids, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, v, null));
-		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropOwner, value.Owner, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropRealmName, value.RealmName, null, null);
-		writer.WriteProperty(options, PropUsername, value.Username, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Invalidate API keys.
@@ -144,7 +60,7 @@ internal sealed partial class InvalidateApiKeyRequestConverter : System.Text.Jso
 /// </item>
 /// </list>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.InvalidateApiKeyRequestConverter))]
 public sealed partial class InvalidateApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>
 {
 #if NET7_0_OR_GREATER

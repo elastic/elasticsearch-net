@@ -54,133 +54,13 @@ public sealed partial class SimulateTemplateRequestParameters : Elastic.Transpor
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-internal sealed partial class SimulateTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAllowAutoCreate = System.Text.Json.JsonEncodedText.Encode("allow_auto_create");
-	private static readonly System.Text.Json.JsonEncodedText PropComposedOf = System.Text.Json.JsonEncodedText.Encode("composed_of");
-	private static readonly System.Text.Json.JsonEncodedText PropDataStream = System.Text.Json.JsonEncodedText.Encode("data_stream");
-	private static readonly System.Text.Json.JsonEncodedText PropDeprecated = System.Text.Json.JsonEncodedText.Encode("deprecated");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissingComponentTemplates = System.Text.Json.JsonEncodedText.Encode("ignore_missing_component_templates");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexPatterns = System.Text.Json.JsonEncodedText.Encode("index_patterns");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
-	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
-	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-
-	public override Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propAllowAutoCreate = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>?> propComposedOf = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamVisibility?> propDataStream = default;
-		LocalJsonValue<bool?> propDeprecated = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propIgnoreMissingComponentTemplates = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndexPatterns = default;
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
-		LocalJsonValue<long?> propPriority = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateMapping?> propTemplate = default;
-		LocalJsonValue<long?> propVersion = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAllowAutoCreate.TryReadProperty(ref reader, options, PropAllowAutoCreate, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propComposedOf.TryReadProperty(ref reader, options, PropComposedOf, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Name>(o, null)))
-			{
-				continue;
-			}
-
-			if (propDataStream.TryReadProperty(ref reader, options, PropDataStream, null))
-			{
-				continue;
-			}
-
-			if (propDeprecated.TryReadProperty(ref reader, options, PropDeprecated, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propIgnoreMissingComponentTemplates.TryReadProperty(ref reader, options, PropIgnoreMissingComponentTemplates, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
-			{
-				continue;
-			}
-
-			if (propIndexPatterns.TryReadProperty(ref reader, options, PropIndexPatterns, null))
-			{
-				continue;
-			}
-
-			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
-			{
-				continue;
-			}
-
-			if (propPriority.TryReadProperty(ref reader, options, PropPriority, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propTemplate.TryReadProperty(ref reader, options, PropTemplate, null))
-			{
-				continue;
-			}
-
-			if (propVersion.TryReadProperty(ref reader, options, PropVersion, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AllowAutoCreate = propAllowAutoCreate.Value,
-			ComposedOf = propComposedOf.Value,
-			DataStream = propDataStream.Value,
-			Deprecated = propDeprecated.Value,
-			IgnoreMissingComponentTemplates = propIgnoreMissingComponentTemplates.Value,
-			IndexPatterns = propIndexPatterns.Value,
-			Meta = propMeta.Value,
-			Priority = propPriority.Value,
-			Template = propTemplate.Value,
-			Version = propVersion.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAllowAutoCreate, value.AllowAutoCreate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropComposedOf, value.ComposedOf, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Name>(o, v, null));
-		writer.WriteProperty(options, PropDataStream, value.DataStream, null, null);
-		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropIgnoreMissingComponentTemplates, value.IgnoreMissingComponentTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropIndexPatterns, value.IndexPatterns, null, null);
-		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
-		writer.WriteProperty(options, PropPriority, value.Priority, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
-		writer.WriteProperty(options, PropVersion, value.Version, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Simulate an index template.
 /// Get the index configuration that would be applied by a particular index template.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SimulateTemplateRequestConverter))]
 public sealed partial class SimulateTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateTemplateRequestParameters>
 {
 	public SimulateTemplateRequest(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))

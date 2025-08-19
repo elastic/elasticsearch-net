@@ -27,35 +27,6 @@ public sealed partial class GetRollupIndexCapsRequestParameters : Elastic.Transp
 {
 }
 
-internal sealed partial class GetRollupIndexCapsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Get the rollup index capabilities.
@@ -75,7 +46,7 @@ internal sealed partial class GetRollupIndexCapsRequestConverter : System.Text.J
 /// </item>
 /// </list>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.Json.GetRollupIndexCapsRequestConverter))]
 public sealed partial class GetRollupIndexCapsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

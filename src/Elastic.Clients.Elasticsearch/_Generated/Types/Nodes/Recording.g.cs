@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-internal sealed partial class RecordingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Recording>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionCount = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_count");
-	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionTime = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_time");
-	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionTimeMillis = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-
-	public override Elastic.Clients.Elasticsearch.Nodes.Recording Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long?> propCumulativeExecutionCount = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propCumulativeExecutionTime = default;
-		LocalJsonValue<System.TimeSpan?> propCumulativeExecutionTimeMillis = default;
-		LocalJsonValue<string?> propName = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCumulativeExecutionCount.TryReadProperty(ref reader, options, PropCumulativeExecutionCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propCumulativeExecutionTime.TryReadProperty(ref reader, options, PropCumulativeExecutionTime, null))
-			{
-				continue;
-			}
-
-			if (propCumulativeExecutionTimeMillis.TryReadProperty(ref reader, options, PropCumulativeExecutionTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
-			{
-				continue;
-			}
-
-			if (propName.TryReadProperty(ref reader, options, PropName, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Nodes.Recording(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CumulativeExecutionCount = propCumulativeExecutionCount.Value,
-			CumulativeExecutionTime = propCumulativeExecutionTime.Value,
-			CumulativeExecutionTimeMillis = propCumulativeExecutionTimeMillis.Value,
-			Name = propName.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Recording value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCumulativeExecutionCount, value.CumulativeExecutionCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropCumulativeExecutionTime, value.CumulativeExecutionTime, null, null);
-		writer.WriteProperty(options, PropCumulativeExecutionTimeMillis, value.CumulativeExecutionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteNullableValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
-		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.RecordingConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.RecordingConverter))]
 public sealed partial class Recording
 {
 #if NET7_0_OR_GREATER

@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-internal sealed partial class WatcherWatchTriggerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all");
-	private static readonly System.Text.Json.JsonEncodedText PropSchedule = System.Text.Json.JsonEncodedText.Encode("schedule");
-
-	public override Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Counter> propAll = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTriggerSchedule?> propSchedule = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAll.TryReadProperty(ref reader, options, PropAll, null))
-			{
-				continue;
-			}
-
-			if (propSchedule.TryReadProperty(ref reader, options, PropSchedule, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			All = propAll.Value,
-			Schedule = propSchedule.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAll, value.All, null, null);
-		writer.WriteProperty(options, PropSchedule, value.Schedule, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTriggerConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.WatcherWatchTriggerConverter))]
 public sealed partial class WatcherWatchTrigger
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

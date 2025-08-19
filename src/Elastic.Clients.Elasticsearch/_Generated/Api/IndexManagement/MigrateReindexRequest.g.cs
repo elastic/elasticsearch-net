@@ -27,19 +27,6 @@ public sealed partial class MigrateReindexRequestParameters : Elastic.Transport.
 {
 }
 
-internal sealed partial class MigrateReindexRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest>
-{
-	public override Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Reindex = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Reindex, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Reindex legacy backing indices.
@@ -50,7 +37,7 @@ internal sealed partial class MigrateReindexRequestConverter : System.Text.Json.
 /// The persistent task ID is returned immediately and the reindexing work is completed in that task.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.MigrateReindexRequestConverter))]
 public sealed partial class MigrateReindexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindexRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

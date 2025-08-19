@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
-internal sealed partial class TestResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.TestResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMatchedRules = System.Text.Json.JsonEncodedText.Encode("matched_rules");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalMatchedRules = System.Text.Json.JsonEncodedText.Encode("total_matched_rules");
-
-	public override Elastic.Clients.Elasticsearch.QueryRules.TestResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule>> propMatchedRules = default;
-		LocalJsonValue<int> propTotalMatchedRules = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMatchedRules.TryReadProperty(ref reader, options, PropMatchedRules, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propTotalMatchedRules.TryReadProperty(ref reader, options, PropTotalMatchedRules, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.QueryRules.TestResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			MatchedRules = propMatchedRules.Value,
-			TotalMatchedRules = propTotalMatchedRules.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryRules.TestResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMatchedRules, value.MatchedRules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule>(o, v, null));
-		writer.WriteProperty(options, PropTotalMatchedRules, value.TotalMatchedRules, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.TestResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.Json.TestResponseConverter))]
 public sealed partial class TestResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -87,12 +39,12 @@ public sealed partial class TestResponse : Elastic.Transport.Products.Elasticsea
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule> MatchedRules { get; set; }
+System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryRules.QueryRulesetMatchedRule> MatchedRules { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		int TotalMatchedRules { get; set; }
+int TotalMatchedRules { get; set; }
 }

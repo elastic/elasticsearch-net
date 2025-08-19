@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class TextEmbeddingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextEmbedding>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
-	private static readonly System.Text.Json.JsonEncodedText PropModelText = System.Text.Json.JsonEncodedText.Encode("model_text");
-
-	public override Elastic.Clients.Elasticsearch.TextEmbedding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propModelId = default;
-		LocalJsonValue<string> propModelText = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propModelId.TryReadProperty(ref reader, options, PropModelId, null))
-			{
-				continue;
-			}
-
-			if (propModelText.TryReadProperty(ref reader, options, PropModelText, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TextEmbedding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ModelId = propModelId.Value,
-			ModelText = propModelText.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextEmbedding value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
-		writer.WriteProperty(options, PropModelText, value.ModelText, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextEmbeddingConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.TextEmbeddingConverter))]
 public sealed partial class TextEmbedding
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

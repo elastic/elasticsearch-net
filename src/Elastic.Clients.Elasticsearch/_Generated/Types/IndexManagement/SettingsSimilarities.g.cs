@@ -23,20 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-internal sealed partial class SettingsSimilaritiesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities>
-{
-	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities(reader.ReadValue<System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>?>(options, static System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>(o, null, null)));
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarities value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.BackingDictionary, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>(o, v, null, null));
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilaritiesConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.SettingsSimilaritiesConverter))]
 public sealed partial class SettingsSimilarities : Elastic.Clients.Elasticsearch.IsADictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity>
 {
 	public SettingsSimilarities()

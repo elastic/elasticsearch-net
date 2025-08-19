@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class IntervalsAllOfConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropIntervals = System.Text.Json.JsonEncodedText.Encode("intervals");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxGaps = System.Text.Json.JsonEncodedText.Encode("max_gaps");
-	private static readonly System.Text.Json.JsonEncodedText PropOrdered = System.Text.Json.JsonEncodedText.Encode("ordered");
-
-	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter?> propFilter = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>> propIntervals = default;
-		LocalJsonValue<int?> propMaxGaps = default;
-		LocalJsonValue<bool?> propOrdered = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
-			{
-				continue;
-			}
-
-			if (propIntervals.TryReadProperty(ref reader, options, PropIntervals, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propMaxGaps.TryReadProperty(ref reader, options, PropMaxGaps, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propOrdered.TryReadProperty(ref reader, options, PropOrdered, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Filter = propFilter.Value,
-			Intervals = propIntervals.Value,
-			MaxGaps = propMaxGaps.Value,
-			Ordered = propOrdered.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOf value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropIntervals, value.Intervals, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Intervals> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Intervals>(o, v, null));
-		writer.WriteProperty(options, PropMaxGaps, value.MaxGaps, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropOrdered, value.Ordered, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAllOfConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IntervalsAllOfConverter))]
 public sealed partial class IntervalsAllOf
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

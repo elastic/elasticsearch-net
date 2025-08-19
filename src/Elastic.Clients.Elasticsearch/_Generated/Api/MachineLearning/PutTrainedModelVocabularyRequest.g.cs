@@ -27,63 +27,6 @@ public sealed partial class PutTrainedModelVocabularyRequestParameters : Elastic
 {
 }
 
-internal sealed partial class PutTrainedModelVocabularyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMerges = System.Text.Json.JsonEncodedText.Encode("merges");
-	private static readonly System.Text.Json.JsonEncodedText PropScores = System.Text.Json.JsonEncodedText.Encode("scores");
-	private static readonly System.Text.Json.JsonEncodedText PropVocabulary = System.Text.Json.JsonEncodedText.Encode("vocabulary");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propMerges = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<double>?> propScores = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>> propVocabulary = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMerges.TryReadProperty(ref reader, options, PropMerges, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
-			{
-				continue;
-			}
-
-			if (propScores.TryReadProperty(ref reader, options, PropScores, static System.Collections.Generic.ICollection<double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<double>(o, null)))
-			{
-				continue;
-			}
-
-			if (propVocabulary.TryReadProperty(ref reader, options, PropVocabulary, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Merges = propMerges.Value,
-			Scores = propScores.Value,
-			Vocabulary = propVocabulary.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMerges, value.Merges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropScores, value.Scores, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<double>? v) => w.WriteCollectionValue<double>(o, v, null));
-		writer.WriteProperty(options, PropVocabulary, value.Vocabulary, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create a trained model vocabulary.
@@ -91,7 +34,7 @@ internal sealed partial class PutTrainedModelVocabularyRequestConverter : System
 /// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PutTrainedModelVocabularyRequestConverter))]
 public sealed partial class PutTrainedModelVocabularyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelVocabularyRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

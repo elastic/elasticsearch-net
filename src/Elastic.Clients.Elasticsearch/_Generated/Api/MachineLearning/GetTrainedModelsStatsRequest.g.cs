@@ -68,35 +68,6 @@ public sealed partial class GetTrainedModelsStatsRequestParameters : Elastic.Tra
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
-internal sealed partial class GetTrainedModelsStatsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest>
-{
-	public override Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Get trained models usage info.
@@ -104,7 +75,7 @@ internal sealed partial class GetTrainedModelsStatsRequestConverter : System.Tex
 /// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GetTrainedModelsStatsRequestConverter))]
 public sealed partial class GetTrainedModelsStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsStatsRequestParameters>
 {
 	public GetTrainedModelsStatsRequest(Elastic.Clients.Elasticsearch.Ids? modelId) : base(r => r.Optional("model_id", modelId))

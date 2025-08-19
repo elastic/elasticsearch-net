@@ -27,81 +27,6 @@ public sealed partial class OidcPrepareAuthenticationRequestParameters : Elastic
 {
 }
 
-internal sealed partial class OidcPrepareAuthenticationRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropIss = System.Text.Json.JsonEncodedText.Encode("iss");
-	private static readonly System.Text.Json.JsonEncodedText PropLoginHint = System.Text.Json.JsonEncodedText.Encode("login_hint");
-	private static readonly System.Text.Json.JsonEncodedText PropNonce = System.Text.Json.JsonEncodedText.Encode("nonce");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
-
-	public override Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propIss = default;
-		LocalJsonValue<string?> propLoginHint = default;
-		LocalJsonValue<string?> propNonce = default;
-		LocalJsonValue<string?> propRealm = default;
-		LocalJsonValue<string?> propState = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propIss.TryReadProperty(ref reader, options, PropIss, null))
-			{
-				continue;
-			}
-
-			if (propLoginHint.TryReadProperty(ref reader, options, PropLoginHint, null))
-			{
-				continue;
-			}
-
-			if (propNonce.TryReadProperty(ref reader, options, PropNonce, null))
-			{
-				continue;
-			}
-
-			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
-			{
-				continue;
-			}
-
-			if (propState.TryReadProperty(ref reader, options, PropState, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Iss = propIss.Value,
-			LoginHint = propLoginHint.Value,
-			Nonce = propNonce.Value,
-			Realm = propRealm.Value,
-			State = propState.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIss, value.Iss, null, null);
-		writer.WriteProperty(options, PropLoginHint, value.LoginHint, null, null);
-		writer.WriteProperty(options, PropNonce, value.Nonce, null, null);
-		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
-		writer.WriteProperty(options, PropState, value.State, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Prepare OpenID connect authentication.
@@ -117,7 +42,7 @@ internal sealed partial class OidcPrepareAuthenticationRequestConverter : System
 /// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.OidcPrepareAuthenticationRequestConverter))]
 public sealed partial class OidcPrepareAuthenticationRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>
 {
 #if NET7_0_OR_GREATER

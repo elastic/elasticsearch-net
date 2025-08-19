@@ -23,20 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-internal sealed partial class TokenizersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.Tokenizers>
-{
-	public override Elastic.Clients.Elasticsearch.Analysis.Tokenizers Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.Analysis.Tokenizers(reader.ReadValue<System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ITokenizer>?>(options, static System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ITokenizer>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.ITokenizer>(o, null, null)));
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.Tokenizers value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.BackingDictionary, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ITokenizer>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.ITokenizer>(o, v, null, null));
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.TokenizersConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.TokenizersConverter))]
 public sealed partial class Tokenizers : Elastic.Clients.Elasticsearch.IsADictionary<string, Elastic.Clients.Elasticsearch.Analysis.ITokenizer>
 {
 	public Tokenizers()

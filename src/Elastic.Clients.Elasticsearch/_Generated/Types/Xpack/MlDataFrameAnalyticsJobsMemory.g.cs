@@ -23,46 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-internal sealed partial class MlDataFrameAnalyticsJobsMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsMemory>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropPeakUsageBytes = System.Text.Json.JsonEncodedText.Encode("peak_usage_bytes");
-
-	public override Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.JobStatistics> propPeakUsageBytes = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propPeakUsageBytes.TryReadProperty(ref reader, options, PropPeakUsageBytes, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			PeakUsageBytes = propPeakUsageBytes.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsMemory value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPeakUsageBytes, value.PeakUsageBytes, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsMemoryConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.MlDataFrameAnalyticsJobsMemoryConverter))]
 public sealed partial class MlDataFrameAnalyticsJobsMemory
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

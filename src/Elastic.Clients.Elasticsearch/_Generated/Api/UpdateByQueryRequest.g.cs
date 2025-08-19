@@ -260,81 +260,6 @@ public sealed partial class UpdateByQueryRequestParameters : Elastic.Transport.R
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
-internal sealed partial class UpdateByQueryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.UpdateByQueryRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropConflicts = System.Text.Json.JsonEncodedText.Encode("conflicts");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxDocs = System.Text.Json.JsonEncodedText.Encode("max_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
-	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("slice");
-
-	public override Elastic.Clients.Elasticsearch.UpdateByQueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Conflicts?> propConflicts = default;
-		LocalJsonValue<long?> propMaxDocs = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propConflicts.TryReadProperty(ref reader, options, PropConflicts, static Elastic.Clients.Elasticsearch.Conflicts? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Conflicts>(o)))
-			{
-				continue;
-			}
-
-			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
-			{
-				continue;
-			}
-
-			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
-			{
-				continue;
-			}
-
-			if (propSlice.TryReadProperty(ref reader, options, PropSlice, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.UpdateByQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Conflicts = propConflicts.Value,
-			MaxDocs = propMaxDocs.Value,
-			Query = propQuery.Value,
-			Script = propScript.Value,
-			Slice = propSlice.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.UpdateByQueryRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConflicts, value.Conflicts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Conflicts? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Conflicts>(o, v));
-		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropSlice, value.Slice, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Update documents.
@@ -493,7 +418,7 @@ internal sealed partial class UpdateByQueryRequestConverter : System.Text.Json.S
 /// This API enables you to only modify the source of matching documents; you cannot move them.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.UpdateByQueryRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.UpdateByQueryRequestConverter))]
 public sealed partial class UpdateByQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

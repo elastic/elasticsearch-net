@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
-internal sealed partial class RetentionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropExpireAfter = System.Text.Json.JsonEncodedText.Encode("expire_after");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxCount = System.Text.Json.JsonEncodedText.Encode("max_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMinCount = System.Text.Json.JsonEncodedText.Encode("min_count");
-
-	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propExpireAfter = default;
-		LocalJsonValue<int> propMaxCount = default;
-		LocalJsonValue<int> propMinCount = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propExpireAfter.TryReadProperty(ref reader, options, PropExpireAfter, null))
-			{
-				continue;
-			}
-
-			if (propMaxCount.TryReadProperty(ref reader, options, PropMaxCount, null))
-			{
-				continue;
-			}
-
-			if (propMinCount.TryReadProperty(ref reader, options, PropMinCount, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ExpireAfter = propExpireAfter.Value,
-			MaxCount = propMaxCount.Value,
-			MinCount = propMinCount.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExpireAfter, value.ExpireAfter, null, null);
-		writer.WriteProperty(options, PropMaxCount, value.MaxCount, null, null);
-		writer.WriteProperty(options, PropMinCount, value.MinCount, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.RetentionConverter))]
 public sealed partial class Retention
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

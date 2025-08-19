@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class WeightedAverageAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
-	private static readonly System.Text.Json.JsonEncodedText PropValueType = System.Text.Json.JsonEncodedText.Encode("value_type");
-	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight");
-
-	public override Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propFormat = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue?> propValue = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ValueType?> propValueType = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageValue?> propWeight = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
-			{
-				continue;
-			}
-
-			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
-			{
-				continue;
-			}
-
-			if (propValueType.TryReadProperty(ref reader, options, PropValueType, static Elastic.Clients.Elasticsearch.Aggregations.ValueType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Aggregations.ValueType>(o)))
-			{
-				continue;
-			}
-
-			if (propWeight.TryReadProperty(ref reader, options, PropWeight, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Format = propFormat.Value,
-			Value = propValue.Value,
-			ValueType = propValueType.Value,
-			Weight = propWeight.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregation value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteProperty(options, PropValue, value.Value, null, null);
-		writer.WriteProperty(options, PropValueType, value.ValueType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ValueType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Aggregations.ValueType>(o, v));
-		writer.WriteProperty(options, PropWeight, value.Weight, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregationConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.WeightedAverageAggregationConverter))]
 public sealed partial class WeightedAverageAggregation
 {
 #if NET7_0_OR_GREATER

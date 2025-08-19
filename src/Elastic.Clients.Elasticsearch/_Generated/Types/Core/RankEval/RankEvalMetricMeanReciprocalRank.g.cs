@@ -23,61 +23,13 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
-internal sealed partial class RankEvalMetricMeanReciprocalRankConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k");
-	private static readonly System.Text.Json.JsonEncodedText PropRelevantRatingThreshold = System.Text.Json.JsonEncodedText.Encode("relevant_rating_threshold");
-
-	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int?> propK = default;
-		LocalJsonValue<int?> propRelevantRatingThreshold = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propK.TryReadProperty(ref reader, options, PropK, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propRelevantRatingThreshold.TryReadProperty(ref reader, options, PropRelevantRatingThreshold, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			K = propK.Value,
-			RelevantRatingThreshold = propRelevantRatingThreshold.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRank value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropK, value.K, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropRelevantRatingThreshold, value.RelevantRatingThreshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Mean Reciprocal Rank
 /// </para>
 /// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/search-rank-eval.html#_mean_reciprocal_rank">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricMeanReciprocalRankConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricMeanReciprocalRankConverter))]
 public sealed partial class RankEvalMetricMeanReciprocalRank
 {
 #if NET7_0_OR_GREATER

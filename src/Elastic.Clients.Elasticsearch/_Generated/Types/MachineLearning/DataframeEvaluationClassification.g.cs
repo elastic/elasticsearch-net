@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class DataframeEvaluationClassificationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropActualField = System.Text.Json.JsonEncodedText.Encode("actual_field");
-	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictedField = System.Text.Json.JsonEncodedText.Encode("predicted_field");
-	private static readonly System.Text.Json.JsonEncodedText PropTopClassesField = System.Text.Json.JsonEncodedText.Encode("top_classes_field");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propActualField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics?> propMetrics = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propPredictedField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTopClassesField = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propActualField.TryReadProperty(ref reader, options, PropActualField, null))
-			{
-				continue;
-			}
-
-			if (propMetrics.TryReadProperty(ref reader, options, PropMetrics, null))
-			{
-				continue;
-			}
-
-			if (propPredictedField.TryReadProperty(ref reader, options, PropPredictedField, null))
-			{
-				continue;
-			}
-
-			if (propTopClassesField.TryReadProperty(ref reader, options, PropTopClassesField, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ActualField = propActualField.Value,
-			Metrics = propMetrics.Value,
-			PredictedField = propPredictedField.Value,
-			TopClassesField = propTopClassesField.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropActualField, value.ActualField, null, null);
-		writer.WriteProperty(options, PropMetrics, value.Metrics, null, null);
-		writer.WriteProperty(options, PropPredictedField, value.PredictedField, null, null);
-		writer.WriteProperty(options, PropTopClassesField, value.TopClassesField, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeEvaluationClassificationConverter))]
 public sealed partial class DataframeEvaluationClassification
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

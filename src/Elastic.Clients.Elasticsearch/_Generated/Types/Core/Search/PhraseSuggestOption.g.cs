@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-internal sealed partial class PhraseSuggestOptionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestOption>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCollateMatch = System.Text.Json.JsonEncodedText.Encode("collate_match");
-	private static readonly System.Text.Json.JsonEncodedText PropHighlighted = System.Text.Json.JsonEncodedText.Encode("highlighted");
-	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score");
-	private static readonly System.Text.Json.JsonEncodedText PropText = System.Text.Json.JsonEncodedText.Encode("text");
-
-	public override Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestOption Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propCollateMatch = default;
-		LocalJsonValue<string?> propHighlighted = default;
-		LocalJsonValue<double> propScore = default;
-		LocalJsonValue<string> propText = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCollateMatch.TryReadProperty(ref reader, options, PropCollateMatch, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propHighlighted.TryReadProperty(ref reader, options, PropHighlighted, null))
-			{
-				continue;
-			}
-
-			if (propScore.TryReadProperty(ref reader, options, PropScore, null))
-			{
-				continue;
-			}
-
-			if (propText.TryReadProperty(ref reader, options, PropText, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestOption(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CollateMatch = propCollateMatch.Value,
-			Highlighted = propHighlighted.Value,
-			Score = propScore.Value,
-			Text = propText.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestOption value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCollateMatch, value.CollateMatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropHighlighted, value.Highlighted, null, null);
-		writer.WriteProperty(options, PropScore, value.Score, null, null);
-		writer.WriteProperty(options, PropText, value.Text, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.PhraseSuggestOptionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.PhraseSuggestOptionConverter))]
 public sealed partial class PhraseSuggestOption
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -27,63 +27,6 @@ public sealed partial class SamlAuthenticateRequestParameters : Elastic.Transpor
 {
 }
 
-internal sealed partial class SamlAuthenticateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropContent = System.Text.Json.JsonEncodedText.Encode("content");
-	private static readonly System.Text.Json.JsonEncodedText PropIds = System.Text.Json.JsonEncodedText.Encode("ids");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-
-	public override Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propContent = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Ids> propIds = default;
-		LocalJsonValue<string?> propRealm = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propContent.TryReadProperty(ref reader, options, PropContent, null))
-			{
-				continue;
-			}
-
-			if (propIds.TryReadProperty(ref reader, options, PropIds, null))
-			{
-				continue;
-			}
-
-			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Content = propContent.Value,
-			Ids = propIds.Value,
-			Realm = propRealm.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropContent, value.Content, null, null);
-		writer.WriteProperty(options, PropIds, value.Ids, null, null);
-		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Authenticate SAML.
@@ -118,7 +61,7 @@ internal sealed partial class SamlAuthenticateRequestConverter : System.Text.Jso
 /// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SamlAuthenticateRequestConverter))]
 public sealed partial class SamlAuthenticateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

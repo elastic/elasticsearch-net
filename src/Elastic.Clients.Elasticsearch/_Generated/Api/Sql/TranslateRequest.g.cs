@@ -27,72 +27,6 @@ public sealed partial class TranslateRequestParameters : Elastic.Transport.Reque
 {
 }
 
-internal sealed partial class TranslateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Sql.TranslateRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFetchSize = System.Text.Json.JsonEncodedText.Encode("fetch_size");
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
-
-	public override Elastic.Clients.Elasticsearch.Sql.TranslateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int?> propFetchSize = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
-		LocalJsonValue<string> propQuery = default;
-		LocalJsonValue<string?> propTimeZone = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFetchSize.TryReadProperty(ref reader, options, PropFetchSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
-			{
-				continue;
-			}
-
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
-			{
-				continue;
-			}
-
-			if (propTimeZone.TryReadProperty(ref reader, options, PropTimeZone, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Sql.TranslateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			FetchSize = propFetchSize.Value,
-			Filter = propFilter.Value,
-			Query = propQuery.Value,
-			TimeZone = propTimeZone.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Sql.TranslateRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFetchSize, value.FetchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Translate SQL into Elasticsearch queries.
@@ -100,7 +34,7 @@ internal sealed partial class TranslateRequestConverter : System.Text.Json.Seria
 /// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.TranslateRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.TranslateRequestConverter))]
 public sealed partial class TranslateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.TranslateRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
