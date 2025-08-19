@@ -23,61 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-internal sealed partial class RetentionPolicyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy>
-{
-	private static readonly System.Text.Json.JsonEncodedText VariantTime = System.Text.Json.JsonEncodedText.Encode("time");
-
-	public override Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		string? variantType = null;
-		object? variant = null;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (reader.ValueTextEquals(VariantTime))
-			{
-				variantType = VariantTime.Value;
-				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy>(options, null);
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			VariantType = variantType,
-			Variant = variant
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		switch (value.VariantType)
-		{
-			case null:
-				break;
-			case "time":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TransformManagement.TimeRetentionPolicy)value.Variant, null, null);
-				break;
-			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy)}'.");
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicyConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.RetentionPolicyConverter))]
 public sealed partial class RetentionPolicy
 {
 	internal string? VariantType { get; set; }

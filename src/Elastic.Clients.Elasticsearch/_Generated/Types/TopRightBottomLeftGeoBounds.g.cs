@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class TopRightBottomLeftGeoBoundsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropBottomLeft = System.Text.Json.JsonEncodedText.Encode("bottom_left");
-	private static readonly System.Text.Json.JsonEncodedText PropTopRight = System.Text.Json.JsonEncodedText.Encode("top_right");
-
-	public override Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoLocation> propBottomLeft = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoLocation> propTopRight = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propBottomLeft.TryReadProperty(ref reader, options, PropBottomLeft, null))
-			{
-				continue;
-			}
-
-			if (propTopRight.TryReadProperty(ref reader, options, PropTopRight, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			BottomLeft = propBottomLeft.Value,
-			TopRight = propTopRight.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBounds value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBottomLeft, value.BottomLeft, null, null);
-		writer.WriteProperty(options, PropTopRight, value.TopRight, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TopRightBottomLeftGeoBoundsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.TopRightBottomLeftGeoBoundsConverter))]
 public sealed partial class TopRightBottomLeftGeoBounds
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

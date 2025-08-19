@@ -23,78 +23,12 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class ElasticsearchVersionMinInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropBuildFlavor = System.Text.Json.JsonEncodedText.Encode("build_flavor");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumIndexCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_index_compatibility_version");
-	private static readonly System.Text.Json.JsonEncodedText PropMinimumWireCompatibilityVersion = System.Text.Json.JsonEncodedText.Encode("minimum_wire_compatibility_version");
-	private static readonly System.Text.Json.JsonEncodedText PropNumber = System.Text.Json.JsonEncodedText.Encode("number");
-
-	public override Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propBuildFlavor = default;
-		LocalJsonValue<string> propMinimumIndexCompatibilityVersion = default;
-		LocalJsonValue<string> propMinimumWireCompatibilityVersion = default;
-		LocalJsonValue<string> propNumber = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propBuildFlavor.TryReadProperty(ref reader, options, PropBuildFlavor, null))
-			{
-				continue;
-			}
-
-			if (propMinimumIndexCompatibilityVersion.TryReadProperty(ref reader, options, PropMinimumIndexCompatibilityVersion, null))
-			{
-				continue;
-			}
-
-			if (propMinimumWireCompatibilityVersion.TryReadProperty(ref reader, options, PropMinimumWireCompatibilityVersion, null))
-			{
-				continue;
-			}
-
-			if (propNumber.TryReadProperty(ref reader, options, PropNumber, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			BuildFlavor = propBuildFlavor.Value,
-			MinimumIndexCompatibilityVersion = propMinimumIndexCompatibilityVersion.Value,
-			MinimumWireCompatibilityVersion = propMinimumWireCompatibilityVersion.Value,
-			Number = propNumber.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfo value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBuildFlavor, value.BuildFlavor, null, null);
-		writer.WriteProperty(options, PropMinimumIndexCompatibilityVersion, value.MinimumIndexCompatibilityVersion, null, null);
-		writer.WriteProperty(options, PropMinimumWireCompatibilityVersion, value.MinimumWireCompatibilityVersion, null, null);
-		writer.WriteProperty(options, PropNumber, value.Number, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Reduced (minimal) info ElasticsearchVersion
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ElasticsearchVersionMinInfoConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ElasticsearchVersionMinInfoConverter))]
 public sealed partial class ElasticsearchVersionMinInfo
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

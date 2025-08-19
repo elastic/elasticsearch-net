@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-internal sealed partial class RepositoryIntegrityIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicatorDetails>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCorrupted = System.Text.Json.JsonEncodedText.Encode("corrupted");
-	private static readonly System.Text.Json.JsonEncodedText PropCorruptedRepositories = System.Text.Json.JsonEncodedText.Encode("corrupted_repositories");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalRepositories = System.Text.Json.JsonEncodedText.Encode("total_repositories");
-
-	public override Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propCorrupted = default;
-		LocalJsonValue<long?> propCorruptedRepositories = default;
-		LocalJsonValue<long?> propTotalRepositories = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCorrupted.TryReadProperty(ref reader, options, PropCorrupted, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
-			{
-				continue;
-			}
-
-			if (propCorruptedRepositories.TryReadProperty(ref reader, options, PropCorruptedRepositories, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propTotalRepositories.TryReadProperty(ref reader, options, PropTotalRepositories, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Corrupted = propCorrupted.Value,
-			CorruptedRepositories = propCorruptedRepositories.Value,
-			TotalRepositories = propTotalRepositories.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicatorDetails value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCorrupted, value.Corrupted, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropCorruptedRepositories, value.CorruptedRepositories, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropTotalRepositories, value.TotalRepositories, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicatorDetailsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.RepositoryIntegrityIndicatorDetailsConverter))]
 public sealed partial class RepositoryIntegrityIndicatorDetails
 {
 #if NET7_0_OR_GREATER

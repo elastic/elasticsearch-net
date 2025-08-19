@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-internal sealed partial class ElserServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropNumAllocations = System.Text.Json.JsonEncodedText.Encode("num_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropNumThreads = System.Text.Json.JsonEncodedText.Encode("num_threads");
-
-	public override Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocations?> propAdaptiveAllocations = default;
-		LocalJsonValue<int> propNumAllocations = default;
-		LocalJsonValue<int> propNumThreads = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAdaptiveAllocations.TryReadProperty(ref reader, options, PropAdaptiveAllocations, null))
-			{
-				continue;
-			}
-
-			if (propNumAllocations.TryReadProperty(ref reader, options, PropNumAllocations, null))
-			{
-				continue;
-			}
-
-			if (propNumThreads.TryReadProperty(ref reader, options, PropNumThreads, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AdaptiveAllocations = propAdaptiveAllocations.Value,
-			NumAllocations = propNumAllocations.Value,
-			NumThreads = propNumThreads.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.ElserServiceSettings value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAdaptiveAllocations, value.AdaptiveAllocations, null, null);
-		writer.WriteProperty(options, PropNumAllocations, value.NumAllocations, null, null);
-		writer.WriteProperty(options, PropNumThreads, value.NumThreads, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.ElserServiceSettingsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ElserServiceSettingsConverter))]
 public sealed partial class ElserServiceSettings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

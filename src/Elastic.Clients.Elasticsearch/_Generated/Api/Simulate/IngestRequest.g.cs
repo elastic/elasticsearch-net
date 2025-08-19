@@ -27,86 +27,21 @@ public sealed partial class IngestRequestParameters : Elastic.Transport.RequestP
 {
 	/// <summary>
 	/// <para>
+	/// The mapping merge type if mapping overrides are being provided in mapping_addition.
+	/// The allowed values are one of index or template.
+	/// The index option merges mappings the way they would be merged into an existing index.
+	/// The template option merges mappings the way they would be merged into a template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.MergeType? MergeType { get => Q<Elastic.Clients.Elasticsearch.Simulate.MergeType?>("merge_type"); set => Q("merge_type", value); }
+
+	/// <summary>
+	/// <para>
 	/// The pipeline to use as the default pipeline.
 	/// This value can be used to override the default pipeline of the index.
 	/// </para>
 	/// </summary>
 	public string? Pipeline { get => Q<string?>("pipeline"); set => Q("pipeline", value); }
-}
-
-internal sealed partial class IngestRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Simulate.IngestRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropComponentTemplateSubstitutions = System.Text.Json.JsonEncodedText.Encode("component_template_substitutions");
-	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexTemplateSubstitutions = System.Text.Json.JsonEncodedText.Encode("index_template_substitutions");
-	private static readonly System.Text.Json.JsonEncodedText PropMappingAddition = System.Text.Json.JsonEncodedText.Encode("mapping_addition");
-	private static readonly System.Text.Json.JsonEncodedText PropPipelineSubstitutions = System.Text.Json.JsonEncodedText.Encode("pipeline_substitutions");
-
-	public override Elastic.Clients.Elasticsearch.Simulate.IngestRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>?> propComponentTemplateSubstitutions = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document>> propDocs = default;
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>?> propIndexTemplateSubstitutions = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappingAddition = default;
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>?> propPipelineSubstitutions = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propComponentTemplateSubstitutions.TryReadProperty(ref reader, options, PropComponentTemplateSubstitutions, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>(o, null, null)))
-			{
-				continue;
-			}
-
-			if (propDocs.TryReadProperty(ref reader, options, PropDocs, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Document>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propIndexTemplateSubstitutions.TryReadProperty(ref reader, options, PropIndexTemplateSubstitutions, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>(o, null, null)))
-			{
-				continue;
-			}
-
-			if (propMappingAddition.TryReadProperty(ref reader, options, PropMappingAddition, null))
-			{
-				continue;
-			}
-
-			if (propPipelineSubstitutions.TryReadProperty(ref reader, options, PropPipelineSubstitutions, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>(o, null, null)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Simulate.IngestRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ComponentTemplateSubstitutions = propComponentTemplateSubstitutions.Value,
-			Docs = propDocs.Value,
-			IndexTemplateSubstitutions = propIndexTemplateSubstitutions.Value,
-			MappingAddition = propMappingAddition.Value,
-			PipelineSubstitutions = propPipelineSubstitutions.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Simulate.IngestRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropComponentTemplateSubstitutions, value.ComponentTemplateSubstitutions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>(o, v, null, null));
-		writer.WriteProperty(options, PropDocs, value.Docs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Document>(o, v, null));
-		writer.WriteProperty(options, PropIndexTemplateSubstitutions, value.IndexTemplateSubstitutions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>(o, v, null, null));
-		writer.WriteProperty(options, PropMappingAddition, value.MappingAddition, null, null);
-		writer.WriteProperty(options, PropPipelineSubstitutions, value.PipelineSubstitutions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>(o, v, null, null));
-		writer.WriteEndObject();
-	}
 }
 
 /// <summary>
@@ -134,7 +69,7 @@ internal sealed partial class IngestRequestConverter : System.Text.Json.Serializ
 /// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Simulate.IngestRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Simulate.Json.IngestRequestConverter))]
 public sealed partial class IngestRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Simulate.IngestRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
@@ -187,6 +122,16 @@ public sealed partial class IngestRequest : Elastic.Clients.Elasticsearch.Reques
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexName? Index { get => P<Elastic.Clients.Elasticsearch.IndexName?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// The mapping merge type if mapping overrides are being provided in mapping_addition.
+	/// The allowed values are one of index or template.
+	/// The index option merges mappings the way they would be merged into an existing index.
+	/// The template option merges mappings the way they would be merged into a template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.MergeType? MergeType { get => Q<Elastic.Clients.Elasticsearch.Simulate.MergeType?>("merge_type"); set => Q("merge_type", value); }
 
 	/// <summary>
 	/// <para>
@@ -292,6 +237,20 @@ public readonly partial struct IngestRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The mapping merge type if mapping overrides are being provided in mapping_addition.
+	/// The allowed values are one of index or template.
+	/// The index option merges mappings the way they would be merged into an existing index.
+	/// The template option merges mappings the way they would be merged into a template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor MergeType(Elastic.Clients.Elasticsearch.Simulate.MergeType? value)
+	{
+		Instance.MergeType = value;
 		return this;
 	}
 
@@ -725,6 +684,20 @@ public readonly partial struct IngestRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
 		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The mapping merge type if mapping overrides are being provided in mapping_addition.
+	/// The allowed values are one of index or template.
+	/// The index option merges mappings the way they would be merged into an existing index.
+	/// The template option merges mappings the way they would be merged into a template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Simulate.IngestRequestDescriptor<TDocument> MergeType(Elastic.Clients.Elasticsearch.Simulate.MergeType? value)
+	{
+		Instance.MergeType = value;
 		return this;
 	}
 

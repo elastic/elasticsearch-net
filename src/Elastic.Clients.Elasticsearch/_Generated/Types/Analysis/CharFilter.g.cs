@@ -23,63 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-internal sealed partial class ICharFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.ICharFilter>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("type");
-
-	public override Elastic.Clients.Elasticsearch.Analysis.ICharFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		var readerSnapshot = reader;
-		string? discriminator = null;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
-			{
-				break;
-			}
-
-			reader.Skip();
-		}
-
-		reader = readerSnapshot;
-		return discriminator switch
-		{
-			"html_strip" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter>(options, null),
-			"icu_normalizer" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter>(options, null),
-			"kuromoji_iteration_mark" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter>(options, null),
-			"mapping" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter>(options, null),
-			"pattern_replace" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter>(options, null),
-			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.ICharFilter)}'.")
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.ICharFilter value, System.Text.Json.JsonSerializerOptions options)
-	{
-		switch (value.Type)
-		{
-			case "html_strip":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter)value, null);
-				break;
-			case "icu_normalizer":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter)value, null);
-				break;
-			case "kuromoji_iteration_mark":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.KuromojiIterationMarkCharFilter)value, null);
-				break;
-			case "mapping":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter)value, null);
-				break;
-			case "pattern_replace":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.PatternReplaceCharFilter)value, null);
-				break;
-			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.ICharFilter)}'.");
-		}
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.ICharFilterConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.ICharFilterConverter))]
 public partial interface ICharFilter
 {
 	public string Type { get; }

@@ -33,25 +33,12 @@ public sealed partial class PostBehavioralAnalyticsEventRequestParameters : Elas
 	public bool? Debug { get => Q<bool?>("debug"); set => Q("debug", value); }
 }
 
-internal sealed partial class PostBehavioralAnalyticsEventRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest>
-{
-	public override Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Payload = reader.ReadValue<object>(options, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Payload, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>)));
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create a behavioral analytics collection event.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.PostBehavioralAnalyticsEventRequestConverter))]
 public sealed partial class PostBehavioralAnalyticsEventRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class FilterRefConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.FilterRef>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFilterId = System.Text.Json.JsonEncodedText.Encode("filter_id");
-	private static readonly System.Text.Json.JsonEncodedText PropFilterType = System.Text.Json.JsonEncodedText.Encode("filter_type");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.FilterRef Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propFilterId = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.FilterType?> propFilterType = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFilterId.TryReadProperty(ref reader, options, PropFilterId, null))
-			{
-				continue;
-			}
-
-			if (propFilterType.TryReadProperty(ref reader, options, PropFilterType, static Elastic.Clients.Elasticsearch.MachineLearning.FilterType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.FilterType>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.FilterRef(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			FilterId = propFilterId.Value,
-			FilterType = propFilterType.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.FilterRef value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFilterId, value.FilterId, null, null);
-		writer.WriteProperty(options, PropFilterType, value.FilterType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.MachineLearning.FilterType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.MachineLearning.FilterType>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.FilterRefConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.FilterRefConverter))]
 public sealed partial class FilterRef
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

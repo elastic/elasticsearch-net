@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class InnerRetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.InnerRetriever>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropNormalizer = System.Text.Json.JsonEncodedText.Encode("normalizer");
-	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever");
-	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight");
-
-	public override Elastic.Clients.Elasticsearch.InnerRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ScoreNormalizer> propNormalizer = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever> propRetriever = default;
-		LocalJsonValue<float> propWeight = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propNormalizer.TryReadProperty(ref reader, options, PropNormalizer, null))
-			{
-				continue;
-			}
-
-			if (propRetriever.TryReadProperty(ref reader, options, PropRetriever, null))
-			{
-				continue;
-			}
-
-			if (propWeight.TryReadProperty(ref reader, options, PropWeight, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.InnerRetriever(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Normalizer = propNormalizer.Value,
-			Retriever = propRetriever.Value,
-			Weight = propWeight.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.InnerRetriever value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNormalizer, value.Normalizer, null, null);
-		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
-		writer.WriteProperty(options, PropWeight, value.Weight, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.InnerRetrieverConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.InnerRetrieverConverter))]
 public sealed partial class InnerRetriever
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

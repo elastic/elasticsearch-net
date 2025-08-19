@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-internal sealed partial class FileSettingsIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicatorDetails>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFailureStreak = System.Text.Json.JsonEncodedText.Encode("failure_streak");
-	private static readonly System.Text.Json.JsonEncodedText PropMostRecentFailure = System.Text.Json.JsonEncodedText.Encode("most_recent_failure");
-
-	public override Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long> propFailureStreak = default;
-		LocalJsonValue<string> propMostRecentFailure = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFailureStreak.TryReadProperty(ref reader, options, PropFailureStreak, null))
-			{
-				continue;
-			}
-
-			if (propMostRecentFailure.TryReadProperty(ref reader, options, PropMostRecentFailure, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			FailureStreak = propFailureStreak.Value,
-			MostRecentFailure = propMostRecentFailure.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicatorDetails value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFailureStreak, value.FailureStreak, null, null);
-		writer.WriteProperty(options, PropMostRecentFailure, value.MostRecentFailure, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicatorDetailsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.FileSettingsIndicatorDetailsConverter))]
 public sealed partial class FileSettingsIndicatorDetails
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

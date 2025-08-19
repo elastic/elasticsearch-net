@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class FlushJobResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFlushed = System.Text.Json.JsonEncodedText.Encode("flushed");
-	private static readonly System.Text.Json.JsonEncodedText PropLastFinalizedBucketEnd = System.Text.Json.JsonEncodedText.Encode("last_finalized_bucket_end");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool> propFlushed = default;
-		LocalJsonValue<int?> propLastFinalizedBucketEnd = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFlushed.TryReadProperty(ref reader, options, PropFlushed, null))
-			{
-				continue;
-			}
-
-			if (propLastFinalizedBucketEnd.TryReadProperty(ref reader, options, PropLastFinalizedBucketEnd, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Flushed = propFlushed.Value,
-			LastFinalizedBucketEnd = propLastFinalizedBucketEnd.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFlushed, value.Flushed, null, null);
-		writer.WriteProperty(options, PropLastFinalizedBucketEnd, value.LastFinalizedBucketEnd, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.FlushJobResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.FlushJobResponseConverter))]
 public sealed partial class FlushJobResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -87,9 +39,9 @@ public sealed partial class FlushJobResponse : Elastic.Transport.Products.Elasti
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		bool Flushed { get; set; }
+bool Flushed { get; set; }
 
 	/// <summary>
 	/// <para>

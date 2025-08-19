@@ -189,13 +189,6 @@ public sealed partial class DeleteByQueryRequestParameters : Elastic.Transport.R
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
-	/// </para>
-	/// </summary>
-	public System.Collections.Generic.ICollection<string>? Sort { get => Q<System.Collections.Generic.ICollection<string>?>("sort"); set => Q("sort", value); }
-
-	/// <summary>
-	/// <para>
 	/// The specific <c>tag</c> of the request for logging and statistical purposes.
 	/// </para>
 	/// </summary>
@@ -246,63 +239,6 @@ public sealed partial class DeleteByQueryRequestParameters : Elastic.Transport.R
 	/// </para>
 	/// </summary>
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
-}
-
-internal sealed partial class DeleteByQueryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.DeleteByQueryRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMaxDocs = System.Text.Json.JsonEncodedText.Encode("max_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("slice");
-
-	public override Elastic.Clients.Elasticsearch.DeleteByQueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long?> propMaxDocs = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
-			{
-				continue;
-			}
-
-			if (propSlice.TryReadProperty(ref reader, options, PropSlice, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.DeleteByQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			MaxDocs = propMaxDocs.Value,
-			Query = propQuery.Value,
-			Slice = propSlice.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.DeleteByQueryRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteProperty(options, PropSlice, value.Slice, null, null);
-		writer.WriteEndObject();
-	}
 }
 
 /// <summary>
@@ -457,7 +393,7 @@ internal sealed partial class DeleteByQueryRequestConverter : System.Text.Json.S
 /// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.DeleteByQueryRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.DeleteByQueryRequestConverter))]
 public sealed partial class DeleteByQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.DeleteByQueryRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -660,13 +596,6 @@ public sealed partial class DeleteByQueryRequest : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
-	/// </para>
-	/// </summary>
-	public System.Collections.Generic.ICollection<string>? Sort { get => Q<System.Collections.Generic.ICollection<string>?>("sort"); set => Q("sort", value); }
-
-	/// <summary>
-	/// <para>
 	/// The specific <c>tag</c> of the request for logging and statistical purposes.
 	/// </para>
 	/// </summary>
@@ -738,6 +667,13 @@ public sealed partial class DeleteByQueryRequest : Elastic.Clients.Elasticsearch
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A sort object that specifies the order of deleted documents.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 }
 
 /// <summary>
@@ -1201,28 +1137,6 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort(System.Collections.Generic.ICollection<string>? value)
-	{
-		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort(params string[] values)
-	{
-		Instance.Sort = [.. values];
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
 	/// The specific <c>tag</c> of the request for logging and statistical purposes.
 	/// </para>
 	/// </summary>
@@ -1383,6 +1297,62 @@ public readonly partial struct DeleteByQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Slice<T>(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that specifies the order of deleted documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
+	{
+		Instance.Sort = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that specifies the order of deleted documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
+	{
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that specifies the order of deleted documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Build(action));
+		}
+
+		Instance.Sort = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that specifies the order of deleted documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>.Build(action));
+		}
+
+		Instance.Sort = items;
 		return this;
 	}
 
@@ -1897,28 +1867,6 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<string>? value)
-	{
-		Instance.Sort = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of <c>&lt;field>:&lt;direction></c> pairs.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Sort(params string[] values)
-	{
-		Instance.Sort = [.. values];
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
 	/// The specific <c>tag</c> of the request for logging and statistical purposes.
 	/// </para>
 	/// </summary>
@@ -2057,6 +2005,45 @@ public readonly partial struct DeleteByQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> action)
 	{
 		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that specifies the order of deleted documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
+	{
+		Instance.Sort = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that specifies the order of deleted documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
+	{
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sort object that specifies the order of deleted documents.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.DeleteByQueryRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Sort = items;
 		return this;
 	}
 

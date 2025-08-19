@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class LatLonGeoLocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LatLonGeoLocation>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropLat = System.Text.Json.JsonEncodedText.Encode("lat");
-	private static readonly System.Text.Json.JsonEncodedText PropLon = System.Text.Json.JsonEncodedText.Encode("lon");
-
-	public override Elastic.Clients.Elasticsearch.LatLonGeoLocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<double> propLat = default;
-		LocalJsonValue<double> propLon = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propLat.TryReadProperty(ref reader, options, PropLat, null))
-			{
-				continue;
-			}
-
-			if (propLon.TryReadProperty(ref reader, options, PropLon, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.LatLonGeoLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Lat = propLat.Value,
-			Lon = propLon.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.LatLonGeoLocation value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLat, value.Lat, null, null);
-		writer.WriteProperty(options, PropLon, value.Lon, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LatLonGeoLocationConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.LatLonGeoLocationConverter))]
 public sealed partial class LatLonGeoLocation
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-internal sealed partial class MlInferenceIngestProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessor>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropNumDocsProcessed = System.Text.Json.JsonEncodedText.Encode("num_docs_processed");
-	private static readonly System.Text.Json.JsonEncodedText PropNumFailures = System.Text.Json.JsonEncodedText.Encode("num_failures");
-	private static readonly System.Text.Json.JsonEncodedText PropPipelines = System.Text.Json.JsonEncodedText.Encode("pipelines");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeMs = System.Text.Json.JsonEncodedText.Encode("time_ms");
-
-	public override Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount> propNumDocsProcessed = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount> propNumFailures = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlCounter> propPipelines = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorCount> propTimeMs = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propNumDocsProcessed.TryReadProperty(ref reader, options, PropNumDocsProcessed, null))
-			{
-				continue;
-			}
-
-			if (propNumFailures.TryReadProperty(ref reader, options, PropNumFailures, null))
-			{
-				continue;
-			}
-
-			if (propPipelines.TryReadProperty(ref reader, options, PropPipelines, null))
-			{
-				continue;
-			}
-
-			if (propTimeMs.TryReadProperty(ref reader, options, PropTimeMs, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			NumDocsProcessed = propNumDocsProcessed.Value,
-			NumFailures = propNumFailures.Value,
-			Pipelines = propPipelines.Value,
-			TimeMs = propTimeMs.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessor value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNumDocsProcessed, value.NumDocsProcessed, null, null);
-		writer.WriteProperty(options, PropNumFailures, value.NumFailures, null, null);
-		writer.WriteProperty(options, PropPipelines, value.Pipelines, null, null);
-		writer.WriteProperty(options, PropTimeMs, value.TimeMs, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessorConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.MlInferenceIngestProcessorConverter))]
 public sealed partial class MlInferenceIngestProcessor
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-internal sealed partial class IlmIndicatorDetailsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicatorDetails>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropIlmStatus = System.Text.Json.JsonEncodedText.Encode("ilm_status");
-	private static readonly System.Text.Json.JsonEncodedText PropPolicies = System.Text.Json.JsonEncodedText.Encode("policies");
-	private static readonly System.Text.Json.JsonEncodedText PropStagnatingIndices = System.Text.Json.JsonEncodedText.Encode("stagnating_indices");
-
-	public override Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicatorDetails Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.LifecycleOperationMode> propIlmStatus = default;
-		LocalJsonValue<long> propPolicies = default;
-		LocalJsonValue<int> propStagnatingIndices = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propIlmStatus.TryReadProperty(ref reader, options, PropIlmStatus, null))
-			{
-				continue;
-			}
-
-			if (propPolicies.TryReadProperty(ref reader, options, PropPolicies, null))
-			{
-				continue;
-			}
-
-			if (propStagnatingIndices.TryReadProperty(ref reader, options, PropStagnatingIndices, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicatorDetails(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			IlmStatus = propIlmStatus.Value,
-			Policies = propPolicies.Value,
-			StagnatingIndices = propStagnatingIndices.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicatorDetails value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIlmStatus, value.IlmStatus, null, null);
-		writer.WriteProperty(options, PropPolicies, value.Policies, null, null);
-		writer.WriteProperty(options, PropStagnatingIndices, value.StagnatingIndices, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicatorDetailsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.IlmIndicatorDetailsConverter))]
 public sealed partial class IlmIndicatorDetails
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

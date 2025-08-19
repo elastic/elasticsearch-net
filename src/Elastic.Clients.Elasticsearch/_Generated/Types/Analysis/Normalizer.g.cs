@@ -23,51 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-internal sealed partial class INormalizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.INormalizer>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDiscriminator = System.Text.Json.JsonEncodedText.Encode("type");
-
-	public override Elastic.Clients.Elasticsearch.Analysis.INormalizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		var readerSnapshot = reader;
-		string? discriminator = "custom";
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (reader.TryReadProperty(options, PropDiscriminator, ref discriminator, null))
-			{
-				break;
-			}
-
-			reader.Skip();
-		}
-
-		reader = readerSnapshot;
-		return discriminator switch
-		{
-			"custom" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer>(options, null),
-			"lowercase" => reader.ReadValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer>(options, null),
-			_ => throw new System.Text.Json.JsonException($"Variant '{discriminator}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.INormalizer)}'.")
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.INormalizer value, System.Text.Json.JsonSerializerOptions options)
-	{
-		switch (value.Type)
-		{
-			case "custom":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.CustomNormalizer)value, null);
-				break;
-			case "lowercase":
-				writer.WriteValue(options, (Elastic.Clients.Elasticsearch.Analysis.LowercaseNormalizer)value, null);
-				break;
-			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.Type}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Analysis.INormalizer)}'.");
-		}
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.INormalizerConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.INormalizerConverter))]
 public partial interface INormalizer
 {
 	public string Type { get; }

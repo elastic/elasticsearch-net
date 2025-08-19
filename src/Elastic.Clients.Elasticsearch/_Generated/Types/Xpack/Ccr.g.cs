@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-internal sealed partial class CcrConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Ccr>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAutoFollowPatternsCount = System.Text.Json.JsonEncodedText.Encode("auto_follow_patterns_count");
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndicesCount = System.Text.Json.JsonEncodedText.Encode("follower_indices_count");
-
-	public override Elastic.Clients.Elasticsearch.Xpack.Ccr Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int> propAutoFollowPatternsCount = default;
-		LocalJsonValue<bool> propAvailable = default;
-		LocalJsonValue<bool> propEnabled = default;
-		LocalJsonValue<int> propFollowerIndicesCount = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAutoFollowPatternsCount.TryReadProperty(ref reader, options, PropAutoFollowPatternsCount, null))
-			{
-				continue;
-			}
-
-			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
-			{
-				continue;
-			}
-
-			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
-			{
-				continue;
-			}
-
-			if (propFollowerIndicesCount.TryReadProperty(ref reader, options, PropFollowerIndicesCount, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Xpack.Ccr(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AutoFollowPatternsCount = propAutoFollowPatternsCount.Value,
-			Available = propAvailable.Value,
-			Enabled = propEnabled.Value,
-			FollowerIndicesCount = propFollowerIndicesCount.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.Ccr value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAutoFollowPatternsCount, value.AutoFollowPatternsCount, null, null);
-		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
-		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
-		writer.WriteProperty(options, PropFollowerIndicesCount, value.FollowerIndicesCount, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.CcrConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.CcrConverter))]
 public sealed partial class Ccr
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

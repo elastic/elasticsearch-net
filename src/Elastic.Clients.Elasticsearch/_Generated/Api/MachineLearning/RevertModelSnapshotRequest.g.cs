@@ -27,45 +27,6 @@ public sealed partial class RevertModelSnapshotRequestParameters : Elastic.Trans
 {
 }
 
-internal sealed partial class RevertModelSnapshotRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteInterveningResults = System.Text.Json.JsonEncodedText.Encode("delete_intervening_results");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propDeleteInterveningResults = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDeleteInterveningResults.TryReadProperty(ref reader, options, PropDeleteInterveningResults, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			DeleteInterveningResults = propDeleteInterveningResults.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDeleteInterveningResults, value.DeleteInterveningResults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Revert to a snapshot.
@@ -78,7 +39,7 @@ internal sealed partial class RevertModelSnapshotRequestConverter : System.Text.
 /// snapshot after Black Friday or a critical system failure.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.RevertModelSnapshotRequestConverter))]
 public sealed partial class RevertModelSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

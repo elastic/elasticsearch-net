@@ -33,25 +33,12 @@ public sealed partial class PutSearchApplicationRequestParameters : Elastic.Tran
 	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 }
 
-internal sealed partial class PutSearchApplicationRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest>
-{
-	public override Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { SearchApplication = reader.ReadValue<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.SearchApplication, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create or update a search application.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.PutSearchApplicationRequestConverter))]
 public sealed partial class PutSearchApplicationRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
