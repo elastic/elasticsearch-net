@@ -27,45 +27,6 @@ public sealed partial class RenderQueryRequestParameters : Elastic.Transport.Req
 {
 }
 
-internal sealed partial class RenderQueryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
-
-	public override Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Params = propParams.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Render a search application query.
@@ -77,7 +38,7 @@ internal sealed partial class RenderQueryRequestConverter : System.Text.Json.Ser
 /// You must have <c>read</c> privileges on the backing alias of the search application.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.RenderQueryRequestConverter))]
 public sealed partial class RenderQueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

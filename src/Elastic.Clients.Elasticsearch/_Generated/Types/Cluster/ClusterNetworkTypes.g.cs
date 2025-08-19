@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-internal sealed partial class ClusterNetworkTypesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropHttpTypes = System.Text.Json.JsonEncodedText.Encode("http_types");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportTypes = System.Text.Json.JsonEncodedText.Encode("transport_types");
-
-	public override Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>> propHttpTypes = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, int>> propTransportTypes = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propHttpTypes.TryReadProperty(ref reader, options, PropHttpTypes, static System.Collections.Generic.IReadOnlyDictionary<string, int> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)!))
-			{
-				continue;
-			}
-
-			if (propTransportTypes.TryReadProperty(ref reader, options, PropTransportTypes, static System.Collections.Generic.IReadOnlyDictionary<string, int> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, int>(o, null, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			HttpTypes = propHttpTypes.Value,
-			TransportTypes = propTransportTypes.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypes value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropHttpTypes, value.HttpTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int> v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
-		writer.WriteProperty(options, PropTransportTypes, value.TransportTypes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, int> v) => w.WriteDictionaryValue<string, int>(o, v, null, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterNetworkTypesConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterNetworkTypesConverter))]
 public sealed partial class ClusterNetworkTypes
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

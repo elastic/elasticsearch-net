@@ -27,35 +27,6 @@ public sealed partial class GetPrivilegesRequestParameters : Elastic.Transport.R
 {
 }
 
-internal sealed partial class GetPrivilegesRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Get application privileges.
@@ -76,7 +47,7 @@ internal sealed partial class GetPrivilegesRequestConverter : System.Text.Json.S
 /// </item>
 /// </list>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetPrivilegesRequestConverter))]
 public sealed partial class GetPrivilegesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>
 {
 	public GetPrivilegesRequest(Elastic.Clients.Elasticsearch.Name? application) : base(r => r.Optional("application", application))

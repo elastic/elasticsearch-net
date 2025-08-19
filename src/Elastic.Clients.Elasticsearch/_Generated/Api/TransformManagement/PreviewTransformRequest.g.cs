@@ -34,117 +34,6 @@ public sealed partial class PreviewTransformRequestParameters : Elastic.Transpor
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class PreviewTransformRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropDest = System.Text.Json.JsonEncodedText.Encode("dest");
-	private static readonly System.Text.Json.JsonEncodedText PropFrequency = System.Text.Json.JsonEncodedText.Encode("frequency");
-	private static readonly System.Text.Json.JsonEncodedText PropLatest = System.Text.Json.JsonEncodedText.Encode("latest");
-	private static readonly System.Text.Json.JsonEncodedText PropPivot = System.Text.Json.JsonEncodedText.Encode("pivot");
-	private static readonly System.Text.Json.JsonEncodedText PropRetentionPolicy = System.Text.Json.JsonEncodedText.Encode("retention_policy");
-	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
-	private static readonly System.Text.Json.JsonEncodedText PropSync = System.Text.Json.JsonEncodedText.Encode("sync");
-
-	public override Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propDescription = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Destination?> propDest = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propFrequency = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Latest?> propLatest = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Pivot?> propPivot = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.RetentionPolicy?> propRetentionPolicy = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Settings?> propSettings = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Source?> propSource = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.TransformManagement.Sync?> propSync = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
-			{
-				continue;
-			}
-
-			if (propDest.TryReadProperty(ref reader, options, PropDest, null))
-			{
-				continue;
-			}
-
-			if (propFrequency.TryReadProperty(ref reader, options, PropFrequency, null))
-			{
-				continue;
-			}
-
-			if (propLatest.TryReadProperty(ref reader, options, PropLatest, null))
-			{
-				continue;
-			}
-
-			if (propPivot.TryReadProperty(ref reader, options, PropPivot, null))
-			{
-				continue;
-			}
-
-			if (propRetentionPolicy.TryReadProperty(ref reader, options, PropRetentionPolicy, null))
-			{
-				continue;
-			}
-
-			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
-			{
-				continue;
-			}
-
-			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
-			{
-				continue;
-			}
-
-			if (propSync.TryReadProperty(ref reader, options, PropSync, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Description = propDescription.Value,
-			Dest = propDest.Value,
-			Frequency = propFrequency.Value,
-			Latest = propLatest.Value,
-			Pivot = propPivot.Value,
-			RetentionPolicy = propRetentionPolicy.Value,
-			Settings = propSettings.Value,
-			Source = propSource.Value,
-			Sync = propSync.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropDest, value.Dest, null, null);
-		writer.WriteProperty(options, PropFrequency, value.Frequency, null, null);
-		writer.WriteProperty(options, PropLatest, value.Latest, null, null);
-		writer.WriteProperty(options, PropPivot, value.Pivot, null, null);
-		writer.WriteProperty(options, PropRetentionPolicy, value.RetentionPolicy, null, null);
-		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
-		writer.WriteProperty(options, PropSource, value.Source, null, null);
-		writer.WriteProperty(options, PropSync, value.Sync, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Preview a transform.
@@ -156,7 +45,7 @@ internal sealed partial class PreviewTransformRequestConverter : System.Text.Jso
 /// types of the source index and the transform aggregations.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.PreviewTransformRequestConverter))]
 public sealed partial class PreviewTransformRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.PreviewTransformRequestParameters>
 {
 	public PreviewTransformRequest(Elastic.Clients.Elasticsearch.Id? transformId) : base(r => r.Optional("transform_id", transformId))

@@ -52,19 +52,6 @@ public sealed partial class PutDataStreamMappingsRequestParameters : Elastic.Tra
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class PutDataStreamMappingsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest>
-{
-	public override Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Mappings = reader.ReadValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Mappings, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Update data stream mappings.
@@ -75,7 +62,7 @@ internal sealed partial class PutDataStreamMappingsRequestConverter : System.Tex
 /// that are created during rollover after this API is called. No indices are changed by this API.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutDataStreamMappingsRequestConverter))]
 public sealed partial class PutDataStreamMappingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataStreamMappingsRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

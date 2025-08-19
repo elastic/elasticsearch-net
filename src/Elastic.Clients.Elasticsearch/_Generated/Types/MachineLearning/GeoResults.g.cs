@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class GeoResultsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GeoResults>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropActualPoint = System.Text.Json.JsonEncodedText.Encode("actual_point");
-	private static readonly System.Text.Json.JsonEncodedText PropTypicalPoint = System.Text.Json.JsonEncodedText.Encode("typical_point");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.GeoResults Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propActualPoint = default;
-		LocalJsonValue<string?> propTypicalPoint = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propActualPoint.TryReadProperty(ref reader, options, PropActualPoint, null))
-			{
-				continue;
-			}
-
-			if (propTypicalPoint.TryReadProperty(ref reader, options, PropTypicalPoint, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.GeoResults(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ActualPoint = propActualPoint.Value,
-			TypicalPoint = propTypicalPoint.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GeoResults value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropActualPoint, value.ActualPoint, null, null);
-		writer.WriteProperty(options, PropTypicalPoint, value.TypicalPoint, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GeoResultsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.GeoResultsConverter))]
 public sealed partial class GeoResults
 {
 #if NET7_0_OR_GREATER

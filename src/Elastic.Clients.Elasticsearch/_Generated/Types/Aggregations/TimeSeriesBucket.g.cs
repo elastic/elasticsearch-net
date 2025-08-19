@@ -23,61 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class TimeSeriesBucketConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesBucket>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
-
-	public override Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>? propAggregations = default;
-		LocalJsonValue<long> propDocCount = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldValue>> propKey = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
-			{
-				continue;
-			}
-
-			if (propKey.TryReadProperty(ref reader, options, PropKey, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldValue> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.FieldValue>(o, null, null)!))
-			{
-				continue;
-			}
-
-			propAggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
-			Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.ReadItem(ref reader, options, out string key, out Elastic.Clients.Elasticsearch.Aggregations.IAggregate value);
-			propAggregations[key] = value;
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(propAggregations),
-			DocCount = propDocCount.Value,
-			Key = propKey.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesBucket value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
-		writer.WriteProperty(options, PropKey, value.Key, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.FieldValue> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.FieldValue>(o, v, null, null));
-		if (value.Aggregations is not null)
-		{
-			foreach (var item in value.Aggregations)
-			{
-				Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.WriteItem(writer, options, item.Key, item.Value);
-			}
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesBucketConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TimeSeriesBucketConverter))]
 public sealed partial class TimeSeriesBucket
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

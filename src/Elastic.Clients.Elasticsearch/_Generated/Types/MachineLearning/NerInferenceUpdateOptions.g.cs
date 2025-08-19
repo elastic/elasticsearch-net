@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class NerInferenceUpdateOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propResultsField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions?> propTokenization = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
-			{
-				continue;
-			}
-
-			if (propTokenization.TryReadProperty(ref reader, options, PropTokenization, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ResultsField = propResultsField.Value,
-			Tokenization = propTokenization.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptions value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
-		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceUpdateOptionsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.NerInferenceUpdateOptionsConverter))]
 public sealed partial class NerInferenceUpdateOptions
 {
 #if NET7_0_OR_GREATER

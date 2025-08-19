@@ -23,72 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-internal sealed partial class MappingCharFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropMappingsPath = System.Text.Json.JsonEncodedText.Encode("mappings_path");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-
-	public override Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propMappings = default;
-		LocalJsonValue<string?> propMappingsPath = default;
-		LocalJsonValue<string?> propVersion = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMappings.TryReadProperty(ref reader, options, PropMappings, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
-			{
-				continue;
-			}
-
-			if (propMappingsPath.TryReadProperty(ref reader, options, PropMappingsPath, null))
-			{
-				continue;
-			}
-
-			if (reader.ValueTextEquals(PropType))
-			{
-				reader.Skip();
-				continue;
-			}
-
-			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Mappings = propMappings.Value,
-			MappingsPath = propMappingsPath.Value,
-			Version = propVersion.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMappings, value.Mappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropMappingsPath, value.MappingsPath, null, null);
-		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteProperty(options, PropVersion, value.Version, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.MappingCharFilterConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.MappingCharFilterConverter))]
 public sealed partial class MappingCharFilter : Elastic.Clients.Elasticsearch.Analysis.ICharFilter
 {
 #if NET7_0_OR_GREATER

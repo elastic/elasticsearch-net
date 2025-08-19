@@ -23,20 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-internal sealed partial class GetPipelineResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse>
-{
-	public override Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Pipelines = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>(o, null, null)!) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Pipelines, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Ingest.Pipeline>(o, v, null, null));
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.GetPipelineResponseConverter))]
 public sealed partial class GetPipelineResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-internal sealed partial class SlmConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Slm>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropPolicyCount = System.Text.Json.JsonEncodedText.Encode("policy_count");
-	private static readonly System.Text.Json.JsonEncodedText PropPolicyStats = System.Text.Json.JsonEncodedText.Encode("policy_stats");
-
-	public override Elastic.Clients.Elasticsearch.Xpack.Slm Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool> propAvailable = default;
-		LocalJsonValue<bool> propEnabled = default;
-		LocalJsonValue<int?> propPolicyCount = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics?> propPolicyStats = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAvailable.TryReadProperty(ref reader, options, PropAvailable, null))
-			{
-				continue;
-			}
-
-			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
-			{
-				continue;
-			}
-
-			if (propPolicyCount.TryReadProperty(ref reader, options, PropPolicyCount, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propPolicyStats.TryReadProperty(ref reader, options, PropPolicyStats, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Xpack.Slm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Available = propAvailable.Value,
-			Enabled = propEnabled.Value,
-			PolicyCount = propPolicyCount.Value,
-			PolicyStats = propPolicyStats.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.Slm value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAvailable, value.Available, null, null);
-		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
-		writer.WriteProperty(options, PropPolicyCount, value.PolicyCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropPolicyStats, value.PolicyStats, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.SlmConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.SlmConverter))]
 public sealed partial class Slm
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

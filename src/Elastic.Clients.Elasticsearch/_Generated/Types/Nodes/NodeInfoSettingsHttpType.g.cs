@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-internal sealed partial class NodeInfoSettingsHttpTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttpType>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDefault = System.Text.Json.JsonEncodedText.Encode("default");
-
-	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttpType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
-		{
-			var value = reader.ReadValue<string>(options, null);
-			return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttpType(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-			{
-				Default = value
-			};
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propDefault = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDefault.TryReadProperty(ref reader, options, PropDefault, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttpType(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Default = propDefault.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttpType value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDefault, value.Default, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsHttpTypeConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoSettingsHttpTypeConverter))]
 public sealed partial class NodeInfoSettingsHttpType
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

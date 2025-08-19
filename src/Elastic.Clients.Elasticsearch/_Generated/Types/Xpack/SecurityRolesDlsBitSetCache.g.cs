@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-internal sealed partial class SecurityRolesDlsBitSetCacheConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropMemory = System.Text.Json.JsonEncodedText.Encode("memory");
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("memory_in_bytes");
-
-	public override Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int> propCount = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMemory = default;
-		LocalJsonValue<long> propMemoryInBytes = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
-			{
-				continue;
-			}
-
-			if (propMemory.TryReadProperty(ref reader, options, PropMemory, null))
-			{
-				continue;
-			}
-
-			if (propMemoryInBytes.TryReadProperty(ref reader, options, PropMemoryInBytes, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Count = propCount.Value,
-			Memory = propMemory.Value,
-			MemoryInBytes = propMemoryInBytes.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count, null, null);
-		writer.WriteProperty(options, PropMemory, value.Memory, null, null);
-		writer.WriteProperty(options, PropMemoryInBytes, value.MemoryInBytes, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCacheConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.SecurityRolesDlsBitSetCacheConverter))]
 public sealed partial class SecurityRolesDlsBitSetCache
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,127 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-internal sealed partial class GetMigrateReindexStatusResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropComplete = System.Text.Json.JsonEncodedText.Encode("complete");
-	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
-	private static readonly System.Text.Json.JsonEncodedText PropException = System.Text.Json.JsonEncodedText.Encode("exception");
-	private static readonly System.Text.Json.JsonEncodedText PropInProgress = System.Text.Json.JsonEncodedText.Encode("in_progress");
-	private static readonly System.Text.Json.JsonEncodedText PropPending = System.Text.Json.JsonEncodedText.Encode("pending");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTimeMillis = System.Text.Json.JsonEncodedText.Encode("start_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropSuccesses = System.Text.Json.JsonEncodedText.Encode("successes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalIndicesInDataStream = System.Text.Json.JsonEncodedText.Encode("total_indices_in_data_stream");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalIndicesRequiringUpgrade = System.Text.Json.JsonEncodedText.Encode("total_indices_requiring_upgrade");
-
-	public override Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool> propComplete = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusError>> propErrors = default;
-		LocalJsonValue<string?> propException = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress>> propInProgress = default;
-		LocalJsonValue<int> propPending = default;
-		LocalJsonValue<System.DateTimeOffset?> propStartTime = default;
-		LocalJsonValue<System.DateTimeOffset> propStartTimeMillis = default;
-		LocalJsonValue<int> propSuccesses = default;
-		LocalJsonValue<int> propTotalIndicesInDataStream = default;
-		LocalJsonValue<int> propTotalIndicesRequiringUpgrade = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propComplete.TryReadProperty(ref reader, options, PropComplete, null))
-			{
-				continue;
-			}
-
-			if (propErrors.TryReadProperty(ref reader, options, PropErrors, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusError> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.StatusError>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propException.TryReadProperty(ref reader, options, PropException, null))
-			{
-				continue;
-			}
-
-			if (propInProgress.TryReadProperty(ref reader, options, PropInProgress, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propPending.TryReadProperty(ref reader, options, PropPending, null))
-			{
-				continue;
-			}
-
-			if (propStartTime.TryReadProperty(ref reader, options, PropStartTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
-			{
-				continue;
-			}
-
-			if (propStartTimeMillis.TryReadProperty(ref reader, options, PropStartTimeMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
-			{
-				continue;
-			}
-
-			if (propSuccesses.TryReadProperty(ref reader, options, PropSuccesses, null))
-			{
-				continue;
-			}
-
-			if (propTotalIndicesInDataStream.TryReadProperty(ref reader, options, PropTotalIndicesInDataStream, null))
-			{
-				continue;
-			}
-
-			if (propTotalIndicesRequiringUpgrade.TryReadProperty(ref reader, options, PropTotalIndicesRequiringUpgrade, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Complete = propComplete.Value,
-			Errors = propErrors.Value,
-			Exception = propException.Value,
-			InProgress = propInProgress.Value,
-			Pending = propPending.Value,
-			StartTime = propStartTime.Value,
-			StartTimeMillis = propStartTimeMillis.Value,
-			Successes = propSuccesses.Value,
-			TotalIndicesInDataStream = propTotalIndicesInDataStream.Value,
-			TotalIndicesRequiringUpgrade = propTotalIndicesRequiringUpgrade.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropComplete, value.Complete, null, null);
-		writer.WriteProperty(options, PropErrors, value.Errors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusError> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.StatusError>(o, v, null));
-		writer.WriteProperty(options, PropException, value.Exception, null, null);
-		writer.WriteProperty(options, PropInProgress, value.InProgress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress>(o, v, null));
-		writer.WriteProperty(options, PropPending, value.Pending, null, null);
-		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
-		writer.WriteProperty(options, PropStartTimeMillis, value.StartTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteProperty(options, PropSuccesses, value.Successes, null, null);
-		writer.WriteProperty(options, PropTotalIndicesInDataStream, value.TotalIndicesInDataStream, null, null);
-		writer.WriteProperty(options, PropTotalIndicesRequiringUpgrade, value.TotalIndicesRequiringUpgrade, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetMigrateReindexStatusResponseConverter))]
 public sealed partial class GetMigrateReindexStatusResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -159,44 +39,44 @@ public sealed partial class GetMigrateReindexStatusResponse : Elastic.Transport.
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		bool Complete { get; set; }
+bool Complete { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusError> Errors { get; set; }
+System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusError> Errors { get; set; }
 	public string? Exception { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress> InProgress { get; set; }
+System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress> InProgress { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		int Pending { get; set; }
+int Pending { get; set; }
 	public System.DateTimeOffset? StartTime { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		System.DateTimeOffset StartTimeMillis { get; set; }
+System.DateTimeOffset StartTimeMillis { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		int Successes { get; set; }
+int Successes { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		int TotalIndicesInDataStream { get; set; }
+int TotalIndicesInDataStream { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		int TotalIndicesRequiringUpgrade { get; set; }
+int TotalIndicesRequiringUpgrade { get; set; }
 }

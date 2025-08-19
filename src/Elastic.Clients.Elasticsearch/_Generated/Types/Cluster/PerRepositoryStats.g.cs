@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-internal sealed partial class PerRepositoryStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentCounts = System.Text.Json.JsonEncodedText.Encode("current_counts");
-	private static readonly System.Text.Json.JsonEncodedText PropOldestStartTime = System.Text.Json.JsonEncodedText.Encode("oldest_start_time");
-	private static readonly System.Text.Json.JsonEncodedText PropOldestStartTimeMillis = System.Text.Json.JsonEncodedText.Encode("oldest_start_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-
-	public override Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.RepositoryStatsCurrentCounts> propCurrentCounts = default;
-		LocalJsonValue<string?> propOldestStartTime = default;
-		LocalJsonValue<long> propOldestStartTimeMillis = default;
-		LocalJsonValue<string> propType = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCurrentCounts.TryReadProperty(ref reader, options, PropCurrentCounts, null))
-			{
-				continue;
-			}
-
-			if (propOldestStartTime.TryReadProperty(ref reader, options, PropOldestStartTime, null))
-			{
-				continue;
-			}
-
-			if (propOldestStartTimeMillis.TryReadProperty(ref reader, options, PropOldestStartTimeMillis, null))
-			{
-				continue;
-			}
-
-			if (propType.TryReadProperty(ref reader, options, PropType, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CurrentCounts = propCurrentCounts.Value,
-			OldestStartTime = propOldestStartTime.Value,
-			OldestStartTimeMillis = propOldestStartTimeMillis.Value,
-			Type = propType.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStats value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCurrentCounts, value.CurrentCounts, null, null);
-		writer.WriteProperty(options, PropOldestStartTime, value.OldestStartTime, null, null);
-		writer.WriteProperty(options, PropOldestStartTimeMillis, value.OldestStartTimeMillis, null, null);
-		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.PerRepositoryStatsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.PerRepositoryStatsConverter))]
 public sealed partial class PerRepositoryStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class RandomSamplerAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropProbability = System.Text.Json.JsonEncodedText.Encode("probability");
-	private static readonly System.Text.Json.JsonEncodedText PropSeed = System.Text.Json.JsonEncodedText.Encode("seed");
-	private static readonly System.Text.Json.JsonEncodedText PropShardSeed = System.Text.Json.JsonEncodedText.Encode("shard_seed");
-
-	public override Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<double> propProbability = default;
-		LocalJsonValue<int?> propSeed = default;
-		LocalJsonValue<int?> propShardSeed = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propProbability.TryReadProperty(ref reader, options, PropProbability, null))
-			{
-				continue;
-			}
-
-			if (propSeed.TryReadProperty(ref reader, options, PropSeed, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propShardSeed.TryReadProperty(ref reader, options, PropShardSeed, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Probability = propProbability.Value,
-			Seed = propSeed.Value,
-			ShardSeed = propShardSeed.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropProbability, value.Probability, null, null);
-		writer.WriteProperty(options, PropSeed, value.Seed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropShardSeed, value.ShardSeed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregationConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.RandomSamplerAggregationConverter))]
 public sealed partial class RandomSamplerAggregation
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

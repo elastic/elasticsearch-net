@@ -33,19 +33,6 @@ public sealed partial class PutPrivilegesRequestParameters : Elastic.Transport.R
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-internal sealed partial class PutPrivilegesRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Privileges = reader.ReadValue<System.Collections.Generic.IDictionary<string, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>>>(options, static System.Collections.Generic.IDictionary<string, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>>(o, null, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>(o, null, null)!)!) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Privileges, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>> v) => w.WriteDictionaryValue<string, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.PrivilegeActions>(o, v, null, null)));
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create or update application privileges.
@@ -107,7 +94,7 @@ internal sealed partial class PutPrivilegesRequestConverter : System.Text.Json.S
 /// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.PutPrivilegesRequestConverter))]
 public sealed partial class PutPrivilegesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

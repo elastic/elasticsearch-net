@@ -34,45 +34,6 @@ public sealed partial class ReloadSecureSettingsRequestParameters : Elastic.Tran
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class ReloadSecureSettingsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropSecureSettingsPassword = System.Text.Json.JsonEncodedText.Encode("secure_settings_password");
-
-	public override Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propSecureSettingsPassword = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propSecureSettingsPassword.TryReadProperty(ref reader, options, PropSecureSettingsPassword, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			SecureSettingsPassword = propSecureSettingsPassword.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSecureSettingsPassword, value.SecureSettingsPassword, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Reload the keystore on nodes in the cluster.
@@ -88,7 +49,7 @@ internal sealed partial class ReloadSecureSettingsRequestConverter : System.Text
 /// Alternatively, you can reload the secure settings on each node by locally accessing the API and passing the node-specific Elasticsearch keystore password.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.ReloadSecureSettingsRequestConverter))]
 public sealed partial class ReloadSecureSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>
 {
 	public ReloadSecureSettingsRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId) : base(r => r.Optional("node_id", nodeId))

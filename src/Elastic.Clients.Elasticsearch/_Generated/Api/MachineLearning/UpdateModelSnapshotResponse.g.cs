@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class UpdateModelSnapshotResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
-	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool> propAcknowledged = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot> propModel = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAcknowledged.TryReadProperty(ref reader, options, PropAcknowledged, null))
-			{
-				continue;
-			}
-
-			if (propModel.TryReadProperty(ref reader, options, PropModel, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Acknowledged = propAcknowledged.Value,
-			Model = propModel.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcknowledged, value.Acknowledged, null, null);
-		writer.WriteProperty(options, PropModel, value.Model, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.UpdateModelSnapshotResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.UpdateModelSnapshotResponseConverter))]
 public sealed partial class UpdateModelSnapshotResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -87,12 +39,12 @@ public sealed partial class UpdateModelSnapshotResponse : Elastic.Transport.Prod
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		bool Acknowledged { get; set; }
+bool Acknowledged { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot Model { get; set; }
+Elastic.Clients.Elasticsearch.MachineLearning.ModelSnapshot Model { get; set; }
 }

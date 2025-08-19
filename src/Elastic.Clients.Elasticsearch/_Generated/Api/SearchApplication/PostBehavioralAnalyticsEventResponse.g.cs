@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-internal sealed partial class PostBehavioralAnalyticsEventResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAccepted = System.Text.Json.JsonEncodedText.Encode("accepted");
-	private static readonly System.Text.Json.JsonEncodedText PropEvent = System.Text.Json.JsonEncodedText.Encode("event");
-
-	public override Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool> propAccepted = default;
-		LocalJsonValue<object?> propEvent = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAccepted.TryReadProperty(ref reader, options, PropAccepted, null))
-			{
-				continue;
-			}
-
-			if (propEvent.TryReadProperty(ref reader, options, PropEvent, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Accepted = propAccepted.Value,
-			Event = propEvent.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAccepted, value.Accepted, null, null);
-		writer.WriteProperty(options, PropEvent, value.Event, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.PostBehavioralAnalyticsEventResponseConverter))]
 public sealed partial class PostBehavioralAnalyticsEventResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -87,8 +39,8 @@ public sealed partial class PostBehavioralAnalyticsEventResponse : Elastic.Trans
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		bool Accepted { get; set; }
+bool Accepted { get; set; }
 	public object? Event { get; set; }
 }

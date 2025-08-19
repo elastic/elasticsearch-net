@@ -27,19 +27,6 @@ public sealed partial class DownsampleRequestParameters : Elastic.Transport.Requ
 {
 }
 
-internal sealed partial class DownsampleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest>
-{
-	public override Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Config = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Config, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Downsample an index.
@@ -53,7 +40,7 @@ internal sealed partial class DownsampleRequestConverter : System.Text.Json.Seri
 /// The source index must be read only (<c>index.blocks.write: true</c>).
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DownsampleRequestConverter))]
 public sealed partial class DownsampleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

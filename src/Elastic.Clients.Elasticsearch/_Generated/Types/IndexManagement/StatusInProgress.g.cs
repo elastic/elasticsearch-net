@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-internal sealed partial class StatusInProgressConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropReindexedDocCount = System.Text.Json.JsonEncodedText.Encode("reindexed_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDocCount = System.Text.Json.JsonEncodedText.Encode("total_doc_count");
-
-	public override Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propIndex = default;
-		LocalJsonValue<long> propReindexedDocCount = default;
-		LocalJsonValue<long> propTotalDocCount = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
-			{
-				continue;
-			}
-
-			if (propReindexedDocCount.TryReadProperty(ref reader, options, PropReindexedDocCount, null))
-			{
-				continue;
-			}
-
-			if (propTotalDocCount.TryReadProperty(ref reader, options, PropTotalDocCount, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Index = propIndex.Value,
-			ReindexedDocCount = propReindexedDocCount.Value,
-			TotalDocCount = propTotalDocCount.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgress value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropReindexedDocCount, value.ReindexedDocCount, null, null);
-		writer.WriteProperty(options, PropTotalDocCount, value.TotalDocCount, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.StatusInProgressConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.StatusInProgressConverter))]
 public sealed partial class StatusInProgress
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

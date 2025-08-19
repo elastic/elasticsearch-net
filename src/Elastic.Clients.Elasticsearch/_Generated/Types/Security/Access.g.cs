@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-internal sealed partial class AccessConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.Access>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropReplication = System.Text.Json.JsonEncodedText.Encode("replication");
-	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
-
-	public override Elastic.Clients.Elasticsearch.Security.Access Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>?> propReplication = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>?> propSearch = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propReplication.TryReadProperty(ref reader, options, PropReplication, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>(o, null)))
-			{
-				continue;
-			}
-
-			if (propSearch.TryReadProperty(ref reader, options, PropSearch, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.SearchAccess>(o, null)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.Access(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Replication = propReplication.Value,
-			Search = propSearch.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.Access value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropReplication, value.Replication, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.ReplicationAccess>(o, v, null));
-		writer.WriteProperty(options, PropSearch, value.Search, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.SearchAccess>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.SearchAccess>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.AccessConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.AccessConverter))]
 public sealed partial class Access
 {
 #if NET7_0_OR_GREATER

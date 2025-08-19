@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-internal sealed partial class SearchApplicationParametersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyticsCollectionName = System.Text.Json.JsonEncodedText.Encode("analytics_collection_name");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
-
-	public override Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propAnalyticsCollectionName = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName>> propIndices = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationTemplate?> propTemplate = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAnalyticsCollectionName.TryReadProperty(ref reader, options, PropAnalyticsCollectionName, null))
-			{
-				continue;
-			}
-
-			if (propIndices.TryReadProperty(ref reader, options, PropIndices, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexName>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propTemplate.TryReadProperty(ref reader, options, PropTemplate, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AnalyticsCollectionName = propAnalyticsCollectionName.Value,
-			Indices = propIndices.Value,
-			Template = propTemplate.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnalyticsCollectionName, value.AnalyticsCollectionName, null, null);
-		writer.WriteProperty(options, PropIndices, value.Indices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexName> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexName>(o, v, null));
-		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParametersConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.Json.SearchApplicationParametersConverter))]
 public sealed partial class SearchApplicationParameters
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

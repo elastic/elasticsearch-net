@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class RankFeatureFunctionSigmoidConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropExponent = System.Text.Json.JsonEncodedText.Encode("exponent");
-	private static readonly System.Text.Json.JsonEncodedText PropPivot = System.Text.Json.JsonEncodedText.Encode("pivot");
-
-	public override Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<float> propExponent = default;
-		LocalJsonValue<float> propPivot = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propExponent.TryReadProperty(ref reader, options, PropExponent, null))
-			{
-				continue;
-			}
-
-			if (propPivot.TryReadProperty(ref reader, options, PropPivot, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Exponent = propExponent.Value,
-			Pivot = propPivot.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoid value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExponent, value.Exponent, null, null);
-		writer.WriteProperty(options, PropPivot, value.Pivot, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSigmoidConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.RankFeatureFunctionSigmoidConverter))]
 public sealed partial class RankFeatureFunctionSigmoid
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

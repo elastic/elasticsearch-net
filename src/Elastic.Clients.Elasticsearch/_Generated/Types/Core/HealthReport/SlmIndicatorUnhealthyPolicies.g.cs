@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.HealthReport;
 
-internal sealed partial class SlmIndicatorUnhealthyPoliciesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropInvocationsSinceLastSuccess = System.Text.Json.JsonEncodedText.Encode("invocations_since_last_success");
-
-	public override Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long> propCount = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, long>?> propInvocationsSinceLastSuccess = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
-			{
-				continue;
-			}
-
-			if (propInvocationsSinceLastSuccess.TryReadProperty(ref reader, options, PropInvocationsSinceLastSuccess, static System.Collections.Generic.IReadOnlyDictionary<string, long>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, long>(o, null, null)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Count = propCount.Value,
-			InvocationsSinceLastSuccess = propInvocationsSinceLastSuccess.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPolicies value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCount, value.Count, null, null);
-		writer.WriteProperty(options, PropInvocationsSinceLastSuccess, value.InvocationsSinceLastSuccess, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, long>? v) => w.WriteDictionaryValue<string, long>(o, v, null, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.SlmIndicatorUnhealthyPoliciesConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.HealthReport.Json.SlmIndicatorUnhealthyPoliciesConverter))]
 public sealed partial class SlmIndicatorUnhealthyPolicies
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

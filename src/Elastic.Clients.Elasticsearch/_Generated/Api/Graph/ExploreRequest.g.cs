@@ -42,72 +42,6 @@ public sealed partial class ExploreRequestParameters : Elastic.Transport.Request
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class ExploreRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.ExploreRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropConnections = System.Text.Json.JsonEncodedText.Encode("connections");
-	private static readonly System.Text.Json.JsonEncodedText PropControls = System.Text.Json.JsonEncodedText.Encode("controls");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropVertices = System.Text.Json.JsonEncodedText.Encode("vertices");
-
-	public override Elastic.Clients.Elasticsearch.Graph.ExploreRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Graph.Hop?> propConnections = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Graph.ExploreControls?> propControls = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>?> propVertices = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propConnections.TryReadProperty(ref reader, options, PropConnections, null))
-			{
-				continue;
-			}
-
-			if (propControls.TryReadProperty(ref reader, options, PropControls, null))
-			{
-				continue;
-			}
-
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
-			{
-				continue;
-			}
-
-			if (propVertices.TryReadProperty(ref reader, options, PropVertices, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>(o, null)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Graph.ExploreRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Connections = propConnections.Value,
-			Controls = propControls.Value,
-			Query = propQuery.Value,
-			Vertices = propVertices.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Graph.ExploreRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConnections, value.Connections, null, null);
-		writer.WriteProperty(options, PropControls, value.Controls, null, null);
-		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteProperty(options, PropVertices, value.Vertices, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Explore graph analytics.
@@ -118,7 +52,7 @@ internal sealed partial class ExploreRequestConverter : System.Text.Json.Seriali
 /// You can exclude vertices that have already been returned.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.ExploreRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Graph.Json.ExploreRequestConverter))]
 public sealed partial class ExploreRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Graph.ExploreRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

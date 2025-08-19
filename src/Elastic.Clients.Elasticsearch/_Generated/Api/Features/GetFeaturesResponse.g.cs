@@ -23,46 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Features;
 
-internal sealed partial class GetFeaturesResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features");
-
-	public override Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature>> propFeatures = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFeatures.TryReadProperty(ref reader, options, PropFeatures, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Features.Feature>(o, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Features = propFeatures.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Features.GetFeaturesResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFeatures, value.Features, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Features.Feature>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Features.GetFeaturesResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Features.Json.GetFeaturesResponseConverter))]
 public sealed partial class GetFeaturesResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -78,7 +39,7 @@ public sealed partial class GetFeaturesResponse : Elastic.Transport.Products.Ela
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> Features { get; set; }
+System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Features.Feature> Features { get; set; }
 }

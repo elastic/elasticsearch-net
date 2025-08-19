@@ -33,72 +33,6 @@ public sealed partial class ForgetFollowerRequestParameters : Elastic.Transport.
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class ForgetFollowerRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFollowerCluster = System.Text.Json.JsonEncodedText.Encode("follower_cluster");
-	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndex = System.Text.Json.JsonEncodedText.Encode("follower_index");
-	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndexUuid = System.Text.Json.JsonEncodedText.Encode("follower_index_uuid");
-	private static readonly System.Text.Json.JsonEncodedText PropLeaderRemoteCluster = System.Text.Json.JsonEncodedText.Encode("leader_remote_cluster");
-
-	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propFollowerCluster = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propFollowerIndex = default;
-		LocalJsonValue<string?> propFollowerIndexUuid = default;
-		LocalJsonValue<string?> propLeaderRemoteCluster = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFollowerCluster.TryReadProperty(ref reader, options, PropFollowerCluster, null))
-			{
-				continue;
-			}
-
-			if (propFollowerIndex.TryReadProperty(ref reader, options, PropFollowerIndex, null))
-			{
-				continue;
-			}
-
-			if (propFollowerIndexUuid.TryReadProperty(ref reader, options, PropFollowerIndexUuid, null))
-			{
-				continue;
-			}
-
-			if (propLeaderRemoteCluster.TryReadProperty(ref reader, options, PropLeaderRemoteCluster, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			FollowerCluster = propFollowerCluster.Value,
-			FollowerIndex = propFollowerIndex.Value,
-			FollowerIndexUuid = propFollowerIndexUuid.Value,
-			LeaderRemoteCluster = propLeaderRemoteCluster.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFollowerCluster, value.FollowerCluster, null, null);
-		writer.WriteProperty(options, PropFollowerIndex, value.FollowerIndex, null, null);
-		writer.WriteProperty(options, PropFollowerIndexUuid, value.FollowerIndexUuid, null, null);
-		writer.WriteProperty(options, PropLeaderRemoteCluster, value.LeaderRemoteCluster, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Forget a follower.
@@ -117,7 +51,7 @@ internal sealed partial class ForgetFollowerRequestConverter : System.Text.Json.
 /// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.ForgetFollowerRequestConverter))]
 public sealed partial class ForgetFollowerRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

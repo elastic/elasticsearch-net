@@ -34,35 +34,6 @@ public sealed partial class ClearCachedRealmsRequestParameters : Elastic.Transpo
 	public System.Collections.Generic.ICollection<string>? Usernames { get => Q<System.Collections.Generic.ICollection<string>?>("usernames"); set => Q("usernames", value); }
 }
 
-internal sealed partial class ClearCachedRealmsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Clear the user cache.
@@ -77,7 +48,7 @@ internal sealed partial class ClearCachedRealmsRequestConverter : System.Text.Js
 /// For more information, refer to the documentation about controlling the user cache.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ClearCachedRealmsRequestConverter))]
 public sealed partial class ClearCachedRealmsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

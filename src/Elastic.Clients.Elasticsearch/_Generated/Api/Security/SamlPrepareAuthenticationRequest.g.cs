@@ -27,63 +27,6 @@ public sealed partial class SamlPrepareAuthenticationRequestParameters : Elastic
 {
 }
 
-internal sealed partial class SamlPrepareAuthenticationRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAcs = System.Text.Json.JsonEncodedText.Encode("acs");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-	private static readonly System.Text.Json.JsonEncodedText PropRelayState = System.Text.Json.JsonEncodedText.Encode("relay_state");
-
-	public override Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propAcs = default;
-		LocalJsonValue<string?> propRealm = default;
-		LocalJsonValue<string?> propRelayState = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAcs.TryReadProperty(ref reader, options, PropAcs, null))
-			{
-				continue;
-			}
-
-			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
-			{
-				continue;
-			}
-
-			if (propRelayState.TryReadProperty(ref reader, options, PropRelayState, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Acs = propAcs.Value,
-			Realm = propRealm.Value,
-			RelayState = propRelayState.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAcs, value.Acs, null, null);
-		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
-		writer.WriteProperty(options, PropRelayState, value.RelayState, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Prepare SAML authentication.
@@ -105,7 +48,7 @@ internal sealed partial class SamlPrepareAuthenticationRequestConverter : System
 /// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.SamlPrepareAuthenticationRequestConverter))]
 public sealed partial class SamlPrepareAuthenticationRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>
 {
 #if NET7_0_OR_GREATER

@@ -23,61 +23,13 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
-internal sealed partial class RankEvalMetricExpectedReciprocalRankConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k");
-	private static readonly System.Text.Json.JsonEncodedText PropMaximumRelevance = System.Text.Json.JsonEncodedText.Encode("maximum_relevance");
-
-	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int?> propK = default;
-		LocalJsonValue<int> propMaximumRelevance = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propK.TryReadProperty(ref reader, options, PropK, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propMaximumRelevance.TryReadProperty(ref reader, options, PropMaximumRelevance, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			K = propK.Value,
-			MaximumRelevance = propMaximumRelevance.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropK, value.K, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropMaximumRelevance, value.MaximumRelevance, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Expected Reciprocal Rank (ERR)
 /// </para>
 /// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rank-eval#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.Json.RankEvalMetricExpectedReciprocalRankConverter))]
 public sealed partial class RankEvalMetricExpectedReciprocalRank
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-internal sealed partial class MlDataFrameAnalyticsJobsAnalysisConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropClassification = System.Text.Json.JsonEncodedText.Encode("classification");
-	private static readonly System.Text.Json.JsonEncodedText PropOutlierDetection = System.Text.Json.JsonEncodedText.Encode("outlier_detection");
-	private static readonly System.Text.Json.JsonEncodedText PropRegression = System.Text.Json.JsonEncodedText.Encode("regression");
-
-	public override Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int?> propClassification = default;
-		LocalJsonValue<int?> propOutlierDetection = default;
-		LocalJsonValue<int?> propRegression = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propClassification.TryReadProperty(ref reader, options, PropClassification, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propOutlierDetection.TryReadProperty(ref reader, options, PropOutlierDetection, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propRegression.TryReadProperty(ref reader, options, PropRegression, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Classification = propClassification.Value,
-			OutlierDetection = propOutlierDetection.Value,
-			Regression = propRegression.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysis value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClassification, value.Classification, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropOutlierDetection, value.OutlierDetection, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropRegression, value.Regression, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.MlDataFrameAnalyticsJobsAnalysisConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.MlDataFrameAnalyticsJobsAnalysisConverter))]
 public sealed partial class MlDataFrameAnalyticsJobsAnalysis
 {
 #if NET7_0_OR_GREATER

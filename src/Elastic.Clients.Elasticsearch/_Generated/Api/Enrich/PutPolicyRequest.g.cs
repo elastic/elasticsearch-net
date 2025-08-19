@@ -33,70 +33,13 @@ public sealed partial class PutPolicyRequestParameters : Elastic.Transport.Reque
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-internal sealed partial class PutPolicyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropGeoMatch = System.Text.Json.JsonEncodedText.Encode("geo_match");
-	private static readonly System.Text.Json.JsonEncodedText PropMatch = System.Text.Json.JsonEncodedText.Encode("match");
-	private static readonly System.Text.Json.JsonEncodedText PropRange = System.Text.Json.JsonEncodedText.Encode("range");
-
-	public override Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy?> propGeoMatch = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy?> propMatch = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicy?> propRange = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propGeoMatch.TryReadProperty(ref reader, options, PropGeoMatch, null))
-			{
-				continue;
-			}
-
-			if (propMatch.TryReadProperty(ref reader, options, PropMatch, null))
-			{
-				continue;
-			}
-
-			if (propRange.TryReadProperty(ref reader, options, PropRange, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			GeoMatch = propGeoMatch.Value,
-			Match = propMatch.Value,
-			Range = propRange.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropGeoMatch, value.GeoMatch, null, null);
-		writer.WriteProperty(options, PropMatch, value.Match, null, null);
-		writer.WriteProperty(options, PropRange, value.Range, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create an enrich policy.
 /// Creates an enrich policy.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.Json.PutPolicyRequestConverter))]
 public sealed partial class PutPolicyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

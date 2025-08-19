@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class TrainedModelAssignmentRoutingTableConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentAllocations = System.Text.Json.JsonEncodedText.Encode("current_allocations");
-	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
-	private static readonly System.Text.Json.JsonEncodedText PropRoutingState = System.Text.Json.JsonEncodedText.Encode("routing_state");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetAllocations = System.Text.Json.JsonEncodedText.Encode("target_allocations");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int> propCurrentAllocations = default;
-		LocalJsonValue<string?> propReason = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.RoutingState> propRoutingState = default;
-		LocalJsonValue<int> propTargetAllocations = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCurrentAllocations.TryReadProperty(ref reader, options, PropCurrentAllocations, null))
-			{
-				continue;
-			}
-
-			if (propReason.TryReadProperty(ref reader, options, PropReason, null))
-			{
-				continue;
-			}
-
-			if (propRoutingState.TryReadProperty(ref reader, options, PropRoutingState, null))
-			{
-				continue;
-			}
-
-			if (propTargetAllocations.TryReadProperty(ref reader, options, PropTargetAllocations, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CurrentAllocations = propCurrentAllocations.Value,
-			Reason = propReason.Value,
-			RoutingState = propRoutingState.Value,
-			TargetAllocations = propTargetAllocations.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCurrentAllocations, value.CurrentAllocations, null, null);
-		writer.WriteProperty(options, PropReason, value.Reason, null, null);
-		writer.WriteProperty(options, PropRoutingState, value.RoutingState, null, null);
-		writer.WriteProperty(options, PropTargetAllocations, value.TargetAllocations, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTableConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelAssignmentRoutingTableConverter))]
 public sealed partial class TrainedModelAssignmentRoutingTable
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,20 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-internal sealed partial class GetRepositoryResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse>
-{
-	public override Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Repositories = reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.Repositories>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Repositories, null);
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.GetRepositoryResponseConverter))]
 public sealed partial class GetRepositoryResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

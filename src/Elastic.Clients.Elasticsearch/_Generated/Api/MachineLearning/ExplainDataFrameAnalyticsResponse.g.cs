@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class ExplainDataFrameAnalyticsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFieldSelection = System.Text.Json.JsonEncodedText.Encode("field_selection");
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryEstimation = System.Text.Json.JsonEncodedText.Encode("memory_estimation");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection>> propFieldSelection = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation> propMemoryEstimation = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFieldSelection.TryReadProperty(ref reader, options, PropFieldSelection, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propMemoryEstimation.TryReadProperty(ref reader, options, PropMemoryEstimation, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			FieldSelection = propFieldSelection.Value,
-			MemoryEstimation = propMemoryEstimation.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFieldSelection, value.FieldSelection, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsFieldSelection>(o, v, null));
-		writer.WriteProperty(options, PropMemoryEstimation, value.MemoryEstimation, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ExplainDataFrameAnalyticsResponseConverter))]
 public sealed partial class ExplainDataFrameAnalyticsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

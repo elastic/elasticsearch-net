@@ -47,72 +47,6 @@ public sealed partial class AllocationExplainRequestParameters : Elastic.Transpo
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-internal sealed partial class AllocationExplainRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentNode = System.Text.Json.JsonEncodedText.Encode("current_node");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
-	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard");
-
-	public override Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propCurrentNode = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
-		LocalJsonValue<bool?> propPrimary = default;
-		LocalJsonValue<int?> propShard = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCurrentNode.TryReadProperty(ref reader, options, PropCurrentNode, null))
-			{
-				continue;
-			}
-
-			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
-			{
-				continue;
-			}
-
-			if (propPrimary.TryReadProperty(ref reader, options, PropPrimary, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propShard.TryReadProperty(ref reader, options, PropShard, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CurrentNode = propCurrentNode.Value,
-			Index = propIndex.Value,
-			Primary = propPrimary.Value,
-			Shard = propShard.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCurrentNode, value.CurrentNode, null, null);
-		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropPrimary, value.Primary, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropShard, value.Shard, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Explain the shard allocations.
@@ -124,7 +58,7 @@ internal sealed partial class AllocationExplainRequestConverter : System.Text.Js
 /// Refer to the linked documentation for examples of how to troubleshoot allocation issues using this API.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.AllocationExplainRequestConverter))]
 public sealed partial class AllocationExplainRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestParameters>
 {
 #if NET7_0_OR_GREATER

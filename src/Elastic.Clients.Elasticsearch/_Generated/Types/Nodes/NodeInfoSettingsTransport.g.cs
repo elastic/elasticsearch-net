@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-internal sealed partial class NodeInfoSettingsTransportConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreDeserializationErrors = System.Text.Json.JsonEncodedText.Encode("ignore_deserialization_errors");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropTypeDefault = System.Text.Json.JsonEncodedText.Encode("type.default");
-
-	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportFeatures?> propFeatures = default;
-		LocalJsonValue<bool?> propIgnoreDeserializationErrors = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportType> propType = default;
-		LocalJsonValue<string?> propTypeDefault = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFeatures.TryReadProperty(ref reader, options, PropFeatures, null))
-			{
-				continue;
-			}
-
-			if (propIgnoreDeserializationErrors.TryReadProperty(ref reader, options, PropIgnoreDeserializationErrors, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propType.TryReadProperty(ref reader, options, PropType, null))
-			{
-				continue;
-			}
-
-			if (propTypeDefault.TryReadProperty(ref reader, options, PropTypeDefault, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Features = propFeatures.Value,
-			IgnoreDeserializationErrors = propIgnoreDeserializationErrors.Value,
-			Type = propType.Value,
-			TypeDefault = propTypeDefault.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransport value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFeatures, value.Features, null, null);
-		writer.WriteProperty(options, PropIgnoreDeserializationErrors, value.IgnoreDeserializationErrors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteProperty(options, PropTypeDefault, value.TypeDefault, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsTransportConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.Json.NodeInfoSettingsTransportConverter))]
 public sealed partial class NodeInfoSettingsTransport
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

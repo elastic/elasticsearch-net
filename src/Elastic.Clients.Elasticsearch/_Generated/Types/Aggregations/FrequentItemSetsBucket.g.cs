@@ -23,70 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class FrequentItemSetsBucketConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsBucket>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
-	private static readonly System.Text.Json.JsonEncodedText PropSupport = System.Text.Json.JsonEncodedText.Encode("support");
-
-	public override Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>? propAggregations = default;
-		LocalJsonValue<long> propDocCount = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<string>>> propKey = default;
-		LocalJsonValue<double> propSupport = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
-			{
-				continue;
-			}
-
-			if (propKey.TryReadProperty(ref reader, options, PropKey, static System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<string>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<string>>(o, null, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!)!))
-			{
-				continue;
-			}
-
-			if (propSupport.TryReadProperty(ref reader, options, PropSupport, null))
-			{
-				continue;
-			}
-
-			propAggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.IAggregate>();
-			Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.ReadItem(ref reader, options, out string key, out Elastic.Clients.Elasticsearch.Aggregations.IAggregate value);
-			propAggregations[key] = value;
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsBucket(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Aggregations = new Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary(propAggregations),
-			DocCount = propDocCount.Value,
-			Key = propKey.Value,
-			Support = propSupport.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsBucket value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
-		writer.WriteProperty(options, PropKey, value.Key, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<string>> v) => w.WriteDictionaryValue<string, System.Collections.Generic.IReadOnlyCollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
-		writer.WriteProperty(options, PropSupport, value.Support, null, null);
-		if (value.Aggregations is not null)
-		{
-			foreach (var item in value.Aggregations)
-			{
-				Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionaryConverter.WriteItem(writer, options, item.Key, item.Value);
-			}
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsBucketConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.FrequentItemSetsBucketConverter))]
 public sealed partial class FrequentItemSetsBucket
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

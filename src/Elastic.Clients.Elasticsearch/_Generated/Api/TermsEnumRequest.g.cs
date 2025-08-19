@@ -27,99 +27,6 @@ public sealed partial class TermsEnumRequestParameters : Elastic.Transport.Reque
 {
 }
 
-internal sealed partial class TermsEnumRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TermsEnumRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCaseInsensitive = System.Text.Json.JsonEncodedText.Encode("case_insensitive");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexFilter = System.Text.Json.JsonEncodedText.Encode("index_filter");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropString = System.Text.Json.JsonEncodedText.Encode("string");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
-
-	public override Elastic.Clients.Elasticsearch.TermsEnumRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propCaseInsensitive = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propIndexFilter = default;
-		LocalJsonValue<string?> propSearchAfter = default;
-		LocalJsonValue<int?> propSize = default;
-		LocalJsonValue<string?> propString = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTimeout = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCaseInsensitive.TryReadProperty(ref reader, options, PropCaseInsensitive, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propField.TryReadProperty(ref reader, options, PropField, null))
-			{
-				continue;
-			}
-
-			if (propIndexFilter.TryReadProperty(ref reader, options, PropIndexFilter, null))
-			{
-				continue;
-			}
-
-			if (propSearchAfter.TryReadProperty(ref reader, options, PropSearchAfter, null))
-			{
-				continue;
-			}
-
-			if (propSize.TryReadProperty(ref reader, options, PropSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propString.TryReadProperty(ref reader, options, PropString, null))
-			{
-				continue;
-			}
-
-			if (propTimeout.TryReadProperty(ref reader, options, PropTimeout, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TermsEnumRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CaseInsensitive = propCaseInsensitive.Value,
-			Field = propField.Value,
-			IndexFilter = propIndexFilter.Value,
-			SearchAfter = propSearchAfter.Value,
-			Size = propSize.Value,
-			String = propString.Value,
-			Timeout = propTimeout.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TermsEnumRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCaseInsensitive, value.CaseInsensitive, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropIndexFilter, value.IndexFilter, null, null);
-		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropString, value.String, null, null);
-		writer.WriteProperty(options, PropTimeout, value.Timeout, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Get terms in an index.
@@ -133,7 +40,7 @@ internal sealed partial class TermsEnumRequestConverter : System.Text.Json.Seria
 /// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TermsEnumRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.TermsEnumRequestConverter))]
 public sealed partial class TermsEnumRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

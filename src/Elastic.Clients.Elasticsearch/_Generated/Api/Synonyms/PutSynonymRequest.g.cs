@@ -34,45 +34,6 @@ public sealed partial class PutSynonymRequestParameters : Elastic.Transport.Requ
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 }
 
-internal sealed partial class PutSynonymRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropSynonymsSet = System.Text.Json.JsonEncodedText.Encode("synonyms_set");
-
-	public override Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>> propSynonymsSet = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propSynonymsSet.TryReadProperty(ref reader, options, PropSynonymsSet, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>(o, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			SynonymsSet = propSynonymsSet.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSynonymsSet, value.SynonymsSet, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Synonyms.SynonymRule>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create or update a synonym set.
@@ -87,7 +48,7 @@ internal sealed partial class PutSynonymRequestConverter : System.Text.Json.Seri
 /// For practical examples of how to create or update a synonyms set, refer to the External documentation.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.Json.PutSynonymRequestConverter))]
 public sealed partial class PutSynonymRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

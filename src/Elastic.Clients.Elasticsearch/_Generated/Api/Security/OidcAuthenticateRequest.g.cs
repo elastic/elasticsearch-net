@@ -27,72 +27,6 @@ public sealed partial class OidcAuthenticateRequestParameters : Elastic.Transpor
 {
 }
 
-internal sealed partial class OidcAuthenticateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropNonce = System.Text.Json.JsonEncodedText.Encode("nonce");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-	private static readonly System.Text.Json.JsonEncodedText PropRedirectUri = System.Text.Json.JsonEncodedText.Encode("redirect_uri");
-	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
-
-	public override Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propNonce = default;
-		LocalJsonValue<string?> propRealm = default;
-		LocalJsonValue<string> propRedirectUri = default;
-		LocalJsonValue<string> propState = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propNonce.TryReadProperty(ref reader, options, PropNonce, null))
-			{
-				continue;
-			}
-
-			if (propRealm.TryReadProperty(ref reader, options, PropRealm, null))
-			{
-				continue;
-			}
-
-			if (propRedirectUri.TryReadProperty(ref reader, options, PropRedirectUri, null))
-			{
-				continue;
-			}
-
-			if (propState.TryReadProperty(ref reader, options, PropState, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Nonce = propNonce.Value,
-			Realm = propRealm.Value,
-			RedirectUri = propRedirectUri.Value,
-			State = propState.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNonce, value.Nonce, null, null);
-		writer.WriteProperty(options, PropRealm, value.Realm, null, null);
-		writer.WriteProperty(options, PropRedirectUri, value.RedirectUri, null, null);
-		writer.WriteProperty(options, PropState, value.State, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Authenticate OpenID Connect.
@@ -105,7 +39,7 @@ internal sealed partial class OidcAuthenticateRequestConverter : System.Text.Jso
 /// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.OidcAuthenticateRequestConverter))]
 public sealed partial class OidcAuthenticateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

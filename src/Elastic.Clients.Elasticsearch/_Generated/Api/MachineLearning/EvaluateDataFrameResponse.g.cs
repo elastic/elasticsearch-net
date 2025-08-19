@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class EvaluateDataFrameResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropClassification = System.Text.Json.JsonEncodedText.Encode("classification");
-	private static readonly System.Text.Json.JsonEncodedText PropOutlierDetection = System.Text.Json.JsonEncodedText.Encode("outlier_detection");
-	private static readonly System.Text.Json.JsonEncodedText PropRegression = System.Text.Json.JsonEncodedText.Encode("regression");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummary?> propClassification = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeOutlierDetectionSummary?> propOutlierDetection = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeRegressionSummary?> propRegression = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propClassification.TryReadProperty(ref reader, options, PropClassification, null))
-			{
-				continue;
-			}
-
-			if (propOutlierDetection.TryReadProperty(ref reader, options, PropOutlierDetection, null))
-			{
-				continue;
-			}
-
-			if (propRegression.TryReadProperty(ref reader, options, PropRegression, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Classification = propClassification.Value,
-			OutlierDetection = propOutlierDetection.Value,
-			Regression = propRegression.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClassification, value.Classification, null, null);
-		writer.WriteProperty(options, PropOutlierDetection, value.OutlierDetection, null, null);
-		writer.WriteProperty(options, PropRegression, value.Regression, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.EvaluateDataFrameResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.EvaluateDataFrameResponseConverter))]
 public sealed partial class EvaluateDataFrameResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -27,35 +27,6 @@ public sealed partial class GetServiceAccountsRequestParameters : Elastic.Transp
 {
 }
 
-internal sealed partial class GetServiceAccountsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Get service accounts.
@@ -67,7 +38,7 @@ internal sealed partial class GetServiceAccountsRequestConverter : System.Text.J
 /// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetServiceAccountsRequestConverter))]
 public sealed partial class GetServiceAccountsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>
 {
 	public GetServiceAccountsRequest(string? @namespace, string? service) : base(r => r.Optional("namespace", @namespace).Optional("service", service))

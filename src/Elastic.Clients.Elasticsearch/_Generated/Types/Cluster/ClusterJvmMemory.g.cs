@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-internal sealed partial class ClusterJvmMemoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropHeapMax = System.Text.Json.JsonEncodedText.Encode("heap_max");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapMaxInBytes = System.Text.Json.JsonEncodedText.Encode("heap_max_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapUsed = System.Text.Json.JsonEncodedText.Encode("heap_used");
-	private static readonly System.Text.Json.JsonEncodedText PropHeapUsedInBytes = System.Text.Json.JsonEncodedText.Encode("heap_used_in_bytes");
-
-	public override Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propHeapMax = default;
-		LocalJsonValue<long> propHeapMaxInBytes = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propHeapUsed = default;
-		LocalJsonValue<long> propHeapUsedInBytes = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propHeapMax.TryReadProperty(ref reader, options, PropHeapMax, null))
-			{
-				continue;
-			}
-
-			if (propHeapMaxInBytes.TryReadProperty(ref reader, options, PropHeapMaxInBytes, null))
-			{
-				continue;
-			}
-
-			if (propHeapUsed.TryReadProperty(ref reader, options, PropHeapUsed, null))
-			{
-				continue;
-			}
-
-			if (propHeapUsedInBytes.TryReadProperty(ref reader, options, PropHeapUsedInBytes, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			HeapMax = propHeapMax.Value,
-			HeapMaxInBytes = propHeapMaxInBytes.Value,
-			HeapUsed = propHeapUsed.Value,
-			HeapUsedInBytes = propHeapUsedInBytes.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemory value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropHeapMax, value.HeapMax, null, null);
-		writer.WriteProperty(options, PropHeapMaxInBytes, value.HeapMaxInBytes, null, null);
-		writer.WriteProperty(options, PropHeapUsed, value.HeapUsed, null, null);
-		writer.WriteProperty(options, PropHeapUsedInBytes, value.HeapUsedInBytes, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterJvmMemoryConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.ClusterJvmMemoryConverter))]
 public sealed partial class ClusterJvmMemory
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

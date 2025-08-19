@@ -33,90 +33,6 @@ public sealed partial class PutRoleMappingRequestParameters : Elastic.Transport.
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-internal sealed partial class PutRoleMappingRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
-	private static readonly System.Text.Json.JsonEncodedText PropRoleTemplates = System.Text.Json.JsonEncodedText.Encode("role_templates");
-	private static readonly System.Text.Json.JsonEncodedText PropRules = System.Text.Json.JsonEncodedText.Encode("rules");
-	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as");
-
-	public override Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propEnabled = default;
-		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propRoles = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>?> propRoleTemplates = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.RoleMappingRule?> propRules = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propRunAs = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, static object (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))!)))
-			{
-				continue;
-			}
-
-			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
-			{
-				continue;
-			}
-
-			if (propRoleTemplates.TryReadProperty(ref reader, options, PropRoleTemplates, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RoleTemplate>(o, null)))
-			{
-				continue;
-			}
-
-			if (propRules.TryReadProperty(ref reader, options, PropRules, null))
-			{
-				continue;
-			}
-
-			if (propRunAs.TryReadProperty(ref reader, options, PropRunAs, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Enabled = propEnabled.Value,
-			Metadata = propMetadata.Value,
-			Roles = propRoles.Value,
-			RoleTemplates = propRoleTemplates.Value,
-			Rules = propRules.Value,
-			RunAs = propRunAs.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropEnabled, value.Enabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
-		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropRoleTemplates, value.RoleTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RoleTemplate>(o, v, null));
-		writer.WriteProperty(options, PropRules, value.Rules, null, null);
-		writer.WriteProperty(options, PropRunAs, value.RunAs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create or update role mappings.
@@ -155,7 +71,7 @@ internal sealed partial class PutRoleMappingRequestConverter : System.Text.Json.
 /// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.PutRoleMappingRequestConverter))]
 public sealed partial class PutRoleMappingRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

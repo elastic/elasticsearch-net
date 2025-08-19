@@ -27,63 +27,6 @@ public sealed partial class ForecastRequestParameters : Elastic.Transport.Reques
 {
 }
 
-internal sealed partial class ForecastRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDuration = System.Text.Json.JsonEncodedText.Encode("duration");
-	private static readonly System.Text.Json.JsonEncodedText PropExpiresIn = System.Text.Json.JsonEncodedText.Encode("expires_in");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxModelMemory = System.Text.Json.JsonEncodedText.Encode("max_model_memory");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDuration = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propExpiresIn = default;
-		LocalJsonValue<string?> propMaxModelMemory = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDuration.TryReadProperty(ref reader, options, PropDuration, null))
-			{
-				continue;
-			}
-
-			if (propExpiresIn.TryReadProperty(ref reader, options, PropExpiresIn, null))
-			{
-				continue;
-			}
-
-			if (propMaxModelMemory.TryReadProperty(ref reader, options, PropMaxModelMemory, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Duration = propDuration.Value,
-			ExpiresIn = propExpiresIn.Value,
-			MaxModelMemory = propMaxModelMemory.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDuration, value.Duration, null, null);
-		writer.WriteProperty(options, PropExpiresIn, value.ExpiresIn, null, null);
-		writer.WriteProperty(options, PropMaxModelMemory, value.MaxModelMemory, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Predict future behavior of a time series.
@@ -95,7 +38,7 @@ internal sealed partial class ForecastRequestConverter : System.Text.Json.Serial
 /// based on historical data.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.ForecastRequestConverter))]
 public sealed partial class ForecastRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.ForecastRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

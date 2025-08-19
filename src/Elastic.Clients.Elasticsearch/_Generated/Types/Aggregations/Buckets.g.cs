@@ -23,64 +23,13 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class BucketsConverter<TBucket> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket>>
-{
-	public override Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray);
-		return selector(ref reader, options) switch
-		{
-			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket>(reader.ReadValue<System.Collections.Generic.IDictionary<string, TBucket>>(options, static System.Collections.Generic.IDictionary<string, TBucket> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, TBucket>(o, null, null)!)),
-			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket>(reader.ReadValue<System.Collections.Generic.ICollection<TBucket>>(options, static System.Collections.Generic.ICollection<TBucket> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<TBucket>(o, null)!)),
-			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket>)}")
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.Buckets<TBucket> value, System.Text.Json.JsonSerializerOptions options)
-	{
-		switch (value.Tag)
-		{
-			case Elastic.Clients.Elasticsearch.UnionTag.T1:
-				{
-					writer.WriteValue(options, value.Value1, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, TBucket> v) => w.WriteDictionaryValue<string, TBucket>(o, v, null, null));
-					break;
-				}
-
-			case Elastic.Clients.Elasticsearch.UnionTag.T2:
-				{
-					writer.WriteValue(options, value.Value2, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<TBucket> v) => w.WriteCollectionValue<TBucket>(o, v, null));
-					break;
-				}
-
-			default:
-				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
-		}
-	}
-}
-
-internal sealed partial class BucketsConverterFactory : System.Text.Json.Serialization.JsonConverterFactory
-{
-	public override bool CanConvert(System.Type typeToConvert)
-	{
-		return typeToConvert.IsGenericType && typeToConvert.GetGenericTypeDefinition() == typeof(Buckets<>);
-	}
-
-	[System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute'")]
-	public override System.Text.Json.Serialization.JsonConverter CreateConverter(System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		var args = typeToConvert.GetGenericArguments();
-		var converter = (System.Text.Json.Serialization.JsonConverter)System.Activator.CreateInstance(typeof(BucketsConverter<>).MakeGenericType(args[0]), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public, binder: null, args: null, culture: null)!;
-		return converter;
-	}
-}
-
 /// <summary>
 /// <para>
 /// Aggregation buckets. By default they are returned as an array, but if the aggregation has keys configured for
 /// the different buckets, the result is a dictionary.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.BucketsConverterFactory))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BucketsConverterFactory))]
 public sealed partial class Buckets<TBucket> : Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IDictionary<string, TBucket>, System.Collections.Generic.ICollection<TBucket>>
 {
 	public Buckets(System.Collections.Generic.IDictionary<string, TBucket> value) : base(value)

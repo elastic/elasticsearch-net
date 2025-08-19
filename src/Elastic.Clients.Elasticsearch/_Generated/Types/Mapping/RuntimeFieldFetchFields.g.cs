@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-internal sealed partial class RuntimeFieldFetchFieldsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-
-	public override Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
-		{
-			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.Field>(options, null);
-			return new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-			{
-				Field = value
-			};
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
-		LocalJsonValue<string?> propFormat = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propField.TryReadProperty(ref reader, options, PropField, null))
-			{
-				continue;
-			}
-
-			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Field = propField.Value,
-			Format = propFormat.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFields value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropFormat, value.Format, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldFetchFieldsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.Json.RuntimeFieldFetchFieldsConverter))]
 public sealed partial class RuntimeFieldFetchFields
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -34,35 +34,6 @@ public sealed partial class AsyncQueryStopRequestParameters : Elastic.Transport.
 	public bool? DropNullColumns { get => Q<bool?>("drop_null_columns"); set => Q("drop_null_columns", value); }
 }
 
-internal sealed partial class AsyncQueryStopRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Stop async ES|QL query.
@@ -72,7 +43,7 @@ internal sealed partial class AsyncQueryStopRequestConverter : System.Text.Json.
 /// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Esql.Json.AsyncQueryStopRequestConverter))]
 public sealed partial class AsyncQueryStopRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Esql.AsyncQueryStopRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

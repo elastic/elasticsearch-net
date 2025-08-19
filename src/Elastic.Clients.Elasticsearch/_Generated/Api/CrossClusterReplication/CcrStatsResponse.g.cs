@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
-internal sealed partial class CcrStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAutoFollowStats = System.Text.Json.JsonEncodedText.Encode("auto_follow_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropFollowStats = System.Text.Json.JsonEncodedText.Encode("follow_stats");
-
-	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats> propAutoFollowStats = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStats> propFollowStats = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAutoFollowStats.TryReadProperty(ref reader, options, PropAutoFollowStats, null))
-			{
-				continue;
-			}
-
-			if (propFollowStats.TryReadProperty(ref reader, options, PropFollowStats, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AutoFollowStats = propAutoFollowStats.Value,
-			FollowStats = propFollowStats.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAutoFollowStats, value.AutoFollowStats, null, null);
-		writer.WriteProperty(options, PropFollowStats, value.FollowStats, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.CcrStatsResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.Json.CcrStatsResponseConverter))]
 public sealed partial class CcrStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

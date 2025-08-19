@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-internal sealed partial class FielddataFrequencyFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
-	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
-	private static readonly System.Text.Json.JsonEncodedText PropMinSegmentSize = System.Text.Json.JsonEncodedText.Encode("min_segment_size");
-
-	public override Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<double> propMax = default;
-		LocalJsonValue<double> propMin = default;
-		LocalJsonValue<int> propMinSegmentSize = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMax.TryReadProperty(ref reader, options, PropMax, null))
-			{
-				continue;
-			}
-
-			if (propMin.TryReadProperty(ref reader, options, PropMin, null))
-			{
-				continue;
-			}
-
-			if (propMinSegmentSize.TryReadProperty(ref reader, options, PropMinSegmentSize, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Max = propMax.Value,
-			Min = propMin.Value,
-			MinSegmentSize = propMinSegmentSize.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilter value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMax, value.Max, null, null);
-		writer.WriteProperty(options, PropMin, value.Min, null, null);
-		writer.WriteProperty(options, PropMinSegmentSize, value.MinSegmentSize, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.FielddataFrequencyFilterConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.FielddataFrequencyFilterConverter))]
 public sealed partial class FielddataFrequencyFilter
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
