@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct UserQueryDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct UserQueryDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.4/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor" class="text-break">
+Struct UserQueryDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L474"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct UserQueryDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.#ctor">
+  UserQueryDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L484"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor__ctor_Elastic_Clients_Elasticsearch_Security_UserQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.#ctor(Elastic.Clients.Elasticsearch.Security.UserQuery)">
+  UserQueryDescriptor(UserQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L478"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor(UserQuery instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Bool_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Bool*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Bool" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Bool">
+  Bool()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L509"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+matches users matching boolean combinations of other queries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Bool()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Bool_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Bool*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Bool_Elastic_Clients_Elasticsearch_QueryDsl_BoolQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Bool(Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery)">
+  Bool(BoolQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L498"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+matches users matching boolean combinations of other queries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Bool(BoolQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQuery.html">BoolQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Bool_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Bool*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Bool_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_BoolQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Bool(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor})">
+  Bool(Action&lt;BoolQueryDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L520"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+matches users matching boolean combinations of other queries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Bool(Action&lt;BoolQueryDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor.html">BoolQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Bool_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Bool*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Bool__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_BoolQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Bool``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor{``0}})">
+  Bool&lt;T&gt;(Action&lt;BoolQueryDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L531"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+matches users matching boolean combinations of other queries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Bool&lt;T&gt;(Action&lt;BoolQueryDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.BoolQueryDescriptor-1.html">BoolQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Exists_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Exists*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Exists_Elastic_Clients_Elasticsearch_QueryDsl_ExistsQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Exists(Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery)">
+  Exists(ExistsQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L542"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain an indexed value for a field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Exists(ExistsQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQuery.html">ExistsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Exists_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Exists*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Exists_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_ExistsQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Exists(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor})">
+  Exists(Action&lt;ExistsQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L553"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain an indexed value for a field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Exists(Action&lt;ExistsQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor.html">ExistsQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Exists_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Exists*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Exists__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_ExistsQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Exists``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor{``0}})">
+  Exists&lt;T&gt;(Action&lt;ExistsQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L564"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain an indexed value for a field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Exists&lt;T&gt;(Action&lt;ExistsQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.ExistsQueryDescriptor-1.html">ExistsQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Ids_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Ids*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Ids" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Ids">
+  Ids()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L588"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users based on their IDs.
+This query uses the user document IDs stored in the <code>_id</code> field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Ids()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Ids_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Ids*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Ids_Elastic_Clients_Elasticsearch_QueryDsl_IdsQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Ids(Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery)">
+  Ids(IdsQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L576"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users based on their IDs.
+This query uses the user document IDs stored in the <code>_id</code> field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Ids(IdsQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IdsQuery.html">IdsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Ids_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Ids*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Ids_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_IdsQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Ids(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor})">
+  Ids(Action&lt;IdsQueryDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L600"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users based on their IDs.
+This query uses the user document IDs stored in the <code>_id</code> field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Ids(Action&lt;IdsQueryDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IdsQueryDescriptor.html">IdsQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Match_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Match*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Match_Elastic_Clients_Elasticsearch_QueryDsl_MatchQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Match(Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery)">
+  Match(MatchQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L612"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that match a provided text, number, date or boolean value.
+The provided text is analyzed before matching.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Match(MatchQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQuery.html">MatchQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Match_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Match*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Match_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MatchQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Match(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor})">
+  Match(Action&lt;MatchQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L624"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that match a provided text, number, date or boolean value.
+The provided text is analyzed before matching.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Match(Action&lt;MatchQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor.html">MatchQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_MatchAll_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.MatchAll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_MatchAll" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.MatchAll">
+  MatchAll()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L658"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches all users, giving them all a <code>_score</code> of 1.0.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor MatchAll()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_MatchAll_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.MatchAll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_MatchAll_Elastic_Clients_Elasticsearch_QueryDsl_MatchAllQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.MatchAll(Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery)">
+  MatchAll(MatchAllQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L647"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches all users, giving them all a <code>_score</code> of 1.0.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor MatchAll(MatchAllQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQuery.html">MatchAllQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_MatchAll_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.MatchAll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_MatchAll_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MatchAllQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.MatchAll(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor})">
+  MatchAll(Action&lt;MatchAllQueryDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L669"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Matches all users, giving them all a <code>_score</code> of 1.0.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor MatchAll(Action&lt;MatchAllQueryDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchAllQueryDescriptor.html">MatchAllQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Match_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Match*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Match__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_MatchQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Match``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor{``0}})">
+  Match&lt;T&gt;(Action&lt;MatchQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L636"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that match a provided text, number, date or boolean value.
+The provided text is analyzed before matching.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Match&lt;T&gt;(Action&lt;MatchQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchQueryDescriptor-1.html">MatchQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Prefix_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Prefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Prefix_Elastic_Clients_Elasticsearch_QueryDsl_PrefixQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Prefix(Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery)">
+  Prefix(PrefixQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L680"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain a specific prefix in a provided field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Prefix(PrefixQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQuery.html">PrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Prefix_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Prefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Prefix_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_PrefixQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Prefix(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor})">
+  Prefix(Action&lt;PrefixQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L691"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain a specific prefix in a provided field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Prefix(Action&lt;PrefixQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor.html">PrefixQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Prefix_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Prefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Prefix__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_PrefixQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Prefix``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor{``0}})">
+  Prefix&lt;T&gt;(Action&lt;PrefixQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L702"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain a specific prefix in a provided field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Prefix&lt;T&gt;(Action&lt;PrefixQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.PrefixQueryDescriptor-1.html">PrefixQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Range_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Range_Elastic_Clients_Elasticsearch_QueryDsl_IRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Range(Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery)">
+  Range(IRangeQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L713"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain terms within a provided range.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Range(IRangeQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Range_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Range_System_Func_Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Elastic_Clients_Elasticsearch_QueryDsl_IRangeQuery__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Range(System.Func{Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory,Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery})">
+  Range(Func&lt;IRangeQueryFactory, IRangeQuery&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L724"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain terms within a provided range.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Range(Func&lt;IRangeQueryFactory, IRangeQuery&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.html">IRangeQueryFactory</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Range_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Range*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Range__1_System_Func_Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory___0__Elastic_Clients_Elasticsearch_QueryDsl_IRangeQuery__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Range``1(System.Func{Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory{``0},Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery})">
+  Range&lt;T&gt;(Func&lt;IRangeQueryFactory&lt;T&gt;, IRangeQuery&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L735"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain terms within a provided range.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Range&lt;T&gt;(Func&lt;IRangeQueryFactory&lt;T&gt;, IRangeQuery&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory-1.html">IRangeQueryFactory</a>&lt;T&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_SimpleQueryString_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.SimpleQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_SimpleQueryString_Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.SimpleQueryString(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)">
+  SimpleQueryString(SimpleQueryStringQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L746"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor SimpleQueryString(SimpleQueryStringQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery.html">SimpleQueryStringQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_SimpleQueryString_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.SimpleQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_SimpleQueryString_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.SimpleQueryString(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor})">
+  SimpleQueryString(Action&lt;SimpleQueryStringQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L757"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor SimpleQueryString(Action&lt;SimpleQueryStringQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_SimpleQueryString_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.SimpleQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_SimpleQueryString__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.SimpleQueryString``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor{``0}})">
+  SimpleQueryString&lt;T&gt;(Action&lt;SimpleQueryStringQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L768"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users based on a provided query string, using a parser with a limited but fault-tolerant syntax.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor SimpleQueryString&lt;T&gt;(Action&lt;SimpleQueryStringQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor-1.html">SimpleQueryStringQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Term_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Term*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Term_Elastic_Clients_Elasticsearch_QueryDsl_TermQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Term(Elastic.Clients.Elasticsearch.QueryDsl.TermQuery)">
+  Term(TermQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L780"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain an exact term in a provided field.
+To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Term(TermQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQuery.html">TermQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Term_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Term*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Term_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_TermQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Term(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor})">
+  Term(Action&lt;TermQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L792"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain an exact term in a provided field.
+To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Term(Action&lt;TermQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor.html">TermQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Term_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Term*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Term__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_TermQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Term``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor{``0}})">
+  Term&lt;T&gt;(Action&lt;TermQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L804"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain an exact term in a provided field.
+To return a document, the query term must exactly match the queried field's value, including whitespace and capitalization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Term&lt;T&gt;(Action&lt;TermQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermQueryDescriptor-1.html">TermQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Terms_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Terms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Terms_Elastic_Clients_Elasticsearch_QueryDsl_TermsQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Terms(Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery)">
+  Terms(TermsQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L816"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain one or more exact terms in a provided field.
+To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Terms(TermsQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQuery.html">TermsQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Terms_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Terms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Terms_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_TermsQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Terms(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor})">
+  Terms(Action&lt;TermsQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L828"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain one or more exact terms in a provided field.
+To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Terms(Action&lt;TermsQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor.html">TermsQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Terms_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Terms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Terms__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_TermsQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Terms``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor{``0}})">
+  Terms&lt;T&gt;(Action&lt;TermsQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L840"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain one or more exact terms in a provided field.
+To return a document, one or more terms must exactly match a field value, including whitespace and capitalization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Terms&lt;T&gt;(Action&lt;TermsQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryDescriptor-1.html">TermsQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Wildcard_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Wildcard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Wildcard_Elastic_Clients_Elasticsearch_QueryDsl_WildcardQuery_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Wildcard(Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery)">
+  Wildcard(WildcardQuery?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L851"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain terms matching a wildcard pattern.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Wildcard(WildcardQuery? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQuery.html">WildcardQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Wildcard_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Wildcard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Wildcard_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_WildcardQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Wildcard(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor})">
+  Wildcard(Action&lt;WildcardQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L862"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain terms matching a wildcard pattern.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Wildcard(Action&lt;WildcardQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor.html">WildcardQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Wildcard_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Wildcard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_Wildcard__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_WildcardQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.Wildcard``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor{``0}})">
+  Wildcard&lt;T&gt;(Action&lt;WildcardQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L873"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns users that contain terms matching a wildcard pattern.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UserQueryDescriptor Wildcard&lt;T&gt;(Action&lt;WildcardQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.WildcardQueryDescriptor-1.html">WildcardQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Security_UserQuery__Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Security.UserQuery)~Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor">
+  explicit operator UserQueryDescriptor(UserQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L490"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator UserQueryDescriptor(UserQuery instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Security_UserQueryDescriptor__Elastic_Clients_Elasticsearch_Security_UserQuery" data-uid="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor)~Elastic.Clients.Elasticsearch.Security.UserQuery">
+  implicit operator UserQuery(UserQueryDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/UserQuery.g.cs/#L491"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator UserQuery(UserQueryDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQueryDescriptor.html">UserQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.UserQuery.html">UserQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

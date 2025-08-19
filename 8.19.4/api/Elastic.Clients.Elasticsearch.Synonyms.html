@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Elastic.Clients.Elasticsearch.Synonyms | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Elastic.Clients.Elasticsearch.Synonyms | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Synonyms">
+
+  <h1 id="Elastic_Clients_Elasticsearch_Synonyms" data-uid="Elastic.Clients.Elasticsearch.Synonyms" class="text-break">Namespace Elastic.Clients.Elasticsearch.Synonyms</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest.html">DeleteSynonymRequest</a></dt>
+      <dd><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters.html">DeleteSynonymRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymResponse.html">DeleteSynonymResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequest.html">DeleteSynonymRuleRequest</a></dt>
+      <dd><p>
+Delete a synonym rule.
+Delete a synonym rule from a synonym set.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestParameters.html">DeleteSynonymRuleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleResponse.html">DeleteSynonymRuleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequest.html">GetSynonymRequest</a></dt>
+      <dd><p>
+Get a synonym set.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestParameters.html">GetSynonymRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymResponse.html">GetSynonymResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequest.html">GetSynonymRuleRequest</a></dt>
+      <dd><p>
+Get a synonym rule.
+Get a synonym rule from a synonym set.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestParameters.html">GetSynonymRuleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleResponse.html">GetSynonymRuleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequest.html">GetSynonymsSetsRequest</a></dt>
+      <dd><p>
+Get all synonym sets.
+Get a summary of all defined synonym sets.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestParameters.html">GetSynonymsSetsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsResponse.html">GetSynonymsSetsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequest.html">PutSynonymRequest</a></dt>
+      <dd><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestParameters.html">PutSynonymRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymResponse.html">PutSynonymResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequest.html">PutSynonymRuleRequest</a></dt>
+      <dd><p>
+Create or update a synonym rule.
+Create or update a synonym rule in a synonym set.
+</p>
+<p>
+If any of the synonym rules included is invalid, the API returns an error.
+</p>
+<p>
+When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestParameters.html">PutSynonymRuleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse.html">PutSynonymRuleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.SynonymRule.html">SynonymRule</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleRead.html">SynonymRuleRead</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient.html">SynonymsNamespacedClient</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.SynonymsSetItem.html">SynonymsSetItem</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor.html">DeleteSynonymRequestDescriptor</a></dt>
+      <dd><p>
+Delete a synonym set.
+</p>
+<p>
+You can only delete a synonyms set that is not in use by any index analyzer.
+</p>
+<p>
+Synonyms sets can be used in synonym graph token filters and synonym token filters.
+These synonym filters can be used as part of search analyzers.
+</p>
+<p>
+Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+</p>
+<p>
+If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+To prevent that, synonyms sets that are used in analyzers can't be deleted.
+A delete request in this case will return a 400 response code.
+</p>
+<p>
+To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+Once finished, you can delete the index.
+When the synonyms set is not used in analyzers, you will be able to delete it.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRuleRequestDescriptor.html">DeleteSynonymRuleRequestDescriptor</a></dt>
+      <dd><p>
+Delete a synonym rule.
+Delete a synonym rule from a synonym set.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRequestDescriptor.html">GetSynonymRequestDescriptor</a></dt>
+      <dd><p>
+Get a synonym set.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymRuleRequestDescriptor.html">GetSynonymRuleRequestDescriptor</a></dt>
+      <dd><p>
+Get a synonym rule.
+Get a synonym rule from a synonym set.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.GetSynonymsSetsRequestDescriptor.html">GetSynonymsSetsRequestDescriptor</a></dt>
+      <dd><p>
+Get all synonym sets.
+Get a summary of all defined synonym sets.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRequestDescriptor.html">PutSynonymRequestDescriptor</a></dt>
+      <dd><p>
+Create or update a synonym set.
+Synonyms sets are limited to a maximum of 10,000 synonym rules per set.
+If you need to manage more synonym rules, you can create multiple synonym sets.
+</p>
+<p>
+When an existing synonyms set is updated, the search analyzers that use the synonyms set are reloaded automatically for all indices.
+This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleRequestDescriptor.html">PutSynonymRuleRequestDescriptor</a></dt>
+      <dd><p>
+Create or update a synonym rule.
+Create or update a synonym rule in a synonym set.
+</p>
+<p>
+If any of the synonym rules included is invalid, the API returns an error.
+</p>
+<p>
+When you update a synonym rule, all analyzers using the synonyms set will be reloaded automatically to reflect the new rule.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Synonyms.SynonymRuleDescriptor.html">SynonymRuleDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

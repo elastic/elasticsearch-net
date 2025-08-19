@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct PutTrainedModelRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct PutTrainedModelRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create a trained model. Enable you to supply a trained model that is not created by data frame analytics.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.4/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1" class="text-break">
+Struct PutTrainedModelRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L540"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create a trained model.
+Enable you to supply a trained model that is not created by data frame analytics.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct PutTrainedModelRequestDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.#ctor">
+  PutTrainedModelRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L555"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public PutTrainedModelRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.Id)">
+  PutTrainedModelRequestDescriptor(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L550"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor(Id modelId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>modelId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest)">
+  PutTrainedModelRequestDescriptor(PutTrainedModelRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L544"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor(PutTrainedModelRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.html">PutTrainedModelRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_CompressedDefinition_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.CompressedDefinition*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_CompressedDefinition_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.CompressedDefinition(System.String)">
+  CompressedDefinition(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L607"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The compressed (GZipped and Base64 encoded) inference definition of the
+model. If compressed_definition is specified, then definition cannot be
+specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; CompressedDefinition(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_DeferDefinitionDecompression_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.DeferDefinitionDecompression*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_DeferDefinitionDecompression_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.DeferDefinitionDecompression(System.Nullable{System.Boolean})">
+  DeferDefinitionDecompression(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L582"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If set to <code>true</code> and a <code>compressed_definition</code> is provided,
+the request defers definition decompression and skips relevant
+validations.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; DeferDefinitionDecompression(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Definition_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Definition*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Definition_Elastic_Clients_Elasticsearch_MachineLearning_Definition_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Definition(Elastic.Clients.Elasticsearch.MachineLearning.Definition)">
+  Definition(Definition?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L619"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The inference definition for the model. If definition is specified, then
+compressed_definition cannot be specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; Definition(Definition? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.Definition.html">Definition</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Definition_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Definition*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Definition_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_DefinitionDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Definition(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor})">
+  Definition(Action&lt;DefinitionDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L631"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The inference definition for the model. If definition is specified, then
+compressed_definition cannot be specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; Definition(Action&lt;DefinitionDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DefinitionDescriptor.html">DefinitionDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Description_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Description_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Description(System.String)">
+  Description(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L642"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A human-readable description of the inference trained model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; Description(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L813"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L819"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Human_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L825"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_InferenceConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.InferenceConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_InferenceConfig_Elastic_Clients_Elasticsearch_MachineLearning_InferenceConfigCreate_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate)">
+  InferenceConfig(InferenceConfigCreate?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L656"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The default configuration for inference. This can be either a regression
+or classification configuration. It must match the underlying
+definition.trained_model's target_type. For pre-packaged models such as
+ELSER the config is not required.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; InferenceConfig(InferenceConfigCreate? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate.html">InferenceConfigCreate</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_InferenceConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.InferenceConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_InferenceConfig_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_InferenceConfigCreateDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.InferenceConfig(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor{`0}})">
+  InferenceConfig(Action&lt;InferenceConfigCreateDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L670"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The default configuration for inference. This can be either a regression
+or classification configuration. It must match the underlying
+definition.trained_model's target_type. For pre-packaged models such as
+ELSER the config is not required.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; InferenceConfig(Action&lt;InferenceConfigCreateDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor-1.html">InferenceConfigCreateDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Input_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Input*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Input_Elastic_Clients_Elasticsearch_MachineLearning_Input_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Input(Elastic.Clients.Elasticsearch.MachineLearning.Input)">
+  Input(Input?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L681"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The input field names for the model definition.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; Input(Input? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.Input.html">Input</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Input_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Input*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Input_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_InputDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Input(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor})">
+  Input(Action&lt;InputDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L692"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The input field names for the model definition.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; Input(Action&lt;InputDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.InputDescriptor.html">InputDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Metadata_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Metadata_System_Object_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Metadata(System.Object)">
+  Metadata(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L703"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An object map that contains metadata about the model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; Metadata(object? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_ModelId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.ModelId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_ModelId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.ModelId(Elastic.Clients.Elasticsearch.Id)">
+  ModelId(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L569"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The unique identifier of the trained model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; ModelId(Id value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_ModelSizeBytes_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.ModelSizeBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_ModelSizeBytes_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.ModelSizeBytes(System.Nullable{System.Int64})">
+  ModelSizeBytes(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L716"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The estimated memory usage in bytes to keep the trained model in memory.
+This property is supported only if defer_definition_decompression is true
+or the model definition is not supplied.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; ModelSizeBytes(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_ModelType_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.ModelType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_ModelType_System_Nullable_Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelType__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.ModelType(System.Nullable{Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType})">
+  ModelType(TrainedModelType?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L727"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The model type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; ModelType(TrainedModelType? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType.html">TrainedModelType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_PlatformArchitecture_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.PlatformArchitecture*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_PlatformArchitecture_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.PlatformArchitecture(System.String)">
+  PlatformArchitecture(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L744"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The platform architecture (if applicable) of the trained mode. If the model
+only works on one platform, because it is heavily optimized for a particular
+processor architecture and OS combination, then this field specifies which.
+The format of the string must match the platform identifiers used by Elasticsearch,
+so one of, <code>linux-x86_64</code>, <code>linux-aarch64</code>, <code>darwin-x86_64</code>, <code>darwin-aarch64</code>,
+or <code>windows-x86_64</code>. For portable models (those that work independent of processor
+architecture or OS features), leave this field unset.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; PlatformArchitecture(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_PrefixStrings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.PrefixStrings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_PrefixStrings" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.PrefixStrings">
+  PrefixStrings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L766"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Optional prefix strings applied at inference
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; PrefixStrings()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_PrefixStrings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.PrefixStrings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_PrefixStrings_Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelPrefixStrings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.PrefixStrings(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings)">
+  PrefixStrings(TrainedModelPrefixStrings?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L755"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Optional prefix strings applied at inference
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; PrefixStrings(TrainedModelPrefixStrings? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings.html">TrainedModelPrefixStrings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_PrefixStrings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.PrefixStrings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_PrefixStrings_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_TrainedModelPrefixStringsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.PrefixStrings(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor})">
+  PrefixStrings(Action&lt;TrainedModelPrefixStringsDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L777"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Optional prefix strings applied at inference
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; PrefixStrings(Action&lt;TrainedModelPrefixStringsDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStringsDescriptor.html">TrainedModelPrefixStringsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Pretty_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L831"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L843"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.4/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L849"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.4/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.4/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L837"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Tags_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Tags*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Tags_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Tags(System.Collections.Generic.ICollection{System.String})">
+  Tags(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L788"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of tags to organize the model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; Tags(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Tags_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Tags*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_Tags_System_String___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.Tags(System.String[])">
+  Tags(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L799"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of tags to organize the model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; Tags(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_WaitForCompletion_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.WaitForCompletion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_WaitForCompletion_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.WaitForCompletion(System.Nullable{System.Boolean})">
+  WaitForCompletion(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L594"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Whether to wait for all child operations (e.g. model download)
+to complete.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutTrainedModelRequestDescriptor&lt;TDocument&gt; WaitForCompletion(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest__Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest)~Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor{`0}">
+  explicit operator PutTrainedModelRequestDescriptor&lt;TDocument&gt;(PutTrainedModelRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L561"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator PutTrainedModelRequestDescriptor&lt;TDocument&gt;(PutTrainedModelRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.html">PutTrainedModelRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequestDescriptor__0___Elastic_Clients_Elasticsearch_MachineLearning_PutTrainedModelRequest" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor{`0})~Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest">
+  implicit operator PutTrainedModelRequest(PutTrainedModelRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutTrainedModelRequest.g.cs/#L562"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator PutTrainedModelRequest(PutTrainedModelRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequestDescriptor-1.html">PutTrainedModelRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelRequest.html">PutTrainedModelRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
