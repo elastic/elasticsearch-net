@@ -4,12 +4,11 @@
 
 using System;
 using System.Runtime.Serialization;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-[JsonConverter(typeof(DateMathOperationConverter))]
+[JsonConverter(typeof(Json.DateMathOperationConverter))]
 public enum DateMathOperation
 {
 	[EnumMember(Value = "+")]
@@ -17,39 +16,6 @@ public enum DateMathOperation
 
 	[EnumMember(Value = "-")]
 	Subtract
-}
-
-internal sealed class DateMathOperationConverter : JsonConverter<DateMathOperation>
-{
-	public override DateMathOperation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "+":
-				return DateMathOperation.Add;
-			case "-":
-				return DateMathOperation.Subtract;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, DateMathOperation value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case DateMathOperation.Add:
-				writer.WriteStringValue("+");
-				return;
-			case DateMathOperation.Subtract:
-				writer.WriteStringValue("-");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
 }
 
 public static class DateMathOperationExtensions
@@ -60,8 +26,10 @@ public static class DateMathOperationExtensions
 		{
 			case DateMathOperation.Add:
 				return "+";
+
 			case DateMathOperation.Subtract:
 				return "-";
+
 			default:
 				throw new ArgumentOutOfRangeException(nameof(value), value, null);
 		}
