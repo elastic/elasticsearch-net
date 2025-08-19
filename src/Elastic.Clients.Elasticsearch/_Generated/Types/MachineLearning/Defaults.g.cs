@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class DefaultsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Defaults>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAnomalyDetectors = System.Text.Json.JsonEncodedText.Encode("anomaly_detectors");
-	private static readonly System.Text.Json.JsonEncodedText PropDatafeeds = System.Text.Json.JsonEncodedText.Encode("datafeeds");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.Defaults Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnomalyDetectors> propAnomalyDetectors = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Datafeeds> propDatafeeds = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAnomalyDetectors.TryReadProperty(ref reader, options, PropAnomalyDetectors, null))
-			{
-				continue;
-			}
-
-			if (propDatafeeds.TryReadProperty(ref reader, options, PropDatafeeds, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.Defaults(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AnomalyDetectors = propAnomalyDetectors.Value,
-			Datafeeds = propDatafeeds.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.Defaults value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnomalyDetectors, value.AnomalyDetectors, null, null);
-		writer.WriteProperty(options, PropDatafeeds, value.Datafeeds, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DefaultsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DefaultsConverter))]
 public sealed partial class Defaults
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class AggregateOutputConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropExponent = System.Text.Json.JsonEncodedText.Encode("exponent");
-	private static readonly System.Text.Json.JsonEncodedText PropLogisticRegression = System.Text.Json.JsonEncodedText.Encode("logistic_regression");
-	private static readonly System.Text.Json.JsonEncodedText PropWeightedMode = System.Text.Json.JsonEncodedText.Encode("weighted_mode");
-	private static readonly System.Text.Json.JsonEncodedText PropWeightedSum = System.Text.Json.JsonEncodedText.Encode("weighted_sum");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Weights?> propExponent = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Weights?> propLogisticRegression = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Weights?> propWeightedMode = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Weights?> propWeightedSum = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propExponent.TryReadProperty(ref reader, options, PropExponent, null))
-			{
-				continue;
-			}
-
-			if (propLogisticRegression.TryReadProperty(ref reader, options, PropLogisticRegression, null))
-			{
-				continue;
-			}
-
-			if (propWeightedMode.TryReadProperty(ref reader, options, PropWeightedMode, null))
-			{
-				continue;
-			}
-
-			if (propWeightedSum.TryReadProperty(ref reader, options, PropWeightedSum, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Exponent = propExponent.Value,
-			LogisticRegression = propLogisticRegression.Value,
-			WeightedMode = propWeightedMode.Value,
-			WeightedSum = propWeightedSum.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutput value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropExponent, value.Exponent, null, null);
-		writer.WriteProperty(options, PropLogisticRegression, value.LogisticRegression, null, null);
-		writer.WriteProperty(options, PropWeightedMode, value.WeightedMode, null, null);
-		writer.WriteProperty(options, PropWeightedSum, value.WeightedSum, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.AggregateOutputConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.AggregateOutputConverter))]
 public sealed partial class AggregateOutput
 {
 #if NET7_0_OR_GREATER

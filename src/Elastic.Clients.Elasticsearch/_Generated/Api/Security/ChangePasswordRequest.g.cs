@@ -33,54 +33,6 @@ public sealed partial class ChangePasswordRequestParameters : Elastic.Transport.
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
-internal sealed partial class ChangePasswordRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
-	private static readonly System.Text.Json.JsonEncodedText PropPasswordHash = System.Text.Json.JsonEncodedText.Encode("password_hash");
-
-	public override Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propPassword = default;
-		LocalJsonValue<string?> propPasswordHash = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propPassword.TryReadProperty(ref reader, options, PropPassword, null))
-			{
-				continue;
-			}
-
-			if (propPasswordHash.TryReadProperty(ref reader, options, PropPasswordHash, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Password = propPassword.Value,
-			PasswordHash = propPasswordHash.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPassword, value.Password, null, null);
-		writer.WriteProperty(options, PropPasswordHash, value.PasswordHash, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Change passwords.
@@ -89,7 +41,7 @@ internal sealed partial class ChangePasswordRequestConverter : System.Text.Json.
 /// Change the passwords of users in the native realm and built-in users.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.ChangePasswordRequestConverter))]
 public sealed partial class ChangePasswordRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>
 {
 	public ChangePasswordRequest(Elastic.Clients.Elasticsearch.Username? username) : base(r => r.Optional("username", username))

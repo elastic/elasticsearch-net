@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-internal sealed partial class MlJobForecastsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropForecastedJobs = System.Text.Json.JsonEncodedText.Encode("forecasted_jobs");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-
-	public override Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long> propForecastedJobs = default;
-		LocalJsonValue<long> propTotal = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propForecastedJobs.TryReadProperty(ref reader, options, PropForecastedJobs, null))
-			{
-				continue;
-			}
-
-			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ForecastedJobs = propForecastedJobs.Value,
-			Total = propTotal.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.MlJobForecasts value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropForecastedJobs, value.ForecastedJobs, null, null);
-		writer.WriteProperty(options, PropTotal, value.Total, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.MlJobForecastsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.MlJobForecastsConverter))]
 public sealed partial class MlJobForecasts
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

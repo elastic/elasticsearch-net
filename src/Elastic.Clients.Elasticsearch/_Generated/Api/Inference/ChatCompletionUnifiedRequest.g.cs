@@ -33,19 +33,6 @@ public sealed partial class ChatCompletionUnifiedRequestParameters : Elastic.Tra
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class ChatCompletionUnifiedRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { ChatCompletionRequest = reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.ChatCompletionRequest, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Perform chat completion inference
@@ -61,7 +48,7 @@ internal sealed partial class ChatCompletionUnifiedRequestConverter : System.Tex
 /// If you use the <c>openai</c>, <c>hugging_face</c> or the <c>elastic</c> service, use the Chat completion inference API.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.ChatCompletionUnifiedRequestConverter))]
 public sealed partial class ChatCompletionUnifiedRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

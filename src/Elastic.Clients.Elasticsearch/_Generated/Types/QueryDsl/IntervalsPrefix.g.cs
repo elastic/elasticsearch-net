@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class IntervalsPrefixConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
-	private static readonly System.Text.Json.JsonEncodedText PropUseField = System.Text.Json.JsonEncodedText.Encode("use_field");
-
-	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propAnalyzer = default;
-		LocalJsonValue<string> propPrefix = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propUseField = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
-			{
-				continue;
-			}
-
-			if (propPrefix.TryReadProperty(ref reader, options, PropPrefix, null))
-			{
-				continue;
-			}
-
-			if (propUseField.TryReadProperty(ref reader, options, PropUseField, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Analyzer = propAnalyzer.Value,
-			Prefix = propPrefix.Value,
-			UseField = propUseField.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
-		writer.WriteProperty(options, PropPrefix, value.Prefix, null, null);
-		writer.WriteProperty(options, PropUseField, value.UseField, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefixConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Json.IntervalsPrefixConverter))]
 public sealed partial class IntervalsPrefix
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

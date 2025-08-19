@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class FiltersAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFilters = System.Text.Json.JsonEncodedText.Encode("filters");
-	private static readonly System.Text.Json.JsonEncodedText PropOtherBucket = System.Text.Json.JsonEncodedText.Encode("other_bucket");
-	private static readonly System.Text.Json.JsonEncodedText PropOtherBucketKey = System.Text.Json.JsonEncodedText.Encode("other_bucket_key");
-
-	public override Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilters = default;
-		LocalJsonValue<bool?> propOtherBucket = default;
-		LocalJsonValue<string?> propOtherBucketKey = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFilters.TryReadProperty(ref reader, options, PropFilters, null))
-			{
-				continue;
-			}
-
-			if (propOtherBucket.TryReadProperty(ref reader, options, PropOtherBucket, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propOtherBucketKey.TryReadProperty(ref reader, options, PropOtherBucketKey, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Filters = propFilters.Value,
-			OtherBucket = propOtherBucket.Value,
-			OtherBucketKey = propOtherBucketKey.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFilters, value.Filters, null, null);
-		writer.WriteProperty(options, PropOtherBucket, value.OtherBucket, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropOtherBucketKey, value.OtherBucketKey, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregationConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.FiltersAggregationConverter))]
 public sealed partial class FiltersAggregation
 {
 #if NET7_0_OR_GREATER

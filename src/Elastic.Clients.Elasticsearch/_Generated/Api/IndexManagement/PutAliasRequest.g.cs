@@ -42,88 +42,13 @@ public sealed partial class PutAliasRequestParameters : Elastic.Transport.Reques
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class PutAliasRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexRouting = System.Text.Json.JsonEncodedText.Encode("index_routing");
-	private static readonly System.Text.Json.JsonEncodedText PropIsWriteIndex = System.Text.Json.JsonEncodedText.Encode("is_write_index");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchRouting = System.Text.Json.JsonEncodedText.Encode("search_routing");
-
-	public override Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propIndexRouting = default;
-		LocalJsonValue<bool?> propIsWriteIndex = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propSearchRouting = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
-			{
-				continue;
-			}
-
-			if (propIndexRouting.TryReadProperty(ref reader, options, PropIndexRouting, null))
-			{
-				continue;
-			}
-
-			if (propIsWriteIndex.TryReadProperty(ref reader, options, PropIsWriteIndex, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
-			{
-				continue;
-			}
-
-			if (propSearchRouting.TryReadProperty(ref reader, options, PropSearchRouting, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Filter = propFilter.Value,
-			IndexRouting = propIndexRouting.Value,
-			IsWriteIndex = propIsWriteIndex.Value,
-			Routing = propRouting.Value,
-			SearchRouting = propSearchRouting.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
-		writer.WriteProperty(options, PropIndexRouting, value.IndexRouting, null, null);
-		writer.WriteProperty(options, PropIsWriteIndex, value.IsWriteIndex, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
-		writer.WriteProperty(options, PropSearchRouting, value.SearchRouting, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create or update an alias.
 /// Adds a data stream or index to an alias.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.PutAliasRequestConverter))]
 public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutAliasRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

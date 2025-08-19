@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-internal sealed partial class InputConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.InputConfig>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropInputField = System.Text.Json.JsonEncodedText.Encode("input_field");
-	private static readonly System.Text.Json.JsonEncodedText PropOutputField = System.Text.Json.JsonEncodedText.Encode("output_field");
-
-	public override Elastic.Clients.Elasticsearch.Ingest.InputConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propInputField = default;
-		LocalJsonValue<string> propOutputField = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propInputField.TryReadProperty(ref reader, options, PropInputField, null))
-			{
-				continue;
-			}
-
-			if (propOutputField.TryReadProperty(ref reader, options, PropOutputField, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Ingest.InputConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			InputField = propInputField.Value,
-			OutputField = propOutputField.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.InputConfig value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropInputField, value.InputField, null, null);
-		writer.WriteProperty(options, PropOutputField, value.OutputField, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.InputConfigConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.InputConfigConverter))]
 public sealed partial class InputConfig
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class TokenPruningConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TokenPruningConfig>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropOnlyScorePrunedTokens = System.Text.Json.JsonEncodedText.Encode("only_score_pruned_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropTokensFreqRatioThreshold = System.Text.Json.JsonEncodedText.Encode("tokens_freq_ratio_threshold");
-	private static readonly System.Text.Json.JsonEncodedText PropTokensWeightThreshold = System.Text.Json.JsonEncodedText.Encode("tokens_weight_threshold");
-
-	public override Elastic.Clients.Elasticsearch.TokenPruningConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propOnlyScorePrunedTokens = default;
-		LocalJsonValue<int?> propTokensFreqRatioThreshold = default;
-		LocalJsonValue<float?> propTokensWeightThreshold = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propOnlyScorePrunedTokens.TryReadProperty(ref reader, options, PropOnlyScorePrunedTokens, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propTokensFreqRatioThreshold.TryReadProperty(ref reader, options, PropTokensFreqRatioThreshold, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propTokensWeightThreshold.TryReadProperty(ref reader, options, PropTokensWeightThreshold, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TokenPruningConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			OnlyScorePrunedTokens = propOnlyScorePrunedTokens.Value,
-			TokensFreqRatioThreshold = propTokensFreqRatioThreshold.Value,
-			TokensWeightThreshold = propTokensWeightThreshold.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TokenPruningConfig value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropOnlyScorePrunedTokens, value.OnlyScorePrunedTokens, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropTokensFreqRatioThreshold, value.TokensFreqRatioThreshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropTokensWeightThreshold, value.TokensWeightThreshold, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TokenPruningConfigConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.TokenPruningConfigConverter))]
 public sealed partial class TokenPruningConfig
 {
 #if NET7_0_OR_GREATER

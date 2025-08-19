@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.TermVectors;
 
-internal sealed partial class FieldStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropSumDocFreq = System.Text.Json.JsonEncodedText.Encode("sum_doc_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropSumTtf = System.Text.Json.JsonEncodedText.Encode("sum_ttf");
-
-	public override Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int> propDocCount = default;
-		LocalJsonValue<long> propSumDocFreq = default;
-		LocalJsonValue<long> propSumTtf = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
-			{
-				continue;
-			}
-
-			if (propSumDocFreq.TryReadProperty(ref reader, options, PropSumDocFreq, null))
-			{
-				continue;
-			}
-
-			if (propSumTtf.TryReadProperty(ref reader, options, PropSumTtf, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			DocCount = propDocCount.Value,
-			SumDocFreq = propSumDocFreq.Value,
-			SumTtf = propSumTtf.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
-		writer.WriteProperty(options, PropSumDocFreq, value.SumDocFreq, null, null);
-		writer.WriteProperty(options, PropSumTtf, value.SumTtf, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatisticsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.TermVectors.Json.FieldStatisticsConverter))]
 public sealed partial class FieldStatistics
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

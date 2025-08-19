@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class TermsPartitionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TermsPartition>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropNumPartitions = System.Text.Json.JsonEncodedText.Encode("num_partitions");
-	private static readonly System.Text.Json.JsonEncodedText PropPartition = System.Text.Json.JsonEncodedText.Encode("partition");
-
-	public override Elastic.Clients.Elasticsearch.Aggregations.TermsPartition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long> propNumPartitions = default;
-		LocalJsonValue<long> propPartition = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propNumPartitions.TryReadProperty(ref reader, options, PropNumPartitions, null))
-			{
-				continue;
-			}
-
-			if (propPartition.TryReadProperty(ref reader, options, PropPartition, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.TermsPartition(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			NumPartitions = propNumPartitions.Value,
-			Partition = propPartition.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TermsPartition value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNumPartitions, value.NumPartitions, null, null);
-		writer.WriteProperty(options, PropPartition, value.Partition, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.TermsPartitionConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TermsPartitionConverter))]
 public sealed partial class TermsPartition
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

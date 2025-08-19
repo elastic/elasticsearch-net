@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class DataframeAnalyticsStatsMemoryUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryReestimateBytes = System.Text.Json.JsonEncodedText.Encode("memory_reestimate_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropPeakUsageBytes = System.Text.Json.JsonEncodedText.Encode("peak_usage_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<long?> propMemoryReestimateBytes = default;
-		LocalJsonValue<long> propPeakUsageBytes = default;
-		LocalJsonValue<string> propStatus = default;
-		LocalJsonValue<System.DateTimeOffset?> propTimestamp = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMemoryReestimateBytes.TryReadProperty(ref reader, options, PropMemoryReestimateBytes, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (propPeakUsageBytes.TryReadProperty(ref reader, options, PropPeakUsageBytes, null))
-			{
-				continue;
-			}
-
-			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
-			{
-				continue;
-			}
-
-			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			MemoryReestimateBytes = propMemoryReestimateBytes.Value,
-			PeakUsageBytes = propPeakUsageBytes.Value,
-			Status = propStatus.Value,
-			Timestamp = propTimestamp.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsage value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMemoryReestimateBytes, value.MemoryReestimateBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropPeakUsageBytes, value.PeakUsageBytes, null, null);
-		writer.WriteProperty(options, PropStatus, value.Status, null, null);
-		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsMemoryUsageConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsStatsMemoryUsageConverter))]
 public sealed partial class DataframeAnalyticsStatsMemoryUsage
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

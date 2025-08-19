@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-internal sealed partial class XpackInfoResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropBuild = System.Text.Json.JsonEncodedText.Encode("build");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features");
-	private static readonly System.Text.Json.JsonEncodedText PropLicense = System.Text.Json.JsonEncodedText.Encode("license");
-	private static readonly System.Text.Json.JsonEncodedText PropTagline = System.Text.Json.JsonEncodedText.Encode("tagline");
-
-	public override Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.BuildInformation> propBuild = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Features> propFeatures = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.MinimalLicenseInformation> propLicense = default;
-		LocalJsonValue<string> propTagline = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propBuild.TryReadProperty(ref reader, options, PropBuild, null))
-			{
-				continue;
-			}
-
-			if (propFeatures.TryReadProperty(ref reader, options, PropFeatures, null))
-			{
-				continue;
-			}
-
-			if (propLicense.TryReadProperty(ref reader, options, PropLicense, null))
-			{
-				continue;
-			}
-
-			if (propTagline.TryReadProperty(ref reader, options, PropTagline, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Build = propBuild.Value,
-			Features = propFeatures.Value,
-			License = propLicense.Value,
-			Tagline = propTagline.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropBuild, value.Build, null, null);
-		writer.WriteProperty(options, PropFeatures, value.Features, null, null);
-		writer.WriteProperty(options, PropLicense, value.License, null, null);
-		writer.WriteProperty(options, PropTagline, value.Tagline, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Xpack.Json.XpackInfoResponseConverter))]
 public sealed partial class XpackInfoResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
@@ -105,22 +39,22 @@ public sealed partial class XpackInfoResponse : Elastic.Transport.Products.Elast
 
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		Elastic.Clients.Elasticsearch.Xpack.BuildInformation Build { get; set; }
+Elastic.Clients.Elasticsearch.Xpack.BuildInformation Build { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		Elastic.Clients.Elasticsearch.Xpack.Features Features { get; set; }
+Elastic.Clients.Elasticsearch.Xpack.Features Features { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		Elastic.Clients.Elasticsearch.Xpack.MinimalLicenseInformation License { get; set; }
+Elastic.Clients.Elasticsearch.Xpack.MinimalLicenseInformation License { get; set; }
 	public
 #if NET7_0_OR_GREATER
-		required
+required
 #endif
-		string Tagline { get; set; }
+string Tagline { get; set; }
 }

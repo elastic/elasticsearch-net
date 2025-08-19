@@ -54,35 +54,6 @@ public sealed partial class ReloadSearchAnalyzersRequestParameters : Elastic.Tra
 	public string? Resource { get => Q<string?>("resource"); set => Q("resource", value); }
 }
 
-internal sealed partial class ReloadSearchAnalyzersRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest>
-{
-	public override Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Reload search analyzers.
@@ -104,7 +75,7 @@ internal sealed partial class ReloadSearchAnalyzersRequestConverter : System.Tex
 /// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.ReloadSearchAnalyzersRequestConverter))]
 public sealed partial class ReloadSearchAnalyzersRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class DataframeAnalyticsStatsDataCountsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsDataCounts>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropSkippedDocsCount = System.Text.Json.JsonEncodedText.Encode("skipped_docs_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTestDocsCount = System.Text.Json.JsonEncodedText.Encode("test_docs_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTrainingDocsCount = System.Text.Json.JsonEncodedText.Encode("training_docs_count");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsDataCounts Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int> propSkippedDocsCount = default;
-		LocalJsonValue<int> propTestDocsCount = default;
-		LocalJsonValue<int> propTrainingDocsCount = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propSkippedDocsCount.TryReadProperty(ref reader, options, PropSkippedDocsCount, null))
-			{
-				continue;
-			}
-
-			if (propTestDocsCount.TryReadProperty(ref reader, options, PropTestDocsCount, null))
-			{
-				continue;
-			}
-
-			if (propTrainingDocsCount.TryReadProperty(ref reader, options, PropTrainingDocsCount, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsDataCounts(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			SkippedDocsCount = propSkippedDocsCount.Value,
-			TestDocsCount = propTestDocsCount.Value,
-			TrainingDocsCount = propTrainingDocsCount.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsDataCounts value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSkippedDocsCount, value.SkippedDocsCount, null, null);
-		writer.WriteProperty(options, PropTestDocsCount, value.TestDocsCount, null, null);
-		writer.WriteProperty(options, PropTrainingDocsCount, value.TrainingDocsCount, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsStatsDataCountsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DataframeAnalyticsStatsDataCountsConverter))]
 public sealed partial class DataframeAnalyticsStatsDataCounts
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

@@ -47,35 +47,6 @@ public sealed partial class HealthReportRequestParameters : Elastic.Transport.Re
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
-internal sealed partial class HealthReportRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.HealthReportRequest>
-{
-	public override Elastic.Clients.Elasticsearch.HealthReportRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.HealthReportRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.HealthReportRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Get the cluster health.
@@ -103,7 +74,7 @@ internal sealed partial class HealthReportRequestConverter : System.Text.Json.Se
 /// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.HealthReportRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.HealthReportRequestConverter))]
 public sealed partial class HealthReportRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.HealthReportRequestParameters>
 {
 	public HealthReportRequest(System.Collections.Generic.ICollection<string>? feature) : base(r => r.Optional("feature", feature))

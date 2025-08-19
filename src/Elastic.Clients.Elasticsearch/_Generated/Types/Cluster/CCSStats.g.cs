@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-internal sealed partial class CCSStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.CCSStats>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropClusters = System.Text.Json.JsonEncodedText.Encode("clusters");
-	private static readonly System.Text.Json.JsonEncodedText PropEsql = System.Text.Json.JsonEncodedText.Encode("_esql");
-	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("_search");
-
-	public override Elastic.Clients.Elasticsearch.Cluster.CCSStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo>?> propClusters = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.CCSUsageStats?> propEsql = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.CCSUsageStats> propSearch = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propClusters.TryReadProperty(ref reader, options, PropClusters, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo>(o, null, null)))
-			{
-				continue;
-			}
-
-			if (propEsql.TryReadProperty(ref reader, options, PropEsql, null))
-			{
-				continue;
-			}
-
-			if (propSearch.TryReadProperty(ref reader, options, PropSearch, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Cluster.CCSStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Clusters = propClusters.Value,
-			Esql = propEsql.Value,
-			Search = propSearch.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.CCSStats value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClusters, value.Clusters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo>(o, v, null, null));
-		writer.WriteProperty(options, PropEsql, value.Esql, null, null);
-		writer.WriteProperty(options, PropSearch, value.Search, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.CCSStatsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.Json.CCSStatsConverter))]
 public sealed partial class CCSStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

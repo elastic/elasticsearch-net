@@ -43,54 +43,6 @@ public sealed partial class MigrateToDataTiersRequestParameters : Elastic.Transp
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-internal sealed partial class MigrateToDataTiersRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropLegacyTemplateToDelete = System.Text.Json.JsonEncodedText.Encode("legacy_template_to_delete");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeAttribute = System.Text.Json.JsonEncodedText.Encode("node_attribute");
-
-	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propLegacyTemplateToDelete = default;
-		LocalJsonValue<string?> propNodeAttribute = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propLegacyTemplateToDelete.TryReadProperty(ref reader, options, PropLegacyTemplateToDelete, null))
-			{
-				continue;
-			}
-
-			if (propNodeAttribute.TryReadProperty(ref reader, options, PropNodeAttribute, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			LegacyTemplateToDelete = propLegacyTemplateToDelete.Value,
-			NodeAttribute = propNodeAttribute.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropLegacyTemplateToDelete, value.LegacyTemplateToDelete, null, null);
-		writer.WriteProperty(options, PropNodeAttribute, value.NodeAttribute, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Migrate to data tiers routing.
@@ -124,7 +76,7 @@ internal sealed partial class MigrateToDataTiersRequestConverter : System.Text.J
 /// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.MigrateToDataTiersRequestConverter))]
 public sealed partial class MigrateToDataTiersRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>
 {
 #if NET7_0_OR_GREATER
