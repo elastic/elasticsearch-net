@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-internal sealed partial class IndexRoutingAllocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDisk = System.Text.Json.JsonEncodedText.Encode("disk");
-	private static readonly System.Text.Json.JsonEncodedText PropEnable = System.Text.Json.JsonEncodedText.Encode("enable");
-	private static readonly System.Text.Json.JsonEncodedText PropInclude = System.Text.Json.JsonEncodedText.Encode("include");
-	private static readonly System.Text.Json.JsonEncodedText PropInitialRecovery = System.Text.Json.JsonEncodedText.Encode("initial_recovery");
-
-	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationDisk?> propDisk = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions?> propEnable = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInclude?> propInclude = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationInitialRecovery?> propInitialRecovery = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDisk.TryReadProperty(ref reader, options, PropDisk, null))
-			{
-				continue;
-			}
-
-			if (propEnable.TryReadProperty(ref reader, options, PropEnable, static Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions>(o)))
-			{
-				continue;
-			}
-
-			if (propInclude.TryReadProperty(ref reader, options, PropInclude, null))
-			{
-				continue;
-			}
-
-			if (propInitialRecovery.TryReadProperty(ref reader, options, PropInitialRecovery, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Disk = propDisk.Value,
-			Enable = propEnable.Value,
-			Include = propInclude.Value,
-			InitialRecovery = propInitialRecovery.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocation value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDisk, value.Disk, null, null);
-		writer.WriteProperty(options, PropEnable, value.Enable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions>(o, v));
-		writer.WriteProperty(options, PropInclude, value.Include, null, null);
-		writer.WriteProperty(options, PropInitialRecovery, value.InitialRecovery, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndexRoutingAllocationConverter))]
 public sealed partial class IndexRoutingAllocation
 {
 #if NET7_0_OR_GREATER

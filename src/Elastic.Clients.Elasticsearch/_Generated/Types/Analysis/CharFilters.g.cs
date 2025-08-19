@@ -23,20 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-internal sealed partial class CharFiltersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.CharFilters>
-{
-	public override Elastic.Clients.Elasticsearch.Analysis.CharFilters Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.Analysis.CharFilters(reader.ReadValue<System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>?>(options, static System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>(o, null, null)));
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.CharFilters value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.BackingDictionary, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>(o, v, null, null));
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.CharFiltersConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.CharFiltersConverter))]
 public sealed partial class CharFilters : Elastic.Clients.Elasticsearch.IsADictionary<string, Elastic.Clients.Elasticsearch.Analysis.ICharFilter>
 {
 	public CharFilters()

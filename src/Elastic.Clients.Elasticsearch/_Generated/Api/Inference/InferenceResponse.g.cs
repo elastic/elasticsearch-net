@@ -23,20 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-internal sealed partial class InferenceResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.InferenceResponse>
-{
-	public override Elastic.Clients.Elasticsearch.Inference.InferenceResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.Inference.InferenceResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Result = reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.InferenceResult>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.InferenceResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.Result, null);
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.InferenceResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.InferenceResponseConverter))]
 public sealed partial class InferenceResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

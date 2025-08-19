@@ -27,54 +27,6 @@ public sealed partial class MoveToStepRequestParameters : Elastic.Transport.Requ
 {
 }
 
-internal sealed partial class MoveToStepRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentStep = System.Text.Json.JsonEncodedText.Encode("current_step");
-	private static readonly System.Text.Json.JsonEncodedText PropNextStep = System.Text.Json.JsonEncodedText.Encode("next_step");
-
-	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey> propCurrentStep = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey> propNextStep = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCurrentStep.TryReadProperty(ref reader, options, PropCurrentStep, null))
-			{
-				continue;
-			}
-
-			if (propNextStep.TryReadProperty(ref reader, options, PropNextStep, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CurrentStep = propCurrentStep.Value,
-			NextStep = propNextStep.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCurrentStep, value.CurrentStep, null, null);
-		writer.WriteProperty(options, PropNextStep, value.NextStep, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Move to a lifecycle step.
@@ -96,7 +48,7 @@ internal sealed partial class MoveToStepRequestConverter : System.Text.Json.Seri
 /// An index cannot move to a step that is not part of its policy.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json.MoveToStepRequestConverter))]
 public sealed partial class MoveToStepRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

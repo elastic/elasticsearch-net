@@ -23,61 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-internal sealed partial class SyncConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Sync>
-{
-	private static readonly System.Text.Json.JsonEncodedText VariantTime = System.Text.Json.JsonEncodedText.Encode("time");
-
-	public override Elastic.Clients.Elasticsearch.TransformManagement.Sync Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		string? variantType = null;
-		object? variant = null;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (reader.ValueTextEquals(VariantTime))
-			{
-				variantType = VariantTime.Value;
-				reader.Read();
-				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.TransformManagement.TimeSync>(options, null);
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TransformManagement.Sync(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			VariantType = variantType,
-			Variant = variant
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.Sync value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		switch (value.VariantType)
-		{
-			case null:
-				break;
-			case "time":
-				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.TransformManagement.TimeSync)value.Variant, null, null);
-				break;
-			default:
-				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.TransformManagement.Sync)}'.");
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.SyncConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.SyncConverter))]
 public sealed partial class Sync
 {
 	internal string? VariantType { get; set; }

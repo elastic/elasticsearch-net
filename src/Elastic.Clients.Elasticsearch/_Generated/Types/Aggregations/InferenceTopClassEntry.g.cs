@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class InferenceTopClassEntryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropClassName = System.Text.Json.JsonEncodedText.Encode("class_name");
-	private static readonly System.Text.Json.JsonEncodedText PropClassProbability = System.Text.Json.JsonEncodedText.Encode("class_probability");
-	private static readonly System.Text.Json.JsonEncodedText PropClassScore = System.Text.Json.JsonEncodedText.Encode("class_score");
-
-	public override Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.FieldValue> propClassName = default;
-		LocalJsonValue<double> propClassProbability = default;
-		LocalJsonValue<double> propClassScore = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propClassName.TryReadProperty(ref reader, options, PropClassName, null))
-			{
-				continue;
-			}
-
-			if (propClassProbability.TryReadProperty(ref reader, options, PropClassProbability, null))
-			{
-				continue;
-			}
-
-			if (propClassScore.TryReadProperty(ref reader, options, PropClassScore, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ClassName = propClassName.Value,
-			ClassProbability = propClassProbability.Value,
-			ClassScore = propClassScore.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntry value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropClassName, value.ClassName, null, null);
-		writer.WriteProperty(options, PropClassProbability, value.ClassProbability, null, null);
-		writer.WriteProperty(options, PropClassScore, value.ClassScore, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.InferenceTopClassEntryConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.InferenceTopClassEntryConverter))]
 public sealed partial class InferenceTopClassEntry
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

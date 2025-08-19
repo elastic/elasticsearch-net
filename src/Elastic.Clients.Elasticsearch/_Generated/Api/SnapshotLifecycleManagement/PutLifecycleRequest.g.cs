@@ -44,81 +44,6 @@ public sealed partial class PutLifecycleRequestParameters : Elastic.Transport.Re
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
-internal sealed partial class PutLifecycleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropConfig = System.Text.Json.JsonEncodedText.Encode("config");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropRepository = System.Text.Json.JsonEncodedText.Encode("repository");
-	private static readonly System.Text.Json.JsonEncodedText PropRetention = System.Text.Json.JsonEncodedText.Encode("retention");
-	private static readonly System.Text.Json.JsonEncodedText PropSchedule = System.Text.Json.JsonEncodedText.Encode("schedule");
-
-	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration?> propConfig = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propName = default;
-		LocalJsonValue<string?> propRepository = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention?> propRetention = default;
-		LocalJsonValue<string?> propSchedule = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propConfig.TryReadProperty(ref reader, options, PropConfig, null))
-			{
-				continue;
-			}
-
-			if (propName.TryReadProperty(ref reader, options, PropName, null))
-			{
-				continue;
-			}
-
-			if (propRepository.TryReadProperty(ref reader, options, PropRepository, null))
-			{
-				continue;
-			}
-
-			if (propRetention.TryReadProperty(ref reader, options, PropRetention, null))
-			{
-				continue;
-			}
-
-			if (propSchedule.TryReadProperty(ref reader, options, PropSchedule, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Config = propConfig.Value,
-			Name = propName.Value,
-			Repository = propRepository.Value,
-			Retention = propRetention.Value,
-			Schedule = propSchedule.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropConfig, value.Config, null, null);
-		writer.WriteProperty(options, PropName, value.Name, null, null);
-		writer.WriteProperty(options, PropRepository, value.Repository, null, null);
-		writer.WriteProperty(options, PropRetention, value.Retention, null, null);
-		writer.WriteProperty(options, PropSchedule, value.Schedule, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create or update a policy.
@@ -127,7 +52,7 @@ internal sealed partial class PutLifecycleRequestConverter : System.Text.Json.Se
 /// Only the latest version of a policy is stored.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json.PutLifecycleRequestConverter))]
 public sealed partial class PutLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

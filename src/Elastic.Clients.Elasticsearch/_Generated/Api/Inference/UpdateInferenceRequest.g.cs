@@ -27,19 +27,6 @@ public sealed partial class UpdateInferenceRequestParameters : Elastic.Transport
 {
 }
 
-internal sealed partial class UpdateInferenceRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest>
-{
-	public override Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { InferenceConfig = reader.ReadValue<Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.InferenceConfig, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Update an inference endpoint.
@@ -53,7 +40,7 @@ internal sealed partial class UpdateInferenceRequestConverter : System.Text.Json
 /// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.UpdateInferenceRequestConverter))]
 public sealed partial class UpdateInferenceRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

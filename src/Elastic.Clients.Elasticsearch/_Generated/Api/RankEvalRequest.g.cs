@@ -54,54 +54,6 @@ public sealed partial class RankEvalRequestParameters : Elastic.Transport.Reques
 	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
 }
 
-internal sealed partial class RankEvalRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RankEvalRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropMetric = System.Text.Json.JsonEncodedText.Encode("metric");
-	private static readonly System.Text.Json.JsonEncodedText PropRequests = System.Text.Json.JsonEncodedText.Encode("requests");
-
-	public override Elastic.Clients.Elasticsearch.RankEvalRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric?> propMetric = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>> propRequests = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propMetric.TryReadProperty(ref reader, options, PropMetric, null))
-			{
-				continue;
-			}
-
-			if (propRequests.TryReadProperty(ref reader, options, PropRequests, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>(o, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.RankEvalRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Metric = propMetric.Value,
-			Requests = propRequests.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.RankEvalRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMetric, value.Metric, null, null);
-		writer.WriteProperty(options, PropRequests, value.Requests, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalRequestItem>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Evaluate ranked search results.
@@ -110,7 +62,7 @@ internal sealed partial class RankEvalRequestConverter : System.Text.Json.Serial
 /// Evaluate the quality of ranked search results over a set of typical search queries.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.RankEvalRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.RankEvalRequestConverter))]
 public sealed partial class RankEvalRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.RankEvalRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

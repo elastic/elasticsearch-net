@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Enrich;
 
-internal sealed partial class ExecuteEnrichPolicyStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropPhase = System.Text.Json.JsonEncodedText.Encode("phase");
-	private static readonly System.Text.Json.JsonEncodedText PropStep = System.Text.Json.JsonEncodedText.Encode("step");
-
-	public override Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase> propPhase = default;
-		LocalJsonValue<string?> propStep = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propPhase.TryReadProperty(ref reader, options, PropPhase, null))
-			{
-				continue;
-			}
-
-			if (propStep.TryReadProperty(ref reader, options, PropStep, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Phase = propPhase.Value,
-			Step = propStep.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropPhase, value.Phase, null, null);
-		writer.WriteProperty(options, PropStep, value.Step, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatusConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Enrich.Json.ExecuteEnrichPolicyStatusConverter))]
 public sealed partial class ExecuteEnrichPolicyStatus
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

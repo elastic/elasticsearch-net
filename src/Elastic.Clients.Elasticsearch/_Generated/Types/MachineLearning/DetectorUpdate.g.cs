@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class DetectorUpdateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCustomRules = System.Text.Json.JsonEncodedText.Encode("custom_rules");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropDetectorIndex = System.Text.Json.JsonEncodedText.Encode("detector_index");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>?> propCustomRules = default;
-		LocalJsonValue<string?> propDescription = default;
-		LocalJsonValue<int> propDetectorIndex = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCustomRules.TryReadProperty(ref reader, options, PropCustomRules, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>(o, null)))
-			{
-				continue;
-			}
-
-			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
-			{
-				continue;
-			}
-
-			if (propDetectorIndex.TryReadProperty(ref reader, options, PropDetectorIndex, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			CustomRules = propCustomRules.Value,
-			Description = propDescription.Value,
-			DetectorIndex = propDetectorIndex.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCustomRules, value.CustomRules, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectionRule>(o, v, null));
-		writer.WriteProperty(options, PropDescription, value.Description, null, null);
-		writer.WriteProperty(options, PropDetectorIndex, value.DetectorIndex, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.DetectorUpdateConverter))]
 public sealed partial class DetectorUpdate
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

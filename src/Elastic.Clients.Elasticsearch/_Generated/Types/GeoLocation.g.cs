@@ -50,7 +50,7 @@ namespace Elastic.Clients.Elasticsearch;
 /// </item>
 /// </list>
 /// </summary>
-public sealed partial class GeoLocation : Elastic.Clients.Elasticsearch.Core.IComplexUnion<Elastic.Clients.Elasticsearch.GeoLocation.Kind>
+public partial class GeoLocation : Elastic.Clients.Elasticsearch.Core.IComplexUnion<Elastic.Clients.Elasticsearch.GeoLocation.Kind>
 {
 	public enum Kind
 	{

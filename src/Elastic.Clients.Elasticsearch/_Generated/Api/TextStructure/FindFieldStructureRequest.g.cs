@@ -273,35 +273,6 @@ public sealed partial class FindFieldStructureRequestParameters : Elastic.Transp
 	public string? TimestampFormat { get => Q<string?>("timestamp_format"); set => Q("timestamp_format", value); }
 }
 
-internal sealed partial class FindFieldStructureRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest>
-{
-	public override Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Find the structure of a text field.
@@ -345,7 +316,7 @@ internal sealed partial class FindFieldStructureRequestConverter : System.Text.J
 /// It helps determine why the returned structure was chosen.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TextStructure.Json.FindFieldStructureRequestConverter))]
 public sealed partial class FindFieldStructureRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>
 {
 #if NET7_0_OR_GREATER

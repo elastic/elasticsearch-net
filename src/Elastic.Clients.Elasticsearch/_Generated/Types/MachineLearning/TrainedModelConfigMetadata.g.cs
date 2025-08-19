@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class TrainedModelConfigMetadataConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigMetadata>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureImportanceBaseline = System.Text.Json.JsonEncodedText.Encode("feature_importance_baseline");
-	private static readonly System.Text.Json.JsonEncodedText PropHyperparameters = System.Text.Json.JsonEncodedText.Encode("hyperparameters");
-	private static readonly System.Text.Json.JsonEncodedText PropModelAliases = System.Text.Json.JsonEncodedText.Encode("model_aliases");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalFeatureImportance = System.Text.Json.JsonEncodedText.Encode("total_feature_importance");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigMetadata Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>?> propFeatureImportanceBaseline = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter>?> propHyperparameters = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propModelAliases = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportance>?> propTotalFeatureImportance = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propFeatureImportanceBaseline.TryReadProperty(ref reader, options, PropFeatureImportanceBaseline, static System.Collections.Generic.IReadOnlyDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
-			{
-				continue;
-			}
-
-			if (propHyperparameters.TryReadProperty(ref reader, options, PropHyperparameters, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter>(o, null)))
-			{
-				continue;
-			}
-
-			if (propModelAliases.TryReadProperty(ref reader, options, PropModelAliases, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
-			{
-				continue;
-			}
-
-			if (propTotalFeatureImportance.TryReadProperty(ref reader, options, PropTotalFeatureImportance, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportance>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportance>(o, null)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigMetadata(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			FeatureImportanceBaseline = propFeatureImportanceBaseline.Value,
-			Hyperparameters = propHyperparameters.Value,
-			ModelAliases = propModelAliases.Value,
-			TotalFeatureImportance = propTotalFeatureImportance.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigMetadata value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropFeatureImportanceBaseline, value.FeatureImportanceBaseline, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
-		writer.WriteProperty(options, PropHyperparameters, value.Hyperparameters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter>(o, v, null));
-		writer.WriteProperty(options, PropModelAliases, value.ModelAliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropTotalFeatureImportance, value.TotalFeatureImportance, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportance>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.TotalFeatureImportance>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelConfigMetadataConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TrainedModelConfigMetadataConverter))]
 public sealed partial class TrainedModelConfigMetadata
 {
 #if NET7_0_OR_GREATER

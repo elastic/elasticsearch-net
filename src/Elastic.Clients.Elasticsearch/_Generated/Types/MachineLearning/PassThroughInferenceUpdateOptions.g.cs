@@ -23,55 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-internal sealed partial class PassThroughInferenceUpdateOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceUpdateOptions>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceUpdateOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propResultsField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions?> propTokenization = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
-			{
-				continue;
-			}
-
-			if (propTokenization.TryReadProperty(ref reader, options, PropTokenization, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ResultsField = propResultsField.Value,
-			Tokenization = propTokenization.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceUpdateOptions value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
-		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceUpdateOptionsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PassThroughInferenceUpdateOptionsConverter))]
 public sealed partial class PassThroughInferenceUpdateOptions
 {
 #if NET7_0_OR_GREATER

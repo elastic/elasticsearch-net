@@ -23,96 +23,12 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-internal sealed partial class SettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Settings>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropAlignCheckpoints = System.Text.Json.JsonEncodedText.Encode("align_checkpoints");
-	private static readonly System.Text.Json.JsonEncodedText PropDatesAsEpochMillis = System.Text.Json.JsonEncodedText.Encode("dates_as_epoch_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropDeduceMappings = System.Text.Json.JsonEncodedText.Encode("deduce_mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropDocsPerSecond = System.Text.Json.JsonEncodedText.Encode("docs_per_second");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxPageSearchSize = System.Text.Json.JsonEncodedText.Encode("max_page_search_size");
-	private static readonly System.Text.Json.JsonEncodedText PropUnattended = System.Text.Json.JsonEncodedText.Encode("unattended");
-
-	public override Elastic.Clients.Elasticsearch.TransformManagement.Settings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<bool?> propAlignCheckpoints = default;
-		LocalJsonValue<bool?> propDatesAsEpochMillis = default;
-		LocalJsonValue<bool?> propDeduceMappings = default;
-		LocalJsonValue<float?> propDocsPerSecond = default;
-		LocalJsonValue<int?> propMaxPageSearchSize = default;
-		LocalJsonValue<bool?> propUnattended = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propAlignCheckpoints.TryReadProperty(ref reader, options, PropAlignCheckpoints, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propDatesAsEpochMillis.TryReadProperty(ref reader, options, PropDatesAsEpochMillis, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propDeduceMappings.TryReadProperty(ref reader, options, PropDeduceMappings, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (propDocsPerSecond.TryReadProperty(ref reader, options, PropDocsPerSecond, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
-			{
-				continue;
-			}
-
-			if (propMaxPageSearchSize.TryReadProperty(ref reader, options, PropMaxPageSearchSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
-			{
-				continue;
-			}
-
-			if (propUnattended.TryReadProperty(ref reader, options, PropUnattended, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TransformManagement.Settings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			AlignCheckpoints = propAlignCheckpoints.Value,
-			DatesAsEpochMillis = propDatesAsEpochMillis.Value,
-			DeduceMappings = propDeduceMappings.Value,
-			DocsPerSecond = propDocsPerSecond.Value,
-			MaxPageSearchSize = propMaxPageSearchSize.Value,
-			Unattended = propUnattended.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.Settings value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAlignCheckpoints, value.AlignCheckpoints, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropDatesAsEpochMillis, value.DatesAsEpochMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropDeduceMappings, value.DeduceMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteProperty(options, PropDocsPerSecond, value.DocsPerSecond, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
-		writer.WriteProperty(options, PropMaxPageSearchSize, value.MaxPageSearchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropUnattended, value.Unattended, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// The source of the data for the transform.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.SettingsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.SettingsConverter))]
 public sealed partial class Settings
 {
 #if NET7_0_OR_GREATER

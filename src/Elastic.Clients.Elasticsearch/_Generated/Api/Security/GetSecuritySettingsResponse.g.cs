@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-internal sealed partial class GetSecuritySettingsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropSecurity = System.Text.Json.JsonEncodedText.Encode("security");
-	private static readonly System.Text.Json.JsonEncodedText PropSecurityProfile = System.Text.Json.JsonEncodedText.Encode("security-profile");
-	private static readonly System.Text.Json.JsonEncodedText PropSecurityTokens = System.Text.Json.JsonEncodedText.Encode("security-tokens");
-
-	public override Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.SecuritySettings> propSecurity = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.SecuritySettings> propSecurityProfile = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.SecuritySettings> propSecurityTokens = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propSecurity.TryReadProperty(ref reader, options, PropSecurity, null))
-			{
-				continue;
-			}
-
-			if (propSecurityProfile.TryReadProperty(ref reader, options, PropSecurityProfile, null))
-			{
-				continue;
-			}
-
-			if (propSecurityTokens.TryReadProperty(ref reader, options, PropSecurityTokens, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Security = propSecurity.Value,
-			SecurityProfile = propSecurityProfile.Value,
-			SecurityTokens = propSecurityTokens.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropSecurity, value.Security, null, null);
-		writer.WriteProperty(options, PropSecurityProfile, value.SecurityProfile, null, null);
-		writer.WriteProperty(options, PropSecurityTokens, value.SecurityTokens, null, null);
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetSecuritySettingsResponseConverter))]
 public sealed partial class GetSecuritySettingsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

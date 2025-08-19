@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-internal sealed partial class JinaAIServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettings>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
-	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
-	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity");
-
-	public override Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propApiKey = default;
-		LocalJsonValue<string?> propModelId = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.RateLimitSetting?> propRateLimit = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType?> propSimilarity = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
-			{
-				continue;
-			}
-
-			if (propModelId.TryReadProperty(ref reader, options, PropModelId, null))
-			{
-				continue;
-			}
-
-			if (propRateLimit.TryReadProperty(ref reader, options, PropRateLimit, null))
-			{
-				continue;
-			}
-
-			if (propSimilarity.TryReadProperty(ref reader, options, PropSimilarity, static Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			ApiKey = propApiKey.Value,
-			ModelId = propModelId.Value,
-			RateLimit = propRateLimit.Value,
-			Similarity = propSimilarity.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettings value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
-		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
-		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);
-		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.JinaAIServiceSettingsConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.JinaAIServiceSettingsConverter))]
 public sealed partial class JinaAIServiceSettings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

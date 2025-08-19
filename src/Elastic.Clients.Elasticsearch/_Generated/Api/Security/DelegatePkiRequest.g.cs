@@ -27,45 +27,6 @@ public sealed partial class DelegatePkiRequestParameters : Elastic.Transport.Req
 {
 }
 
-internal sealed partial class DelegatePkiRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropX509CertificateChain = System.Text.Json.JsonEncodedText.Encode("x509_certificate_chain");
-
-	public override Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.ICollection<string>> propX509CertificateChain = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propX509CertificateChain.TryReadProperty(ref reader, options, PropX509CertificateChain, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			X509CertificateChain = propX509CertificateChain.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropX509CertificateChain, value.X509CertificateChain, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Delegate PKI authentication.
@@ -84,7 +45,7 @@ internal sealed partial class DelegatePkiRequestConverter : System.Text.Json.Ser
 /// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.DelegatePkiRequestConverter))]
 public sealed partial class DelegatePkiRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

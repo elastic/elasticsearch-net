@@ -23,64 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-internal sealed partial class BucketCorrelationFunctionCountCorrelationIndicatorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropExpectations = System.Text.Json.JsonEncodedText.Encode("expectations");
-	private static readonly System.Text.Json.JsonEncodedText PropFractions = System.Text.Json.JsonEncodedText.Encode("fractions");
-
-	public override Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int> propDocCount = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<double>> propExpectations = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<double>?> propFractions = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDocCount.TryReadProperty(ref reader, options, PropDocCount, null))
-			{
-				continue;
-			}
-
-			if (propExpectations.TryReadProperty(ref reader, options, PropExpectations, static System.Collections.Generic.ICollection<double> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<double>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propFractions.TryReadProperty(ref reader, options, PropFractions, static System.Collections.Generic.ICollection<double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<double>(o, null)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			DocCount = propDocCount.Value,
-			Expectations = propExpectations.Value,
-			Fractions = propFractions.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicator value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDocCount, value.DocCount, null, null);
-		writer.WriteProperty(options, PropExpectations, value.Expectations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<double> v) => w.WriteCollectionValue<double>(o, v, null));
-		writer.WriteProperty(options, PropFractions, value.Fractions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<double>? v) => w.WriteCollectionValue<double>(o, v, null));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationFunctionCountCorrelationIndicatorConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.BucketCorrelationFunctionCountCorrelationIndicatorConverter))]
 public sealed partial class BucketCorrelationFunctionCountCorrelationIndicator
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

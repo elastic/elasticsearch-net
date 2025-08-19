@@ -27,69 +27,12 @@ public sealed partial class PutTrainedModelDefinitionPartRequestParameters : Ela
 {
 }
 
-internal sealed partial class PutTrainedModelDefinitionPartRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropDefinition = System.Text.Json.JsonEncodedText.Encode("definition");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDefinitionLength = System.Text.Json.JsonEncodedText.Encode("total_definition_length");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalParts = System.Text.Json.JsonEncodedText.Encode("total_parts");
-
-	public override Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propDefinition = default;
-		LocalJsonValue<long> propTotalDefinitionLength = default;
-		LocalJsonValue<int> propTotalParts = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propDefinition.TryReadProperty(ref reader, options, PropDefinition, null))
-			{
-				continue;
-			}
-
-			if (propTotalDefinitionLength.TryReadProperty(ref reader, options, PropTotalDefinitionLength, null))
-			{
-				continue;
-			}
-
-			if (propTotalParts.TryReadProperty(ref reader, options, PropTotalParts, null))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Definition = propDefinition.Value,
-			TotalDefinitionLength = propTotalDefinitionLength.Value,
-			TotalParts = propTotalParts.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDefinition, value.Definition, null, null);
-		writer.WriteProperty(options, PropTotalDefinitionLength, value.TotalDefinitionLength, null, null);
-		writer.WriteProperty(options, PropTotalParts, value.TotalParts, null, null);
-		writer.WriteEndObject();
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create part of a trained model definition.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PutTrainedModelDefinitionPartRequestConverter))]
 public sealed partial class PutTrainedModelDefinitionPartRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutTrainedModelDefinitionPartRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]

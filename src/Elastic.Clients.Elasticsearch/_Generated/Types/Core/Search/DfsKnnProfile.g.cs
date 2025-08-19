@@ -23,73 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
-internal sealed partial class DfsKnnProfileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile>
-{
-	private static readonly System.Text.Json.JsonEncodedText PropCollector = System.Text.Json.JsonEncodedText.Encode("collector");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropRewriteTime = System.Text.Json.JsonEncodedText.Encode("rewrite_time");
-	private static readonly System.Text.Json.JsonEncodedText PropVectorOperationsCount = System.Text.Json.JsonEncodedText.Encode("vector_operations_count");
-
-	public override Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult>> propCollector = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileResult>> propQuery = default;
-		LocalJsonValue<long> propRewriteTime = default;
-		LocalJsonValue<long?> propVectorOperationsCount = default;
-		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
-		{
-			if (propCollector.TryReadProperty(ref reader, options, PropCollector, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propQuery.TryReadProperty(ref reader, options, PropQuery, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileResult> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileResult>(o, null)!))
-			{
-				continue;
-			}
-
-			if (propRewriteTime.TryReadProperty(ref reader, options, PropRewriteTime, null))
-			{
-				continue;
-			}
-
-			if (propVectorOperationsCount.TryReadProperty(ref reader, options, PropVectorOperationsCount, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
-			{
-				continue;
-			}
-
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
-			{
-				reader.Skip();
-				continue;
-			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
-		}
-
-		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-		{
-			Collector = propCollector.Value,
-			Query = propQuery.Value,
-			RewriteTime = propRewriteTime.Value,
-			VectorOperationsCount = propVectorOperationsCount.Value
-		};
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfile value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteStartObject();
-		writer.WriteProperty(options, PropCollector, value.Collector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.KnnCollectorResult>(o, v, null));
-		writer.WriteProperty(options, PropQuery, value.Query, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileResult> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileResult>(o, v, null));
-		writer.WriteProperty(options, PropRewriteTime, value.RewriteTime, null, null);
-		writer.WriteProperty(options, PropVectorOperationsCount, value.VectorOperationsCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteEndObject();
-	}
-}
-
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.DfsKnnProfileConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.Json.DfsKnnProfileConverter))]
 public sealed partial class DfsKnnProfile
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]

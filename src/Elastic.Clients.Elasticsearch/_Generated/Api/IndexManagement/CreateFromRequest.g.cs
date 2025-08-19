@@ -27,19 +27,6 @@ public sealed partial class CreateFromRequestParameters : Elastic.Transport.Requ
 {
 }
 
-internal sealed partial class CreateFromRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest>
-{
-	public override Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { CreateFrom = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.CreateFrom, null);
-	}
-}
-
 /// <summary>
 /// <para>
 /// Create an index from a source index.
@@ -48,7 +35,7 @@ internal sealed partial class CreateFromRequestConverter : System.Text.Json.Seri
 /// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
 /// </para>
 /// </summary>
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.CreateFromRequestConverter))]
 public sealed partial class CreateFromRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestParameters>
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
