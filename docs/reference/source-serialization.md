@@ -8,7 +8,13 @@ mapped_pages:
 Source serialization refers to the process of (de)serializing POCO types in consumer applications as source documents indexed and retrieved from {{es}}. A source serializer implementation handles serialization, with the default implementation using the `System.Text.Json` library. As a result, you may use `System.Text.Json` attributes and converters to control the serialization behavior.
 
 - [Modelling documents with types](#modeling-documents-with-types)
+  - [Default behavior](#default-behaviour)
+  - [Using Elasticsearch types in documents](#elasticsearch-types-in-documents)
 - [Customizing source serialization](#customizing-source-serialization)
+  - [Using `System.Text.Json` attributes](#system-text-json-attributes)
+  - [Configuring custom `JsonSerializerOptions`](#configuring-custom-jsonserializeroptions)
+  - [Registering custom `System.Text.Json` converters](#registering-custom-converters)
+  - [Creating a custom `Serializer`](#creating-custom-serializers)
 - [Native AOT](#native-aot)
 
 ## Modeling documents with types [modeling-documents-with-types]
@@ -50,6 +56,34 @@ The index request is serialized, with the source serializer handling the `MyDocu
   "stringProperty": "value"
 }
 ```
+
+### Using Elasticsearch types in documents [elasticsearch-types-in-documents]
+
+There are various cases where you might have a POCO type that contains an `Elastic.Clients.Elasticsearch` type as one of its properties.
+
+For example, consider if you want to use percolation; you need to store {{es}} queries as part of the `_source` of your document, which means you need to have a POCO that looks like this:
+
+```csharp
+using Elastic.Clients.Elasticsearch.QueryDsl;
+using Elastic.Clients.Elasticsearch.Serialization;
+
+public class MyPercolationDocument
+{
+    [JsonConverter(typeof(RequestResponseConverter<Query>))] <2>
+    public Query Query { get; set; } <2>
+
+    public string Category { get; set; }
+}
+```
+
+1. The `Query` property uses the `Elastic.Clients.Elasticsearch.QueryDsl.Query` Elasticsearch type.
+2. The `JsonConverter` attribute specifies the `RequestResponseConverter<T>` to be used for the `Query` property. This special converter instructs the `DefaultSourceSerializer` to delegate (de-)serialization to the `RequestResponseSerializer`.
+
+::::{warning}
+
+Failure to strictly use `RequestResponseConverter<T>` for `Elastic.Clients.Elasticsearch` types will most likely result in problems with document (de-)serialization.
+
+::::
 
 ## Customizing source serialization [customizing-source-serialization]
 
@@ -348,14 +382,17 @@ var client = new ElasticsearchClient(settings);
 
 1. If implementing `Serializer` is enough, why must we provide an instance wrapped in a factory `Func`?
 
-There are various cases where you might have a POCO type that contains an `Elastic.Clients.Elasticsearch` type as one of its properties. The `SourceSerializerFactory` delegate provides access to the default built-in serializer so you can access it when necessary. For example, consider if you want to use percolation; you need to store {{es}} queries as part of the `_source` of your document, which means you need to have a POCO that looks like this.
+There are various cases where you might have a POCO type that contains an `Elastic.Clients.Elasticsearch` type as one of its properties (see [Elasticsearch types in documents](#elasticsearch-types-in-documents)). The `SourceSerializerFactory` delegate provides access to the default built-in serializer so you can access it when necessary. For example, consider if you want to use percolation; you need to store {{es}} queries as part of the `_source` of your document, which means you need to have a POCO that looks like this.
 
 ```csharp
 using Elastic.Clients.Elasticsearch.QueryDsl;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 public class MyPercolationDocument
 {
+    [JsonConverter(typeof(RequestResponseConverter<Query>))]
     public Query Query { get; set; }
+
     public string Category { get; set; }
 }
 ```
