@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class RepositoryAnalyzeRequestParameters | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class RepositoryAnalyzeRequestParameters | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.5/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters" class="text-break">
+Class RepositoryAnalyzeRequestParameters  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.html">Snapshot</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class RepositoryAnalyzeRequestParameters : RequestParameters</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.5/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters</a></div>
+      <div><span class="xref">RepositoryAnalyzeRequestParameters</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.5/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.ContainsQueryString(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.5/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.GetQueryStringValue&lt;TOut&gt;(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.5/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.SetQueryString(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.5/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.CreatePathWithQueryStrings(string, ITransportConfiguration)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.5/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.AcceptHeaderFromFormat(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.5/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.QueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_BlobCount_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.BlobCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_BlobCount" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.BlobCount">
+  BlobCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The total number of blobs to write to the repository during the test.
+For realistic experiments, you should set it to at least <code>2000</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? BlobCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_Concurrency_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.Concurrency*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_Concurrency" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.Concurrency">
+  Concurrency
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of operations to run concurrently during the test.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Concurrency { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_Detailed_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.Detailed*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_Detailed" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.Detailed">
+  Detailed
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether to return detailed results, including timing information for every operation performed during the analysis.
+If false, it returns only a summary of the analysis.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Detailed { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_EarlyReadNodeCount_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.EarlyReadNodeCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_EarlyReadNodeCount" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.EarlyReadNodeCount">
+  EarlyReadNodeCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of nodes on which to perform an early read operation while writing each blob.
+Early read operations are only rarely performed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? EarlyReadNodeCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_MaxBlobSize_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.MaxBlobSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_MaxBlobSize" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.MaxBlobSize">
+  MaxBlobSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum size of a blob to be written during the test.
+For realistic experiments, you should set it to at least <code>2gb</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? MaxBlobSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_MaxTotalDataSize_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.MaxTotalDataSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_MaxTotalDataSize" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.MaxTotalDataSize">
+  MaxTotalDataSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An upper limit on the total size of all the blobs written during the test.
+For realistic experiments, you should set it to at least <code>1tb</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? MaxTotalDataSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_RareActionProbability_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.RareActionProbability*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_RareActionProbability" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.RareActionProbability">
+  RareActionProbability
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The probability of performing a rare action such as an early read, an overwrite, or an aborted write on each blob.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? RareActionProbability { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_RarelyAbortWrites_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.RarelyAbortWrites*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_RarelyAbortWrites" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.RarelyAbortWrites">
+  RarelyAbortWrites
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether to rarely cancel writes before they complete.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? RarelyAbortWrites { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_ReadNodeCount_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.ReadNodeCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_ReadNodeCount" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.ReadNodeCount">
+  ReadNodeCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of nodes on which to read a blob after writing.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? ReadNodeCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_RegisterOperationCount_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.RegisterOperationCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_RegisterOperationCount" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.RegisterOperationCount">
+  RegisterOperationCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The minimum number of linearizable register operations to perform in total.
+For realistic experiments, you should set it to at least <code>100</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? RegisterOperationCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_Seed_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.Seed*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_Seed" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.Seed">
+  Seed
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L111"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The seed for the pseudo-random number generator used to generate the list of operations performed during the test.
+To repeat the same set of operations in multiple experiments, use the same seed in each experiment.
+Note that the operations are performed concurrently so might not always happen in the same order on each run.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Seed { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_Timeout_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RepositoryAnalyzeRequestParameters_Timeout" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestParameters.Timeout">
+  Timeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RepositoryAnalyzeRequest.g.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period of time to wait for the test to complete.
+If no response is received before the timeout expires, the test is cancelled and returns an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? Timeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

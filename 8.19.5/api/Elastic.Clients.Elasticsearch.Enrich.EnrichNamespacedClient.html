@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class EnrichNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class EnrichNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.5/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient" class="text-break">
+Class EnrichNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.html">Enrich</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class EnrichNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">EnrichNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.#ctor">
+  EnrichNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.html">EnrichNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected EnrichNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicy_Elastic_Clients_Elasticsearch_Enrich_DeletePolicyRequest_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicy(Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest)">
+  DeletePolicy(DeletePolicyRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeletePolicyResponse DeletePolicy(DeletePolicyRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest.html">DeletePolicyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse.html">DeletePolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicy_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicy(Elastic.Clients.Elasticsearch.Name)">
+  DeletePolicy(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeletePolicyResponse DeletePolicy(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse.html">DeletePolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicy_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Enrich_DeletePolicyRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicy(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor})">
+  DeletePolicy(Name, Action&lt;DeletePolicyRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeletePolicyResponse DeletePolicy(Name name, Action&lt;DeletePolicyRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor.html">DeletePolicyRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse.html">DeletePolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicyAsync_Elastic_Clients_Elasticsearch_Enrich_DeletePolicyRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicyAsync(Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest,System.Threading.CancellationToken)">
+  DeletePolicyAsync(DeletePolicyRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeletePolicyResponse&gt; DeletePolicyAsync(DeletePolicyRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequest.html">DeletePolicyRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse.html">DeletePolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicyAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Enrich_DeletePolicyRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicyAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor},System.Threading.CancellationToken)">
+  DeletePolicyAsync(Name, Action&lt;DeletePolicyRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeletePolicyResponse&gt; DeletePolicyAsync(Name name, Action&lt;DeletePolicyRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.DeletePolicyRequestDescriptor.html">DeletePolicyRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse.html">DeletePolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_DeletePolicyAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.DeletePolicyAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  DeletePolicyAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeletePolicyResponse&gt; DeletePolicyAsync(Name name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.DeletePolicyResponse.html">DeletePolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicy_Elastic_Clients_Elasticsearch_Enrich_ExecutePolicyRequest_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicy(Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest)">
+  ExecutePolicy(ExecutePolicyRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExecutePolicyResponse ExecutePolicy(ExecutePolicyRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest.html">ExecutePolicyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse.html">ExecutePolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicy_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicy(Elastic.Clients.Elasticsearch.Name)">
+  ExecutePolicy(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExecutePolicyResponse ExecutePolicy(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse.html">ExecutePolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicy_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Enrich_ExecutePolicyRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicy(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor})">
+  ExecutePolicy(Name, Action&lt;ExecutePolicyRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExecutePolicyResponse ExecutePolicy(Name name, Action&lt;ExecutePolicyRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor.html">ExecutePolicyRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse.html">ExecutePolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicyAsync_Elastic_Clients_Elasticsearch_Enrich_ExecutePolicyRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicyAsync(Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest,System.Threading.CancellationToken)">
+  ExecutePolicyAsync(ExecutePolicyRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExecutePolicyResponse&gt; ExecutePolicyAsync(ExecutePolicyRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequest.html">ExecutePolicyRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse.html">ExecutePolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicyAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Enrich_ExecutePolicyRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicyAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor},System.Threading.CancellationToken)">
+  ExecutePolicyAsync(Name, Action&lt;ExecutePolicyRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExecutePolicyResponse&gt; ExecutePolicyAsync(Name name, Action&lt;ExecutePolicyRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyRequestDescriptor.html">ExecutePolicyRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse.html">ExecutePolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_ExecutePolicyAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.ExecutePolicyAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  ExecutePolicyAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExecutePolicyResponse&gt; ExecutePolicyAsync(Name name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.ExecutePolicyResponse.html">ExecutePolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicy" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicy">
+  GetPolicy()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetPolicyResponse GetPolicy()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse.html">GetPolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicy_Elastic_Clients_Elasticsearch_Enrich_GetPolicyRequest_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicy(Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest)">
+  GetPolicy(GetPolicyRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetPolicyResponse GetPolicy(GetPolicyRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest.html">GetPolicyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse.html">GetPolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicy_Elastic_Clients_Elasticsearch_Names_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicy(Elastic.Clients.Elasticsearch.Names)">
+  GetPolicy(Names?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetPolicyResponse GetPolicy(Names? name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse.html">GetPolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicy_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_Enrich_GetPolicyRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicy(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor})">
+  GetPolicy(Names?, Action&lt;GetPolicyRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L164"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetPolicyResponse GetPolicy(Names? name, Action&lt;GetPolicyRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor.html">GetPolicyRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse.html">GetPolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicy_System_Action_Elastic_Clients_Elasticsearch_Enrich_GetPolicyRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicy(System.Action{Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor})">
+  GetPolicy(Action&lt;GetPolicyRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetPolicyResponse GetPolicy(Action&lt;GetPolicyRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor.html">GetPolicyRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse.html">GetPolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicyAsync_Elastic_Clients_Elasticsearch_Enrich_GetPolicyRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicyAsync(Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest,System.Threading.CancellationToken)">
+  GetPolicyAsync(GetPolicyRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L173"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetPolicyResponse&gt; GetPolicyAsync(GetPolicyRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequest.html">GetPolicyRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse.html">GetPolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicyAsync_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_Enrich_GetPolicyRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicyAsync(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor},System.Threading.CancellationToken)">
+  GetPolicyAsync(Names?, Action&lt;GetPolicyRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L204"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetPolicyResponse&gt; GetPolicyAsync(Names? name, Action&lt;GetPolicyRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor.html">GetPolicyRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse.html">GetPolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicyAsync_Elastic_Clients_Elasticsearch_Names_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicyAsync(Elastic.Clients.Elasticsearch.Names,System.Threading.CancellationToken)">
+  GetPolicyAsync(Names?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L196"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetPolicyResponse&gt; GetPolicyAsync(Names? name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse.html">GetPolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicyAsync_System_Action_Elastic_Clients_Elasticsearch_Enrich_GetPolicyRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicyAsync(System.Action{Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor},System.Threading.CancellationToken)">
+  GetPolicyAsync(Action&lt;GetPolicyRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetPolicyResponse&gt; GetPolicyAsync(Action&lt;GetPolicyRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyRequestDescriptor.html">GetPolicyRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse.html">GetPolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_GetPolicyAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.GetPolicyAsync(System.Threading.CancellationToken)">
+  GetPolicyAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetPolicyResponse&gt; GetPolicyAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.GetPolicyResponse.html">GetPolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicy_Elastic_Clients_Elasticsearch_Enrich_PutPolicyRequest_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicy(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest)">
+  PutPolicy(PutPolicyRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutPolicyResponse PutPolicy(PutPolicyRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest.html">PutPolicyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse.html">PutPolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicy_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicy(Elastic.Clients.Elasticsearch.Name)">
+  PutPolicy(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutPolicyResponse PutPolicy(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse.html">PutPolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicy_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Enrich_PutPolicyRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicy(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor})">
+  PutPolicy(Name, Action&lt;PutPolicyRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutPolicyResponse PutPolicy(Name name, Action&lt;PutPolicyRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor.html">PutPolicyRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse.html">PutPolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicyAsync_Elastic_Clients_Elasticsearch_Enrich_PutPolicyRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicyAsync(Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest,System.Threading.CancellationToken)">
+  PutPolicyAsync(PutPolicyRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L245"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutPolicyResponse&gt; PutPolicyAsync(PutPolicyRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequest.html">PutPolicyRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse.html">PutPolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicyAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Enrich_PutPolicyRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicyAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor},System.Threading.CancellationToken)">
+  PutPolicyAsync(Name, Action&lt;PutPolicyRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutPolicyResponse&gt; PutPolicyAsync(Name name, Action&lt;PutPolicyRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor.html">PutPolicyRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse.html">PutPolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicyAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicyAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  PutPolicyAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L251"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutPolicyResponse&gt; PutPolicyAsync(Name name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse.html">PutPolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicyAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicyAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicyAsync__1_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Enrich_PutPolicyRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicyAsync``1(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  PutPolicyAsync&lt;TDocument&gt;(Name, Action&lt;PutPolicyRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L268"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutPolicyResponse&gt; PutPolicyAsync&lt;TDocument&gt;(Name name, Action&lt;PutPolicyRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor-1.html">PutPolicyRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse.html">PutPolicyResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicy_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_PutPolicy__1_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Enrich_PutPolicyRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.PutPolicy``1(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor{``0}})">
+  PutPolicy&lt;TDocument&gt;(Name, Action&lt;PutPolicyRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L236"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutPolicyResponse PutPolicy&lt;TDocument&gt;(Name name, Action&lt;PutPolicyRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyRequestDescriptor-1.html">PutPolicyRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.PutPolicyResponse.html">PutPolicyResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_Stats" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.Stats">
+  Stats()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L283"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual EnrichStatsResponse Stats()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse.html">EnrichStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_Stats_Elastic_Clients_Elasticsearch_Enrich_EnrichStatsRequest_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.Stats(Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest)">
+  Stats(EnrichStatsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L277"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual EnrichStatsResponse Stats(EnrichStatsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest.html">EnrichStatsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse.html">EnrichStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_Stats_System_Action_Elastic_Clients_Elasticsearch_Enrich_EnrichStatsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.Stats(System.Action{Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor})">
+  Stats(Action&lt;EnrichStatsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L291"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual EnrichStatsResponse Stats(Action&lt;EnrichStatsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor.html">EnrichStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse.html">EnrichStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_StatsAsync_Elastic_Clients_Elasticsearch_Enrich_EnrichStatsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.StatsAsync(Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest,System.Threading.CancellationToken)">
+  StatsAsync(EnrichStatsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L300"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;EnrichStatsResponse&gt; StatsAsync(EnrichStatsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequest.html">EnrichStatsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse.html">EnrichStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_StatsAsync_System_Action_Elastic_Clients_Elasticsearch_Enrich_EnrichStatsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.StatsAsync(System.Action{Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor},System.Threading.CancellationToken)">
+  StatsAsync(Action&lt;EnrichStatsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L314"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;EnrichStatsResponse&gt; StatsAsync(Action&lt;EnrichStatsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichStatsRequestDescriptor.html">EnrichStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse.html">EnrichStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Enrich_EnrichNamespacedClient_StatsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Enrich.EnrichNamespacedClient.StatsAsync(System.Threading.CancellationToken)">
+  StatsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Enrich.g.cs/#L306"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;EnrichStatsResponse&gt; StatsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Enrich.EnrichStatsResponse.html">EnrichStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

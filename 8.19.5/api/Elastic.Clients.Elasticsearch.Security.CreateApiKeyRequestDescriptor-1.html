@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct CreateApiKeyRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct CreateApiKeyRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create an API key.   Create an API key for access without requiring basic authentication.   IMPORTANT: If the credential that is used to authenticate this request is an API key, the derived API key cannot have any privileges. If you specify privileges, the API returns an error.   A successful request returns a JSON structure that contains the API key, its unique id, and its name. If applicable, it also returns expiration information for the API key in milliseconds.   NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.   The API keys are created by the Elasticsearch API key service, which is automatically enabled. To configure or turn off the API key service, refer to API key service setting documentation.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.5/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1" class="text-break">
+Struct CreateApiKeyRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L480"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create an API key.
+</p>
+<p>
+Create an API key for access without requiring basic authentication.
+</p>
+<p>
+IMPORTANT: If the credential that is used to authenticate this request is an API key, the derived API key cannot have any privileges.
+If you specify privileges, the API returns an error.
+</p>
+<p>
+A successful request returns a JSON structure that contains the API key, its unique id, and its name.
+If applicable, it also returns expiration information for the API key in milliseconds.
+</p>
+<p>
+NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
+</p>
+<p>
+The API keys are created by the Elasticsearch API key service, which is automatically enabled.
+To configure or turn off the API key service, refer to API key service setting documentation.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct CreateApiKeyRequestDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.#ctor">
+  CreateApiKeyRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L490"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequest_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest)">
+  CreateApiKeyRequestDescriptor(CreateApiKeyRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L484"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor(CreateApiKeyRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest.html">CreateApiKeyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_AddMetadatum_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.AddMetadatum*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_AddMetadatum_System_String_System_Object_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.AddMetadatum(System.String,System.Object)">
+  AddMetadatum(string, object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L554"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; AddMetadatum(string key, object value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_AddRoleDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.AddRoleDescriptor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_AddRoleDescriptor_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.AddRoleDescriptor(System.String)">
+  AddRoleDescriptor(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L685"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; AddRoleDescriptor(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_AddRoleDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.AddRoleDescriptor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_AddRoleDescriptor_System_String_Elastic_Clients_Elasticsearch_Security_RoleDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.AddRoleDescriptor(System.String,Elastic.Clients.Elasticsearch.Security.RoleDescriptor)">
+  AddRoleDescriptor(string, RoleDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L632"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; AddRoleDescriptor(string key, RoleDescriptor value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleDescriptor.html">RoleDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_AddRoleDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.AddRoleDescriptor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_AddRoleDescriptor_System_String_System_Action_Elastic_Clients_Elasticsearch_Security_RoleDescriptorDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.AddRoleDescriptor(System.String,System.Action{Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor{`0}})">
+  AddRoleDescriptor(string, Action&lt;RoleDescriptorDescriptor&lt;TDocument&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L692"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; AddRoleDescriptor(string key, Action&lt;RoleDescriptorDescriptor&lt;TDocument&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor-1.html">RoleDescriptorDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L712"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Expiration_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Expiration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Expiration_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Expiration(Elastic.Clients.Elasticsearch.Duration)">
+  Expiration(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L515"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The expiration time for the API key.
+By default, API keys never expire.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; Expiration(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L718"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Human_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L724"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Metadata" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Metadata">
+  Metadata()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L537"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <code>_</code> are reserved for system usage.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; Metadata()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Metadata_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringObject__" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Metadata(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject})">
+  Metadata(Action&lt;FluentDictionaryOfStringObject&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L548"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <code>_</code> are reserved for system usage.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; Metadata(Action&lt;FluentDictionaryOfStringObject&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.html">FluentDictionaryOfStringObject</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Metadata_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Metadata(System.Collections.Generic.IDictionary{System.String,System.Object})">
+  Metadata(IDictionary&lt;string, object&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L526"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <code>_</code> are reserved for system usage.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; Metadata(IDictionary&lt;string, object&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Name_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Name*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Name_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Name(Elastic.Clients.Elasticsearch.Name)">
+  Name(Name?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L566"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A name for the API key.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; Name(Name? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Pretty_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L730"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Refresh_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_Refresh_System_Nullable_Elastic_Clients_Elasticsearch_Refresh__" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.Refresh(System.Nullable{Elastic.Clients.Elasticsearch.Refresh})">
+  Refresh(Refresh?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L503"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code> (the default) then refresh the affected shards to make this operation visible to search, if <code>wait_for</code> then wait for a refresh to make this operation visible to search, if <code>false</code> then do nothing with refreshes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; Refresh(Refresh? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Refresh.html">Refresh</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L742"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.5/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L748"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.5/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.5/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RoleDescriptors_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RoleDescriptors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RoleDescriptors" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RoleDescriptors">
+  RoleDescriptors()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L606"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of role descriptors for this API key.
+When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+The structure of role descriptor is the same as the request for the create role API.
+For more details, refer to the create or update roles API.
+</p>
+<p>
+NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+In this case, you must explicitly specify a role descriptor with no privileges.
+The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; RoleDescriptors()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RoleDescriptors_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RoleDescriptors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RoleDescriptors_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringRoleDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RoleDescriptors(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor{`0}})">
+  RoleDescriptors(Action&lt;FluentDictionaryOfStringRoleDescriptor&lt;TDocument&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L626"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of role descriptors for this API key.
+When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+The structure of role descriptor is the same as the request for the create role API.
+For more details, refer to the create or update roles API.
+</p>
+<p>
+NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+In this case, you must explicitly specify a role descriptor with no privileges.
+The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; RoleDescriptors(Action&lt;FluentDictionaryOfStringRoleDescriptor&lt;TDocument&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor-1.html">FluentDictionaryOfStringRoleDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RoleDescriptors_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RoleDescriptors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RoleDescriptors_System_Collections_Generic_IDictionary_System_String_Elastic_Clients_Elasticsearch_Security_RoleDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RoleDescriptors(System.Collections.Generic.IDictionary{System.String,Elastic.Clients.Elasticsearch.Security.RoleDescriptor})">
+  RoleDescriptors(IDictionary&lt;string, RoleDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L586"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of role descriptors for this API key.
+When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+The structure of role descriptor is the same as the request for the create role API.
+For more details, refer to the create or update roles API.
+</p>
+<p>
+NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+In this case, you must explicitly specify a role descriptor with no privileges.
+The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; RoleDescriptors(IDictionary&lt;string, RoleDescriptor&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleDescriptor.html">RoleDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RoleDescriptors_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RoleDescriptors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RoleDescriptors_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RoleDescriptors(System.String)">
+  RoleDescriptors(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L653"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of role descriptors for this API key.
+When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+The structure of role descriptor is the same as the request for the create role API.
+For more details, refer to the create or update roles API.
+</p>
+<p>
+NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+In this case, you must explicitly specify a role descriptor with no privileges.
+The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; RoleDescriptors(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RoleDescriptors_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RoleDescriptors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_RoleDescriptors_System_String___" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.RoleDescriptors(System.String[])">
+  RoleDescriptors(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L673"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of role descriptors for this API key.
+When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+The structure of role descriptor is the same as the request for the create role API.
+For more details, refer to the create or update roles API.
+</p>
+<p>
+NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+In this case, you must explicitly specify a role descriptor with no privileges.
+The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; RoleDescriptors(params string[] keys)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>keys</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L736"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CreateApiKeyRequestDescriptor&lt;TDocument&gt; SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequest__Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest)~Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor{`0}">
+  explicit operator CreateApiKeyRequestDescriptor&lt;TDocument&gt;(CreateApiKeyRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L495"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator CreateApiKeyRequestDescriptor&lt;TDocument&gt;(CreateApiKeyRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest.html">CreateApiKeyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequestDescriptor__0___Elastic_Clients_Elasticsearch_Security_CreateApiKeyRequest" data-uid="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor{`0})~Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest">
+  implicit operator CreateApiKeyRequest(CreateApiKeyRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/CreateApiKeyRequest.g.cs/#L496"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator CreateApiKeyRequest(CreateApiKeyRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor-1.html">CreateApiKeyRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest.html">CreateApiKeyRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

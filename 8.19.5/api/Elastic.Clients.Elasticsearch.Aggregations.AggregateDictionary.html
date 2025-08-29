@@ -1,0 +1,2848 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class AggregateDictionary | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class AggregateDictionary | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.5/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary" class="text-break">
+Class AggregateDictionary  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.html">Aggregations</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(AggregateDictionaryConverter))]
+public sealed class AggregateDictionary : IsAReadOnlyDictionary&lt;string, IAggregate&gt;, IIsAReadOnlyDictionary&lt;string, IAggregate&gt;, IReadOnlyDictionary&lt;string, IAggregate&gt;, IReadOnlyCollection&lt;KeyValuePair&lt;string, IAggregate&gt;&gt;, IEnumerable&lt;KeyValuePair&lt;string, IAggregate&gt;&gt;, IEnumerable, IIsAReadOnlyDictionary</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IsAReadOnlyDictionary-2.html">IsAReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IAggregate.html">IAggregate</a>&gt;</div>
+      <div><span class="xref">AggregateDictionary</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IIsAReadOnlyDictionary-2.html">IIsAReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IAggregate.html">IAggregate</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IAggregate.html">IAggregate</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IAggregate.html">IAggregate</a>&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IAggregate.html">IAggregate</a>&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.IIsAReadOnlyDictionary.html">IIsAReadOnlyDictionary</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.IsAReadOnlyDictionary-2.html#Elastic_Clients_Elasticsearch_IsAReadOnlyDictionary_2_Count">IsAReadOnlyDictionary&lt;string, IAggregate&gt;.Count</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.IsAReadOnlyDictionary-2.html#Elastic_Clients_Elasticsearch_IsAReadOnlyDictionary_2_Item__0_">IsAReadOnlyDictionary&lt;string, IAggregate&gt;.this[string]</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.IsAReadOnlyDictionary-2.html#Elastic_Clients_Elasticsearch_IsAReadOnlyDictionary_2_Keys">IsAReadOnlyDictionary&lt;string, IAggregate&gt;.Keys</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.IsAReadOnlyDictionary-2.html#Elastic_Clients_Elasticsearch_IsAReadOnlyDictionary_2_Values">IsAReadOnlyDictionary&lt;string, IAggregate&gt;.Values</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.IsAReadOnlyDictionary-2.html#Elastic_Clients_Elasticsearch_IsAReadOnlyDictionary_2_ContainsKey__0_">IsAReadOnlyDictionary&lt;string, IAggregate&gt;.ContainsKey(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.IsAReadOnlyDictionary-2.html#Elastic_Clients_Elasticsearch_IsAReadOnlyDictionary_2_TryGetValue__0__1__">IsAReadOnlyDictionary&lt;string, IAggregate&gt;.TryGetValue(string, out IAggregate)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary__ctor_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary__ctor_System_Collections_Generic_IReadOnlyDictionary_System_String_Elastic_Clients_Elasticsearch_Aggregations_IAggregate__" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.#ctor(System.Collections.Generic.IReadOnlyDictionary{System.String,Elastic.Clients.Elasticsearch.Aggregations.IAggregate})">
+  AggregateDictionary(IReadOnlyDictionary&lt;string, IAggregate&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AggregateDictionary(IReadOnlyDictionary&lt;string, IAggregate&gt; backingDictionary)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>backingDictionary</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IAggregate.html">IAggregate</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetAdjacencyMatrix_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetAdjacencyMatrix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetAdjacencyMatrix_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetAdjacencyMatrix(System.String)">
+  GetAdjacencyMatrix(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AdjacencyMatrixAggregate? GetAdjacencyMatrix(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AdjacencyMatrixAggregate.html">AdjacencyMatrixAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetAutoDateHistogram_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetAutoDateHistogram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetAutoDateHistogram_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetAutoDateHistogram(System.String)">
+  GetAutoDateHistogram(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AutoDateHistogramAggregate? GetAutoDateHistogram(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AutoDateHistogramAggregate.html">AutoDateHistogramAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetAverage_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetAverage*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetAverage_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetAverage(System.String)">
+  GetAverage(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AverageAggregate? GetAverage(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AverageAggregate.html">AverageAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetBoxplot_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetBoxplot*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetBoxplot_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetBoxplot(System.String)">
+  GetBoxplot(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BoxplotAggregate? GetBoxplot(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate.html">BoxplotAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetBucketMetricValue_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetBucketMetricValue*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetBucketMetricValue_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetBucketMetricValue(System.String)">
+  GetBucketMetricValue(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BucketMetricValueAggregate? GetBucketMetricValue(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate.html">BucketMetricValueAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetCardinality_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetCardinality*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetCardinality_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetCardinality(System.String)">
+  GetCardinality(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CardinalityAggregate? GetCardinality(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate.html">CardinalityAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetChildren_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetChildren*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetChildren_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetChildren(System.String)">
+  GetChildren(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ChildrenAggregate? GetChildren(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate.html">ChildrenAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetComposite_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetComposite*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetComposite_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetComposite(System.String)">
+  GetComposite(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CompositeAggregate? GetComposite(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate.html">CompositeAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetCumulativeCardinality_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetCumulativeCardinality*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetCumulativeCardinality_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetCumulativeCardinality(System.String)">
+  GetCumulativeCardinality(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CumulativeCardinalityAggregate? GetCumulativeCardinality(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregate.html">CumulativeCardinalityAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetDateHistogram_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetDateHistogram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetDateHistogram_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetDateHistogram(System.String)">
+  GetDateHistogram(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateHistogramAggregate? GetDateHistogram(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate.html">DateHistogramAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetDateRange_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetDateRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetDateRange_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetDateRange(System.String)">
+  GetDateRange(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateRangeAggregate? GetDateRange(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DateRangeAggregate.html">DateRangeAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetDerivative_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetDerivative*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetDerivative_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetDerivative(System.String)">
+  GetDerivative(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DerivativeAggregate? GetDerivative(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DerivativeAggregate.html">DerivativeAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetDoubleTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetDoubleTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetDoubleTerms_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetDoubleTerms(System.String)">
+  GetDoubleTerms(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DoubleTermsAggregate? GetDoubleTerms(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.DoubleTermsAggregate.html">DoubleTermsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetExtendedStats_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetExtendedStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetExtendedStats_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetExtendedStats(System.String)">
+  GetExtendedStats(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ExtendedStatsAggregate? GetExtendedStats(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsAggregate.html">ExtendedStatsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetExtendedStatsBucket_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetExtendedStatsBucket*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetExtendedStatsBucket_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetExtendedStatsBucket(System.String)">
+  GetExtendedStatsBucket(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ExtendedStatsBucketAggregate? GetExtendedStatsBucket(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ExtendedStatsBucketAggregate.html">ExtendedStatsBucketAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetFilter_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetFilter_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetFilter(System.String)">
+  GetFilter(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FilterAggregate? GetFilter(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FilterAggregate.html">FilterAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetFilters_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetFilters*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetFilters_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetFilters(System.String)">
+  GetFilters(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FiltersAggregate? GetFilters(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregate.html">FiltersAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetFrequentItemSets_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetFrequentItemSets*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetFrequentItemSets_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetFrequentItemSets(System.String)">
+  GetFrequentItemSets(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L63"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FrequentItemSetsAggregate? GetFrequentItemSets(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregate.html">FrequentItemSetsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeoBounds_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeoBounds*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeoBounds_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeoBounds(System.String)">
+  GetGeoBounds(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoBoundsAggregate? GetGeoBounds(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoBoundsAggregate.html">GeoBoundsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeoCentroid_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeoCentroid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeoCentroid_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeoCentroid(System.String)">
+  GetGeoCentroid(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoCentroidAggregate? GetGeoCentroid(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoCentroidAggregate.html">GeoCentroidAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeoDistance_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeoDistance*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeoDistance_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeoDistance(System.String)">
+  GetGeoDistance(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoDistanceAggregate? GetGeoDistance(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoDistanceAggregate.html">GeoDistanceAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeoLine_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeoLine*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeoLine_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeoLine(System.String)">
+  GetGeoLine(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoLineAggregate? GetGeoLine(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregate.html">GeoLineAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeohashGrid_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeohashGrid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeohashGrid_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeohashGrid(System.String)">
+  GetGeohashGrid(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeohashGridAggregate? GetGeohashGrid(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeohashGridAggregate.html">GeohashGridAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeohexGrid_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeohexGrid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeohexGrid_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeohexGrid(System.String)">
+  GetGeohexGrid(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeohexGridAggregate? GetGeohexGrid(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeohexGridAggregate.html">GeohexGridAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeotileGrid_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeotileGrid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGeotileGrid_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGeotileGrid(System.String)">
+  GetGeotileGrid(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeotileGridAggregate? GetGeotileGrid(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregate.html">GeotileGridAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGlobal_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGlobal*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetGlobal_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetGlobal(System.String)">
+  GetGlobal(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GlobalAggregate? GetGlobal(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.GlobalAggregate.html">GlobalAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetHdrPercentileRanks_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetHdrPercentileRanks*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetHdrPercentileRanks_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetHdrPercentileRanks(System.String)">
+  GetHdrPercentileRanks(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HdrPercentileRanksAggregate? GetHdrPercentileRanks(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HdrPercentileRanksAggregate.html">HdrPercentileRanksAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetHdrPercentiles_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetHdrPercentiles*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetHdrPercentiles_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetHdrPercentiles(System.String)">
+  GetHdrPercentiles(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HdrPercentilesAggregate? GetHdrPercentiles(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HdrPercentilesAggregate.html">HdrPercentilesAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetHistogram_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetHistogram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetHistogram_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetHistogram(System.String)">
+  GetHistogram(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HistogramAggregate? GetHistogram(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregate.html">HistogramAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetInference_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetInference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetInference_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetInference(System.String)">
+  GetInference(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InferenceAggregate? GetInference(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.InferenceAggregate.html">InferenceAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetIpPrefix_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetIpPrefix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetIpPrefix_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetIpPrefix(System.String)">
+  GetIpPrefix(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IpPrefixAggregate? GetIpPrefix(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregate.html">IpPrefixAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetIpRange_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetIpRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetIpRange_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetIpRange(System.String)">
+  GetIpRange(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IpRangeAggregate? GetIpRange(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IpRangeAggregate.html">IpRangeAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetLongRareTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetLongRareTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetLongRareTerms_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetLongRareTerms(System.String)">
+  GetLongRareTerms(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LongRareTermsAggregate? GetLongRareTerms(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.LongRareTermsAggregate.html">LongRareTermsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetLongTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetLongTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetLongTerms_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetLongTerms(System.String)">
+  GetLongTerms(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LongTermsAggregate? GetLongTerms(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.LongTermsAggregate.html">LongTermsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMatrixStats_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMatrixStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMatrixStats_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMatrixStats(System.String)">
+  GetMatrixStats(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MatrixStatsAggregate? GetMatrixStats(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MatrixStatsAggregate.html">MatrixStatsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMax_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMax*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMax_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMax(System.String)">
+  GetMax(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MaxAggregate? GetMax(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MaxAggregate.html">MaxAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMedianAbsoluteDeviation_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMedianAbsoluteDeviation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMedianAbsoluteDeviation_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMedianAbsoluteDeviation(System.String)">
+  GetMedianAbsoluteDeviation(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MedianAbsoluteDeviationAggregate? GetMedianAbsoluteDeviation(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MedianAbsoluteDeviationAggregate.html">MedianAbsoluteDeviationAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMin_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMin*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMin_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMin(System.String)">
+  GetMin(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MinAggregate? GetMin(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MinAggregate.html">MinAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMissing_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMissing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMissing_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMissing(System.String)">
+  GetMissing(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MissingAggregate? GetMissing(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MissingAggregate.html">MissingAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMultiTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMultiTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetMultiTerms_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetMultiTerms(System.String)">
+  GetMultiTerms(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiTermsAggregate? GetMultiTerms(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.MultiTermsAggregate.html">MultiTermsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetNested_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetNested*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetNested_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetNested(System.String)">
+  GetNested(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public NestedAggregate? GetNested(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.NestedAggregate.html">NestedAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetParent_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetParent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetParent_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetParent(System.String)">
+  GetParent(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ParentAggregate? GetParent(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ParentAggregate.html">ParentAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetPercentilesBucket_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetPercentilesBucket*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetPercentilesBucket_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetPercentilesBucket(System.String)">
+  GetPercentilesBucket(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PercentilesBucketAggregate? GetPercentilesBucket(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.PercentilesBucketAggregate.html">PercentilesBucketAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetRange_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetRange_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetRange(System.String)">
+  GetRange(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RangeAggregate? GetRange(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RangeAggregate.html">RangeAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetRate_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetRate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetRate_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetRate(System.String)">
+  GetRate(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RateAggregate? GetRate(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.RateAggregate.html">RateAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetReverseNested_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetReverseNested*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetReverseNested_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetReverseNested(System.String)">
+  GetReverseNested(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReverseNestedAggregate? GetReverseNested(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ReverseNestedAggregate.html">ReverseNestedAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetSampler_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetSampler*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetSampler_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetSampler(System.String)">
+  GetSampler(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SamplerAggregate? GetSampler(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregate.html">SamplerAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetScriptedMetric_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetScriptedMetric*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetScriptedMetric_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetScriptedMetric(System.String)">
+  GetScriptedMetric(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ScriptedMetricAggregate? GetScriptedMetric(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ScriptedMetricAggregate.html">ScriptedMetricAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetSignificantLongTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetSignificantLongTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetSignificantLongTerms_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetSignificantLongTerms(System.String)">
+  GetSignificantLongTerms(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SignificantLongTermsAggregate? GetSignificantLongTerms(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SignificantLongTermsAggregate.html">SignificantLongTermsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetSignificantStringTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetSignificantStringTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetSignificantStringTerms_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetSignificantStringTerms(System.String)">
+  GetSignificantStringTerms(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SignificantStringTermsAggregate? GetSignificantStringTerms(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SignificantStringTermsAggregate.html">SignificantStringTermsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetSimpleValue_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetSimpleValue*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetSimpleValue_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetSimpleValue(System.String)">
+  GetSimpleValue(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleValueAggregate? GetSimpleValue(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SimpleValueAggregate.html">SimpleValueAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetStats_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetStats_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetStats(System.String)">
+  GetStats(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StatsAggregate? GetStats(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StatsAggregate.html">StatsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetStatsBucket_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetStatsBucket*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetStatsBucket_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetStatsBucket(System.String)">
+  GetStatsBucket(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StatsBucketAggregate? GetStatsBucket(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StatsBucketAggregate.html">StatsBucketAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetStringRareTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetStringRareTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetStringRareTerms_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetStringRareTerms(System.String)">
+  GetStringRareTerms(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StringRareTermsAggregate? GetStringRareTerms(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StringRareTermsAggregate.html">StringRareTermsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetStringStats_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetStringStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetStringStats_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetStringStats(System.String)">
+  GetStringStats(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StringStatsAggregate? GetStringStats(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate.html">StringStatsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetStringTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetStringTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetStringTerms_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetStringTerms(System.String)">
+  GetStringTerms(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StringTermsAggregate? GetStringTerms(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.StringTermsAggregate.html">StringTermsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetSum_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetSum*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetSum_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetSum(System.String)">
+  GetSum(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SumAggregate? GetSum(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.SumAggregate.html">SumAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTDigestPercentileRanks_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTDigestPercentileRanks*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTDigestPercentileRanks_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTDigestPercentileRanks(System.String)">
+  GetTDigestPercentileRanks(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L105"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TDigestPercentileRanksAggregate? GetTDigestPercentileRanks(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentileRanksAggregate.html">TDigestPercentileRanksAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTDigestPercentiles_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTDigestPercentiles*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTDigestPercentiles_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTDigestPercentiles(System.String)">
+  GetTDigestPercentiles(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TDigestPercentilesAggregate? GetTDigestPercentiles(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TDigestPercentilesAggregate.html">TDigestPercentilesAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTTest_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTTest*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTTest_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTTest(System.String)">
+  GetTTest(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TTestAggregate? GetTTest(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TTestAggregate.html">TTestAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTimeSeries_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTimeSeries*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTimeSeries_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTimeSeries(System.String)">
+  GetTimeSeries(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimeSeriesAggregate? GetTimeSeries(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TimeSeriesAggregate.html">TimeSeriesAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTopHits_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTopHits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTopHits_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTopHits(System.String)">
+  GetTopHits(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TopHitsAggregate? GetTopHits(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TopHitsAggregate.html">TopHitsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTopMetrics_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTopMetrics*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetTopMetrics_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetTopMetrics(System.String)">
+  GetTopMetrics(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L109"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TopMetricsAggregate? GetTopMetrics(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.TopMetricsAggregate.html">TopMetricsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetUnmappedRareTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetUnmappedRareTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetUnmappedRareTerms_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetUnmappedRareTerms(System.String)">
+  GetUnmappedRareTerms(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UnmappedRareTermsAggregate? GetUnmappedRareTerms(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.UnmappedRareTermsAggregate.html">UnmappedRareTermsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetUnmappedSampler_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetUnmappedSampler*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetUnmappedSampler_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetUnmappedSampler(System.String)">
+  GetUnmappedSampler(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L113"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UnmappedSamplerAggregate? GetUnmappedSampler(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.UnmappedSamplerAggregate.html">UnmappedSamplerAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetUnmappedSignificantTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetUnmappedSignificantTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetUnmappedSignificantTerms_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetUnmappedSignificantTerms(System.String)">
+  GetUnmappedSignificantTerms(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L111"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UnmappedSignificantTermsAggregate? GetUnmappedSignificantTerms(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.UnmappedSignificantTermsAggregate.html">UnmappedSignificantTermsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetUnmappedTerms_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetUnmappedTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetUnmappedTerms_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetUnmappedTerms(System.String)">
+  GetUnmappedTerms(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UnmappedTermsAggregate? GetUnmappedTerms(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.UnmappedTermsAggregate.html">UnmappedTermsAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetValueCount_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetValueCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetValueCount_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetValueCount(System.String)">
+  GetValueCount(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ValueCountAggregate? GetValueCount(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.ValueCountAggregate.html">ValueCountAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetVariableWidthHistogram_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetVariableWidthHistogram*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetVariableWidthHistogram_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetVariableWidthHistogram(System.String)">
+  GetVariableWidthHistogram(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public VariableWidthHistogramAggregate? GetVariableWidthHistogram(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.VariableWidthHistogramAggregate.html">VariableWidthHistogramAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetWeightedAverage_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetWeightedAverage*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_GetWeightedAverage_System_String_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.GetWeightedAverage(System.String)">
+  GetWeightedAverage(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WeightedAverageAggregate? GetWeightedAverage(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.WeightedAverageAggregate.html">WeightedAverageAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_TryGetAggregate_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.TryGetAggregate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_TryGetAggregate_System_String_Elastic_Clients_Elasticsearch_Aggregations_IAggregate__" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.TryGetAggregate(System.String,Elastic.Clients.Elasticsearch.Aggregations.IAggregate@)">
+  TryGetAggregate(string, out IAggregate)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetAggregate(string key, out IAggregate value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.IAggregate.html">IAggregate</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_TryGetAggregate_" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.TryGetAggregate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Aggregations_AggregateDictionary_TryGetAggregate__1_System_String___0__" data-uid="Elastic.Clients.Elasticsearch.Aggregations.AggregateDictionary.TryGetAggregate``1(System.String,``0@)">
+  TryGetAggregate&lt;T&gt;(string, out T?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.5/src/Elastic.Clients.Elasticsearch/_Generated/Types/Aggregations/AggregateDictionary.g.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetAggregate&lt;T&gt;(string key, out T? value) where T : class, IAggregate</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
