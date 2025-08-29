@@ -474,6 +474,9 @@ internal static class JsonReaderExtensions
 	public static List<T>? ReadSingleOrManyCollectionValue<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
 		JsonReadFunc<T>? readElement)
 	{
+		// TODO: Allow passing a selector function to distinguish between single or many in complex scenarios
+		// (e.g. when the single element can be an array, see: GeoLocation).
+
 		if (reader.TokenType is JsonTokenType.Null)
 		{
 			return null;
