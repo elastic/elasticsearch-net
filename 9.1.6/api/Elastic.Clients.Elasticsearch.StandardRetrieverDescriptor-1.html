@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct StandardRetrieverDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct StandardRetrieverDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.6/apiSpec/new?filename=Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1" class="text-break">
+Struct StandardRetrieverDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct StandardRetrieverDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.#ctor">
+  StandardRetrieverDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1__ctor_Elastic_Clients_Elasticsearch_StandardRetriever_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.StandardRetriever)">
+  StandardRetrieverDescriptor(StandardRetriever)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor(StandardRetriever instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetriever.html">StandardRetriever</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Collapse_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Collapse*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Collapse_Elastic_Clients_Elasticsearch_Core_Search_FieldCollapse_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse)">
+  Collapse(FieldCollapse?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Collapses the top documents by a specified key into a single top document per key.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; Collapse(FieldCollapse? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse.html">FieldCollapse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Collapse_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Collapse*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Collapse_System_Action_Elastic_Clients_Elasticsearch_Core_Search_FieldCollapseDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Collapse(System.Action{Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor{`0}})">
+  Collapse(Action&lt;FieldCollapseDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Collapses the top documents by a specified key into a single top document per key.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; Collapse(Action&lt;FieldCollapseDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor-1.html">FieldCollapseDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Filter_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Filter_Elastic_Clients_Elasticsearch_QueryDsl_Query___" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query[])">
+  Filter(params Query[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L159"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Query to filter the documents that can match.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; Filter(params Query[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Filter_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Filter_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__0_____" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Filter(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor{`0}}[])">
+  Filter(params Action&lt;QueryDescriptor&lt;TDocument&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Query to filter the documents that can match.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; Filter(params Action&lt;QueryDescriptor&lt;TDocument&gt;&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor-1.html">QueryDescriptor</a>&lt;TDocument&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Filter_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Filter_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_QueryDsl_Query__" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Filter(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.QueryDsl.Query})">
+  Filter(ICollection&lt;Query&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Query to filter the documents that can match.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; Filter(ICollection&lt;Query&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_MinScore_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.MinScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_MinScore_System_Nullable_System_Single__" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.MinScore(System.Nullable{System.Single})">
+  MinScore(float?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Minimum _score for matching documents. Documents with a lower _score are not included in the top documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; MinScore(float? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Name_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Name*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Name_System_String_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Name(System.String)">
+  Name(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Retriever name.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; Name(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Query_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Query_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Query(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  Query(Query?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L209"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a query to retrieve a set of top documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; Query(Query? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Query_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Query_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Query(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor{`0}})">
+  Query(Action&lt;QueryDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L220"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a query to retrieve a set of top documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; Query(Action&lt;QueryDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor-1.html">QueryDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_SearchAfter_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.SearchAfter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_SearchAfter_Elastic_Clients_Elasticsearch_FieldValue___" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.SearchAfter(Elastic.Clients.Elasticsearch.FieldValue[])">
+  SearchAfter(params FieldValue[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a search after object parameter used for pagination.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; SearchAfter(params FieldValue[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_SearchAfter_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.SearchAfter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_SearchAfter_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_FieldValue__" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.SearchAfter(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.FieldValue})">
+  SearchAfter(ICollection&lt;FieldValue&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a search after object parameter used for pagination.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; SearchAfter(ICollection&lt;FieldValue&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Sort_Elastic_Clients_Elasticsearch_SortOptions___" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Sort(Elastic.Clients.Elasticsearch.SortOptions[])">
+  Sort(params SortOptions[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L264"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A sort object that that specifies the order of matching documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; Sort(params SortOptions[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Sort_System_Action_Elastic_Clients_Elasticsearch_SortOptionsDescriptor__0_____" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Sort(System.Action{Elastic.Clients.Elasticsearch.SortOptionsDescriptor{`0}}[])">
+  Sort(params Action&lt;SortOptionsDescriptor&lt;TDocument&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A sort object that that specifies the order of matching documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; Sort(params Action&lt;SortOptionsDescriptor&lt;TDocument&gt;&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor-1.html">SortOptionsDescriptor</a>&lt;TDocument&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_Sort_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_SortOptions__" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.Sort(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.SortOptions})">
+  Sort(ICollection&lt;SortOptions&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L253"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A sort object that that specifies the order of matching documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; Sort(ICollection&lt;SortOptions&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_TerminateAfter_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.TerminateAfter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_TerminateAfter_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.TerminateAfter(System.Nullable{System.Int32})">
+  TerminateAfter(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum number of documents to collect for each shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StandardRetrieverDescriptor&lt;TDocument&gt; TerminateAfter(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_StandardRetriever__Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.StandardRetriever)~Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor{`0}">
+  explicit operator StandardRetrieverDescriptor&lt;TDocument&gt;(StandardRetriever)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator StandardRetrieverDescriptor&lt;TDocument&gt;(StandardRetriever instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetriever.html">StandardRetriever</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_StandardRetrieverDescriptor__0___Elastic_Clients_Elasticsearch_StandardRetriever" data-uid="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor{`0})~Elastic.Clients.Elasticsearch.StandardRetriever">
+  implicit operator StandardRetriever(StandardRetrieverDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/StandardRetriever.g.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator StandardRetriever(StandardRetrieverDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetrieverDescriptor-1.html">StandardRetrieverDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.StandardRetriever.html">StandardRetriever</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

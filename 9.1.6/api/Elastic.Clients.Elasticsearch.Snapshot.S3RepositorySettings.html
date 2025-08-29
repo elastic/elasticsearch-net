@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class S3RepositorySettings | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class S3RepositorySettings | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.6/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings" class="text-break">
+Class S3RepositorySettings  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.html">Snapshot</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(S3RepositorySettingsConverter))]
+public sealed class S3RepositorySettings</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">S3RepositorySettings</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings__ctor_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings__ctor" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.#ctor">
+  S3RepositorySettings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public S3RepositorySettings()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings__ctor_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings__ctor_System_String_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.#ctor(System.String)">
+  S3RepositorySettings(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public S3RepositorySettings(string bucket)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>bucket</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_BasePath_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.BasePath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_BasePath" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.BasePath">
+  BasePath
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The path to the repository data within its bucket.
+It defaults to an empty string, meaning that the repository is at the root of the bucket.
+The value of this setting should not start or end with a forward slash (<code>/</code>).
+</p>
+<p>
+NOTE: Don't set base_path when configuring a snapshot repository for Elastic Cloud Enterprise.
+Elastic Cloud Enterprise automatically generates the <code>base_path</code> for each deployment so that multiple deployments may share the same bucket.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? BasePath { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_Bucket_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.Bucket*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_Bucket" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.Bucket">
+  Bucket
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the S3 bucket to use for snapshots.
+The bucket name must adhere to Amazon's S3 bucket naming rules.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Bucket { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_BufferSize_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.BufferSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_BufferSize" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.BufferSize">
+  BufferSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The minimum threshold below which the chunk is uploaded using a single request.
+Beyond this threshold, the S3 repository will use the AWS Multipart Upload API to split the chunk into several parts, each of <code>buffer_size</code> length, and to upload each part in its own request.
+Note that setting a buffer size lower than 5mb is not allowed since it will prevent the use of the Multipart API and may result in upload errors.
+It is also not possible to set a buffer size greater than 5gb as it is the maximum upload size allowed by S3.
+Defaults to <code>100mb</code> or 5% of JVM heap, whichever is smaller.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? BufferSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_CannedAcl_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.CannedAcl*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_CannedAcl" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.CannedAcl">
+  CannedAcl
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The S3 repository supports all S3 canned ACLs: <code>private</code>, <code>public-read</code>, <code>public-read-write</code>, <code>authenticated-read</code>, <code>log-delivery-write</code>, <code>bucket-owner-read</code>, <code>bucket-owner-full-control</code>.
+You could specify a canned ACL using the <code>canned_acl</code> setting.
+When the S3 repository creates buckets and objects, it adds the canned ACL into the buckets and objects.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? CannedAcl { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_ChunkSize_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.ChunkSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_ChunkSize" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.ChunkSize">
+  ChunkSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L105"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
+It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
+Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
+Specify the chunk size as a byte unit, for example: <code>10MB</code>, <code>5KB</code>, 500B.
+The default varies by repository type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? ChunkSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_Client_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.Client*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_Client" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.Client">
+  Client
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the S3 client to use to connect to S3.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Client { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_Compress_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.Compress*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_Compress" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.Compress">
+  Compress
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L120"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+When set to <code>true</code>, metadata files are stored in compressed format.
+This setting doesn't affect index files that are already compressed by default.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Compress { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_DeleteObjectsMaxSize_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.DeleteObjectsMaxSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_DeleteObjectsMaxSize" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.DeleteObjectsMaxSize">
+  DeleteObjectsMaxSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L128"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maxmimum batch size, between 1 and 1000, used for <code>DeleteObjects</code> requests.
+Defaults to 1000 which is the maximum number supported by the  AWS DeleteObjects API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? DeleteObjectsMaxSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_GetRegisterRetryDelay_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.GetRegisterRetryDelay*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_GetRegisterRetryDelay" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.GetRegisterRetryDelay">
+  GetRegisterRetryDelay
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L135"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The time to wait before trying again if an attempt to read a linearizable register fails.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? GetRegisterRetryDelay { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_MaxMultipartParts_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.MaxMultipartParts*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_MaxMultipartParts" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.MaxMultipartParts">
+  MaxMultipartParts
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of parts that Elasticsearch will write during a multipart upload of a single object.
+Files which are larger than <code>buffer_size × max_multipart_parts</code> will be chunked into several smaller objects.
+Elasticsearch may also split a file across multiple objects to satisfy other constraints such as the <code>chunk_size</code> limit.
+Defaults to <code>10000</code> which is the maximum number of parts in a multipart upload in AWS S3.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxMultipartParts { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_MaxMultipartUploadCleanupSize_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.MaxMultipartUploadCleanupSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_MaxMultipartUploadCleanupSize" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.MaxMultipartUploadCleanupSize">
+  MaxMultipartUploadCleanupSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of possibly-dangling multipart uploads to clean up in each batch of snapshot deletions.
+Defaults to 1000 which is the maximum number supported by the AWS ListMultipartUploads API.
+If set to <code>0</code>, Elasticsearch will not attempt to clean up dangling multipart uploads.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxMultipartUploadCleanupSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_MaxRestoreBytesPerSec_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.MaxRestoreBytesPerSec*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_MaxRestoreBytesPerSec" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.MaxRestoreBytesPerSec">
+  MaxRestoreBytesPerSec
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L163"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum snapshot restore rate per node.
+It defaults to unlimited.
+Note that restores are also throttled through recovery settings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? MaxRestoreBytesPerSec { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_MaxSnapshotBytesPerSec_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.MaxSnapshotBytesPerSec*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_MaxSnapshotBytesPerSec" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.MaxSnapshotBytesPerSec">
+  MaxSnapshotBytesPerSec
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L172"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum snapshot creation rate per node.
+It defaults to 40mb per second.
+Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? MaxSnapshotBytesPerSec { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_Readonly_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.Readonly*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_Readonly" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.Readonly">
+  Readonly
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L191"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, the repository is read-only.
+The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
+</p>
+<p>
+Only a cluster with write access can create snapshots in the repository.
+All other clusters connected to the repository should have the <code>readonly</code> parameter set to <code>true</code>.
+</p>
+<p>
+If <code>false</code>, the cluster can write to the repository and create snapshots in it.
+</p>
+<p>
+IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
+Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Readonly { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_ServerSideEncryption_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.ServerSideEncryption*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_ServerSideEncryption" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.ServerSideEncryption">
+  ServerSideEncryption
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+When set to <code>true</code>, files are encrypted on server side using an AES256 algorithm.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? ServerSideEncryption { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_StorageClass_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.StorageClass*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_StorageClass" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.StorageClass">
+  StorageClass
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L206"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The S3 storage class for objects written to the repository.
+Values may be <code>standard</code>, <code>reduced_redundancy</code>, <code>standard_ia</code>, <code>onezone_ia</code>, and <code>intelligent_tiering</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? StorageClass { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_ThrottledDeleteRetryDelayIncrement_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.ThrottledDeleteRetryDelayIncrement*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_ThrottledDeleteRetryDelayIncrement" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.ThrottledDeleteRetryDelayIncrement">
+  ThrottledDeleteRetryDelayIncrement
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L214"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The delay before the first retry and the amount the delay is incremented by on each subsequent retry.
+The default is 50ms and the minimum is 0ms.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? ThrottledDeleteRetryDelayIncrement { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_ThrottledDeleteRetryMaximumDelay_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.ThrottledDeleteRetryMaximumDelay*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_ThrottledDeleteRetryMaximumDelay" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.ThrottledDeleteRetryMaximumDelay">
+  ThrottledDeleteRetryMaximumDelay
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L222"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The upper bound on how long the delays between retries will grow to.
+The default is 5s and the minimum is 0ms.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? ThrottledDeleteRetryMaximumDelay { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_ThrottledDeleteRetryMaximumNumberOfRetries_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.ThrottledDeleteRetryMaximumNumberOfRetries*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_S3RepositorySettings_ThrottledDeleteRetryMaximumNumberOfRetries" data-uid="Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings.ThrottledDeleteRetryMaximumNumberOfRetries">
+  ThrottledDeleteRetryMaximumNumberOfRetries
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/S3RepositorySettings.g.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number times to retry a throttled snapshot deletion.
+The default is 10 and the minimum value is 0 which will disable retries altogether.
+Note that if retries are enabled in the Azure client, each of these retries comprises that many client-level retries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? ThrottledDeleteRetryMaximumNumberOfRetries { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
