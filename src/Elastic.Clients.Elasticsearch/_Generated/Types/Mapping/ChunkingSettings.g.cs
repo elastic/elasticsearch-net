@@ -27,11 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 public sealed partial class ChunkingSettings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ChunkingSettings(int maxChunkSize, string separatorGroup, System.Collections.Generic.ICollection<string> separators, string strategy)
+	public ChunkingSettings(int maxChunkSize, string strategy)
 	{
 		MaxChunkSize = maxChunkSize;
-		SeparatorGroup = separatorGroup;
-		Separators = separators;
 		Strategy = strategy;
 	}
 #if NET7_0_OR_GREATER
@@ -83,7 +81,7 @@ public sealed partial class ChunkingSettings
 
 	/// <summary>
 	/// <para>
-	/// This parameter is only applicable when using the <c>recursive</c> chunking strategy.
+	/// Only applicable to the <c>recursive</c> strategy and required when using it.
 	/// </para>
 	/// <para>
 	/// Sets a predefined list of separators in the saved chunking settings based on the selected text type.
@@ -93,15 +91,14 @@ public sealed partial class ChunkingSettings
 	/// Using this parameter is an alternative to manually specifying a custom <c>separators</c> list.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string SeparatorGroup { get; set; }
+	public string? SeparatorGroup { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// A list of strings used as possible split points when chunking text with the <c>recursive</c> strategy.
+	/// Only applicable to the <c>recursive</c> strategy and required when using it.
+	/// </para>
+	/// <para>
+	/// A list of strings used as possible split points when chunking text.
 	/// </para>
 	/// <para>
 	/// Each string can be a plain string or a regular expression (regex) pattern.
@@ -112,11 +109,7 @@ public sealed partial class ChunkingSettings
 	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Separators { get; set; }
+	public System.Collections.Generic.ICollection<string>? Separators { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -211,7 +204,7 @@ public readonly partial struct ChunkingSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// This parameter is only applicable when using the <c>recursive</c> chunking strategy.
+	/// Only applicable to the <c>recursive</c> strategy and required when using it.
 	/// </para>
 	/// <para>
 	/// Sets a predefined list of separators in the saved chunking settings based on the selected text type.
@@ -221,7 +214,7 @@ public readonly partial struct ChunkingSettingsDescriptor
 	/// Using this parameter is an alternative to manually specifying a custom <c>separators</c> list.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor SeparatorGroup(string value)
+	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor SeparatorGroup(string? value)
 	{
 		Instance.SeparatorGroup = value;
 		return this;
@@ -229,7 +222,10 @@ public readonly partial struct ChunkingSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A list of strings used as possible split points when chunking text with the <c>recursive</c> strategy.
+	/// Only applicable to the <c>recursive</c> strategy and required when using it.
+	/// </para>
+	/// <para>
+	/// A list of strings used as possible split points when chunking text.
 	/// </para>
 	/// <para>
 	/// Each string can be a plain string or a regular expression (regex) pattern.
@@ -240,7 +236,7 @@ public readonly partial struct ChunkingSettingsDescriptor
 	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor Separators(System.Collections.Generic.ICollection<string> value)
+	public Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor Separators(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Separators = value;
 		return this;
@@ -248,7 +244,10 @@ public readonly partial struct ChunkingSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A list of strings used as possible split points when chunking text with the <c>recursive</c> strategy.
+	/// Only applicable to the <c>recursive</c> strategy and required when using it.
+	/// </para>
+	/// <para>
+	/// A list of strings used as possible split points when chunking text.
 	/// </para>
 	/// <para>
 	/// Each string can be a plain string or a regular expression (regex) pattern.
