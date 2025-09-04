@@ -11,6 +11,7 @@ toc:
       - file: serialization.md
         children:
           - file: source-serialization.md
+          - file: request-response-serialization.md
   - file: using-net-client.md
     children:
       - file: aggregations.md
