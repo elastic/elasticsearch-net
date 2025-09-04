@@ -21,54 +21,30 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Snapshot;
+namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.Json.CleanupRepositoryResultsConverter))]
-public sealed partial class CleanupRepositoryResults
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.SetUpgradeModeResponseConverter))]
+public sealed partial class SetUpgradeModeResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CleanupRepositoryResults(long deletedBlobs, long deletedBytes)
-	{
-		DeletedBlobs = deletedBlobs;
-		DeletedBytes = deletedBytes;
-	}
-#if NET7_0_OR_GREATER
-	public CleanupRepositoryResults()
+	public SetUpgradeModeResponse()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public CleanupRepositoryResults()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal CleanupRepositoryResults(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal SetUpgradeModeResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The number of binary large objects (blobs) removed from the snapshot repository during cleanup operations.
-	/// A non-zero value indicates that unreferenced blobs were found and subsequently cleaned up.
+	/// For a successful response, this value is always true. On failure, an exception is returned instead.
 	/// </para>
 	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	long DeletedBlobs { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The number of bytes freed by cleanup operations.
-	/// </para>
-	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	long DeletedBytes { get; set; }
+	bool Acknowledged { get; set; }
 }

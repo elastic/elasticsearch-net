@@ -106,7 +106,10 @@ public sealed partial class GcsRepositorySettingsConverter : System.Text.Json.Se
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			ApplicationName = propApplicationName.Value,
+#pragma warning disable CS0618
+			ApplicationName = propApplicationName.Value
+#pragma warning restore CS0618
+,
 			BasePath = propBasePath.Value,
 			Bucket = propBucket.Value,
 			ChunkSize = propChunkSize.Value,
@@ -121,7 +124,10 @@ public sealed partial class GcsRepositorySettingsConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropApplicationName, value.ApplicationName, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropApplicationName, value.ApplicationName, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteProperty(options, PropBasePath, value.BasePath, null, null);
 		writer.WriteProperty(options, PropBucket, value.Bucket, null, null);
 		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);

@@ -446,6 +446,52 @@ public partial class TransformManagementNamespacedClient : Elastic.Clients.Elast
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequest, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformResponse, Elastic.Clients.Elasticsearch.TransformManagement.ScheduleNowTransformRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse SetUpgradeMode(Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse SetUpgradeMode()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse SetUpgradeMode(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse> SetUpgradeModeAsync(Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse> SetUpgradeModeAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse> SetUpgradeModeAsync(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequest, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeResponse, Elastic.Clients.Elasticsearch.TransformManagement.SetUpgradeModeRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.TransformManagement.StartTransformResponse StartTransform(Elastic.Clients.Elasticsearch.TransformManagement.StartTransformRequest request)
 	{
 		request.BeforeRequest();

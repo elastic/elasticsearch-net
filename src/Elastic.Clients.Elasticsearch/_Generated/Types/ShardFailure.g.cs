@@ -27,10 +27,9 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class ShardFailure
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ShardFailure(Elastic.Clients.Elasticsearch.ErrorCause reason, int shard)
+	public ShardFailure(Elastic.Clients.Elasticsearch.ErrorCause reason)
 	{
 		Reason = reason;
-		Shard = shard;
 	}
 #if NET7_0_OR_GREATER
 	public ShardFailure()
@@ -51,15 +50,12 @@ public sealed partial class ShardFailure
 
 	public string? Index { get; set; }
 	public string? Node { get; set; }
+	public bool? Primary { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	Elastic.Clients.Elasticsearch.ErrorCause Reason { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int Shard { get; set; }
+	public int? Shard { get; set; }
 	public string? Status { get; set; }
 }

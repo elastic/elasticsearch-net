@@ -48,12 +48,22 @@ public sealed partial class SourceOnlyRepository : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings Settings { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The source-only repository type.
+	/// </para>
+	/// </summary>
 	public string Type => "source";
 
 	public string? Uuid { get; set; }
@@ -78,18 +88,33 @@ public readonly partial struct SourceOnlyRepositoryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository instance) => new Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepository(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettings value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor.Build(null);
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.SourceOnlyRepositorySettingsDescriptor.Build(action);
