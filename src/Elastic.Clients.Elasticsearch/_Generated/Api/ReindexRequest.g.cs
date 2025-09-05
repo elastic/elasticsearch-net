@@ -180,7 +180,7 @@ public sealed partial class ReindexRequestParameters : Elastic.Transport.Request
 /// </item>
 /// <item>
 /// <para>
-/// When requested with <c>wait_for_completion=false</c>, a task id is returned, which can be used via the task management API to monitor, debug, or cancel the task. The task may disappear or fail if the node shuts down.
+/// When requested with <c>wait_for_completion=false</c>, a task id is returned, for use with the task management APIs. The task may disappear or fail if the node shuts down.
 /// When retrying a failed reindex operation, it might be necessary to set <c>conflicts=proceed</c> or to first delete the partial destination index.
 /// Additionally, dry runs, checking disk space, and fetching index recovery information can help address the root cause.
 /// </para>
@@ -428,7 +428,7 @@ public sealed partial class ReindexRequest : Elastic.Clients.Elasticsearch.Reque
 /// </item>
 /// <item>
 /// <para>
-/// When requested with <c>wait_for_completion=false</c>, a task id is returned, which can be used via the task management API to monitor, debug, or cancel the task. The task may disappear or fail if the node shuts down.
+/// When requested with <c>wait_for_completion=false</c>, a task id is returned, for use with the task management APIs. The task may disappear or fail if the node shuts down.
 /// When retrying a failed reindex operation, it might be necessary to set <c>conflicts=proceed</c> or to first delete the partial destination index.
 /// Additionally, dry runs, checking disk space, and fetching index recovery information can help address the root cause.
 /// </para>
@@ -838,7 +838,7 @@ public readonly partial struct ReindexRequestDescriptor
 /// </item>
 /// <item>
 /// <para>
-/// When requested with <c>wait_for_completion=false</c>, a task id is returned, which can be used via the task management API to monitor, debug, or cancel the task. The task may disappear or fail if the node shuts down.
+/// When requested with <c>wait_for_completion=false</c>, a task id is returned, for use with the task management APIs. The task may disappear or fail if the node shuts down.
 /// When retrying a failed reindex operation, it might be necessary to set <c>conflicts=proceed</c> or to first delete the partial destination index.
 /// Additionally, dry runs, checking disk space, and fetching index recovery information can help address the root cause.
 /// </para>

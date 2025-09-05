@@ -31,19 +31,12 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.InferenceChunkingSettingsConverter))]
 public sealed partial class InferenceChunkingSettings
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public InferenceChunkingSettings(string separatorGroup, System.Collections.Generic.ICollection<string> separators)
-	{
-		SeparatorGroup = separatorGroup;
-		Separators = separators;
-	}
 #if NET7_0_OR_GREATER
 	public InferenceChunkingSettings()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public InferenceChunkingSettings()
 	{
 	}
@@ -82,7 +75,7 @@ public sealed partial class InferenceChunkingSettings
 
 	/// <summary>
 	/// <para>
-	/// This parameter is only applicable when using the <c>recursive</c> chunking strategy.
+	/// Only applicable to the <c>recursive</c> strategy and required when using it.
 	/// </para>
 	/// <para>
 	/// Sets a predefined list of separators in the saved chunking settings based on the selected text type.
@@ -92,15 +85,14 @@ public sealed partial class InferenceChunkingSettings
 	/// Using this parameter is an alternative to manually specifying a custom <c>separators</c> list.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string SeparatorGroup { get; set; }
+	public string? SeparatorGroup { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// A list of strings used as possible split points when chunking text with the <c>recursive</c> strategy.
+	/// Only applicable to the <c>recursive</c> strategy and required when using it.
+	/// </para>
+	/// <para>
+	/// A list of strings used as possible split points when chunking text.
 	/// </para>
 	/// <para>
 	/// Each string can be a plain string or a regular expression (regex) pattern.
@@ -111,11 +103,7 @@ public sealed partial class InferenceChunkingSettings
 	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<string> Separators { get; set; }
+	public System.Collections.Generic.ICollection<string>? Separators { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -211,7 +199,7 @@ public readonly partial struct InferenceChunkingSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// This parameter is only applicable when using the <c>recursive</c> chunking strategy.
+	/// Only applicable to the <c>recursive</c> strategy and required when using it.
 	/// </para>
 	/// <para>
 	/// Sets a predefined list of separators in the saved chunking settings based on the selected text type.
@@ -221,7 +209,7 @@ public readonly partial struct InferenceChunkingSettingsDescriptor
 	/// Using this parameter is an alternative to manually specifying a custom <c>separators</c> list.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor SeparatorGroup(string value)
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor SeparatorGroup(string? value)
 	{
 		Instance.SeparatorGroup = value;
 		return this;
@@ -229,7 +217,10 @@ public readonly partial struct InferenceChunkingSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A list of strings used as possible split points when chunking text with the <c>recursive</c> strategy.
+	/// Only applicable to the <c>recursive</c> strategy and required when using it.
+	/// </para>
+	/// <para>
+	/// A list of strings used as possible split points when chunking text.
 	/// </para>
 	/// <para>
 	/// Each string can be a plain string or a regular expression (regex) pattern.
@@ -240,7 +231,7 @@ public readonly partial struct InferenceChunkingSettingsDescriptor
 	/// the <c>max_chunk_size</c> limit, to reduce the total number of chunks generated.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Separators(System.Collections.Generic.ICollection<string> value)
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor Separators(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Separators = value;
 		return this;
@@ -248,7 +239,10 @@ public readonly partial struct InferenceChunkingSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A list of strings used as possible split points when chunking text with the <c>recursive</c> strategy.
+	/// Only applicable to the <c>recursive</c> strategy and required when using it.
+	/// </para>
+	/// <para>
+	/// A list of strings used as possible split points when chunking text.
 	/// </para>
 	/// <para>
 	/// Each string can be a plain string or a regular expression (regex) pattern.
@@ -299,8 +293,13 @@ public readonly partial struct InferenceChunkingSettingsDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings Build(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor> action)
+	internal static Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings Build(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
 		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor(new Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

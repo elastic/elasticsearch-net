@@ -28,6 +28,7 @@ public sealed partial class DeleteByQueryRequestConverter : System.Text.Json.Ser
 	private static readonly System.Text.Json.JsonEncodedText PropMaxDocs = System.Text.Json.JsonEncodedText.Encode("max_docs");
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
 	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("slice");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
 
 	public override Elastic.Clients.Elasticsearch.DeleteByQueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -35,6 +36,7 @@ public sealed partial class DeleteByQueryRequestConverter : System.Text.Json.Ser
 		LocalJsonValue<long?> propMaxDocs = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
@@ -48,6 +50,11 @@ public sealed partial class DeleteByQueryRequestConverter : System.Text.Json.Ser
 			}
 
 			if (propSlice.TryReadProperty(ref reader, options, PropSlice, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
 			{
 				continue;
 			}
@@ -66,7 +73,8 @@ public sealed partial class DeleteByQueryRequestConverter : System.Text.Json.Ser
 		{
 			MaxDocs = propMaxDocs.Value,
 			Query = propQuery.Value,
-			Slice = propSlice.Value
+			Slice = propSlice.Value,
+			Sort = propSort.Value
 		};
 	}
 
@@ -76,6 +84,7 @@ public sealed partial class DeleteByQueryRequestConverter : System.Text.Json.Ser
 		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropSlice, value.Slice, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
 		writer.WriteEndObject();
 	}
 }

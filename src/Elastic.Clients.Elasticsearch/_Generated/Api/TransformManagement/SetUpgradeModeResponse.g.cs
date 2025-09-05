@@ -21,41 +21,30 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.ShardFailureConverter))]
-public sealed partial class ShardFailure
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.Json.SetUpgradeModeResponseConverter))]
+public sealed partial class SetUpgradeModeResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ShardFailure(Elastic.Clients.Elasticsearch.ErrorCause reason)
-	{
-		Reason = reason;
-	}
-#if NET7_0_OR_GREATER
-	public ShardFailure()
+	public SetUpgradeModeResponse()
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public ShardFailure()
-	{
-	}
-#endif
+
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal ShardFailure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal SetUpgradeModeResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public string? Index { get; set; }
-	public string? Node { get; set; }
-	public bool? Primary { get; set; }
+	/// <summary>
+	/// <para>
+	/// For a successful response, this value is always true. On failure, an exception is returned instead.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.ErrorCause Reason { get; set; }
-	public int? Shard { get; set; }
-	public string? Status { get; set; }
+	bool Acknowledged { get; set; }
 }
