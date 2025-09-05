@@ -55,6 +55,11 @@ public sealed partial class Status
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Indicates whether the current cluster state is included in the snapshot.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
@@ -65,31 +70,84 @@ public sealed partial class Status
 	required
 #endif
 	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Snapshot.SnapshotIndexStats> Indices { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the repository that includes the snapshot.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	string Repository { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Statistics for the shards in the snapshot.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Snapshot.ShardsStats ShardsStats { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the snapshot.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	string Snapshot { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The current snapshot state:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>FAILED</c>: The snapshot finished with an error and failed to store any data.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>STARTED</c>: The snapshot is currently running.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>SUCCESS</c>: The snapshot completed.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	string State { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Details about the number (<c>file_count</c>) and size (<c>size_in_bytes</c>) of files included in the snapshot.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats Stats { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The universally unique identifier (UUID) for the snapshot.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required

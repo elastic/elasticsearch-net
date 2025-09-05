@@ -48,12 +48,27 @@ public sealed partial class S3Repository : Elastic.Clients.Elasticsearch.Snapsho
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// <para>
+	/// NOTE: In addition to the specified settings, you can also use all non-secure client settings in the repository settings.
+	/// In this case, the client settings found in the repository settings will be merged with those of the named client used by the repository.
+	/// Conflicts between client and repository settings are resolved by the repository settings taking precedence over client settings.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings Settings { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The S3 repository type.
+	/// </para>
+	/// </summary>
 	public string Type => "s3";
 
 	public string? Uuid { get; set; }
@@ -78,12 +93,32 @@ public readonly partial struct S3RepositoryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.S3Repository instance) => new Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.S3Repository(Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// <para>
+	/// NOTE: In addition to the specified settings, you can also use all non-secure client settings in the repository settings.
+	/// In this case, the client settings found in the repository settings will be merged with those of the named client used by the repository.
+	/// Conflicts between client and repository settings are resolved by the repository settings taking precedence over client settings.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// <para>
+	/// NOTE: In addition to the specified settings, you can also use all non-secure client settings in the repository settings.
+	/// In this case, the client settings found in the repository settings will be merged with those of the named client used by the repository.
+	/// Conflicts between client and repository settings are resolved by the repository settings taking precedence over client settings.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.S3RepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor> action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettingsDescriptor.Build(action);

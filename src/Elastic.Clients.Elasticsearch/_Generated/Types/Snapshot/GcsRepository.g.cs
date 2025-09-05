@@ -48,12 +48,22 @@ public sealed partial class GcsRepository : Elastic.Clients.Elasticsearch.Snapsh
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings Settings { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// The Google Cloud Storage repository type.
+	/// </para>
+	/// </summary>
 	public string Type => "gcs";
 
 	public string? Uuid { get; set; }
@@ -78,12 +88,22 @@ public readonly partial struct GcsRepositoryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.GcsRepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.GcsRepository instance) => new Elastic.Clients.Elasticsearch.Snapshot.GcsRepositoryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.GcsRepository(Elastic.Clients.Elasticsearch.Snapshot.GcsRepositoryDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.GcsRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettings value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The repository settings.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.GcsRepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettingsDescriptor> action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.GcsRepositorySettingsDescriptor.Build(action);

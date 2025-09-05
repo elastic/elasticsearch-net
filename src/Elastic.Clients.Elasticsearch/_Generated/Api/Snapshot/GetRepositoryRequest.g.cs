@@ -27,14 +27,17 @@ public sealed partial class GetRepositoryRequestParameters : Elastic.Transport.R
 {
 	/// <summary>
 	/// <para>
-	/// Return local information, do not retrieve the state from master node (default: false)
+	/// If <c>true</c>, the request gets information from the local node only.
+	/// If <c>false</c>, the request gets information from the master node.
 	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -77,21 +80,28 @@ public sealed partial class GetRepositoryRequest : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of repository names
+	/// A comma-separated list of snapshot repository names used to limit the request.
+	/// Wildcard (<c>*</c>) expressions are supported including combining wildcards with exclude patterns starting with <c>-</c>.
+	/// </para>
+	/// <para>
+	/// To get information about all snapshot repositories registered in the cluster, omit this parameter or use <c>*</c> or <c>_all</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("repository"); set => PO("repository", value); }
 
 	/// <summary>
 	/// <para>
-	/// Return local information, do not retrieve the state from master node (default: false)
+	/// If <c>true</c>, the request gets information from the local node only.
+	/// If <c>false</c>, the request gets information from the master node.
 	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -127,7 +137,11 @@ public readonly partial struct GetRepositoryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of repository names
+	/// A comma-separated list of snapshot repository names used to limit the request.
+	/// Wildcard (<c>*</c>) expressions are supported including combining wildcards with exclude patterns starting with <c>-</c>.
+	/// </para>
+	/// <para>
+	/// To get information about all snapshot repositories registered in the cluster, omit this parameter or use <c>*</c> or <c>_all</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? value)
@@ -138,7 +152,8 @@ public readonly partial struct GetRepositoryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Return local information, do not retrieve the state from master node (default: false)
+	/// If <c>true</c>, the request gets information from the local node only.
+	/// If <c>false</c>, the request gets information from the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor Local(bool? value = true)
@@ -149,7 +164,9 @@ public readonly partial struct GetRepositoryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)

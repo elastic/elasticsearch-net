@@ -457,6 +457,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls TransformManagementPutTransform = new ApiUrls(new[] { "_transform/{transform_id}" });
 	internal static ApiUrls TransformManagementResetTransform = new ApiUrls(new[] { "_transform/{transform_id}/_reset" });
 	internal static ApiUrls TransformManagementScheduleNowTransform = new ApiUrls(new[] { "_transform/{transform_id}/_schedule_now" });
+	internal static ApiUrls TransformManagementSetUpgradeMode = new ApiUrls(new[] { "_transform/set_upgrade_mode" });
 	internal static ApiUrls TransformManagementStartTransform = new ApiUrls(new[] { "_transform/{transform_id}/_start" });
 	internal static ApiUrls TransformManagementStopTransform = new ApiUrls(new[] { "_transform/{transform_id}/_stop" });
 	internal static ApiUrls TransformManagementUpdateTransform = new ApiUrls(new[] { "_transform/{transform_id}/_update" });

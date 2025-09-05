@@ -32,11 +32,18 @@ public sealed partial class S3RepositorySettingsConverter : System.Text.Json.Ser
 	private static readonly System.Text.Json.JsonEncodedText PropChunkSize = System.Text.Json.JsonEncodedText.Encode("chunk_size");
 	private static readonly System.Text.Json.JsonEncodedText PropClient = System.Text.Json.JsonEncodedText.Encode("client");
 	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress");
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteObjectsMaxSize = System.Text.Json.JsonEncodedText.Encode("delete_objects_max_size");
+	private static readonly System.Text.Json.JsonEncodedText PropGetRegisterRetryDelay = System.Text.Json.JsonEncodedText.Encode("get_register_retry_delay");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxMultipartParts = System.Text.Json.JsonEncodedText.Encode("max_multipart_parts");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxMultipartUploadCleanupSize = System.Text.Json.JsonEncodedText.Encode("max_multipart_upload_cleanup_size");
 	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec");
 	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec");
 	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly");
 	private static readonly System.Text.Json.JsonEncodedText PropServerSideEncryption = System.Text.Json.JsonEncodedText.Encode("server_side_encryption");
 	private static readonly System.Text.Json.JsonEncodedText PropStorageClass = System.Text.Json.JsonEncodedText.Encode("storage_class");
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledDeleteRetryDelayIncrement = System.Text.Json.JsonEncodedText.Encode("throttled_delete_retry.delay_increment");
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledDeleteRetryMaximumDelay = System.Text.Json.JsonEncodedText.Encode("throttled_delete_retry.maximum_delay");
+	private static readonly System.Text.Json.JsonEncodedText PropThrottledDeleteRetryMaximumNumberOfRetries = System.Text.Json.JsonEncodedText.Encode("throttled_delete_retry.maximum_number_of_retries");
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.S3RepositorySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -48,11 +55,18 @@ public sealed partial class S3RepositorySettingsConverter : System.Text.Json.Ser
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propChunkSize = default;
 		LocalJsonValue<string?> propClient = default;
 		LocalJsonValue<bool?> propCompress = default;
+		LocalJsonValue<int?> propDeleteObjectsMaxSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propGetRegisterRetryDelay = default;
+		LocalJsonValue<int?> propMaxMultipartParts = default;
+		LocalJsonValue<int?> propMaxMultipartUploadCleanupSize = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxRestoreBytesPerSec = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxSnapshotBytesPerSec = default;
 		LocalJsonValue<bool?> propReadonly = default;
 		LocalJsonValue<bool?> propServerSideEncryption = default;
 		LocalJsonValue<string?> propStorageClass = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propThrottledDeleteRetryDelayIncrement = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propThrottledDeleteRetryMaximumDelay = default;
+		LocalJsonValue<int?> propThrottledDeleteRetryMaximumNumberOfRetries = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propBasePath.TryReadProperty(ref reader, options, PropBasePath, null))
@@ -90,6 +104,26 @@ public sealed partial class S3RepositorySettingsConverter : System.Text.Json.Ser
 				continue;
 			}
 
+			if (propDeleteObjectsMaxSize.TryReadProperty(ref reader, options, PropDeleteObjectsMaxSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propGetRegisterRetryDelay.TryReadProperty(ref reader, options, PropGetRegisterRetryDelay, null))
+			{
+				continue;
+			}
+
+			if (propMaxMultipartParts.TryReadProperty(ref reader, options, PropMaxMultipartParts, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propMaxMultipartUploadCleanupSize.TryReadProperty(ref reader, options, PropMaxMultipartUploadCleanupSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
 			if (propMaxRestoreBytesPerSec.TryReadProperty(ref reader, options, PropMaxRestoreBytesPerSec, null))
 			{
 				continue;
@@ -115,6 +149,21 @@ public sealed partial class S3RepositorySettingsConverter : System.Text.Json.Ser
 				continue;
 			}
 
+			if (propThrottledDeleteRetryDelayIncrement.TryReadProperty(ref reader, options, PropThrottledDeleteRetryDelayIncrement, null))
+			{
+				continue;
+			}
+
+			if (propThrottledDeleteRetryMaximumDelay.TryReadProperty(ref reader, options, PropThrottledDeleteRetryMaximumDelay, null))
+			{
+				continue;
+			}
+
+			if (propThrottledDeleteRetryMaximumNumberOfRetries.TryReadProperty(ref reader, options, PropThrottledDeleteRetryMaximumNumberOfRetries, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.Skip();
@@ -134,11 +183,18 @@ public sealed partial class S3RepositorySettingsConverter : System.Text.Json.Ser
 			ChunkSize = propChunkSize.Value,
 			Client = propClient.Value,
 			Compress = propCompress.Value,
+			DeleteObjectsMaxSize = propDeleteObjectsMaxSize.Value,
+			GetRegisterRetryDelay = propGetRegisterRetryDelay.Value,
+			MaxMultipartParts = propMaxMultipartParts.Value,
+			MaxMultipartUploadCleanupSize = propMaxMultipartUploadCleanupSize.Value,
 			MaxRestoreBytesPerSec = propMaxRestoreBytesPerSec.Value,
 			MaxSnapshotBytesPerSec = propMaxSnapshotBytesPerSec.Value,
 			Readonly = propReadonly.Value,
 			ServerSideEncryption = propServerSideEncryption.Value,
-			StorageClass = propStorageClass.Value
+			StorageClass = propStorageClass.Value,
+			ThrottledDeleteRetryDelayIncrement = propThrottledDeleteRetryDelayIncrement.Value,
+			ThrottledDeleteRetryMaximumDelay = propThrottledDeleteRetryMaximumDelay.Value,
+			ThrottledDeleteRetryMaximumNumberOfRetries = propThrottledDeleteRetryMaximumNumberOfRetries.Value
 		};
 	}
 
@@ -152,11 +208,18 @@ public sealed partial class S3RepositorySettingsConverter : System.Text.Json.Ser
 		writer.WriteProperty(options, PropChunkSize, value.ChunkSize, null, null);
 		writer.WriteProperty(options, PropClient, value.Client, null, null);
 		writer.WriteProperty(options, PropCompress, value.Compress, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropDeleteObjectsMaxSize, value.DeleteObjectsMaxSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropGetRegisterRetryDelay, value.GetRegisterRetryDelay, null, null);
+		writer.WriteProperty(options, PropMaxMultipartParts, value.MaxMultipartParts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropMaxMultipartUploadCleanupSize, value.MaxMultipartUploadCleanupSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
 		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
 		writer.WriteProperty(options, PropReadonly, value.Readonly, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropServerSideEncryption, value.ServerSideEncryption, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropStorageClass, value.StorageClass, null, null);
+		writer.WriteProperty(options, PropThrottledDeleteRetryDelayIncrement, value.ThrottledDeleteRetryDelayIncrement, null, null);
+		writer.WriteProperty(options, PropThrottledDeleteRetryMaximumDelay, value.ThrottledDeleteRetryMaximumDelay, null, null);
+		writer.WriteProperty(options, PropThrottledDeleteRetryMaximumNumberOfRetries, value.ThrottledDeleteRetryMaximumNumberOfRetries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }
