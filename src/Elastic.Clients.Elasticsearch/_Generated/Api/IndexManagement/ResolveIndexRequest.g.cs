@@ -49,6 +49,13 @@ public sealed partial class ResolveIndexRequestParameters : Elastic.Transport.Re
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// Filter indices by index mode - standard, lookup, time_series, etc. Comma-separated list of IndexMode. Empty means no filter.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>? Mode { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>?>("mode"); set => Q("mode", value); }
 }
 
 /// <summary>
@@ -120,6 +127,13 @@ public sealed partial class ResolveIndexRequest : Elastic.Clients.Elasticsearch.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// Filter indices by index mode - standard, lookup, time_series, etc. Comma-separated list of IndexMode. Empty means no filter.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>? Mode { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>?>("mode"); set => Q("mode", value); }
 }
 
 /// <summary>
@@ -212,6 +226,28 @@ public readonly partial struct ResolveIndexRequestDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Filter indices by index mode - standard, lookup, time_series, etc. Comma-separated list of IndexMode. Empty means no filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor Mode(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.IndexMode>? value)
+	{
+		Instance.Mode = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Filter indices by index mode - standard, lookup, time_series, etc. Comma-separated list of IndexMode. Empty means no filter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveIndexRequestDescriptor Mode(params Elastic.Clients.Elasticsearch.IndexManagement.IndexMode[] values)
+	{
+		Instance.Mode = [.. values];
 		return this;
 	}
 

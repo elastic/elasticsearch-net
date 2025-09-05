@@ -28,7 +28,7 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 	/// <summary>
 	/// <para>
 	/// The total number of blobs to write to the repository during the test.
-	/// For realistic experiments, you should set it to at least <c>2000</c>.
+	/// For realistic experiments, set this parameter to at least <c>2000</c>.
 	/// </para>
 	/// </summary>
 	public int? BlobCount { get => Q<int?>("blob_count"); set => Q("blob_count", value); }
@@ -36,6 +36,7 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 	/// <summary>
 	/// <para>
 	/// The number of operations to run concurrently during the test.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public int? Concurrency { get => Q<int?>("concurrency"); set => Q("concurrency", value); }
@@ -52,6 +53,7 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 	/// <para>
 	/// The number of nodes on which to perform an early read operation while writing each blob.
 	/// Early read operations are only rarely performed.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public int? EarlyReadNodeCount { get => Q<int?>("early_read_node_count"); set => Q("early_read_node_count", value); }
@@ -59,7 +61,7 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 	/// <summary>
 	/// <para>
 	/// The maximum size of a blob to be written during the test.
-	/// For realistic experiments, you should set it to at least <c>2gb</c>.
+	/// For realistic experiments, set this parameter to at least <c>2gb</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxBlobSize { get => Q<Elastic.Clients.Elasticsearch.ByteSize?>("max_blob_size"); set => Q("max_blob_size", value); }
@@ -67,7 +69,7 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 	/// <summary>
 	/// <para>
 	/// An upper limit on the total size of all the blobs written during the test.
-	/// For realistic experiments, you should set it to at least <c>1tb</c>.
+	/// For realistic experiments, set this parameter to at least <c>1tb</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxTotalDataSize { get => Q<Elastic.Clients.Elasticsearch.ByteSize?>("max_total_data_size"); set => Q("max_total_data_size", value); }
@@ -75,6 +77,7 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 	/// <summary>
 	/// <para>
 	/// The probability of performing a rare action such as an early read, an overwrite, or an aborted write on each blob.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public double? RareActionProbability { get => Q<double?>("rare_action_probability"); set => Q("rare_action_probability", value); }
@@ -82,6 +85,7 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 	/// <summary>
 	/// <para>
 	/// Indicates whether to rarely cancel writes before they complete.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public bool? RarelyAbortWrites { get => Q<bool?>("rarely_abort_writes"); set => Q("rarely_abort_writes", value); }
@@ -89,6 +93,7 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 	/// <summary>
 	/// <para>
 	/// The number of nodes on which to read a blob after writing.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public int? ReadNodeCount { get => Q<int?>("read_node_count"); set => Q("read_node_count", value); }
@@ -96,7 +101,7 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 	/// <summary>
 	/// <para>
 	/// The minimum number of linearizable register operations to perform in total.
-	/// For realistic experiments, you should set it to at least <c>100</c>.
+	/// For realistic experiments, set this parameter to at least <c>100</c>.
 	/// </para>
 	/// </summary>
 	public int? RegisterOperationCount { get => Q<int?>("register_operation_count"); set => Q("register_operation_count", value); }
@@ -106,6 +111,7 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 	/// The seed for the pseudo-random number generator used to generate the list of operations performed during the test.
 	/// To repeat the same set of operations in multiple experiments, use the same seed in each experiment.
 	/// Note that the operations are performed concurrently so might not always happen in the same order on each run.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public int? Seed { get => Q<int?>("seed"); set => Q("seed", value); }
@@ -114,6 +120,7 @@ public sealed partial class RepositoryAnalyzeRequestParameters : Elastic.Transpo
 	/// <para>
 	/// The period of time to wait for the test to complete.
 	/// If no response is received before the timeout expires, the test is cancelled and returns an error.
+	/// For realistic experiments, set this parameter sufficiently long to allow the test to complete.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -300,7 +307,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// <summary>
 	/// <para>
 	/// The total number of blobs to write to the repository during the test.
-	/// For realistic experiments, you should set it to at least <c>2000</c>.
+	/// For realistic experiments, set this parameter to at least <c>2000</c>.
 	/// </para>
 	/// </summary>
 	public int? BlobCount { get => Q<int?>("blob_count"); set => Q("blob_count", value); }
@@ -308,6 +315,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// <summary>
 	/// <para>
 	/// The number of operations to run concurrently during the test.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public int? Concurrency { get => Q<int?>("concurrency"); set => Q("concurrency", value); }
@@ -324,6 +332,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// <para>
 	/// The number of nodes on which to perform an early read operation while writing each blob.
 	/// Early read operations are only rarely performed.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public int? EarlyReadNodeCount { get => Q<int?>("early_read_node_count"); set => Q("early_read_node_count", value); }
@@ -331,7 +340,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// <summary>
 	/// <para>
 	/// The maximum size of a blob to be written during the test.
-	/// For realistic experiments, you should set it to at least <c>2gb</c>.
+	/// For realistic experiments, set this parameter to at least <c>2gb</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxBlobSize { get => Q<Elastic.Clients.Elasticsearch.ByteSize?>("max_blob_size"); set => Q("max_blob_size", value); }
@@ -339,7 +348,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// <summary>
 	/// <para>
 	/// An upper limit on the total size of all the blobs written during the test.
-	/// For realistic experiments, you should set it to at least <c>1tb</c>.
+	/// For realistic experiments, set this parameter to at least <c>1tb</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxTotalDataSize { get => Q<Elastic.Clients.Elasticsearch.ByteSize?>("max_total_data_size"); set => Q("max_total_data_size", value); }
@@ -347,6 +356,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// <summary>
 	/// <para>
 	/// The probability of performing a rare action such as an early read, an overwrite, or an aborted write on each blob.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public double? RareActionProbability { get => Q<double?>("rare_action_probability"); set => Q("rare_action_probability", value); }
@@ -354,6 +364,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// <summary>
 	/// <para>
 	/// Indicates whether to rarely cancel writes before they complete.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public bool? RarelyAbortWrites { get => Q<bool?>("rarely_abort_writes"); set => Q("rarely_abort_writes", value); }
@@ -361,6 +372,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// <summary>
 	/// <para>
 	/// The number of nodes on which to read a blob after writing.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public int? ReadNodeCount { get => Q<int?>("read_node_count"); set => Q("read_node_count", value); }
@@ -368,7 +380,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// <summary>
 	/// <para>
 	/// The minimum number of linearizable register operations to perform in total.
-	/// For realistic experiments, you should set it to at least <c>100</c>.
+	/// For realistic experiments, set this parameter to at least <c>100</c>.
 	/// </para>
 	/// </summary>
 	public int? RegisterOperationCount { get => Q<int?>("register_operation_count"); set => Q("register_operation_count", value); }
@@ -378,6 +390,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// The seed for the pseudo-random number generator used to generate the list of operations performed during the test.
 	/// To repeat the same set of operations in multiple experiments, use the same seed in each experiment.
 	/// Note that the operations are performed concurrently so might not always happen in the same order on each run.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public int? Seed { get => Q<int?>("seed"); set => Q("seed", value); }
@@ -386,6 +399,7 @@ public sealed partial class RepositoryAnalyzeRequest : Elastic.Clients.Elasticse
 	/// <para>
 	/// The period of time to wait for the test to complete.
 	/// If no response is received before the timeout expires, the test is cancelled and returns an error.
+	/// For realistic experiments, set this parameter sufficiently long to allow the test to complete.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -570,7 +584,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The total number of blobs to write to the repository during the test.
-	/// For realistic experiments, you should set it to at least <c>2000</c>.
+	/// For realistic experiments, set this parameter to at least <c>2000</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor BlobCount(int? value)
@@ -582,6 +596,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The number of operations to run concurrently during the test.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor Concurrency(int? value)
@@ -606,6 +621,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <para>
 	/// The number of nodes on which to perform an early read operation while writing each blob.
 	/// Early read operations are only rarely performed.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor EarlyReadNodeCount(int? value)
@@ -617,7 +633,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The maximum size of a blob to be written during the test.
-	/// For realistic experiments, you should set it to at least <c>2gb</c>.
+	/// For realistic experiments, set this parameter to at least <c>2gb</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxBlobSize(Elastic.Clients.Elasticsearch.ByteSize? value)
@@ -629,7 +645,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The maximum size of a blob to be written during the test.
-	/// For realistic experiments, you should set it to at least <c>2gb</c>.
+	/// For realistic experiments, set this parameter to at least <c>2gb</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxBlobSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
@@ -641,7 +657,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// An upper limit on the total size of all the blobs written during the test.
-	/// For realistic experiments, you should set it to at least <c>1tb</c>.
+	/// For realistic experiments, set this parameter to at least <c>1tb</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxTotalDataSize(Elastic.Clients.Elasticsearch.ByteSize? value)
@@ -653,7 +669,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// An upper limit on the total size of all the blobs written during the test.
-	/// For realistic experiments, you should set it to at least <c>1tb</c>.
+	/// For realistic experiments, set this parameter to at least <c>1tb</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor MaxTotalDataSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
@@ -665,6 +681,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The probability of performing a rare action such as an early read, an overwrite, or an aborted write on each blob.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor RareActionProbability(double? value)
@@ -676,6 +693,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// Indicates whether to rarely cancel writes before they complete.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor RarelyAbortWrites(bool? value = true)
@@ -687,6 +705,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The number of nodes on which to read a blob after writing.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor ReadNodeCount(int? value)
@@ -698,7 +717,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The minimum number of linearizable register operations to perform in total.
-	/// For realistic experiments, you should set it to at least <c>100</c>.
+	/// For realistic experiments, set this parameter to at least <c>100</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor RegisterOperationCount(int? value)
@@ -712,6 +731,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// The seed for the pseudo-random number generator used to generate the list of operations performed during the test.
 	/// To repeat the same set of operations in multiple experiments, use the same seed in each experiment.
 	/// Note that the operations are performed concurrently so might not always happen in the same order on each run.
+	/// For realistic experiments, leave this parameter unset.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor Seed(int? value)
@@ -724,6 +744,7 @@ public readonly partial struct RepositoryAnalyzeRequestDescriptor
 	/// <para>
 	/// The period of time to wait for the test to complete.
 	/// If no response is received before the timeout expires, the test is cancelled and returns an error.
+	/// For realistic experiments, set this parameter sufficiently long to allow the test to complete.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.RepositoryAnalyzeRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)

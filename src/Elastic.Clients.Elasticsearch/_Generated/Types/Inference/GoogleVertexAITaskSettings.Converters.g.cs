@@ -26,16 +26,23 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 public sealed partial class GoogleVertexAITaskSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAutoTruncate = System.Text.Json.JsonEncodedText.Encode("auto_truncate");
+	private static readonly System.Text.Json.JsonEncodedText PropThinkingConfig = System.Text.Json.JsonEncodedText.Encode("thinking_config");
 	private static readonly System.Text.Json.JsonEncodedText PropTopN = System.Text.Json.JsonEncodedText.Encode("top_n");
 
 	public override Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propAutoTruncate = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.ThinkingConfig?> propThinkingConfig = default;
 		LocalJsonValue<int?> propTopN = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAutoTruncate.TryReadProperty(ref reader, options, PropAutoTruncate, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propThinkingConfig.TryReadProperty(ref reader, options, PropThinkingConfig, null))
 			{
 				continue;
 			}
@@ -58,6 +65,7 @@ public sealed partial class GoogleVertexAITaskSettingsConverter : System.Text.Js
 		return new Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			AutoTruncate = propAutoTruncate.Value,
+			ThinkingConfig = propThinkingConfig.Value,
 			TopN = propTopN.Value
 		};
 	}
@@ -66,6 +74,7 @@ public sealed partial class GoogleVertexAITaskSettingsConverter : System.Text.Js
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAutoTruncate, value.AutoTruncate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropThinkingConfig, value.ThinkingConfig, null, null);
 		writer.WriteProperty(options, PropTopN, value.TopN, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
