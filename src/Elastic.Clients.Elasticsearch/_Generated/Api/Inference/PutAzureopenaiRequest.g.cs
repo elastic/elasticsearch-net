@@ -258,7 +258,18 @@ public readonly partial struct PutAzureopenaiRequestDescriptor
 	/// The chunking configuration object.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor> action)
+	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor ChunkingSettings()
+	{
+		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The chunking configuration object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;

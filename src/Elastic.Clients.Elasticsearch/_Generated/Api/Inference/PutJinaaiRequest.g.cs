@@ -228,7 +228,18 @@ public readonly partial struct PutJinaaiRequestDescriptor
 	/// The chunking configuration object.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor> action)
+	public Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor ChunkingSettings()
+	{
+		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The chunking configuration object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;

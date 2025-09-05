@@ -26,9 +26,13 @@ namespace Elastic.Clients.Elasticsearch.Json;
 public sealed partial class ShardFailureConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ShardFailure>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex1 = System.Text.Json.JsonEncodedText.Encode("_index");
 	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
+	private static readonly System.Text.Json.JsonEncodedText PropNode1 = System.Text.Json.JsonEncodedText.Encode("_node");
+	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
 	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
 	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard");
+	private static readonly System.Text.Json.JsonEncodedText PropShard1 = System.Text.Json.JsonEncodedText.Encode("_shard");
 	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
 
 	public override Elastic.Clients.Elasticsearch.ShardFailure Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -36,17 +40,23 @@ public sealed partial class ShardFailureConverter : System.Text.Json.Serializati
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propIndex = default;
 		LocalJsonValue<string?> propNode = default;
+		LocalJsonValue<bool?> propPrimary = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause> propReason = default;
-		LocalJsonValue<int> propShard = default;
+		LocalJsonValue<int?> propShard = default;
 		LocalJsonValue<string?> propStatus = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null) || propIndex.TryReadProperty(ref reader, options, PropIndex1, null))
 			{
 				continue;
 			}
 
-			if (propNode.TryReadProperty(ref reader, options, PropNode, null))
+			if (propNode.TryReadProperty(ref reader, options, PropNode, null) || propNode.TryReadProperty(ref reader, options, PropNode1, null))
+			{
+				continue;
+			}
+
+			if (propPrimary.TryReadProperty(ref reader, options, PropPrimary, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -56,7 +66,7 @@ public sealed partial class ShardFailureConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propShard.TryReadProperty(ref reader, options, PropShard, null))
+			if (propShard.TryReadProperty(ref reader, options, PropShard, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)) || propShard.TryReadProperty(ref reader, options, PropShard1, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -80,6 +90,7 @@ public sealed partial class ShardFailureConverter : System.Text.Json.Serializati
 		{
 			Index = propIndex.Value,
 			Node = propNode.Value,
+			Primary = propPrimary.Value,
 			Reason = propReason.Value,
 			Shard = propShard.Value,
 			Status = propStatus.Value
@@ -91,8 +102,9 @@ public sealed partial class ShardFailureConverter : System.Text.Json.Serializati
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
 		writer.WriteProperty(options, PropNode, value.Node, null, null);
+		writer.WriteProperty(options, PropPrimary, value.Primary, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropReason, value.Reason, null, null);
-		writer.WriteProperty(options, PropShard, value.Shard, null, null);
+		writer.WriteProperty(options, PropShard, value.Shard, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropStatus, value.Status, null, null);
 		writer.WriteEndObject();
 	}

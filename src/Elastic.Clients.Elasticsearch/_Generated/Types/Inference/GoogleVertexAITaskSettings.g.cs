@@ -51,6 +51,14 @@ public sealed partial class GoogleVertexAITaskSettings
 
 	/// <summary>
 	/// <para>
+	/// For a <c>completion</c> or <c>chat_completion</c> task, allows configuration of the thinking features for the model.
+	/// Refer to the Google documentation for the allowable configurations for each model type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.ThinkingConfig? ThinkingConfig { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// For a <c>rerank</c> task, the number of the top N documents that should be returned.
 	/// </para>
 	/// </summary>
@@ -84,6 +92,42 @@ public readonly partial struct GoogleVertexAiTaskSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor AutoTruncate(bool? value = true)
 	{
 		Instance.AutoTruncate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For a <c>completion</c> or <c>chat_completion</c> task, allows configuration of the thinking features for the model.
+	/// Refer to the Google documentation for the allowable configurations for each model type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor ThinkingConfig(Elastic.Clients.Elasticsearch.Inference.ThinkingConfig? value)
+	{
+		Instance.ThinkingConfig = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For a <c>completion</c> or <c>chat_completion</c> task, allows configuration of the thinking features for the model.
+	/// Refer to the Google documentation for the allowable configurations for each model type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor ThinkingConfig()
+	{
+		Instance.ThinkingConfig = Elastic.Clients.Elasticsearch.Inference.ThinkingConfigDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For a <c>completion</c> or <c>chat_completion</c> task, allows configuration of the thinking features for the model.
+	/// Refer to the Google documentation for the allowable configurations for each model type.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor ThinkingConfig(System.Action<Elastic.Clients.Elasticsearch.Inference.ThinkingConfigDescriptor>? action)
+	{
+		Instance.ThinkingConfig = Elastic.Clients.Elasticsearch.Inference.ThinkingConfigDescriptor.Build(action);
 		return this;
 	}
 

@@ -38,8 +38,8 @@ public sealed partial class ChunkingSettingsConverter : System.Text.Json.Seriali
 		LocalJsonValue<int> propMaxChunkSize = default;
 		LocalJsonValue<int?> propOverlap = default;
 		LocalJsonValue<int?> propSentenceOverlap = default;
-		LocalJsonValue<string> propSeparatorGroup = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>> propSeparators = default;
+		LocalJsonValue<string?> propSeparatorGroup = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propSeparators = default;
 		LocalJsonValue<string> propStrategy = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -63,7 +63,7 @@ public sealed partial class ChunkingSettingsConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propSeparators.TryReadProperty(ref reader, options, PropSeparators, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			if (propSeparators.TryReadProperty(ref reader, options, PropSeparators, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -101,7 +101,7 @@ public sealed partial class ChunkingSettingsConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropOverlap, value.Overlap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSentenceOverlap, value.SentenceOverlap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSeparatorGroup, value.SeparatorGroup, null, null);
-		writer.WriteProperty(options, PropSeparators, value.Separators, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropSeparators, value.Separators, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropStrategy, value.Strategy, null, null);
 		writer.WriteEndObject();
 	}

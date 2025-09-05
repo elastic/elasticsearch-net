@@ -124,6 +124,7 @@ public sealed partial class PutElserRequest : Elastic.Clients.Elasticsearch.Requ
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Note that for ELSER endpoints, the max_chunk_size may not exceed <c>300</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
@@ -235,6 +236,7 @@ public readonly partial struct PutElserRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Note that for ELSER endpoints, the max_chunk_size may not exceed <c>300</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
@@ -246,9 +248,22 @@ public readonly partial struct PutElserRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Note that for ELSER endpoints, the max_chunk_size may not exceed <c>300</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor> action)
+	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor ChunkingSettings()
+	{
+		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The chunking configuration object.
+	/// Note that for ELSER endpoints, the max_chunk_size may not exceed <c>300</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
