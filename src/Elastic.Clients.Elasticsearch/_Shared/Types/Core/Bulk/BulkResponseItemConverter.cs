@@ -109,6 +109,7 @@ public sealed class BulkResponseItemConverter : JsonConverter<ResponseItem>
 			if (options.UnmappedMemberHandling is JsonUnmappedMemberHandling.Skip)
 			{
 				reader.Skip();
+				continue;
 			}
 
 			throw new JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
