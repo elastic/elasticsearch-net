@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct IndexPrivilege | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct IndexPrivilege | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.7/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Security_IndexPrivilege.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Security.IndexPrivilege%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege" class="text-break">
+Struct IndexPrivilege  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(IndexPrivilegeConverter))]
+public readonly struct IndexPrivilege</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege__ctor_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.#ctor(System.String)">
+  IndexPrivilege(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexPrivilege(string value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_All_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.All*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_All" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.All">
+  All
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege All { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_AutoConfigure_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.AutoConfigure*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_AutoConfigure" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.AutoConfigure">
+  AutoConfigure
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege AutoConfigure { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Create_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Create*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Create" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Create">
+  Create
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege Create { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_CreateDoc_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateDoc*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_CreateDoc" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateDoc">
+  CreateDoc
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege CreateDoc { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_CreateIndex_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateIndex*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_CreateIndex" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CreateIndex">
+  CreateIndex
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege CreateIndex { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_CrossClusterReplication_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CrossClusterReplication*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_CrossClusterReplication" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CrossClusterReplication">
+  CrossClusterReplication
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege CrossClusterReplication { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_CrossClusterReplicationInternal_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CrossClusterReplicationInternal*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_CrossClusterReplicationInternal" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.CrossClusterReplicationInternal">
+  CrossClusterReplicationInternal
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege CrossClusterReplicationInternal { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Delete_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Delete" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Delete">
+  Delete
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege Delete { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_DeleteIndex_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.DeleteIndex*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_DeleteIndex" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.DeleteIndex">
+  DeleteIndex
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege DeleteIndex { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Index_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Index" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Index">
+  Index
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L45"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege Index { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Maintenance_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Maintenance*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Maintenance" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Maintenance">
+  Maintenance
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege Maintenance { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Manage_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Manage*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Manage" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Manage">
+  Manage
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege Manage { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ManageDataStreamLifecycle_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageDataStreamLifecycle*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ManageDataStreamLifecycle" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageDataStreamLifecycle">
+  ManageDataStreamLifecycle
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege ManageDataStreamLifecycle { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ManageFollowIndex_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageFollowIndex*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ManageFollowIndex" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageFollowIndex">
+  ManageFollowIndex
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege ManageFollowIndex { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ManageIlm_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageIlm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ManageIlm" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageIlm">
+  ManageIlm
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege ManageIlm { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ManageLeaderIndex_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageLeaderIndex*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ManageLeaderIndex" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ManageLeaderIndex">
+  ManageLeaderIndex
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege ManageLeaderIndex { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Monitor_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Monitor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Monitor" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Monitor">
+  Monitor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L52"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege Monitor { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_None_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.None*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_None" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.None">
+  None
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege None { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Read_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Read*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Read" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Read">
+  Read
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege Read { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ReadCrossCluster_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ReadCrossCluster*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ReadCrossCluster" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ReadCrossCluster">
+  ReadCrossCluster
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege ReadCrossCluster { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Value_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Value*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Value" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Value">
+  Value
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Value { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ViewIndexMetadata_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ViewIndexMetadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ViewIndexMetadata" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ViewIndexMetadata">
+  ViewIndexMetadata
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege ViewIndexMetadata { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Write_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Write*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Write" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Write">
+  Write
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IndexPrivilege Write { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Equals_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Equals*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Equals_Elastic_Clients_Elasticsearch_Security_IndexPrivilege_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Equals(Elastic.Clients.Elasticsearch.Security.IndexPrivilege)">
+  Equals(IndexPrivilege)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(IndexPrivilege other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Equals_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Equals*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Equals_System_Object_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.Equals(System.Object)">
+  Equals(object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_GetHashCode_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.GetHashCode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_GetHashCode" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.GetHashCode">
+  GetHashCode()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ToString_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ToString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_ToString" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.ToString">
+  ToString()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_op_Equality_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.op_Equality*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_op_Equality_Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Elastic_Clients_Elasticsearch_Security_IndexPrivilege_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.op_Equality(Elastic.Clients.Elasticsearch.Security.IndexPrivilege,Elastic.Clients.Elasticsearch.Security.IndexPrivilege)">
+  operator ==(IndexPrivilege, IndexPrivilege)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(IndexPrivilege a, IndexPrivilege b)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+    <dt><code>b</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_op_Implicit_Elastic_Clients_Elasticsearch_Security_IndexPrivilege__System_String" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.op_Implicit(Elastic.Clients.Elasticsearch.Security.IndexPrivilege)~System.String">
+  implicit operator string(IndexPrivilege)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L61"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator string(IndexPrivilege @enum)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>enum</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_op_Implicit_System_String__Elastic_Clients_Elasticsearch_Security_IndexPrivilege" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.op_Implicit(System.String)~Elastic.Clients.Elasticsearch.Security.IndexPrivilege">
+  implicit operator IndexPrivilege(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator IndexPrivilege(string value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_op_Inequality_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.op_Inequality*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_IndexPrivilege_op_Inequality_Elastic_Clients_Elasticsearch_Security_IndexPrivilege_Elastic_Clients_Elasticsearch_Security_IndexPrivilege_" data-uid="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.op_Inequality(Elastic.Clients.Elasticsearch.Security.IndexPrivilege,Elastic.Clients.Elasticsearch.Security.IndexPrivilege)">
+  operator !=(IndexPrivilege, IndexPrivilege)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Security/IndexPrivilege.g.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(IndexPrivilege a, IndexPrivilege b)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+    <dt><code>b</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndexPrivilege.html">IndexPrivilege</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

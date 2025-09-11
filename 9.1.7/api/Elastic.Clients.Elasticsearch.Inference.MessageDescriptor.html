@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct MessageDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct MessageDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="An object representing part of the conversation.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.7/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Inference_MessageDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Inference.MessageDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor" class="text-break">
+Struct MessageDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/Message.g.cs/#L130"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Inference.html">Inference</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+An object representing part of the conversation.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct MessageDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.#ctor">
+  MessageDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/Message.g.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MessageDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor__ctor_Elastic_Clients_Elasticsearch_Inference_Message_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.#ctor(Elastic.Clients.Elasticsearch.Inference.Message)">
+  MessageDescriptor(Message)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/Message.g.cs/#L134"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MessageDescriptor(Message instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Inference.Message.html">Message</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_Content_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.Content*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_Content_Elastic_Clients_Elasticsearch_Union_System_String_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Inference_ContentObject___" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.Content(Elastic.Clients.Elasticsearch.Union{System.String,System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Inference.ContentObject}})">
+  Content(Union&lt;string, ICollection&lt;ContentObject&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/Message.g.cs/#L175"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The content of the message.
+</p>
+<p>
+String example:
+</p>
+<pre><code class="lang-csharp">{
+   "content": "Some string"
+}</code></pre>
+<p>
+Object example:
+</p>
+<pre><code class="lang-csharp">{
+  "content": [
+      {
+       "text": "Some text",
+       "type": "text"
+      }
+   ]
+}</code></pre>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MessageDescriptor Content(Union&lt;string, ICollection&lt;ContentObject&gt;&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html">Union</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Inference.ContentObject.html">ContentObject</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.html">MessageDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_Role_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.Role*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_Role_System_String_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.Role(System.String)">
+  Role(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/Message.g.cs/#L186"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The role of the message author. Valid values are <code>user</code>, <code>assistant</code>, <code>system</code>, and <code>tool</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MessageDescriptor Role(string value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.html">MessageDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_ToolCallId_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.ToolCallId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_ToolCallId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.ToolCallId(Elastic.Clients.Elasticsearch.Id)">
+  ToolCallId(Id?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/Message.g.cs/#L197"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only for <code>tool</code> role messages. The tool call that this message is responding to.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MessageDescriptor ToolCallId(Id? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.html">MessageDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_ToolCalls_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.ToolCalls*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_ToolCalls_Elastic_Clients_Elasticsearch_Inference_ToolCall___" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.ToolCalls(Elastic.Clients.Elasticsearch.Inference.ToolCall[])">
+  ToolCalls(params ToolCall[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/Message.g.cs/#L249"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only for <code>assistant</code> role messages. The tool calls generated by the model. If it's specified, the <code>content</code> field is optional.
+Example:
+</p>
+<pre><code class="lang-csharp">{
+  "tool_calls": [
+      {
+          "id": "call_KcAjWtAww20AihPHphUh46Gd",
+          "type": "function",
+          "function": {
+              "name": "get_current_weather",
+              "arguments": "{\"location\":\"Boston, MA\"}"
+          }
+      }
+  ]
+}</code></pre>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MessageDescriptor ToolCalls(params ToolCall[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Inference.ToolCall.html">ToolCall</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.html">MessageDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_ToolCalls_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.ToolCalls*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_ToolCalls_System_Action_Elastic_Clients_Elasticsearch_Inference_ToolCallDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.ToolCalls(System.Action{Elastic.Clients.Elasticsearch.Inference.ToolCallDescriptor}[])">
+  ToolCalls(params Action&lt;ToolCallDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/Message.g.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only for <code>assistant</code> role messages. The tool calls generated by the model. If it's specified, the <code>content</code> field is optional.
+Example:
+</p>
+<pre><code class="lang-csharp">{
+  "tool_calls": [
+      {
+          "id": "call_KcAjWtAww20AihPHphUh46Gd",
+          "type": "function",
+          "function": {
+              "name": "get_current_weather",
+              "arguments": "{\"location\":\"Boston, MA\"}"
+          }
+      }
+  ]
+}</code></pre>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MessageDescriptor ToolCalls(params Action&lt;ToolCallDescriptor&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Inference.ToolCallDescriptor.html">ToolCallDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.html">MessageDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_ToolCalls_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.ToolCalls*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_ToolCalls_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Inference_ToolCall__" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.ToolCalls(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Inference.ToolCall})">
+  ToolCalls(ICollection&lt;ToolCall&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/Message.g.cs/#L223"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only for <code>assistant</code> role messages. The tool calls generated by the model. If it's specified, the <code>content</code> field is optional.
+Example:
+</p>
+<pre><code class="lang-csharp">{
+  "tool_calls": [
+      {
+          "id": "call_KcAjWtAww20AihPHphUh46Gd",
+          "type": "function",
+          "function": {
+              "name": "get_current_weather",
+              "arguments": "{\"location\":\"Boston, MA\"}"
+          }
+      }
+  ]
+}</code></pre>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MessageDescriptor ToolCalls(ICollection&lt;ToolCall&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Inference.ToolCall.html">ToolCall</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.html">MessageDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Inference_Message__Elastic_Clients_Elasticsearch_Inference_MessageDescriptor" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Inference.Message)~Elastic.Clients.Elasticsearch.Inference.MessageDescriptor">
+  explicit operator MessageDescriptor(Message)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/Message.g.cs/#L146"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator MessageDescriptor(Message instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Inference.Message.html">Message</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.html">MessageDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_MessageDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Inference_MessageDescriptor__Elastic_Clients_Elasticsearch_Inference_Message" data-uid="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Inference.MessageDescriptor)~Elastic.Clients.Elasticsearch.Inference.Message">
+  implicit operator Message(MessageDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/Message.g.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Message(MessageDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Inference.MessageDescriptor.html">MessageDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Inference.Message.html">Message</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
