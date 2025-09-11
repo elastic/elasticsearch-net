@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct FieldValues | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct FieldValues | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.6/apiSpec/new?filename=Elastic_Clients_Elasticsearch_FieldValues.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.FieldValues%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.FieldValues">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_FieldValues" data-uid="Elastic.Clients.Elasticsearch.FieldValues" class="text-break">
+Struct FieldValues  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(FieldValuesConverter))]
+public readonly struct FieldValues : IEquatable&lt;FieldValues&gt;, IEnumerable&lt;FieldValue&gt;, IEnumerable</code></pre>
+  </div>
+
+
+
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues__ctor_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues__ctor" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor">
+  FieldValues()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FieldValues()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues__ctor_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues__ctor_System_Collections_Generic_IEnumerable_Elastic_Clients_Elasticsearch_FieldValue__" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor(System.Collections.Generic.IEnumerable{Elastic.Clients.Elasticsearch.FieldValue})">
+  FieldValues(IEnumerable&lt;FieldValue&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FieldValues(IEnumerable&lt;FieldValue&gt; values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues__ctor_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues__ctor_System_Collections_Generic_IEnumerable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor(System.Collections.Generic.IEnumerable{System.Boolean})">
+  FieldValues(IEnumerable&lt;bool&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L58"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FieldValues(IEnumerable&lt;bool&gt; values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues__ctor_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues__ctor_System_Collections_Generic_IEnumerable_System_Double__" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor(System.Collections.Generic.IEnumerable{System.Double})">
+  FieldValues(IEnumerable&lt;double&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FieldValues(IEnumerable&lt;double&gt; values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues__ctor_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues__ctor_System_Collections_Generic_IEnumerable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor(System.Collections.Generic.IEnumerable{System.Int32})">
+  FieldValues(IEnumerable&lt;int&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FieldValues(IEnumerable&lt;int&gt; values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues__ctor_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues__ctor_System_Collections_Generic_IEnumerable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor(System.Collections.Generic.IEnumerable{System.Int64})">
+  FieldValues(IEnumerable&lt;long&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FieldValues(IEnumerable&lt;long&gt; values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues__ctor_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues__ctor_System_Collections_Generic_IEnumerable_System_Object__" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor(System.Collections.Generic.IEnumerable{System.Object})">
+  FieldValues(IEnumerable&lt;object?&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FieldValues(IEnumerable&lt;object?&gt; values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues__ctor_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues__ctor_System_Collections_Generic_IEnumerable_System_String__" data-uid="Elastic.Clients.Elasticsearch.FieldValues.#ctor(System.Collections.Generic.IEnumerable{System.String})">
+  FieldValues(IEnumerable&lt;string&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FieldValues(IEnumerable&lt;string&gt; values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_Empty" data-uid="Elastic.Clients.Elasticsearch.FieldValues.Empty">
+  Empty
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly FieldValues Empty</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_Values_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.Values*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_Values" data-uid="Elastic.Clients.Elasticsearch.FieldValues.Values">
+  Values
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyCollection&lt;FieldValue&gt; Values { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_Equals_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.Equals*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_Equals_Elastic_Clients_Elasticsearch_FieldValues_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.Equals(Elastic.Clients.Elasticsearch.FieldValues)">
+  Equals(FieldValues)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L120"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(FieldValues other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_Equals_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.Equals*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_Equals_System_Object_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.Equals(System.Object)">
+  Equals(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object? obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_GetEnumerator_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.GetEnumerator*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_GetEnumerator" data-uid="Elastic.Clients.Elasticsearch.FieldValues.GetEnumerator">
+  GetEnumerator()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L130"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerator&lt;FieldValue&gt; GetEnumerator()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1">IEnumerator</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_GetHashCode_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.GetHashCode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_GetHashCode" data-uid="Elastic.Clients.Elasticsearch.FieldValues.GetHashCode">
+  GetHashCode()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_op_Equality_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Equality*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_op_Equality_Elastic_Clients_Elasticsearch_FieldValues_Elastic_Clients_Elasticsearch_FieldValues_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Equality(Elastic.Clients.Elasticsearch.FieldValues,Elastic.Clients.Elasticsearch.FieldValues)">
+  operator ==(FieldValues, FieldValues)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(FieldValues left, FieldValues right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_Elastic_Clients_Elasticsearch_FieldValue____Elastic_Clients_Elasticsearch_FieldValues" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit(Elastic.Clients.Elasticsearch.FieldValue[])~Elastic.Clients.Elasticsearch.FieldValues">
+  implicit operator FieldValues(FieldValue[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator FieldValues(FieldValue[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_System_Boolean____Elastic_Clients_Elasticsearch_FieldValues" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit(System.Boolean[])~Elastic.Clients.Elasticsearch.FieldValues">
+  implicit operator FieldValues(bool[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator FieldValues(bool[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_System_Double____Elastic_Clients_Elasticsearch_FieldValues" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit(System.Double[])~Elastic.Clients.Elasticsearch.FieldValues">
+  implicit operator FieldValues(double[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator FieldValues(double[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_System_Int32____Elastic_Clients_Elasticsearch_FieldValues" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit(System.Int32[])~Elastic.Clients.Elasticsearch.FieldValues">
+  implicit operator FieldValues(int[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator FieldValues(int[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_System_Int64____Elastic_Clients_Elasticsearch_FieldValues" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit(System.Int64[])~Elastic.Clients.Elasticsearch.FieldValues">
+  implicit operator FieldValues(long[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator FieldValues(long[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_System_Object____Elastic_Clients_Elasticsearch_FieldValues" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit(System.Object[])~Elastic.Clients.Elasticsearch.FieldValues">
+  implicit operator FieldValues(object?[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator FieldValues(object?[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_op_Implicit_System_String____Elastic_Clients_Elasticsearch_FieldValues" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Implicit(System.String[])~Elastic.Clients.Elasticsearch.FieldValues">
+  implicit operator FieldValues(string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator FieldValues(string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_FieldValues_op_Inequality_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Inequality*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_FieldValues_op_Inequality_Elastic_Clients_Elasticsearch_FieldValues_Elastic_Clients_Elasticsearch_FieldValues_" data-uid="Elastic.Clients.Elasticsearch.FieldValues.op_Inequality(Elastic.Clients.Elasticsearch.FieldValues,Elastic.Clients.Elasticsearch.FieldValues)">
+  operator !=(FieldValues, FieldValues)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Core/Fields/FieldValues.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(FieldValues left, FieldValues right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Elastic.Clients.Elasticsearch.FieldValues.html">FieldValues</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

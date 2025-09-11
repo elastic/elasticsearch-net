@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class GeoLocation | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class GeoLocation | Elasticsearch.NET ">
+      
+      <meta name="description" content="A latitude/longitude as a 2 dimensional point. It can be represented in various ways:    as a {lat, long} object    as a geo hash value    as a [lon, lat] array    as a string in &quot;&amp;lt;lat&amp;gt;, &amp;lt;lon&amp;gt;&quot; or WKT point formats">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.6/apiSpec/new?filename=Elastic_Clients_Elasticsearch_GeoLocation.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.GeoLocation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.GeoLocation">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_GeoLocation" data-uid="Elastic.Clients.Elasticsearch.GeoLocation" class="text-break">
+Class GeoLocation  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Types/GeoLocation.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+A latitude/longitude as a 2 dimensional point. It can be represented in various ways:
+</p>
+<ul><li>
+<p>
+as a <code>{lat, long}</code> object
+</p>
+</li><li>
+<p>
+as a geo hash value
+</p>
+</li><li>
+<p>
+as a <code>[lon, lat]</code> array
+</p>
+</li><li>
+<p>
+as a string in <code>"&lt;lat&gt;, &lt;lon&gt;"</code> or WKT point formats
+</p>
+</li></ul>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(GeoLocationConverter))]
+public class GeoLocation</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">GeoLocation</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_IsCoordinates_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsCoordinates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_IsCoordinates" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsCoordinates">
+  IsCoordinates
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsCoordinates { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_IsGeoHash_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsGeoHash*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_IsGeoHash" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsGeoHash">
+  IsGeoHash
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsGeoHash { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_IsLatitudeLongitude_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsLatitudeLongitude*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_IsLatitudeLongitude" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsLatitudeLongitude">
+  IsLatitudeLongitude
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsLatitudeLongitude { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_IsText_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsText*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_IsText" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsText">
+  IsText
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsText { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_Coordinates_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.Coordinates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_Coordinates_System_Collections_Generic_ICollection_System_Double__" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.Coordinates(System.Collections.Generic.ICollection{System.Double})">
+  Coordinates(ICollection&lt;double&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static GeoLocation Coordinates(ICollection&lt;double&gt; coordinates)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>coordinates</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoLocation.html">GeoLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_GeoHash_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.GeoHash*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_GeoHash_Elastic_Clients_Elasticsearch_GeoHashLocation_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.GeoHash(Elastic.Clients.Elasticsearch.GeoHashLocation)">
+  GeoHash(GeoHashLocation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static GeoLocation GeoHash(GeoHashLocation geoHash)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoHash</code> <a class="xref" href="Elastic.Clients.Elasticsearch.GeoHashLocation.html">GeoHashLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoLocation.html">GeoLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_IsValidLatitude_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsValidLatitude*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_IsValidLatitude_System_Double_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsValidLatitude(System.Double)">
+  IsValidLatitude(double)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Types/GeoLocation.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsValidLatitude(double latitude)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>latitude</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_IsValidLongitude_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsValidLongitude*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_IsValidLongitude_System_Double_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.IsValidLongitude(System.Double)">
+  IsValidLongitude(double)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Shared/Types/GeoLocation.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsValidLongitude(double longitude)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>longitude</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_LatitudeLongitude_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.LatitudeLongitude*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_LatitudeLongitude_Elastic_Clients_Elasticsearch_LatLonGeoLocation_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.LatitudeLongitude(Elastic.Clients.Elasticsearch.LatLonGeoLocation)">
+  LatitudeLongitude(LatLonGeoLocation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static GeoLocation LatitudeLongitude(LatLonGeoLocation latitudeLongitude)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>latitudeLongitude</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LatLonGeoLocation.html">LatLonGeoLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoLocation.html">GeoLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_Text_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.Text*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_Text_System_String_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.Text(System.String)">
+  Text(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L146"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static GeoLocation Text(string text)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>text</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoLocation.html">GeoLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_TryGetCoordinates_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.TryGetCoordinates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_TryGetCoordinates_System_Collections_Generic_ICollection_System_Double___" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.TryGetCoordinates(System.Collections.Generic.ICollection{System.Double}@)">
+  TryGetCoordinates(out ICollection&lt;double&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L128"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetCoordinates(out ICollection&lt;double&gt;? coordinates)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>coordinates</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_TryGetGeoHash_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.TryGetGeoHash*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_TryGetGeoHash_Elastic_Clients_Elasticsearch_GeoHashLocation__" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.TryGetGeoHash(Elastic.Clients.Elasticsearch.GeoHashLocation@)">
+  TryGetGeoHash(out GeoHashLocation?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetGeoHash(out GeoHashLocation? geoHash)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoHash</code> <a class="xref" href="Elastic.Clients.Elasticsearch.GeoHashLocation.html">GeoHashLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_TryGetLatitudeLongitude_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.TryGetLatitudeLongitude*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_TryGetLatitudeLongitude_Elastic_Clients_Elasticsearch_LatLonGeoLocation__" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.TryGetLatitudeLongitude(Elastic.Clients.Elasticsearch.LatLonGeoLocation@)">
+  TryGetLatitudeLongitude(out LatLonGeoLocation?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetLatitudeLongitude(out LatLonGeoLocation? latitudeLongitude)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>latitudeLongitude</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LatLonGeoLocation.html">LatLonGeoLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_TryGetText_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.TryGetText*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_TryGetText_System_String__" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.TryGetText(System.String@)">
+  TryGetText(out string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L150"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool TryGetText(out string? text)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>text</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_op_Implicit_Elastic_Clients_Elasticsearch_GeoHashLocation__Elastic_Clients_Elasticsearch_GeoLocation" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.op_Implicit(Elastic.Clients.Elasticsearch.GeoHashLocation)~Elastic.Clients.Elasticsearch.GeoLocation">
+  implicit operator GeoLocation(GeoHashLocation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator GeoLocation(GeoHashLocation geoHash)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>geoHash</code> <a class="xref" href="Elastic.Clients.Elasticsearch.GeoHashLocation.html">GeoHashLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoLocation.html">GeoLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_op_Implicit_Elastic_Clients_Elasticsearch_LatLonGeoLocation__Elastic_Clients_Elasticsearch_GeoLocation" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.op_Implicit(Elastic.Clients.Elasticsearch.LatLonGeoLocation)~Elastic.Clients.Elasticsearch.GeoLocation">
+  implicit operator GeoLocation(LatLonGeoLocation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator GeoLocation(LatLonGeoLocation latitudeLongitude)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>latitudeLongitude</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LatLonGeoLocation.html">LatLonGeoLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoLocation.html">GeoLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_op_Implicit_System_Double____Elastic_Clients_Elasticsearch_GeoLocation" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.op_Implicit(System.Double[])~Elastic.Clients.Elasticsearch.GeoLocation">
+  implicit operator GeoLocation(double[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator GeoLocation(double[] coordinates)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>coordinates</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoLocation.html">GeoLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GeoLocation_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GeoLocation_op_Implicit_System_String__Elastic_Clients_Elasticsearch_GeoLocation" data-uid="Elastic.Clients.Elasticsearch.GeoLocation.op_Implicit(System.String)~Elastic.Clients.Elasticsearch.GeoLocation">
+  implicit operator GeoLocation(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.6/src/Elastic.Clients.Elasticsearch/_Generated/Types/GeoLocation.g.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator GeoLocation(string text)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>text</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GeoLocation.html">GeoLocation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
