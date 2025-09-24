@@ -55,6 +55,7 @@ public sealed partial class MultisearchHeader
 	public bool? IgnoreUnavailable { get; set; }
 	public Elastic.Clients.Elasticsearch.Indices? Indices { get; set; }
 	public string? Preference { get; set; }
+	public string? ProjectRouting { get; set; }
 	public bool? RequestCache { get; set; }
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get; set; }
@@ -135,6 +136,12 @@ public readonly partial struct MultisearchHeaderDescriptor
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor Preference(string? value)
 	{
 		Instance.Preference = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeaderDescriptor ProjectRouting(string? value)
+	{
+		Instance.ProjectRouting = value;
 		return this;
 	}
 

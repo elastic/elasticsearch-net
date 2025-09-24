@@ -26,16 +26,30 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 public sealed partial class AuthenticateApiKeyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.AuthenticateApiKey>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropInternal = System.Text.Json.JsonEncodedText.Encode("internal");
+	private static readonly System.Text.Json.JsonEncodedText PropManagedBy = System.Text.Json.JsonEncodedText.Encode("managed_by");
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
 
 	public override Elastic.Clients.Elasticsearch.Security.AuthenticateApiKey Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propId = default;
+		LocalJsonValue<bool> propInternal = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy> propManagedBy = default;
 		LocalJsonValue<string?> propName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propInternal.TryReadProperty(ref reader, options, PropInternal, null))
+			{
+				continue;
+			}
+
+			if (propManagedBy.TryReadProperty(ref reader, options, PropManagedBy, null))
 			{
 				continue;
 			}
@@ -58,6 +72,8 @@ public sealed partial class AuthenticateApiKeyConverter : System.Text.Json.Seria
 		return new Elastic.Clients.Elasticsearch.Security.AuthenticateApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Id = propId.Value,
+			Internal = propInternal.Value,
+			ManagedBy = propManagedBy.Value,
 			Name = propName.Value
 		};
 	}
@@ -66,6 +82,8 @@ public sealed partial class AuthenticateApiKeyConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropInternal, value.Internal, null, null);
+		writer.WriteProperty(options, PropManagedBy, value.ManagedBy, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteEndObject();
 	}

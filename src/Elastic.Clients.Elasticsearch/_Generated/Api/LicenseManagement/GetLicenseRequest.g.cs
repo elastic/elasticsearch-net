@@ -36,7 +36,9 @@ public sealed partial class GetLicenseRequestParameters : Elastic.Transport.Requ
 
 	/// <summary>
 	/// <para>
-	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
+	/// Specifies whether to retrieve local information.
+	/// From 9.2 onwards the default value is <c>true</c>, which means the information is retrieved from the responding node.
+	/// In earlier versions the default is <c>false</c>, which means the information is retrieved from the elected master node.
 	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -93,7 +95,9 @@ public sealed partial class GetLicenseRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
+	/// Specifies whether to retrieve local information.
+	/// From 9.2 onwards the default value is <c>true</c>, which means the information is retrieved from the responding node.
+	/// In earlier versions the default is <c>false</c>, which means the information is retrieved from the elected master node.
 	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
@@ -145,7 +149,9 @@ public readonly partial struct GetLicenseRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specifies whether to retrieve local information. The default value is <c>false</c>, which means the information is retrieved from the master node.
+	/// Specifies whether to retrieve local information.
+	/// From 9.2 onwards the default value is <c>true</c>, which means the information is retrieved from the responding node.
+	/// In earlier versions the default is <c>false</c>, which means the information is retrieved from the elected master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor Local(bool? value = true)

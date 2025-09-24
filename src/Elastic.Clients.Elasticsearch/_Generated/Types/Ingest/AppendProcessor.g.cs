@@ -27,10 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Ingest;
 public sealed partial class AppendProcessor
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public AppendProcessor(Elastic.Clients.Elasticsearch.Field field, System.Collections.Generic.ICollection<object> value)
+	public AppendProcessor(Elastic.Clients.Elasticsearch.Field field)
 	{
 		Field = field;
-		Value = value;
 	}
 #if NET7_0_OR_GREATER
 	public AppendProcessor()
@@ -55,6 +54,13 @@ public sealed partial class AppendProcessor
 	/// </para>
 	/// </summary>
 	public bool? AllowDuplicates { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The origin field which will be appended to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Field? CopyFrom { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -107,14 +113,10 @@ public sealed partial class AppendProcessor
 
 	/// <summary>
 	/// <para>
-	/// The value to be appended. Supports template snippets.
+	/// The value to be appended. Supports template snippets. May specify only one of <c>value</c> or <c>copy_from</c>.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.ICollection<object> Value { get; set; }
+	public System.Collections.Generic.ICollection<object>? Value { get; set; }
 }
 
 public readonly partial struct AppendProcessorDescriptor<TDocument>
@@ -144,6 +146,28 @@ public readonly partial struct AppendProcessorDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> AllowDuplicates(bool? value = true)
 	{
 		Instance.AllowDuplicates = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The origin field which will be appended to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> CopyFrom(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.CopyFrom = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The origin field which will be appended to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> CopyFrom(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
+	{
+		Instance.CopyFrom = value;
 		return this;
 	}
 
@@ -280,10 +304,10 @@ public readonly partial struct AppendProcessorDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The value to be appended. Supports template snippets.
+	/// The value to be appended. Supports template snippets. May specify only one of <c>value</c> or <c>copy_from</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> Value(System.Collections.Generic.ICollection<object> value)
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> Value(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Value = value;
 		return this;
@@ -291,7 +315,7 @@ public readonly partial struct AppendProcessorDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The value to be appended. Supports template snippets.
+	/// The value to be appended. Supports template snippets. May specify only one of <c>value</c> or <c>copy_from</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor<TDocument> Value(params object[] values)
@@ -336,6 +360,28 @@ public readonly partial struct AppendProcessorDescriptor
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor AllowDuplicates(bool? value = true)
 	{
 		Instance.AllowDuplicates = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The origin field which will be appended to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor CopyFrom(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.CopyFrom = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The origin field which will be appended to <c>field</c>, cannot set <c>value</c> simultaneously.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor CopyFrom<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.CopyFrom = value;
 		return this;
 	}
 
@@ -489,10 +535,10 @@ public readonly partial struct AppendProcessorDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The value to be appended. Supports template snippets.
+	/// The value to be appended. Supports template snippets. May specify only one of <c>value</c> or <c>copy_from</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor Value(System.Collections.Generic.ICollection<object> value)
+	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor Value(System.Collections.Generic.ICollection<object>? value)
 	{
 		Instance.Value = value;
 		return this;
@@ -500,7 +546,7 @@ public readonly partial struct AppendProcessorDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The value to be appended. Supports template snippets.
+	/// The value to be appended. Supports template snippets. May specify only one of <c>value</c> or <c>copy_from</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Ingest.AppendProcessorDescriptor Value(params object[] values)

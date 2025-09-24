@@ -28,6 +28,7 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropColumnar = System.Text.Json.JsonEncodedText.Encode("columnar");
 	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
 	private static readonly System.Text.Json.JsonEncodedText PropIncludeCcsMetadata = System.Text.Json.JsonEncodedText.Encode("include_ccs_metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeCcsMetadata1 = System.Text.Json.JsonEncodedText.Encode("include_execution_metadata");
 	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive");
 	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion");
 	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale");
@@ -61,7 +62,7 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)) || propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata1, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}

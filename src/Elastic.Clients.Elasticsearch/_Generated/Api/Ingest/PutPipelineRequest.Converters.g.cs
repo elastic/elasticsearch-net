@@ -27,6 +27,7 @@ public sealed partial class PutPipelineRequestConverter : System.Text.Json.Seria
 {
 	private static readonly System.Text.Json.JsonEncodedText PropDeprecated = System.Text.Json.JsonEncodedText.Encode("deprecated");
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldAccessPattern = System.Text.Json.JsonEncodedText.Encode("field_access_pattern");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
 	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
 	private static readonly System.Text.Json.JsonEncodedText PropProcessors = System.Text.Json.JsonEncodedText.Encode("processors");
@@ -37,6 +38,7 @@ public sealed partial class PutPipelineRequestConverter : System.Text.Json.Seria
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propDeprecated = default;
 		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern?> propFieldAccessPattern = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propProcessors = default;
@@ -49,6 +51,11 @@ public sealed partial class PutPipelineRequestConverter : System.Text.Json.Seria
 			}
 
 			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propFieldAccessPattern.TryReadProperty(ref reader, options, PropFieldAccessPattern, static Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern>(o)))
 			{
 				continue;
 			}
@@ -87,6 +94,7 @@ public sealed partial class PutPipelineRequestConverter : System.Text.Json.Seria
 		{
 			Deprecated = propDeprecated.Value,
 			Description = propDescription.Value,
+			FieldAccessPattern = propFieldAccessPattern.Value,
 			Meta = propMeta.Value,
 			OnFailure = propOnFailure.Value,
 			Processors = propProcessors.Value,
@@ -99,6 +107,7 @@ public sealed partial class PutPipelineRequestConverter : System.Text.Json.Seria
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropFieldAccessPattern, value.FieldAccessPattern, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern>(o, v));
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
 		writer.WriteProperty(options, PropProcessors, value.Processors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));

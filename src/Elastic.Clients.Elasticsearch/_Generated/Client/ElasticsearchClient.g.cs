@@ -50,6 +50,7 @@ public partial class ElasticsearchClient
 	public virtual Elastic.Clients.Elasticsearch.Snapshot.SnapshotNamespacedClient Snapshot { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient SnapshotLifecycleManagement { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient Sql { get; private set; }
+	public virtual Elastic.Clients.Elasticsearch.Streams.StreamsNamespacedClient Streams { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient Synonyms { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Tasks.TasksNamespacedClient Tasks { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.TextStructure.TextStructureNamespacedClient TextStructure { get; private set; }
@@ -83,6 +84,7 @@ public partial class ElasticsearchClient
 		Snapshot = new Elastic.Clients.Elasticsearch.Snapshot.SnapshotNamespacedClient(this);
 		SnapshotLifecycleManagement = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient(this);
 		Sql = new Elastic.Clients.Elasticsearch.Sql.SqlNamespacedClient(this);
+		Streams = new Elastic.Clients.Elasticsearch.Streams.StreamsNamespacedClient(this);
 		Synonyms = new Elastic.Clients.Elasticsearch.Synonyms.SynonymsNamespacedClient(this);
 		Tasks = new Elastic.Clients.Elasticsearch.Tasks.TasksNamespacedClient(this);
 		TextStructure = new Elastic.Clients.Elasticsearch.TextStructure.TextStructureNamespacedClient(this);

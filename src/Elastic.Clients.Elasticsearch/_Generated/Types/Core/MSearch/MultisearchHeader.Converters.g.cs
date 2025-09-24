@@ -33,6 +33,7 @@ public sealed partial class MultisearchHeaderConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable");
 	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("index");
 	private static readonly System.Text.Json.JsonEncodedText PropPreference = System.Text.Json.JsonEncodedText.Encode("preference");
+	private static readonly System.Text.Json.JsonEncodedText PropProjectRouting = System.Text.Json.JsonEncodedText.Encode("project_routing");
 	private static readonly System.Text.Json.JsonEncodedText PropRequestCache = System.Text.Json.JsonEncodedText.Encode("request_cache");
 	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
 	private static readonly System.Text.Json.JsonEncodedText PropSearchType = System.Text.Json.JsonEncodedText.Encode("search_type");
@@ -48,6 +49,7 @@ public sealed partial class MultisearchHeaderConverter : System.Text.Json.Serial
 		LocalJsonValue<bool?> propIgnoreUnavailable = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Indices?> propIndices = default;
 		LocalJsonValue<string?> propPreference = default;
+		LocalJsonValue<string?> propProjectRouting = default;
 		LocalJsonValue<bool?> propRequestCache = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchType?> propSearchType = default;
@@ -93,6 +95,11 @@ public sealed partial class MultisearchHeaderConverter : System.Text.Json.Serial
 				continue;
 			}
 
+			if (propProjectRouting.TryReadProperty(ref reader, options, PropProjectRouting, null))
+			{
+				continue;
+			}
+
 			if (propRequestCache.TryReadProperty(ref reader, options, PropRequestCache, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
@@ -128,6 +135,7 @@ public sealed partial class MultisearchHeaderConverter : System.Text.Json.Serial
 			IgnoreUnavailable = propIgnoreUnavailable.Value,
 			Indices = propIndices.Value,
 			Preference = propPreference.Value,
+			ProjectRouting = propProjectRouting.Value,
 			RequestCache = propRequestCache.Value,
 			Routing = propRouting.Value,
 			SearchType = propSearchType.Value
@@ -145,6 +153,7 @@ public sealed partial class MultisearchHeaderConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropIgnoreUnavailable, value.IgnoreUnavailable, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
 		writer.WriteProperty(options, PropPreference, value.Preference, null, null);
+		writer.WriteProperty(options, PropProjectRouting, value.ProjectRouting, null, null);
 		writer.WriteProperty(options, PropRequestCache, value.RequestCache, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
 		writer.WriteProperty(options, PropSearchType, value.SearchType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.SearchType? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.SearchType>(o, v));

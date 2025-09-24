@@ -153,7 +153,7 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// When set to <c>true</c> and performing a cross-cluster query, the response will include an extra <c>_clusters</c>
+	/// When set to <c>true</c> and performing a cross-cluster/cross-project query, the response will include an extra <c>_clusters</c>
 	/// object with information about the clusters that participated in the search along with info such as shards
 	/// count.
 	/// </para>
@@ -312,7 +312,7 @@ public readonly partial struct EsqlQueryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// When set to <c>true</c> and performing a cross-cluster query, the response will include an extra <c>_clusters</c>
+	/// When set to <c>true</c> and performing a cross-cluster/cross-project query, the response will include an extra <c>_clusters</c>
 	/// object with information about the clusters that participated in the search along with info such as shards
 	/// count.
 	/// </para>
@@ -538,7 +538,7 @@ public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// When set to <c>true</c> and performing a cross-cluster query, the response will include an extra <c>_clusters</c>
+	/// When set to <c>true</c> and performing a cross-cluster/cross-project query, the response will include an extra <c>_clusters</c>
 	/// object with information about the clusters that participated in the search along with info such as shards
 	/// count.
 	/// </para>

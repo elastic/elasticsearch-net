@@ -21,17 +21,13 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
+namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed partial class SimulateIndexTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.Json.FieldAccessPatternConverter))]
+public enum FieldAccessPattern
 {
-	public override Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
-	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { IndexTemplate = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate?>(options, null) };
-	}
-
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.IndexTemplate, null);
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "classic")]
+	Classic,
+	[System.Runtime.Serialization.EnumMember(Value = "flexible")]
+	Flexible
 }
