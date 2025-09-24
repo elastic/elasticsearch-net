@@ -21,17 +21,41 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
+namespace Elastic.Clients.Elasticsearch.Streams;
 
-public sealed partial class SimulateIndexTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Streams.Json.LogsStatusConverter))]
+public sealed partial class LogsStatus
 {
-	public override Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LogsStatus(bool enabled)
 	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { IndexTemplate = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate?>(options, null) };
+		Enabled = enabled;
+	}
+#if NET7_0_OR_GREATER
+	public LogsStatus()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public LogsStatus()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal LogsStatus(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
-	{
-		writer.WriteValue(options, value.IndexTemplate, null);
-	}
+	/// <summary>
+	/// <para>
+	/// If true, the logs stream feature is enabled.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
 }

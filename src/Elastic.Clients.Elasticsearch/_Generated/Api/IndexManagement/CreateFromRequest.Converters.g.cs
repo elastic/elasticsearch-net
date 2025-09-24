@@ -27,7 +27,7 @@ public sealed partial class CreateFromRequestConverter : System.Text.Json.Serial
 {
 	public override Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { CreateFrom = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom>(options, null) };
+		return new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { CreateFrom = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom?>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest value, System.Text.Json.JsonSerializerOptions options)
