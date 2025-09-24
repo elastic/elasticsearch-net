@@ -26,16 +26,23 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 public sealed partial class TextEmbeddingRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropInput = System.Text.Json.JsonEncodedText.Encode("input");
+	private static readonly System.Text.Json.JsonEncodedText PropInputType = System.Text.Json.JsonEncodedText.Encode("input_type");
 	private static readonly System.Text.Json.JsonEncodedText PropTaskSettings = System.Text.Json.JsonEncodedText.Encode("task_settings");
 
 	public override Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.ICollection<string>> propInput = default;
+		LocalJsonValue<string?> propInputType = default;
 		LocalJsonValue<object?> propTaskSettings = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propInput.TryReadProperty(ref reader, options, PropInput, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propInputType.TryReadProperty(ref reader, options, PropInputType, null))
 			{
 				continue;
 			}
@@ -58,6 +65,7 @@ public sealed partial class TextEmbeddingRequestConverter : System.Text.Json.Ser
 		return new Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Input = propInput.Value,
+			InputType = propInputType.Value,
 			TaskSettings = propTaskSettings.Value
 		};
 	}
@@ -66,6 +74,7 @@ public sealed partial class TextEmbeddingRequestConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropInput, value.Input, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropInputType, value.InputType, null, null);
 		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteEndObject();
 	}
