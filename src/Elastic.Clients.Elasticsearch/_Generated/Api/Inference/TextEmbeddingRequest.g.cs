@@ -103,6 +103,41 @@ public sealed partial class TextEmbeddingRequest : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
+	/// The input data type for the text embedding model. Possible values include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>SEARCH</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>INGEST</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>CLASSIFICATION</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>CLUSTERING</c>
+	/// Not all services support all values. Unsupported values will trigger a validation exception.
+	/// Accepted values depend on the configured inference service, refer to the relevant service-specific documentation for more info.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// info
+	/// The <c>input_type</c> parameter specified on the root level of the request body will take precedence over the <c>input_type</c> parameter specified in <c>task_settings</c>.
+	/// </para>
+	/// </summary>
+	public string? InputType { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Optional task settings
 	/// </para>
 	/// </summary>
@@ -183,6 +218,45 @@ public readonly partial struct TextEmbeddingRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor Input(params string[] values)
 	{
 		Instance.Input = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The input data type for the text embedding model. Possible values include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>SEARCH</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>INGEST</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>CLASSIFICATION</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>CLUSTERING</c>
+	/// Not all services support all values. Unsupported values will trigger a validation exception.
+	/// Accepted values depend on the configured inference service, refer to the relevant service-specific documentation for more info.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// info
+	/// The <c>input_type</c> parameter specified on the root level of the request body will take precedence over the <c>input_type</c> parameter specified in <c>task_settings</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor InputType(string? value)
+	{
+		Instance.InputType = value;
 		return this;
 	}
 

@@ -61,6 +61,9 @@ public sealed partial class RefreshRequestParameters : Elastic.Transport.Request
 /// You can change this default interval with the <c>index.refresh_interval</c> setting.
 /// </para>
 /// <para>
+/// In Elastic Cloud Serverless, the default refresh interval is 5 seconds across all indices.
+/// </para>
+/// <para>
 /// Refresh requests are synchronous and do not return a response until the refresh operation completes.
 /// </para>
 /// <para>
@@ -145,6 +148,9 @@ public sealed partial class RefreshRequest : Elastic.Clients.Elasticsearch.Reque
 /// <para>
 /// By default, Elasticsearch periodically refreshes indices every second, but only on indices that have received one search request or more in the last 30 seconds.
 /// You can change this default interval with the <c>index.refresh_interval</c> setting.
+/// </para>
+/// <para>
+/// In Elastic Cloud Serverless, the default refresh interval is 5 seconds across all indices.
 /// </para>
 /// <para>
 /// Refresh requests are synchronous and do not return a response until the refresh operation completes.
@@ -308,6 +314,9 @@ public readonly partial struct RefreshRequestDescriptor
 /// <para>
 /// By default, Elasticsearch periodically refreshes indices every second, but only on indices that have received one search request or more in the last 30 seconds.
 /// You can change this default interval with the <c>index.refresh_interval</c> setting.
+/// </para>
+/// <para>
+/// In Elastic Cloud Serverless, the default refresh interval is 5 seconds across all indices.
 /// </para>
 /// <para>
 /// Refresh requests are synchronous and do not return a response until the refresh operation completes.

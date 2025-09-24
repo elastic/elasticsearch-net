@@ -38,16 +38,9 @@ public sealed partial class CreateFromRequestParameters : Elastic.Transport.Requ
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.CreateFromRequestConverter))]
 public sealed partial class CreateFromRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestParameters>
 {
-	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CreateFromRequest(Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest) : base(r => r.Required("source", source).Required("dest", dest))
 	{
-	}
-
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CreateFromRequest(Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom createFrom) : base(r => r.Required("source", source).Required("dest", dest))
-	{
-		CreateFrom = createFrom;
 	}
 #if NET7_0_OR_GREATER
 	public CreateFromRequest()
@@ -89,11 +82,7 @@ public sealed partial class CreateFromRequest : Elastic.Clients.Elasticsearch.Re
 	required
 #endif
 	Elastic.Clients.Elasticsearch.IndexName Source { get => P<Elastic.Clients.Elasticsearch.IndexName>("source"); set => PR("source", value); }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom CreateFrom { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom? CreateFrom { get; set; }
 }
 
 /// <summary>
@@ -116,9 +105,7 @@ public readonly partial struct CreateFromRequestDescriptor
 
 	public CreateFromRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest)
 	{
-#pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest(source, dest);
-#pragma warning restore CS0618
 	}
 
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
@@ -152,7 +139,7 @@ public readonly partial struct CreateFromRequestDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor CreateFrom(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor CreateFrom(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom? value)
 	{
 		Instance.CreateFrom = value;
 		return this;
@@ -247,9 +234,7 @@ public readonly partial struct CreateFromRequestDescriptor<TDocument>
 
 	public CreateFromRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest)
 	{
-#pragma warning disable CS0618
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequest(source, dest);
-#pragma warning restore CS0618
 	}
 
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
@@ -283,7 +268,7 @@ public readonly partial struct CreateFromRequestDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument> CreateFrom(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateFromRequestDescriptor<TDocument> CreateFrom(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom? value)
 	{
 		Instance.CreateFrom = value;
 		return this;

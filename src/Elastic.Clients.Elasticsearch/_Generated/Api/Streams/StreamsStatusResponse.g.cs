@@ -21,17 +21,25 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
+namespace Elastic.Clients.Elasticsearch.Streams;
 
-public sealed partial class SimulateIndexTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Streams.Json.StreamsStatusResponseConverter))]
+public sealed partial class StreamsStatusResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
-	public override Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StreamsStatusResponse()
 	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { IndexTemplate = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate?>(options, null) };
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StreamsStatusResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
-		writer.WriteValue(options, value.IndexTemplate, null);
+		_ = sentinel;
 	}
+
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+Elastic.Clients.Elasticsearch.Streams.LogsStatus Logs { get; set; }
 }

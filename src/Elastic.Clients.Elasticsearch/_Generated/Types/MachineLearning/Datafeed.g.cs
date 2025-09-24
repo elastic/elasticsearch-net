@@ -71,6 +71,12 @@ public sealed partial class Datafeed
 	required
 #endif
 	Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig DelayedDataCheckConfig { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The interval at which scheduled queries are made while the datafeed runs in real time. The default value is either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket span. For example: <c>150s</c>. When <c>frequency</c> is shorter than the bucket span, interim results for the last (partial) bucket are written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value must be divisible by the interval of the date histogram aggregation.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Frequency { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Indexes { get; set; }
 	public
