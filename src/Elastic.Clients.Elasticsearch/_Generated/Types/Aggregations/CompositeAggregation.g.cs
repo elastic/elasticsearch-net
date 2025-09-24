@@ -62,7 +62,7 @@ public sealed partial class CompositeAggregation
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
+	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? Sources { get; set; }
 }
 
 public readonly partial struct CompositeAggregationDescriptor<TDocument>
@@ -148,7 +148,7 @@ public readonly partial struct CompositeAggregationDescriptor<TDocument>
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? value)
 	{
 		Instance.Sources = value;
 		return this;
@@ -160,9 +160,9 @@ public readonly partial struct CompositeAggregationDescriptor<TDocument>
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>[] values)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources()
 	{
-		Instance.Sources = [.. values];
+		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource<TDocument>.Build(null);
 		return this;
 	}
 
@@ -172,15 +172,23 @@ public readonly partial struct CompositeAggregationDescriptor<TDocument>
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<TDocument>>?[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> Sources(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource<TDocument>>? action)
 	{
-		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<TDocument>.Build(action));
-		}
+		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource<TDocument>.Build(action);
+		return this;
+	}
 
-		Instance.Sources = items;
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> AddSource(string key, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource value)
+	{
+		Instance.Sources ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
+		Instance.Sources.Add(new System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>(key, value));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor<TDocument> AddSource(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument>> action)
+	{
+		Instance.Sources ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
+		Instance.Sources.Add(new System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>(key, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument>.Build(action)));
 		return this;
 	}
 
@@ -292,7 +300,7 @@ public readonly partial struct CompositeAggregationDescriptor
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(System.Collections.Generic.ICollection<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>? value)
 	{
 		Instance.Sources = value;
 		return this;
@@ -304,9 +312,9 @@ public readonly partial struct CompositeAggregationDescriptor
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(params System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>[] values)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources()
 	{
-		Instance.Sources = [.. values];
+		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource.Build(null);
 		return this;
 	}
 
@@ -316,15 +324,9 @@ public readonly partial struct CompositeAggregationDescriptor
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource>?[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource>? action)
 	{
-		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource.Build(action));
-		}
-
-		Instance.Sources = items;
+		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource.Build(action);
 		return this;
 	}
 
@@ -334,15 +336,30 @@ public readonly partial struct CompositeAggregationDescriptor
 	/// Keys are returned in the order of the <c>sources</c> definition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources<T>(params System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<T>>?[] actions)
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor Sources<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource<T>>? action)
 	{
-		var items = new System.Collections.Generic.List<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringCompositeAggregationSource<T>.Build(action));
-		}
+		Instance.Sources = Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfStringCompositeAggregationSource<T>.Build(action);
+		return this;
+	}
 
-		Instance.Sources = items;
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor AddSource(string key, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource value)
+	{
+		Instance.Sources ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
+		Instance.Sources.Add(new System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>(key, value));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor AddSource(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor> action)
+	{
+		Instance.Sources ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
+		Instance.Sources.Add(new System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>(key, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor.Build(action)));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationDescriptor AddSource<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<T>> action)
+	{
+		Instance.Sources ??= new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>>();
+		Instance.Sources.Add(new System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource>(key, Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<T>.Build(action)));
 		return this;
 	}
 
