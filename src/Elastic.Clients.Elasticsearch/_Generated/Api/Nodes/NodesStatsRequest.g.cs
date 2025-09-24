@@ -72,7 +72,7 @@ public sealed partial class NodesStatsRequestParameters : Elastic.Transport.Requ
 	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
+	public Elastic.Clients.Elasticsearch.NodeStatsLevel? Level { get => Q<Elastic.Clients.Elasticsearch.NodeStatsLevel?>("level"); set => Q("level", value); }
 
 	/// <summary>
 	/// <para>
@@ -210,7 +210,7 @@ public sealed partial class NodesStatsRequest : Elastic.Clients.Elasticsearch.Re
 	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
+	public Elastic.Clients.Elasticsearch.NodeStatsLevel? Level { get => Q<Elastic.Clients.Elasticsearch.NodeStatsLevel?>("level"); set => Q("level", value); }
 
 	/// <summary>
 	/// <para>
@@ -414,7 +414,7 @@ public readonly partial struct NodesStatsRequestDescriptor
 	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? value)
+	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.NodeStatsLevel? value)
 	{
 		Instance.Level = value;
 		return this;
@@ -696,7 +696,7 @@ public readonly partial struct NodesStatsRequestDescriptor<TDocument>
 	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? value)
+	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.NodeStatsLevel? value)
 	{
 		Instance.Level = value;
 		return this;

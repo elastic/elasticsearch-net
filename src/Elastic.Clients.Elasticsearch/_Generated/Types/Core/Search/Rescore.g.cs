@@ -46,10 +46,12 @@ public sealed partial class Rescore
 
 	public Elastic.Clients.Elasticsearch.Core.Search.LearningToRank? LearningToRank { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.LearningToRank>("learning_to_rank"); set => SetVariant("learning_to_rank", value); }
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery? Query { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery>("query"); set => SetVariant("query", value); }
+	public Elastic.Clients.Elasticsearch.Core.Search.ScriptRescore? Script { get => GetVariant<Elastic.Clients.Elasticsearch.Core.Search.ScriptRescore>("script"); set => SetVariant("script", value); }
 	public int? WindowSize { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Core.Search.LearningToRank value) => new Elastic.Clients.Elasticsearch.Core.Search.Rescore { LearningToRank = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery value) => new Elastic.Clients.Elasticsearch.Core.Search.Rescore { Query = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.Rescore(Elastic.Clients.Elasticsearch.Core.Search.ScriptRescore value) => new Elastic.Clients.Elasticsearch.Core.Search.Rescore { Script = value };
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	private T? GetVariant<T>(string type)
@@ -110,6 +112,18 @@ public readonly partial struct RescoreDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Core.Search.ScriptRescore? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.Core.Search.ScriptRescoreDescriptor> action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.Core.Search.ScriptRescoreDescriptor.Build(action);
 		return this;
 	}
 
@@ -174,6 +188,18 @@ public readonly partial struct RescoreDescriptor
 	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<T>> action)
 	{
 		Instance.Query = Elastic.Clients.Elasticsearch.Core.Search.RescoreQueryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor Script(Elastic.Clients.Elasticsearch.Core.Search.ScriptRescore? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.Core.Search.ScriptRescoreDescriptor> action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.Core.Search.ScriptRescoreDescriptor.Build(action);
 		return this;
 	}
 

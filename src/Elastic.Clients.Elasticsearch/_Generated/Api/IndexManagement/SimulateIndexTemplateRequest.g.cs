@@ -82,7 +82,7 @@ public sealed partial class SimulateIndexTemplateRequest : Elastic.Clients.Elast
 
 	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.simulate_index_template";
 
@@ -124,6 +124,7 @@ public sealed partial class SimulateIndexTemplateRequest : Elastic.Clients.Elast
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate? IndexTemplate { get; set; }
 }
 
 /// <summary>
@@ -211,6 +212,24 @@ public readonly partial struct SimulateIndexTemplateRequestDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor IndexTemplate(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate? value)
+	{
+		Instance.IndexTemplate = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor IndexTemplate(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor> action)
+	{
+		Instance.IndexTemplate = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor IndexTemplate<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<T>> action)
+	{
+		Instance.IndexTemplate = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<T>.Build(action);
+		return this;
+	}
+
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	internal static Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor> action)
 	{
@@ -256,6 +275,154 @@ public readonly partial struct SimulateIndexTemplateRequestDescriptor
 	}
 
 	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}
+
+/// <summary>
+/// <para>
+/// Simulate an index.
+/// Get the index configuration that would be applied to the specified index from an existing index template.
+/// </para>
+/// </summary>
+public readonly partial struct SimulateIndexTemplateRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimulateIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public SimulateIndexTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest(name);
+	}
+
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public SimulateIndexTemplateRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest(Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the index to simulate
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// User defined reason for dry-run creating the new template for simulation purposes
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> Cause(string? value)
+	{
+		Instance.Cause = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> Create(bool? value = true)
+	{
+		Instance.Create = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, returns all relevant default configurations for the index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
+	{
+		Instance.IncludeDefaults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> IndexTemplate(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate? value)
+	{
+		Instance.IndexTemplate = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> IndexTemplate(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>> action)
+	{
+		Instance.IndexTemplate = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
 	{
 		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
 		return this;

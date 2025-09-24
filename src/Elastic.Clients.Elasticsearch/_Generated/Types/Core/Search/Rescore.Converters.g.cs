@@ -28,6 +28,7 @@ public sealed partial class RescoreConverter : System.Text.Json.Serialization.Js
 	private static readonly System.Text.Json.JsonEncodedText PropWindowSize = System.Text.Json.JsonEncodedText.Encode("window_size");
 	private static readonly System.Text.Json.JsonEncodedText VariantLearningToRank = System.Text.Json.JsonEncodedText.Encode("learning_to_rank");
 	private static readonly System.Text.Json.JsonEncodedText VariantQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText VariantScript = System.Text.Json.JsonEncodedText.Encode("script");
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.Rescore Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -55,6 +56,14 @@ public sealed partial class RescoreConverter : System.Text.Json.Serialization.Js
 				variantType = VariantQuery.Value;
 				reader.Read();
 				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantScript))
+			{
+				variantType = VariantScript.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.ScriptRescore>(options, null);
 				continue;
 			}
 
@@ -88,6 +97,9 @@ public sealed partial class RescoreConverter : System.Text.Json.Serialization.Js
 				break;
 			case "query":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.RescoreQuery)value.Variant, null, null);
+				break;
+			case "script":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Core.Search.ScriptRescore)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Core.Search.Rescore)}'.");

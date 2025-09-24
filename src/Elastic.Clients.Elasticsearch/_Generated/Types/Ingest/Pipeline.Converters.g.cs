@@ -29,6 +29,7 @@ public sealed partial class PipelineConverter : System.Text.Json.Serialization.J
 	private static readonly System.Text.Json.JsonEncodedText PropCreatedDateMillis = System.Text.Json.JsonEncodedText.Encode("created_date_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropDeprecated = System.Text.Json.JsonEncodedText.Encode("deprecated");
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldAccessPattern = System.Text.Json.JsonEncodedText.Encode("field_access_pattern");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
 	private static readonly System.Text.Json.JsonEncodedText PropModifiedDate = System.Text.Json.JsonEncodedText.Encode("modified_date");
 	private static readonly System.Text.Json.JsonEncodedText PropModifiedDateMillis = System.Text.Json.JsonEncodedText.Encode("modified_date_millis");
@@ -43,6 +44,7 @@ public sealed partial class PipelineConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<System.DateTimeOffset?> propCreatedDateMillis = default;
 		LocalJsonValue<bool?> propDeprecated = default;
 		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern?> propFieldAccessPattern = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
 		LocalJsonValue<System.DateTimeOffset?> propModifiedDate = default;
 		LocalJsonValue<System.DateTimeOffset?> propModifiedDateMillis = default;
@@ -67,6 +69,11 @@ public sealed partial class PipelineConverter : System.Text.Json.Serialization.J
 			}
 
 			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propFieldAccessPattern.TryReadProperty(ref reader, options, PropFieldAccessPattern, static Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern>(o)))
 			{
 				continue;
 			}
@@ -117,6 +124,7 @@ public sealed partial class PipelineConverter : System.Text.Json.Serialization.J
 			CreatedDateMillis = propCreatedDateMillis.Value,
 			Deprecated = propDeprecated.Value,
 			Description = propDescription.Value,
+			FieldAccessPattern = propFieldAccessPattern.Value,
 			Meta = propMeta.Value,
 			ModifiedDate = propModifiedDate.Value,
 			ModifiedDateMillis = propModifiedDateMillis.Value,
@@ -133,6 +141,7 @@ public sealed partial class PipelineConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropCreatedDateMillis, value.CreatedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropFieldAccessPattern, value.FieldAccessPattern, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Ingest.FieldAccessPattern>(o, v));
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropModifiedDate, value.ModifiedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropModifiedDateMillis, value.ModifiedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));

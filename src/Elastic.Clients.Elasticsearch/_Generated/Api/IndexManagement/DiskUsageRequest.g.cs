@@ -79,6 +79,9 @@ public sealed partial class DiskUsageRequestParameters : Elastic.Transport.Reque
 /// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 /// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 /// </para>
+/// <para>
+/// For usage examples see the External documentation or refer to <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/index-disk-usage">Analyze the index disk usage example</a> for an example.
+/// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DiskUsageRequestConverter))]
 public sealed partial class DiskUsageRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageRequestParameters>
@@ -171,6 +174,9 @@ public sealed partial class DiskUsageRequest : Elastic.Clients.Elasticsearch.Req
 /// NOTE: The total size of fields of the analyzed shards of the index in the response is usually smaller than the index <c>store_size</c> value because some small metadata files are ignored and some parts of data files might not be scanned by the API.
 /// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 /// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
+/// </para>
+/// <para>
+/// For usage examples see the External documentation or refer to <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/index-disk-usage">Analyze the index disk usage example</a> for an example.
 /// </para>
 /// </summary>
 public readonly partial struct DiskUsageRequestDescriptor
@@ -345,6 +351,9 @@ public readonly partial struct DiskUsageRequestDescriptor
 /// NOTE: The total size of fields of the analyzed shards of the index in the response is usually smaller than the index <c>store_size</c> value because some small metadata files are ignored and some parts of data files might not be scanned by the API.
 /// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 /// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
+/// </para>
+/// <para>
+/// For usage examples see the External documentation or refer to <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/index-disk-usage">Analyze the index disk usage example</a> for an example.
 /// </para>
 /// </summary>
 public readonly partial struct DiskUsageRequestDescriptor<TDocument>

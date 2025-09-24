@@ -128,7 +128,7 @@ public sealed partial class GetOverallBucketsRequest : Elastic.Clients.Elasticse
 	/// Refer to the description for the <c>overall_score</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Union<double, string>? OverallScore { get; set; }
+	public double? OverallScore { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -260,7 +260,7 @@ public readonly partial struct GetOverallBucketsRequestDescriptor
 	/// Refer to the description for the <c>overall_score</c> query parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor OverallScore(Elastic.Clients.Elasticsearch.Union<double, string>? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor OverallScore(double? value)
 	{
 		Instance.OverallScore = value;
 		return this;
