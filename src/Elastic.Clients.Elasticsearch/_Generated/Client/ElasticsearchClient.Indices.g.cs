@@ -5187,6 +5187,15 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>(request);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse SimulateIndexTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>(request);
+	}
+
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -5204,6 +5213,15 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateResponse> SimulateIndexTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SimulateIndexTemplateRequestDescriptor<TDocument>(name);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();

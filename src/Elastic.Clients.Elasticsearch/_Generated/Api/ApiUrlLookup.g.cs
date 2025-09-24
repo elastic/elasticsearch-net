@@ -437,6 +437,9 @@ internal static class ApiUrlLookup
 	internal static ApiUrls SqlGetAsyncStatus = new ApiUrls(new[] { "_sql/async/status/{id}" });
 	internal static ApiUrls SqlQuery = new ApiUrls(new[] { "_sql" });
 	internal static ApiUrls SqlTranslate = new ApiUrls(new[] { "_sql/translate" });
+	internal static ApiUrls StreamsLogsDisable = new ApiUrls(new[] { "_streams/logs/_disable" });
+	internal static ApiUrls StreamsLogsEnable = new ApiUrls(new[] { "_streams/logs/_enable" });
+	internal static ApiUrls StreamsStatus = new ApiUrls(new[] { "_streams/status" });
 	internal static ApiUrls SynonymsDeleteSynonym = new ApiUrls(new[] { "_synonyms/{id}" });
 	internal static ApiUrls SynonymsDeleteSynonymRule = new ApiUrls(new[] { "_synonyms/{set_id}/{rule_id}" });
 	internal static ApiUrls SynonymsGetSynonym = new ApiUrls(new[] { "_synonyms/{id}" });
