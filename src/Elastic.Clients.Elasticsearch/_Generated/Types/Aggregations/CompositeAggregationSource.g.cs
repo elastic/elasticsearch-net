@@ -26,6 +26,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.CompositeAggregationSourceConverter))]
 public sealed partial class CompositeAggregationSource
 {
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
 #if NET7_0_OR_GREATER
 	public CompositeAggregationSource()
 	{
@@ -47,28 +49,51 @@ public sealed partial class CompositeAggregationSource
 	/// A date histogram aggregation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation? DateHistogram { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation? DateHistogram { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation>("date_histogram"); set => SetVariant("date_histogram", value); }
 
 	/// <summary>
 	/// <para>
 	/// A geotile grid aggregation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation? GeotileGrid { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation? GeotileGrid { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation>("geotile_grid"); set => SetVariant("geotile_grid", value); }
 
 	/// <summary>
 	/// <para>
 	/// A histogram aggregation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation? Histogram { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation? Histogram { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation>("histogram"); set => SetVariant("histogram", value); }
 
 	/// <summary>
 	/// <para>
 	/// A terms aggregation.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation? Terms { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation? Terms { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation>("terms"); set => SetVariant("terms", value); }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Aggregations.CompositeDateHistogramAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource { DateHistogram = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Aggregations.CompositeGeoTileGridAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource { GeotileGrid = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Aggregations.CompositeHistogramAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource { Histogram = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Aggregations.CompositeTermsAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource { Terms = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
+	{
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
+		{
+			return result;
+		}
+
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
+	}
 }
 
 public readonly partial struct CompositeAggregationSourceDescriptor<TDocument>
@@ -212,13 +237,8 @@ public readonly partial struct CompositeAggregationSourceDescriptor<TDocument>
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument>>? action)
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument>> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;
@@ -410,13 +430,8 @@ public readonly partial struct CompositeAggregationSourceDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSourceDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregationSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;
