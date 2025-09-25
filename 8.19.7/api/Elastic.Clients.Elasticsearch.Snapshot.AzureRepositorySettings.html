@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class AzureRepositorySettings | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class AzureRepositorySettings | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.7/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings" class="text-break">
+Class AzureRepositorySettings  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.html">Snapshot</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(AzureRepositorySettingsConverter))]
+public sealed class AzureRepositorySettings</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">AzureRepositorySettings</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings__ctor_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings__ctor" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.#ctor">
+  AzureRepositorySettings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AzureRepositorySettings()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_BasePath_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.BasePath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_BasePath" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.BasePath">
+  BasePath
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The path to the repository data within the container.
+It defaults to the root directory.
+</p>
+<p>
+NOTE: Don't set <code>base_path</code> when configuring a snapshot repository for Elastic Cloud Enterprise.
+Elastic Cloud Enterprise automatically generates the <code>base_path</code> for each deployment so that multiple deployments can share the same bucket.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? BasePath { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_ChunkSize_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.ChunkSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_ChunkSize" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.ChunkSize">
+  ChunkSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
+It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
+Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
+Specify the chunk size as a byte unit, for example: <code>10MB</code>, <code>5KB</code>, 500B.
+The default varies by repository type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? ChunkSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_Client_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.Client*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_Client" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.Client">
+  Client
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L73"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the Azure repository client to use.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Client { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_Compress_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.Compress*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_Compress" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.Compress">
+  Compress
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+When set to <code>true</code>, metadata files are stored in compressed format.
+This setting doesn't affect index files that are already compressed by default.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Compress { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_Container_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.Container*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_Container" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.Container">
+  Container
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The Azure container.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Container { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_DeleteObjectsMaxSize_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.DeleteObjectsMaxSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_DeleteObjectsMaxSize" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.DeleteObjectsMaxSize">
+  DeleteObjectsMaxSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maxmimum batch size, between 1 and 256, used for <code>BlobBatch</code> requests.
+Defaults to 256 which is the maximum number supported by the Azure blob batch API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? DeleteObjectsMaxSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_LocationMode_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.LocationMode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_LocationMode" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.LocationMode">
+  LocationMode
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Either <code>primary_only</code> or <code>secondary_only</code>.
+Note that if you set it to <code>secondary_only</code>, it will force <code>readonly</code> to <code>true</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? LocationMode { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_MaxConcurrentBatchDeletes_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.MaxConcurrentBatchDeletes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_MaxConcurrentBatchDeletes" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.MaxConcurrentBatchDeletes">
+  MaxConcurrentBatchDeletes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L113"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of concurrent batch delete requests that will be submitted for any individual bulk delete with <code>BlobBatch</code>.
+Note that the effective number of concurrent deletes is further limited by the Azure client connection and event loop thread limits.
+Defaults to 10, minimum is 1, maximum is 100.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxConcurrentBatchDeletes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_MaxRestoreBytesPerSec_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.MaxRestoreBytesPerSec*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_MaxRestoreBytesPerSec" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.MaxRestoreBytesPerSec">
+  MaxRestoreBytesPerSec
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum snapshot restore rate per node.
+It defaults to unlimited.
+Note that restores are also throttled through recovery settings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? MaxRestoreBytesPerSec { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_MaxSnapshotBytesPerSec_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.MaxSnapshotBytesPerSec*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_MaxSnapshotBytesPerSec" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.MaxSnapshotBytesPerSec">
+  MaxSnapshotBytesPerSec
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L131"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum snapshot creation rate per node.
+It defaults to 40mb per second.
+Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ByteSize? MaxSnapshotBytesPerSec { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_Readonly_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.Readonly*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_AzureRepositorySettings_Readonly" data-uid="Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings.Readonly">
+  Readonly
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Types/Snapshot/AzureRepositorySettings.g.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the repository is read-only.
+The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
+</p>
+<p>
+Only a cluster with write access can create snapshots in the repository.
+All other clusters connected to the repository should have the <code>readonly</code> parameter set to <code>true</code>.
+If <code>false</code>, the cluster can write to the repository and create snapshots in it.
+</p>
+<p>
+IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
+Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Readonly { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

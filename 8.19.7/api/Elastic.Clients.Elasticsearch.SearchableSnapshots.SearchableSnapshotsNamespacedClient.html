@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SearchableSnapshotsNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SearchableSnapshotsNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.7/apiSpec/new?filename=Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient" class="text-break">
+Class SearchableSnapshotsNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.html">SearchableSnapshots</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SearchableSnapshotsNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">SearchableSnapshotsNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.#ctor">
+  SearchableSnapshotsNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.html">SearchableSnapshotsNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected SearchableSnapshotsNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStats" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStats">
+  CacheStats()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual CacheStatsResponse CacheStats()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse.html">CacheStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStats_Elastic_Clients_Elasticsearch_NodeIds_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStats(Elastic.Clients.Elasticsearch.NodeIds)">
+  CacheStats(NodeIds?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual CacheStatsResponse CacheStats(NodeIds? nodeId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nodeId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.NodeIds.html">NodeIds</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse.html">CacheStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStats_Elastic_Clients_Elasticsearch_NodeIds_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_CacheStatsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStats(Elastic.Clients.Elasticsearch.NodeIds,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor})">
+  CacheStats(NodeIds?, Action&lt;CacheStatsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual CacheStatsResponse CacheStats(NodeIds? nodeId, Action&lt;CacheStatsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nodeId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.NodeIds.html">NodeIds</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor.html">CacheStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse.html">CacheStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStats_Elastic_Clients_Elasticsearch_SearchableSnapshots_CacheStatsRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStats(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest)">
+  CacheStats(CacheStatsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual CacheStatsResponse CacheStats(CacheStatsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest.html">CacheStatsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse.html">CacheStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStats_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_CacheStatsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStats(System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor})">
+  CacheStats(Action&lt;CacheStatsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual CacheStatsResponse CacheStats(Action&lt;CacheStatsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor.html">CacheStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse.html">CacheStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStatsAsync_Elastic_Clients_Elasticsearch_NodeIds_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_CacheStatsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStatsAsync(Elastic.Clients.Elasticsearch.NodeIds,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor},System.Threading.CancellationToken)">
+  CacheStatsAsync(NodeIds?, Action&lt;CacheStatsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CacheStatsResponse&gt; CacheStatsAsync(NodeIds? nodeId, Action&lt;CacheStatsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nodeId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.NodeIds.html">NodeIds</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor.html">CacheStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse.html">CacheStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStatsAsync_Elastic_Clients_Elasticsearch_NodeIds_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStatsAsync(Elastic.Clients.Elasticsearch.NodeIds,System.Threading.CancellationToken)">
+  CacheStatsAsync(NodeIds?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CacheStatsResponse&gt; CacheStatsAsync(NodeIds? nodeId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nodeId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.NodeIds.html">NodeIds</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse.html">CacheStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStatsAsync_Elastic_Clients_Elasticsearch_SearchableSnapshots_CacheStatsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStatsAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest,System.Threading.CancellationToken)">
+  CacheStatsAsync(CacheStatsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CacheStatsResponse&gt; CacheStatsAsync(CacheStatsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest.html">CacheStatsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse.html">CacheStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStatsAsync_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_CacheStatsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStatsAsync(System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor},System.Threading.CancellationToken)">
+  CacheStatsAsync(Action&lt;CacheStatsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CacheStatsResponse&gt; CacheStatsAsync(Action&lt;CacheStatsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor.html">CacheStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse.html">CacheStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_CacheStatsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.CacheStatsAsync(System.Threading.CancellationToken)">
+  CacheStatsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CacheStatsResponse&gt; CacheStatsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsResponse.html">CacheStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache">
+  ClearCache()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClearCacheResponse ClearCache()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache(Elastic.Clients.Elasticsearch.Indices)">
+  ClearCache(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L144"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClearCacheResponse ClearCache(Indices? indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_ClearCacheRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor})">
+  ClearCache(Indices?, Action&lt;ClearCacheRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L152"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClearCacheResponse ClearCache(Indices? indices, Action&lt;ClearCacheRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor.html">ClearCacheRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_Elastic_Clients_Elasticsearch_SearchableSnapshots_ClearCacheRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache(Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest)">
+  ClearCache(ClearCacheRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClearCacheResponse ClearCache(ClearCacheRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest.html">ClearCacheRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_ClearCacheRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache(System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor})">
+  ClearCache(Action&lt;ClearCacheRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L135"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClearCacheResponse ClearCache(Action&lt;ClearCacheRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor.html">ClearCacheRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_ClearCacheRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor},System.Threading.CancellationToken)">
+  ClearCacheAsync(Indices?, Action&lt;ClearCacheRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L218"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCacheResponse&gt; ClearCacheAsync(Indices? indices, Action&lt;ClearCacheRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor.html">ClearCacheRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_Elastic_Clients_Elasticsearch_Indices_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync(Elastic.Clients.Elasticsearch.Indices,System.Threading.CancellationToken)">
+  ClearCacheAsync(Indices?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCacheResponse&gt; ClearCacheAsync(Indices? indices, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_Elastic_Clients_Elasticsearch_SearchableSnapshots_ClearCacheRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest,System.Threading.CancellationToken)">
+  ClearCacheAsync(ClearCacheRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCacheResponse&gt; ClearCacheAsync(ClearCacheRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequest.html">ClearCacheRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_ClearCacheRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync(System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor},System.Threading.CancellationToken)">
+  ClearCacheAsync(Action&lt;ClearCacheRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L201"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCacheResponse&gt; ClearCacheAsync(Action&lt;ClearCacheRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor.html">ClearCacheRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync(System.Threading.CancellationToken)">
+  ClearCacheAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCacheResponse&gt; ClearCacheAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_ClearCacheRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  ClearCacheAsync&lt;TDocument&gt;(Indices?, Action&lt;ClearCacheRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L244"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCacheResponse&gt; ClearCacheAsync&lt;TDocument&gt;(Indices? indices, Action&lt;ClearCacheRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor-1.html">ClearCacheRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync__1_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_ClearCacheRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync``1(System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  ClearCacheAsync&lt;TDocument&gt;(Action&lt;ClearCacheRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L235"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCacheResponse&gt; ClearCacheAsync&lt;TDocument&gt;(Action&lt;ClearCacheRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor-1.html">ClearCacheRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCacheAsync__1_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCacheAsync``1(System.Threading.CancellationToken)">
+  ClearCacheAsync&lt;TDocument&gt;(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClearCacheResponse&gt; ClearCacheAsync&lt;TDocument&gt;(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache__1" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache``1">
+  ClearCache&lt;TDocument&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L161"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClearCacheResponse ClearCache&lt;TDocument&gt;()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_ClearCacheRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor{``0}})">
+  ClearCache&lt;TDocument&gt;(Indices?, Action&lt;ClearCacheRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L178"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClearCacheResponse ClearCache&lt;TDocument&gt;(Indices? indices, Action&lt;ClearCacheRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor-1.html">ClearCacheRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_ClearCache__1_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_ClearCacheRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.ClearCache``1(System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor{``0}})">
+  ClearCache&lt;TDocument&gt;(Action&lt;ClearCacheRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L169"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClearCacheResponse ClearCache&lt;TDocument&gt;(Action&lt;ClearCacheRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheRequestDescriptor-1.html">ClearCacheRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.ClearCacheResponse.html">ClearCacheResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Mount_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Mount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Mount_Elastic_Clients_Elasticsearch_Name_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Mount(Elastic.Clients.Elasticsearch.Name,Elastic.Clients.Elasticsearch.Name)">
+  Mount(Name, Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual MountResponse Mount(Name repository, Name snapshot)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>repository</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>snapshot</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse.html">MountResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Mount_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Mount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Mount_Elastic_Clients_Elasticsearch_Name_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_MountRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Mount(Elastic.Clients.Elasticsearch.Name,Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor})">
+  Mount(Name, Name, Action&lt;MountRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual MountResponse Mount(Name repository, Name snapshot, Action&lt;MountRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>repository</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>snapshot</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor.html">MountRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse.html">MountResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Mount_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Mount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Mount_Elastic_Clients_Elasticsearch_SearchableSnapshots_MountRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Mount(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest)">
+  Mount(MountRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L253"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual MountResponse Mount(MountRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest.html">MountRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse.html">MountResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_MountAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.MountAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_MountAsync_Elastic_Clients_Elasticsearch_Name_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_MountRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.MountAsync(Elastic.Clients.Elasticsearch.Name,Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor},System.Threading.CancellationToken)">
+  MountAsync(Name, Name, Action&lt;MountRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L290"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;MountResponse&gt; MountAsync(Name repository, Name snapshot, Action&lt;MountRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>repository</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>snapshot</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequestDescriptor.html">MountRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse.html">MountResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_MountAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.MountAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_MountAsync_Elastic_Clients_Elasticsearch_Name_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.MountAsync(Elastic.Clients.Elasticsearch.Name,Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  MountAsync(Name, Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L282"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;MountResponse&gt; MountAsync(Name repository, Name snapshot, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>repository</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>snapshot</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse.html">MountResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_MountAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.MountAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_MountAsync_Elastic_Clients_Elasticsearch_SearchableSnapshots_MountRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.MountAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest,System.Threading.CancellationToken)">
+  MountAsync(MountRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L276"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;MountResponse&gt; MountAsync(MountRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.MountRequest.html">MountRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse.html">MountResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats">
+  Stats()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SearchableSnapshotsStatsResponse Stats()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats(Elastic.Clients.Elasticsearch.Indices)">
+  Stats(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L322"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SearchableSnapshotsStatsResponse Stats(Indices? indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsStatsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor})">
+  Stats(Indices?, Action&lt;SearchableSnapshotsStatsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L330"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SearchableSnapshotsStatsResponse Stats(Indices? indices, Action&lt;SearchableSnapshotsStatsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor.html">SearchableSnapshotsStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsStatsRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest)">
+  Stats(SearchableSnapshotsStatsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L299"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SearchableSnapshotsStatsResponse Stats(SearchableSnapshotsStatsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest.html">SearchableSnapshotsStatsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsStatsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats(System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor})">
+  Stats(Action&lt;SearchableSnapshotsStatsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L313"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SearchableSnapshotsStatsResponse Stats(Action&lt;SearchableSnapshotsStatsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor.html">SearchableSnapshotsStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsStatsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor},System.Threading.CancellationToken)">
+  StatsAsync(Indices?, Action&lt;SearchableSnapshotsStatsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L396"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SearchableSnapshotsStatsResponse&gt; StatsAsync(Indices? indices, Action&lt;SearchableSnapshotsStatsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor.html">SearchableSnapshotsStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_Elastic_Clients_Elasticsearch_Indices_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync(Elastic.Clients.Elasticsearch.Indices,System.Threading.CancellationToken)">
+  StatsAsync(Indices?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L388"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SearchableSnapshotsStatsResponse&gt; StatsAsync(Indices? indices, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsStatsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync(Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest,System.Threading.CancellationToken)">
+  StatsAsync(SearchableSnapshotsStatsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L365"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SearchableSnapshotsStatsResponse&gt; StatsAsync(SearchableSnapshotsStatsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequest.html">SearchableSnapshotsStatsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsStatsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync(System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor},System.Threading.CancellationToken)">
+  StatsAsync(Action&lt;SearchableSnapshotsStatsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L379"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SearchableSnapshotsStatsResponse&gt; StatsAsync(Action&lt;SearchableSnapshotsStatsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor.html">SearchableSnapshotsStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync(System.Threading.CancellationToken)">
+  StatsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L371"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SearchableSnapshotsStatsResponse&gt; StatsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsStatsRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  StatsAsync&lt;TDocument&gt;(Indices?, Action&lt;SearchableSnapshotsStatsRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L422"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SearchableSnapshotsStatsResponse&gt; StatsAsync&lt;TDocument&gt;(Indices? indices, Action&lt;SearchableSnapshotsStatsRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor-1.html">SearchableSnapshotsStatsRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync__1_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsStatsRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync``1(System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  StatsAsync&lt;TDocument&gt;(Action&lt;SearchableSnapshotsStatsRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L413"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SearchableSnapshotsStatsResponse&gt; StatsAsync&lt;TDocument&gt;(Action&lt;SearchableSnapshotsStatsRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor-1.html">SearchableSnapshotsStatsRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_StatsAsync__1_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.StatsAsync``1(System.Threading.CancellationToken)">
+  StatsAsync&lt;TDocument&gt;(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L405"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SearchableSnapshotsStatsResponse&gt; StatsAsync&lt;TDocument&gt;(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats__1" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats``1">
+  Stats&lt;TDocument&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L339"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SearchableSnapshotsStatsResponse Stats&lt;TDocument&gt;()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsStatsRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor{``0}})">
+  Stats&lt;TDocument&gt;(Indices?, Action&lt;SearchableSnapshotsStatsRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L356"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SearchableSnapshotsStatsResponse Stats&lt;TDocument&gt;(Indices? indices, Action&lt;SearchableSnapshotsStatsRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor-1.html">SearchableSnapshotsStatsRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsNamespacedClient_Stats__1_System_Action_Elastic_Clients_Elasticsearch_SearchableSnapshots_SearchableSnapshotsStatsRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient.Stats``1(System.Action{Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor{``0}})">
+  Stats&lt;TDocument&gt;(Action&lt;SearchableSnapshotsStatsRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.7/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.SearchableSnapshots.g.cs/#L347"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SearchableSnapshotsStatsResponse Stats&lt;TDocument&gt;(Action&lt;SearchableSnapshotsStatsRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsRequestDescriptor-1.html">SearchableSnapshotsStatsRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsStatsResponse.html">SearchableSnapshotsStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
