@@ -19,6 +19,131 @@ Breaking changes can impact your Elastic applications, potentially disrupting no
 %
 % ::::
 
+## 9.1.8 [elasticsearch-net-client-918-breaking-changes]
+
+### Overview
+
+- [1. Improved usability of `CompositeAggregation`](#1-composite-aggregation)
+
+### Breaking changes
+
+#### 1. Improved usability of `CompositeAggregation` [#1-composite-aggregation]
+
+**Impact**: Low.
+
+The type of the `Sources` property has been changed from `ICollection<IDictionary<string, CompositeAggregationSource>>` to `ICollection<KeyValuePair<string, CompositeAggregationSource>>`. This corresponds to the Elasticsearch standard for modeling ordered dictionaries in the REST API.
+
+`CompositeAggregationSource` is now also a container (similar to `Aggregation`, `Query`, etc.). This change improves usability due to specialized code generation. For example, implicit conversion operators from all existing variants (`CompositeTermsAggregation`, `CompositeHistogramAggregation`, etc.) to `CompositeAggregationSource` are now generated.
+
+As a consequence, the object initializer syntax changes as follows:
+
+```csharp
+// 9.1.7 and below
+
+var request = new SearchRequest
+{
+    Aggregations = new Dictionary<string, Aggregation>
+    {
+        { "my_composite", new CompositeAggregation
+        {
+            Sources =
+            [
+                new Dictionary<string, CompositeAggregationSource>
+                {
+                    { "my_terms", new CompositeAggregationSource
+                    {
+                        Terms = new CompositeTermsAggregation
+                        {
+                            // ...
+                        }
+                    }}
+                },
+                new Dictionary<string, CompositeAggregationSource>
+                {
+                    { "my_histo", new CompositeAggregationSource
+                    {
+                        Histogram = new CompositeHistogramAggregation(0.5)
+                        {
+                            // ...
+                        }
+                    }}
+                }
+            ]
+        }}
+    }
+};
+
+// 9.1.8 and above
+
+var request = new SearchRequest
+{
+    Aggregations = new Dictionary<string, Aggregation>
+    {
+        { "my_composite", new CompositeAggregation
+        {
+            Sources =
+            [
+                new KeyValuePair<string, CompositeAggregationSource>(
+                    "my_terms",
+                    new CompositeTermsAggregation <1>
+                    {
+                        // ...
+                    }
+                ),
+                new KeyValuePair<string, CompositeAggregationSource>(
+                    "my_histo",
+                    new CompositeHistogramAggregation(0.5) <2>
+                    {
+                        // ...
+                    }
+                )
+            ]
+        }}
+    }
+};
+```
+
+1. Implicit conversion from `CompositeTermsAggregation` to `CompositeAggregationSource`.
+2. Implicit conversion from `CompositeHistogramAggregation` to `CompositeAggregationSource`.
+
+In addition, this change allows optimized Fluent syntax to be generated, which ultimately avoids a previously existing ambiguity:
+
+```csharp
+// 9.1.7 and below
+
+var descriptor = new SearchRequestDescriptor()
+    .Aggregations(aggs => aggs
+        .Add("my_composize", agg => agg
+            .Composite(composite => composite
+                .Sources( <1>
+                    x => x.Add("my_terms", x => x.Terms(/* ... */)), <2>
+                    x => x.Add("my_histo", x => x.Histogram(/* ... */)) <3>
+                )
+            )
+        )
+    );
+
+// 9.1.8 and above
+
+var descriptor = new SearchRequestDescriptor()
+    .Aggregations(aggs => aggs
+        .Add("my_composize", agg => agg
+            .Composite(composite => composite
+                .Sources(sources => sources
+                    .Add("my_terms", x => x.Terms(/* ... */))
+                    .Add("my_histo", x => x.Histogram(/* ... */))
+                )
+            )
+        )
+    );
+```
+
+1. This is the `params` overload that initializes the `Sources` collection with multiple entries.
+2. Add dictionary item 1 that contains a single `Terms` aggregation entry.
+3. Add dictionary item 2 that contains a single `Histogram` aggregation entry.
+
+The old syntax was tricky because the 9.1.8 example also compiled successfully, but the `.Add` referred to the first dictionary both times. This ultimately resulted in a list with only one dictionary, which had multiple entries, and thus an invalid request.
+
 ## 9.1.1 [elasticsearch-net-client-911-breaking-changes]
 
 ### Overview
