@@ -1,0 +1,3668 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class IngestNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class IngestNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.8/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient" class="text-break">
+Class IngestNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.html">Ingest</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class IngestNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">IngestNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.#ctor">
+  IngestNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.html">IngestNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected IngestNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabase_Elastic_Clients_Elasticsearch_Ids_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ids)">
+  DeleteGeoipDatabase(Ids)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(Ids id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse.html">DeleteGeoipDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabase_Elastic_Clients_Elasticsearch_Ids_System_Action_Elastic_Clients_Elasticsearch_Ingest_DeleteGeoipDatabaseRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ids,System.Action{Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor})">
+  DeleteGeoipDatabase(Ids, Action&lt;DeleteGeoipDatabaseRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(Ids id, Action&lt;DeleteGeoipDatabaseRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor.html">DeleteGeoipDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse.html">DeleteGeoipDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabase_Elastic_Clients_Elasticsearch_Ingest_DeleteGeoipDatabaseRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest)">
+  DeleteGeoipDatabase(DeleteGeoipDatabaseRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(DeleteGeoipDatabaseRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest.html">DeleteGeoipDatabaseRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse.html">DeleteGeoipDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabaseAsync_Elastic_Clients_Elasticsearch_Ids_System_Action_Elastic_Clients_Elasticsearch_Ingest_DeleteGeoipDatabaseRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids,System.Action{Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteGeoipDatabaseAsync(Ids, Action&lt;DeleteGeoipDatabaseRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteGeoipDatabaseResponse&gt; DeleteGeoipDatabaseAsync(Ids id, Action&lt;DeleteGeoipDatabaseRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor.html">DeleteGeoipDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse.html">DeleteGeoipDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabaseAsync_Elastic_Clients_Elasticsearch_Ids_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids,System.Threading.CancellationToken)">
+  DeleteGeoipDatabaseAsync(Ids, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteGeoipDatabaseResponse&gt; DeleteGeoipDatabaseAsync(Ids id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse.html">DeleteGeoipDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteGeoipDatabaseAsync_Elastic_Clients_Elasticsearch_Ingest_DeleteGeoipDatabaseRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest,System.Threading.CancellationToken)">
+  DeleteGeoipDatabaseAsync(DeleteGeoipDatabaseRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteGeoipDatabaseResponse&gt; DeleteGeoipDatabaseAsync(DeleteGeoipDatabaseRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest.html">DeleteGeoipDatabaseRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse.html">DeleteGeoipDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabase_Elastic_Clients_Elasticsearch_Ids_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids)">
+  DeleteIpLocationDatabase(Ids)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase(Ids id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse.html">DeleteIpLocationDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabase_Elastic_Clients_Elasticsearch_Ids_System_Action_Elastic_Clients_Elasticsearch_Ingest_DeleteIpLocationDatabaseRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids,System.Action{Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor})">
+  DeleteIpLocationDatabase(Ids, Action&lt;DeleteIpLocationDatabaseRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase(Ids id, Action&lt;DeleteIpLocationDatabaseRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor.html">DeleteIpLocationDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse.html">DeleteIpLocationDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabase_Elastic_Clients_Elasticsearch_Ingest_DeleteIpLocationDatabaseRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabase(Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest)">
+  DeleteIpLocationDatabase(DeleteIpLocationDatabaseRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase(DeleteIpLocationDatabaseRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest.html">DeleteIpLocationDatabaseRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse.html">DeleteIpLocationDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabaseAsync_Elastic_Clients_Elasticsearch_Ids_System_Action_Elastic_Clients_Elasticsearch_Ingest_DeleteIpLocationDatabaseRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids,System.Action{Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteIpLocationDatabaseAsync(Ids, Action&lt;DeleteIpLocationDatabaseRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteIpLocationDatabaseResponse&gt; DeleteIpLocationDatabaseAsync(Ids id, Action&lt;DeleteIpLocationDatabaseRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor.html">DeleteIpLocationDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse.html">DeleteIpLocationDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabaseAsync_Elastic_Clients_Elasticsearch_Ids_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids,System.Threading.CancellationToken)">
+  DeleteIpLocationDatabaseAsync(Ids, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteIpLocationDatabaseResponse&gt; DeleteIpLocationDatabaseAsync(Ids id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse.html">DeleteIpLocationDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeleteIpLocationDatabaseAsync_Elastic_Clients_Elasticsearch_Ingest_DeleteIpLocationDatabaseRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeleteIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest,System.Threading.CancellationToken)">
+  DeleteIpLocationDatabaseAsync(DeleteIpLocationDatabaseRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteIpLocationDatabaseResponse&gt; DeleteIpLocationDatabaseAsync(DeleteIpLocationDatabaseRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest.html">DeleteIpLocationDatabaseRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse.html">DeleteIpLocationDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipeline_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipeline(Elastic.Clients.Elasticsearch.Id)">
+  DeletePipeline(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeletePipelineResponse DeletePipeline(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse.html">DeletePipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipeline_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_DeletePipelineRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipeline(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestDescriptor})">
+  DeletePipeline(Id, Action&lt;DeletePipelineRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeletePipelineResponse DeletePipeline(Id id, Action&lt;DeletePipelineRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestDescriptor.html">DeletePipelineRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse.html">DeletePipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipeline_Elastic_Clients_Elasticsearch_Ingest_DeletePipelineRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipeline(Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest)">
+  DeletePipeline(DeletePipelineRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeletePipelineResponse DeletePipeline(DeletePipelineRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest.html">DeletePipelineRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse.html">DeletePipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipelineAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_DeletePipelineRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestDescriptor},System.Threading.CancellationToken)">
+  DeletePipelineAsync(Id, Action&lt;DeletePipelineRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeletePipelineResponse&gt; DeletePipelineAsync(Id id, Action&lt;DeletePipelineRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestDescriptor.html">DeletePipelineRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse.html">DeletePipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipelineAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  DeletePipelineAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeletePipelineResponse&gt; DeletePipelineAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse.html">DeletePipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_DeletePipelineAsync_Elastic_Clients_Elasticsearch_Ingest_DeletePipelineRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.DeletePipelineAsync(Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest,System.Threading.CancellationToken)">
+  DeletePipelineAsync(DeletePipelineRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeletePipelineResponse&gt; DeletePipelineAsync(DeletePipelineRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest.html">DeletePipelineRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse.html">DeletePipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStats_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStats" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStats">
+  GeoIpStats()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GeoIpStatsResponse GeoIpStats()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse.html">GeoIpStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStats_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStats_Elastic_Clients_Elasticsearch_Ingest_GeoIpStatsRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStats(Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest)">
+  GeoIpStats(GeoIpStatsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest.html">GeoIpStatsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse.html">GeoIpStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStats_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStats_System_Action_Elastic_Clients_Elasticsearch_Ingest_GeoIpStatsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStats(System.Action{Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestDescriptor})">
+  GeoIpStats(Action&lt;GeoIpStatsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GeoIpStatsResponse GeoIpStats(Action&lt;GeoIpStatsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestDescriptor.html">GeoIpStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse.html">GeoIpStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStatsAsync_Elastic_Clients_Elasticsearch_Ingest_GeoIpStatsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStatsAsync(Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest,System.Threading.CancellationToken)">
+  GeoIpStatsAsync(GeoIpStatsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GeoIpStatsResponse&gt; GeoIpStatsAsync(GeoIpStatsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest.html">GeoIpStatsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse.html">GeoIpStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStatsAsync_System_Action_Elastic_Clients_Elasticsearch_Ingest_GeoIpStatsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStatsAsync(System.Action{Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestDescriptor},System.Threading.CancellationToken)">
+  GeoIpStatsAsync(Action&lt;GeoIpStatsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L216"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GeoIpStatsResponse&gt; GeoIpStatsAsync(Action&lt;GeoIpStatsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestDescriptor.html">GeoIpStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse.html">GeoIpStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStatsAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GeoIpStatsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GeoIpStatsAsync(System.Threading.CancellationToken)">
+  GeoIpStatsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GeoIpStatsResponse&gt; GeoIpStatsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse.html">GeoIpStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabase" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabase">
+  GetGeoipDatabase()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetGeoipDatabaseResponse GetGeoipDatabase()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse.html">GetGeoipDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabase_Elastic_Clients_Elasticsearch_Ids_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids)">
+  GetGeoipDatabase(Ids?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetGeoipDatabaseResponse GetGeoipDatabase(Ids? id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse.html">GetGeoipDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabase_Elastic_Clients_Elasticsearch_Ids_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetGeoipDatabaseRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids,System.Action{Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor})">
+  GetGeoipDatabase(Ids?, Action&lt;GetGeoipDatabaseRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L256"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetGeoipDatabaseResponse GetGeoipDatabase(Ids? id, Action&lt;GetGeoipDatabaseRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor.html">GetGeoipDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse.html">GetGeoipDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabase_Elastic_Clients_Elasticsearch_Ingest_GetGeoipDatabaseRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest)">
+  GetGeoipDatabase(GetGeoipDatabaseRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L225"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetGeoipDatabaseResponse GetGeoipDatabase(GetGeoipDatabaseRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest.html">GetGeoipDatabaseRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse.html">GetGeoipDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabase_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetGeoipDatabaseRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabase(System.Action{Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor})">
+  GetGeoipDatabase(Action&lt;GetGeoipDatabaseRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L239"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetGeoipDatabaseResponse GetGeoipDatabase(Action&lt;GetGeoipDatabaseRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor.html">GetGeoipDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse.html">GetGeoipDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabaseAsync_Elastic_Clients_Elasticsearch_Ids_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetGeoipDatabaseRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids,System.Action{Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor},System.Threading.CancellationToken)">
+  GetGeoipDatabaseAsync(Ids?, Action&lt;GetGeoipDatabaseRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L296"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetGeoipDatabaseResponse&gt; GetGeoipDatabaseAsync(Ids? id, Action&lt;GetGeoipDatabaseRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor.html">GetGeoipDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse.html">GetGeoipDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabaseAsync_Elastic_Clients_Elasticsearch_Ids_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids,System.Threading.CancellationToken)">
+  GetGeoipDatabaseAsync(Ids?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L288"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetGeoipDatabaseResponse&gt; GetGeoipDatabaseAsync(Ids? id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse.html">GetGeoipDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabaseAsync_Elastic_Clients_Elasticsearch_Ingest_GetGeoipDatabaseRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest,System.Threading.CancellationToken)">
+  GetGeoipDatabaseAsync(GetGeoipDatabaseRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L265"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetGeoipDatabaseResponse&gt; GetGeoipDatabaseAsync(GetGeoipDatabaseRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest.html">GetGeoipDatabaseRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse.html">GetGeoipDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabaseAsync_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetGeoipDatabaseRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabaseAsync(System.Action{Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor},System.Threading.CancellationToken)">
+  GetGeoipDatabaseAsync(Action&lt;GetGeoipDatabaseRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L279"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetGeoipDatabaseResponse&gt; GetGeoipDatabaseAsync(Action&lt;GetGeoipDatabaseRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor.html">GetGeoipDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse.html">GetGeoipDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetGeoipDatabaseAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetGeoipDatabaseAsync(System.Threading.CancellationToken)">
+  GetGeoipDatabaseAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L271"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetGeoipDatabaseResponse&gt; GetGeoipDatabaseAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse.html">GetGeoipDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabase" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabase">
+  GetIpLocationDatabase()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L311"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse.html">GetIpLocationDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabase_Elastic_Clients_Elasticsearch_Ids_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids)">
+  GetIpLocationDatabase(Ids?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L328"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase(Ids? id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse.html">GetIpLocationDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabase_Elastic_Clients_Elasticsearch_Ids_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetIpLocationDatabaseRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids,System.Action{Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor})">
+  GetIpLocationDatabase(Ids?, Action&lt;GetIpLocationDatabaseRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L336"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase(Ids? id, Action&lt;GetIpLocationDatabaseRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor.html">GetIpLocationDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse.html">GetIpLocationDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabase_Elastic_Clients_Elasticsearch_Ingest_GetIpLocationDatabaseRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest)">
+  GetIpLocationDatabase(GetIpLocationDatabaseRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase(GetIpLocationDatabaseRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest.html">GetIpLocationDatabaseRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse.html">GetIpLocationDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabase_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetIpLocationDatabaseRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabase(System.Action{Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor})">
+  GetIpLocationDatabase(Action&lt;GetIpLocationDatabaseRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L319"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase(Action&lt;GetIpLocationDatabaseRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor.html">GetIpLocationDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse.html">GetIpLocationDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabaseAsync_Elastic_Clients_Elasticsearch_Ids_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetIpLocationDatabaseRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids,System.Action{Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor},System.Threading.CancellationToken)">
+  GetIpLocationDatabaseAsync(Ids?, Action&lt;GetIpLocationDatabaseRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L376"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetIpLocationDatabaseResponse&gt; GetIpLocationDatabaseAsync(Ids? id, Action&lt;GetIpLocationDatabaseRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor.html">GetIpLocationDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse.html">GetIpLocationDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabaseAsync_Elastic_Clients_Elasticsearch_Ids_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids,System.Threading.CancellationToken)">
+  GetIpLocationDatabaseAsync(Ids?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L368"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetIpLocationDatabaseResponse&gt; GetIpLocationDatabaseAsync(Ids? id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse.html">GetIpLocationDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabaseAsync_Elastic_Clients_Elasticsearch_Ingest_GetIpLocationDatabaseRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest,System.Threading.CancellationToken)">
+  GetIpLocationDatabaseAsync(GetIpLocationDatabaseRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L345"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetIpLocationDatabaseResponse&gt; GetIpLocationDatabaseAsync(GetIpLocationDatabaseRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest.html">GetIpLocationDatabaseRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse.html">GetIpLocationDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabaseAsync_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetIpLocationDatabaseRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabaseAsync(System.Action{Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor},System.Threading.CancellationToken)">
+  GetIpLocationDatabaseAsync(Action&lt;GetIpLocationDatabaseRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L359"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetIpLocationDatabaseResponse&gt; GetIpLocationDatabaseAsync(Action&lt;GetIpLocationDatabaseRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor.html">GetIpLocationDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse.html">GetIpLocationDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetIpLocationDatabaseAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetIpLocationDatabaseAsync(System.Threading.CancellationToken)">
+  GetIpLocationDatabaseAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L351"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetIpLocationDatabaseResponse&gt; GetIpLocationDatabaseAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse.html">GetIpLocationDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipeline" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipeline">
+  GetPipeline()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L391"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetPipelineResponse GetPipeline()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse.html">GetPipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipeline_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipeline(Elastic.Clients.Elasticsearch.Id)">
+  GetPipeline(Id?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L408"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetPipelineResponse GetPipeline(Id? id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse.html">GetPipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipeline_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetPipelineRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipeline(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor})">
+  GetPipeline(Id?, Action&lt;GetPipelineRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L416"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetPipelineResponse GetPipeline(Id? id, Action&lt;GetPipelineRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor.html">GetPipelineRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse.html">GetPipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipeline_Elastic_Clients_Elasticsearch_Ingest_GetPipelineRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipeline(Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest)">
+  GetPipeline(GetPipelineRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L385"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetPipelineResponse GetPipeline(GetPipelineRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest.html">GetPipelineRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse.html">GetPipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipeline_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetPipelineRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipeline(System.Action{Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor})">
+  GetPipeline(Action&lt;GetPipelineRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L399"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetPipelineResponse GetPipeline(Action&lt;GetPipelineRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor.html">GetPipelineRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse.html">GetPipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipelineAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetPipelineRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipelineAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor},System.Threading.CancellationToken)">
+  GetPipelineAsync(Id?, Action&lt;GetPipelineRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L456"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetPipelineResponse&gt; GetPipelineAsync(Id? id, Action&lt;GetPipelineRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor.html">GetPipelineRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse.html">GetPipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipelineAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipelineAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  GetPipelineAsync(Id?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L448"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetPipelineResponse&gt; GetPipelineAsync(Id? id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse.html">GetPipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipelineAsync_Elastic_Clients_Elasticsearch_Ingest_GetPipelineRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipelineAsync(Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest,System.Threading.CancellationToken)">
+  GetPipelineAsync(GetPipelineRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L425"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetPipelineResponse&gt; GetPipelineAsync(GetPipelineRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest.html">GetPipelineRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse.html">GetPipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipelineAsync_System_Action_Elastic_Clients_Elasticsearch_Ingest_GetPipelineRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipelineAsync(System.Action{Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor},System.Threading.CancellationToken)">
+  GetPipelineAsync(Action&lt;GetPipelineRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L439"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetPipelineResponse&gt; GetPipelineAsync(Action&lt;GetPipelineRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor.html">GetPipelineRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse.html">GetPipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_GetPipelineAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.GetPipelineAsync(System.Threading.CancellationToken)">
+  GetPipelineAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L431"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetPipelineResponse&gt; GetPipelineAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse.html">GetPipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrok_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrok*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrok" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrok">
+  ProcessorGrok()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L471"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ProcessorGrokResponse ProcessorGrok()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse.html">ProcessorGrokResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrok_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrok*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrok_Elastic_Clients_Elasticsearch_Ingest_ProcessorGrokRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrok(Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest)">
+  ProcessorGrok(ProcessorGrokRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L465"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest.html">ProcessorGrokRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse.html">ProcessorGrokResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrok_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrok*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrok_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorGrokRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrok(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestDescriptor})">
+  ProcessorGrok(Action&lt;ProcessorGrokRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L479"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ProcessorGrokResponse ProcessorGrok(Action&lt;ProcessorGrokRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestDescriptor.html">ProcessorGrokRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse.html">ProcessorGrokResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrokAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrokAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrokAsync_Elastic_Clients_Elasticsearch_Ingest_ProcessorGrokRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrokAsync(Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest,System.Threading.CancellationToken)">
+  ProcessorGrokAsync(ProcessorGrokRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L488"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ProcessorGrokResponse&gt; ProcessorGrokAsync(ProcessorGrokRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest.html">ProcessorGrokRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse.html">ProcessorGrokResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrokAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrokAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrokAsync_System_Action_Elastic_Clients_Elasticsearch_Ingest_ProcessorGrokRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrokAsync(System.Action{Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestDescriptor},System.Threading.CancellationToken)">
+  ProcessorGrokAsync(Action&lt;ProcessorGrokRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L502"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ProcessorGrokResponse&gt; ProcessorGrokAsync(Action&lt;ProcessorGrokRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestDescriptor.html">ProcessorGrokRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse.html">ProcessorGrokResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrokAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrokAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_ProcessorGrokAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.ProcessorGrokAsync(System.Threading.CancellationToken)">
+  ProcessorGrokAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L494"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ProcessorGrokResponse&gt; ProcessorGrokAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse.html">ProcessorGrokResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabase_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabase(Elastic.Clients.Elasticsearch.Id)">
+  PutGeoipDatabase(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L517"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutGeoipDatabaseResponse PutGeoipDatabase(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse.html">PutGeoipDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabase_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_PutGeoipDatabaseRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabase(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor})">
+  PutGeoipDatabase(Id, Action&lt;PutGeoipDatabaseRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L525"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutGeoipDatabaseResponse PutGeoipDatabase(Id id, Action&lt;PutGeoipDatabaseRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor.html">PutGeoipDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse.html">PutGeoipDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabase_Elastic_Clients_Elasticsearch_Ingest_PutGeoipDatabaseRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabase(Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest)">
+  PutGeoipDatabase(PutGeoipDatabaseRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L511"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutGeoipDatabaseResponse PutGeoipDatabase(PutGeoipDatabaseRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest.html">PutGeoipDatabaseRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse.html">PutGeoipDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabaseAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_PutGeoipDatabaseRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor},System.Threading.CancellationToken)">
+  PutGeoipDatabaseAsync(Id, Action&lt;PutGeoipDatabaseRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L548"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutGeoipDatabaseResponse&gt; PutGeoipDatabaseAsync(Id id, Action&lt;PutGeoipDatabaseRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor.html">PutGeoipDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse.html">PutGeoipDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabaseAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  PutGeoipDatabaseAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L540"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutGeoipDatabaseResponse&gt; PutGeoipDatabaseAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse.html">PutGeoipDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutGeoipDatabaseAsync_Elastic_Clients_Elasticsearch_Ingest_PutGeoipDatabaseRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest,System.Threading.CancellationToken)">
+  PutGeoipDatabaseAsync(PutGeoipDatabaseRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L534"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutGeoipDatabaseResponse&gt; PutGeoipDatabaseAsync(PutGeoipDatabaseRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest.html">PutGeoipDatabaseRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse.html">PutGeoipDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabase_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabase(Elastic.Clients.Elasticsearch.Id)">
+  PutIpLocationDatabase(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L563"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutIpLocationDatabaseResponse PutIpLocationDatabase(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse.html">PutIpLocationDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabase_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_PutIpLocationDatabaseRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabase(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor})">
+  PutIpLocationDatabase(Id, Action&lt;PutIpLocationDatabaseRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L571"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutIpLocationDatabaseResponse PutIpLocationDatabase(Id id, Action&lt;PutIpLocationDatabaseRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor.html">PutIpLocationDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse.html">PutIpLocationDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabase_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabase*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabase_Elastic_Clients_Elasticsearch_Ingest_PutIpLocationDatabaseRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabase(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest)">
+  PutIpLocationDatabase(PutIpLocationDatabaseRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L557"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutIpLocationDatabaseResponse PutIpLocationDatabase(PutIpLocationDatabaseRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest.html">PutIpLocationDatabaseRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse.html">PutIpLocationDatabaseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabaseAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_PutIpLocationDatabaseRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor},System.Threading.CancellationToken)">
+  PutIpLocationDatabaseAsync(Id, Action&lt;PutIpLocationDatabaseRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L594"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutIpLocationDatabaseResponse&gt; PutIpLocationDatabaseAsync(Id id, Action&lt;PutIpLocationDatabaseRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor.html">PutIpLocationDatabaseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse.html">PutIpLocationDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabaseAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  PutIpLocationDatabaseAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L586"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutIpLocationDatabaseResponse&gt; PutIpLocationDatabaseAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse.html">PutIpLocationDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabaseAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabaseAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutIpLocationDatabaseAsync_Elastic_Clients_Elasticsearch_Ingest_PutIpLocationDatabaseRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest,System.Threading.CancellationToken)">
+  PutIpLocationDatabaseAsync(PutIpLocationDatabaseRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L580"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutIpLocationDatabaseResponse&gt; PutIpLocationDatabaseAsync(PutIpLocationDatabaseRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest.html">PutIpLocationDatabaseRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse.html">PutIpLocationDatabaseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipeline_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipeline(Elastic.Clients.Elasticsearch.Id)">
+  PutPipeline(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L609"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutPipelineResponse PutPipeline(Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse.html">PutPipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipeline_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_PutPipelineRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipeline(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor})">
+  PutPipeline(Id, Action&lt;PutPipelineRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L617"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutPipelineResponse PutPipeline(Id id, Action&lt;PutPipelineRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor.html">PutPipelineRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse.html">PutPipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipeline_Elastic_Clients_Elasticsearch_Ingest_PutPipelineRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipeline(Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest)">
+  PutPipeline(PutPipelineRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L603"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutPipelineResponse PutPipeline(PutPipelineRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest.html">PutPipelineRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse.html">PutPipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipelineAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_PutPipelineRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipelineAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor},System.Threading.CancellationToken)">
+  PutPipelineAsync(Id, Action&lt;PutPipelineRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L649"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutPipelineResponse&gt; PutPipelineAsync(Id id, Action&lt;PutPipelineRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor.html">PutPipelineRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse.html">PutPipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipelineAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipelineAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  PutPipelineAsync(Id, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L641"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutPipelineResponse&gt; PutPipelineAsync(Id id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse.html">PutPipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipelineAsync_Elastic_Clients_Elasticsearch_Ingest_PutPipelineRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipelineAsync(Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest,System.Threading.CancellationToken)">
+  PutPipelineAsync(PutPipelineRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L635"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutPipelineResponse&gt; PutPipelineAsync(PutPipelineRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest.html">PutPipelineRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse.html">PutPipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipelineAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipelineAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipelineAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_PutPipelineRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipelineAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  PutPipelineAsync&lt;TDocument&gt;(Id, Action&lt;PutPipelineRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L658"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutPipelineResponse&gt; PutPipelineAsync&lt;TDocument&gt;(Id id, Action&lt;PutPipelineRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor-1.html">PutPipelineRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse.html">PutPipelineResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipeline_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_PutPipeline__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_PutPipelineRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.PutPipeline``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor{``0}})">
+  PutPipeline&lt;TDocument&gt;(Id, Action&lt;PutPipelineRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L626"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutPipelineResponse PutPipeline&lt;TDocument&gt;(Id id, Action&lt;PutPipelineRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor-1.html">PutPipelineRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse.html">PutPipelineResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate(Elastic.Clients.Elasticsearch.Id)">
+  Simulate(Id?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L682"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SimulateResponse Simulate(Id? id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_SimulateRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor})">
+  Simulate(Id?, Action&lt;SimulateRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L690"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SimulateResponse Simulate(Id? id, Action&lt;SimulateRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor.html">SimulateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate_Elastic_Clients_Elasticsearch_Ingest_SimulateRequest_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate(Elastic.Clients.Elasticsearch.Ingest.SimulateRequest)">
+  Simulate(SimulateRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L667"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SimulateResponse Simulate(SimulateRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateRequest.html">SimulateRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate_System_Action_Elastic_Clients_Elasticsearch_Ingest_SimulateRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate(System.Action{Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor})">
+  Simulate(Action&lt;SimulateRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L673"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SimulateResponse Simulate(Action&lt;SimulateRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor.html">SimulateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_SimulateRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor},System.Threading.CancellationToken)">
+  SimulateAsync(Id?, Action&lt;SimulateRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L740"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SimulateResponse&gt; SimulateAsync(Id? id, Action&lt;SimulateRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor.html">SimulateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync_Elastic_Clients_Elasticsearch_Id_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync(Elastic.Clients.Elasticsearch.Id,System.Threading.CancellationToken)">
+  SimulateAsync(Id?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L732"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SimulateResponse&gt; SimulateAsync(Id? id, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync_Elastic_Clients_Elasticsearch_Ingest_SimulateRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync(Elastic.Clients.Elasticsearch.Ingest.SimulateRequest,System.Threading.CancellationToken)">
+  SimulateAsync(SimulateRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L717"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SimulateResponse&gt; SimulateAsync(SimulateRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateRequest.html">SimulateRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync_System_Action_Elastic_Clients_Elasticsearch_Ingest_SimulateRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync(System.Action{Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor},System.Threading.CancellationToken)">
+  SimulateAsync(Action&lt;SimulateRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L723"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SimulateResponse&gt; SimulateAsync(Action&lt;SimulateRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor.html">SimulateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_SimulateRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  SimulateAsync&lt;TDocument&gt;(Id?, Action&lt;SimulateRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L758"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SimulateResponse&gt; SimulateAsync&lt;TDocument&gt;(Id? id, Action&lt;SimulateRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor-1.html">SimulateRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_SimulateAsync__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_SimulateRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.SimulateAsync``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  SimulateAsync&lt;TDocument&gt;(Action&lt;SimulateRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L749"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;SimulateResponse&gt; SimulateAsync&lt;TDocument&gt;(Action&lt;SimulateRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor-1.html">SimulateRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate__1_Elastic_Clients_Elasticsearch_Id_System_Action_Elastic_Clients_Elasticsearch_Ingest_SimulateRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate``1(Elastic.Clients.Elasticsearch.Id,System.Action{Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor{``0}})">
+  Simulate&lt;TDocument&gt;(Id?, Action&lt;SimulateRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L708"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SimulateResponse Simulate&lt;TDocument&gt;(Id? id, Action&lt;SimulateRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor-1.html">SimulateRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate_" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Ingest_IngestNamespacedClient_Simulate__1_System_Action_Elastic_Clients_Elasticsearch_Ingest_SimulateRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient.Simulate``1(System.Action{Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor{``0}})">
+  Simulate&lt;TDocument&gt;(Action&lt;SimulateRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Ingest.g.cs/#L699"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual SimulateResponse Simulate&lt;TDocument&gt;(Action&lt;SimulateRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor-1.html">SimulateRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Ingest.SimulateResponse.html">SimulateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

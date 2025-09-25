@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct UpdateDatafeedRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct UpdateDatafeedRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Update a datafeed. You must stop and start the datafeed for the changes to be applied. When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at the time of the update and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.8/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1" class="text-break">
+Struct UpdateDatafeedRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L846"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Update a datafeed.
+You must stop and start the datafeed for the changes to be applied.
+When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
+the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
+those credentials are used instead.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct UpdateDatafeedRequestDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.#ctor">
+  UpdateDatafeedRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L861"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public UpdateDatafeedRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.Id)">
+  UpdateDatafeedRequestDescriptor(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L856"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor(Id datafeedId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>datafeedId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequest_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest)">
+  UpdateDatafeedRequestDescriptor(UpdateDatafeedRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L850"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor(UpdateDatafeedRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest.html">UpdateDatafeedRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddAggregation_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddAggregation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddAggregation_System_String_Elastic_Clients_Elasticsearch_Aggregations_Aggregation_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddAggregation(System.String,Elastic.Clients.Elasticsearch.Aggregations.Aggregation)">
+  AddAggregation(string, Aggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L978"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; AddAggregation(string key, Aggregation value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddAggregation_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddAggregation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddAggregation_System_String_System_Action_Elastic_Clients_Elasticsearch_Aggregations_AggregationDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddAggregation(System.String,System.Action{Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor{`0}})">
+  AddAggregation(string, Action&lt;AggregationDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L985"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; AddAggregation(string key, Action&lt;AggregationDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor-1.html">AggregationDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddRuntimeMapping_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeField_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeField)">
+  AddRuntimeMapping(Field, RuntimeField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1221"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; AddRuntimeMapping(Field key, RuntimeField value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddRuntimeMapping_Elastic_Clients_Elasticsearch_Field_System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field,System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor{`0}})">
+  AddRuntimeMapping(Field, Action&lt;RuntimeFieldDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1235"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; AddRuntimeMapping(Field key, Action&lt;RuntimeFieldDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor-1.html">RuntimeFieldDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddRuntimeMapping_System_Linq_Expressions_Expression_System_Func__0_System_Object___Elastic_Clients_Elasticsearch_Mapping_RuntimeField_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddRuntimeMapping(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Elastic.Clients.Elasticsearch.Mapping.RuntimeField)">
+  AddRuntimeMapping(Expression&lt;Func&lt;TDocument, object?&gt;&gt;, RuntimeField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1228"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; AddRuntimeMapping(Expression&lt;Func&lt;TDocument, object?&gt;&gt; key, RuntimeField value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddRuntimeMapping_System_Linq_Expressions_Expression_System_Func__0_System_Object___System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddRuntimeMapping(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor{`0}})">
+  AddRuntimeMapping(Expression&lt;Func&lt;TDocument, object?&gt;&gt;, Action&lt;RuntimeFieldDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; AddRuntimeMapping(Expression&lt;Func&lt;TDocument, object?&gt;&gt; key, Action&lt;RuntimeFieldDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor-1.html">RuntimeFieldDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddScriptField_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddScriptField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddScriptField_System_String_Elastic_Clients_Elasticsearch_ScriptField_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddScriptField(System.String,Elastic.Clients.Elasticsearch.ScriptField)">
+  AddScriptField(string, ScriptField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1285"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; AddScriptField(string key, ScriptField value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ScriptField.html">ScriptField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddScriptField_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddScriptField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AddScriptField_System_String_System_Action_Elastic_Clients_Elasticsearch_ScriptFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AddScriptField(System.String,System.Action{Elastic.Clients.Elasticsearch.ScriptFieldDescriptor})">
+  AddScriptField(string, Action&lt;ScriptFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; AddScriptField(string key, Action&lt;ScriptFieldDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.html">ScriptFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Aggregations_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Aggregations*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Aggregations" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Aggregations">
+  Aggregations()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L960"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
+with low cardinality data.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; Aggregations()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Aggregations_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Aggregations*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Aggregations_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringAggregation__0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Aggregations(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation{`0}})">
+  Aggregations(Action&lt;FluentDictionaryOfStringAggregation&lt;TDocument&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L972"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
+with low cardinality data.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; Aggregations(Action&lt;FluentDictionaryOfStringAggregation&lt;TDocument&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation-1.html">FluentDictionaryOfStringAggregation</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Aggregations_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Aggregations*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Aggregations_System_Collections_Generic_IDictionary_System_String_Elastic_Clients_Elasticsearch_Aggregations_Aggregation__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Aggregations(System.Collections.Generic.IDictionary{System.String,Elastic.Clients.Elasticsearch.Aggregations.Aggregation})">
+  Aggregations(IDictionary&lt;string, Aggregation&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L948"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If set, the datafeed performs aggregation searches. Support for aggregations is limited and should be used only
+with low cardinality data.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; Aggregations(IDictionary&lt;string, Aggregation&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AllowNoIndices_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AllowNoIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_AllowNoIndices_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.AllowNoIndices(System.Nullable{System.Boolean})">
+  AllowNoIndices(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L889"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
+<code>_all</code> string or when no indices are specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; AllowNoIndices(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ChunkingConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ChunkingConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ChunkingConfig_Elastic_Clients_Elasticsearch_MachineLearning_ChunkingConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ChunkingConfig(Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig)">
+  ChunkingConfig(ChunkingConfig?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L999"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Datafeeds might search over long time periods, for several months or years. This search is split into time
+chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of
+these time chunks are calculated; it is an advanced configuration option.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; ChunkingConfig(ChunkingConfig? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfig.html">ChunkingConfig</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ChunkingConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ChunkingConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ChunkingConfig_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_ChunkingConfigDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ChunkingConfig(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor})">
+  ChunkingConfig(Action&lt;ChunkingConfigDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1012"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Datafeeds might search over long time periods, for several months or years. This search is split into time
+chunks in order to ensure the load on Elasticsearch is managed. Chunking configuration controls how the size of
+these time chunks are calculated; it is an advanced configuration option.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; ChunkingConfig(Action&lt;ChunkingConfigDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ChunkingConfigDescriptor.html">ChunkingConfigDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_DatafeedId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.DatafeedId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_DatafeedId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.DatafeedId(Elastic.Clients.Elasticsearch.Id)">
+  DatafeedId(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L877"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A numerical character string that uniquely identifies the datafeed.
+This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores.
+It must start and end with alphanumeric characters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; DatafeedId(Id value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_DelayedDataCheckConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.DelayedDataCheckConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_DelayedDataCheckConfig_Elastic_Clients_Elasticsearch_MachineLearning_DelayedDataCheckConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.DelayedDataCheckConfig(Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig)">
+  DelayedDataCheckConfig(DelayedDataCheckConfig?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1027"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally
+search over indices that have already been read in an effort to determine whether any data has subsequently been
+added to the index. If missing data is found, it is a good indication that the <code>query_delay</code> is set too low and
+the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time
+datafeeds.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; DelayedDataCheckConfig(DelayedDataCheckConfig? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfig.html">DelayedDataCheckConfig</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_DelayedDataCheckConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.DelayedDataCheckConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_DelayedDataCheckConfig_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_DelayedDataCheckConfigDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.DelayedDataCheckConfig(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor})">
+  DelayedDataCheckConfig(Action&lt;DelayedDataCheckConfigDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1042"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies whether the datafeed checks for missing data and the size of the window. The datafeed can optionally
+search over indices that have already been read in an effort to determine whether any data has subsequently been
+added to the index. If missing data is found, it is a good indication that the <code>query_delay</code> is set too low and
+the data is being indexed after the datafeed has passed that moment in time. This check runs only on real-time
+datafeeds.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; DelayedDataCheckConfig(Action&lt;DelayedDataCheckConfigDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DelayedDataCheckConfigDescriptor.html">DelayedDataCheckConfigDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1319"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ExpandWildcards_Elastic_Clients_Elasticsearch_ExpandWildcard___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcard[])">
+  ExpandWildcards(params ExpandWildcard[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L913"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+whether wildcard expressions match hidden data streams. Supports comma-separated values.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; ExpandWildcards(params ExpandWildcard[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ExpandWildcards_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ExpandWildcard__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ExpandWildcards(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ExpandWildcard})">
+  ExpandWildcards(ICollection&lt;ExpandWildcard&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L901"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+whether wildcard expressions match hidden data streams. Supports comma-separated values.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; ExpandWildcards(ICollection&lt;ExpandWildcard&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1325"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Frequency_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Frequency*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Frequency_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Frequency(Elastic.Clients.Elasticsearch.Duration)">
+  Frequency(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1057"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The interval at which scheduled queries are made while the datafeed runs in real time. The default value is
+either the bucket span for short bucket spans, or, for longer bucket spans, a sensible fraction of the bucket
+span. When <code>frequency</code> is shorter than the bucket span, interim results for the last (partial) bucket are
+written then eventually overwritten by the full bucket results. If the datafeed uses aggregations, this value
+must be divisible by the interval of the date histogram aggregation.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; Frequency(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Human_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1331"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_IgnoreThrottled_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.IgnoreThrottled*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_IgnoreThrottled_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.IgnoreThrottled(System.Nullable{System.Boolean})">
+  IgnoreThrottled(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L919"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;7.16.0&#39;.&quot;)]
+public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; IgnoreThrottled(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_IgnoreUnavailable_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.IgnoreUnavailable(System.Nullable{System.Boolean})">
+  IgnoreUnavailable(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L936"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, unavailable indices (missing or closed) are ignored.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; IgnoreUnavailable(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Indices_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Indices_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Indices(System.Collections.Generic.ICollection{System.String})">
+  Indices(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1069"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
+learning nodes must have the <code>remote_cluster_client</code> role.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; Indices(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Indices_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Indices_System_String___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Indices(System.String[])">
+  Indices(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1081"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
+learning nodes must have the <code>remote_cluster_client</code> role.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; Indices(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_IndicesOptions_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.IndicesOptions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_IndicesOptions" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.IndicesOptions">
+  IndicesOptions()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies index expansion options that are used during search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; IndicesOptions()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_IndicesOptions_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.IndicesOptions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_IndicesOptions_Elastic_Clients_Elasticsearch_IndicesOptions_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.IndicesOptions(Elastic.Clients.Elasticsearch.IndicesOptions)">
+  IndicesOptions(IndicesOptions?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1092"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies index expansion options that are used during search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; IndicesOptions(IndicesOptions? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndicesOptions.html">IndicesOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_IndicesOptions_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.IndicesOptions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_IndicesOptions_System_Action_Elastic_Clients_Elasticsearch_IndicesOptionsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.IndicesOptions(System.Action{Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor})">
+  IndicesOptions(Action&lt;IndicesOptionsDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies index expansion options that are used during search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; IndicesOptions(Action&lt;IndicesOptionsDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndicesOptionsDescriptor.html">IndicesOptionsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_JobId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.JobId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_JobId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.JobId(Elastic.Clients.Elasticsearch.Id)">
+  JobId(Id?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1120"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; JobId(Id? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_MaxEmptySearches_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.MaxEmptySearches*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_MaxEmptySearches_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.MaxEmptySearches(System.Nullable{System.Int32})">
+  MaxEmptySearches(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1134"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If a real-time datafeed has never seen any data (including during any initial training period), it automatically
+stops and closes the associated job after this many real-time searches return no documents. In other words,
+it stops after <code>frequency</code> times <code>max_empty_searches</code> of real-time operation. If not set, a datafeed with no
+end time that sees no data remains started until it is explicitly stopped. By default, it is not set.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; MaxEmptySearches(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Pretty_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1337"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Query_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Query_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Query(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  Query(Query?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1151"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
+Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
+object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also
+changed. Therefore, the time required to learn might be long and the understandability of the results is
+unpredictable. If you want to make significant changes to the source data, it is recommended that you
+clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one
+when you are satisfied with the results of the job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; Query(Query? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Query_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_Query_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.Query(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor{`0}})">
+  Query(Action&lt;QueryDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1168"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The Elasticsearch query domain-specific language (DSL). This value corresponds to the query object in an
+Elasticsearch search POST body. All the options that are supported by Elasticsearch can be used, as this
+object is passed verbatim to Elasticsearch. Note that if you change the query, the analyzed data is also
+changed. Therefore, the time required to learn might be long and the understandability of the results is
+unpredictable. If you want to make significant changes to the source data, it is recommended that you
+clone the job and datafeed and make the amendments in the clone. Let both run in parallel and close one
+when you are satisfied with the results of the job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; Query(Action&lt;QueryDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor-1.html">QueryDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_QueryDelay_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.QueryDelay*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_QueryDelay_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.QueryDelay(Elastic.Clients.Elasticsearch.Duration)">
+  QueryDelay(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1182"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of seconds behind real time that data is queried. For example, if data from 10:04 a.m. might
+not be searchable in Elasticsearch until 10:06 a.m., set this property to 120 seconds. The default
+value is randomly selected between <code>60s</code> and <code>120s</code>. This randomness improves the query performance
+when there are multiple jobs running on the same node.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; QueryDelay(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1349"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.8/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1355"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.8/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.8/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_RuntimeMappings" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.RuntimeMappings">
+  RuntimeMappings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1204"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies runtime fields for the datafeed search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; RuntimeMappings()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_RuntimeMappings_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfFieldRuntimeField__0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.RuntimeMappings(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField{`0}})">
+  RuntimeMappings(Action&lt;FluentDictionaryOfFieldRuntimeField&lt;TDocument&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1215"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies runtime fields for the datafeed search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; RuntimeMappings(Action&lt;FluentDictionaryOfFieldRuntimeField&lt;TDocument&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField-1.html">FluentDictionaryOfFieldRuntimeField</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_RuntimeMappings_System_Collections_Generic_IDictionary_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeField__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.RuntimeMappings(System.Collections.Generic.IDictionary{Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeField})">
+  RuntimeMappings(IDictionary&lt;Field, RuntimeField&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies runtime fields for the datafeed search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; RuntimeMappings(IDictionary&lt;Field, RuntimeField&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ScriptFields_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ScriptFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ScriptFields" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ScriptFields">
+  ScriptFields()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+The detector configuration objects in a job can contain functions that use these script fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; ScriptFields()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ScriptFields_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ScriptFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ScriptFields_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringScriptField__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ScriptFields(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField})">
+  ScriptFields(Action&lt;FluentDictionaryOfStringScriptField&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1279"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+The detector configuration objects in a job can contain functions that use these script fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; ScriptFields(Action&lt;FluentDictionaryOfStringScriptField&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringScriptField.html">FluentDictionaryOfStringScriptField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ScriptFields_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ScriptFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ScriptFields_System_Collections_Generic_IDictionary_System_String_Elastic_Clients_Elasticsearch_ScriptField__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ScriptFields(System.Collections.Generic.IDictionary{System.String,Elastic.Clients.Elasticsearch.ScriptField})">
+  ScriptFields(IDictionary&lt;string, ScriptField&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies scripts that evaluate custom expressions and returns script fields to the datafeed.
+The detector configuration objects in a job can contain functions that use these script fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; ScriptFields(IDictionary&lt;string, ScriptField&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.ScriptField.html">ScriptField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ScrollSize_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ScrollSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_ScrollSize_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.ScrollSize(System.Nullable{System.Int32})">
+  ScrollSize(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The size parameter that is used in Elasticsearch searches when the datafeed does not use aggregations.
+The maximum value is the value of <code>index.max_result_window</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; ScrollSize(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L1343"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UpdateDatafeedRequestDescriptor&lt;TDocument&gt; SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequest__Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest)~Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor{`0}">
+  explicit operator UpdateDatafeedRequestDescriptor&lt;TDocument&gt;(UpdateDatafeedRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L867"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator UpdateDatafeedRequestDescriptor&lt;TDocument&gt;(UpdateDatafeedRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest.html">UpdateDatafeedRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequestDescriptor__0___Elastic_Clients_Elasticsearch_MachineLearning_UpdateDatafeedRequest" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor{`0})~Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest">
+  implicit operator UpdateDatafeedRequest(UpdateDatafeedRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/UpdateDatafeedRequest.g.cs/#L868"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator UpdateDatafeedRequest(UpdateDatafeedRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequestDescriptor-1.html">UpdateDatafeedRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.UpdateDatafeedRequest.html">UpdateDatafeedRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
