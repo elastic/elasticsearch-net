@@ -58,7 +58,7 @@ public sealed partial class Hit<TDocument>
 #endif
 	string Id { get; set; }
 	public System.Collections.Generic.IReadOnlyCollection<string>? Ignored { get; set; }
-	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.FieldValue>>? IgnoredFieldValues { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IReadOnlyCollection<object>>? IgnoredFieldValues { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
