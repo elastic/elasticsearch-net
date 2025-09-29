@@ -54,7 +54,7 @@ public sealed partial class FilterConverter : System.Text.Json.Serialization.Jso
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

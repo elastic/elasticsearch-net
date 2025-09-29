@@ -36,7 +36,7 @@ public sealed partial class BengaliNormalizationTokenFilterConverter : System.Te
 		{
 			if (reader.ValueTextEquals(PropType))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -47,7 +47,7 @@ public sealed partial class BengaliNormalizationTokenFilterConverter : System.Te
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

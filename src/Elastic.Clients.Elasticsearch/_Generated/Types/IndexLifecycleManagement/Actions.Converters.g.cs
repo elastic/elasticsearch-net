@@ -124,7 +124,7 @@ public sealed partial class ActionsConverter : System.Text.Json.Serialization.Js
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

@@ -121,6 +121,20 @@ public sealed partial class SignificantTermsAggregation
 
 	/// <summary>
 	/// <para>
+	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
+	/// </para>
+	/// <para>
+	/// The p-value is the probability of obtaining test results at least as extreme as
+	/// the results actually observed, under the assumption that the null hypothesis is
+	/// correct. The p-value is calculated assuming that the foreground set and the
+	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
+	/// hypothesis that the probabilities are the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic? PValue { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Customized score, implemented via a script.
 	/// </para>
 	/// </summary>
@@ -408,6 +422,60 @@ public readonly partial struct SignificantTermsAggregationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> Percentage(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor>? action)
 	{
 		Instance.Percentage = Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
+	/// </para>
+	/// <para>
+	/// The p-value is the probability of obtaining test results at least as extreme as
+	/// the results actually observed, under the assumption that the null hypothesis is
+	/// correct. The p-value is calculated assuming that the foreground set and the
+	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
+	/// hypothesis that the probabilities are the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> PValue(Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic? value)
+	{
+		Instance.PValue = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
+	/// </para>
+	/// <para>
+	/// The p-value is the probability of obtaining test results at least as extreme as
+	/// the results actually observed, under the assumption that the null hypothesis is
+	/// correct. The p-value is calculated assuming that the foreground set and the
+	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
+	/// hypothesis that the probabilities are the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> PValue()
+	{
+		Instance.PValue = Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
+	/// </para>
+	/// <para>
+	/// The p-value is the probability of obtaining test results at least as extreme as
+	/// the results actually observed, under the assumption that the null hypothesis is
+	/// correct. The p-value is calculated assuming that the foreground set and the
+	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
+	/// hypothesis that the probabilities are the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor<TDocument> PValue(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor>? action)
+	{
+		Instance.PValue = Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor.Build(action);
 		return this;
 	}
 
@@ -751,6 +819,60 @@ public readonly partial struct SignificantTermsAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor Percentage(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor>? action)
 	{
 		Instance.Percentage = Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristicDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
+	/// </para>
+	/// <para>
+	/// The p-value is the probability of obtaining test results at least as extreme as
+	/// the results actually observed, under the assumption that the null hypothesis is
+	/// correct. The p-value is calculated assuming that the foreground set and the
+	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
+	/// hypothesis that the probabilities are the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor PValue(Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic? value)
+	{
+		Instance.PValue = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
+	/// </para>
+	/// <para>
+	/// The p-value is the probability of obtaining test results at least as extreme as
+	/// the results actually observed, under the assumption that the null hypothesis is
+	/// correct. The p-value is calculated assuming that the foreground set and the
+	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
+	/// hypothesis that the probabilities are the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor PValue()
+	{
+		Instance.PValue = Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Significant terms heuristic that calculates the p-value between the term existing in foreground and background sets.
+	/// </para>
+	/// <para>
+	/// The p-value is the probability of obtaining test results at least as extreme as
+	/// the results actually observed, under the assumption that the null hypothesis is
+	/// correct. The p-value is calculated assuming that the foreground set and the
+	/// background set are independent https://en.wikipedia.org/wiki/Bernoulli_trial, with the null
+	/// hypothesis that the probabilities are the same.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.SignificantTermsAggregationDescriptor PValue(System.Action<Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor>? action)
+	{
+		Instance.PValue = Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristicDescriptor.Build(action);
 		return this;
 	}
 

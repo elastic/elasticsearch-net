@@ -82,7 +82,7 @@ public sealed partial class OverallBucketConverter : System.Text.Json.Serializat
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

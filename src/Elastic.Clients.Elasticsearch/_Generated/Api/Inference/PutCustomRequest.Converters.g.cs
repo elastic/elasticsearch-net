@@ -45,7 +45,7 @@ public sealed partial class PutCustomRequestConverter : System.Text.Json.Seriali
 
 			if (reader.ValueTextEquals(PropService))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -61,7 +61,7 @@ public sealed partial class PutCustomRequestConverter : System.Text.Json.Seriali
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

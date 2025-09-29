@@ -39,7 +39,7 @@ public sealed partial class ISettingsSimilarityConverter : System.Text.Json.Seri
 				break;
 			}
 
-			reader.Skip();
+			reader.SafeSkip();
 		}
 
 		reader = readerSnapshot;

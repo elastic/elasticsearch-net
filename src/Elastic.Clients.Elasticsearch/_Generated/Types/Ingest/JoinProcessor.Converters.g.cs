@@ -89,7 +89,7 @@ public sealed partial class JoinProcessorConverter : System.Text.Json.Serializat
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

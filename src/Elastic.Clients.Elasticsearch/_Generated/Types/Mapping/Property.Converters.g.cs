@@ -39,7 +39,7 @@ public sealed partial class IPropertyConverter : System.Text.Json.Serialization.
 				break;
 			}
 
-			reader.Skip();
+			reader.SafeSkip();
 		}
 
 		reader = readerSnapshot;

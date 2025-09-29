@@ -68,7 +68,7 @@ public sealed partial class AllocateActionConverter : System.Text.Json.Serializa
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

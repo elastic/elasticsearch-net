@@ -103,7 +103,7 @@ public sealed partial class GetResponseConverter<TDocument> : System.Text.Json.S
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

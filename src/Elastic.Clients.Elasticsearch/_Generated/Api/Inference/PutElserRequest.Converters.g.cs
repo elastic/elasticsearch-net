@@ -43,7 +43,7 @@ public sealed partial class PutElserRequestConverter : System.Text.Json.Serializ
 
 			if (reader.ValueTextEquals(PropService))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -54,7 +54,7 @@ public sealed partial class PutElserRequestConverter : System.Text.Json.Serializ
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

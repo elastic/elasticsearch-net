@@ -89,7 +89,7 @@ public sealed partial class ForeachProcessorConverter : System.Text.Json.Seriali
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

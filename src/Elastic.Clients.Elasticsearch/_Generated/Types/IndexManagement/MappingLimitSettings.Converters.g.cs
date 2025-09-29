@@ -96,7 +96,7 @@ public sealed partial class MappingLimitSettingsConverter : System.Text.Json.Ser
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

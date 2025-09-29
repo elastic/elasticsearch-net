@@ -61,7 +61,7 @@ public sealed partial class EqlConverter : System.Text.Json.Serialization.JsonCo
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

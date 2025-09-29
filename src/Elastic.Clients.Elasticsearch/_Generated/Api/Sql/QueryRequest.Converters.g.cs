@@ -152,7 +152,7 @@ public sealed partial class QueryRequestConverter : System.Text.Json.Serializati
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

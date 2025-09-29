@@ -214,7 +214,18 @@ public readonly partial struct InferenceConfigCreateDescriptor<TDocument>
 	/// Fill mask configuration for inference.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> FillMask(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor> action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> FillMask()
+	{
+		Instance.FillMask = Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fill mask configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> FillMask(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor>? action)
 	{
 		Instance.FillMask = Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor.Build(action);
 		return this;
@@ -413,7 +424,18 @@ public readonly partial struct InferenceConfigCreateDescriptor<TDocument>
 	/// Text embedding configuration for inference.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextEmbedding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor> action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextEmbedding()
+	{
+		Instance.TextEmbedding = Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text embedding configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextEmbedding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor>? action)
 	{
 		Instance.TextEmbedding = Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor.Build(action);
 		return this;
@@ -435,7 +457,18 @@ public readonly partial struct InferenceConfigCreateDescriptor<TDocument>
 	/// Text expansion configuration for inference.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextExpansion(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor> action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextExpansion()
+	{
+		Instance.TextExpansion = Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text expansion configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor<TDocument> TextExpansion(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor>? action)
 	{
 		Instance.TextExpansion = Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor.Build(action);
 		return this;
@@ -540,7 +573,18 @@ public readonly partial struct InferenceConfigCreateDescriptor
 	/// Fill mask configuration for inference.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor FillMask(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor> action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor FillMask()
+	{
+		Instance.FillMask = Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Fill mask configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor FillMask(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor>? action)
 	{
 		Instance.FillMask = Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor.Build(action);
 		return this;
@@ -756,7 +800,18 @@ public readonly partial struct InferenceConfigCreateDescriptor
 	/// Text embedding configuration for inference.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextEmbedding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor> action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextEmbedding()
+	{
+		Instance.TextEmbedding = Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text embedding configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextEmbedding(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor>? action)
 	{
 		Instance.TextEmbedding = Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor.Build(action);
 		return this;
@@ -778,7 +833,18 @@ public readonly partial struct InferenceConfigCreateDescriptor
 	/// Text expansion configuration for inference.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextExpansion(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor> action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextExpansion()
+	{
+		Instance.TextExpansion = Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Text expansion configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreateDescriptor TextExpansion(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor>? action)
 	{
 		Instance.TextExpansion = Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor.Build(action);
 		return this;
