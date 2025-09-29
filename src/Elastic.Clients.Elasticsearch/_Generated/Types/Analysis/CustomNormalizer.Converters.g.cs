@@ -48,13 +48,13 @@ public sealed partial class CustomNormalizerConverter : System.Text.Json.Seriali
 
 			if (reader.ValueTextEquals(PropType))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

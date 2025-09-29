@@ -83,13 +83,13 @@ public sealed partial class RankFeaturesPropertyConverter : System.Text.Json.Ser
 
 			if (reader.ValueTextEquals(PropType))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

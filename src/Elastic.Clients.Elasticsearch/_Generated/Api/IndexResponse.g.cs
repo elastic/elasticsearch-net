@@ -37,6 +37,12 @@ public sealed partial class IndexResponse : Elastic.Transport.Products.Elasticse
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The role of the failure store in this document response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? FailureStore { get; set; }
 	public bool? ForcedRefresh { get; set; }
 
 	/// <summary>

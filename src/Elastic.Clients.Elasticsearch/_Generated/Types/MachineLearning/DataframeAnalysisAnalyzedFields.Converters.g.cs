@@ -56,7 +56,7 @@ public sealed partial class DataframeAnalysisAnalyzedFieldsConverter : System.Te
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

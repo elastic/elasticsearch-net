@@ -54,7 +54,7 @@ public sealed partial class RandomSamplerAggregationConverter : System.Text.Json
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

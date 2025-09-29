@@ -145,7 +145,7 @@ public sealed partial class ReindexResponseConverter : System.Text.Json.Serializ
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

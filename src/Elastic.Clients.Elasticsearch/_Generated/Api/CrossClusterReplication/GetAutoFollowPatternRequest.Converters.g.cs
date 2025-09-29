@@ -32,7 +32,7 @@ public sealed partial class GetAutoFollowPatternRequestConverter : System.Text.J
 		{
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

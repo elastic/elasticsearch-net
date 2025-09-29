@@ -61,7 +61,7 @@ public sealed partial class XpackInfoResponseConverter : System.Text.Json.Serial
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

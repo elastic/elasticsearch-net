@@ -32,7 +32,7 @@ public sealed partial class InfoRequestConverter : System.Text.Json.Serializatio
 		{
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

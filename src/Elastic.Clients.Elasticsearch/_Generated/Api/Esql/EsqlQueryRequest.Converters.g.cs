@@ -41,7 +41,7 @@ public sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seriali
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
 		LocalJsonValue<bool?> propIncludeCcsMetadata = default;
 		LocalJsonValue<string?> propLocale = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propParams = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>?> propParams = default;
 		LocalJsonValue<bool?> propProfile = default;
 		LocalJsonValue<string> propQuery = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -66,7 +66,7 @@ public sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)))
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)!)))
 			{
 				continue;
 			}
@@ -83,7 +83,7 @@ public sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seriali
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -110,7 +110,7 @@ public sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
 		writer.WriteProperty(options, PropIncludeCcsMetadata, value.IncludeCcsMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
-		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? v) => w.WriteCollectionValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null)));
 		writer.WriteProperty(options, PropProfile, value.Profile, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteEndObject();

@@ -40,7 +40,7 @@ public sealed partial class ScriptRescoreConverter : System.Text.Json.Serializat
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

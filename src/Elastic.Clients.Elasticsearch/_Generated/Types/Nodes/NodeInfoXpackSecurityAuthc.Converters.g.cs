@@ -47,7 +47,7 @@ public sealed partial class NodeInfoXpackSecurityAuthcConverter : System.Text.Js
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

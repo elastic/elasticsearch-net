@@ -40,7 +40,7 @@ public sealed partial class MappingLimitSettingsDimensionFieldsConverter : Syste
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

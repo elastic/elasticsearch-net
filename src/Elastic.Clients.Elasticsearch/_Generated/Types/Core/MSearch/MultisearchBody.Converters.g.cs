@@ -272,7 +272,7 @@ public sealed partial class MultisearchBodyConverter : System.Text.Json.Serializ
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

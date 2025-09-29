@@ -40,7 +40,7 @@ public sealed partial class PutTrainedModelVocabularyResponseConverter : System.
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

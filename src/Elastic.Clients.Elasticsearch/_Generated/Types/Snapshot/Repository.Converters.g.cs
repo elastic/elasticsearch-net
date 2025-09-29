@@ -39,7 +39,7 @@ public sealed partial class IRepositoryConverter : System.Text.Json.Serializatio
 				break;
 			}
 
-			reader.Skip();
+			reader.SafeSkip();
 		}
 
 		reader = readerSnapshot;

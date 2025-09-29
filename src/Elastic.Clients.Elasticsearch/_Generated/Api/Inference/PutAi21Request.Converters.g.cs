@@ -36,7 +36,7 @@ public sealed partial class PutAi21RequestConverter : System.Text.Json.Serializa
 		{
 			if (reader.ValueTextEquals(PropService))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -47,7 +47,7 @@ public sealed partial class PutAi21RequestConverter : System.Text.Json.Serializa
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

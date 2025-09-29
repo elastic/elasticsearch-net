@@ -44,7 +44,7 @@ public sealed partial class RankConverter : System.Text.Json.Serialization.JsonC
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
