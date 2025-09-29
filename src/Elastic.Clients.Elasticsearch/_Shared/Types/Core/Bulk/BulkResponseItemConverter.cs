@@ -108,7 +108,7 @@ public sealed class BulkResponseItemConverter : JsonConverter<ResponseItem>
 
 			if (options.UnmappedMemberHandling is JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
