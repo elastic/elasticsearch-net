@@ -68,7 +68,7 @@ public sealed partial class VectorConverter : System.Text.Json.Serialization.Jso
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

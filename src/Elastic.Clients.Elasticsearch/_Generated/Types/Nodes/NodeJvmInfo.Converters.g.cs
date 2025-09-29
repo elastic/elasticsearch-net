@@ -117,7 +117,7 @@ public sealed partial class NodeJvmInfoConverter : System.Text.Json.Serializatio
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

@@ -36,7 +36,7 @@ public sealed partial class TextEmbeddingInferenceOptionsConverter : System.Text
 		LocalJsonValue<int?> propEmbeddingSize = default;
 		LocalJsonValue<string?> propResultsField = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig?> propTokenization = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary> propVocabulary = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary?> propVocabulary = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propEmbeddingSize.TryReadProperty(ref reader, options, PropEmbeddingSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
@@ -61,7 +61,7 @@ public sealed partial class TextEmbeddingInferenceOptionsConverter : System.Text
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

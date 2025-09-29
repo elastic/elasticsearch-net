@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class IndexResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropFailureStore = System.Text.Json.JsonEncodedText.Encode("failure_store");
 	private static readonly System.Text.Json.JsonEncodedText PropForcedRefresh = System.Text.Json.JsonEncodedText.Encode("forced_refresh");
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
 	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
@@ -37,6 +38,7 @@ public sealed partial class IndexResponseConverter : System.Text.Json.Serializat
 	public override Elastic.Clients.Elasticsearch.IndexResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus?> propFailureStore = default;
 		LocalJsonValue<bool?> propForcedRefresh = default;
 		LocalJsonValue<string> propId = default;
 		LocalJsonValue<string> propIndex = default;
@@ -47,6 +49,11 @@ public sealed partial class IndexResponseConverter : System.Text.Json.Serializat
 		LocalJsonValue<long> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propFailureStore.TryReadProperty(ref reader, options, PropFailureStore, static Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus>(o)))
+			{
+				continue;
+			}
+
 			if (propForcedRefresh.TryReadProperty(ref reader, options, PropForcedRefresh, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
@@ -89,7 +96,7 @@ public sealed partial class IndexResponseConverter : System.Text.Json.Serializat
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -99,6 +106,7 @@ public sealed partial class IndexResponseConverter : System.Text.Json.Serializat
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.IndexResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			FailureStore = propFailureStore.Value,
 			ForcedRefresh = propForcedRefresh.Value,
 			Id = propId.Value,
 			Index = propIndex.Value,
@@ -113,6 +121,7 @@ public sealed partial class IndexResponseConverter : System.Text.Json.Serializat
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFailureStore, value.FailureStore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus>(o, v));
 		writer.WriteProperty(options, PropForcedRefresh, value.ForcedRefresh, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);

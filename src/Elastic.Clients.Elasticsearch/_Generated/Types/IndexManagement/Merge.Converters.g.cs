@@ -40,7 +40,7 @@ public sealed partial class MergeConverter : System.Text.Json.Serialization.Json
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

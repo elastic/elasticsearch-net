@@ -61,7 +61,7 @@ public sealed partial class SearchAccessConverter : System.Text.Json.Serializati
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

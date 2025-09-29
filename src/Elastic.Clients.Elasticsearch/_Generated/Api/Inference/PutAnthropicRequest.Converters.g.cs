@@ -45,7 +45,7 @@ public sealed partial class PutAnthropicRequestConverter : System.Text.Json.Seri
 
 			if (reader.ValueTextEquals(PropService))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -61,7 +61,7 @@ public sealed partial class PutAnthropicRequestConverter : System.Text.Json.Seri
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

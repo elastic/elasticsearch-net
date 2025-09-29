@@ -38,7 +38,7 @@ public sealed partial class FillMaskInferenceOptionsConverter : System.Text.Json
 		LocalJsonValue<int?> propNumTopClasses = default;
 		LocalJsonValue<string?> propResultsField = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig?> propTokenization = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary> propVocabulary = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary?> propVocabulary = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propMaskToken.TryReadProperty(ref reader, options, PropMaskToken, null))
@@ -68,7 +68,7 @@ public sealed partial class FillMaskInferenceOptionsConverter : System.Text.Json
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

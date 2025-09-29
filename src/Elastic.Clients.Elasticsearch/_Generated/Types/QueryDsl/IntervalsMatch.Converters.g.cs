@@ -75,7 +75,7 @@ public sealed partial class IntervalsMatchConverter : System.Text.Json.Serializa
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

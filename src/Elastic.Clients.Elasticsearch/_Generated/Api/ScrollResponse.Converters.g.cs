@@ -131,7 +131,7 @@ public sealed partial class ScrollResponseConverter<TDocument> : System.Text.Jso
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

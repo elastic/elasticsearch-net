@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class UpdateResponseConverter<TDocument> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropFailureStore = System.Text.Json.JsonEncodedText.Encode("failure_store");
 	private static readonly System.Text.Json.JsonEncodedText PropForcedRefresh = System.Text.Json.JsonEncodedText.Encode("forced_refresh");
 	private static readonly System.Text.Json.JsonEncodedText PropGet = System.Text.Json.JsonEncodedText.Encode("get");
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
@@ -38,6 +39,7 @@ public sealed partial class UpdateResponseConverter<TDocument> : System.Text.Jso
 	public override Elastic.Clients.Elasticsearch.UpdateResponse<TDocument> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus?> propFailureStore = default;
 		LocalJsonValue<bool?> propForcedRefresh = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.InlineGet<TDocument>?> propGet = default;
 		LocalJsonValue<string> propId = default;
@@ -49,6 +51,11 @@ public sealed partial class UpdateResponseConverter<TDocument> : System.Text.Jso
 		LocalJsonValue<long> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propFailureStore.TryReadProperty(ref reader, options, PropFailureStore, static Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus>(o)))
+			{
+				continue;
+			}
+
 			if (propForcedRefresh.TryReadProperty(ref reader, options, PropForcedRefresh, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
@@ -96,7 +103,7 @@ public sealed partial class UpdateResponseConverter<TDocument> : System.Text.Jso
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -106,6 +113,7 @@ public sealed partial class UpdateResponseConverter<TDocument> : System.Text.Jso
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.UpdateResponse<TDocument>(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			FailureStore = propFailureStore.Value,
 			ForcedRefresh = propForcedRefresh.Value,
 			Get = propGet.Value,
 			Id = propId.Value,
@@ -121,6 +129,7 @@ public sealed partial class UpdateResponseConverter<TDocument> : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.UpdateResponse<TDocument> value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFailureStore, value.FailureStore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Core.Bulk.FailureStoreStatus>(o, v));
 		writer.WriteProperty(options, PropForcedRefresh, value.ForcedRefresh, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropGet, value.Get, null, null);
 		writer.WriteProperty(options, PropId, value.Id, null, null);

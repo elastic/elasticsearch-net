@@ -38,6 +38,7 @@ public sealed partial class DataStreamConverter : System.Text.Json.Serialization
 	private static readonly System.Text.Json.JsonEncodedText PropPreferIlm = System.Text.Json.JsonEncodedText.Encode("prefer_ilm");
 	private static readonly System.Text.Json.JsonEncodedText PropReplicated = System.Text.Json.JsonEncodedText.Encode("replicated");
 	private static readonly System.Text.Json.JsonEncodedText PropRolloverOnWrite = System.Text.Json.JsonEncodedText.Encode("rollover_on_write");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
 	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
 	private static readonly System.Text.Json.JsonEncodedText PropSystem = System.Text.Json.JsonEncodedText.Encode("system");
 	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
@@ -59,6 +60,7 @@ public sealed partial class DataStreamConverter : System.Text.Json.Serialization
 		LocalJsonValue<bool> propPreferIlm = default;
 		LocalJsonValue<bool?> propReplicated = default;
 		LocalJsonValue<bool> propRolloverOnWrite = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings> propSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.HealthStatus> propStatus = default;
 		LocalJsonValue<bool?> propSystem = default;
 		LocalJsonValue<string> propTemplate = default;
@@ -130,6 +132,11 @@ public sealed partial class DataStreamConverter : System.Text.Json.Serialization
 				continue;
 			}
 
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
+			{
+				continue;
+			}
+
 			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
 			{
 				continue;
@@ -152,7 +159,7 @@ public sealed partial class DataStreamConverter : System.Text.Json.Serialization
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -175,6 +182,7 @@ public sealed partial class DataStreamConverter : System.Text.Json.Serialization
 			PreferIlm = propPreferIlm.Value,
 			Replicated = propReplicated.Value,
 			RolloverOnWrite = propRolloverOnWrite.Value,
+			Settings = propSettings.Value,
 			Status = propStatus.Value,
 			System = propSystem.Value,
 			Template = propTemplate.Value,
@@ -198,6 +206,7 @@ public sealed partial class DataStreamConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropPreferIlm, value.PreferIlm, null, null);
 		writer.WriteProperty(options, PropReplicated, value.Replicated, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRolloverOnWrite, value.RolloverOnWrite, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
 		writer.WriteProperty(options, PropStatus, value.Status, null, null);
 		writer.WriteProperty(options, PropSystem, value.System, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropTemplate, value.Template, null, null);

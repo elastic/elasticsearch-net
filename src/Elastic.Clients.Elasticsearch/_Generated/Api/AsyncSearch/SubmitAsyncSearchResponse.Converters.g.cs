@@ -103,7 +103,7 @@ public sealed partial class SubmitAsyncSearchResponseConverter<TDocument> : Syst
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

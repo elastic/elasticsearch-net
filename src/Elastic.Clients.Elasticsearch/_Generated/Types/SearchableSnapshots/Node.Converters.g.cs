@@ -40,7 +40,7 @@ public sealed partial class NodeConverter : System.Text.Json.Serialization.JsonC
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

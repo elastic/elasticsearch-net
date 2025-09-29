@@ -75,7 +75,7 @@ public sealed partial class RollupSearchResponseConverter<TDocument> : System.Te
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

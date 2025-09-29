@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class DataStream
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DataStream(int generation, bool hidden, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> indices, string name, Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy nextGenerationManagedBy, bool preferIlm, bool rolloverOnWrite, Elastic.Clients.Elasticsearch.HealthStatus status, string template, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField timestampField)
+	public DataStream(int generation, bool hidden, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamIndex> indices, string name, Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy nextGenerationManagedBy, bool preferIlm, bool rolloverOnWrite, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.HealthStatus status, string template, Elastic.Clients.Elasticsearch.IndexManagement.DataStreamTimestampField timestampField)
 	{
 		Generation = generation;
 		Hidden = hidden;
@@ -36,6 +36,7 @@ public sealed partial class DataStream
 		NextGenerationManagedBy = nextGenerationManagedBy;
 		PreferIlm = preferIlm;
 		RolloverOnWrite = rolloverOnWrite;
+		Settings = settings;
 		Status = status;
 		Template = template;
 		TimestampField = timestampField;
@@ -180,6 +181,18 @@ public sealed partial class DataStream
 	required
 #endif
 	bool RolloverOnWrite { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The settings specific to this data stream that will take precedence over the settings in the matching index
+	/// template.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
 
 	/// <summary>
 	/// <para>

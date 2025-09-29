@@ -36,6 +36,7 @@ public sealed partial class SignificantTermsAggregationConverter : System.Text.J
 	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
 	private static readonly System.Text.Json.JsonEncodedText PropMutualInformation = System.Text.Json.JsonEncodedText.Encode("mutual_information");
 	private static readonly System.Text.Json.JsonEncodedText PropPercentage = System.Text.Json.JsonEncodedText.Encode("percentage");
+	private static readonly System.Text.Json.JsonEncodedText PropPValue = System.Text.Json.JsonEncodedText.Encode("p_value");
 	private static readonly System.Text.Json.JsonEncodedText PropScriptHeuristic = System.Text.Json.JsonEncodedText.Encode("script_heuristic");
 	private static readonly System.Text.Json.JsonEncodedText PropShardMinDocCount = System.Text.Json.JsonEncodedText.Encode("shard_min_doc_count");
 	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
@@ -55,6 +56,7 @@ public sealed partial class SignificantTermsAggregationConverter : System.Text.J
 		LocalJsonValue<long?> propMinDocCount = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.MutualInformationHeuristic?> propMutualInformation = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.PercentageScoreHeuristic?> propPercentage = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.PValueHeuristic?> propPValue = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic?> propScriptHeuristic = default;
 		LocalJsonValue<long?> propShardMinDocCount = default;
 		LocalJsonValue<int?> propShardSize = default;
@@ -116,6 +118,11 @@ public sealed partial class SignificantTermsAggregationConverter : System.Text.J
 				continue;
 			}
 
+			if (propPValue.TryReadProperty(ref reader, options, PropPValue, null))
+			{
+				continue;
+			}
+
 			if (propScriptHeuristic.TryReadProperty(ref reader, options, PropScriptHeuristic, null))
 			{
 				continue;
@@ -138,7 +145,7 @@ public sealed partial class SignificantTermsAggregationConverter : System.Text.J
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -159,6 +166,7 @@ public sealed partial class SignificantTermsAggregationConverter : System.Text.J
 			MinDocCount = propMinDocCount.Value,
 			MutualInformation = propMutualInformation.Value,
 			Percentage = propPercentage.Value,
+			PValue = propPValue.Value,
 			ScriptHeuristic = propScriptHeuristic.Value,
 			ShardMinDocCount = propShardMinDocCount.Value,
 			ShardSize = propShardSize.Value,
@@ -180,6 +188,7 @@ public sealed partial class SignificantTermsAggregationConverter : System.Text.J
 		writer.WriteProperty(options, PropMinDocCount, value.MinDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMutualInformation, value.MutualInformation, null, null);
 		writer.WriteProperty(options, PropPercentage, value.Percentage, null, null);
+		writer.WriteProperty(options, PropPValue, value.PValue, null, null);
 		writer.WriteProperty(options, PropScriptHeuristic, value.ScriptHeuristic, null, null);
 		writer.WriteProperty(options, PropShardMinDocCount, value.ShardMinDocCount, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));

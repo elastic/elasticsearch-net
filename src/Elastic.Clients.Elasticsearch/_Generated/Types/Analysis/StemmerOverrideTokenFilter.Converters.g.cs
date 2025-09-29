@@ -50,7 +50,7 @@ public sealed partial class StemmerOverrideTokenFilterConverter : System.Text.Js
 
 			if (reader.ValueTextEquals(PropType))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -61,7 +61,7 @@ public sealed partial class StemmerOverrideTokenFilterConverter : System.Text.Js
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

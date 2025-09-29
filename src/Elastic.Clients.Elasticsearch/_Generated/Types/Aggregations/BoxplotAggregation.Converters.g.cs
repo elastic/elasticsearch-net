@@ -68,7 +68,7 @@ public sealed partial class BoxplotAggregationConverter : System.Text.Json.Seria
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

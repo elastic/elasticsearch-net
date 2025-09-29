@@ -61,7 +61,7 @@ public sealed partial class PutComponentTemplateRequestConverter : System.Text.J
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
