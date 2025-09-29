@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct GeoShapePropertyDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct GeoShapePropertyDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="The geo_shape data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles and polygons.  Learn more about this API in the Elasticsearch documentation.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.8/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1" class="text-break">
+Struct GeoShapePropertyDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.html">Mapping</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+The <code>geo_shape</code> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
+and polygons.
+</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</a></p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct GeoShapePropertyDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.#ctor">
+  GeoShapePropertyDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1__ctor_Elastic_Clients_Elasticsearch_Mapping_GeoShapeProperty_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty)">
+  GeoShapePropertyDescriptor(GeoShapeProperty)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor(GeoShapeProperty instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty.html">GeoShapeProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_AddMeta_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.AddMeta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_AddMeta_System_String_System_String_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.AddMeta(System.String,System.String)">
+  AddMeta(string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; AddMeta(string key, string value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Coerce_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Coerce*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Coerce_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Coerce(System.Nullable{System.Boolean})">
+  Coerce(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Coerce(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_CopyTo_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.CopyTo*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_CopyTo_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.CopyTo(Elastic.Clients.Elasticsearch.Fields)">
+  CopyTo(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L109"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; CopyTo(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_CopyTo_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.CopyTo*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_CopyTo_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.CopyTo(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+  CopyTo(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; CopyTo(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_DocValues_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.DocValues*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_DocValues_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.DocValues(System.Nullable{System.Boolean})">
+  DocValues(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; DocValues(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Dynamic_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Dynamic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Dynamic_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_DynamicMapping__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Dynamic(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.DynamicMapping})">
+  Dynamic(DynamicMapping?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L127"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Dynamic(DynamicMapping? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.html">DynamicMapping</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Fields_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Fields_Elastic_Clients_Elasticsearch_Mapping_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Fields(Elastic.Clients.Elasticsearch.Mapping.Properties)">
+  Fields(Properties?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Fields(Properties? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.Properties.html">Properties</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Fields_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Fields_System_Action_Elastic_Clients_Elasticsearch_Mapping_PropertiesDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Fields(System.Action{Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor{`0}})">
+  Fields(Action&lt;PropertiesDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Fields(Action&lt;PropertiesDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor-1.html">PropertiesDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_IgnoreAbove_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.IgnoreAbove*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_IgnoreAbove_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.IgnoreAbove(System.Nullable{System.Int32})">
+  IgnoreAbove(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; IgnoreAbove(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_IgnoreMalformed_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.IgnoreMalformed*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_IgnoreMalformed_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.IgnoreMalformed(System.Nullable{System.Boolean})">
+  IgnoreMalformed(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L151"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; IgnoreMalformed(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_IgnoreZValue_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.IgnoreZValue*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_IgnoreZValue_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.IgnoreZValue(System.Nullable{System.Boolean})">
+  IgnoreZValue(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L157"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; IgnoreZValue(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Index_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Index_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Index(System.Nullable{System.Boolean})">
+  Index(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L163"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Index(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Meta_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Meta" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Meta">
+  Meta()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Metadata about the field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Meta()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Meta_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Meta_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringString__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Meta(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString})">
+  Meta(Action&lt;FluentDictionaryOfStringString&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L196"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Metadata about the field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Meta(Action&lt;FluentDictionaryOfStringString&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.html">FluentDictionaryOfStringString</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Meta_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Meta_System_Collections_Generic_IDictionary_System_String_System_String__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Meta(System.Collections.Generic.IDictionary{System.String,System.String})">
+  Meta(IDictionary&lt;string, string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Metadata about the field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Meta(IDictionary&lt;string, string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Orientation_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Orientation*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Orientation_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_GeoOrientation__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Orientation(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.GeoOrientation})">
+  Orientation(GeoOrientation?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L209"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Orientation(GeoOrientation? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoOrientation.html">GeoOrientation</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Properties_Elastic_Clients_Elasticsearch_Mapping_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Properties(Elastic.Clients.Elasticsearch.Mapping.Properties)">
+  Properties(Properties?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L215"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Properties(Properties? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.Properties.html">Properties</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Properties_System_Action_Elastic_Clients_Elasticsearch_Mapping_PropertiesDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Properties(System.Action{Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor{`0}})">
+  Properties(Action&lt;PropertiesDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L221"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Properties(Action&lt;PropertiesDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor-1.html">PropertiesDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Store_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Store*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Store_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Store(System.Nullable{System.Boolean})">
+  Store(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Store(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Strategy_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Strategy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_Strategy_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_GeoStrategy__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.Strategy(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.GeoStrategy})">
+  Strategy(GeoStrategy?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L233"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; Strategy(GeoStrategy? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoStrategy.html">GeoStrategy</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_SyntheticSourceKeep_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.SyntheticSourceKeep*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_SyntheticSourceKeep_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_SyntheticSourceKeepEnum__" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.SyntheticSourceKeep(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum})">
+  SyntheticSourceKeep(SyntheticSourceKeepEnum?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L239"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GeoShapePropertyDescriptor&lt;TDocument&gt; SyntheticSourceKeep(SyntheticSourceKeepEnum? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.html">SyntheticSourceKeepEnum</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_Mapping_GeoShapeProperty__Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty)~Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor{`0}">
+  explicit operator GeoShapePropertyDescriptor&lt;TDocument&gt;(GeoShapeProperty)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L100"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator GeoShapePropertyDescriptor&lt;TDocument&gt;(GeoShapeProperty instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty.html">GeoShapeProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_Mapping_GeoShapePropertyDescriptor__0___Elastic_Clients_Elasticsearch_Mapping_GeoShapeProperty" data-uid="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor{`0})~Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty">
+  implicit operator GeoShapeProperty(GeoShapePropertyDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/GeoShapeProperty.g.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator GeoShapeProperty(GeoShapePropertyDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyDescriptor-1.html">GeoShapePropertyDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.GeoShapeProperty.html">GeoShapeProperty</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

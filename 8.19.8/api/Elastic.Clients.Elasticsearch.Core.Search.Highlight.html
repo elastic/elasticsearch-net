@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Highlight | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Highlight | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.8/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Core_Search_Highlight.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Core.Search.Highlight%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight" class="text-break">
+Class Highlight  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.html">Core</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.html">Search</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(HighlightConverter))]
+public sealed class Highlight</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Highlight</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight__ctor_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight__ctor" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.#ctor">
+  Highlight()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public Highlight()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight__ctor_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight__ctor_System_Collections_Generic_IDictionary_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Core_Search_HighlightField__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.#ctor(System.Collections.Generic.IDictionary{Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Core.Search.HighlightField})">
+  Highlight(IDictionary&lt;Field, HighlightField&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Highlight(IDictionary&lt;Field, HighlightField&gt; fields)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fields</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlightField.html">HighlightField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_BoundaryChars_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.BoundaryChars*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_BoundaryChars" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.BoundaryChars">
+  BoundaryChars
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A string that contains each boundary character.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? BoundaryChars { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_BoundaryMaxScan_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.BoundaryMaxScan*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_BoundaryMaxScan" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.BoundaryMaxScan">
+  BoundaryMaxScan
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L63"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+How far to scan for boundary characters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? BoundaryMaxScan { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_BoundaryScanner_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.BoundaryScanner*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_BoundaryScanner" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.BoundaryScanner">
+  BoundaryScanner
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies how to break the highlighted fragments: chars, sentence, or word.
+Only valid for the unified and fvh highlighters.
+Defaults to <code>sentence</code> for the <code>unified</code> highlighter. Defaults to <code>chars</code> for the <code>fvh</code> highlighter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BoundaryScanner? BoundaryScanner { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.BoundaryScanner.html">BoundaryScanner</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_BoundaryScannerLocale_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.BoundaryScannerLocale*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_BoundaryScannerLocale" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.BoundaryScannerLocale">
+  BoundaryScannerLocale
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Controls which locale is used to search for sentence and word boundaries.
+This parameter takes a form of a language tag, for example: <code>"en-US"</code>, <code>"fr-FR"</code>, <code>"ja-JP"</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? BoundaryScannerLocale { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Encoder_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Encoder*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Encoder" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Encoder">
+  Encoder
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HighlighterEncoder? Encoder { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlighterEncoder.html">HighlighterEncoder</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Fields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Fields" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Fields">
+  Fields
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;Field, HighlightField&gt; Fields { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlightField.html">HighlightField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_ForceSource_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.ForceSource*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_ForceSource" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.ForceSource">
+  ForceSource
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? ForceSource { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_FragmentSize_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.FragmentSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_FragmentSize" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.FragmentSize">
+  FragmentSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The size of the highlighted fragment in characters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? FragmentSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Fragmenter_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Fragmenter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Fragmenter" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Fragmenter">
+  Fragmenter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L95"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies how text should be broken up in highlight snippets: <code>simple</code> or <code>span</code>.
+Only valid for the <code>plain</code> highlighter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HighlighterFragmenter? Fragmenter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter.html">HighlighterFragmenter</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_HighlightFilter_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.HighlightFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_HighlightFilter" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.HighlightFilter">
+  HighlightFilter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L103"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? HighlightFilter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_HighlightQuery_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.HighlightQuery*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_HighlightQuery" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.HighlightQuery">
+  HighlightQuery
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L111"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Highlight matches for a query other than the search query.
+This is especially useful if you use a rescore query because those are not taken into account by highlighting by default.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Query? HighlightQuery { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_MaxAnalyzedOffset_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.MaxAnalyzedOffset*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_MaxAnalyzedOffset" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.MaxAnalyzedOffset">
+  MaxAnalyzedOffset
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L120"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If set to a non-negative value, highlighting stops at this defined maximum limit.
+The rest of the text is not processed, thus not highlighted and no error is returned
+The <code>max_analyzed_offset</code> query setting does not override the <code>index.highlight.max_analyzed_offset</code> setting, which prevails when it’s set to lower value than the query setting.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxAnalyzedOffset { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_MaxFragmentLength_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.MaxFragmentLength*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_MaxFragmentLength" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.MaxFragmentLength">
+  MaxFragmentLength
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxFragmentLength { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_NoMatchSize_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.NoMatchSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_NoMatchSize" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.NoMatchSize">
+  NoMatchSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L128"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The amount of text you want to return from the beginning of the field if there are no matching fragments to highlight.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? NoMatchSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_NumberOfFragments_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.NumberOfFragments*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_NumberOfFragments" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.NumberOfFragments">
+  NumberOfFragments
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of fragments to return.
+If the number of fragments is set to <code>0</code>, no fragments are returned.
+Instead, the entire field contents are highlighted and returned.
+This can be handy when you need to highlight short texts such as a title or address, but fragmentation is not required.
+If <code>number_of_fragments</code> is <code>0</code>, <code>fragment_size</code> is ignored.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? NumberOfFragments { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Options_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Options*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Options" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Options">
+  Options
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt;? Options { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Order_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Order*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Order" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Order">
+  Order
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L150"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sorts highlighted fragments by score when set to <code>score</code>.
+By default, fragments will be output in the order they appear in the field (order: <code>none</code>).
+Setting this option to <code>score</code> will output the most relevant fragments first.
+Each highlighter applies its own logic to compute relevancy scores.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HighlighterOrder? Order { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlighterOrder.html">HighlighterOrder</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_PhraseLimit_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.PhraseLimit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_PhraseLimit" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.PhraseLimit">
+  PhraseLimit
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L160"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Controls the number of matching phrases in a document that are considered.
+Prevents the <code>fvh</code> highlighter from analyzing too many phrases and consuming too much memory.
+When using <code>matched_fields</code>, <code>phrase_limit</code> phrases per matched field are considered. Raising the limit increases query time and consumes more memory.
+Only supported by the <code>fvh</code> highlighter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? PhraseLimit { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_PostTags_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.PostTags*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_PostTags" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.PostTags">
+  PostTags
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L168"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Use in conjunction with <code>pre_tags</code> to define the HTML tags to use for the highlighted text.
+By default, highlighted text is wrapped in <code>&lt;em&gt;</code> and <code>&lt;/em&gt;</code> tags.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;string&gt;? PostTags { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_PreTags_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.PreTags*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_PreTags" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.PreTags">
+  PreTags
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L176"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Use in conjunction with <code>post_tags</code> to define the HTML tags to use for the highlighted text.
+By default, highlighted text is wrapped in <code>&lt;em&gt;</code> and <code>&lt;/em&gt;</code> tags.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;string&gt;? PreTags { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_RequireFieldMatch_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.RequireFieldMatch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_RequireFieldMatch" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.RequireFieldMatch">
+  RequireFieldMatch
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L184"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+By default, only fields that contains a query match are highlighted.
+Set to <code>false</code> to highlight all fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? RequireFieldMatch { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_TagsSchema_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.TagsSchema*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_TagsSchema" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.TagsSchema">
+  TagsSchema
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L191"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Set to <code>styled</code> to use the built-in tag schema.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HighlighterTagsSchema? TagsSchema { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlighterTagsSchema.html">HighlighterTagsSchema</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Type_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Type*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_Highlight_Type" data-uid="Elastic.Clients.Elasticsearch.Core.Search.Highlight.Type">
+  Type
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/Highlight.g.cs/#L192"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HighlighterType? Type { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlighterType.html">HighlighterType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

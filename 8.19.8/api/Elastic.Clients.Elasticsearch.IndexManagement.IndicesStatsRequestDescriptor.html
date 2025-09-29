@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct IndicesStatsRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct IndicesStatsRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Get index statistics. For data streams, the API retrieves statistics for the stream&#39;s backing indices.   By default, the returned statistics are index-level with primaries and total aggregations. primaries are the values for only the primary shards. total are the accumulated values for both primary and replica shards.   To get shard-level statistics, set the level parameter to shards.   NOTE: When moving to another node, the shard-level statistics for a shard are cleared. Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.8/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor" class="text-break">
+Struct IndicesStatsRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Get index statistics.
+For data streams, the API retrieves statistics for the stream's backing indices.
+</p>
+<p>
+By default, the returned statistics are index-level with <code>primaries</code> and <code>total</code> aggregations.
+<code>primaries</code> are the values for only the primary shards.
+<code>total</code> are the accumulated values for both primary and replica shards.
+</p>
+<p>
+To get shard-level statistics, set the <code>level</code> parameter to <code>shards</code>.
+</p>
+<p>
+NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
+Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct IndicesStatsRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.#ctor">
+  IndicesStatsRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L273"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequest_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest)">
+  IndicesStatsRequestDescriptor(IndicesStatsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L252"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor(IndicesStatsRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest.html">IndicesStatsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Indices)">
+  IndicesStatsRequestDescriptor(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L263"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor(Indices? indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Indices_Elastic_Clients_Elasticsearch_Metrics_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Indices,Elastic.Clients.Elasticsearch.Metrics)">
+  IndicesStatsRequestDescriptor(Indices?, Metrics?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L268"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor(Indices? indices, Metrics? metric)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>metric</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Metrics.html">Metrics</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Metrics_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Metrics)">
+  IndicesStatsRequestDescriptor(Metrics?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L258"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor(Metrics? metric)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>metric</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Metrics.html">Metrics</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_CompletionFields_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.CompletionFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_CompletionFields_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.CompletionFields(Elastic.Clients.Elasticsearch.Fields)">
+  CompletionFields(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L308"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor CompletionFields(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_CompletionFields_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.CompletionFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_CompletionFields__1_System_Linq_Expressions_Expression_System_Func___0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.CompletionFields``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+  CompletionFields&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L319"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor CompletionFields&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L474"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_ExpandWildcards_Elastic_Clients_Elasticsearch_ExpandWildcard___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcard[])">
+  ExpandWildcards(params ExpandWildcard[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L345"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match. If the request can target data streams, this argument
+determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+such as <code>open,hidden</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor ExpandWildcards(params ExpandWildcard[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_ExpandWildcards_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ExpandWildcard__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.ExpandWildcards(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ExpandWildcard})">
+  ExpandWildcards(ICollection&lt;ExpandWildcard&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match. If the request can target data streams, this argument
+determines whether wildcard expressions match hidden data streams. Supports comma-separated values,
+such as <code>open,hidden</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor ExpandWildcards(ICollection&lt;ExpandWildcard&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_FielddataFields_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.FielddataFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_FielddataFields_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.FielddataFields(Elastic.Clients.Elasticsearch.Fields)">
+  FielddataFields(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L356"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor FielddataFields(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_FielddataFields_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.FielddataFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_FielddataFields__1_System_Linq_Expressions_Expression_System_Func___0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.FielddataFields``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+  FielddataFields&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L367"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor FielddataFields&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Fields_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Fields(Elastic.Clients.Elasticsearch.Fields)">
+  Fields(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L378"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Comma-separated list or wildcard expressions of fields to include in the statistics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor Fields(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Fields__1_System_Linq_Expressions_Expression_System_Func___0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Fields``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+  Fields&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L389"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Comma-separated list or wildcard expressions of fields to include in the statistics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor Fields&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L480"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_ForbidClosedIndices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.ForbidClosedIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_ForbidClosedIndices_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.ForbidClosedIndices(System.Nullable{System.Boolean})">
+  ForbidClosedIndices(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L400"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, statistics are not collected from closed indices.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor ForbidClosedIndices(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Groups_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Groups*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Groups_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Groups(System.Collections.Generic.ICollection{System.String})">
+  Groups(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L411"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Comma-separated list of search groups to include in the search statistics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor Groups(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Groups_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Groups*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Groups_System_String___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Groups(System.String[])">
+  Groups(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L422"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Comma-separated list of search groups to include in the search statistics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor Groups(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L486"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_IncludeSegmentFileSizes_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.IncludeSegmentFileSizes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_IncludeSegmentFileSizes_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.IncludeSegmentFileSizes(System.Nullable{System.Boolean})">
+  IncludeSegmentFileSizes(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L433"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor IncludeSegmentFileSizes(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_IncludeUnloadedSegments_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.IncludeUnloadedSegments*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_IncludeUnloadedSegments_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.IncludeUnloadedSegments(System.Nullable{System.Boolean})">
+  IncludeUnloadedSegments(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L444"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, the response includes information from segments that are not loaded into memory.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor IncludeUnloadedSegments(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Indices_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Indices(Elastic.Clients.Elasticsearch.Indices)">
+  Indices(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L286"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of index names; use <code>_all</code> or empty string to perform the operation on all indices
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor Indices(Indices? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Level_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Level*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Level_System_Nullable_Elastic_Clients_Elasticsearch_Level__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Level(System.Nullable{Elastic.Clients.Elasticsearch.Level})">
+  Level(Level?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L455"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether statistics are aggregated at the cluster, index, or shard level.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor Level(Level? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Level.html">Level</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Metric_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Metric*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Metric_Elastic_Clients_Elasticsearch_Metrics_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Metric(Elastic.Clients.Elasticsearch.Metrics)">
+  Metric(Metrics?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L297"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Limit the information returned the specific metrics.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor Metric(Metrics? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Metrics.html">Metrics</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L492"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L504"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.8/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L510"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.8/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.8/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L498"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndicesStatsRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequest__Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest)~Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor">
+  explicit operator IndicesStatsRequestDescriptor(IndicesStatsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L278"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator IndicesStatsRequestDescriptor(IndicesStatsRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest.html">IndicesStatsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequestDescriptor__Elastic_Clients_Elasticsearch_IndexManagement_IndicesStatsRequest" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor)~Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest">
+  implicit operator IndicesStatsRequest(IndicesStatsRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.8/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/IndicesStatsRequest.g.cs/#L279"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator IndicesStatsRequest(IndicesStatsRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor.html">IndicesStatsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest.html">IndicesStatsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
