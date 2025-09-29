@@ -68,7 +68,7 @@ public sealed partial class IpDatabaseConfigurationMetadataConverter : System.Te
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

@@ -61,7 +61,7 @@ public sealed partial class DataframeOutlierDetectionSummaryConverter : System.T
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

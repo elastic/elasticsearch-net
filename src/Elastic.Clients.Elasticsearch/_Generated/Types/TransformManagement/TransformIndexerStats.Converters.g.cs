@@ -152,7 +152,7 @@ public sealed partial class TransformIndexerStatsConverter : System.Text.Json.Se
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

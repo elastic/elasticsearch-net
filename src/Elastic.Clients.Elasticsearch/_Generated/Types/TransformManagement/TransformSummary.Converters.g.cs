@@ -138,7 +138,7 @@ public sealed partial class TransformSummaryConverter : System.Text.Json.Seriali
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

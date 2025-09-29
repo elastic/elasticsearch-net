@@ -145,7 +145,7 @@ public sealed partial class ShardRecoveryConverter : System.Text.Json.Serializat
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

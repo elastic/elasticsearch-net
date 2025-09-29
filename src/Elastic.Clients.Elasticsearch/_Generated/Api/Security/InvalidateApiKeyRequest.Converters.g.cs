@@ -75,7 +75,7 @@ public sealed partial class InvalidateApiKeyRequestConverter : System.Text.Json.
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

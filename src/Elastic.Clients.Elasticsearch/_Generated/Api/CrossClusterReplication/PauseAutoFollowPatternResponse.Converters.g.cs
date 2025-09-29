@@ -40,7 +40,7 @@ public sealed partial class PauseAutoFollowPatternResponseConverter : System.Tex
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

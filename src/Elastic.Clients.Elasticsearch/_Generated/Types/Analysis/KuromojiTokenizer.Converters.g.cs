@@ -75,7 +75,7 @@ public sealed partial class KuromojiTokenizerConverter : System.Text.Json.Serial
 
 			if (reader.ValueTextEquals(PropType))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -96,7 +96,7 @@ public sealed partial class KuromojiTokenizerConverter : System.Text.Json.Serial
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

@@ -41,13 +41,13 @@ public sealed partial class SettingsSimilarityLmdConverter : System.Text.Json.Se
 
 			if (reader.ValueTextEquals(PropType))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

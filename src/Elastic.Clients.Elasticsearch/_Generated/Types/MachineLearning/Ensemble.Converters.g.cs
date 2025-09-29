@@ -68,7 +68,7 @@ public sealed partial class EnsembleConverter : System.Text.Json.Serialization.J
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

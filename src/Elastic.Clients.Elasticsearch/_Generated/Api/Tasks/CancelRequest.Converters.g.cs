@@ -32,7 +32,7 @@ public sealed partial class CancelRequestConverter : System.Text.Json.Serializat
 		{
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

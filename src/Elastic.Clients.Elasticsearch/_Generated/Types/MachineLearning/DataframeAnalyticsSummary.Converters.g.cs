@@ -124,7 +124,7 @@ public sealed partial class DataframeAnalyticsSummaryConverter : System.Text.Jso
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

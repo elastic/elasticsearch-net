@@ -110,7 +110,7 @@ public sealed partial class RoleInfoConverter : System.Text.Json.Serialization.J
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

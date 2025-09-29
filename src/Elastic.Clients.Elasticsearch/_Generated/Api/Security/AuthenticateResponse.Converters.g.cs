@@ -110,7 +110,7 @@ public sealed partial class AuthenticateResponseConverter : System.Text.Json.Ser
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

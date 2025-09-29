@@ -146,13 +146,13 @@ public sealed partial class GeoPointPropertyConverter : System.Text.Json.Seriali
 
 			if (reader.ValueTextEquals(PropType))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

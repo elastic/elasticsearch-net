@@ -61,7 +61,7 @@ public sealed partial class DelegatePkiResponseConverter : System.Text.Json.Seri
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

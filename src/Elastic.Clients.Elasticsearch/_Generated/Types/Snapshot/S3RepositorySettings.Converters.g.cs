@@ -166,7 +166,7 @@ public sealed partial class S3RepositorySettingsConverter : System.Text.Json.Ser
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
