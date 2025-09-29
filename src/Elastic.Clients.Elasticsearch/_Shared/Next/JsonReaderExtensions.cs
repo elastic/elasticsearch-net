@@ -63,6 +63,29 @@ internal static class JsonReaderExtensions
 		return new JsonException($"Expected JSON {valid} token, but got '{reader.TokenType}'.");
 	}
 
+	public static void SafeSkip(this ref Utf8JsonReader reader)
+	{
+		// Utf8JsonReader.Skip() unconditionally throws, if the reader instance is constructed with `isFinalBlock = false`.
+		// This may happen when reading from streams or pipes.
+
+		// For custom converters, System.Text.JSON always guarantees that the entire JSON value for the current scope is available.
+		// See:
+		// https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/converters-how-to#steps-to-follow-the-basic-pattern
+
+		// > Override the Read method to deserialize the incoming JSON and convert it to type T. Use the Utf8JsonReader that's passed to
+		// > the method to read the JSON. You don't have to worry about handling partial data, as the serializer passes all the data for
+		// > the current JSON scope.
+
+		// We use `TrySkip()` here to avoid the exception.
+
+		if (!reader.TrySkip())
+		{
+			throw new InvalidOperationException(
+				"Failed to skip JSON token. This case should never happen and indicates a severe problem. " +
+				"Please open an issue in the Github repository.");
+		}
+	}
+
 	/// <summary>
 	/// Compares the JSON encoded text to the JSON token value in the source and returns <see langword="true"/> if they match.
 	/// </summary>

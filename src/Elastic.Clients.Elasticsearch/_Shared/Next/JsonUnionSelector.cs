@@ -119,7 +119,7 @@ internal static class JsonUnionSelector
 			}
 
 			internalReader.Read();
-			internalReader.Skip();
+			internalReader.SafeSkip();
 		}
 
 		return UnionTag.None;
