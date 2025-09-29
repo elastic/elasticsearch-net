@@ -40,7 +40,7 @@ public sealed partial class PutDataStreamOptionsRequestConverter : System.Text.J
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

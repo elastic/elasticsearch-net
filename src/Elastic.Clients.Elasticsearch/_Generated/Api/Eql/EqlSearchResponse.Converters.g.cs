@@ -82,7 +82,7 @@ public sealed partial class EqlSearchResponseConverter<TEvent> : System.Text.Jso
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

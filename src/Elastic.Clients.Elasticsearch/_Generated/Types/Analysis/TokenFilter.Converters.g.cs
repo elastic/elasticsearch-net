@@ -39,7 +39,7 @@ public sealed partial class ITokenFilterConverter : System.Text.Json.Serializati
 				break;
 			}
 
-			reader.Skip();
+			reader.SafeSkip();
 		}
 
 		reader = readerSnapshot;

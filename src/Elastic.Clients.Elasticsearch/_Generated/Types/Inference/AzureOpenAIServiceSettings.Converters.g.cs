@@ -75,7 +75,7 @@ public sealed partial class AzureOpenAIServiceSettingsConverter : System.Text.Js
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

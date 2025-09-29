@@ -124,7 +124,7 @@ public sealed partial class TaskInfoConverter : System.Text.Json.Serialization.J
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

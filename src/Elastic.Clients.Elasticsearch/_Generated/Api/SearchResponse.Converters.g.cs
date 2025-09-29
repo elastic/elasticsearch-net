@@ -131,7 +131,7 @@ public sealed partial class SearchResponseConverter<TDocument> : System.Text.Jso
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

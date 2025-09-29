@@ -89,7 +89,7 @@ public sealed partial class HyphenationDecompounderTokenFilterConverter : System
 
 			if (reader.ValueTextEquals(PropType))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -110,7 +110,7 @@ public sealed partial class HyphenationDecompounderTokenFilterConverter : System
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

@@ -40,7 +40,7 @@ public sealed partial class UpdateTrainedModelDeploymentResponseConverter : Syst
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

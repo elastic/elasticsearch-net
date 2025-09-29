@@ -152,7 +152,7 @@ public sealed partial class SignificantTextAggregationConverter : System.Text.Js
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

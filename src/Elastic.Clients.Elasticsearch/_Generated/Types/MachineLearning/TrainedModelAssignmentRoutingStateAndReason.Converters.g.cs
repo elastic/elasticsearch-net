@@ -47,7 +47,7 @@ public sealed partial class TrainedModelAssignmentRoutingStateAndReasonConverter
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

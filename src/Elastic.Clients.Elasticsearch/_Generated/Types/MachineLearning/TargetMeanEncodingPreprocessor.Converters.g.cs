@@ -61,7 +61,7 @@ public sealed partial class TargetMeanEncodingPreprocessorConverter : System.Tex
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

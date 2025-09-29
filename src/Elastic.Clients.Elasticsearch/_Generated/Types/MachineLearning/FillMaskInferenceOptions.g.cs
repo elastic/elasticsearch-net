@@ -31,18 +31,12 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.FillMaskInferenceOptionsConverter))]
 public sealed partial class FillMaskInferenceOptions
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public FillMaskInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary vocabulary)
-	{
-		Vocabulary = vocabulary;
-	}
 #if NET7_0_OR_GREATER
 	public FillMaskInferenceOptions()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public FillMaskInferenceOptions()
 	{
 	}
@@ -84,11 +78,7 @@ public sealed partial class FillMaskInferenceOptions
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary Vocabulary { get; set; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
 }
 
 /// <summary>
@@ -174,7 +164,7 @@ public readonly partial struct FillMaskInferenceOptionsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? value)
 	{
 		Instance.Vocabulary = value;
 		return this;
@@ -187,8 +177,13 @@ public readonly partial struct FillMaskInferenceOptionsDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor> action)
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

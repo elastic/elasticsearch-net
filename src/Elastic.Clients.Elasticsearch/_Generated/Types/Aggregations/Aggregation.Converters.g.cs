@@ -743,7 +743,7 @@ public sealed partial class AggregationConverter : System.Text.Json.Serializatio
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
