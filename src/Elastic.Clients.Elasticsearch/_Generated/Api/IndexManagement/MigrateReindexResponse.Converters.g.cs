@@ -40,7 +40,7 @@ public sealed partial class MigrateReindexResponseConverter : System.Text.Json.S
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

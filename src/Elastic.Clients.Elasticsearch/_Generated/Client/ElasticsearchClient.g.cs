@@ -41,6 +41,7 @@ public partial class ElasticsearchClient
 	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient LicenseManagement { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.MachineLearning.MachineLearningNamespacedClient MachineLearning { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesNamespacedClient Nodes { get; private set; }
+	public virtual Elastic.Clients.Elasticsearch.Project.ProjectNamespacedClient Project { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient QueryRules { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient Rollup { get; private set; }
 	public virtual Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient SearchableSnapshots { get; private set; }
@@ -75,6 +76,7 @@ public partial class ElasticsearchClient
 		LicenseManagement = new Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient(this);
 		MachineLearning = new Elastic.Clients.Elasticsearch.MachineLearning.MachineLearningNamespacedClient(this);
 		Nodes = new Elastic.Clients.Elasticsearch.Nodes.NodesNamespacedClient(this);
+		Project = new Elastic.Clients.Elasticsearch.Project.ProjectNamespacedClient(this);
 		QueryRules = new Elastic.Clients.Elasticsearch.QueryRules.QueryRulesNamespacedClient(this);
 		Rollup = new Elastic.Clients.Elasticsearch.Rollup.RollupNamespacedClient(this);
 		SearchableSnapshots = new Elastic.Clients.Elasticsearch.SearchableSnapshots.SearchableSnapshotsNamespacedClient(this);

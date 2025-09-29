@@ -32,7 +32,7 @@ public sealed partial class GetBehavioralAnalyticsRequestConverter : System.Text
 		{
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

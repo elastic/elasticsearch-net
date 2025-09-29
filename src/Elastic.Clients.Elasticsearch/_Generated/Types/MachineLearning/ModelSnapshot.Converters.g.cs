@@ -103,7 +103,7 @@ public sealed partial class ModelSnapshotConverter : System.Text.Json.Serializat
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

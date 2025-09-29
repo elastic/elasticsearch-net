@@ -32,7 +32,7 @@ public sealed partial class ProcessorGrokRequestConverter : System.Text.Json.Ser
 		{
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

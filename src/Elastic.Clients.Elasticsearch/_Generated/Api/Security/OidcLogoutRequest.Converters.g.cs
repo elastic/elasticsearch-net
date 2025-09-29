@@ -47,7 +47,7 @@ public sealed partial class OidcLogoutRequestConverter : System.Text.Json.Serial
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

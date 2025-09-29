@@ -75,7 +75,7 @@ public sealed partial class PutAzureopenaiResponseConverter : System.Text.Json.S
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

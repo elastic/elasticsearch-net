@@ -103,7 +103,7 @@ public sealed partial class DataStreamLifecycleRolloverConditionsConverter : Sys
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

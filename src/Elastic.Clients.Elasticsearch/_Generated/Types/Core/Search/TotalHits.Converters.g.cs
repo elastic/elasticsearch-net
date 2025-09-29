@@ -47,7 +47,7 @@ public sealed partial class TotalHitsConverter : System.Text.Json.Serialization.
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

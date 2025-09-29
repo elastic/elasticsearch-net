@@ -54,7 +54,7 @@ public sealed partial class DataStreamMappingsConverter : System.Text.Json.Seria
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

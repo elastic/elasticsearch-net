@@ -103,7 +103,7 @@ public sealed partial class ReindexTaskConverter : System.Text.Json.Serializatio
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

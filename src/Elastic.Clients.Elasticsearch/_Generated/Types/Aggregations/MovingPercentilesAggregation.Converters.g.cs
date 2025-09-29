@@ -59,7 +59,7 @@ public sealed partial class MovingPercentilesAggregationConverter : System.Text.
 
 			if (reader.ValueTextEquals(PropKeyed))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -75,7 +75,7 @@ public sealed partial class MovingPercentilesAggregationConverter : System.Text.
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

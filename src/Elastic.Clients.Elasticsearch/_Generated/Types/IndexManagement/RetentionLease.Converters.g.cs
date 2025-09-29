@@ -40,7 +40,7 @@ public sealed partial class RetentionLeaseConverter : System.Text.Json.Serializa
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

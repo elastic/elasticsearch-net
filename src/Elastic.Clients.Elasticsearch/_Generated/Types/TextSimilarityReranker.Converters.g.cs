@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class TextSimilarityRerankerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextSimilarityReranker>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropChunkRescorer = System.Text.Json.JsonEncodedText.Encode("chunk_rescorer");
 	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
 	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
 	private static readonly System.Text.Json.JsonEncodedText PropInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
@@ -37,6 +38,7 @@ public sealed partial class TextSimilarityRerankerConverter : System.Text.Json.S
 	public override Elastic.Clients.Elasticsearch.TextSimilarityReranker Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ChunkRescorer?> propChunkRescorer = default;
 		LocalJsonValue<string> propField = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
 		LocalJsonValue<string?> propInferenceId = default;
@@ -47,6 +49,11 @@ public sealed partial class TextSimilarityRerankerConverter : System.Text.Json.S
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever> propRetriever = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propChunkRescorer.TryReadProperty(ref reader, options, PropChunkRescorer, null))
+			{
+				continue;
+			}
+
 			if (propField.TryReadProperty(ref reader, options, PropField, null))
 			{
 				continue;
@@ -89,7 +96,7 @@ public sealed partial class TextSimilarityRerankerConverter : System.Text.Json.S
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -99,6 +106,7 @@ public sealed partial class TextSimilarityRerankerConverter : System.Text.Json.S
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.TextSimilarityReranker(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			ChunkRescorer = propChunkRescorer.Value,
 			Field = propField.Value,
 			Filter = propFilter.Value,
 			InferenceId = propInferenceId.Value,
@@ -113,6 +121,7 @@ public sealed partial class TextSimilarityRerankerConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextSimilarityReranker value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropChunkRescorer, value.ChunkRescorer, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
 		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
 		writer.WriteProperty(options, PropInferenceId, value.InferenceId, null, null);

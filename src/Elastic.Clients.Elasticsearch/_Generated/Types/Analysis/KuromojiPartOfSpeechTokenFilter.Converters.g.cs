@@ -43,7 +43,7 @@ public sealed partial class KuromojiPartOfSpeechTokenFilterConverter : System.Te
 
 			if (reader.ValueTextEquals(PropType))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -54,7 +54,7 @@ public sealed partial class KuromojiPartOfSpeechTokenFilterConverter : System.Te
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

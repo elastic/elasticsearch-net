@@ -38,7 +38,7 @@ public sealed partial class IcuFoldingTokenFilterConverter : System.Text.Json.Se
 		{
 			if (reader.ValueTextEquals(PropType))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -54,7 +54,7 @@ public sealed partial class IcuFoldingTokenFilterConverter : System.Text.Json.Se
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

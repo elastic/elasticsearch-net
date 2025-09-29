@@ -75,7 +75,7 @@ public sealed partial class AllocationStoreConverter : System.Text.Json.Serializ
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

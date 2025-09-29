@@ -34,7 +34,7 @@ public sealed partial class TextExpansionInferenceOptionsConverter : System.Text
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propResultsField = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig?> propTokenization = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary> propVocabulary = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary?> propVocabulary = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
@@ -54,7 +54,7 @@ public sealed partial class TextExpansionInferenceOptionsConverter : System.Text
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

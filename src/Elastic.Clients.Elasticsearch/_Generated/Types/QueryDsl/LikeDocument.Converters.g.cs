@@ -89,7 +89,7 @@ public sealed partial class LikeDocumentConverter : System.Text.Json.Serializati
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

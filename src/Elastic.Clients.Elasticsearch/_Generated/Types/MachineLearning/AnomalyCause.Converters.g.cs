@@ -138,7 +138,7 @@ public sealed partial class AnomalyCauseConverter : System.Text.Json.Serializati
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

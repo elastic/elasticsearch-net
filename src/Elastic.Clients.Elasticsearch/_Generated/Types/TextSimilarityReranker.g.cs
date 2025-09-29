@@ -52,7 +52,14 @@ public sealed partial class TextSimilarityReranker
 
 	/// <summary>
 	/// <para>
-	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
+	/// Whether to rescore on only the best matching chunks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ChunkRescorer? ChunkRescorer { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text.
 	/// </para>
 	/// </summary>
 	public
@@ -77,7 +84,7 @@ public sealed partial class TextSimilarityReranker
 
 	/// <summary>
 	/// <para>
-	/// The text snippet used as the basis for similarity comparison
+	/// The text snippet used as the basis for similarity comparison.
 	/// </para>
 	/// </summary>
 	public
@@ -140,7 +147,40 @@ public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
+	/// Whether to rescore on only the best matching chunks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> ChunkRescorer(Elastic.Clients.Elasticsearch.ChunkRescorer? value)
+	{
+		Instance.ChunkRescorer = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to rescore on only the best matching chunks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> ChunkRescorer()
+	{
+		Instance.ChunkRescorer = Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to rescore on only the best matching chunks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> ChunkRescorer(System.Action<Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor>? action)
+	{
+		Instance.ChunkRescorer = Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> Field(string value)
@@ -201,7 +241,7 @@ public readonly partial struct TextSimilarityRerankerDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The text snippet used as the basis for similarity comparison
+	/// The text snippet used as the basis for similarity comparison.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor<TDocument> InferenceText(string value)
@@ -295,7 +335,40 @@ public readonly partial struct TextSimilarityRerankerDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text
+	/// Whether to rescore on only the best matching chunks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor ChunkRescorer(Elastic.Clients.Elasticsearch.ChunkRescorer? value)
+	{
+		Instance.ChunkRescorer = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to rescore on only the best matching chunks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor ChunkRescorer()
+	{
+		Instance.ChunkRescorer = Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to rescore on only the best matching chunks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor ChunkRescorer(System.Action<Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor>? action)
+	{
+		Instance.ChunkRescorer = Elastic.Clients.Elasticsearch.ChunkRescorerDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The document field to be used for text similarity comparisons. This field should contain the text that will be evaluated against the inference_text.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor Field(string value)
@@ -373,7 +446,7 @@ public readonly partial struct TextSimilarityRerankerDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The text snippet used as the basis for similarity comparison
+	/// The text snippet used as the basis for similarity comparison.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.TextSimilarityRerankerDescriptor InferenceText(string value)

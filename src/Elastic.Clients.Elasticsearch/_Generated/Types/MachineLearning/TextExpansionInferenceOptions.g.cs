@@ -31,18 +31,12 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.TextExpansionInferenceOptionsConverter))]
 public sealed partial class TextExpansionInferenceOptions
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TextExpansionInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary vocabulary)
-	{
-		Vocabulary = vocabulary;
-	}
 #if NET7_0_OR_GREATER
 	public TextExpansionInferenceOptions()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public TextExpansionInferenceOptions()
 	{
 	}
@@ -66,11 +60,7 @@ public sealed partial class TextExpansionInferenceOptions
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary Vocabulary { get; set; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
 }
 
 /// <summary>
@@ -130,7 +120,7 @@ public readonly partial struct TextExpansionInferenceOptionsDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? value)
 	{
 		Instance.Vocabulary = value;
 		return this;
@@ -143,8 +133,13 @@ public readonly partial struct TextExpansionInferenceOptionsDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor> action)
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
 		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptionsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.TextExpansionInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

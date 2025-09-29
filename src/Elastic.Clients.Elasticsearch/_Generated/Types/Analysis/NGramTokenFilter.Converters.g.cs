@@ -57,7 +57,7 @@ public sealed partial class NGramTokenFilterConverter : System.Text.Json.Seriali
 
 			if (reader.ValueTextEquals(PropType))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -68,7 +68,7 @@ public sealed partial class NGramTokenFilterConverter : System.Text.Json.Seriali
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 

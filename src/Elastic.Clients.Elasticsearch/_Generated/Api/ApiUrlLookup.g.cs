@@ -326,6 +326,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls NoNamespaceUpdate = new ApiUrls(new[] { "{index}/_update/{id}" });
 	internal static ApiUrls NoNamespaceUpdateByQuery = new ApiUrls(new[] { "{index}/_update_by_query" });
 	internal static ApiUrls NoNamespaceUpdateByQueryRethrottle = new ApiUrls(new[] { "_update_by_query/{task_id}/_rethrottle" });
+	internal static ApiUrls ProjectTags = new ApiUrls(new[] { "_project/tags" });
 	internal static ApiUrls QueryRulesDeleteRule = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_rule/{rule_id}" });
 	internal static ApiUrls QueryRulesDeleteRuleset = new ApiUrls(new[] { "_query_rules/{ruleset_id}" });
 	internal static ApiUrls QueryRulesGetRule = new ApiUrls(new[] { "_query_rules/{ruleset_id}/_rule/{rule_id}" });

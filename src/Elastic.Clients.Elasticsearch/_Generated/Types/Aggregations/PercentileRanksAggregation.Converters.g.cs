@@ -63,7 +63,7 @@ public sealed partial class PercentileRanksAggregationConverter : System.Text.Js
 
 			if (reader.ValueTextEquals(PropKeyed))
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -89,7 +89,7 @@ public sealed partial class PercentileRanksAggregationConverter : System.Text.Js
 
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
-				reader.Skip();
+				reader.SafeSkip();
 				continue;
 			}
 
