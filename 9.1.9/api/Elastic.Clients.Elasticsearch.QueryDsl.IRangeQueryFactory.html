@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct IRangeQueryFactory | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct IRangeQueryFactory | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.9/apiSpec/new?filename=Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory" class="text-break">
+Struct IRangeQueryFactory  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.html">QueryDsl</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct IRangeQueryFactory</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Date_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Date*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Date_Elastic_Clients_Elasticsearch_QueryDsl_DateRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Date(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery)">
+  Date(DateRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Date(DateRangeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery.html">DateRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Date_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Date*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Date_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_DateRangeQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Date(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor})">
+  Date(Action&lt;DateRangeQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Date(Action&lt;DateRangeQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor.html">DateRangeQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_DateRange_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.DateRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_DateRange_Elastic_Clients_Elasticsearch_QueryDsl_DateRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.DateRange(Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery)">
+  DateRange(DateRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L50"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use &#39;Date()&#39; instead.&quot;)]
+public IRangeQuery DateRange(DateRangeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQuery.html">DateRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_DateRange_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.DateRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_DateRange_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_DateRangeQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.DateRange(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor})">
+  DateRange(Action&lt;DateRangeQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use &#39;Date()&#39; instead.&quot;)]
+public IRangeQuery DateRange(Action&lt;DateRangeQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor.html">DateRangeQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_DateRange_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.DateRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_DateRange__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_DateRangeQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.DateRange``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor{``0}})">
+  DateRange&lt;T&gt;(Action&lt;DateRangeQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L62"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use &#39;Date()&#39; instead.&quot;)]
+public IRangeQuery DateRange&lt;T&gt;(Action&lt;DateRangeQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor-1.html">DateRangeQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Date_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Date*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Date__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_DateRangeQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Date``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor{``0}})">
+  Date&lt;T&gt;(Action&lt;DateRangeQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Date&lt;T&gt;(Action&lt;DateRangeQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.DateRangeQueryDescriptor-1.html">DateRangeQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Number_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Number*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Number_Elastic_Clients_Elasticsearch_QueryDsl_NumberRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Number(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery)">
+  Number(NumberRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Number(NumberRangeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery.html">NumberRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Number_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Number*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Number_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_NumberRangeQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Number(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor})">
+  Number(Action&lt;NumberRangeQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Number(Action&lt;NumberRangeQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor.html">NumberRangeQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_NumberRange_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.NumberRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_NumberRange_Elastic_Clients_Elasticsearch_QueryDsl_NumberRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.NumberRange(Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery)">
+  NumberRange(NumberRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use &#39;Number()&#39; instead.&quot;)]
+public IRangeQuery NumberRange(NumberRangeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery.html">NumberRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_NumberRange_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.NumberRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_NumberRange_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_NumberRangeQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.NumberRange(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor})">
+  NumberRange(Action&lt;NumberRangeQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use &#39;Number()&#39; instead.&quot;)]
+public IRangeQuery NumberRange(Action&lt;NumberRangeQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor.html">NumberRangeQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_NumberRange_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.NumberRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_NumberRange__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_NumberRangeQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.NumberRange``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor{``0}})">
+  NumberRange&lt;T&gt;(Action&lt;NumberRangeQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use &#39;Number()&#39; instead.&quot;)]
+public IRangeQuery NumberRange&lt;T&gt;(Action&lt;NumberRangeQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor-1.html">NumberRangeQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Number_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Number*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Number__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_NumberRangeQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Number``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor{``0}})">
+  Number&lt;T&gt;(Action&lt;NumberRangeQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L109"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Number&lt;T&gt;(Action&lt;NumberRangeQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor-1.html">NumberRangeQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Term_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Term*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Term_Elastic_Clients_Elasticsearch_QueryDsl_TermRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Term(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery)">
+  Term(TermRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Term(TermRangeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery.html">TermRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Term_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Term*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Term_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_TermRangeQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Term(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor})">
+  Term(Action&lt;TermRangeQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Term(Action&lt;TermRangeQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor.html">TermRangeQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_TermRange_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.TermRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_TermRange_Elastic_Clients_Elasticsearch_QueryDsl_TermRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.TermRange(Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery)">
+  TermRange(TermRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use &#39;Term()&#39; instead.&quot;)]
+public IRangeQuery TermRange(TermRangeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQuery.html">TermRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_TermRange_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.TermRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_TermRange_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_TermRangeQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.TermRange(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor})">
+  TermRange(Action&lt;TermRangeQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use &#39;Term()&#39; instead.&quot;)]
+public IRangeQuery TermRange(Action&lt;TermRangeQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor.html">TermRangeQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_TermRange_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.TermRange*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_TermRange__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_TermRangeQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.TermRange``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor{``0}})">
+  TermRange&lt;T&gt;(Action&lt;TermRangeQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Shared/Types/QueryDsl/RangeQuery.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use &#39;Term()&#39; instead.&quot;)]
+public IRangeQuery TermRange&lt;T&gt;(Action&lt;TermRangeQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor-1.html">TermRangeQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Term_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Term*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Term__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_TermRangeQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Term``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor{``0}})">
+  Term&lt;T&gt;(Action&lt;TermRangeQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Term&lt;T&gt;(Action&lt;TermRangeQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermRangeQueryDescriptor-1.html">TermRangeQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Untyped_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Untyped*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Untyped_Elastic_Clients_Elasticsearch_QueryDsl_UntypedRangeQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Untyped(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery)">
+  Untyped(UntypedRangeQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Untyped(UntypedRangeQuery value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery.html">UntypedRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Untyped_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Untyped*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Untyped_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_UntypedRangeQueryDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Untyped(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor})">
+  Untyped(Action&lt;UntypedRangeQueryDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L134"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Untyped(Action&lt;UntypedRangeQueryDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor.html">UntypedRangeQueryDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Untyped_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Untyped*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_IRangeQueryFactory_Untyped__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_UntypedRangeQueryDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQueryFactory.Untyped``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor{``0}})">
+  Untyped&lt;T&gt;(Action&lt;UntypedRangeQueryDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/RangeQuery.g.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IRangeQuery Untyped&lt;T&gt;(Action&lt;UntypedRangeQueryDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor-1.html">UntypedRangeQueryDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.html">IRangeQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class AsyncQueryRequest | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class AsyncQueryRequest | Elasticsearch.NET ">
+      
+      <meta name="description" content="Run an async ES|QL query. Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.   The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.9/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest" class="text-break">
+Class AsyncQueryRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Esql.html">Esql</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Run an async ES|QL query.
+Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
+</p>
+<p>
+The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(AsyncQueryRequestConverter))]
+public sealed class AsyncQueryRequest : PlainRequest&lt;AsyncQueryRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestParameters.html">AsyncQueryRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestParameters.html">AsyncQueryRequestParameters</a>&gt;</div>
+      <div><span class="xref">AsyncQueryRequest</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;AsyncQueryRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;AsyncQueryRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;AsyncQueryRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;AsyncQueryRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;AsyncQueryRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RequestConfiguration">Request.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest__ctor" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.#ctor">
+  AsyncQueryRequest()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public AsyncQueryRequest()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest__ctor_System_String_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.#ctor(System.String)">
+  AsyncQueryRequest(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L82"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AsyncQueryRequest(string query)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>query</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_AllowPartialResults_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.AllowPartialResults*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_AllowPartialResults" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.AllowPartialResults">
+  AllowPartialResults
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, partial results will be returned if there are shard failures, but the query can continue to execute on other clusters and shards.
+If <code>false</code>, the query will fail if there are any failures.
+</p>
+<p>
+To override the default behavior, you can set the <code>esql.query.allow_partial_results</code> cluster setting to <code>false</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? AllowPartialResults { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Columnar_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Columnar*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Columnar" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Columnar">
+  Columnar
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L158"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Columnar { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Delimiter_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Delimiter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Delimiter" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Delimiter">
+  Delimiter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The character to use between values within a CSV row.
+It is valid only for the CSV format.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Delimiter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_DropNullColumns_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.DropNullColumns*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_DropNullColumns" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.DropNullColumns">
+  DropNullColumns
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L137"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether columns that are entirely <code>null</code> will be removed from the <code>columns</code> and <code>values</code> portion of the results.
+If <code>true</code>, the response will include an extra section under the name <code>all_columns</code> which has the name of all the columns.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? DropNullColumns { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Filter_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Filter" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Filter">
+  Filter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L165"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specify a Query DSL query in the filter parameter to filter the set of documents that an ES|QL query runs on.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Query? Filter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Format_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Format*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Format" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Format">
+  Format
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L151"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A short version of the Accept header, e.g. json, yaml.
+</p>
+<p>
+<code>csv</code>, <code>tsv</code>, and <code>txt</code> formats will return results in a tabular format, excluding other metadata fields from the response.
+</p>
+<p>
+For async requests, nothing will be returned if the async query doesn't finish within the timeout.
+The query ID and running status are available in the <code>X-Elasticsearch-Async-Id</code> and <code>X-Elasticsearch-Async-Is-Running</code> HTTP headers of the response, respectively.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EsqlFormat? Format { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Esql.EsqlFormat.html">EsqlFormat</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_IncludeCcsMetadata_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.IncludeCcsMetadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_IncludeCcsMetadata" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.IncludeCcsMetadata">
+  IncludeCcsMetadata
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+When set to <code>true</code> and performing a cross-cluster query, the response will include an extra <code>_clusters</code>
+object with information about the clusters that participated in the search along with info such as shards
+count.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IncludeCcsMetadata { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_KeepAlive_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.KeepAlive*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_KeepAlive" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.KeepAlive">
+  KeepAlive
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L184"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period for which the query and its results are stored in the cluster.
+The default period is five days.
+When this period expires, the query and its results are deleted, even if the query is still ongoing.
+If the <code>keep_on_completion</code> parameter is false, Elasticsearch only stores async queries that do not complete within the period set by the <code>wait_for_completion_timeout</code> parameter, regardless of this value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? KeepAlive { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_KeepOnCompletion_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.KeepOnCompletion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_KeepOnCompletion" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.KeepOnCompletion">
+  KeepOnCompletion
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L192"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether the query and its results are stored in the cluster.
+If false, the query and its results are stored in the cluster only if the request does not complete during the period set by the <code>wait_for_completion_timeout</code> parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? KeepOnCompletion { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Locale_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Locale*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Locale" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Locale">
+  Locale
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Locale { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Params_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Params*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Params" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Params">
+  Params
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+To avoid any attempts of hacking or code injection, extract the values in a separate list of parameters. Use question mark placeholders (?) in the query string for each of the parameters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;FieldValue&gt;? Params { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldValue.html">FieldValue</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Profile_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Profile*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Profile" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Profile">
+  Profile
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If provided and <code>true</code> the response will include an extra <code>profile</code> object
+with information on how the query was executed. This information is for human debugging
+and its format can change at any time but it can give some insight into the performance
+of each part of the query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Profile { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Query_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_Query" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.Query">
+  Query
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L217"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The ES|QL query API accepts an ES|QL query string in the query parameter, runs it, and returns the results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Query { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.9/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_WaitForCompletionTimeout_" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.WaitForCompletionTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Esql_AsyncQueryRequest_WaitForCompletionTimeout" data-uid="Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequest.WaitForCompletionTimeout">
+  WaitForCompletionTimeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.9/src/Elastic.Clients.Elasticsearch/_Generated/Api/Esql/AsyncQueryRequest.g.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period to wait for the request to finish.
+By default, the request waits for 1 second for the query results.
+If the query completes during this period, results are returned
+Otherwise, a query ID is returned that can later be used to retrieve the results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? WaitForCompletionTimeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
