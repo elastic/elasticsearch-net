@@ -27,10 +27,15 @@ namespace Elastic.Clients.Elasticsearch.Xpack;
 public sealed partial class SecurityRolesDlsBitSetCache
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SecurityRolesDlsBitSetCache(int count, long memoryInBytes)
+	public SecurityRolesDlsBitSetCache(int count, long evictions, long hits, System.TimeSpan hitsTimeInMillis, long memoryInBytes, long misses, System.TimeSpan missesTimeInMillis)
 	{
 		Count = count;
+		Evictions = evictions;
+		Hits = hits;
+		HitsTimeInMillis = hitsTimeInMillis;
 		MemoryInBytes = memoryInBytes;
+		Misses = misses;
+		MissesTimeInMillis = missesTimeInMillis;
 	}
 #if NET7_0_OR_GREATER
 	public SecurityRolesDlsBitSetCache()
@@ -49,15 +54,87 @@ public sealed partial class SecurityRolesDlsBitSetCache
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Number of entries in the cache.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	int Count { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Total number of cache evictions.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Evictions { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Total number of cache hits.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Hits { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Total combined time spent in cache for hits in milliseconds.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan HitsTimeInMillis { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Human-readable amount of memory taken up by the cache.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? Memory { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Memory taken up by the cache in bytes.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	long MemoryInBytes { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Total number of cache misses.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Misses { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Total combined time spent in cache for misses in milliseconds.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan MissesTimeInMillis { get; set; }
 }

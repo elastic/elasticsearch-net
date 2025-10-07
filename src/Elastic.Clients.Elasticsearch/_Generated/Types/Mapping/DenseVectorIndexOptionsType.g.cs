@@ -28,6 +28,18 @@ public enum DenseVectorIndexOptionsType
 {
 	/// <summary>
 	/// <para>
+	/// This utilizes the DiskBBQ algorithm, a version of Inverted Vector File (IVF) that uses BBQ to quantize vectors.
+	/// Only supports <c>element_type</c> of <c>float</c>.
+	/// </para>
+	/// <para>
+	/// This not only significantly reduces memory usage, but also allows for indexing and searching of very large datasets that do not fit in memory.
+	/// Unlike HNSW, this index type loses performance gracefully as the index grows larger than memory.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "bbq_disk")]
+	BbqDisk,
+	/// <summary>
+	/// <para>
 	/// This utilizes a brute-force search algorithm in addition to automatically quantizing to binary vectors.
 	/// Only supports <c>element_type</c> of <c>float</c>.
 	/// </para>

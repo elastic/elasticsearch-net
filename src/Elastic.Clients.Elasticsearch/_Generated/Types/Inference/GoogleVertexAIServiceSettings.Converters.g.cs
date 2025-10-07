@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropDimensions = System.Text.Json.JsonEncodedText.Encode("dimensions");
 	private static readonly System.Text.Json.JsonEncodedText PropLocation = System.Text.Json.JsonEncodedText.Encode("location");
 	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
 	private static readonly System.Text.Json.JsonEncodedText PropProjectId = System.Text.Json.JsonEncodedText.Encode("project_id");
@@ -34,6 +35,7 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 	public override Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propDimensions = default;
 		LocalJsonValue<string> propLocation = default;
 		LocalJsonValue<string> propModelId = default;
 		LocalJsonValue<string> propProjectId = default;
@@ -41,6 +43,11 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 		LocalJsonValue<string> propServiceAccountJson = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propDimensions.TryReadProperty(ref reader, options, PropDimensions, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
 			if (propLocation.TryReadProperty(ref reader, options, PropLocation, null))
 			{
 				continue;
@@ -78,6 +85,7 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Dimensions = propDimensions.Value,
 			Location = propLocation.Value,
 			ModelId = propModelId.Value,
 			ProjectId = propProjectId.Value,
@@ -89,6 +97,7 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDimensions, value.Dimensions, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropLocation, value.Location, null, null);
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropProjectId, value.ProjectId, null, null);

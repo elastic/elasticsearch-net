@@ -53,6 +53,15 @@ public sealed partial class GoogleVertexAIServiceSettings
 
 	/// <summary>
 	/// <para>
+	/// For a <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
+	/// By default, the model's standard output dimension is used.
+	/// Refer to the Google documentation for more information.
+	/// </para>
+	/// </summary>
+	public int? Dimensions { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The name of the location to use for the inference task.
 	/// Refer to the Google documentation for the list of supported locations.
 	/// </para>
@@ -124,6 +133,19 @@ public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// For a <c>text_embedding</c> task, the number of dimensions the resulting output embeddings should have.
+	/// By default, the model's standard output dimension is used.
+	/// Refer to the Google documentation for more information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Dimensions(int? value)
+	{
+		Instance.Dimensions = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
