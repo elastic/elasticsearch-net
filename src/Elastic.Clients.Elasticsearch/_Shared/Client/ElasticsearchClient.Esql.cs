@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Threading;
 using Elastic.Transport;
@@ -16,6 +17,15 @@ namespace Elastic.Clients.Elasticsearch.Esql;
 
 public partial class EsqlNamespacedClient
 {
+#pragma warning disable IL2026, IL3050
+
+	private static readonly JsonSerializerOptions EsqlJsonSerializerOptions = new JsonSerializerOptions(JsonSerializerOptions.Default)
+	{
+		TypeInfoResolver = EsqlJsonSerializerContext.Default
+	};
+
+#pragma warning restore IL2026, IL3050
+
 	/// <summary>
 	/// Executes an ES|QL request and returns the response as a stream.
 	/// </summary>
@@ -71,9 +81,8 @@ public partial class EsqlNamespacedClient
 	{
 		// TODO: Improve performance
 
-		// TODO: fixme
 #pragma warning disable IL2026, IL3050
-		using var doc = JsonSerializer.Deserialize<JsonDocument>(response.Data) ?? throw new JsonException();
+		using var doc = JsonSerializer.Deserialize<JsonDocument>(response.Data, EsqlJsonSerializerOptions) ?? throw new JsonException();
 #pragma warning restore IL2026, IL3050
 
 		if (!doc.RootElement.TryGetProperty("columns"u8, out var columns) || (columns.ValueKind is not JsonValueKind.Array))
@@ -107,9 +116,17 @@ public partial class EsqlNamespacedClient
 			writer.Reset();
 
 			var properties = names.Zip(document.EnumerateArray(),
-				(key, value) => new KeyValuePair<string, JsonNode?>(key, JsonValue.Create(value)));
+				(key, value) => new KeyValuePair<string, JsonNode?>(key, value.ValueKind switch
+				{
+					JsonValueKind.Object => JsonObject.Create(value),
+					JsonValueKind.Array => JsonArray.Create(value),
+					_ => JsonValue.Create(value)
+				}));
+
 			foreach (var property in properties)
+			{
 				obj.Add(property);
+			}
 
 			obj.WriteTo(writer);
 			writer.Flush();
@@ -120,4 +137,8 @@ public partial class EsqlNamespacedClient
 			yield return result;
 		}
 	}
+
+	[JsonSerializable(typeof(JsonDocument))]
+	internal sealed partial class EsqlJsonSerializerContext :
+		JsonSerializerContext;
 }
