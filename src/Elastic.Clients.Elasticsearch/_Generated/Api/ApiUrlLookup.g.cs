@@ -168,6 +168,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferencePutAzureaistudio = new ApiUrls(new[] { "_inference/{task_type}/{azureaistudio_inference_id}" });
 	internal static ApiUrls InferencePutAzureopenai = new ApiUrls(new[] { "_inference/{task_type}/{azureopenai_inference_id}" });
 	internal static ApiUrls InferencePutCohere = new ApiUrls(new[] { "_inference/{task_type}/{cohere_inference_id}" });
+	internal static ApiUrls InferencePutContextualai = new ApiUrls(new[] { "_inference/{task_type}/{contextualai_inference_id}" });
 	internal static ApiUrls InferencePutCustom = new ApiUrls(new[] { "_inference/{task_type}/{custom_inference_id}" });
 	internal static ApiUrls InferencePutDeepseek = new ApiUrls(new[] { "_inference/{task_type}/{deepseek_inference_id}" });
 	internal static ApiUrls InferencePutElasticsearch = new ApiUrls(new[] { "_inference/{task_type}/{elasticsearch_inference_id}" });
@@ -391,6 +392,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls SecurityGetServiceAccounts = new ApiUrls(new[] { "_security/service/{namespace}/{service}", "_security/service/{namespace}", "_security/service" });
 	internal static ApiUrls SecurityGetServiceCredentials = new ApiUrls(new[] { "_security/service/{namespace}/{service}/credential" });
 	internal static ApiUrls SecurityGetSettings = new ApiUrls(new[] { "_security/settings" });
+	internal static ApiUrls SecurityGetStats = new ApiUrls(new[] { "_security/stats" });
 	internal static ApiUrls SecurityGetToken = new ApiUrls(new[] { "_security/oauth2/token" });
 	internal static ApiUrls SecurityGetUser = new ApiUrls(new[] { "_security/user/{username}", "_security/user" });
 	internal static ApiUrls SecurityGetUserPrivileges = new ApiUrls(new[] { "_security/user/_privileges" });
