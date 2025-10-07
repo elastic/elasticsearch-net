@@ -21,27 +21,24 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Sql;
+namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.TranslateResponseConverter))]
-public sealed partial class TranslateResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.StationaryConverter))]
+public sealed partial class Stationary
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TranslateResponse()
+#if NET7_0_OR_GREATER
+	public Stationary()
 	{
 	}
-
+#endif
+#if !NET7_0_OR_GREATER
+	public Stationary()
+	{
+	}
+#endif
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal TranslateResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal Stationary(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
-
-	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
-	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
-	public long? Size { get; set; }
-	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
-	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
-	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 }

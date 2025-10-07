@@ -27,9 +27,8 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class TextEmbedding
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TextEmbedding(string modelId, string modelText)
+	public TextEmbedding(string modelText)
 	{
-		ModelId = modelId;
 		ModelText = modelText;
 	}
 #if NET7_0_OR_GREATER
@@ -49,11 +48,13 @@ public sealed partial class TextEmbedding
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	/// <summary>
+	/// <para>
+	/// Model ID is required for all dense_vector fields but
+	/// may be inferred for semantic_text fields
+	/// </para>
+	/// </summary>
+	public string? ModelId { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
@@ -80,7 +81,13 @@ public readonly partial struct TextEmbeddingDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor(Elastic.Clients.Elasticsearch.TextEmbedding instance) => new Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.TextEmbedding(Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor descriptor) => descriptor.Instance;
 
-	public Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor ModelId(string value)
+	/// <summary>
+	/// <para>
+	/// Model ID is required for all dense_vector fields but
+	/// may be inferred for semantic_text fields
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextEmbeddingDescriptor ModelId(string? value)
 	{
 		Instance.ModelId = value;
 		return this;

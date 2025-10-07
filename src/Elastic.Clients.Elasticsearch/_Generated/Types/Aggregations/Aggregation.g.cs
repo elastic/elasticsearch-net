@@ -126,10 +126,35 @@ public sealed partial class Aggregation
 
 	/// <summary>
 	/// <para>
+	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation? CartesianBounds { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation>("cartesian_bounds"); set => SetVariant("cartesian_bounds", value); }
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation? CartesianCentroid { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation>("cartesian_centroid"); set => SetVariant("cartesian_centroid", value); }
+
+	/// <summary>
+	/// <para>
 	/// A multi-bucket aggregation that groups semi-structured text into buckets.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation? CategorizeText { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation>("categorize_text"); set => SetVariant("categorize_text", value); }
+
+	/// <summary>
+	/// <para>
+	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
+	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
+	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
+	/// the largest change in the distribution of values, if they are statistically significant.
+	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation? ChangePoint { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation>("change_point"); set => SetVariant("change_point", value); }
 
 	/// <summary>
 	/// <para>
@@ -223,7 +248,7 @@ public sealed partial class Aggregation
 	/// A bucket aggregation which finds frequent item sets, a form of association rules mining that identifies items that often occur together.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation? FrequentItemSets { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation>("frequent_item_sets"); set => SetVariant("frequent_item_sets", value); }
+	public Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation? FrequentItemSets { get => GetVariant<Elastic.Clients.Elasticsearch.Aggregations.FrequentItemSetsAggregation>(""); set => SetVariant("", value); }
 
 	/// <summary>
 	/// <para>
@@ -614,7 +639,10 @@ public sealed partial class Aggregation
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.BucketSelectorAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { BucketSelector = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.BucketSortAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { BucketSort = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { Cardinality = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { CartesianBounds = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { CartesianCentroid = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { CategorizeText = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { ChangePoint = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { Children = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { Composite = value };
 	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(Elastic.Clients.Elasticsearch.Aggregations.CumulativeCardinalityAggregation value) => new Elastic.Clients.Elasticsearch.Aggregations.Aggregation { CumulativeCardinality = value };
@@ -1080,6 +1108,72 @@ public readonly partial struct AggregationDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
+	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianBounds(Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation? value)
+	{
+		Instance.CartesianBounds = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianBounds()
+	{
+		Instance.CartesianBounds = Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.CartesianBounds = Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianCentroid(Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation? value)
+	{
+		Instance.CartesianCentroid = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianCentroid()
+	{
+		Instance.CartesianCentroid = Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CartesianCentroid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument>>? action)
+	{
+		Instance.CartesianCentroid = Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// A multi-bucket aggregation that groups semi-structured text into buckets.
 	/// </para>
 	/// </summary>
@@ -1097,6 +1191,51 @@ public readonly partial struct AggregationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> CategorizeText(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument>> action)
 	{
 		Instance.CategorizeText = Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
+	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
+	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
+	/// the largest change in the distribution of values, if they are statistically significant.
+	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ChangePoint(Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation? value)
+	{
+		Instance.ChangePoint = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
+	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
+	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
+	/// the largest change in the distribution of values, if they are statistically significant.
+	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ChangePoint()
+	{
+		Instance.ChangePoint = Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
+	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
+	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
+	/// the largest change in the distribution of values, if they are statistically significant.
+	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument> ChangePoint(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor>? action)
+	{
+		Instance.ChangePoint = Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor.Build(action);
 		return this;
 	}
 
@@ -3710,6 +3849,94 @@ public readonly partial struct AggregationDescriptor
 
 	/// <summary>
 	/// <para>
+	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianBounds(Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation? value)
+	{
+		Instance.CartesianBounds = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianBounds()
+	{
+		Instance.CartesianBounds = Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianBounds(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor>? action)
+	{
+		Instance.CartesianBounds = Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the spatial bounding box containing all values for a Point or Shape field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianBounds<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<T>>? action)
+	{
+		Instance.CartesianBounds = Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianCentroid(Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation? value)
+	{
+		Instance.CartesianCentroid = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianCentroid()
+	{
+		Instance.CartesianCentroid = Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianCentroid(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor>? action)
+	{
+		Instance.CartesianCentroid = Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A metric aggregation that computes the weighted centroid from all coordinate values for point and shape fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CartesianCentroid<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<T>>? action)
+	{
+		Instance.CartesianCentroid = Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
 	/// A multi-bucket aggregation that groups semi-structured text into buckets.
 	/// </para>
 	/// </summary>
@@ -3738,6 +3965,51 @@ public readonly partial struct AggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor CategorizeText<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<T>> action)
 	{
 		Instance.CategorizeText = Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
+	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
+	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
+	/// the largest change in the distribution of values, if they are statistically significant.
+	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ChangePoint(Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation? value)
+	{
+		Instance.ChangePoint = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
+	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
+	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
+	/// the largest change in the distribution of values, if they are statistically significant.
+	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ChangePoint()
+	{
+		Instance.ChangePoint = Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A sibling pipeline that detects, spikes, dips, and change points in a metric.
+	/// Given a distribution of values provided by the sibling multi-bucket aggregation,
+	/// this aggregation indicates the bucket of any spike or dip and/or the bucket at which
+	/// the largest change in the distribution of values, if they are statistically significant.
+	/// There must be at least 22 bucketed values. Fewer than 1,000 is preferred.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor ChangePoint(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor>? action)
+	{
+		Instance.ChangePoint = Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregationDescriptor.Build(action);
 		return this;
 	}
 
