@@ -53,6 +53,14 @@ public sealed partial class SemanticTextProperty : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Inference endpoint that will be used to generate embeddings for the field.
 	/// This parameter cannot be updated. Use the Create inference API to create the endpoint.
 	/// If <c>search_inference_id</c> is specified, the inference endpoint will only be used at index time.
@@ -115,6 +123,30 @@ public readonly partial struct SemanticTextPropertyDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor> action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -225,6 +257,42 @@ public readonly partial struct SemanticTextPropertyDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor> action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
 		return this;
 	}
 
