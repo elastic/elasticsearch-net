@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class LicenseManagementNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class LicenseManagementNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.9/apiSpec/new?filename=Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient" class="text-break">
+Class LicenseManagementNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.html">LicenseManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class LicenseManagementNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">LicenseManagementNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.#ctor">
+  LicenseManagementNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.html">LicenseManagementNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected LicenseManagementNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Delete" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Delete">
+  Delete()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteLicenseResponse Delete()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse.html">DeleteLicenseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Delete_Elastic_Clients_Elasticsearch_LicenseManagement_DeleteLicenseRequest_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Delete(Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest)">
+  Delete(DeleteLicenseRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteLicenseResponse Delete(DeleteLicenseRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest.html">DeleteLicenseRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse.html">DeleteLicenseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Delete_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Delete*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Delete_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_DeleteLicenseRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Delete(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor})">
+  Delete(Action&lt;DeleteLicenseRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteLicenseResponse Delete(Action&lt;DeleteLicenseRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor.html">DeleteLicenseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse.html">DeleteLicenseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_DeleteAsync_Elastic_Clients_Elasticsearch_LicenseManagement_DeleteLicenseRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.DeleteAsync(Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest,System.Threading.CancellationToken)">
+  DeleteAsync(DeleteLicenseRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteLicenseResponse&gt; DeleteAsync(DeleteLicenseRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest.html">DeleteLicenseRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse.html">DeleteLicenseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_DeleteAsync_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_DeleteLicenseRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.DeleteAsync(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteAsync(Action&lt;DeleteLicenseRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteLicenseResponse&gt; DeleteAsync(Action&lt;DeleteLicenseRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor.html">DeleteLicenseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse.html">DeleteLicenseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_DeleteAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.DeleteAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_DeleteAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.DeleteAsync(System.Threading.CancellationToken)">
+  DeleteAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteLicenseResponse&gt; DeleteAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse.html">DeleteLicenseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Get_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Get" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Get">
+  Get()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetLicenseResponse Get()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse.html">GetLicenseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Get_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Get_Elastic_Clients_Elasticsearch_LicenseManagement_GetLicenseRequest_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Get(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest)">
+  Get(GetLicenseRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetLicenseResponse Get(GetLicenseRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest.html">GetLicenseRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse.html">GetLicenseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Get_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Get*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Get_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_GetLicenseRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Get(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor})">
+  Get(Action&lt;GetLicenseRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetLicenseResponse Get(Action&lt;GetLicenseRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor.html">GetLicenseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse.html">GetLicenseResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetAsync_Elastic_Clients_Elasticsearch_LicenseManagement_GetLicenseRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest,System.Threading.CancellationToken)">
+  GetAsync(GetLicenseRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetLicenseResponse&gt; GetAsync(GetLicenseRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest.html">GetLicenseRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse.html">GetLicenseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetAsync_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_GetLicenseRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetAsync(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor},System.Threading.CancellationToken)">
+  GetAsync(Action&lt;GetLicenseRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetLicenseResponse&gt; GetAsync(Action&lt;GetLicenseRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor.html">GetLicenseRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse.html">GetLicenseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetAsync(System.Threading.CancellationToken)">
+  GetAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetLicenseResponse&gt; GetAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse.html">GetLicenseResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatus_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatus" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatus">
+  GetBasicStatus()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetBasicStatusResponse GetBasicStatus()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse.html">GetBasicStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatus_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatus_Elastic_Clients_Elasticsearch_LicenseManagement_GetBasicStatusRequest_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatus(Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest)">
+  GetBasicStatus(GetBasicStatusRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetBasicStatusResponse GetBasicStatus(GetBasicStatusRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest.html">GetBasicStatusRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse.html">GetBasicStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatus_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatus_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_GetBasicStatusRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatus(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor})">
+  GetBasicStatus(Action&lt;GetBasicStatusRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetBasicStatusResponse GetBasicStatus(Action&lt;GetBasicStatusRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor.html">GetBasicStatusRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse.html">GetBasicStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatusAsync_Elastic_Clients_Elasticsearch_LicenseManagement_GetBasicStatusRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatusAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest,System.Threading.CancellationToken)">
+  GetBasicStatusAsync(GetBasicStatusRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetBasicStatusResponse&gt; GetBasicStatusAsync(GetBasicStatusRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest.html">GetBasicStatusRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse.html">GetBasicStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatusAsync_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_GetBasicStatusRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatusAsync(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor},System.Threading.CancellationToken)">
+  GetBasicStatusAsync(Action&lt;GetBasicStatusRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetBasicStatusResponse&gt; GetBasicStatusAsync(Action&lt;GetBasicStatusRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor.html">GetBasicStatusRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse.html">GetBasicStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetBasicStatusAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetBasicStatusAsync(System.Threading.CancellationToken)">
+  GetBasicStatusAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetBasicStatusResponse&gt; GetBasicStatusAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse.html">GetBasicStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatus_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatus" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatus">
+  GetTrialStatus()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetTrialStatusResponse GetTrialStatus()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse.html">GetTrialStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatus_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatus_Elastic_Clients_Elasticsearch_LicenseManagement_GetTrialStatusRequest_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatus(Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest)">
+  GetTrialStatus(GetTrialStatusRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetTrialStatusResponse GetTrialStatus(GetTrialStatusRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest.html">GetTrialStatusRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse.html">GetTrialStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatus_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatus*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatus_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_GetTrialStatusRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatus(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor})">
+  GetTrialStatus(Action&lt;GetTrialStatusRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetTrialStatusResponse GetTrialStatus(Action&lt;GetTrialStatusRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor.html">GetTrialStatusRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse.html">GetTrialStatusResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatusAsync_Elastic_Clients_Elasticsearch_LicenseManagement_GetTrialStatusRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatusAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest,System.Threading.CancellationToken)">
+  GetTrialStatusAsync(GetTrialStatusRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetTrialStatusResponse&gt; GetTrialStatusAsync(GetTrialStatusRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest.html">GetTrialStatusRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse.html">GetTrialStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatusAsync_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_GetTrialStatusRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatusAsync(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor},System.Threading.CancellationToken)">
+  GetTrialStatusAsync(Action&lt;GetTrialStatusRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L216"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetTrialStatusResponse&gt; GetTrialStatusAsync(Action&lt;GetTrialStatusRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor.html">GetTrialStatusRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse.html">GetTrialStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatusAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatusAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_GetTrialStatusAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.GetTrialStatusAsync(System.Threading.CancellationToken)">
+  GetTrialStatusAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetTrialStatusResponse&gt; GetTrialStatusAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse.html">GetTrialStatusResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Post_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Post*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Post" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Post">
+  Post()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostResponse Post()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse.html">PostResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Post_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Post*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Post_Elastic_Clients_Elasticsearch_LicenseManagement_PostRequest_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Post(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest)">
+  Post(PostRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L225"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostResponse Post(PostRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest.html">PostRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse.html">PostResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Post_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Post*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_Post_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_PostRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.Post(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor})">
+  Post(Action&lt;PostRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L239"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostResponse Post(Action&lt;PostRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor.html">PostRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse.html">PostResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostAsync_Elastic_Clients_Elasticsearch_LicenseManagement_PostRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest,System.Threading.CancellationToken)">
+  PostAsync(PostRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostResponse&gt; PostAsync(PostRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest.html">PostRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse.html">PostResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostAsync_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_PostRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostAsync(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor},System.Threading.CancellationToken)">
+  PostAsync(Action&lt;PostRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostResponse&gt; PostAsync(Action&lt;PostRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor.html">PostRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse.html">PostResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostAsync(System.Threading.CancellationToken)">
+  PostAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L254"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostResponse&gt; PostAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse.html">PostResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasic_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasic" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasic">
+  PostStartBasic()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L277"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostStartBasicResponse PostStartBasic()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse.html">PostStartBasicResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasic_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasic_Elastic_Clients_Elasticsearch_LicenseManagement_PostStartBasicRequest_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasic(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest)">
+  PostStartBasic(PostStartBasicRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L271"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostStartBasicResponse PostStartBasic(PostStartBasicRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest.html">PostStartBasicRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse.html">PostStartBasicResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasic_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasic_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_PostStartBasicRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasic(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor})">
+  PostStartBasic(Action&lt;PostStartBasicRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L285"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostStartBasicResponse PostStartBasic(Action&lt;PostStartBasicRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor.html">PostStartBasicRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse.html">PostStartBasicResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasicAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasicAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasicAsync_Elastic_Clients_Elasticsearch_LicenseManagement_PostStartBasicRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasicAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest,System.Threading.CancellationToken)">
+  PostStartBasicAsync(PostStartBasicRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L294"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostStartBasicResponse&gt; PostStartBasicAsync(PostStartBasicRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest.html">PostStartBasicRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse.html">PostStartBasicResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasicAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasicAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasicAsync_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_PostStartBasicRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasicAsync(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor},System.Threading.CancellationToken)">
+  PostStartBasicAsync(Action&lt;PostStartBasicRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L308"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostStartBasicResponse&gt; PostStartBasicAsync(Action&lt;PostStartBasicRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor.html">PostStartBasicRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse.html">PostStartBasicResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasicAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasicAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartBasicAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartBasicAsync(System.Threading.CancellationToken)">
+  PostStartBasicAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L300"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostStartBasicResponse&gt; PostStartBasicAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse.html">PostStartBasicResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrial_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrial*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrial" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrial">
+  PostStartTrial()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L323"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostStartTrialResponse PostStartTrial()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse.html">PostStartTrialResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrial_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrial*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrial_Elastic_Clients_Elasticsearch_LicenseManagement_PostStartTrialRequest_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrial(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest)">
+  PostStartTrial(PostStartTrialRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostStartTrialResponse PostStartTrial(PostStartTrialRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest.html">PostStartTrialRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse.html">PostStartTrialResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrial_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrial*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrial_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_PostStartTrialRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrial(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor})">
+  PostStartTrial(Action&lt;PostStartTrialRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L331"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostStartTrialResponse PostStartTrial(Action&lt;PostStartTrialRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor.html">PostStartTrialRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse.html">PostStartTrialResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrialAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrialAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrialAsync_Elastic_Clients_Elasticsearch_LicenseManagement_PostStartTrialRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrialAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest,System.Threading.CancellationToken)">
+  PostStartTrialAsync(PostStartTrialRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L340"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostStartTrialResponse&gt; PostStartTrialAsync(PostStartTrialRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest.html">PostStartTrialRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse.html">PostStartTrialResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrialAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrialAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrialAsync_System_Action_Elastic_Clients_Elasticsearch_LicenseManagement_PostStartTrialRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrialAsync(System.Action{Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor},System.Threading.CancellationToken)">
+  PostStartTrialAsync(Action&lt;PostStartTrialRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L354"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostStartTrialResponse&gt; PostStartTrialAsync(Action&lt;PostStartTrialRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor.html">PostStartTrialRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse.html">PostStartTrialResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrialAsync_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrialAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_LicenseManagement_LicenseManagementNamespacedClient_PostStartTrialAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient.PostStartTrialAsync(System.Threading.CancellationToken)">
+  PostStartTrialAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.License.g.cs/#L346"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostStartTrialResponse&gt; PostStartTrialAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse.html">PostStartTrialResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

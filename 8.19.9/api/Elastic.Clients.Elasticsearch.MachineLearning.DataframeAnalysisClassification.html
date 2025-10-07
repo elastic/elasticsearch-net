@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class DataframeAnalysisClassification | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class DataframeAnalysisClassification | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.9/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification" class="text-break">
+Class DataframeAnalysisClassification  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(DataframeAnalysisClassificationConverter))]
+public sealed class DataframeAnalysisClassification</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">DataframeAnalysisClassification</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification__ctor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.#ctor">
+  DataframeAnalysisClassification()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public DataframeAnalysisClassification()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification__ctor_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.#ctor(System.String)">
+  DataframeAnalysisClassification(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DataframeAnalysisClassification(string dependentVariable)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dependentVariable</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_Alpha_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.Alpha*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_Alpha" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.Alpha">
+  Alpha
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L56"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This parameter affects loss calculations by acting as a multiplier of the tree depth. Higher alpha values result in shallower trees and faster training times. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to zero.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? Alpha { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_ClassAssignmentObjective_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.ClassAssignmentObjective*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_ClassAssignmentObjective" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.ClassAssignmentObjective">
+  ClassAssignmentObjective
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? ClassAssignmentObjective { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_DependentVariable_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.DependentVariable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_DependentVariable" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.DependentVariable">
+  DependentVariable
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines which field of the document is to be predicted. It must match one of the fields in the index being used to train. If this field is missing from a document, then that document will not be used for training, but a prediction with the trained model will be generated for it. It is also known as continuous target variable.
+For classification analysis, the data type of the field must be numeric (<code>integer</code>, <code>short</code>, <code>long</code>, <code>byte</code>), categorical (<code>ip</code> or <code>keyword</code>), or <code>boolean</code>. There must be no more than 30 different values in this field.
+For regression analysis, the data type of the field must be numeric.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string DependentVariable { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_DownsampleFactor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.DownsampleFactor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_DownsampleFactor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.DownsampleFactor">
+  DownsampleFactor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Controls the fraction of data that is used to compute the derivatives of the loss function for tree training. A small value results in the use of a small fraction of the data. If this value is set to be less than 1, accuracy typically improves. However, too small a value may result in poor convergence for the ensemble and so require more trees. By default, this value is calculated during hyperparameter optimization. It must be greater than zero and less than or equal to 1.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? DownsampleFactor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_EarlyStoppingEnabled_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.EarlyStoppingEnabled*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_EarlyStoppingEnabled" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.EarlyStoppingEnabled">
+  EarlyStoppingEnabled
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Specifies whether the training process should finish if it is not finding any better performing models. If disabled, the training process can take significantly longer and the chance of finding a better performing model is unremarkable.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? EarlyStoppingEnabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_Eta_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.Eta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_Eta" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.Eta">
+  Eta
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L91"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. The shrinkage applied to the weights. Smaller values result in larger forests which have a better generalization error. However, larger forests cause slower training. By default, this value is calculated during hyperparameter optimization. It must be a value between 0.001 and 1.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? Eta { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_EtaGrowthRatePerTree_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.EtaGrowthRatePerTree*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_EtaGrowthRatePerTree" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.EtaGrowthRatePerTree">
+  EtaGrowthRatePerTree
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Specifies the rate at which <code>eta</code> increases for each new tree that is added to the forest. For example, a rate of 1.05 increases <code>eta</code> by 5% for each extra tree. By default, this value is calculated during hyperparameter optimization. It must be between 0.5 and 2.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? EtaGrowthRatePerTree { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_FeatureBagFraction_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.FeatureBagFraction*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_FeatureBagFraction" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.FeatureBagFraction">
+  FeatureBagFraction
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L105"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Defines the fraction of features that will be used when selecting a random bag for each candidate split. By default, this value is calculated during hyperparameter optimization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? FeatureBagFraction { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_FeatureProcessors_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.FeatureProcessors*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_FeatureProcessors" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.FeatureProcessors">
+  FeatureProcessors
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. A collection of feature preprocessors that modify one or more included fields. The analysis uses the resulting one or more features instead of the original document field. However, these features are ephemeral; they are not stored in the destination index. Multiple <code>feature_processors</code> entries can refer to the same document fields. Automatic categorical feature encoding still occurs for the fields that are unprocessed by a custom processor or that have categorical values. Use this property only if you want to override the automatic feature encoding of the specified fields.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;DataframeAnalysisFeatureProcessor&gt;? FeatureProcessors { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisFeatureProcessor.html">DataframeAnalysisFeatureProcessor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_Gamma_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.Gamma*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_Gamma" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.Gamma">
+  Gamma
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies a linear penalty associated with the size of individual trees in the forest. A high gamma value causes training to prefer small trees. A small gamma value results in larger individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? Gamma { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_Lambda_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.Lambda*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_Lambda" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.Lambda">
+  Lambda
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Regularization parameter to prevent overfitting on the training data set. Multiplies an L2 regularization term which applies to leaf weights of the individual trees in the forest. A high lambda value causes training to favor small leaf weights. This behavior makes the prediction function smoother at the expense of potentially not being able to capture relevant relationships between the features and the dependent variable. A small lambda value results in large individual trees and slower training. By default, this value is calculated during hyperparameter optimization. It must be a nonnegative value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? Lambda { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_MaxOptimizationRoundsPerHyperparameter_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.MaxOptimizationRoundsPerHyperparameter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_MaxOptimizationRoundsPerHyperparameter" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.MaxOptimizationRoundsPerHyperparameter">
+  MaxOptimizationRoundsPerHyperparameter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. A multiplier responsible for determining the maximum number of hyperparameter optimization steps in the Bayesian optimization procedure. The maximum number of steps is determined based on the number of undefined hyperparameters times the maximum optimization rounds per hyperparameter. By default, this value is calculated during hyperparameter optimization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxOptimizationRoundsPerHyperparameter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_MaxTrees_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.MaxTrees*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_MaxTrees" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.MaxTrees">
+  MaxTrees
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Defines the maximum number of decision trees in the forest. The maximum value is 2000. By default, this value is calculated during hyperparameter optimization.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxTrees { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_NumTopClasses_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.NumTopClasses*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_NumTopClasses" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.NumTopClasses">
+  NumTopClasses
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the number of categories for which the predicted probabilities are reported. It must be non-negative or -1. If it is -1 or greater than the total number of categories, probabilities are reported for all categories; if you have a large number of categories, there could be a significant effect on the size of your destination index. NOTE: To use the AUC ROC evaluation method, <code>num_top_classes</code> must be set to -1 or a value greater than or equal to the total number of categories.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? NumTopClasses { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_NumTopFeatureImportanceValues_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.NumTopFeatureImportanceValues*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_NumTopFeatureImportanceValues" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.NumTopFeatureImportanceValues">
+  NumTopFeatureImportanceValues
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Specifies the maximum number of feature importance values per document to return. By default, no feature importance calculation occurs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? NumTopFeatureImportanceValues { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_PredictionFieldName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.PredictionFieldName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_PredictionFieldName" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.PredictionFieldName">
+  PredictionFieldName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L161"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the name of the prediction field in the results. Defaults to <code>&lt;dependent_variable&gt;_prediction</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Field? PredictionFieldName { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_RandomizeSeed_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.RandomizeSeed*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_RandomizeSeed" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.RandomizeSeed">
+  RandomizeSeed
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L168"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the seed for the random generator that is used to pick training data. By default, it is randomly generated. Set it to a specific value to use the same training data each time you start a job (assuming other related parameters such as <code>source</code> and <code>analyzed_fields</code> are the same).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? RandomizeSeed { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_SoftTreeDepthLimit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.SoftTreeDepthLimit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_SoftTreeDepthLimit" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.SoftTreeDepthLimit">
+  SoftTreeDepthLimit
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L175"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Machine learning uses loss guided tree growing, which means that the decision trees grow where the regularized loss decreases most quickly. This soft limit combines with the <code>soft_tree_depth_tolerance</code> to penalize trees that exceed the specified depth; the regularized loss increases quickly beyond this depth. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? SoftTreeDepthLimit { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_SoftTreeDepthTolerance_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.SoftTreeDepthTolerance*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_SoftTreeDepthTolerance" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.SoftTreeDepthTolerance">
+  SoftTreeDepthTolerance
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L182"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. This option controls how quickly the regularized loss increases when the tree depth exceeds <code>soft_tree_depth_limit</code>. By default, this value is calculated during hyperparameter optimization. It must be greater than or equal to 0.01.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? SoftTreeDepthTolerance { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_TrainingPercent_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.TrainingPercent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_DataframeAnalysisClassification_TrainingPercent" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification.TrainingPercent">
+  TrainingPercent
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.9/src/Elastic.Clients.Elasticsearch/_Generated/Types/MachineLearning/DataframeAnalysisClassification.g.cs/#L189"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines what percentage of the eligible documents that will be used for training. Documents that are ignored by the analysis (for example those that contain arrays with more than one value) won’t be included in the calculation for used percentage.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Percentage? TrainingPercent { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Percentage.html">Percentage</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
