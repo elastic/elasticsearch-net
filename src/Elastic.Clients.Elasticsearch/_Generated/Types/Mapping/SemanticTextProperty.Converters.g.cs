@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 public sealed partial class SemanticTextPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropChunkingSettings = System.Text.Json.JsonEncodedText.Encode("chunking_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
 	private static readonly System.Text.Json.JsonEncodedText PropInferenceId = System.Text.Json.JsonEncodedText.Encode("inference_id");
 	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
 	private static readonly System.Text.Json.JsonEncodedText PropSearchInferenceId = System.Text.Json.JsonEncodedText.Encode("search_inference_id");
@@ -35,12 +36,18 @@ public sealed partial class SemanticTextPropertyConverter : System.Text.Json.Ser
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings?> propChunkingSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propInferenceId = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propSearchInferenceId = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propChunkingSettings.TryReadProperty(ref reader, options, PropChunkingSettings, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
 			{
 				continue;
 			}
@@ -79,6 +86,7 @@ public sealed partial class SemanticTextPropertyConverter : System.Text.Json.Ser
 		return new Elastic.Clients.Elasticsearch.Mapping.SemanticTextProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			ChunkingSettings = propChunkingSettings.Value,
+			Fields = propFields.Value,
 			InferenceId = propInferenceId.Value,
 			Meta = propMeta.Value,
 			SearchInferenceId = propSearchInferenceId.Value
@@ -89,6 +97,7 @@ public sealed partial class SemanticTextPropertyConverter : System.Text.Json.Ser
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropChunkingSettings, value.ChunkingSettings, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
 		writer.WriteProperty(options, PropInferenceId, value.InferenceId, null, null);
 		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropSearchInferenceId, value.SearchInferenceId, null, null);
