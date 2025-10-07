@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct PutRuleRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct PutRuleRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create or update a query rule. Create or update a query rule within a query ruleset.   IMPORTANT: Due to limitations within pinned queries, you can only pin documents using ids or docs, but cannot use both in single rule. It is advised to use one or the other in query rulesets, to avoid errors. Additionally, pinned queries have a maximum limit of 100 pinned hits. If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.10/apiSpec/new?filename=Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor" class="text-break">
+Struct PutRuleRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.html">QueryRules</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create or update a query rule.
+Create or update a query rule within a query ruleset.
+</p>
+<p>
+IMPORTANT: Due to limitations within pinned queries, you can only pin documents using ids or docs, but cannot use both in single rule.
+It is advised to use one or the other in query rulesets, to avoid errors.
+Additionally, pinned queries have a maximum limit of 100 pinned hits.
+If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct PutRuleRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.#ctor">
+  PutRuleRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L165"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public PutRuleRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Id_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Id,Elastic.Clients.Elasticsearch.Id)">
+  PutRuleRequestDescriptor(Id, Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L158"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor(Id rulesetId, Id ruleId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>rulesetId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+    <dt><code>ruleId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequest_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest)">
+  PutRuleRequestDescriptor(PutRuleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L152"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor(PutRuleRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest.html">PutRuleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Actions_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Actions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Actions" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Actions">
+  Actions()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L214"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The actions to take when the rule is matched.
+The format of this action depends on the rule type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor Actions()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Actions_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Actions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Actions_Elastic_Clients_Elasticsearch_QueryRules_QueryRuleActions_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Actions(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions)">
+  Actions(QueryRuleActions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The actions to take when the rule is matched.
+The format of this action depends on the rule type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor Actions(QueryRuleActions value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActions.html">QueryRuleActions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Actions_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Actions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Actions_System_Action_Elastic_Clients_Elasticsearch_QueryRules_QueryRuleActionsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Actions(System.Action{Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor})">
+  Actions(Action&lt;QueryRuleActionsDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L226"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The actions to take when the rule is matched.
+The format of this action depends on the rule type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor Actions(Action&lt;QueryRuleActionsDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.QueryRuleActionsDescriptor.html">QueryRuleActionsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Criteria_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Criteria*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Criteria_Elastic_Clients_Elasticsearch_QueryRules_QueryRuleCriteria___" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Criteria(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria[])">
+  Criteria(params QueryRuleCriteria[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L250"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The criteria that must be met for the rule to be applied.
+If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor Criteria(params QueryRuleCriteria[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria.html">QueryRuleCriteria</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Criteria_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Criteria*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Criteria_System_Action_Elastic_Clients_Elasticsearch_QueryRules_QueryRuleCriteriaDescriptor____" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Criteria(System.Action{Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor}[])">
+  Criteria(params Action&lt;QueryRuleCriteriaDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The criteria that must be met for the rule to be applied.
+If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor Criteria(params Action&lt;QueryRuleCriteriaDescriptor&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteriaDescriptor.html">QueryRuleCriteriaDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Criteria_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Criteria*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Criteria_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_QueryRules_QueryRuleCriteria__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Criteria(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria})">
+  Criteria(ICollection&lt;QueryRuleCriteria&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L238"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The criteria that must be met for the rule to be applied.
+If multiple criteria are specified for a rule, all criteria must be met for the rule to be applied.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor Criteria(ICollection&lt;QueryRuleCriteria&gt; value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.QueryRuleCriteria.html">QueryRuleCriteria</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L299"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L311"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Priority_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Priority*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Priority_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Priority(System.Nullable{System.Int32})">
+  Priority(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor Priority(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L329"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.10/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L335"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.10/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.10/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_RuleId_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.RuleId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_RuleId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.RuleId(Elastic.Clients.Elasticsearch.Id)">
+  RuleId(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The unique identifier of the query rule within the specified ruleset to be created or updated.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor RuleId(Id value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_RulesetId_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.RulesetId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_RulesetId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.RulesetId(Elastic.Clients.Elasticsearch.Id)">
+  RulesetId(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L190"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The unique identifier of the query ruleset containing the rule to be created or updated.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor RulesetId(Id value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L323"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Type_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Type*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_Type_Elastic_Clients_Elasticsearch_QueryRules_QueryRuleType_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.Type(Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType)">
+  Type(QueryRuleType)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L285"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The type of rule.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRuleRequestDescriptor Type(QueryRuleType value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.QueryRuleType.html">QueryRuleType</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequest__Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest)~Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor">
+  explicit operator PutRuleRequestDescriptor(PutRuleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L171"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator PutRuleRequestDescriptor(PutRuleRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest.html">PutRuleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequestDescriptor__Elastic_Clients_Elasticsearch_QueryRules_PutRuleRequest" data-uid="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor)~Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest">
+  implicit operator PutRuleRequest(PutRuleRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/QueryRules/PutRuleRequest.g.cs/#L172"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator PutRuleRequest(PutRuleRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequestDescriptor.html">PutRuleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryRules.PutRuleRequest.html">PutRuleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

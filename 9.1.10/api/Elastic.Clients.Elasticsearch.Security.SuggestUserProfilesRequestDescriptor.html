@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct SuggestUserProfilesRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct SuggestUserProfilesRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Suggest a user profile.   Get suggestions for user profiles that match specified search criteria.   NOTE: The user profile feature is designed only for use by Kibana and Elastic&#39;s Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly. Elastic reserves the right to change or remove this feature in future releases without prior notice.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.10/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor" class="text-break">
+Struct SuggestUserProfilesRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Suggest a user profile.
+</p>
+<p>
+Get suggestions for user profiles that match specified search criteria.
+</p>
+<p>
+NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions.
+Individual users and external applications should not call this API directly.
+Elastic reserves the right to change or remove this feature in future releases without prior notice.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct SuggestUserProfilesRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.#ctor">
+  SuggestUserProfilesRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L129"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequest_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest)">
+  SuggestUserProfilesRequestDescriptor(SuggestUserProfilesRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L123"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor(SuggestUserProfilesRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest.html">SuggestUserProfilesRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Data_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Data*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Data_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Data(System.Collections.Generic.ICollection{System.String})">
+  Data(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L146"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of filters for the <code>data</code> field of the profile document.
+To return all content use <code>data=*</code>.
+To return a subset of content, use <code>data=&lt;key&gt;</code> to retrieve content nested under the specified <code>&lt;key&gt;</code>.
+By default, the API returns no <code>data</code> content.
+It is an error to specify <code>data</code> as both the query parameter and the request body field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor Data(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Data_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Data*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Data_System_String___" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Data(System.String[])">
+  Data(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L161"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of filters for the <code>data</code> field of the profile document.
+To return all content use <code>data=*</code>.
+To return a subset of content, use <code>data=&lt;key&gt;</code> to retrieve content nested under the specified <code>&lt;key&gt;</code>.
+By default, the API returns no <code>data</code> content.
+It is an error to specify <code>data</code> as both the query parameter and the request body field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor Data(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Hint_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Hint*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Hint" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Hint">
+  Hint()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extra search criteria to improve relevance of the suggestion result.
+Profiles matching the spcified hint are ranked higher in the response.
+Profiles not matching the hint aren't excluded from the response as long as the profile matches the <code>name</code> field query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor Hint()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Hint_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Hint*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Hint_Elastic_Clients_Elasticsearch_Security_Hint_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Hint(Elastic.Clients.Elasticsearch.Security.Hint)">
+  Hint(Hint?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extra search criteria to improve relevance of the suggestion result.
+Profiles matching the spcified hint are ranked higher in the response.
+Profiles not matching the hint aren't excluded from the response as long as the profile matches the <code>name</code> field query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor Hint(Hint? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.Hint.html">Hint</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Hint_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Hint*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Hint_System_Action_Elastic_Clients_Elasticsearch_Security_HintDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Hint(System.Action{Elastic.Clients.Elasticsearch.Security.HintDescriptor})">
+  Hint(Action&lt;HintDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extra search criteria to improve relevance of the suggestion result.
+Profiles matching the spcified hint are ranked higher in the response.
+Profiles not matching the hint aren't excluded from the response as long as the profile matches the <code>name</code> field query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor Hint(Action&lt;HintDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.HintDescriptor.html">HintDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L254"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Name_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Name*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Name_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Name(System.String)">
+  Name(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L212"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A query string used to match name-related fields in user profile documents.
+Name-related fields are the user's <code>username</code>, <code>full_name</code>, and <code>email</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor Name(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L260"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L272"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.10/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L278"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.10/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.10/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Size_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_Size_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.Size(System.Nullable{System.Int64})">
+  Size(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L223"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of profiles to return.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor Size(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L266"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SuggestUserProfilesRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequest__Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest)~Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor">
+  explicit operator SuggestUserProfilesRequestDescriptor(SuggestUserProfilesRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L134"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator SuggestUserProfilesRequestDescriptor(SuggestUserProfilesRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest.html">SuggestUserProfilesRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequestDescriptor__Elastic_Clients_Elasticsearch_Security_SuggestUserProfilesRequest" data-uid="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor)~Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest">
+  implicit operator SuggestUserProfilesRequest(SuggestUserProfilesRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/SuggestUserProfilesRequest.g.cs/#L135"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator SuggestUserProfilesRequest(SuggestUserProfilesRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor.html">SuggestUserProfilesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest.html">SuggestUserProfilesRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

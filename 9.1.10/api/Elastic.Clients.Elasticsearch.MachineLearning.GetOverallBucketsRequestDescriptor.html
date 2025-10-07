@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct GetOverallBucketsRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct GetOverallBucketsRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Get overall bucket results.   Retrievs overall bucket results that summarize the bucket results of multiple anomaly detection jobs.   The overall_score is calculated by combining the scores of all the buckets within the overall bucket span. First, the maximum anomaly_score per anomaly detection job in the overall bucket is calculated. Then the top_n of those scores are averaged to result in the overall_score. This means that you can fine-tune the overall_score so that it is more or less sensitive to the number of jobs that detect an anomaly at the same time. For example, if you set top_n to 1, the overall_score is the maximum bucket score in the overall bucket. Alternatively, if you set top_n to the number of jobs, the overall_score is high only when all jobs detect anomalies in that overall bucket. If you set the bucket_span parameter (to a value greater than its default), the overall_score is the maximum overall_score of the overall buckets that have a span equal to the jobs&#39; largest bucket span.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.10/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor" class="text-break">
+Struct GetOverallBucketsRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L173"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Get overall bucket results.
+</p>
+<p>
+Retrievs overall bucket results that summarize the bucket results of
+multiple anomaly detection jobs.
+</p>
+<p>
+The <code>overall_score</code> is calculated by combining the scores of all the
+buckets within the overall bucket span. First, the maximum
+<code>anomaly_score</code> per anomaly detection job in the overall bucket is
+calculated. Then the <code>top_n</code> of those scores are averaged to result in
+the <code>overall_score</code>. This means that you can fine-tune the
+<code>overall_score</code> so that it is more or less sensitive to the number of
+jobs that detect an anomaly at the same time. For example, if you set
+<code>top_n</code> to <code>1</code>, the <code>overall_score</code> is the maximum bucket score in the
+overall bucket. Alternatively, if you set <code>top_n</code> to the number of jobs,
+the <code>overall_score</code> is high only when all jobs detect anomalies in that
+overall bucket. If you set the <code>bucket_span</code> parameter (to a value
+greater than its default), the <code>overall_score</code> is the maximum
+<code>overall_score</code> of the overall buckets that have a span equal to the
+jobs' largest bucket span.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct GetOverallBucketsRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.#ctor">
+  GetOverallBucketsRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public GetOverallBucketsRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Id)">
+  GetOverallBucketsRequestDescriptor(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L183"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor(Id jobId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>jobId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequest_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest)">
+  GetOverallBucketsRequestDescriptor(GetOverallBucketsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L177"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor(GetOverallBucketsRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest.html">GetOverallBucketsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_AllowNoMatch_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.AllowNoMatch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_AllowNoMatch_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.AllowNoMatch(System.Nullable{System.Boolean})">
+  AllowNoMatch(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Refer to the description for the <code>allow_no_match</code> query parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor AllowNoMatch(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_BucketSpan_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.BucketSpan*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_BucketSpan_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.BucketSpan(Elastic.Clients.Elasticsearch.Duration)">
+  BucketSpan(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L230"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Refer to the description for the <code>bucket_span</code> query parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor BucketSpan(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_End_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.End*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_End_System_Nullable_System_DateTimeOffset__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.End(System.Nullable{System.DateTimeOffset})">
+  End(DateTimeOffset?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L241"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Refer to the description for the <code>end</code> query parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor End(DateTimeOffset? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L299"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_ExcludeInterim_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.ExcludeInterim*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_ExcludeInterim_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.ExcludeInterim(System.Nullable{System.Boolean})">
+  ExcludeInterim(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L252"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Refer to the description for the <code>exclude_interim</code> query parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor ExcludeInterim(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L311"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_JobId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.JobId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_JobId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.JobId(Elastic.Clients.Elasticsearch.Id)">
+  JobId(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Identifier for the anomaly detection job. It can be a job identifier, a
+group name, a comma-separated list of jobs or groups, or a wildcard
+expression.
+</p>
+<p>
+You can summarize the bucket results for all anomaly detection jobs by
+using <code>_all</code> or by specifying <code>*</code> as the <code>&lt;job_id&gt;</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor JobId(Id value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_OverallScore_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.OverallScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_OverallScore_Elastic_Clients_Elasticsearch_Union_System_Double_System_String__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.OverallScore(Elastic.Clients.Elasticsearch.Union{System.Double,System.String})">
+  OverallScore(Union&lt;double, string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L263"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Refer to the description for the <code>overall_score</code> query parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor OverallScore(Union&lt;double, string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html">Union</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L329"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.10/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L335"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.10/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.10/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L323"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_Start_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.Start*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_Start_System_Nullable_System_DateTimeOffset__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.Start(System.Nullable{System.DateTimeOffset})">
+  Start(DateTimeOffset?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Refer to the description for the <code>start</code> query parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor Start(DateTimeOffset? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_TopN_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.TopN*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_TopN_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.TopN(System.Nullable{System.Int32})">
+  TopN(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L285"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Refer to the description for the <code>top_n</code> query parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetOverallBucketsRequestDescriptor TopN(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequest__Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest)~Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor">
+  explicit operator GetOverallBucketsRequestDescriptor(GetOverallBucketsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L194"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator GetOverallBucketsRequestDescriptor(GetOverallBucketsRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest.html">GetOverallBucketsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequestDescriptor__Elastic_Clients_Elasticsearch_MachineLearning_GetOverallBucketsRequest" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor)~Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest">
+  implicit operator GetOverallBucketsRequest(GetOverallBucketsRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetOverallBucketsRequest.g.cs/#L195"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator GetOverallBucketsRequest(GetOverallBucketsRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequestDescriptor.html">GetOverallBucketsRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetOverallBucketsRequest.html">GetOverallBucketsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

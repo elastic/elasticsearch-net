@@ -1,0 +1,3638 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ClusterNamespacedClient | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ClusterNamespacedClient | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.10/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient" class="text-break">
+Class ClusterNamespacedClient  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.html">Cluster</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ClusterNamespacedClient : NamespacedClientProxy</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html">NamespacedClientProxy</a></div>
+      <div><span class="xref">ClusterNamespacedClient</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.NamespacedClientProxy.html#Elastic_Clients_Elasticsearch_NamespacedClientProxy_Client">NamespacedClientProxy.Client</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient__ctor_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient__ctor" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.#ctor">
+  ClusterNamespacedClient()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Initializes a new instance of the <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.html">ClusterNamespacedClient</a> class for mocking.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ClusterNamespacedClient()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplain_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplain*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplain" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplain">
+  AllocationExplain()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L47"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AllocationExplainResponse AllocationExplain()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse.html">AllocationExplainResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplain_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplain*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplain_Elastic_Clients_Elasticsearch_Cluster_AllocationExplainRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplain(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest)">
+  AllocationExplain(AllocationExplainRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AllocationExplainResponse AllocationExplain(AllocationExplainRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest.html">AllocationExplainRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse.html">AllocationExplainResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplain_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplain*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplain_System_Action_Elastic_Clients_Elasticsearch_Cluster_AllocationExplainRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplain(System.Action{Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor})">
+  AllocationExplain(Action&lt;AllocationExplainRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual AllocationExplainResponse AllocationExplain(Action&lt;AllocationExplainRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor.html">AllocationExplainRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse.html">AllocationExplainResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplainAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplainAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplainAsync_Elastic_Clients_Elasticsearch_Cluster_AllocationExplainRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplainAsync(Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest,System.Threading.CancellationToken)">
+  AllocationExplainAsync(AllocationExplainRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AllocationExplainResponse&gt; AllocationExplainAsync(AllocationExplainRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest.html">AllocationExplainRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse.html">AllocationExplainResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplainAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplainAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplainAsync_System_Action_Elastic_Clients_Elasticsearch_Cluster_AllocationExplainRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplainAsync(System.Action{Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor},System.Threading.CancellationToken)">
+  AllocationExplainAsync(Action&lt;AllocationExplainRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AllocationExplainResponse&gt; AllocationExplainAsync(Action&lt;AllocationExplainRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequestDescriptor.html">AllocationExplainRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse.html">AllocationExplainResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplainAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplainAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_AllocationExplainAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.AllocationExplainAsync(System.Threading.CancellationToken)">
+  AllocationExplainAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;AllocationExplainResponse&gt; AllocationExplainAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.AllocationExplainResponse.html">AllocationExplainResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplate_Elastic_Clients_Elasticsearch_Cluster_DeleteComponentTemplateRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest)">
+  DeleteComponentTemplate(DeleteComponentTemplateRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(DeleteComponentTemplateRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest.html">DeleteComponentTemplateRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse.html">DeleteComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplate_Elastic_Clients_Elasticsearch_Names_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Names)">
+  DeleteComponentTemplate(Names)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(Names name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse.html">DeleteComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplate_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_Cluster_DeleteComponentTemplateRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor})">
+  DeleteComponentTemplate(Names, Action&lt;DeleteComponentTemplateRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(Names name, Action&lt;DeleteComponentTemplateRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor.html">DeleteComponentTemplateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse.html">DeleteComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplateAsync_Elastic_Clients_Elasticsearch_Cluster_DeleteComponentTemplateRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest,System.Threading.CancellationToken)">
+  DeleteComponentTemplateAsync(DeleteComponentTemplateRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteComponentTemplateResponse&gt; DeleteComponentTemplateAsync(DeleteComponentTemplateRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequest.html">DeleteComponentTemplateRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse.html">DeleteComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplateAsync_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_Cluster_DeleteComponentTemplateRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteComponentTemplateAsync(Names, Action&lt;DeleteComponentTemplateRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteComponentTemplateResponse&gt; DeleteComponentTemplateAsync(Names name, Action&lt;DeleteComponentTemplateRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateRequestDescriptor.html">DeleteComponentTemplateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse.html">DeleteComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteComponentTemplateAsync_Elastic_Clients_Elasticsearch_Names_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names,System.Threading.CancellationToken)">
+  DeleteComponentTemplateAsync(Names, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteComponentTemplateResponse&gt; DeleteComponentTemplateAsync(Names name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteComponentTemplateResponse.html">DeleteComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusions_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusions" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusions">
+  DeleteVotingConfigExclusions()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse.html">DeleteVotingConfigExclusionsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusions_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusions_Elastic_Clients_Elasticsearch_Cluster_DeleteVotingConfigExclusionsRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusions(Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest)">
+  DeleteVotingConfigExclusions(DeleteVotingConfigExclusionsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(DeleteVotingConfigExclusionsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest.html">DeleteVotingConfigExclusionsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse.html">DeleteVotingConfigExclusionsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusions_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusions_System_Action_Elastic_Clients_Elasticsearch_Cluster_DeleteVotingConfigExclusionsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusions(System.Action{Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor})">
+  DeleteVotingConfigExclusions(Action&lt;DeleteVotingConfigExclusionsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(Action&lt;DeleteVotingConfigExclusionsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor.html">DeleteVotingConfigExclusionsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse.html">DeleteVotingConfigExclusionsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusionsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusionsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusionsAsync_Elastic_Clients_Elasticsearch_Cluster_DeleteVotingConfigExclusionsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusionsAsync(Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest,System.Threading.CancellationToken)">
+  DeleteVotingConfigExclusionsAsync(DeleteVotingConfigExclusionsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteVotingConfigExclusionsResponse&gt; DeleteVotingConfigExclusionsAsync(DeleteVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequest.html">DeleteVotingConfigExclusionsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse.html">DeleteVotingConfigExclusionsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusionsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusionsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusionsAsync_System_Action_Elastic_Clients_Elasticsearch_Cluster_DeleteVotingConfigExclusionsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusionsAsync(System.Action{Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor},System.Threading.CancellationToken)">
+  DeleteVotingConfigExclusionsAsync(Action&lt;DeleteVotingConfigExclusionsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L170"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteVotingConfigExclusionsResponse&gt; DeleteVotingConfigExclusionsAsync(Action&lt;DeleteVotingConfigExclusionsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsRequestDescriptor.html">DeleteVotingConfigExclusionsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse.html">DeleteVotingConfigExclusionsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusionsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusionsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_DeleteVotingConfigExclusionsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.DeleteVotingConfigExclusionsAsync(System.Threading.CancellationToken)">
+  DeleteVotingConfigExclusionsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L162"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;DeleteVotingConfigExclusionsResponse&gt; DeleteVotingConfigExclusionsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.DeleteVotingConfigExclusionsResponse.html">DeleteVotingConfigExclusionsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplate_Elastic_Clients_Elasticsearch_Cluster_ExistsComponentTemplateRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest)">
+  ExistsComponentTemplate(ExistsComponentTemplateRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(ExistsComponentTemplateRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest.html">ExistsComponentTemplateRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse.html">ExistsComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplate_Elastic_Clients_Elasticsearch_Names_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names)">
+  ExistsComponentTemplate(Names)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(Names name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse.html">ExistsComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplate_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_Cluster_ExistsComponentTemplateRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor})">
+  ExistsComponentTemplate(Names, Action&lt;ExistsComponentTemplateRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(Names name, Action&lt;ExistsComponentTemplateRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor.html">ExistsComponentTemplateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse.html">ExistsComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplateAsync_Elastic_Clients_Elasticsearch_Cluster_ExistsComponentTemplateRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest,System.Threading.CancellationToken)">
+  ExistsComponentTemplateAsync(ExistsComponentTemplateRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExistsComponentTemplateResponse&gt; ExistsComponentTemplateAsync(ExistsComponentTemplateRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequest.html">ExistsComponentTemplateRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse.html">ExistsComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplateAsync_Elastic_Clients_Elasticsearch_Names_System_Action_Elastic_Clients_Elasticsearch_Cluster_ExistsComponentTemplateRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names,System.Action{Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor},System.Threading.CancellationToken)">
+  ExistsComponentTemplateAsync(Names, Action&lt;ExistsComponentTemplateRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L216"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExistsComponentTemplateResponse&gt; ExistsComponentTemplateAsync(Names name, Action&lt;ExistsComponentTemplateRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateRequestDescriptor.html">ExistsComponentTemplateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse.html">ExistsComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_ExistsComponentTemplateAsync_Elastic_Clients_Elasticsearch_Names_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names,System.Threading.CancellationToken)">
+  ExistsComponentTemplateAsync(Names, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ExistsComponentTemplateResponse&gt; ExistsComponentTemplateAsync(Names name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ExistsComponentTemplateResponse.html">ExistsComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplate" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplate">
+  GetComponentTemplate()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetComponentTemplateResponse GetComponentTemplate()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse.html">GetComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplate_Elastic_Clients_Elasticsearch_Cluster_GetComponentTemplateRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplate(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest)">
+  GetComponentTemplate(GetComponentTemplateRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L225"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetComponentTemplateResponse GetComponentTemplate(GetComponentTemplateRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest.html">GetComponentTemplateRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse.html">GetComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplate_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplate(Elastic.Clients.Elasticsearch.Name)">
+  GetComponentTemplate(Name?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetComponentTemplateResponse GetComponentTemplate(Name? name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse.html">GetComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplate_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Cluster_GetComponentTemplateRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplate(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor})">
+  GetComponentTemplate(Name?, Action&lt;GetComponentTemplateRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L256"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetComponentTemplateResponse GetComponentTemplate(Name? name, Action&lt;GetComponentTemplateRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor.html">GetComponentTemplateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse.html">GetComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplate_System_Action_Elastic_Clients_Elasticsearch_Cluster_GetComponentTemplateRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplate(System.Action{Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor})">
+  GetComponentTemplate(Action&lt;GetComponentTemplateRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L239"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetComponentTemplateResponse GetComponentTemplate(Action&lt;GetComponentTemplateRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor.html">GetComponentTemplateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse.html">GetComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplateAsync_Elastic_Clients_Elasticsearch_Cluster_GetComponentTemplateRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest,System.Threading.CancellationToken)">
+  GetComponentTemplateAsync(GetComponentTemplateRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L265"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetComponentTemplateResponse&gt; GetComponentTemplateAsync(GetComponentTemplateRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest.html">GetComponentTemplateRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse.html">GetComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplateAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Cluster_GetComponentTemplateRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor},System.Threading.CancellationToken)">
+  GetComponentTemplateAsync(Name?, Action&lt;GetComponentTemplateRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L296"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetComponentTemplateResponse&gt; GetComponentTemplateAsync(Name? name, Action&lt;GetComponentTemplateRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor.html">GetComponentTemplateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse.html">GetComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplateAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  GetComponentTemplateAsync(Name?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L288"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetComponentTemplateResponse&gt; GetComponentTemplateAsync(Name? name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse.html">GetComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplateAsync_System_Action_Elastic_Clients_Elasticsearch_Cluster_GetComponentTemplateRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplateAsync(System.Action{Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor},System.Threading.CancellationToken)">
+  GetComponentTemplateAsync(Action&lt;GetComponentTemplateRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L279"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetComponentTemplateResponse&gt; GetComponentTemplateAsync(Action&lt;GetComponentTemplateRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor.html">GetComponentTemplateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse.html">GetComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetComponentTemplateAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetComponentTemplateAsync(System.Threading.CancellationToken)">
+  GetComponentTemplateAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L271"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetComponentTemplateResponse&gt; GetComponentTemplateAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateResponse.html">GetComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettings_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettings" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettings">
+  GetSettings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L311"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetClusterSettingsResponse GetSettings()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse.html">GetClusterSettingsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettings_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettings_Elastic_Clients_Elasticsearch_Cluster_GetClusterSettingsRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettings(Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest)">
+  GetSettings(GetClusterSettingsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L305"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetClusterSettingsResponse GetSettings(GetClusterSettingsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest.html">GetClusterSettingsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse.html">GetClusterSettingsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettings_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettings_System_Action_Elastic_Clients_Elasticsearch_Cluster_GetClusterSettingsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettings(System.Action{Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor})">
+  GetSettings(Action&lt;GetClusterSettingsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L319"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual GetClusterSettingsResponse GetSettings(Action&lt;GetClusterSettingsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor.html">GetClusterSettingsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse.html">GetClusterSettingsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettingsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettingsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettingsAsync_Elastic_Clients_Elasticsearch_Cluster_GetClusterSettingsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettingsAsync(Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest,System.Threading.CancellationToken)">
+  GetSettingsAsync(GetClusterSettingsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L328"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetClusterSettingsResponse&gt; GetSettingsAsync(GetClusterSettingsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequest.html">GetClusterSettingsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse.html">GetClusterSettingsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettingsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettingsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettingsAsync_System_Action_Elastic_Clients_Elasticsearch_Cluster_GetClusterSettingsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettingsAsync(System.Action{Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor},System.Threading.CancellationToken)">
+  GetSettingsAsync(Action&lt;GetClusterSettingsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L342"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetClusterSettingsResponse&gt; GetSettingsAsync(Action&lt;GetClusterSettingsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsRequestDescriptor.html">GetClusterSettingsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse.html">GetClusterSettingsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettingsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettingsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_GetSettingsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.GetSettingsAsync(System.Threading.CancellationToken)">
+  GetSettingsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L334"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;GetClusterSettingsResponse&gt; GetSettingsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse.html">GetClusterSettingsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health">
+  Health()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L357"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual HealthResponse Health()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_Elastic_Clients_Elasticsearch_Cluster_HealthRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health(Elastic.Clients.Elasticsearch.Cluster.HealthRequest)">
+  Health(HealthRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L351"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual HealthResponse Health(HealthRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequest.html">HealthRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health(Elastic.Clients.Elasticsearch.Indices)">
+  Health(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L374"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual HealthResponse Health(Indices? indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Cluster_HealthRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor})">
+  Health(Indices?, Action&lt;HealthRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L382"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual HealthResponse Health(Indices? indices, Action&lt;HealthRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor.html">HealthRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_System_Action_Elastic_Clients_Elasticsearch_Cluster_HealthRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health(System.Action{Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor})">
+  Health(Action&lt;HealthRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L365"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual HealthResponse Health(Action&lt;HealthRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor.html">HealthRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_Elastic_Clients_Elasticsearch_Cluster_HealthRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync(Elastic.Clients.Elasticsearch.Cluster.HealthRequest,System.Threading.CancellationToken)">
+  HealthAsync(HealthRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L417"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;HealthResponse&gt; HealthAsync(HealthRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequest.html">HealthRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Cluster_HealthRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor},System.Threading.CancellationToken)">
+  HealthAsync(Indices?, Action&lt;HealthRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L448"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;HealthResponse&gt; HealthAsync(Indices? indices, Action&lt;HealthRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor.html">HealthRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_Elastic_Clients_Elasticsearch_Indices_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync(Elastic.Clients.Elasticsearch.Indices,System.Threading.CancellationToken)">
+  HealthAsync(Indices?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L440"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;HealthResponse&gt; HealthAsync(Indices? indices, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_System_Action_Elastic_Clients_Elasticsearch_Cluster_HealthRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync(System.Action{Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor},System.Threading.CancellationToken)">
+  HealthAsync(Action&lt;HealthRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L431"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;HealthResponse&gt; HealthAsync(Action&lt;HealthRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor.html">HealthRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync(System.Threading.CancellationToken)">
+  HealthAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L423"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;HealthResponse&gt; HealthAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Cluster_HealthRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  HealthAsync&lt;TDocument&gt;(Indices?, Action&lt;HealthRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L474"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;HealthResponse&gt; HealthAsync&lt;TDocument&gt;(Indices? indices, Action&lt;HealthRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor-1.html">HealthRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync__1_System_Action_Elastic_Clients_Elasticsearch_Cluster_HealthRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync``1(System.Action{Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  HealthAsync&lt;TDocument&gt;(Action&lt;HealthRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L465"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;HealthResponse&gt; HealthAsync&lt;TDocument&gt;(Action&lt;HealthRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor-1.html">HealthRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_HealthAsync__1_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.HealthAsync``1(System.Threading.CancellationToken)">
+  HealthAsync&lt;TDocument&gt;(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L457"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;HealthResponse&gt; HealthAsync&lt;TDocument&gt;(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health__1" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health``1">
+  Health&lt;TDocument&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L391"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual HealthResponse Health&lt;TDocument&gt;()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health__1_Elastic_Clients_Elasticsearch_Indices_System_Action_Elastic_Clients_Elasticsearch_Cluster_HealthRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health``1(Elastic.Clients.Elasticsearch.Indices,System.Action{Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor{``0}})">
+  Health&lt;TDocument&gt;(Indices?, Action&lt;HealthRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L408"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual HealthResponse Health&lt;TDocument&gt;(Indices? indices, Action&lt;HealthRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor-1.html">HealthRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Health__1_System_Action_Elastic_Clients_Elasticsearch_Cluster_HealthRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Health``1(System.Action{Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor{``0}})">
+  Health&lt;TDocument&gt;(Action&lt;HealthRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L399"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual HealthResponse Health&lt;TDocument&gt;(Action&lt;HealthRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthRequestDescriptor-1.html">HealthRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.HealthResponse.html">HealthResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Info_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Info*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Info_Elastic_Clients_Elasticsearch_Cluster_ClusterInfoRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Info(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest)">
+  Info(ClusterInfoRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L483"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClusterInfoResponse Info(ClusterInfoRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest.html">ClusterInfoRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse.html">ClusterInfoResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Info_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Info*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Info_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ClusterInfoTarget__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Info(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ClusterInfoTarget})">
+  Info(ICollection&lt;ClusterInfoTarget&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L489"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClusterInfoResponse Info(ICollection&lt;ClusterInfoTarget&gt; target)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>target</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ClusterInfoTarget.html">ClusterInfoTarget</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse.html">ClusterInfoResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Info_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Info*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Info_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ClusterInfoTarget__System_Action_Elastic_Clients_Elasticsearch_Cluster_ClusterInfoRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Info(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ClusterInfoTarget},System.Action{Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor})">
+  Info(ICollection&lt;ClusterInfoTarget&gt;, Action&lt;ClusterInfoRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L497"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClusterInfoResponse Info(ICollection&lt;ClusterInfoTarget&gt; target, Action&lt;ClusterInfoRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>target</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ClusterInfoTarget.html">ClusterInfoTarget</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor.html">ClusterInfoRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse.html">ClusterInfoResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_InfoAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.InfoAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_InfoAsync_Elastic_Clients_Elasticsearch_Cluster_ClusterInfoRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.InfoAsync(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest,System.Threading.CancellationToken)">
+  InfoAsync(ClusterInfoRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L506"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClusterInfoResponse&gt; InfoAsync(ClusterInfoRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest.html">ClusterInfoRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse.html">ClusterInfoResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_InfoAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.InfoAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_InfoAsync_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ClusterInfoTarget__System_Action_Elastic_Clients_Elasticsearch_Cluster_ClusterInfoRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.InfoAsync(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ClusterInfoTarget},System.Action{Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor},System.Threading.CancellationToken)">
+  InfoAsync(ICollection&lt;ClusterInfoTarget&gt;, Action&lt;ClusterInfoRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L520"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClusterInfoResponse&gt; InfoAsync(ICollection&lt;ClusterInfoTarget&gt; target, Action&lt;ClusterInfoRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>target</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ClusterInfoTarget.html">ClusterInfoTarget</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor.html">ClusterInfoRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse.html">ClusterInfoResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_InfoAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.InfoAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_InfoAsync_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ClusterInfoTarget__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.InfoAsync(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ClusterInfoTarget},System.Threading.CancellationToken)">
+  InfoAsync(ICollection&lt;ClusterInfoTarget&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L512"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClusterInfoResponse&gt; InfoAsync(ICollection&lt;ClusterInfoTarget&gt; target, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>target</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ClusterInfoTarget.html">ClusterInfoTarget</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterInfoResponse.html">ClusterInfoResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasks_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasks*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasks" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasks">
+  PendingTasks()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L535"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PendingTasksResponse PendingTasks()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse.html">PendingTasksResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasks_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasks*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasks_Elastic_Clients_Elasticsearch_Cluster_PendingTasksRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasks(Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest)">
+  PendingTasks(PendingTasksRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L529"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PendingTasksResponse PendingTasks(PendingTasksRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest.html">PendingTasksRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse.html">PendingTasksResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasks_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasks*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasks_System_Action_Elastic_Clients_Elasticsearch_Cluster_PendingTasksRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasks(System.Action{Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor})">
+  PendingTasks(Action&lt;PendingTasksRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L543"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PendingTasksResponse PendingTasks(Action&lt;PendingTasksRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor.html">PendingTasksRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse.html">PendingTasksResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasksAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasksAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasksAsync_Elastic_Clients_Elasticsearch_Cluster_PendingTasksRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasksAsync(Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest,System.Threading.CancellationToken)">
+  PendingTasksAsync(PendingTasksRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L552"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PendingTasksResponse&gt; PendingTasksAsync(PendingTasksRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequest.html">PendingTasksRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse.html">PendingTasksResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasksAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasksAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasksAsync_System_Action_Elastic_Clients_Elasticsearch_Cluster_PendingTasksRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasksAsync(System.Action{Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor},System.Threading.CancellationToken)">
+  PendingTasksAsync(Action&lt;PendingTasksRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L566"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PendingTasksResponse&gt; PendingTasksAsync(Action&lt;PendingTasksRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksRequestDescriptor.html">PendingTasksRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse.html">PendingTasksResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasksAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasksAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PendingTasksAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PendingTasksAsync(System.Threading.CancellationToken)">
+  PendingTasksAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L558"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PendingTasksResponse&gt; PendingTasksAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PendingTasksResponse.html">PendingTasksResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusions_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusions" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusions">
+  PostVotingConfigExclusions()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L581"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse.html">PostVotingConfigExclusionsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusions_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusions_Elastic_Clients_Elasticsearch_Cluster_PostVotingConfigExclusionsRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusions(Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest)">
+  PostVotingConfigExclusions(PostVotingConfigExclusionsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L575"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(PostVotingConfigExclusionsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest.html">PostVotingConfigExclusionsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse.html">PostVotingConfigExclusionsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusions_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusions_System_Action_Elastic_Clients_Elasticsearch_Cluster_PostVotingConfigExclusionsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusions(System.Action{Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor})">
+  PostVotingConfigExclusions(Action&lt;PostVotingConfigExclusionsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L589"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(Action&lt;PostVotingConfigExclusionsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor.html">PostVotingConfigExclusionsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse.html">PostVotingConfigExclusionsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusionsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusionsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusionsAsync_Elastic_Clients_Elasticsearch_Cluster_PostVotingConfigExclusionsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusionsAsync(Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest,System.Threading.CancellationToken)">
+  PostVotingConfigExclusionsAsync(PostVotingConfigExclusionsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L598"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostVotingConfigExclusionsResponse&gt; PostVotingConfigExclusionsAsync(PostVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest.html">PostVotingConfigExclusionsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse.html">PostVotingConfigExclusionsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusionsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusionsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusionsAsync_System_Action_Elastic_Clients_Elasticsearch_Cluster_PostVotingConfigExclusionsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusionsAsync(System.Action{Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor},System.Threading.CancellationToken)">
+  PostVotingConfigExclusionsAsync(Action&lt;PostVotingConfigExclusionsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L612"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostVotingConfigExclusionsResponse&gt; PostVotingConfigExclusionsAsync(Action&lt;PostVotingConfigExclusionsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor.html">PostVotingConfigExclusionsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse.html">PostVotingConfigExclusionsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusionsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusionsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PostVotingConfigExclusionsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PostVotingConfigExclusionsAsync(System.Threading.CancellationToken)">
+  PostVotingConfigExclusionsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L604"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PostVotingConfigExclusionsResponse&gt; PostVotingConfigExclusionsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsResponse.html">PostVotingConfigExclusionsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplate_Elastic_Clients_Elasticsearch_Cluster_PutComponentTemplateRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplate(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest)">
+  PutComponentTemplate(PutComponentTemplateRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L621"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutComponentTemplateResponse PutComponentTemplate(PutComponentTemplateRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest.html">PutComponentTemplateRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse.html">PutComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplate_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplate(Elastic.Clients.Elasticsearch.Name)">
+  PutComponentTemplate(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L627"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutComponentTemplateResponse PutComponentTemplate(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse.html">PutComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplate_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Cluster_PutComponentTemplateRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplate(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor})">
+  PutComponentTemplate(Name, Action&lt;PutComponentTemplateRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L635"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutComponentTemplateResponse PutComponentTemplate(Name name, Action&lt;PutComponentTemplateRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor.html">PutComponentTemplateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse.html">PutComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplateAsync_Elastic_Clients_Elasticsearch_Cluster_PutComponentTemplateRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest,System.Threading.CancellationToken)">
+  PutComponentTemplateAsync(PutComponentTemplateRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L653"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutComponentTemplateResponse&gt; PutComponentTemplateAsync(PutComponentTemplateRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest.html">PutComponentTemplateRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse.html">PutComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplateAsync_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Cluster_PutComponentTemplateRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor},System.Threading.CancellationToken)">
+  PutComponentTemplateAsync(Name, Action&lt;PutComponentTemplateRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L667"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutComponentTemplateResponse&gt; PutComponentTemplateAsync(Name name, Action&lt;PutComponentTemplateRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor.html">PutComponentTemplateRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse.html">PutComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplateAsync_Elastic_Clients_Elasticsearch_Name_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name,System.Threading.CancellationToken)">
+  PutComponentTemplateAsync(Name, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L659"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutComponentTemplateResponse&gt; PutComponentTemplateAsync(Name name, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse.html">PutComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplateAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplateAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplateAsync__1_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Cluster_PutComponentTemplateRequestDescriptor___0___System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplateAsync``1(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor{``0}},System.Threading.CancellationToken)">
+  PutComponentTemplateAsync&lt;TDocument&gt;(Name, Action&lt;PutComponentTemplateRequestDescriptor&lt;TDocument&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L676"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;PutComponentTemplateResponse&gt; PutComponentTemplateAsync&lt;TDocument&gt;(Name name, Action&lt;PutComponentTemplateRequestDescriptor&lt;TDocument&gt;&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor-1.html">PutComponentTemplateRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse.html">PutComponentTemplateResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplate_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplate*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_PutComponentTemplate__1_Elastic_Clients_Elasticsearch_Name_System_Action_Elastic_Clients_Elasticsearch_Cluster_PutComponentTemplateRequestDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.PutComponentTemplate``1(Elastic.Clients.Elasticsearch.Name,System.Action{Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor{``0}})">
+  PutComponentTemplate&lt;TDocument&gt;(Name, Action&lt;PutComponentTemplateRequestDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L644"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual PutComponentTemplateResponse PutComponentTemplate&lt;TDocument&gt;(Name name, Action&lt;PutComponentTemplateRequestDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestDescriptor-1.html">PutComponentTemplateRequestDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse.html">PutComponentTemplateResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Stats" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Stats">
+  Stats()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L691"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClusterStatsResponse Stats()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse.html">ClusterStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Stats_Elastic_Clients_Elasticsearch_Cluster_ClusterStatsRequest_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Stats(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest)">
+  Stats(ClusterStatsRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L685"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClusterStatsResponse Stats(ClusterStatsRequest request)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest.html">ClusterStatsRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse.html">ClusterStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Stats_Elastic_Clients_Elasticsearch_NodeIds_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Stats(Elastic.Clients.Elasticsearch.NodeIds)">
+  Stats(NodeIds?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L708"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClusterStatsResponse Stats(NodeIds? nodeId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nodeId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.NodeIds.html">NodeIds</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse.html">ClusterStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Stats_Elastic_Clients_Elasticsearch_NodeIds_System_Action_Elastic_Clients_Elasticsearch_Cluster_ClusterStatsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Stats(Elastic.Clients.Elasticsearch.NodeIds,System.Action{Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor})">
+  Stats(NodeIds?, Action&lt;ClusterStatsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L716"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClusterStatsResponse Stats(NodeIds? nodeId, Action&lt;ClusterStatsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nodeId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.NodeIds.html">NodeIds</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor.html">ClusterStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse.html">ClusterStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Stats_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_Stats_System_Action_Elastic_Clients_Elasticsearch_Cluster_ClusterStatsRequestDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.Stats(System.Action{Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor})">
+  Stats(Action&lt;ClusterStatsRequestDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L699"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual ClusterStatsResponse Stats(Action&lt;ClusterStatsRequestDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor.html">ClusterStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse.html">ClusterStatsResponse</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_StatsAsync_Elastic_Clients_Elasticsearch_Cluster_ClusterStatsRequest_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.StatsAsync(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest,System.Threading.CancellationToken)">
+  StatsAsync(ClusterStatsRequest, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L725"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClusterStatsResponse&gt; StatsAsync(ClusterStatsRequest request, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>request</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest.html">ClusterStatsRequest</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse.html">ClusterStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_StatsAsync_Elastic_Clients_Elasticsearch_NodeIds_System_Action_Elastic_Clients_Elasticsearch_Cluster_ClusterStatsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.StatsAsync(Elastic.Clients.Elasticsearch.NodeIds,System.Action{Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor},System.Threading.CancellationToken)">
+  StatsAsync(NodeIds?, Action&lt;ClusterStatsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L756"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClusterStatsResponse&gt; StatsAsync(NodeIds? nodeId, Action&lt;ClusterStatsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nodeId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.NodeIds.html">NodeIds</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor.html">ClusterStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse.html">ClusterStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_StatsAsync_Elastic_Clients_Elasticsearch_NodeIds_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.StatsAsync(Elastic.Clients.Elasticsearch.NodeIds,System.Threading.CancellationToken)">
+  StatsAsync(NodeIds?, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L748"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClusterStatsResponse&gt; StatsAsync(NodeIds? nodeId, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>nodeId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.NodeIds.html">NodeIds</a></dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse.html">ClusterStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_StatsAsync_System_Action_Elastic_Clients_Elasticsearch_Cluster_ClusterStatsRequestDescriptor__System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.StatsAsync(System.Action{Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor},System.Threading.CancellationToken)">
+  StatsAsync(Action&lt;ClusterStatsRequestDescriptor&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L739"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClusterStatsResponse&gt; StatsAsync(Action&lt;ClusterStatsRequestDescriptor&gt; action, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequestDescriptor.html">ClusterStatsRequestDescriptor</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse.html">ClusterStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_StatsAsync_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.StatsAsync*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_ClusterNamespacedClient_StatsAsync_System_Threading_CancellationToken_" data-uid="Elastic.Clients.Elasticsearch.Cluster.ClusterNamespacedClient.StatsAsync(System.Threading.CancellationToken)">
+  StatsAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.10/src/Elastic.Clients.Elasticsearch/_Generated/Client/ElasticsearchClient.Cluster.g.cs/#L731"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;ClusterStatsResponse&gt; StatsAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse.html">ClusterStatsResponse</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
