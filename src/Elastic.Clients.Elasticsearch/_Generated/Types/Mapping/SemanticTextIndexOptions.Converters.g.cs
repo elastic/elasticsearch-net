@@ -26,14 +26,21 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 public sealed partial class SemanticTextIndexOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropDenseVector = System.Text.Json.JsonEncodedText.Encode("dense_vector");
+	private static readonly System.Text.Json.JsonEncodedText PropSparseVector = System.Text.Json.JsonEncodedText.Encode("sparse_vector");
 
 	public override Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions?> propDenseVector = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions?> propSparseVector = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propDenseVector.TryReadProperty(ref reader, options, PropDenseVector, null))
+			{
+				continue;
+			}
+
+			if (propSparseVector.TryReadProperty(ref reader, options, PropSparseVector, null))
 			{
 				continue;
 			}
@@ -50,7 +57,8 @@ public sealed partial class SemanticTextIndexOptionsConverter : System.Text.Json
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			DenseVector = propDenseVector.Value
+			DenseVector = propDenseVector.Value,
+			SparseVector = propSparseVector.Value
 		};
 	}
 
@@ -58,6 +66,7 @@ public sealed partial class SemanticTextIndexOptionsConverter : System.Text.Json
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDenseVector, value.DenseVector, null, null);
+		writer.WriteProperty(options, PropSparseVector, value.SparseVector, null, null);
 		writer.WriteEndObject();
 	}
 }

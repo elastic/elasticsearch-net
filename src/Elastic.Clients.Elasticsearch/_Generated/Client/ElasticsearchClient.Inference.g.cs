@@ -852,6 +852,52 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutCohereRequest, Elastic.Clients.Elasticsearch.Inference.PutCohereResponse, Elastic.Clients.Elasticsearch.Inference.PutCohereRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse PutContextualai(Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest, Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse, Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse PutContextualai(Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI taskType, Elastic.Clients.Elasticsearch.Id contextualaiInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor(taskType, contextualaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest, Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse, Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse PutContextualai(Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI taskType, Elastic.Clients.Elasticsearch.Id contextualaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor(taskType, contextualaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest, Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse, Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse> PutContextualaiAsync(Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest, Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse, Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse> PutContextualaiAsync(Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI taskType, Elastic.Clients.Elasticsearch.Id contextualaiInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor(taskType, contextualaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest, Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse, Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse> PutContextualaiAsync(Elastic.Clients.Elasticsearch.Inference.TaskTypeContextualAI taskType, Elastic.Clients.Elasticsearch.Id contextualaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor(taskType, contextualaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequest, Elastic.Clients.Elasticsearch.Inference.PutContextualaiResponse, Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Inference.PutCustomResponse PutCustom(Elastic.Clients.Elasticsearch.Inference.PutCustomRequest request)
 	{
 		request.BeforeRequest();

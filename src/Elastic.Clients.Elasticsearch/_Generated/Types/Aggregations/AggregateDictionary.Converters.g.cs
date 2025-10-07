@@ -70,6 +70,9 @@ public sealed partial class AggregateDictionaryConverter : System.Text.Json.Seri
 			"boxplot" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate>(options, null),
 			"bucket_metric_value" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate>(options, null),
 			"cardinality" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate>(options, null),
+			"cartesian_bounds" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregate>(options, null),
+			"cartesian_centroid" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregate>(options, null),
+			"change_point" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregate>(options, null),
 			"children" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate>(options, null),
 			"composite" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate>(options, null),
 			"date_histogram" => reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate>(options, null),
@@ -160,6 +163,15 @@ public sealed partial class AggregateDictionaryConverter : System.Text.Json.Seri
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate v:
 				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate>(o, v));
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregate v:
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregate>(o, v));
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregate v:
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregate>(o, v));
+				break;
+			case Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregate v:
+				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregate>(o, v));
 				break;
 			case Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate v:
 				writer.WriteProperty(options, key, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, string v) => w.WritePropertyName<string>(o, v), static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate v) => w.WritePropertyName<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate>(o, v));

@@ -34,7 +34,7 @@ public sealed partial class AuthenticateApiKeyConverter : System.Text.Json.Seria
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propId = default;
-		LocalJsonValue<bool> propInternal = default;
+		LocalJsonValue<bool?> propInternal = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ApiKeyManagedBy> propManagedBy = default;
 		LocalJsonValue<string?> propName = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -44,7 +44,7 @@ public sealed partial class AuthenticateApiKeyConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propInternal.TryReadProperty(ref reader, options, PropInternal, null))
+			if (propInternal.TryReadProperty(ref reader, options, PropInternal, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ public sealed partial class AuthenticateApiKeyConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropId, value.Id, null, null);
-		writer.WriteProperty(options, PropInternal, value.Internal, null, null);
+		writer.WriteProperty(options, PropInternal, value.Internal, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropManagedBy, value.ManagedBy, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteEndObject();

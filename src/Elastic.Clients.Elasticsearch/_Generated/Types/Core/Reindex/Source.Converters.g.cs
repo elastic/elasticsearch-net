@@ -44,7 +44,7 @@ public sealed partial class SourceConverter : System.Text.Json.Serialization.Jso
 		LocalJsonValue<int?> propSize = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propSourceFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?> propSourceFields = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
@@ -82,7 +82,7 @@ public sealed partial class SourceConverter : System.Text.Json.Serialization.Jso
 				continue;
 			}
 
-			if (propSourceFields.TryReadProperty(ref reader, options, PropSourceFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			if (propSourceFields.TryReadProperty(ref reader, options, PropSourceFields, null))
 			{
 				continue;
 			}
@@ -126,7 +126,7 @@ public sealed partial class SourceConverter : System.Text.Json.Serialization.Jso
 		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null))
 #pragma warning restore CS0618
 		;
-		writer.WriteProperty(options, PropSourceFields, value.SourceFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropSourceFields, value.SourceFields, null, null);
 		writer.WriteEndObject();
 	}
 }

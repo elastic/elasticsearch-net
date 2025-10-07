@@ -50,6 +50,14 @@ public sealed partial class RemoteSource
 
 	/// <summary>
 	/// <para>
+	/// The API key to use for authentication with the remote host (as an alternative to basic auth when the remote cluster is in Elastic Cloud).
+	/// (It is not permitted to set this and also to set an <c>Authorization</c> header via <c>headers</c>.)
+	/// </para>
+	/// </summary>
+	public string? ApiKey { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The remote connection timeout.
 	/// </para>
 	/// </summary>
@@ -76,7 +84,7 @@ public sealed partial class RemoteSource
 
 	/// <summary>
 	/// <para>
-	/// The password to use for authentication with the remote host.
+	/// The password to use for authentication with the remote host (required when using basic auth).
 	/// </para>
 	/// </summary>
 	public string? Password { get; set; }
@@ -90,7 +98,7 @@ public sealed partial class RemoteSource
 
 	/// <summary>
 	/// <para>
-	/// The username to use for authentication with the remote host.
+	/// The username to use for authentication with the remote host (required when using basic auth).
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
@@ -114,6 +122,18 @@ public readonly partial struct RemoteSourceDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource instance) => new Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource(Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The API key to use for authentication with the remote host (as an alternative to basic auth when the remote cluster is in Elastic Cloud).
+	/// (It is not permitted to set this and also to set an <c>Authorization</c> header via <c>headers</c>.)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor ApiKey(string? value)
+	{
+		Instance.ApiKey = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -180,7 +200,7 @@ public readonly partial struct RemoteSourceDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The password to use for authentication with the remote host.
+	/// The password to use for authentication with the remote host (required when using basic auth).
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor Password(string? value)
@@ -202,7 +222,7 @@ public readonly partial struct RemoteSourceDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The username to use for authentication with the remote host.
+	/// The username to use for authentication with the remote host (required when using basic auth).
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSourceDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)

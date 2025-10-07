@@ -85,6 +85,11 @@ public sealed partial class RateLimitSetting
 	/// </item>
 	/// <item>
 	/// <para>
+	/// <c>contextualai</c> service: <c>1000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>elastic</c> service and task type <c>chat_completion</c>: <c>240</c>
 	/// </para>
 	/// </item>
@@ -201,6 +206,11 @@ public readonly partial struct RateLimitSettingDescriptor
 	/// <item>
 	/// <para>
 	/// <c>cohere</c> service: <c>10000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>contextualai</c> service: <c>1000</c>
 	/// </para>
 	/// </item>
 	/// <item>

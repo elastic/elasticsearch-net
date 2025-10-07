@@ -90,7 +90,7 @@ public sealed partial class DenseVectorIndexOptions
 
 	/// <summary>
 	/// <para>
-	/// The rescore vector options. This is only applicable to <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
+	/// The rescore vector options. This is only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector? RescoreVector { get; set; }
@@ -180,7 +180,7 @@ public readonly partial struct DenseVectorIndexOptionsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The rescore vector options. This is only applicable to <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
+	/// The rescore vector options. This is only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor RescoreVector(Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector? value)
@@ -191,7 +191,7 @@ public readonly partial struct DenseVectorIndexOptionsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The rescore vector options. This is only applicable to <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
+	/// The rescore vector options. This is only applicable to <c>bbq_disk</c>, <c>bbq_hnsw</c>, <c>int4_hnsw</c>, <c>int8_hnsw</c>, <c>bbq_flat</c>, <c>int4_flat</c>, and <c>int8_flat</c> index types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor RescoreVector(System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVectorDescriptor> action)

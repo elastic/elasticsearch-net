@@ -27,8 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class SearchUsageStats
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SearchUsageStats(System.Collections.Generic.IReadOnlyDictionary<string, long> queries, System.Collections.Generic.IReadOnlyDictionary<string, long> rescorers, System.Collections.Generic.IReadOnlyDictionary<string, long> retrievers, System.Collections.Generic.IReadOnlyDictionary<string, long> sections, long total)
+	public SearchUsageStats(Elastic.Clients.Elasticsearch.Cluster.ExtendedSearchUsage extended, System.Collections.Generic.IReadOnlyDictionary<string, long> queries, System.Collections.Generic.IReadOnlyDictionary<string, long> rescorers, System.Collections.Generic.IReadOnlyDictionary<string, long> retrievers, System.Collections.Generic.IReadOnlyDictionary<string, long> sections, long total)
 	{
+		Extended = extended;
 		Queries = queries;
 		Rescorers = rescorers;
 		Retrievers = retrievers;
@@ -52,6 +53,11 @@ public sealed partial class SearchUsageStats
 		_ = sentinel;
 	}
 
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ExtendedSearchUsage Extended { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

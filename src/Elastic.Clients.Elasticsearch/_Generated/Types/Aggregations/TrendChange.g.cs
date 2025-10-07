@@ -21,32 +21,31 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Project;
+namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Project.Json.TagsConverter))]
-public sealed partial class Tags
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.TrendChangeConverter))]
+public sealed partial class TrendChange
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Tags(string alias, string id, string organisation, string type)
+	public TrendChange(int changePoint, double pValue, double rValue)
 	{
-		Alias = alias;
-		Id = id;
-		Organisation = organisation;
-		Type = type;
+		ChangePoint = changePoint;
+		PValue = pValue;
+		RValue = rValue;
 	}
 #if NET7_0_OR_GREATER
-	public Tags()
+	public TrendChange()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
 	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
-	public Tags()
+	public TrendChange()
 	{
 	}
 #endif
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal Tags(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal TrendChange(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
@@ -55,27 +54,15 @@ public sealed partial class Tags
 #if NET7_0_OR_GREATER
 	required
 #endif
-	string Alias { get; set; }
+	int ChangePoint { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	string Id { get; set; }
+	double PValue { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	string Organisation { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Type { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Additional tags defined by user.
-	/// </para>
-	/// </summary>
-	public System.Collections.Generic.IReadOnlyDictionary<string, string>? UserDefinedTags { get; set; }
+	double RValue { get; set; }
 }

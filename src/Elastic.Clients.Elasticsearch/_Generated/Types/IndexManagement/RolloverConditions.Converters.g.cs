@@ -154,7 +154,10 @@ public sealed partial class RolloverConditionsConverter : System.Text.Json.Seria
 			MaxPrimaryShardDocs = propMaxPrimaryShardDocs.Value,
 			MaxPrimaryShardSize = propMaxPrimaryShardSize.Value,
 			MaxPrimaryShardSizeBytes = propMaxPrimaryShardSizeBytes.Value,
-			MaxSize = propMaxSize.Value,
+#pragma warning disable CS0618
+			MaxSize = propMaxSize.Value
+#pragma warning restore CS0618
+,
 			MaxSizeBytes = propMaxSizeBytes.Value,
 			MinAge = propMinAge.Value,
 			MinDocs = propMinDocs.Value,
@@ -175,7 +178,10 @@ public sealed partial class RolloverConditionsConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropMaxPrimaryShardDocs, value.MaxPrimaryShardDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMaxPrimaryShardSize, value.MaxPrimaryShardSize, null, null);
 		writer.WriteProperty(options, PropMaxPrimaryShardSizeBytes, value.MaxPrimaryShardSizeBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropMaxSize, value.MaxSize, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropMaxSize, value.MaxSize, null, null)
+#pragma warning restore CS0618
+		;
 		writer.WriteProperty(options, PropMaxSizeBytes, value.MaxSizeBytes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropMinAge, value.MinAge, null, null);
 		writer.WriteProperty(options, PropMinDocs, value.MinDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));

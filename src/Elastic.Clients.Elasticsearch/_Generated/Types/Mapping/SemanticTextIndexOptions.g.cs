@@ -43,6 +43,7 @@ public sealed partial class SemanticTextIndexOptions
 	}
 
 	public Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptions? DenseVector { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions? SparseVector { get; set; }
 }
 
 public readonly partial struct SemanticTextIndexOptionsDescriptor
@@ -73,6 +74,24 @@ public readonly partial struct SemanticTextIndexOptionsDescriptor
 	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor DenseVector(System.Action<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor> action)
 	{
 		Instance.DenseVector = Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor SparseVector(Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptions? value)
+	{
+		Instance.SparseVector = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor SparseVector()
+	{
+		Instance.SparseVector = Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptionsDescriptor SparseVector(System.Action<Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor>? action)
+	{
+		Instance.SparseVector = Elastic.Clients.Elasticsearch.Mapping.SparseVectorIndexOptionsDescriptor.Build(action);
 		return this;
 	}
 

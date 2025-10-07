@@ -300,8 +300,13 @@ public readonly partial struct ChunkingSettingsDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor> action)
+	internal static Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
 		var builder = new Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor(new Elastic.Clients.Elasticsearch.Mapping.ChunkingSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

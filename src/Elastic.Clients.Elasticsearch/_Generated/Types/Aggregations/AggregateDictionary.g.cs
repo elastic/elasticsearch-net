@@ -50,6 +50,9 @@ public sealed partial class AggregateDictionary : Elastic.Clients.Elasticsearch.
 	public Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate? GetBoxplot(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate? GetBucketMetricValue(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.BucketMetricValueAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate? GetCardinality(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregate>(key);
+	public Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregate? GetCartesianBounds(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregate>(key);
+	public Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregate? GetCartesianCentroid(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregate>(key);
+	public Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregate? GetChangePoint(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate? GetChildren(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate? GetComposite(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.CompositeAggregate>(key);
 	public Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate? GetDateHistogram(string key) => TryGet<Elastic.Clients.Elasticsearch.Aggregations.DateHistogramAggregate>(key);

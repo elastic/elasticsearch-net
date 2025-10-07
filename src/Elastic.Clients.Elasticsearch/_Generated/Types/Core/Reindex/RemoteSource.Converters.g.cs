@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Reindex.Json;
 
 public sealed partial class RemoteSourceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
 	private static readonly System.Text.Json.JsonEncodedText PropConnectTimeout = System.Text.Json.JsonEncodedText.Encode("connect_timeout");
 	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers");
 	private static readonly System.Text.Json.JsonEncodedText PropHost = System.Text.Json.JsonEncodedText.Encode("host");
@@ -35,6 +36,7 @@ public sealed partial class RemoteSourceConverter : System.Text.Json.Serializati
 	public override Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propApiKey = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propConnectTimeout = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propHeaders = default;
 		LocalJsonValue<string> propHost = default;
@@ -43,6 +45,11 @@ public sealed partial class RemoteSourceConverter : System.Text.Json.Serializati
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
+			{
+				continue;
+			}
+
 			if (propConnectTimeout.TryReadProperty(ref reader, options, PropConnectTimeout, null))
 			{
 				continue;
@@ -85,6 +92,7 @@ public sealed partial class RemoteSourceConverter : System.Text.Json.Serializati
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			ApiKey = propApiKey.Value,
 			ConnectTimeout = propConnectTimeout.Value,
 			Headers = propHeaders.Value,
 			Host = propHost.Value,
@@ -97,6 +105,7 @@ public sealed partial class RemoteSourceConverter : System.Text.Json.Serializati
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Reindex.RemoteSource value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
 		writer.WriteProperty(options, PropConnectTimeout, value.ConnectTimeout, null, null);
 		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropHost, value.Host, null, null);
