@@ -28,6 +28,7 @@ public sealed partial class DenseVectorIndexOptionsConverter : System.Text.Json.
 	private static readonly System.Text.Json.JsonEncodedText PropConfidenceInterval = System.Text.Json.JsonEncodedText.Encode("confidence_interval");
 	private static readonly System.Text.Json.JsonEncodedText PropEfConstruction = System.Text.Json.JsonEncodedText.Encode("ef_construction");
 	private static readonly System.Text.Json.JsonEncodedText PropM = System.Text.Json.JsonEncodedText.Encode("m");
+	private static readonly System.Text.Json.JsonEncodedText PropOnDiskRescore = System.Text.Json.JsonEncodedText.Encode("on_disk_rescore");
 	private static readonly System.Text.Json.JsonEncodedText PropRescoreVector = System.Text.Json.JsonEncodedText.Encode("rescore_vector");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
@@ -37,6 +38,7 @@ public sealed partial class DenseVectorIndexOptionsConverter : System.Text.Json.
 		LocalJsonValue<float?> propConfidenceInterval = default;
 		LocalJsonValue<int?> propEfConstruction = default;
 		LocalJsonValue<int?> propM = default;
+		LocalJsonValue<bool?> propOnDiskRescore = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsRescoreVector?> propRescoreVector = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType> propType = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -52,6 +54,11 @@ public sealed partial class DenseVectorIndexOptionsConverter : System.Text.Json.
 			}
 
 			if (propM.TryReadProperty(ref reader, options, PropM, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
+			if (propOnDiskRescore.TryReadProperty(ref reader, options, PropOnDiskRescore, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -81,6 +88,7 @@ public sealed partial class DenseVectorIndexOptionsConverter : System.Text.Json.
 			ConfidenceInterval = propConfidenceInterval.Value,
 			EfConstruction = propEfConstruction.Value,
 			M = propM.Value,
+			OnDiskRescore = propOnDiskRescore.Value,
 			RescoreVector = propRescoreVector.Value,
 			Type = propType.Value
 		};
@@ -92,6 +100,7 @@ public sealed partial class DenseVectorIndexOptionsConverter : System.Text.Json.
 		writer.WriteProperty(options, PropConfidenceInterval, value.ConfidenceInterval, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropEfConstruction, value.EfConstruction, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropM, value.M, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
+		writer.WriteProperty(options, PropOnDiskRescore, value.OnDiskRescore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropRescoreVector, value.RescoreVector, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();

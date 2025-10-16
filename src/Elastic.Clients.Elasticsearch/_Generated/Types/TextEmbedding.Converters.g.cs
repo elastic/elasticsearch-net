@@ -31,7 +31,7 @@ public sealed partial class TextEmbeddingConverter : System.Text.Json.Serializat
 	public override Elastic.Clients.Elasticsearch.TextEmbedding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string> propModelId = default;
+		LocalJsonValue<string?> propModelId = default;
 		LocalJsonValue<string> propModelText = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{

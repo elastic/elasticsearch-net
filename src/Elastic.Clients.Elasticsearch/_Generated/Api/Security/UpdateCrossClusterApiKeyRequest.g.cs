@@ -117,6 +117,18 @@ public sealed partial class UpdateCrossClusterApiKeyRequest : Elastic.Clients.El
 
 	/// <summary>
 	/// <para>
+	/// The certificate identity to associate with this API key.
+	/// This field is used to restrict the API key to connections authenticated by a specific TLS certificate.
+	/// The value should match the certificate's distinguished name (DN) pattern.
+	/// When specified, this fully replaces any previously assigned certificate identity.
+	/// To clear an existing certificate identity, explicitly set this field to <c>null</c>.
+	/// When omitted, the existing certificate identity remains unchanged.
+	/// </para>
+	/// </summary>
+	public string? CertificateIdentity { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The expiration time for the API key.
 	/// By default, API keys never expire. This property can be omitted to leave the value unchanged.
 	/// </para>
@@ -254,6 +266,22 @@ public readonly partial struct UpdateCrossClusterApiKeyRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor Access<T>(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor<T>>? action)
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The certificate identity to associate with this API key.
+	/// This field is used to restrict the API key to connections authenticated by a specific TLS certificate.
+	/// The value should match the certificate's distinguished name (DN) pattern.
+	/// When specified, this fully replaces any previously assigned certificate identity.
+	/// To clear an existing certificate identity, explicitly set this field to <c>null</c>.
+	/// When omitted, the existing certificate identity remains unchanged.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor CertificateIdentity(string? value)
+	{
+		Instance.CertificateIdentity = value;
 		return this;
 	}
 
@@ -475,6 +503,22 @@ public readonly partial struct UpdateCrossClusterApiKeyRequestDescriptor<TDocume
 	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> Access(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>>? action)
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The certificate identity to associate with this API key.
+	/// This field is used to restrict the API key to connections authenticated by a specific TLS certificate.
+	/// The value should match the certificate's distinguished name (DN) pattern.
+	/// When specified, this fully replaces any previously assigned certificate identity.
+	/// To clear an existing certificate identity, explicitly set this field to <c>null</c>.
+	/// When omitted, the existing certificate identity remains unchanged.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument> CertificateIdentity(string? value)
+	{
+		Instance.CertificateIdentity = value;
 		return this;
 	}
 

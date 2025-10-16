@@ -53,6 +53,14 @@ public sealed partial class SemanticTextProperty : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Settings for index_options that override any defaults used by semantic_text, for example
 	/// specific quantization settings.
 	/// </para>
@@ -120,9 +128,46 @@ public readonly partial struct SemanticTextPropertyDescriptor<TDocument>
 	/// they will not be applied to existing documents until they are reindexed.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor> action)
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> ChunkingSettings()
+	{
+		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for chunking text into smaller passages. If specified, these will override the
+	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
+	/// they will not be applied to existing documents until they are reindexed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
@@ -266,9 +311,58 @@ public readonly partial struct SemanticTextPropertyDescriptor
 	/// they will not be applied to existing documents until they are reindexed.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor> action)
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor ChunkingSettings()
+	{
+		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Settings for chunking text into smaller passages. If specified, these will override the
+	/// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
+	/// they will not be applied to existing documents until they are reindexed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor>? action)
 	{
 		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Mapping.ChunkingSettingsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
+	{
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
+	/// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.SemanticTextPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
+	{
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
 		return this;
 	}
 

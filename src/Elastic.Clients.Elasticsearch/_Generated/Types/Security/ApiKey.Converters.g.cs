@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 public sealed partial class ApiKeyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKey>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAccess = System.Text.Json.JsonEncodedText.Encode("access");
+	private static readonly System.Text.Json.JsonEncodedText PropCertificateIdentity = System.Text.Json.JsonEncodedText.Encode("certificate_identity");
 	private static readonly System.Text.Json.JsonEncodedText PropCreation = System.Text.Json.JsonEncodedText.Encode("creation");
 	private static readonly System.Text.Json.JsonEncodedText PropExpiration = System.Text.Json.JsonEncodedText.Encode("expiration");
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
@@ -46,6 +47,7 @@ public sealed partial class ApiKeyConverter : System.Text.Json.Serialization.Jso
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.Access?> propAccess = default;
+		LocalJsonValue<string?> propCertificateIdentity = default;
 		LocalJsonValue<System.DateTimeOffset> propCreation = default;
 		LocalJsonValue<System.DateTimeOffset?> propExpiration = default;
 		LocalJsonValue<string> propId = default;
@@ -64,6 +66,11 @@ public sealed partial class ApiKeyConverter : System.Text.Json.Serialization.Jso
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAccess.TryReadProperty(ref reader, options, PropAccess, null))
+			{
+				continue;
+			}
+
+			if (propCertificateIdentity.TryReadProperty(ref reader, options, PropCertificateIdentity, null))
 			{
 				continue;
 			}
@@ -156,6 +163,7 @@ public sealed partial class ApiKeyConverter : System.Text.Json.Serialization.Jso
 		return new Elastic.Clients.Elasticsearch.Security.ApiKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Access = propAccess.Value,
+			CertificateIdentity = propCertificateIdentity.Value,
 			Creation = propCreation.Value,
 			Expiration = propExpiration.Value,
 			Id = propId.Value,
@@ -178,6 +186,7 @@ public sealed partial class ApiKeyConverter : System.Text.Json.Serialization.Jso
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAccess, value.Access, null, null);
+		writer.WriteProperty(options, PropCertificateIdentity, value.CertificateIdentity, null, null);
 		writer.WriteProperty(options, PropCreation, value.Creation, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropExpiration, value.Expiration, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropId, value.Id, null, null);

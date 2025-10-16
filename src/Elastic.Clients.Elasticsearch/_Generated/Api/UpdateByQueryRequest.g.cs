@@ -52,7 +52,7 @@ public sealed partial class UpdateByQueryRequestParameters : Elastic.Transport.R
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
@@ -494,7 +494,7 @@ public sealed partial class UpdateByQueryRequest : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
@@ -981,7 +981,7 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
@@ -1753,7 +1753,7 @@ public readonly partial struct UpdateByQueryRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>

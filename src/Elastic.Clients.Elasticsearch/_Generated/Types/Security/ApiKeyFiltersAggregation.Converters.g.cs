@@ -34,7 +34,6 @@ public sealed partial class ApiKeyFiltersAggregationConverter : System.Text.Json
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>?> propFilters = default;
-		LocalJsonValue<bool?> propKeyed = default;
 		LocalJsonValue<bool?> propOtherBucket = default;
 		LocalJsonValue<string?> propOtherBucketKey = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -44,8 +43,9 @@ public sealed partial class ApiKeyFiltersAggregationConverter : System.Text.Json
 				continue;
 			}
 
-			if (propKeyed.TryReadProperty(ref reader, options, PropKeyed, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			if (reader.ValueTextEquals(PropKeyed))
 			{
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -72,7 +72,6 @@ public sealed partial class ApiKeyFiltersAggregationConverter : System.Text.Json
 		return new Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Filters = propFilters.Value,
-			Keyed = propKeyed.Value,
 			OtherBucket = propOtherBucket.Value,
 			OtherBucketKey = propOtherBucketKey.Value
 		};

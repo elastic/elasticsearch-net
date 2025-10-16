@@ -67,6 +67,15 @@ public sealed partial class ApiKey
 
 	/// <summary>
 	/// <para>
+	/// The certificate identity associated with a cross-cluster API key.
+	/// Restricts the API key to connections authenticated by a specific TLS certificate.
+	/// Only applicable to cross-cluster API keys.
+	/// </para>
+	/// </summary>
+	public string? CertificateIdentity { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Creation time for the API key in milliseconds.
 	/// </para>
 	/// </summary>
