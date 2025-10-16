@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class RemoteClusterInfo | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class RemoteClusterInfo | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.10/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo" class="text-break">
+Class RemoteClusterInfo  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Cluster.html">Cluster</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(RemoteClusterInfoConverter))]
+public sealed class RemoteClusterInfo</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">RemoteClusterInfo</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo__ctor_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo__ctor" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.#ctor">
+  RemoteClusterInfo()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.&quot;)]
+public RemoteClusterInfo()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo__ctor_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo__ctor_System_String_System_Int32_System_Int64_System_Int64_System_Int64_System_String_System_Int32_System_Int32_System_Boolean_Elastic_Clients_Elasticsearch_HealthStatus_System_String_System_Collections_Generic_IReadOnlyCollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.#ctor(System.String,System.Int32,System.Int64,System.Int64,System.Int64,System.String,System.Int32,System.Int32,System.Boolean,Elastic.Clients.Elasticsearch.HealthStatus,System.String,System.Collections.Generic.IReadOnlyCollection{System.String})">
+  RemoteClusterInfo(string, int, long, long, long, string, int, int, bool, HealthStatus, string, IReadOnlyCollection&lt;string&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RemoteClusterInfo(string clusterUuid, int indicesCount, long indicesTotalSizeInBytes, long maxHeapInBytes, long memTotalInBytes, string mode, int nodesCount, int shardsCount, bool skipUnavailable, HealthStatus status, string transportCompress, IReadOnlyCollection&lt;string&gt; version)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>clusterUuid</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>indicesCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>indicesTotalSizeInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>maxHeapInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>memTotalInBytes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+    <dt><code>mode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>nodesCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>shardsCount</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>skipUnavailable</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>status</code> <a class="xref" href="Elastic.Clients.Elasticsearch.HealthStatus.html">HealthStatus</a></dt>
+    <dd></dd>
+    <dt><code>transportCompress</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>version</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_ClusterUuid_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.ClusterUuid*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_ClusterUuid" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.ClusterUuid">
+  ClusterUuid
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The UUID of the remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ClusterUuid { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_IndicesCount_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.IndicesCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_IndicesCount" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.IndicesCount">
+  IndicesCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The total number of indices in the remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int IndicesCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_IndicesTotalSize_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.IndicesTotalSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_IndicesTotalSize" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.IndicesTotalSize">
+  IndicesTotalSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total data set size of all shards assigned to selected nodes, as a human-readable string.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? IndicesTotalSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_IndicesTotalSizeInBytes_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.IndicesTotalSizeInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_IndicesTotalSizeInBytes" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.IndicesTotalSizeInBytes">
+  IndicesTotalSizeInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total data set size, in bytes, of all shards assigned to selected nodes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long IndicesTotalSizeInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_MaxHeap_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.MaxHeap*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_MaxHeap" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.MaxHeap">
+  MaxHeap
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum amount of memory available for use by the heap across the nodes of the remote cluster, as a human-readable string.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? MaxHeap { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_MaxHeapInBytes_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.MaxHeapInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_MaxHeapInBytes" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.MaxHeapInBytes">
+  MaxHeapInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum amount of memory, in bytes, available for use by the heap across the nodes of the remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MaxHeapInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_MemTotal_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.MemTotal*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_MemTotal" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.MemTotal">
+  MemTotal
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L125"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount of physical memory across the nodes of the remote cluster, as a human-readable string.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? MemTotal { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_MemTotalInBytes_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.MemTotalInBytes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_MemTotalInBytes" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.MemTotalInBytes">
+  MemTotalInBytes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L132"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Total amount, in bytes, of physical memory across the nodes of the remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long MemTotalInBytes { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_Mode_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.Mode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_Mode" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.Mode">
+  Mode
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L143"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The connection mode used to communicate with the remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Mode { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_NodesCount_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.NodesCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_NodesCount" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.NodesCount">
+  NodesCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The total count of nodes in the remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int NodesCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_ShardsCount_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.ShardsCount*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_ShardsCount" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.ShardsCount">
+  ShardsCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L165"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The total number of shards in the remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int ShardsCount { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_SkipUnavailable_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.SkipUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_SkipUnavailable" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.SkipUnavailable">
+  SkipUnavailable
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L176"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The <code>skip_unavailable</code> setting used for this remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool SkipUnavailable { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_Status_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.Status*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_Status" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.Status">
+  Status
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L187"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Health status of the cluster, based on the state of its primary and replica shards.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HealthStatus Status { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.HealthStatus.html">HealthStatus</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_TransportCompress_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.TransportCompress*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_TransportCompress" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.TransportCompress">
+  TransportCompress
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Transport compression setting used for this remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string TransportCompress { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_Version_" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Cluster_RemoteClusterInfo_Version" data-uid="Elastic.Clients.Elasticsearch.Cluster.RemoteClusterInfo.Version">
+  Version
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.10/src/Elastic.Clients.Elasticsearch/_Generated/Types/Cluster/RemoteClusterInfo.g.cs/#L209"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The list of Elasticsearch versions used by the nodes on the remote cluster.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyCollection&lt;string&gt; Version { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
