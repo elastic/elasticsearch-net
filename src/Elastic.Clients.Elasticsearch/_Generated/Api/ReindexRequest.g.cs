@@ -334,7 +334,6 @@ public sealed partial class ReindexRequest : Elastic.Clients.Elasticsearch.Reque
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	public long? Size { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -665,12 +664,6 @@ public readonly partial struct ReindexRequestDescriptor
 	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Size(long? value)
-	{
-		Instance.Size = value;
 		return this;
 	}
 
@@ -1075,12 +1068,6 @@ public readonly partial struct ReindexRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Size(long? value)
-	{
-		Instance.Size = value;
 		return this;
 	}
 

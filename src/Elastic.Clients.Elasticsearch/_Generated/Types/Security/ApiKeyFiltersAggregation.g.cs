@@ -55,7 +55,7 @@ public sealed partial class ApiKeyFiltersAggregation
 	/// Set to <c>false</c> to return the buckets as an array of objects.
 	/// </para>
 	/// </summary>
-	public bool? Keyed { get; set; }
+	public bool? Keyed => false;
 
 	/// <summary>
 	/// <para>
@@ -110,18 +110,6 @@ public readonly partial struct ApiKeyFiltersAggregationDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> Filters(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<TDocument>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// By default, the named filters aggregation returns the buckets as an object.
-	/// Set to <c>false</c> to return the buckets as an array of objects.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor<TDocument> Keyed(bool? value = true)
-	{
-		Instance.Keyed = value;
 		return this;
 	}
 
@@ -210,18 +198,6 @@ public readonly partial struct ApiKeyFiltersAggregationDescriptor
 	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Filters<T>(System.Func<Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<T>, Elastic.Clients.Elasticsearch.Aggregations.Buckets<Elastic.Clients.Elasticsearch.Security.ApiKeyQuery>> action)
 	{
 		Instance.Filters = Elastic.Clients.Elasticsearch.Aggregations.BucketsOfApiKeyQueryFactory<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// By default, the named filters aggregation returns the buckets as an object.
-	/// Set to <c>false</c> to return the buckets as an array of objects.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyFiltersAggregationDescriptor Keyed(bool? value = true)
-	{
-		Instance.Keyed = value;
 		return this;
 	}
 

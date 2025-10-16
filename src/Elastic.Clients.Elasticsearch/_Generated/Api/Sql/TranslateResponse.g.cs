@@ -43,4 +43,5 @@ public sealed partial class TranslateResponse : Elastic.Transport.Products.Elast
 	public long? Size { get; set; }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 }
