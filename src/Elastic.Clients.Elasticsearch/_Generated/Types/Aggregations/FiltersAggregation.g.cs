@@ -51,6 +51,14 @@ public sealed partial class FiltersAggregation
 
 	/// <summary>
 	/// <para>
+	/// By default, the named filters aggregation returns the buckets as an object.
+	/// Set to <c>false</c> to return the buckets as an array of objects.
+	/// </para>
+	/// </summary>
+	public bool? Keyed => false;
+
+	/// <summary>
+	/// <para>
 	/// Set to <c>true</c> to add a bucket to the response which will contain all documents that do not match any of the given filters.
 	/// </para>
 	/// </summary>

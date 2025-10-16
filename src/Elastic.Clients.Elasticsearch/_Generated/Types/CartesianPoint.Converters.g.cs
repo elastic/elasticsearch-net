@@ -23,24 +23,24 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Json;
 
-public sealed partial class TextEmbeddingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TextEmbedding>
+public sealed partial class CartesianPointConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CartesianPoint>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
-	private static readonly System.Text.Json.JsonEncodedText PropModelText = System.Text.Json.JsonEncodedText.Encode("model_text");
+	private static readonly System.Text.Json.JsonEncodedText PropX = System.Text.Json.JsonEncodedText.Encode("x");
+	private static readonly System.Text.Json.JsonEncodedText PropY = System.Text.Json.JsonEncodedText.Encode("y");
 
-	public override Elastic.Clients.Elasticsearch.TextEmbedding Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.CartesianPoint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propModelId = default;
-		LocalJsonValue<string> propModelText = default;
+		LocalJsonValue<double> propX = default;
+		LocalJsonValue<double> propY = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propModelId.TryReadProperty(ref reader, options, PropModelId, null))
+			if (propX.TryReadProperty(ref reader, options, PropX, null))
 			{
 				continue;
 			}
 
-			if (propModelText.TryReadProperty(ref reader, options, PropModelText, null))
+			if (propY.TryReadProperty(ref reader, options, PropY, null))
 			{
 				continue;
 			}
@@ -55,18 +55,18 @@ public sealed partial class TextEmbeddingConverter : System.Text.Json.Serializat
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.TextEmbedding(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.CartesianPoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			ModelId = propModelId.Value,
-			ModelText = propModelText.Value
+			X = propX.Value,
+			Y = propY.Value
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TextEmbedding value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CartesianPoint value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
-		writer.WriteProperty(options, PropModelText, value.ModelText, null, null);
+		writer.WriteProperty(options, PropX, value.X, null, null);
+		writer.WriteProperty(options, PropY, value.Y, null, null);
 		writer.WriteEndObject();
 	}
 }

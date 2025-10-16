@@ -21,27 +21,40 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Sql;
+namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.TranslateResponseConverter))]
-public sealed partial class TranslateResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.Json.ChangePointAggregateConverter))]
+public sealed partial class ChangePointAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TranslateResponse()
+	public ChangePointAggregate(Elastic.Clients.Elasticsearch.Aggregations.ChangeType type)
+	{
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public ChangePointAggregate()
 	{
 	}
-
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ChangePointAggregate()
+	{
+	}
+#endif
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal TranslateResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal ChangePointAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
-	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
-	public long? Size { get; set; }
-	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
-	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
-	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.ChangePointBucket? Bucket { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Aggregations.ChangeType Type { get; set; }
+
+	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "change_point";
 }
