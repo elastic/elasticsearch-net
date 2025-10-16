@@ -57,7 +57,7 @@ public sealed partial class ValidateQueryRequestParameters : Elastic.Transport.R
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
@@ -192,7 +192,7 @@ public sealed partial class ValidateQueryRequest : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Operator? DefaultOperator { get => Q<Elastic.Clients.Elasticsearch.QueryDsl.Operator?>("default_operator"); set => Q("default_operator", value); }
@@ -347,7 +347,7 @@ public readonly partial struct ValidateQueryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)
@@ -628,7 +628,7 @@ public readonly partial struct ValidateQueryRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryRequestDescriptor<TDocument> DefaultOperator(Elastic.Clients.Elasticsearch.QueryDsl.Operator? value)

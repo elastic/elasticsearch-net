@@ -52,7 +52,7 @@ public sealed partial class CountRequestParameters : Elastic.Transport.RequestPa
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
@@ -227,7 +227,7 @@ public partial class CountRequest : Elastic.Clients.Elasticsearch.Requests.Plain
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
@@ -419,7 +419,7 @@ public readonly partial struct CountRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>
@@ -751,7 +751,7 @@ public readonly partial struct CountRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The default operator for query string query: <c>AND</c> or <c>OR</c>.
+	/// The default operator for query string query: <c>and</c> or <c>or</c>.
 	/// This parameter can be used only when the <c>q</c> query string parameter is specified.
 	/// </para>
 	/// </summary>

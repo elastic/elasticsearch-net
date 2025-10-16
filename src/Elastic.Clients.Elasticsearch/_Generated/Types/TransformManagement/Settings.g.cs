@@ -97,6 +97,17 @@ public sealed partial class Settings
 	/// </para>
 	/// </summary>
 	public bool? Unattended { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether the transform checkpoint will use the Point In Time API while searching over the source index.
+	/// In general, Point In Time is an optimization that will reduce pressure on the source index by reducing the amount
+	/// of refreshes and merges, but it can be expensive if a large number of Point In Times are opened and closed for a
+	/// given index. The benefits and impact depend on the data being searched, the ingest rate into the source index, and
+	/// the amount of other consumers searching the same source index.
+	/// </para>
+	/// </summary>
+	public bool? UsePointInTime { get; set; }
 }
 
 /// <summary>
@@ -195,6 +206,21 @@ public readonly partial struct SettingsDescriptor
 	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor Unattended(bool? value = true)
 	{
 		Instance.Unattended = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether the transform checkpoint will use the Point In Time API while searching over the source index.
+	/// In general, Point In Time is an optimization that will reduce pressure on the source index by reducing the amount
+	/// of refreshes and merges, but it can be expensive if a large number of Point In Times are opened and closed for a
+	/// given index. The benefits and impact depend on the data being searched, the ingest rate into the source index, and
+	/// the amount of other consumers searching the same source index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.SettingsDescriptor UsePointInTime(bool? value = true)
+	{
+		Instance.UsePointInTime = value;
 		return this;
 	}
 

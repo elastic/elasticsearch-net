@@ -44,13 +44,6 @@ public enum VersionType
 	ExternalGte,
 	/// <summary>
 	/// <para>
-	/// This option is deprecated because it can cause primary and replica shards to diverge.
-	/// </para>
-	/// </summary>
-	[System.Runtime.Serialization.EnumMember(Value = "force")]
-	Force,
-	/// <summary>
-	/// <para>
 	/// Use internal versioning that starts at 1 and increments with each update or delete.
 	/// </para>
 	/// </summary>

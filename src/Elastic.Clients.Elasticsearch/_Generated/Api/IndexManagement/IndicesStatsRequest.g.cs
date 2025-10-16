@@ -85,7 +85,7 @@ public sealed partial class IndicesStatsRequestParameters : Elastic.Transport.Re
 
 	/// <summary>
 	/// <para>
-	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
+	/// Indicates whether statistics are aggregated at the cluster, indices, or shards level.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
@@ -221,7 +221,7 @@ public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.
 
 	/// <summary>
 	/// <para>
-	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
+	/// Indicates whether statistics are aggregated at the cluster, indices, or shards level.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Level? Level { get => Q<Elastic.Clients.Elasticsearch.Level?>("level"); set => Q("level", value); }
@@ -449,7 +449,7 @@ public readonly partial struct IndicesStatsRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
+	/// Indicates whether statistics are aggregated at the cluster, indices, or shards level.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? value)
@@ -736,7 +736,7 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Indicates whether statistics are aggregated at the cluster, index, or shard level.
+	/// Indicates whether statistics are aggregated at the cluster, indices, or shards level.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? value)
