@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 public sealed partial class UpdateCrossClusterApiKeyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAccess = System.Text.Json.JsonEncodedText.Encode("access");
+	private static readonly System.Text.Json.JsonEncodedText PropCertificateIdentity = System.Text.Json.JsonEncodedText.Encode("certificate_identity");
 	private static readonly System.Text.Json.JsonEncodedText PropExpiration = System.Text.Json.JsonEncodedText.Encode("expiration");
 	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
 
@@ -33,11 +34,17 @@ public sealed partial class UpdateCrossClusterApiKeyRequestConverter : System.Te
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.Access> propAccess = default;
+		LocalJsonValue<string?> propCertificateIdentity = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propExpiration = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAccess.TryReadProperty(ref reader, options, PropAccess, null))
+			{
+				continue;
+			}
+
+			if (propCertificateIdentity.TryReadProperty(ref reader, options, PropCertificateIdentity, null))
 			{
 				continue;
 			}
@@ -65,6 +72,7 @@ public sealed partial class UpdateCrossClusterApiKeyRequestConverter : System.Te
 		return new Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Access = propAccess.Value,
+			CertificateIdentity = propCertificateIdentity.Value,
 			Expiration = propExpiration.Value,
 			Metadata = propMetadata.Value
 		};
@@ -74,6 +82,7 @@ public sealed partial class UpdateCrossClusterApiKeyRequestConverter : System.Te
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAccess, value.Access, null, null);
+		writer.WriteProperty(options, PropCertificateIdentity, value.CertificateIdentity, null, null);
 		writer.WriteProperty(options, PropExpiration, value.Expiration, null, null);
 		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteEndObject();

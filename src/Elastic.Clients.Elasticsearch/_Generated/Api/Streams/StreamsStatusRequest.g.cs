@@ -30,7 +30,7 @@ public sealed partial class StreamsStatusRequestParameters : Elastic.Transport.R
 	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TimeUnit? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.TimeUnit?>("master_timeout"); set => Q("master_timeout", value); }
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -73,7 +73,7 @@ public sealed partial class StreamsStatusRequest : Elastic.Clients.Elasticsearch
 	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TimeUnit? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.TimeUnit?>("master_timeout"); set => Q("master_timeout", value); }
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -107,7 +107,7 @@ public readonly partial struct StreamsStatusRequestDescriptor
 	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.TimeUnit? value)
+	public Elastic.Clients.Elasticsearch.Streams.StreamsStatusRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.MasterTimeout = value;
 		return this;

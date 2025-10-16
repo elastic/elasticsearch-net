@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class DenseVectorIndexOptionsTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberBbqDisk = System.Text.Json.JsonEncodedText.Encode("bbq_disk");
 	private static readonly System.Text.Json.JsonEncodedText MemberBbqFlat = System.Text.Json.JsonEncodedText.Encode("bbq_flat");
 	private static readonly System.Text.Json.JsonEncodedText MemberBbqHnsw = System.Text.Json.JsonEncodedText.Encode("bbq_hnsw");
 	private static readonly System.Text.Json.JsonEncodedText MemberFlat = System.Text.Json.JsonEncodedText.Encode("flat");
@@ -36,6 +37,11 @@ public sealed partial class DenseVectorIndexOptionsTypeConverter : System.Text.J
 
 	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberBbqDisk))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqDisk;
+		}
+
 		if (reader.ValueTextEquals(MemberBbqFlat))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqFlat;
@@ -77,6 +83,11 @@ public sealed partial class DenseVectorIndexOptionsTypeConverter : System.Text.J
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberBbqDisk.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqDisk;
+		}
+
 		if (string.Equals(value, MemberBbqFlat.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqFlat;
@@ -124,6 +135,9 @@ public sealed partial class DenseVectorIndexOptionsTypeConverter : System.Text.J
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqDisk:
+				writer.WriteStringValue(MemberBbqDisk);
+				break;
 			case Elastic.Clients.Elasticsearch.Mapping.DenseVectorIndexOptionsType.BbqFlat:
 				writer.WriteStringValue(MemberBbqFlat);
 				break;

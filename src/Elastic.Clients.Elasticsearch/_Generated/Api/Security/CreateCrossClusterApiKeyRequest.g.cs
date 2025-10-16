@@ -108,6 +108,15 @@ public sealed partial class CreateCrossClusterApiKeyRequest : Elastic.Clients.El
 
 	/// <summary>
 	/// <para>
+	/// The certificate identity to associate with this API key.
+	/// This field is used to restrict the API key to connections authenticated by a specific TLS certificate.
+	/// The value should match the certificate's distinguished name (DN) pattern.
+	/// </para>
+	/// </summary>
+	public string? CertificateIdentity { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Expiration time for the API key.
 	/// By default, API keys never expire.
 	/// </para>
@@ -246,6 +255,19 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor Access<T>(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor<T>>? action)
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The certificate identity to associate with this API key.
+	/// This field is used to restrict the API key to connections authenticated by a specific TLS certificate.
+	/// The value should match the certificate's distinguished name (DN) pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor CertificateIdentity(string? value)
+	{
+		Instance.CertificateIdentity = value;
 		return this;
 	}
 
@@ -463,6 +485,19 @@ public readonly partial struct CreateCrossClusterApiKeyRequestDescriptor<TDocume
 	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> Access(System.Action<Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>>? action)
 	{
 		Instance.Access = Elastic.Clients.Elasticsearch.Security.AccessDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The certificate identity to associate with this API key.
+	/// This field is used to restrict the API key to connections authenticated by a specific TLS certificate.
+	/// The value should match the certificate's distinguished name (DN) pattern.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument> CertificateIdentity(string? value)
+	{
+		Instance.CertificateIdentity = value;
 		return this;
 	}
 

@@ -21,26 +21,30 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Project;
+namespace Elastic.Clients.Elasticsearch.Security;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Project.Json.TagsResponseConverter))]
-public sealed partial class TagsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.GetStatsResponseConverter))]
+public sealed partial class GetStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TagsResponse()
+	public GetStatsResponse()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal TagsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal GetStatsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	public System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Project.Tags>? LinkedProjects { get; set; }
+	/// <summary>
+	/// <para>
+	/// A map of node IDs to security statistics for that node.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
-required
+	required
 #endif
-System.Collections.Generic.KeyValuePair<string, Elastic.Clients.Elasticsearch.Project.Tags> Origin { get; set; }
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.NodeSecurityStats> Nodes { get; set; }
 }

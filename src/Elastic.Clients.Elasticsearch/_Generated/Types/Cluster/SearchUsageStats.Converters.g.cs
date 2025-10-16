@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class SearchUsageStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.SearchUsageStats>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropExtended = System.Text.Json.JsonEncodedText.Encode("extended");
 	private static readonly System.Text.Json.JsonEncodedText PropQueries = System.Text.Json.JsonEncodedText.Encode("queries");
 	private static readonly System.Text.Json.JsonEncodedText PropRescorers = System.Text.Json.JsonEncodedText.Encode("rescorers");
 	private static readonly System.Text.Json.JsonEncodedText PropRetrievers = System.Text.Json.JsonEncodedText.Encode("retrievers");
@@ -34,6 +35,7 @@ public sealed partial class SearchUsageStatsConverter : System.Text.Json.Seriali
 	public override Elastic.Clients.Elasticsearch.Cluster.SearchUsageStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ExtendedSearchUsage> propExtended = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, long>> propQueries = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, long>> propRescorers = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, long>> propRetrievers = default;
@@ -41,6 +43,11 @@ public sealed partial class SearchUsageStatsConverter : System.Text.Json.Seriali
 		LocalJsonValue<long> propTotal = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propExtended.TryReadProperty(ref reader, options, PropExtended, null))
+			{
+				continue;
+			}
+
 			if (propQueries.TryReadProperty(ref reader, options, PropQueries, static System.Collections.Generic.IReadOnlyDictionary<string, long> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, long>(o, null, null)!))
 			{
 				continue;
@@ -78,6 +85,7 @@ public sealed partial class SearchUsageStatsConverter : System.Text.Json.Seriali
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Cluster.SearchUsageStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Extended = propExtended.Value,
 			Queries = propQueries.Value,
 			Rescorers = propRescorers.Value,
 			Retrievers = propRetrievers.Value,
@@ -89,6 +97,7 @@ public sealed partial class SearchUsageStatsConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.SearchUsageStats value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExtended, value.Extended, null, null);
 		writer.WriteProperty(options, PropQueries, value.Queries, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, long> v) => w.WriteDictionaryValue<string, long>(o, v, null, null));
 		writer.WriteProperty(options, PropRescorers, value.Rescorers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, long> v) => w.WriteDictionaryValue<string, long>(o, v, null, null));
 		writer.WriteProperty(options, PropRetrievers, value.Retrievers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, long> v) => w.WriteDictionaryValue<string, long>(o, v, null, null));

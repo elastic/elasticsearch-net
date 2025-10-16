@@ -27,7 +27,6 @@ public sealed partial class VersionTypeConverter : System.Text.Json.Serializatio
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberExternal = System.Text.Json.JsonEncodedText.Encode("external");
 	private static readonly System.Text.Json.JsonEncodedText MemberExternalGte = System.Text.Json.JsonEncodedText.Encode("external_gte");
-	private static readonly System.Text.Json.JsonEncodedText MemberForce = System.Text.Json.JsonEncodedText.Encode("force");
 	private static readonly System.Text.Json.JsonEncodedText MemberInternal = System.Text.Json.JsonEncodedText.Encode("internal");
 
 	public override Elastic.Clients.Elasticsearch.VersionType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -40,11 +39,6 @@ public sealed partial class VersionTypeConverter : System.Text.Json.Serializatio
 		if (reader.ValueTextEquals(MemberExternalGte))
 		{
 			return Elastic.Clients.Elasticsearch.VersionType.ExternalGte;
-		}
-
-		if (reader.ValueTextEquals(MemberForce))
-		{
-			return Elastic.Clients.Elasticsearch.VersionType.Force;
 		}
 
 		if (reader.ValueTextEquals(MemberInternal))
@@ -61,11 +55,6 @@ public sealed partial class VersionTypeConverter : System.Text.Json.Serializatio
 		if (string.Equals(value, MemberExternalGte.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.VersionType.ExternalGte;
-		}
-
-		if (string.Equals(value, MemberForce.Value, System.StringComparison.OrdinalIgnoreCase))
-		{
-			return Elastic.Clients.Elasticsearch.VersionType.Force;
 		}
 
 		if (string.Equals(value, MemberInternal.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -85,9 +74,6 @@ public sealed partial class VersionTypeConverter : System.Text.Json.Serializatio
 				break;
 			case Elastic.Clients.Elasticsearch.VersionType.ExternalGte:
 				writer.WriteStringValue(MemberExternalGte);
-				break;
-			case Elastic.Clients.Elasticsearch.VersionType.Force:
-				writer.WriteStringValue(MemberForce);
 				break;
 			case Elastic.Clients.Elasticsearch.VersionType.Internal:
 				writer.WriteStringValue(MemberInternal);

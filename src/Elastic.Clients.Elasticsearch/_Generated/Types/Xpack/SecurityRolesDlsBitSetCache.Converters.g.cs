@@ -26,18 +26,43 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 public sealed partial class SecurityRolesDlsBitSetCacheConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropEvictions = System.Text.Json.JsonEncodedText.Encode("evictions");
+	private static readonly System.Text.Json.JsonEncodedText PropHits = System.Text.Json.JsonEncodedText.Encode("hits");
+	private static readonly System.Text.Json.JsonEncodedText PropHitsTimeInMillis = System.Text.Json.JsonEncodedText.Encode("hits_time_in_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropMemory = System.Text.Json.JsonEncodedText.Encode("memory");
 	private static readonly System.Text.Json.JsonEncodedText PropMemoryInBytes = System.Text.Json.JsonEncodedText.Encode("memory_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropMisses = System.Text.Json.JsonEncodedText.Encode("misses");
+	private static readonly System.Text.Json.JsonEncodedText PropMissesTimeInMillis = System.Text.Json.JsonEncodedText.Encode("misses_time_in_millis");
 
 	public override Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<int> propCount = default;
+		LocalJsonValue<long> propEvictions = default;
+		LocalJsonValue<long> propHits = default;
+		LocalJsonValue<System.TimeSpan> propHitsTimeInMillis = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMemory = default;
 		LocalJsonValue<long> propMemoryInBytes = default;
+		LocalJsonValue<long> propMisses = default;
+		LocalJsonValue<System.TimeSpan> propMissesTimeInMillis = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propEvictions.TryReadProperty(ref reader, options, PropEvictions, null))
+			{
+				continue;
+			}
+
+			if (propHits.TryReadProperty(ref reader, options, PropHits, null))
+			{
+				continue;
+			}
+
+			if (propHitsTimeInMillis.TryReadProperty(ref reader, options, PropHitsTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -48,6 +73,16 @@ public sealed partial class SecurityRolesDlsBitSetCacheConverter : System.Text.J
 			}
 
 			if (propMemoryInBytes.TryReadProperty(ref reader, options, PropMemoryInBytes, null))
+			{
+				continue;
+			}
+
+			if (propMisses.TryReadProperty(ref reader, options, PropMisses, null))
+			{
+				continue;
+			}
+
+			if (propMissesTimeInMillis.TryReadProperty(ref reader, options, PropMissesTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
 			{
 				continue;
 			}
@@ -65,8 +100,13 @@ public sealed partial class SecurityRolesDlsBitSetCacheConverter : System.Text.J
 		return new Elastic.Clients.Elasticsearch.Xpack.SecurityRolesDlsBitSetCache(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Count = propCount.Value,
+			Evictions = propEvictions.Value,
+			Hits = propHits.Value,
+			HitsTimeInMillis = propHitsTimeInMillis.Value,
 			Memory = propMemory.Value,
-			MemoryInBytes = propMemoryInBytes.Value
+			MemoryInBytes = propMemoryInBytes.Value,
+			Misses = propMisses.Value,
+			MissesTimeInMillis = propMissesTimeInMillis.Value
 		};
 	}
 
@@ -74,8 +114,13 @@ public sealed partial class SecurityRolesDlsBitSetCacheConverter : System.Text.J
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropEvictions, value.Evictions, null, null);
+		writer.WriteProperty(options, PropHits, value.Hits, null, null);
+		writer.WriteProperty(options, PropHitsTimeInMillis, value.HitsTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteProperty(options, PropMemory, value.Memory, null, null);
 		writer.WriteProperty(options, PropMemoryInBytes, value.MemoryInBytes, null, null);
+		writer.WriteProperty(options, PropMisses, value.Misses, null, null);
+		writer.WriteProperty(options, PropMissesTimeInMillis, value.MissesTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
 		writer.WriteEndObject();
 	}
 }
