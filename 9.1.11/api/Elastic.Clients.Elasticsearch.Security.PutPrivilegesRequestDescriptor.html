@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct PutPrivilegesRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct PutPrivilegesRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create or update application privileges.   To use this API, you must have one of the following privileges:    The manage_security cluster privilege (or a greater privilege such as all).    The &quot;Manage Application Privileges&quot; global privilege for the application being referenced in the request.    Application names are formed from a prefix, with an optional suffix that conform to the following rules:    The prefix must begin with a lowercase ASCII letter.    The prefix must contain only ASCII letters or digits.    The prefix must be at least 3 characters long.    If the suffix exists, it must begin with either a dash - or _.    The suffix cannot contain any of the following characters: \, /, *, ?, &quot;, &amp;lt;, &amp;gt;, |, ,, *.    No part of the name can contain whitespace.    Privilege names must begin with a lowercase ASCII letter and must contain only ASCII letters and digits along with the characters _, -, and ..   Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: /, *, :.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.11/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor" class="text-break">
+Struct PutPrivilegesRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L204"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create or update application privileges.
+</p>
+<p>
+To use this API, you must have one of the following privileges:
+</p>
+<ul><li>
+<p>
+The <code>manage_security</code> cluster privilege (or a greater privilege such as <code>all</code>).
+</p>
+</li><li>
+<p>
+The "Manage Application Privileges" global privilege for the application being referenced in the request.
+</p>
+</li></ul>
+<p>
+Application names are formed from a prefix, with an optional suffix that conform to the following rules:
+</p>
+<ul><li>
+<p>
+The prefix must begin with a lowercase ASCII letter.
+</p>
+</li><li>
+<p>
+The prefix must contain only ASCII letters or digits.
+</p>
+</li><li>
+<p>
+The prefix must be at least 3 characters long.
+</p>
+</li><li>
+<p>
+If the suffix exists, it must begin with either a dash <code>-</code> or <code>_</code>.
+</p>
+</li><li>
+<p>
+The suffix cannot contain any of the following characters: <code>\</code>, <code>/</code>, <code>*</code>, <code>?</code>, <code>"</code>, <code>&lt;</code>, <code>&gt;</code>, <code>|</code>, <code>,</code>, <code>*</code>.
+</p>
+</li><li>
+<p>
+No part of the name can contain whitespace.
+</p>
+</li></ul>
+<p>
+Privilege names must begin with a lowercase ASCII letter and must contain only ASCII letters and digits along with the characters <code>_</code>, <code>-</code>, and <code>.</code>.
+</p>
+<p>
+Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <code>/</code>, <code>*</code>, <code>:</code>.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct PutPrivilegesRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.#ctor">
+  PutPrivilegesRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L214"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequest_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest)">
+  PutPrivilegesRequestDescriptor(PutPrivilegesRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor(PutPrivilegesRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest.html">PutPrivilegesRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_AddPrivilege_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.AddPrivilege*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_AddPrivilege_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.AddPrivilege(System.String)">
+  AddPrivilege(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L258"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor AddPrivilege(string key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_AddPrivilege_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.AddPrivilege*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_AddPrivilege_System_String_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringPrivilegeActions__" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.AddPrivilege(System.String,System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPrivilegeActions})">
+  AddPrivilege(string, Action&lt;FluentDictionaryOfStringPrivilegeActions&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L265"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor AddPrivilege(string key, Action&lt;FluentDictionaryOfStringPrivilegeActions&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPrivilegeActions.html">FluentDictionaryOfStringPrivilegeActions</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_AddPrivilege_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.AddPrivilege*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_AddPrivilege_System_String_System_Collections_Generic_IDictionary_System_String_Elastic_Clients_Elasticsearch_Security_PrivilegeActions__" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.AddPrivilege(System.String,System.Collections.Generic.IDictionary{System.String,Elastic.Clients.Elasticsearch.Security.PrivilegeActions})">
+  AddPrivilege(string, IDictionary&lt;string, PrivilegeActions&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L251"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor AddPrivilege(string key, IDictionary&lt;string, PrivilegeActions&gt; value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Security.PrivilegeActions.html">PrivilegeActions</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L280"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L286"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L298"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Privileges_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Privileges*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Privileges" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Privileges">
+  Privileges()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L239"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor Privileges()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Privileges_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Privileges*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Privileges_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringDictionaryOfStringPrivilegeActions__" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Privileges(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDictionaryOfStringPrivilegeActions})">
+  Privileges(Action&lt;FluentDictionaryOfStringDictionaryOfStringPrivilegeActions&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L245"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor Privileges(Action&lt;FluentDictionaryOfStringDictionaryOfStringPrivilegeActions&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringDictionaryOfStringPrivilegeActions.html">FluentDictionaryOfStringDictionaryOfStringPrivilegeActions</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Privileges_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Privileges*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Privileges_System_Collections_Generic_IDictionary_System_String_System_Collections_Generic_IDictionary_System_String_Elastic_Clients_Elasticsearch_Security_PrivilegeActions___" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Privileges(System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IDictionary{System.String,Elastic.Clients.Elasticsearch.Security.PrivilegeActions}})">
+  Privileges(IDictionary&lt;string, IDictionary&lt;string, PrivilegeActions&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L233"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor Privileges(IDictionary&lt;string, IDictionary&lt;string, PrivilegeActions&gt;&gt; value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Security.PrivilegeActions.html">PrivilegeActions</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Refresh_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_Refresh_System_Nullable_Elastic_Clients_Elasticsearch_Refresh__" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.Refresh(System.Nullable{Elastic.Clients.Elasticsearch.Refresh})">
+  Refresh(Refresh?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code> (the default) then refresh the affected shards to make this operation visible to search, if <code>wait_for</code> then wait for a refresh to make this operation visible to search, if <code>false</code> then do nothing with refreshes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor Refresh(Refresh? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Refresh.html">Refresh</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.11/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L316"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.11/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.11/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L304"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutPrivilegesRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequest__Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest)~Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor">
+  explicit operator PutPrivilegesRequestDescriptor(PutPrivilegesRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator PutPrivilegesRequestDescriptor(PutPrivilegesRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest.html">PutPrivilegesRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequestDescriptor__Elastic_Clients_Elasticsearch_Security_PutPrivilegesRequest" data-uid="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor)~Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest">
+  implicit operator PutPrivilegesRequest(PutPrivilegesRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutPrivilegesRequest.g.cs/#L220"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator PutPrivilegesRequest(PutPrivilegesRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor.html">PutPrivilegesRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest.html">PutPrivilegesRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

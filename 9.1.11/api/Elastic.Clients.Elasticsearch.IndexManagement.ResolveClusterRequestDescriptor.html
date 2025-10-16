@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct ResolveClusterRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct ResolveClusterRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Resolve the cluster.   Resolve the specified index expressions to return information about each cluster, including the local &quot;querying&quot; cluster, if included. If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.   This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.   You use the same index expression with this endpoint as you would for cross-cluster search. Index and cluster exclusions are also supported with this endpoint.   For each cluster in the index expression, information is returned about:    Whether the querying (&quot;local&quot;) cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the remote/info endpoint.    Whether each remote cluster is configured with skip_unavailable as true or false.    Whether there are any indices, aliases, or data streams on that cluster that match the index expression.    Whether the search is likely to have errors returned when you do the cross-cluster search (including any authorization errors if you do not have permission to query the index).    Cluster version information, including the Elasticsearch server version.    For example, GET /_resolve/cluster/my-index-*,cluster*:my-index-* returns information about the local cluster and all remotely configured clusters that start with the alias cluster*. Each cluster returns information about whether it has any indices, aliases or data streams that match my-index-*.  Note on backwards compatibility  The ability to query without an index expression was added in version 8.18, so when querying remote clusters older than that, the local cluster will send the index expression dummy* to those remote clusters. Thus, if an errors occur, you may see a reference to that index expression even though you didn&#39;t request it. If it causes a problem, you can instead include an index expression like *:* to bypass the issue.  Advantages of using this endpoint before a cross-cluster search  You may want to exclude a cluster or index from a search when:    A remote cluster is not currently connected and is configured with skip_unavailable=false. Running a cross-cluster search under those conditions will cause the entire search to fail.    A cluster has no matching indices, aliases or data streams for the index expression (or your user does not have permissions to search them). For example, suppose your index expression is logs*,remote1:logs* and the remote1 cluster has no indices, aliases or data streams that match logs*. In that case, that cluster will return no results from that cluster if you include it in a cross-cluster search.    The index expression (combined with any query parameters you specify) will likely cause an exception to be thrown when you do the search. In these cases, the &quot;error&quot; field in the _resolve/cluster response will be present. (This is also where security/permission errors will be shown.)    A remote cluster is an older version that does not support the feature you want to use in your search.   Test availability of remote clusters  The remote/info endpoint is commonly used to test whether the &quot;local&quot; cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not. The remote cluster may be available, while the local cluster is not currently connected to it.   You can use the _resolve/cluster API to attempt to reconnect to remote clusters. For example with GET _resolve/cluster or GET _resolve/cluster/*:*. The connected field in the response will indicate whether it was successful. If a connection was (re-)established, this will also cause the remote/info endpoint to now indicate a connected status.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.11/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor" class="text-break">
+Struct ResolveClusterRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L373"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Resolve the cluster.
+</p>
+<p>
+Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
+</p>
+<p>
+This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
+</p>
+<p>
+You use the same index expression with this endpoint as you would for cross-cluster search.
+Index and cluster exclusions are also supported with this endpoint.
+</p>
+<p>
+For each cluster in the index expression, information is returned about:
+</p>
+<ul><li>
+<p>
+Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <code>remote/info</code> endpoint.
+</p>
+</li><li>
+<p>
+Whether each remote cluster is configured with <code>skip_unavailable</code> as <code>true</code> or <code>false</code>.
+</p>
+</li><li>
+<p>
+Whether there are any indices, aliases, or data streams on that cluster that match the index expression.
+</p>
+</li><li>
+<p>
+Whether the search is likely to have errors returned when you do the cross-cluster search (including any authorization errors if you do not have permission to query the index).
+</p>
+</li><li>
+<p>
+Cluster version information, including the Elasticsearch server version.
+</p>
+</li></ul>
+<p>
+For example, <code>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</code> returns information about the local cluster and all remotely configured clusters that start with the alias <code>cluster*</code>.
+Each cluster returns information about whether it has any indices, aliases or data streams that match <code>my-index-*</code>.
+</p>
+Note on backwards compatibility
+<p>
+The ability to query without an index expression was added in version 8.18, so when
+querying remote clusters older than that, the local cluster will send the index
+expression <code>dummy*</code> to those remote clusters. Thus, if an errors occur, you may see a reference
+to that index expression even though you didn't request it. If it causes a problem, you can
+instead include an index expression like <code>*:*</code> to bypass the issue.
+</p>
+Advantages of using this endpoint before a cross-cluster search
+<p>
+You may want to exclude a cluster or index from a search when:
+</p>
+<ul><li>
+<p>
+A remote cluster is not currently connected and is configured with <code>skip_unavailable=false</code>. Running a cross-cluster search under those conditions will cause the entire search to fail.
+</p>
+</li><li>
+<p>
+A cluster has no matching indices, aliases or data streams for the index expression (or your user does not have permissions to search them). For example, suppose your index expression is <code>logs*,remote1:logs*</code> and the remote1 cluster has no indices, aliases or data streams that match <code>logs*</code>. In that case, that cluster will return no results from that cluster if you include it in a cross-cluster search.
+</p>
+</li><li>
+<p>
+The index expression (combined with any query parameters you specify) will likely cause an exception to be thrown when you do the search. In these cases, the "error" field in the <code>_resolve/cluster</code> response will be present. (This is also where security/permission errors will be shown.)
+</p>
+</li><li>
+<p>
+A remote cluster is an older version that does not support the feature you want to use in your search.
+</p>
+</li></ul>
+Test availability of remote clusters
+<p>
+The <code>remote/info</code> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+The remote cluster may be available, while the local cluster is not currently connected to it.
+</p>
+<p>
+You can use the <code>_resolve/cluster</code> API to attempt to reconnect to remote clusters.
+For example with <code>GET _resolve/cluster</code> or <code>GET _resolve/cluster/*:*</code>.
+The <code>connected</code> field in the response will indicate whether it was successful.
+If a connection was (re-)established, this will also cause the <code>remote/info</code> endpoint to now indicate a connected status.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct ResolveClusterRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.#ctor">
+  ResolveClusterRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L388"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequest_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest)">
+  ResolveClusterRequestDescriptor(ResolveClusterRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L377"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor(ResolveClusterRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest.html">ResolveClusterRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Names_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Names)">
+  ResolveClusterRequestDescriptor(Names?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L383"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor(Names? name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_AllowNoIndices_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.AllowNoIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_AllowNoIndices_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.AllowNoIndices(System.Nullable{System.Boolean})">
+  AllowNoIndices(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L420"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If false, the request returns an error if any wildcard expression, index alias, or <code>_all</code> value targets only missing
+or closed indices. This behavior applies even if the request targets other open indices. For example, a request
+targeting <code>foo*,bar*</code> returns an error if an index starts with <code>foo</code> but no index starts with <code>bar</code>.
+NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+options to the <code>_resolve/cluster</code> API endpoint that takes no index expression.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor AllowNoIndices(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L515"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_ExpandWildcards_Elastic_Clients_Elasticsearch_ExpandWildcard___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcard[])">
+  ExpandWildcards(params ExpandWildcard[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L450"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <code>open,hidden</code>.
+NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+options to the <code>_resolve/cluster</code> API endpoint that takes no index expression.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor ExpandWildcards(params ExpandWildcard[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_ExpandWildcards_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ExpandWildcard__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.ExpandWildcards(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ExpandWildcard})">
+  ExpandWildcards(ICollection&lt;ExpandWildcard&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L435"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+Supports comma-separated values, such as <code>open,hidden</code>.
+NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+options to the <code>_resolve/cluster</code> API endpoint that takes no index expression.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor ExpandWildcards(ICollection&lt;ExpandWildcard&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L521"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L527"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_IgnoreThrottled_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.IgnoreThrottled*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_IgnoreThrottled_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.IgnoreThrottled(System.Nullable{System.Boolean})">
+  IgnoreThrottled(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L456"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;7.16.0&#39;.&quot;)]
+public ResolveClusterRequestDescriptor IgnoreThrottled(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_IgnoreUnavailable_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.IgnoreUnavailable(System.Nullable{System.Boolean})">
+  IgnoreUnavailable(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L477"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If false, the request returns an error if it targets a missing or closed index.
+NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+options to the <code>_resolve/cluster</code> API endpoint that takes no index expression.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor IgnoreUnavailable(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_Name_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.Name*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_Name_Elastic_Clients_Elasticsearch_Names_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.Name(Elastic.Clients.Elasticsearch.Names)">
+  Name(Names?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L405"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of names or index patterns for the indices, aliases, and data streams to resolve.
+Resources on remote clusters can be specified using the <code>&lt;cluster&gt;</code>:<code>&lt;name&gt;</code> syntax.
+Index and cluster exclusions (e.g., <code>-cluster1:*</code>) are also supported.
+If no index expression is specified, information about all remote clusters configured on the local cluster
+is returned without doing any index matching
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor Name(Names? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Names.html">Names</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L533"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L545"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.11/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L551"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.11/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.11/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L539"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_Timeout_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_Timeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.Timeout(Elastic.Clients.Elasticsearch.Duration)">
+  Timeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L496"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum time to wait for remote clusters to respond.
+If a remote cluster does not respond within this timeout period, the API response
+will show the cluster as not connected and include an error message that the
+request timed out.
+</p>
+<p>
+The default timeout is unset and the query can take
+as long as the networking layer is configured to wait for remote clusters that are
+not responding (typically 30 seconds).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ResolveClusterRequestDescriptor Timeout(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequest__Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest)~Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor">
+  explicit operator ResolveClusterRequestDescriptor(ResolveClusterRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L393"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator ResolveClusterRequestDescriptor(ResolveClusterRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest.html">ResolveClusterRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequestDescriptor__Elastic_Clients_Elasticsearch_IndexManagement_ResolveClusterRequest" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor)~Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest">
+  implicit operator ResolveClusterRequest(ResolveClusterRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/ResolveClusterRequest.g.cs/#L394"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator ResolveClusterRequest(ResolveClusterRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor.html">ResolveClusterRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest.html">ResolveClusterRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
