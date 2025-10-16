@@ -65,6 +65,8 @@ public sealed class BulkAllRequestDescriptor<T>
 {
 	internal BulkAllRequest<T> Instance { get; }
 
+	public static implicit operator BulkAllRequest<T>(BulkAllRequestDescriptor<T> descriptor) => descriptor.Instance;
+
 	public BulkAllRequestDescriptor(IEnumerable<T> documents)
 	{
 		Instance = new(documents);

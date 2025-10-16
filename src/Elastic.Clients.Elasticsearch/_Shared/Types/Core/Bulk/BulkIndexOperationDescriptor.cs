@@ -14,6 +14,8 @@ public sealed class BulkIndexOperationDescriptor<TSource> :
 {
 	internal new BulkIndexOperation<TSource> Instance => (BulkIndexOperation<TSource>)base.Instance;
 
+	public static implicit operator BulkIndexOperation<TSource>(BulkIndexOperationDescriptor<TSource> descriptor) => descriptor.Instance;
+
 	public BulkIndexOperationDescriptor(TSource source) :
 		base(new BulkIndexOperation<TSource>(source))
 	{
