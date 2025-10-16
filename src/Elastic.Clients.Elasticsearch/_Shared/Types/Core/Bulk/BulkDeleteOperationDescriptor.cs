@@ -9,6 +9,8 @@ public class BulkDeleteOperationDescriptor :
 {
 	private new BulkDeleteOperation Instance => (BulkDeleteOperation)base.Instance;
 
+	public static implicit operator BulkDeleteOperation(BulkDeleteOperationDescriptor descriptor) => descriptor.Instance;
+
 	public BulkDeleteOperationDescriptor() :
 		base(new BulkDeleteOperation(null!))
 	{
@@ -24,6 +26,8 @@ public sealed class BulkDeleteOperationDescriptor<TDocument> :
 	BulkOperationDescriptor<BulkDeleteOperationDescriptor>
 {
 	private new BulkDeleteOperation<TDocument> Instance => (BulkDeleteOperation<TDocument>)base.Instance;
+
+	public static implicit operator BulkDeleteOperation<TDocument>(BulkDeleteOperationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	public BulkDeleteOperationDescriptor() :
 		base(new BulkDeleteOperation<TDocument>(null!))
