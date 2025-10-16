@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 public sealed partial class FiltersAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.FiltersAggregation>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropFilters = System.Text.Json.JsonEncodedText.Encode("filters");
+	private static readonly System.Text.Json.JsonEncodedText PropKeyed = System.Text.Json.JsonEncodedText.Encode("keyed");
 	private static readonly System.Text.Json.JsonEncodedText PropOtherBucket = System.Text.Json.JsonEncodedText.Encode("other_bucket");
 	private static readonly System.Text.Json.JsonEncodedText PropOtherBucketKey = System.Text.Json.JsonEncodedText.Encode("other_bucket_key");
 
@@ -39,6 +40,12 @@ public sealed partial class FiltersAggregationConverter : System.Text.Json.Seria
 		{
 			if (propFilters.TryReadProperty(ref reader, options, PropFilters, null))
 			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropKeyed))
+			{
+				reader.SafeSkip();
 				continue;
 			}
 
@@ -74,6 +81,7 @@ public sealed partial class FiltersAggregationConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFilters, value.Filters, null, null);
+		writer.WriteProperty(options, PropKeyed, value.Keyed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropOtherBucket, value.OtherBucket, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropOtherBucketKey, value.OtherBucketKey, null, null);
 		writer.WriteEndObject();

@@ -39,7 +39,10 @@ public sealed partial class AggregationConverter : System.Text.Json.Serializatio
 	private static readonly System.Text.Json.JsonEncodedText VariantBucketSelector = System.Text.Json.JsonEncodedText.Encode("bucket_selector");
 	private static readonly System.Text.Json.JsonEncodedText VariantBucketSort = System.Text.Json.JsonEncodedText.Encode("bucket_sort");
 	private static readonly System.Text.Json.JsonEncodedText VariantCardinality = System.Text.Json.JsonEncodedText.Encode("cardinality");
+	private static readonly System.Text.Json.JsonEncodedText VariantCartesianBounds = System.Text.Json.JsonEncodedText.Encode("cartesian_bounds");
+	private static readonly System.Text.Json.JsonEncodedText VariantCartesianCentroid = System.Text.Json.JsonEncodedText.Encode("cartesian_centroid");
 	private static readonly System.Text.Json.JsonEncodedText VariantCategorizeText = System.Text.Json.JsonEncodedText.Encode("categorize_text");
+	private static readonly System.Text.Json.JsonEncodedText VariantChangePoint = System.Text.Json.JsonEncodedText.Encode("change_point");
 	private static readonly System.Text.Json.JsonEncodedText VariantChildren = System.Text.Json.JsonEncodedText.Encode("children");
 	private static readonly System.Text.Json.JsonEncodedText VariantComposite = System.Text.Json.JsonEncodedText.Encode("composite");
 	private static readonly System.Text.Json.JsonEncodedText VariantCumulativeCardinality = System.Text.Json.JsonEncodedText.Encode("cumulative_cardinality");
@@ -53,6 +56,7 @@ public sealed partial class AggregationConverter : System.Text.Json.Serializatio
 	private static readonly System.Text.Json.JsonEncodedText VariantFilter = System.Text.Json.JsonEncodedText.Encode("filter");
 	private static readonly System.Text.Json.JsonEncodedText VariantFilters = System.Text.Json.JsonEncodedText.Encode("filters");
 	private static readonly System.Text.Json.JsonEncodedText VariantFrequentItemSets = System.Text.Json.JsonEncodedText.Encode("frequent_item_sets");
+	private static readonly System.Text.Json.JsonEncodedText VariantFrequentItemSets1 = System.Text.Json.JsonEncodedText.Encode("frequent_items");
 	private static readonly System.Text.Json.JsonEncodedText VariantGeoBounds = System.Text.Json.JsonEncodedText.Encode("geo_bounds");
 	private static readonly System.Text.Json.JsonEncodedText VariantGeoCentroid = System.Text.Json.JsonEncodedText.Encode("geo_centroid");
 	private static readonly System.Text.Json.JsonEncodedText VariantGeoDistance = System.Text.Json.JsonEncodedText.Encode("geo_distance");
@@ -213,11 +217,35 @@ public sealed partial class AggregationConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
+			if (reader.ValueTextEquals(VariantCartesianBounds))
+			{
+				variantType = VariantCartesianBounds.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantCartesianCentroid))
+			{
+				variantType = VariantCartesianCentroid.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation>(options, null);
+				continue;
+			}
+
 			if (reader.ValueTextEquals(VariantCategorizeText))
 			{
 				variantType = VariantCategorizeText.Value;
 				reader.Read();
 				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantChangePoint))
+			{
+				variantType = VariantChangePoint.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation>(options, null);
 				continue;
 			}
 
@@ -317,7 +345,7 @@ public sealed partial class AggregationConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (reader.ValueTextEquals(VariantFrequentItemSets))
+			if (reader.ValueTextEquals(VariantFrequentItemSets) || reader.ValueTextEquals(VariantFrequentItemSets1))
 			{
 				variantType = VariantFrequentItemSets.Value;
 				reader.Read();
@@ -800,8 +828,17 @@ public sealed partial class AggregationConverter : System.Text.Json.Serializatio
 			case "cardinality":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.CardinalityAggregation)value.Variant, null, null);
 				break;
+			case "cartesian_bounds":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.CartesianBoundsAggregation)value.Variant, null, null);
+				break;
+			case "cartesian_centroid":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.CartesianCentroidAggregation)value.Variant, null, null);
+				break;
 			case "categorize_text":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation)value.Variant, null, null);
+				break;
+			case "change_point":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.ChangePointAggregation)value.Variant, null, null);
 				break;
 			case "children":
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation)value.Variant, null, null);
