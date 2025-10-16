@@ -13,6 +13,8 @@ public sealed class BulkUpdateOperationDescriptor<TDocument, TPartialDocument> :
 {
 	internal new BulkUpdateOperation<TDocument, TPartialDocument> Instance => (BulkUpdateOperation<TDocument, TPartialDocument>)base.Instance;
 
+	public static implicit operator BulkUpdateOperation<TDocument, TPartialDocument>(BulkUpdateOperationDescriptor<TDocument, TPartialDocument> descriptor) => descriptor.Instance;
+
 	public BulkUpdateOperationDescriptor() :
 		base(new BulkUpdateOperation<TDocument, TPartialDocument>(null!))
 	{

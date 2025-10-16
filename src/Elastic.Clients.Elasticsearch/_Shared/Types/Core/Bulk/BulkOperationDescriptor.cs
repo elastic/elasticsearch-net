@@ -10,6 +10,8 @@ public abstract class BulkOperationDescriptor<TDescriptor>
 	protected TDescriptor Self => (TDescriptor)this;
 	internal BulkOperation Instance { get; }
 
+	public static implicit operator BulkOperation(BulkOperationDescriptor<TDescriptor> descriptor) => descriptor.Instance;
+
 	internal BulkOperationDescriptor(BulkOperation instance)
 	{
 		Instance = instance;

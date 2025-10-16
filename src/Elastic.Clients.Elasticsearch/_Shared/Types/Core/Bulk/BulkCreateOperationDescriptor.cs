@@ -14,6 +14,8 @@ public sealed class BulkCreateOperationDescriptor<TSource> :
 {
 	internal new BulkCreateOperation<TSource> Instance => (BulkCreateOperation<TSource>)base.Instance;
 
+	public static implicit operator BulkCreateOperation<TSource>(BulkCreateOperationDescriptor<TSource> descriptor) => descriptor.Instance;
+
 	public BulkCreateOperationDescriptor(TSource source) :
 		base(new BulkCreateOperation<TSource>(source))
 	{
