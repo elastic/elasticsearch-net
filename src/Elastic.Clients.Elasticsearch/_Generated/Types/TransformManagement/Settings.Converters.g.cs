@@ -31,6 +31,7 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 	private static readonly System.Text.Json.JsonEncodedText PropDocsPerSecond = System.Text.Json.JsonEncodedText.Encode("docs_per_second");
 	private static readonly System.Text.Json.JsonEncodedText PropMaxPageSearchSize = System.Text.Json.JsonEncodedText.Encode("max_page_search_size");
 	private static readonly System.Text.Json.JsonEncodedText PropUnattended = System.Text.Json.JsonEncodedText.Encode("unattended");
+	private static readonly System.Text.Json.JsonEncodedText PropUsePointInTime = System.Text.Json.JsonEncodedText.Encode("use_point_in_time");
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.Settings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -41,6 +42,7 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 		LocalJsonValue<float?> propDocsPerSecond = default;
 		LocalJsonValue<int?> propMaxPageSearchSize = default;
 		LocalJsonValue<bool?> propUnattended = default;
+		LocalJsonValue<bool?> propUsePointInTime = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAlignCheckpoints.TryReadProperty(ref reader, options, PropAlignCheckpoints, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
@@ -73,6 +75,11 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 				continue;
 			}
 
+			if (propUsePointInTime.TryReadProperty(ref reader, options, PropUsePointInTime, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -90,7 +97,8 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 			DeduceMappings = propDeduceMappings.Value,
 			DocsPerSecond = propDocsPerSecond.Value,
 			MaxPageSearchSize = propMaxPageSearchSize.Value,
-			Unattended = propUnattended.Value
+			Unattended = propUnattended.Value,
+			UsePointInTime = propUsePointInTime.Value
 		};
 	}
 
@@ -103,6 +111,7 @@ public sealed partial class SettingsConverter : System.Text.Json.Serialization.J
 		writer.WriteProperty(options, PropDocsPerSecond, value.DocsPerSecond, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteProperty(options, PropMaxPageSearchSize, value.MaxPageSearchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropUnattended, value.Unattended, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropUsePointInTime, value.UsePointInTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}
 }

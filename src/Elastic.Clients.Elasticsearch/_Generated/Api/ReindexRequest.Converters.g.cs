@@ -29,7 +29,6 @@ public sealed partial class ReindexRequestConverter : System.Text.Json.Serializa
 	private static readonly System.Text.Json.JsonEncodedText PropDest = System.Text.Json.JsonEncodedText.Encode("dest");
 	private static readonly System.Text.Json.JsonEncodedText PropMaxDocs = System.Text.Json.JsonEncodedText.Encode("max_docs");
 	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
 	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
 
 	public override Elastic.Clients.Elasticsearch.ReindexRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -39,7 +38,6 @@ public sealed partial class ReindexRequestConverter : System.Text.Json.Serializa
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Destination> propDest = default;
 		LocalJsonValue<long?> propMaxDocs = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
-		LocalJsonValue<long?> propSize = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Source> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -59,11 +57,6 @@ public sealed partial class ReindexRequestConverter : System.Text.Json.Serializa
 			}
 
 			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
-			{
-				continue;
-			}
-
-			if (propSize.TryReadProperty(ref reader, options, PropSize, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
 			{
 				continue;
 			}
@@ -89,7 +82,6 @@ public sealed partial class ReindexRequestConverter : System.Text.Json.Serializa
 			Dest = propDest.Value,
 			MaxDocs = propMaxDocs.Value,
 			Script = propScript.Value,
-			Size = propSize.Value,
 			Source = propSource.Value
 		};
 	}
@@ -101,7 +93,6 @@ public sealed partial class ReindexRequestConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropDest, value.Dest, null, null);
 		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
-		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteEndObject();
 	}
