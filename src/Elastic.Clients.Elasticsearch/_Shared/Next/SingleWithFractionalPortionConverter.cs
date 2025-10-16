@@ -17,7 +17,15 @@ internal sealed class SingleWithFractionalPortionConverter :
 	// https://github.com/dotnet/runtime/blob/main/src/libraries/System.Text.Json/src/System/Text/Json/JsonConstants.cs#L79
 	public const int MaximumFormatLength = 128 + 2;
 
+#if !NETFRAMEWORK
+	// Use G9 to ensure round-tripping of float values.
+	// See here: https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings#the-g-format-specifier
 	private static readonly StandardFormat DefaultFormat = StandardFormat.Parse("G9");
+#else
+	// .NET Framework does not support a custom precision specifier with the G format.
+	private static readonly StandardFormat DefaultFormat = StandardFormat.Parse("G");
+#endif
+
 	private static readonly JsonEncodedText NaN = JsonEncodedText.Encode("NaN"u8);
 	private static readonly JsonEncodedText PositiveInfinity = JsonEncodedText.Encode("Infinity"u8);
 	private static readonly JsonEncodedText NegativeInfinity = JsonEncodedText.Encode("-Infinity"u8);
