@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct SimpleQueryStringQueryDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct SimpleQueryStringQueryDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.2.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor" class="text-break">
+Struct SimpleQueryStringQueryDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L369"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.html">QueryDsl</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct SimpleQueryStringQueryDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.#ctor">
+  SimpleQueryStringQueryDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L379"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor__ctor_Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.#ctor(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)">
+  SimpleQueryStringQueryDescriptor(SimpleQueryStringQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L373"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor(SimpleQueryStringQuery instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery.html">SimpleQueryStringQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_AnalyzeWildcard_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.AnalyzeWildcard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_AnalyzeWildcard_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.AnalyzeWildcard(System.Nullable{System.Boolean})">
+  AnalyzeWildcard(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L404"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the query attempts to analyze wildcard terms in the query string.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor AnalyzeWildcard(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Analyzer_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Analyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Analyzer_System_String_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Analyzer(System.String)">
+  Analyzer(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L393"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Analyzer used to convert text in the query string into tokens.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor Analyzer(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_AutoGenerateSynonymsPhraseQuery_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.AutoGenerateSynonymsPhraseQuery*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_AutoGenerateSynonymsPhraseQuery_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.AutoGenerateSynonymsPhraseQuery(System.Nullable{System.Boolean})">
+  AutoGenerateSynonymsPhraseQuery(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L415"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the parser creates a match_phrase query for each multi-position token.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor AutoGenerateSynonymsPhraseQuery(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Boost_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Boost*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Boost_System_Nullable_System_Single__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Boost(System.Nullable{System.Single})">
+  Boost(float?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L429"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Floating point number used to decrease or increase the relevance scores of the query.
+Boost values are relative to the default value of 1.0.
+A boost value between 0 and 1.0 decreases the relevance score.
+A value greater than 1.0 increases the relevance score.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor Boost(float? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_DefaultOperator_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.DefaultOperator*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_DefaultOperator_System_Nullable_Elastic_Clients_Elasticsearch_QueryDsl_Operator__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.DefaultOperator(System.Nullable{Elastic.Clients.Elasticsearch.QueryDsl.Operator})">
+  DefaultOperator(Operator?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L440"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Default boolean logic used to interpret text in the query string if no operators are specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor DefaultOperator(Operator? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Operator.html">Operator</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Fields_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Fields(Elastic.Clients.Elasticsearch.Fields)">
+  Fields(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L454"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of fields you wish to search.
+Accepts wildcard expressions.
+You also can boost relevance scores for matches to particular fields using a caret (<code>^</code>) notation.
+Defaults to the <code>index.query.default_field index</code> setting, which has a default value of <code>*</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor Fields(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Fields__1_System_Linq_Expressions_Expression_System_Func___0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Fields``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+  Fields&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L468"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of fields you wish to search.
+Accepts wildcard expressions.
+You also can boost relevance scores for matches to particular fields using a caret (<code>^</code>) notation.
+Defaults to the <code>index.query.default_field index</code> setting, which has a default value of <code>*</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor Fields&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Flags_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Flags*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Flags_System_Nullable_Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringFlags__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Flags(System.Nullable{Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags})">
+  Flags(SimpleQueryStringFlags?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L479"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+List of enabled operators for the simple query string syntax.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor Flags(SimpleQueryStringFlags? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringFlags.html">SimpleQueryStringFlags</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_FuzzyMaxExpansions_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.FuzzyMaxExpansions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_FuzzyMaxExpansions_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.FuzzyMaxExpansions(System.Nullable{System.Int32})">
+  FuzzyMaxExpansions(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L490"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum number of terms to which the query expands for fuzzy matching.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor FuzzyMaxExpansions(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_FuzzyPrefixLength_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.FuzzyPrefixLength*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_FuzzyPrefixLength_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.FuzzyPrefixLength(System.Nullable{System.Int32})">
+  FuzzyPrefixLength(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L501"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Number of beginning characters left unchanged for fuzzy matching.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor FuzzyPrefixLength(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_FuzzyTranspositions_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.FuzzyTranspositions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_FuzzyTranspositions_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.FuzzyTranspositions(System.Nullable{System.Boolean})">
+  FuzzyTranspositions(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L512"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <code>ab</code> to <code>ba</code>).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor FuzzyTranspositions(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Lenient_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Lenient*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Lenient_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Lenient(System.Nullable{System.Boolean})">
+  Lenient(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L523"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, format-based errors, such as providing a text value for a numeric field, are ignored.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor Lenient(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_MinimumShouldMatch_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.MinimumShouldMatch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_MinimumShouldMatch_Elastic_Clients_Elasticsearch_MinimumShouldMatch_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.MinimumShouldMatch(Elastic.Clients.Elasticsearch.MinimumShouldMatch)">
+  MinimumShouldMatch(MinimumShouldMatch?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L534"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Minimum number of clauses that must match for a document to be returned.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor MinimumShouldMatch(MinimumShouldMatch? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MinimumShouldMatch.html">MinimumShouldMatch</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Query_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_Query_System_String_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.Query(System.String)">
+  Query(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L545"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Query string in the simple query string syntax you wish to parse and use for search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor Query(string value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_QueryName_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.QueryName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_QueryName_System_String_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.QueryName(System.String)">
+  QueryName(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L551"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor QueryName(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_QuoteFieldSuffix_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.QuoteFieldSuffix*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_QuoteFieldSuffix_System_String_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.QuoteFieldSuffix(System.String)">
+  QuoteFieldSuffix(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L562"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Suffix appended to quoted text in the query string.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SimpleQueryStringQueryDescriptor QuoteFieldSuffix(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQuery__Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery)~Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor">
+  explicit operator SimpleQueryStringQueryDescriptor(SimpleQueryStringQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L385"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator SimpleQueryStringQueryDescriptor(SimpleQueryStringQuery instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery.html">SimpleQueryStringQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQueryDescriptor__Elastic_Clients_Elasticsearch_QueryDsl_SimpleQueryStringQuery" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor)~Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery">
+  implicit operator SimpleQueryStringQuery(SimpleQueryStringQueryDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/SimpleQueryStringQuery.g.cs/#L386"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator SimpleQueryStringQuery(SimpleQueryStringQueryDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQueryDescriptor.html">SimpleQueryStringQueryDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.SimpleQueryStringQuery.html">SimpleQueryStringQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

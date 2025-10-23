@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class PutRoleMappingRequest | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class PutRoleMappingRequest | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create or update role mappings.   Role mappings define which roles are assigned to each user. Each mapping has rules that identify users and a list of roles that are granted to those users. The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.   NOTE: This API does not create roles. Rather, it maps users to existing roles. Roles can be created by using the create or update roles API or roles files.   Role templates   The most common use for role mappings is to create a mapping from a known value on the user to a fixed role name. For example, all users in the cn=admin,dc=example,dc=com LDAP group should be given the superuser role in Elasticsearch. The roles field is used for this purpose.   For more complex needs, it is possible to use Mustache templates to dynamically determine the names of the roles that should be granted to the user. The role_templates field is used for this purpose.   NOTE: To use role templates successfully, the relevant scripting feature must be enabled. Otherwise, all attempts to create a role mapping with role templates fail.   All of the user fields that are available in the role mapping rules are also available in the role templates. Thus it is possible to assign a user to a role that reflects their username, their groups, or the name of the realm to which they authenticated.   By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user. If the format of the template is set to &quot;json&quot; then the template is expected to produce a JSON string or an array of JSON strings for the role names.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.2.0/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest" class="text-break">
+Class PutRoleMappingRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleMappingRequest.g.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create or update role mappings.
+</p>
+<p>
+Role mappings define which roles are assigned to each user.
+Each mapping has rules that identify users and a list of roles that are granted to those users.
+The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
+</p>
+<p>
+NOTE: This API does not create roles. Rather, it maps users to existing roles.
+Roles can be created by using the create or update roles API or roles files.
+</p>
+<p>
+<strong>Role templates</strong>
+</p>
+<p>
+The most common use for role mappings is to create a mapping from a known value on the user to a fixed role name.
+For example, all users in the <code>cn=admin,dc=example,dc=com</code> LDAP group should be given the superuser role in Elasticsearch.
+The <code>roles</code> field is used for this purpose.
+</p>
+<p>
+For more complex needs, it is possible to use Mustache templates to dynamically determine the names of the roles that should be granted to the user.
+The <code>role_templates</code> field is used for this purpose.
+</p>
+<p>
+NOTE: To use role templates successfully, the relevant scripting feature must be enabled.
+Otherwise, all attempts to create a role mapping with role templates fail.
+</p>
+<p>
+All of the user fields that are available in the role mapping rules are also available in the role templates.
+Thus it is possible to assign a user to a role that reflects their username, their groups, or the name of the realm to which they authenticated.
+</p>
+<p>
+By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
+If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(PutRoleMappingRequestConverter))]
+public sealed class PutRoleMappingRequest : PlainRequest&lt;PutRoleMappingRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters.html">PutRoleMappingRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters.html">PutRoleMappingRequestParameters</a>&gt;</div>
+      <div><span class="xref">PutRoleMappingRequest</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;PutRoleMappingRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;PutRoleMappingRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;PutRoleMappingRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;PutRoleMappingRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;PutRoleMappingRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RequestConfiguration">Request.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest__ctor_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.#ctor(Elastic.Clients.Elasticsearch.Name)">
+  PutRoleMappingRequest(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleMappingRequest.g.cs/#L77"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleMappingRequest(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Enabled_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Enabled*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Enabled" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Enabled">
+  Enabled
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleMappingRequest.g.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mappings that have <code>enabled</code> set to <code>false</code> are ignored when role mapping is performed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Enabled { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Metadata" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Metadata">
+  Metadata
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleMappingRequest.g.cs/#L132"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Additional metadata that helps define which roles are assigned to each user.
+Within the metadata object, keys beginning with <code>_</code> are reserved for system usage.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt;? Metadata { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Name_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Name*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Name" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Name">
+  Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleMappingRequest.g.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The distinct name that identifies the role mapping.
+The name is used solely as an identifier to facilitate interaction via the API; it does not affect the behavior of the mapping in any way.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Name Name { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Refresh_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Refresh" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Refresh">
+  Refresh
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleMappingRequest.g.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code> (the default) then refresh the affected shards to make this operation visible to search, if <code>wait_for</code> then wait for a refresh to make this operation visible to search, if <code>false</code> then do nothing with refreshes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Refresh? Refresh { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Refresh.html">Refresh</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_RoleTemplates_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.RoleTemplates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_RoleTemplates" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.RoleTemplates">
+  RoleTemplates
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleMappingRequest.g.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of Mustache templates that will be evaluated to determine the roles names that should granted to the users that match the role mapping rules.
+Exactly one of <code>roles</code> or <code>role_templates</code> must be specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;RoleTemplate&gt;? RoleTemplates { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleTemplate.html">RoleTemplate</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Roles_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Roles*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Roles" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Roles">
+  Roles
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleMappingRequest.g.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of role names that are granted to the users that match the role mapping rules.
+Exactly one of <code>roles</code> or <code>role_templates</code> must be specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;string&gt;? Roles { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Rules_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Rules*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_Rules" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.Rules">
+  Rules
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleMappingRequest.g.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The rules that determine which users should be matched by the mapping.
+A rule is a logical condition that is expressed by using a JSON DSL.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RoleMappingRule? Rules { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.RoleMappingRule.html">RoleMappingRule</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_RunAs_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.RunAs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_RunAs" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.RunAs">
+  RunAs
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleMappingRequest.g.cs/#L157"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;string&gt;? RunAs { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleMappingRequest_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.0/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleMappingRequest.g.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.2.0/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
