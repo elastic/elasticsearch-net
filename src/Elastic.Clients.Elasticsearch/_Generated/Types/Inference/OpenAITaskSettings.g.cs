@@ -44,6 +44,20 @@ public sealed partial class OpenAITaskSettings
 
 	/// <summary>
 	/// <para>
+	/// Specifies custom HTTP header parameters.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "headers":{
+	///   "Custom-Header": "Some-Value",
+	///   "Another-Custom-Header": "Another-Value"
+	/// }
+	/// </code>
+	/// </summary>
+	public object? Headers { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// For a <c>completion</c> or <c>text_embedding</c> task, specify the user issuing the request.
 	/// This information can be used for abuse detection.
 	/// </para>
@@ -69,6 +83,24 @@ public readonly partial struct OpenAiTaskSettingsDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.OpenAITaskSettings instance) => new Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.OpenAITaskSettings(Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Specifies custom HTTP header parameters.
+	/// For example:
+	/// </para>
+	/// <code>
+	/// "headers":{
+	///   "Custom-Header": "Some-Value",
+	///   "Another-Custom-Header": "Another-Value"
+	/// }
+	/// </code>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.OpenAiTaskSettingsDescriptor Headers(object? value)
+	{
+		Instance.Headers = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>

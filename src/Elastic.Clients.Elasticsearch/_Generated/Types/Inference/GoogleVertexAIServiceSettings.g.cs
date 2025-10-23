@@ -27,11 +27,8 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 public sealed partial class GoogleVertexAIServiceSettings
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GoogleVertexAIServiceSettings(string location, string modelId, string projectId, string serviceAccountJson)
+	public GoogleVertexAIServiceSettings(string serviceAccountJson)
 	{
-		Location = location;
-		ModelId = modelId;
-		ProjectId = projectId;
 		ServiceAccountJson = serviceAccountJson;
 	}
 #if NET7_0_OR_GREATER
@@ -62,38 +59,53 @@ public sealed partial class GoogleVertexAIServiceSettings
 
 	/// <summary>
 	/// <para>
-	/// The name of the location to use for the inference task.
+	/// The name of the location to use for the inference task for the Google Vertex AI inference task.
+	/// For Google Vertex AI, when <c>provider</c> is omitted or <c>google</c> <c>location</c> is mandatory.
+	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>location</c> is ignored.
 	/// Refer to the Google documentation for the list of supported locations.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string Location { get; set; }
+	public string? Location { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The name of the model to use for the inference task.
-	/// Refer to the Google documentation for the list of supported models.
+	/// For Google Vertex AI <c>model_id</c> is mandatory.
+	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>model_id</c> will be used for some providers that require it, otherwise - ignored.
+	/// Refer to the Google documentation for the list of supported models for Google Vertex AI.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ModelId { get; set; }
+	public string? ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The name of the project to use for the inference task.
+	/// The name of the project to use for the Google Vertex AI inference task.
+	/// For Google Vertex AI <c>project_id</c> is mandatory.
+	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>project_id</c> is ignored.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	string ProjectId { get; set; }
+	public string? ProjectId { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the Google Model Garden Provider for <c>completion</c> and <c>chat_completion</c> tasks.
+	/// In order for a Google Model Garden endpoint to be used <c>provider</c> must be defined and be other than <c>google</c>.
+	/// Modes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Google Model Garden (third-party models): set <c>provider</c> to a supported non-<c>google</c> value and provide <c>url</c> and/or <c>streaming_url</c>.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Google Vertex AI: omit <c>provider</c> or set it to <c>google</c>. In this mode, do not set <c>url</c> or <c>streaming_url</c> and Elastic will construct the endpoint url from <c>location</c>, <c>model_id</c>, and <c>project_id</c> parameters.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider? Provider { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -113,6 +125,28 @@ public sealed partial class GoogleVertexAIServiceSettings
 	required
 #endif
 	string ServiceAccountJson { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The URL for streaming <c>completion</c> and <c>chat_completion</c> requests to a Google Model Garden provider endpoint.
+	/// If both <c>streaming_url</c> and <c>url</c> are provided, each is used for its respective mode.
+	/// If <c>url</c> is not provided, <c>streaming_url</c> is also used for non-streaming <c>completion</c> requests.
+	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>streaming_url</c> (or <c>url</c>).
+	/// At least one of <c>streaming_url</c> or <c>url</c> must be provided for Google Model Garden endpoint usage.
+	/// </para>
+	/// </summary>
+	public string? StreamingUrl { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The URL for non-streaming <c>completion</c> requests to a Google Model Garden provider endpoint.
+	/// If both <c>url</c> and <c>streaming_url</c> are provided, each is used for its respective mode.
+	/// If <c>streaming_url</c> is not provided, <c>url</c> is also used for streaming <c>completion</c> and <c>chat_completion</c>.
+	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>url</c> (or <c>streaming_url</c>).
+	/// At least one of <c>url</c> or <c>streaming_url</c> must be provided for Google Model Garden endpoint usage.
+	/// </para>
+	/// </summary>
+	public string? Url { get; set; }
 }
 
 public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
@@ -149,11 +183,13 @@ public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the location to use for the inference task.
+	/// The name of the location to use for the inference task for the Google Vertex AI inference task.
+	/// For Google Vertex AI, when <c>provider</c> is omitted or <c>google</c> <c>location</c> is mandatory.
+	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>location</c> is ignored.
 	/// Refer to the Google documentation for the list of supported locations.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Location(string value)
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Location(string? value)
 	{
 		Instance.Location = value;
 		return this;
@@ -162,10 +198,12 @@ public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// The name of the model to use for the inference task.
-	/// Refer to the Google documentation for the list of supported models.
+	/// For Google Vertex AI <c>model_id</c> is mandatory.
+	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>model_id</c> will be used for some providers that require it, otherwise - ignored.
+	/// Refer to the Google documentation for the list of supported models for Google Vertex AI.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor ModelId(string value)
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor ModelId(string? value)
 	{
 		Instance.ModelId = value;
 		return this;
@@ -173,12 +211,39 @@ public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the project to use for the inference task.
+	/// The name of the project to use for the Google Vertex AI inference task.
+	/// For Google Vertex AI <c>project_id</c> is mandatory.
+	/// For Google Model Garden's <c>completion</c> and <c>chat_completion</c> tasks, when <c>provider</c> is a supported non-<c>google</c> value - <c>project_id</c> is ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor ProjectId(string value)
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor ProjectId(string? value)
 	{
 		Instance.ProjectId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the Google Model Garden Provider for <c>completion</c> and <c>chat_completion</c> tasks.
+	/// In order for a Google Model Garden endpoint to be used <c>provider</c> must be defined and be other than <c>google</c>.
+	/// Modes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Google Model Garden (third-party models): set <c>provider</c> to a supported non-<c>google</c> value and provide <c>url</c> and/or <c>streaming_url</c>.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Google Vertex AI: omit <c>provider</c> or set it to <c>google</c>. In this mode, do not set <c>url</c> or <c>streaming_url</c> and Elastic will construct the endpoint url from <c>location</c>, <c>model_id</c>, and <c>project_id</c> parameters.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Provider(Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider? value)
+	{
+		Instance.Provider = value;
 		return this;
 	}
 
@@ -226,6 +291,36 @@ public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor ServiceAccountJson(string value)
 	{
 		Instance.ServiceAccountJson = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The URL for streaming <c>completion</c> and <c>chat_completion</c> requests to a Google Model Garden provider endpoint.
+	/// If both <c>streaming_url</c> and <c>url</c> are provided, each is used for its respective mode.
+	/// If <c>url</c> is not provided, <c>streaming_url</c> is also used for non-streaming <c>completion</c> requests.
+	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>streaming_url</c> (or <c>url</c>).
+	/// At least one of <c>streaming_url</c> or <c>url</c> must be provided for Google Model Garden endpoint usage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor StreamingUrl(string? value)
+	{
+		Instance.StreamingUrl = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The URL for non-streaming <c>completion</c> requests to a Google Model Garden provider endpoint.
+	/// If both <c>url</c> and <c>streaming_url</c> are provided, each is used for its respective mode.
+	/// If <c>streaming_url</c> is not provided, <c>url</c> is also used for streaming <c>completion</c> and <c>chat_completion</c>.
+	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>url</c> (or <c>streaming_url</c>).
+	/// At least one of <c>url</c> or <c>streaming_url</c> must be provided for Google Model Garden endpoint usage.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Url(string? value)
+	{
+		Instance.Url = value;
 		return this;
 	}
 
