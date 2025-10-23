@@ -558,7 +558,13 @@ public readonly partial struct AnalyzersDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Kuromoji(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor> action)
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Kuromoji(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Kuromoji(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor>? action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor.Build(action));
 		return this;

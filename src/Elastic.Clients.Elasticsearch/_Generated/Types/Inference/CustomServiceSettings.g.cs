@@ -52,7 +52,7 @@ public sealed partial class CustomServiceSettings
 
 	/// <summary>
 	/// <para>
-	/// Specifies the HTTPS header parameters – such as <c>Authentication</c> or <c>Contet-Type</c> – that are required to access the custom service.
+	/// Specifies the HTTP header parameters – such as <c>Authentication</c> or <c>Content-Type</c> – that are required to access the custom service.
 	/// For example:
 	/// </para>
 	/// <code>
@@ -194,7 +194,7 @@ public readonly partial struct CustomServiceSettingsDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specifies the HTTPS header parameters – such as <c>Authentication</c> or <c>Contet-Type</c> – that are required to access the custom service.
+	/// Specifies the HTTP header parameters – such as <c>Authentication</c> or <c>Content-Type</c> – that are required to access the custom service.
 	/// For example:
 	/// </para>
 	/// <code>

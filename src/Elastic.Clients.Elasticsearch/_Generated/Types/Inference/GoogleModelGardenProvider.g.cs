@@ -23,15 +23,11 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.TaskTypeGoogleVertexAIConverter))]
-public enum TaskTypeGoogleVertexAI
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.GoogleModelGardenProviderConverter))]
+public enum GoogleModelGardenProvider
 {
-	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
-	ChatCompletion,
-	[System.Runtime.Serialization.EnumMember(Value = "completion")]
-	Completion,
-	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
-	Rerank,
-	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
-	TextEmbedding
+	[System.Runtime.Serialization.EnumMember(Value = "anthropic")]
+	Anthropic,
+	[System.Runtime.Serialization.EnumMember(Value = "google")]
+	Google
 }

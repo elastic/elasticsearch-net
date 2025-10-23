@@ -29,18 +29,24 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 	private static readonly System.Text.Json.JsonEncodedText PropLocation = System.Text.Json.JsonEncodedText.Encode("location");
 	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
 	private static readonly System.Text.Json.JsonEncodedText PropProjectId = System.Text.Json.JsonEncodedText.Encode("project_id");
+	private static readonly System.Text.Json.JsonEncodedText PropProvider = System.Text.Json.JsonEncodedText.Encode("provider");
 	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit");
 	private static readonly System.Text.Json.JsonEncodedText PropServiceAccountJson = System.Text.Json.JsonEncodedText.Encode("service_account_json");
+	private static readonly System.Text.Json.JsonEncodedText PropStreamingUrl = System.Text.Json.JsonEncodedText.Encode("streaming_url");
+	private static readonly System.Text.Json.JsonEncodedText PropUrl = System.Text.Json.JsonEncodedText.Encode("url");
 
 	public override Elastic.Clients.Elasticsearch.Inference.GoogleVertexAIServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<int?> propDimensions = default;
-		LocalJsonValue<string> propLocation = default;
-		LocalJsonValue<string> propModelId = default;
-		LocalJsonValue<string> propProjectId = default;
+		LocalJsonValue<string?> propLocation = default;
+		LocalJsonValue<string?> propModelId = default;
+		LocalJsonValue<string?> propProjectId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider?> propProvider = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.RateLimitSetting?> propRateLimit = default;
 		LocalJsonValue<string> propServiceAccountJson = default;
+		LocalJsonValue<string?> propStreamingUrl = default;
+		LocalJsonValue<string?> propUrl = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propDimensions.TryReadProperty(ref reader, options, PropDimensions, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
@@ -63,12 +69,27 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 				continue;
 			}
 
+			if (propProvider.TryReadProperty(ref reader, options, PropProvider, static Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider>(o)))
+			{
+				continue;
+			}
+
 			if (propRateLimit.TryReadProperty(ref reader, options, PropRateLimit, null))
 			{
 				continue;
 			}
 
 			if (propServiceAccountJson.TryReadProperty(ref reader, options, PropServiceAccountJson, null))
+			{
+				continue;
+			}
+
+			if (propStreamingUrl.TryReadProperty(ref reader, options, PropStreamingUrl, null))
+			{
+				continue;
+			}
+
+			if (propUrl.TryReadProperty(ref reader, options, PropUrl, null))
 			{
 				continue;
 			}
@@ -89,8 +110,11 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 			Location = propLocation.Value,
 			ModelId = propModelId.Value,
 			ProjectId = propProjectId.Value,
+			Provider = propProvider.Value,
 			RateLimit = propRateLimit.Value,
-			ServiceAccountJson = propServiceAccountJson.Value
+			ServiceAccountJson = propServiceAccountJson.Value,
+			StreamingUrl = propStreamingUrl.Value,
+			Url = propUrl.Value
 		};
 	}
 
@@ -101,8 +125,11 @@ public sealed partial class GoogleVertexAIServiceSettingsConverter : System.Text
 		writer.WriteProperty(options, PropLocation, value.Location, null, null);
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropProjectId, value.ProjectId, null, null);
+		writer.WriteProperty(options, PropProvider, value.Provider, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider>(o, v));
 		writer.WriteProperty(options, PropRateLimit, value.RateLimit, null, null);
 		writer.WriteProperty(options, PropServiceAccountJson, value.ServiceAccountJson, null, null);
+		writer.WriteProperty(options, PropStreamingUrl, value.StreamingUrl, null, null);
+		writer.WriteProperty(options, PropUrl, value.Url, null, null);
 		writer.WriteEndObject();
 	}
 }

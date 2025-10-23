@@ -25,11 +25,23 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class TaskTypeGoogleVertexAIConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
 	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
 	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
 
 	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberChatCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI.ChatCompletion;
+		}
+
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI.Completion;
+		}
+
 		if (reader.ValueTextEquals(MemberRerank))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI.Rerank;
@@ -41,6 +53,16 @@ public sealed partial class TaskTypeGoogleVertexAIConverter : System.Text.Json.S
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI.ChatCompletion;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI.Completion;
+		}
+
 		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI.Rerank;
@@ -58,6 +80,12 @@ public sealed partial class TaskTypeGoogleVertexAIConverter : System.Text.Json.S
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI.ChatCompletion:
+				writer.WriteStringValue(MemberChatCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.TaskTypeGoogleVertexAI.Rerank:
 				writer.WriteStringValue(MemberRerank);
 				break;
