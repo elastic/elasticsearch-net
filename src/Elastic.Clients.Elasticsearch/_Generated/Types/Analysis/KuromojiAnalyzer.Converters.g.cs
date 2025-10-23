@@ -32,11 +32,11 @@ public sealed partial class KuromojiAnalyzerConverter : System.Text.Json.Seriali
 	public override Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode> propMode = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode?> propMode = default;
 		LocalJsonValue<string?> propUserDictionary = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			if (propMode.TryReadProperty(ref reader, options, PropMode, static Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode>(o)))
 			{
 				continue;
 			}
@@ -72,7 +72,7 @@ public sealed partial class KuromojiAnalyzerConverter : System.Text.Json.Seriali
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropMode, value.Mode, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode>(o, v));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropUserDictionary, value.UserDictionary, null, null);
 		writer.WriteEndObject();

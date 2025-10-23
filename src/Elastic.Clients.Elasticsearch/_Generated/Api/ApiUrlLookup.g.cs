@@ -40,6 +40,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls ClusterPendingTasks = new ApiUrls(new[] { "_cluster/pending_tasks" });
 	internal static ApiUrls ClusterPostVotingConfigExclusions = new ApiUrls(new[] { "_cluster/voting_config_exclusions" });
 	internal static ApiUrls ClusterPutComponentTemplate = new ApiUrls(new[] { "_component_template/{name}" });
+	internal static ApiUrls ClusterPutSettings = new ApiUrls(new[] { "_cluster/settings" });
 	internal static ApiUrls ClusterStats = new ApiUrls(new[] { "_cluster/stats", "_cluster/stats/nodes/{node_id}" });
 	internal static ApiUrls CrossClusterReplicationDeleteAutoFollowPattern = new ApiUrls(new[] { "_ccr/auto_follow/{name}" });
 	internal static ApiUrls CrossClusterReplicationFollow = new ApiUrls(new[] { "{index}/_ccr/follow" });

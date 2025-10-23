@@ -682,6 +682,52 @@ public partial class ClusterNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequest, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateResponse, Elastic.Clients.Elasticsearch.Cluster.PutComponentTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse PutSettings(Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse PutSettings()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse PutSettings(System.Action<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse> PutSettingsAsync(Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse> PutSettingsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse> PutSettingsAsync(System.Action<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequest, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsResponse, Elastic.Clients.Elasticsearch.Cluster.PutClusterSettingsRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse Stats(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsRequest request)
 	{
 		request.BeforeRequest();
