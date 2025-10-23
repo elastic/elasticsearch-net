@@ -26,18 +26,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.Json.KuromojiAnalyzerConverter))]
 public sealed partial class KuromojiAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public KuromojiAnalyzer(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode mode)
-	{
-		Mode = mode;
-	}
 #if NET7_0_OR_GREATER
 	public KuromojiAnalyzer()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public KuromojiAnalyzer()
 	{
 	}
@@ -48,11 +42,7 @@ public sealed partial class KuromojiAnalyzer : Elastic.Clients.Elasticsearch.Ana
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode Mode { get; set; }
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode? Mode { get; set; }
 
 	public string Type => "kuromoji";
 
@@ -78,7 +68,7 @@ public readonly partial struct KuromojiAnalyzerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer(Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor descriptor) => descriptor.Instance;
 
-	public Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode value)
+	public Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationMode? value)
 	{
 		Instance.Mode = value;
 		return this;
@@ -91,8 +81,13 @@ public readonly partial struct KuromojiAnalyzerDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor> action)
+	internal static Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
 		var builder = new Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

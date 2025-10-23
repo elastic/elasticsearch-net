@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class CustomServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropBatchSize = System.Text.Json.JsonEncodedText.Encode("batch_size");
 	private static readonly System.Text.Json.JsonEncodedText PropHeaders = System.Text.Json.JsonEncodedText.Encode("headers");
 	private static readonly System.Text.Json.JsonEncodedText PropInputType = System.Text.Json.JsonEncodedText.Encode("input_type");
 	private static readonly System.Text.Json.JsonEncodedText PropQueryParameters = System.Text.Json.JsonEncodedText.Encode("query_parameters");
@@ -36,6 +37,7 @@ public sealed partial class CustomServiceSettingsConverter : System.Text.Json.Se
 	public override Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propBatchSize = default;
 		LocalJsonValue<object?> propHeaders = default;
 		LocalJsonValue<object?> propInputType = default;
 		LocalJsonValue<object?> propQueryParameters = default;
@@ -45,6 +47,11 @@ public sealed partial class CustomServiceSettingsConverter : System.Text.Json.Se
 		LocalJsonValue<string?> propUrl = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propBatchSize.TryReadProperty(ref reader, options, PropBatchSize, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
+			{
+				continue;
+			}
+
 			if (propHeaders.TryReadProperty(ref reader, options, PropHeaders, static object? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<object?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>))))
 			{
 				continue;
@@ -92,6 +99,7 @@ public sealed partial class CustomServiceSettingsConverter : System.Text.Json.Se
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			BatchSize = propBatchSize.Value,
 			Headers = propHeaders.Value,
 			InputType = propInputType.Value,
 			QueryParameters = propQueryParameters.Value,
@@ -105,6 +113,7 @@ public sealed partial class CustomServiceSettingsConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBatchSize, value.BatchSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropHeaders, value.Headers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteProperty(options, PropInputType, value.InputType, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
 		writer.WriteProperty(options, PropQueryParameters, value.QueryParameters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object? v) => w.WriteValueEx<object?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object?>)));
