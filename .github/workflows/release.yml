@@ -3,10 +3,6 @@ name: 'CD'
 on:
   workflow_call:
     inputs:
-      flavor:
-        description: 'The release flavor (either ''stack'' or ''serverless'')'
-        type: 'string'
-        required: true
       solution:
         description: 'The filename of the .NET solution file'
         type: 'string'
@@ -24,7 +20,7 @@ on:
         required: true
 
 concurrency:
-  group: 'release-${{ inputs.flavor }}'
+  group: 'release-${{ github.ref_name }}'
   cancel-in-progress: false
 
 env:
