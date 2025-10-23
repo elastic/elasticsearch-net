@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class QueryRequest | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class QueryRequest | Elasticsearch.NET ">
+      
+      <meta name="description" content="Get SQL search results. Run an SQL request.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.12/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Sql_QueryRequest.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Sql.QueryRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest" class="text-break">
+Class QueryRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.html">Sql</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Get SQL search results.
+Run an SQL request.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(QueryRequestConverter))]
+public sealed class QueryRequest : PlainRequest&lt;QueryRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters.html">QueryRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters.html">QueryRequestParameters</a>&gt;</div>
+      <div><span class="xref">QueryRequest</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;QueryRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;QueryRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;QueryRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;QueryRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;QueryRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RequestConfiguration">Request.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest__ctor" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.#ctor">
+  QueryRequest()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public QueryRequest()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_AllowPartialSearchResults_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.AllowPartialSearchResults*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_AllowPartialSearchResults" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.AllowPartialSearchResults">
+  AllowPartialSearchResults
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the response has partial results when there are shard request timeouts or shard failures.
+If <code>false</code>, the API returns an error with no partial results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? AllowPartialSearchResults { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Catalog_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Catalog*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Catalog" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Catalog">
+  Catalog
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L94"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The default catalog (cluster) for queries.
+If unspecified, the queries execute on the data in the local cluster only.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Catalog { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Columnar_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Columnar*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Columnar" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Columnar">
+  Columnar
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the results are in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+The API supports this parameter only for CBOR, JSON, SMILE, and YAML responses.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Columnar { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Cursor_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Cursor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Cursor" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Cursor">
+  Cursor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L111"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The cursor used to retrieve a set of paginated results.
+If you specify a cursor, the API only uses the <code>columnar</code> and <code>time_zone</code> request body parameters.
+It ignores other request body parameters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Cursor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_FetchSize_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.FetchSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_FetchSize" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.FetchSize">
+  FetchSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of rows (or entries) to return in one response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? FetchSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_FieldMultiValueLeniency_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.FieldMultiValueLeniency*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_FieldMultiValueLeniency" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.FieldMultiValueLeniency">
+  FieldMultiValueLeniency
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>false</code>, the API returns an exception when encountering multiple values for a field.
+If <code>true</code>, the API is lenient and returns the first value from the array with no guarantee of consistent results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? FieldMultiValueLeniency { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Filter_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Filter" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Filter">
+  Filter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The Elasticsearch query DSL for additional filtering.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Query? Filter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Format_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Format*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Format" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Format">
+  Format
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The format for the response.
+You can also specify a format using the <code>Accept</code> HTTP header.
+If you specify both this parameter and the <code>Accept</code> HTTP header, this parameter takes precedence.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SqlFormat? Format { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Sql.SqlFormat.html">SqlFormat</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_IndexUsingFrozen_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.IndexUsingFrozen*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_IndexUsingFrozen" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.IndexUsingFrozen">
+  IndexUsingFrozen
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the search can run on frozen indices.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IndexUsingFrozen { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_KeepAlive_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.KeepAlive*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_KeepAlive" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.KeepAlive">
+  KeepAlive
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L147"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The retention period for an async or saved synchronous search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? KeepAlive { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_KeepOnCompletion_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.KeepOnCompletion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_KeepOnCompletion" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.KeepOnCompletion">
+  KeepOnCompletion
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L155"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, Elasticsearch stores synchronous searches if you also specify the <code>wait_for_completion_timeout</code> parameter.
+If <code>false</code>, Elasticsearch only stores async searches that don't finish before the <code>wait_for_completion_timeout</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? KeepOnCompletion { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_PageTimeout_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.PageTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_PageTimeout" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.PageTimeout">
+  PageTimeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L164"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The minimum retention period for the scroll cursor.
+After this time period, a pagination request might fail because the scroll cursor is no longer available.
+Subsequent scroll requests prolong the lifetime of the scroll cursor by the duration of <code>page_timeout</code> in the scroll request.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? PageTimeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Params_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Params*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Params" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Params">
+  Params
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L171"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The values for parameters in the query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;object&gt;? Params { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Query_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_Query" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.Query">
+  Query
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L178"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The SQL query to run.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Query { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_RequestTimeout_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.RequestTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_RequestTimeout" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.RequestTimeout">
+  RequestTimeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The timeout before the request fails.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? RequestTimeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_RuntimeMappings" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.RuntimeMappings">
+  RuntimeMappings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+One or more runtime fields for the search request.
+These fields take precedence over mapped fields with the same name.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;Field, RuntimeField&gt;? RuntimeMappings { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.12/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_TimeZone_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.TimeZone*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_TimeZone" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.TimeZone">
+  TimeZone
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L200"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The ISO-8601 time zone ID for the search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? TimeZone { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_WaitForCompletionTimeout_" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.WaitForCompletionTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Sql_QueryRequest_WaitForCompletionTimeout" data-uid="Elastic.Clients.Elasticsearch.Sql.QueryRequest.WaitForCompletionTimeout">
+  WaitForCompletionTimeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/Sql/QueryRequest.g.cs/#L212"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period to wait for complete results.
+It defaults to no timeout, meaning the request waits for complete search results.
+If the search doesn't finish within this period, the search becomes async.
+</p>
+<p>
+To save a synchronous search, you must specify this parameter and the <code>keep_on_completion</code> parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? WaitForCompletionTimeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

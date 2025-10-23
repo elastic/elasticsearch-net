@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct GetSourceRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct GetSourceRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Get a document&#39;s source.   Get the source of a document. For example:  GET my-index-000001/_source/1  You can use the source filtering parameters to control which parts of the _source are returned:  GET my-index-000001/_source/1/?_source_includes=*.id&amp;amp;_source_excludes=entities">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.1.12/apiSpec/new?filename=Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor" class="text-break">
+Struct GetSourceRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Shared/Api/GetSourceRequestDescriptor.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Get a document's source.
+</p>
+<p>
+Get the source of a document.
+For example:
+</p>
+<pre><code class="lang-csharp">GET my-index-000001/_source/1</code></pre>
+<p>
+You can use the source filtering parameters to control which parts of the <code>_source</code> are returned:
+</p>
+<pre><code class="lang-csharp">GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities</code></pre>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct GetSourceRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.#ctor">
+  GetSourceRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L261"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public GetSourceRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_GetSourceRequest_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.GetSourceRequest)">
+  GetSourceRequestDescriptor(GetSourceRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L250"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor(GetSourceRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequest.html">GetSourceRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_IndexName_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.IndexName,Elastic.Clients.Elasticsearch.Id)">
+  GetSourceRequestDescriptor(IndexName, Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L256"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor(IndexName index, Id id)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+    <dt><code>id</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L446"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L452"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L458"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Id_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Id*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Id_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Id(Elastic.Clients.Elasticsearch.Id)">
+  Id(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A unique document identifier.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Id(Id value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Index_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Index_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Index(Elastic.Clients.Elasticsearch.IndexName)">
+  Index(IndexName)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L286"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the index that contains the document.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Index(IndexName value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Index_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Index__1" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Index``1">
+  Index&lt;TOther&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Shared/Api/GetSourceRequestDescriptor.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A shortcut into calling Index(typeof(TOther)).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Index&lt;TOther&gt;()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TOther</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Preference_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Preference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Preference_System_String_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Preference(System.String)">
+  Preference(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L298"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The node or shard the operation should be performed on.
+By default, the operation is randomized between the shard replicas.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Preference(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L464"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Realtime_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Realtime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Realtime_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Realtime(System.Nullable{System.Boolean})">
+  Realtime(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L309"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request is real-time as opposed to near-real-time.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Realtime(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Refresh_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Refresh_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Refresh(System.Nullable{System.Boolean})">
+  Refresh(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L321"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request refreshes the relevant shards before retrieving the document.
+Setting it to <code>true</code> should be done after careful thought and verification that this does not cause a heavy load on the system (and slow down indexing).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Refresh(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L476"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.12/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L482"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.12/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.1.12/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Routing_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Routing_Elastic_Clients_Elasticsearch_Routing_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Routing(Elastic.Clients.Elasticsearch.Routing)">
+  Routing(Routing?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A custom value used to route operations to a specific shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Routing(Routing? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Routing.html">Routing</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Source_Elastic_Clients_Elasticsearch_Core_Search_SourceConfigParam_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam)">
+  Source(SourceConfigParam?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L343"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether to return the <code>_source</code> field (<code>true</code> or <code>false</code>) or lists the fields to return.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Source(SourceConfigParam? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam.html">SourceConfigParam</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Source_System_Func_Elastic_Clients_Elasticsearch_Core_Search_SourceConfigParamFactory_Elastic_Clients_Elasticsearch_Core_Search_SourceConfigParam__" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Source(System.Func{Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory,Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam})">
+  Source(Func&lt;SourceConfigParamFactory, SourceConfigParam&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L354"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether to return the <code>_source</code> field (<code>true</code> or <code>false</code>) or lists the fields to return.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Source(Func&lt;SourceConfigParamFactory, SourceConfigParam&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory.html">SourceConfigParamFactory</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam.html">SourceConfigParam</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_SourceExcludes_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.SourceExcludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_SourceExcludes_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.SourceExcludes(Elastic.Clients.Elasticsearch.Fields)">
+  SourceExcludes(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L376"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of source fields to exclude in the response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor SourceExcludes(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_SourceExcludes_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.SourceExcludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_SourceExcludes__1_System_Linq_Expressions_Expression_System_Func___0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.SourceExcludes``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+  SourceExcludes&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L387"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of source fields to exclude in the response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor SourceExcludes&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_SourceIncludes_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.SourceIncludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_SourceIncludes_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.SourceIncludes(Elastic.Clients.Elasticsearch.Fields)">
+  SourceIncludes(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L398"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of source fields to include in the response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor SourceIncludes(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_SourceIncludes_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.SourceIncludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_SourceIncludes__1_System_Linq_Expressions_Expression_System_Func___0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.SourceIncludes``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])">
+  SourceIncludes&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L409"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of source fields to include in the response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor SourceIncludes&lt;T&gt;(params Expression&lt;Func&lt;T, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L470"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Source__1_System_Func_Elastic_Clients_Elasticsearch_Core_Search_SourceConfigParamFactory___0__Elastic_Clients_Elasticsearch_Core_Search_SourceConfigParam__" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Source``1(System.Func{Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory{``0},Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam})">
+  Source&lt;T&gt;(Func&lt;SourceConfigParamFactory&lt;T&gt;, SourceConfigParam&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L365"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether to return the <code>_source</code> field (<code>true</code> or <code>false</code>) or lists the fields to return.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Source&lt;T&gt;(Func&lt;SourceConfigParamFactory&lt;T&gt;, SourceConfigParam&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory-1.html">SourceConfigParamFactory</a>&lt;T&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam.html">SourceConfigParam</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Version_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_Version_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.Version(System.Nullable{System.Int64})">
+  Version(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L421"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The version number for concurrency control.
+It must match the current version of the document for the request to succeed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor Version(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_VersionType_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.VersionType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_VersionType_System_Nullable_Elastic_Clients_Elasticsearch_VersionType__" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.VersionType(System.Nullable{Elastic.Clients.Elasticsearch.VersionType})">
+  VersionType(VersionType?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L432"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The version type.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetSourceRequestDescriptor VersionType(VersionType? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.VersionType.html">VersionType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_GetSourceRequest__Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.GetSourceRequest)~Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor">
+  explicit operator GetSourceRequestDescriptor(GetSourceRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator GetSourceRequestDescriptor(GetSourceRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequest.html">GetSourceRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_GetSourceRequestDescriptor__Elastic_Clients_Elasticsearch_GetSourceRequest" data-uid="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor)~Elastic.Clients.Elasticsearch.GetSourceRequest">
+  implicit operator GetSourceRequest(GetSourceRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.1.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/GetSourceRequest.g.cs/#L268"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator GetSourceRequest(GetSourceRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequestDescriptor.html">GetSourceRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.GetSourceRequest.html">GetSourceRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
