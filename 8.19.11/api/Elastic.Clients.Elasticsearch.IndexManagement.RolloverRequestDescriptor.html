@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct RolloverRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct RolloverRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Roll over to a new index. TIP: We recommend using the index lifecycle rollover action to automate rollovers. However, Serverless does not support Index Lifecycle Management (ILM), so don&#39;t use this approach in the Serverless context.   The rollover API creates a new index for a data stream or index alias. The API behavior depends on the rollover target.   Roll over a data stream   If you roll over a data stream, the API creates a new write index for the stream. The stream&#39;s previous write index becomes a regular backing index. A rollover also increments the data stream&#39;s generation.   Roll over an index alias with a write index   TIP: Prior to Elasticsearch 7.9, you&#39;d typically use an index alias with a write index to manage time series data. Data streams replace this functionality, require less maintenance, and automatically integrate with data tiers.   If an index alias points to multiple indices, one of the indices must be a write index. The rollover API creates a new write index for the alias with is_write_index set to true. The API also sets is_write_index to false for the previous write index.   Roll over an index alias with one index   If you roll over an index alias that points to only one index, the API creates a new index for the alias and removes the original index from the alias.   NOTE: A rollover creates a new index and is subject to the wait_for_active_shards setting.   Increment index names for an alias   When you roll over an index alias, you can specify a name for the new index. If you don&#39;t specify a name and the current index ends with - and a number, such as my-index-000001 or my-index-3, the new index name increments that number. For example, if you roll over an alias with a current index of my-index-000001, the rollover creates a new index named my-index-000002. This number is always six characters and zero-padded, regardless of the previous index&#39;s name.   If you use an index alias for time series data, you can use date math in the index name to track the rollover date. For example, you can create an alias that points to an index named &amp;lt;my-index-{now/d}-000001&amp;gt;. If you create the index on May 6, 2099, the index&#39;s name is my-index-2099.05.06-000001. If you roll over the alias on May 7, 2099, the new index&#39;s name is my-index-2099.05.07-000002.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.11/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor" class="text-break">
+Struct RolloverRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L302"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Roll over to a new index.
+TIP: We recommend using the index lifecycle rollover action to automate rollovers. However, Serverless does not support Index Lifecycle Management (ILM), so don't use this approach in the Serverless context.
+</p>
+<p>
+The rollover API creates a new index for a data stream or index alias.
+The API behavior depends on the rollover target.
+</p>
+<p>
+<strong>Roll over a data stream</strong>
+</p>
+<p>
+If you roll over a data stream, the API creates a new write index for the stream.
+The stream's previous write index becomes a regular backing index.
+A rollover also increments the data stream's generation.
+</p>
+<p>
+<strong>Roll over an index alias with a write index</strong>
+</p>
+<p>
+TIP: Prior to Elasticsearch 7.9, you'd typically use an index alias with a write index to manage time series data.
+Data streams replace this functionality, require less maintenance, and automatically integrate with data tiers.
+</p>
+<p>
+If an index alias points to multiple indices, one of the indices must be a write index.
+The rollover API creates a new write index for the alias with <code>is_write_index</code> set to <code>true</code>.
+The API also <code>sets is_write_index</code> to <code>false</code> for the previous write index.
+</p>
+<p>
+<strong>Roll over an index alias with one index</strong>
+</p>
+<p>
+If you roll over an index alias that points to only one index, the API creates a new index for the alias and removes the original index from the alias.
+</p>
+<p>
+NOTE: A rollover creates a new index and is subject to the <code>wait_for_active_shards</code> setting.
+</p>
+<p>
+<strong>Increment index names for an alias</strong>
+</p>
+<p>
+When you roll over an index alias, you can specify a name for the new index.
+If you don't specify a name and the current index ends with <code>-</code> and a number, such as <code>my-index-000001</code> or <code>my-index-3</code>, the new index name increments that number.
+For example, if you roll over an alias with a current index of <code>my-index-000001</code>, the rollover creates a new index named <code>my-index-000002</code>.
+This number is always six characters and zero-padded, regardless of the previous index's name.
+</p>
+<p>
+If you use an index alias for time series data, you can use date math in the index name to track the rollover date.
+For example, you can create an alias that points to an index named <code>&lt;my-index-{now/d}-000001&gt;</code>.
+If you create the index on May 6, 2099, the index's name is <code>my-index-2099.05.06-000001</code>.
+If you roll over the alias on May 7, 2099, the new index's name is <code>my-index-2099.05.07-000002</code>.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct RolloverRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.#ctor">
+  RolloverRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L322"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public RolloverRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_IndexAlias_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.IndexAlias)">
+  RolloverRequestDescriptor(IndexAlias)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L312"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor(IndexAlias alias)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>alias</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexAlias.html">IndexAlias</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_IndexAlias_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.IndexAlias,Elastic.Clients.Elasticsearch.IndexName)">
+  RolloverRequestDescriptor(IndexAlias, IndexName?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L317"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor(IndexAlias alias, IndexName? newIndex)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>alias</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexAlias.html">IndexAlias</a></dt>
+    <dd></dd>
+    <dt><code>newIndex</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequest_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest)">
+  RolloverRequestDescriptor(RolloverRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L306"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor(RolloverRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest.html">RolloverRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_AddAlias_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.AddAlias*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_AddAlias_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.AddAlias(Elastic.Clients.Elasticsearch.IndexName)">
+  AddAlias(IndexName)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L499"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor AddAlias(IndexName key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_AddAlias_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.AddAlias*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_AddAlias_Elastic_Clients_Elasticsearch_IndexName_Elastic_Clients_Elasticsearch_IndexManagement_Alias_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.AddAlias(Elastic.Clients.Elasticsearch.IndexName,Elastic.Clients.Elasticsearch.IndexManagement.Alias)">
+  AddAlias(IndexName, Alias)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L462"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor AddAlias(IndexName key, Alias value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Alias.html">Alias</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_AddAlias_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.AddAlias*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_AddAlias_Elastic_Clients_Elasticsearch_IndexName_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_AliasDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.AddAlias(Elastic.Clients.Elasticsearch.IndexName,System.Action{Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor})">
+  AddAlias(IndexName, Action&lt;AliasDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L506"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor AddAlias(IndexName key, Action&lt;AliasDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.html">AliasDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_AddAlias_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.AddAlias*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_AddAlias__1_Elastic_Clients_Elasticsearch_IndexName_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_AliasDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.AddAlias``1(Elastic.Clients.Elasticsearch.IndexName,System.Action{Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor{``0}})">
+  AddAlias&lt;T&gt;(IndexName, Action&lt;AliasDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L513"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor AddAlias&lt;T&gt;(IndexName key, Action&lt;AliasDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor-1.html">AliasDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_AddSetting_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.AddSetting*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_AddSetting_System_String_System_Object_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.AddSetting(System.String,System.Object)">
+  AddSetting(string, object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L649"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor AddSetting(string key, object value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Alias_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Alias*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Alias_Elastic_Clients_Elasticsearch_IndexAlias_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Alias(Elastic.Clients.Elasticsearch.IndexAlias)">
+  Alias(IndexAlias)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L336"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Name of the data stream or index alias to roll over.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Alias(IndexAlias value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexAlias.html">IndexAlias</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases">
+  Aliases()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L432"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Aliases for the target index.
+Data streams do not support this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Aliases()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases(Elastic.Clients.Elasticsearch.IndexName)">
+  Aliases(IndexName)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L475"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Aliases for the target index.
+Data streams do not support this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Aliases(IndexName key)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases_Elastic_Clients_Elasticsearch_IndexName___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases(Elastic.Clients.Elasticsearch.IndexName[])">
+  Aliases(params IndexName[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L487"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Aliases for the target index.
+Data streams do not support this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Aliases(params IndexName[] keys)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>keys</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfIndexNameAlias__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias})">
+  Aliases(Action&lt;FluentDictionaryOfIndexNameAlias&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L444"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Aliases for the target index.
+Data streams do not support this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Aliases(Action&lt;FluentDictionaryOfIndexNameAlias&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.html">FluentDictionaryOfIndexNameAlias</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases_System_Collections_Generic_IDictionary_Elastic_Clients_Elasticsearch_IndexName_Elastic_Clients_Elasticsearch_IndexManagement_Alias__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases(System.Collections.Generic.IDictionary{Elastic.Clients.Elasticsearch.IndexName,Elastic.Clients.Elasticsearch.IndexManagement.Alias})">
+  Aliases(IDictionary&lt;IndexName, Alias&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L420"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Aliases for the target index.
+Data streams do not support this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Aliases(IDictionary&lt;IndexName, Alias&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Alias.html">Alias</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Aliases__1_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfIndexNameAlias___0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Aliases``1(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias{``0}})">
+  Aliases&lt;T&gt;(Action&lt;FluentDictionaryOfIndexNameAlias&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L456"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Aliases for the target index.
+Data streams do not support this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Aliases&lt;T&gt;(Action&lt;FluentDictionaryOfIndexNameAlias&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias-1.html">FluentDictionaryOfIndexNameAlias</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Conditions_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Conditions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Conditions" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Conditions">
+  Conditions()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L544"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Conditions for the rollover.
+If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
+If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
+If conditions are specified, at least one of them must be a <code>max_*</code> condition.
+The index will rollover if any <code>max_*</code> condition is satisfied and all <code>min_*</code> conditions are satisfied.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Conditions()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Conditions_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Conditions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Conditions_Elastic_Clients_Elasticsearch_IndexManagement_RolloverConditions_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Conditions(Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions)">
+  Conditions(RolloverConditions?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L529"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Conditions for the rollover.
+If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
+If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
+If conditions are specified, at least one of them must be a <code>max_*</code> condition.
+The index will rollover if any <code>max_*</code> condition is satisfied and all <code>min_*</code> conditions are satisfied.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Conditions(RolloverConditions? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditions.html">RolloverConditions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Conditions_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Conditions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Conditions_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_RolloverConditionsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Conditions(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor})">
+  Conditions(Action&lt;RolloverConditionsDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L559"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Conditions for the rollover.
+If specified, Elasticsearch only performs the rollover if the current index satisfies these conditions.
+If this parameter is not specified, Elasticsearch performs the rollover unconditionally.
+If conditions are specified, at least one of them must be a <code>max_*</code> condition.
+The index will rollover if any <code>max_*</code> condition is satisfied and all <code>min_*</code> conditions are satisfied.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Conditions(Action&lt;RolloverConditionsDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverConditionsDescriptor.html">RolloverConditionsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_DryRun_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.DryRun*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_DryRun_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.DryRun(System.Nullable{System.Boolean})">
+  DryRun(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L360"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, checks whether the current index satisfies the specified conditions but does not perform a rollover.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor DryRun(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L664"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L670"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L676"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Lazy_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Lazy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Lazy_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Lazy(System.Nullable{System.Boolean})">
+  Lazy(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L372"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If set to true, the rollover action will only mark a data stream to signal that it needs to be rolled over at the next write.
+Only allowed on data streams.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Lazy(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Mappings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Mappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Mappings" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Mappings">
+  Mappings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L583"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping for fields in the index.
+If specified, this mapping can include field names, field data types, and mapping paramaters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Mappings()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Mappings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Mappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Mappings_Elastic_Clients_Elasticsearch_Mapping_TypeMapping_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping)">
+  Mappings(TypeMapping?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L571"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping for fields in the index.
+If specified, this mapping can include field names, field data types, and mapping paramaters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Mappings(TypeMapping? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMapping.html">TypeMapping</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Mappings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Mappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Mappings_System_Action_Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Mappings(System.Action{Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor})">
+  Mappings(Action&lt;TypeMappingDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L595"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping for fields in the index.
+If specified, this mapping can include field names, field data types, and mapping paramaters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Mappings(Action&lt;TypeMappingDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Mappings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Mappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Mappings__1_System_Action_Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Mappings``1(System.Action{Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor{``0}})">
+  Mappings&lt;T&gt;(Action&lt;TypeMappingDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L607"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Mapping for fields in the index.
+If specified, this mapping can include field names, field data types, and mapping paramaters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Mappings&lt;T&gt;(Action&lt;TypeMappingDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor-1.html">TypeMappingDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_MasterTimeout_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.MasterTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_MasterTimeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.MasterTimeout(Elastic.Clients.Elasticsearch.Duration)">
+  MasterTimeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L384"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor MasterTimeout(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_NewIndex_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.NewIndex*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_NewIndex_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.NewIndex(Elastic.Clients.Elasticsearch.IndexName)">
+  NewIndex(IndexName?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L349"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Name of the index to create.
+Supports date math.
+Data streams do not support this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor NewIndex(IndexName? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L682"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L694"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.11/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L700"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.11/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.11/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Settings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Settings" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Settings">
+  Settings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L631"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configuration options for the index.
+Data streams do not support this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Settings()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Settings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Settings_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringObject__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Settings(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject})">
+  Settings(Action&lt;FluentDictionaryOfStringObject&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L643"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configuration options for the index.
+Data streams do not support this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Settings(Action&lt;FluentDictionaryOfStringObject&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.html">FluentDictionaryOfStringObject</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Settings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Settings_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Settings(System.Collections.Generic.IDictionary{System.String,System.Object})">
+  Settings(IDictionary&lt;string, object&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L619"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configuration options for the index.
+Data streams do not support this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Settings(IDictionary&lt;string, object&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L688"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Timeout_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_Timeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.Timeout(Elastic.Clients.Elasticsearch.Duration)">
+  Timeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L396"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor Timeout(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_WaitForActiveShards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.WaitForActiveShards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_WaitForActiveShards_System_Nullable_Elastic_Clients_Elasticsearch_WaitForActiveShards__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.WaitForActiveShards(System.Nullable{Elastic.Clients.Elasticsearch.WaitForActiveShards})">
+  WaitForActiveShards(WaitForActiveShards?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L408"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of shard copies that must be active before proceeding with the operation.
+Set to all or any positive integer up to the total number of shards in the index (<code>number_of_replicas+1</code>).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RolloverRequestDescriptor WaitForActiveShards(WaitForActiveShards? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.WaitForActiveShards.html">WaitForActiveShards</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequest__Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest)~Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor">
+  explicit operator RolloverRequestDescriptor(RolloverRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L328"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator RolloverRequestDescriptor(RolloverRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest.html">RolloverRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequestDescriptor__Elastic_Clients_Elasticsearch_IndexManagement_RolloverRequest" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor)~Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest">
+  implicit operator RolloverRequest(RolloverRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/RolloverRequest.g.cs/#L329"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator RolloverRequest(RolloverRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequestDescriptor.html">RolloverRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.RolloverRequest.html">RolloverRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

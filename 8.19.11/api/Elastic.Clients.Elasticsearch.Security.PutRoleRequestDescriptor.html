@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct PutRoleRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct PutRoleRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create or update roles.   The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management. The create or update roles API cannot update roles that are defined in roles files. File-based role management is not available in Elastic Serverless.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.11/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor" class="text-break">
+Struct PutRoleRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L175"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Security.html">Security</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create or update roles.
+</p>
+<p>
+The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
+The create or update roles API cannot update roles that are defined in roles files.
+File-based role management is not available in Elastic Serverless.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct PutRoleRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.#ctor">
+  PutRoleRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L190"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public PutRoleRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Name)">
+  PutRoleRequestDescriptor(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor(Name name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Security_PutRoleRequest_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Security.PutRoleRequest)">
+  PutRoleRequestDescriptor(PutRoleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor(PutRoleRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequest.html">PutRoleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_AddGlobal_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.AddGlobal*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_AddGlobal_System_String_System_Object_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.AddGlobal(System.String,System.Object)">
+  AddGlobal(string, object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L326"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor AddGlobal(string key, object value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_AddMetadatum_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.AddMetadatum*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_AddMetadatum_System_String_System_Object_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.AddMetadatum(System.String,System.Object)">
+  AddMetadatum(string, object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L422"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor AddMetadatum(string key, object value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_AddTransientMetadatum_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.AddTransientMetadatum*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_AddTransientMetadatum_System_String_System_Object_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.AddTransientMetadatum(System.String,System.Object)">
+  AddTransientMetadatum(string, object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L595"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor AddTransientMetadatum(string key, object value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Applications_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Applications*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Applications_Elastic_Clients_Elasticsearch_Security_ApplicationPrivileges___" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Applications(Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges[])">
+  Applications(params ApplicationPrivileges[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of application privilege entries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Applications(params ApplicationPrivileges[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges.html">ApplicationPrivileges</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Applications_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Applications*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Applications_System_Action_Elastic_Clients_Elasticsearch_Security_ApplicationPrivilegesDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Applications(System.Action{Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor}[])">
+  Applications(params Action&lt;ApplicationPrivilegesDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L248"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of application privilege entries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Applications(params Action&lt;ApplicationPrivilegesDescriptor&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApplicationPrivilegesDescriptor.html">ApplicationPrivilegesDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Applications_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Applications*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Applications_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Security_ApplicationPrivileges__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Applications(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges})">
+  Applications(ICollection&lt;ApplicationPrivileges&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L226"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of application privilege entries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Applications(ICollection&lt;ApplicationPrivileges&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.ApplicationPrivileges.html">ApplicationPrivileges</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Cluster_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Cluster*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Cluster_Elastic_Clients_Elasticsearch_Security_ClusterPrivilege___" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Cluster(Elastic.Clients.Elasticsearch.Security.ClusterPrivilege[])">
+  Cluster(params ClusterPrivilege[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L276"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of cluster privileges. These privileges define the cluster-level actions for users with this role.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Cluster(params ClusterPrivilege[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.html">ClusterPrivilege</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Cluster_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Cluster*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Cluster_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Security_ClusterPrivilege__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Cluster(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Security.ClusterPrivilege})">
+  Cluster(ICollection&lt;ClusterPrivilege&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L265"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of cluster privileges. These privileges define the cluster-level actions for users with this role.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Cluster(ICollection&lt;ClusterPrivilege&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.ClusterPrivilege.html">ClusterPrivilege</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Description_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Description_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Description(System.String)">
+  Description(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L287"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Optional description of the role descriptor
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Description(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L610"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L616"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Global_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Global*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Global" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Global">
+  Global()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L309"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Global()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Global_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Global*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Global_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringObject__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Global(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject})">
+  Global(Action&lt;FluentDictionaryOfStringObject&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L320"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Global(Action&lt;FluentDictionaryOfStringObject&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.html">FluentDictionaryOfStringObject</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Global_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Global*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Global_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Global(System.Collections.Generic.IDictionary{System.String,System.Object})">
+  Global(IDictionary&lt;string, object&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L298"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An object defining global privileges. A global privilege is a form of cluster privilege that is request-aware. Support for global privileges is currently limited to the management of application privileges.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Global(IDictionary&lt;string, object&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L622"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Indices_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Indices_Elastic_Clients_Elasticsearch_Security_IndicesPrivileges___" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Indices(Elastic.Clients.Elasticsearch.Security.IndicesPrivileges[])">
+  Indices(params IndicesPrivileges[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L349"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of indices permissions entries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Indices(params IndicesPrivileges[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndicesPrivileges.html">IndicesPrivileges</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Indices_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Indices_System_Action_Elastic_Clients_Elasticsearch_Security_IndicesPrivilegesDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Indices(System.Action{Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor}[])">
+  Indices(params Action&lt;IndicesPrivilegesDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L360"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of indices permissions entries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Indices(params Action&lt;IndicesPrivilegesDescriptor&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor.html">IndicesPrivilegesDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Indices_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Indices_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Security_IndicesPrivileges__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Indices(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Security.IndicesPrivileges})">
+  Indices(ICollection&lt;IndicesPrivileges&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L338"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of indices permissions entries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Indices(ICollection&lt;IndicesPrivileges&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndicesPrivileges.html">IndicesPrivileges</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Indices_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Indices__1_System_Action_Elastic_Clients_Elasticsearch_Security_IndicesPrivilegesDescriptor___0_____" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Indices``1(System.Action{Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor{``0}}[])">
+  Indices&lt;T&gt;(params Action&lt;IndicesPrivilegesDescriptor&lt;T&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L377"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of indices permissions entries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Indices&lt;T&gt;(params Action&lt;IndicesPrivilegesDescriptor&lt;T&gt;&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.IndicesPrivilegesDescriptor-1.html">IndicesPrivilegesDescriptor</a>&lt;T&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Metadata" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Metadata">
+  Metadata()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L405"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Optional metadata. Within the metadata object, keys that begin with an underscore (<code>_</code>) are reserved for system use.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Metadata()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Metadata_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringObject__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Metadata(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject})">
+  Metadata(Action&lt;FluentDictionaryOfStringObject&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L416"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Optional metadata. Within the metadata object, keys that begin with an underscore (<code>_</code>) are reserved for system use.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Metadata(Action&lt;FluentDictionaryOfStringObject&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.html">FluentDictionaryOfStringObject</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Metadata_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Metadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Metadata_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Metadata(System.Collections.Generic.IDictionary{System.String,System.Object})">
+  Metadata(IDictionary&lt;string, object&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L394"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Optional metadata. Within the metadata object, keys that begin with an underscore (<code>_</code>) are reserved for system use.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Metadata(IDictionary&lt;string, object&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Name_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Name*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Name_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Name(Elastic.Clients.Elasticsearch.Name)">
+  Name(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L204"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the role.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Name(Name value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L628"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Refresh_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_Refresh_System_Nullable_Elastic_Clients_Elasticsearch_Refresh__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.Refresh(System.Nullable{Elastic.Clients.Elasticsearch.Refresh})">
+  Refresh(Refresh?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L215"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code> (the default) then refresh the affected shards to make this operation visible to search, if <code>wait_for</code> then wait for a refresh to make this operation visible to search, if <code>false</code> then do nothing with refreshes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor Refresh(Refresh? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Refresh.html">Refresh</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteCluster_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteCluster*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteCluster_Elastic_Clients_Elasticsearch_Security_RemoteClusterPrivileges___" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteCluster(Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges[])">
+  RemoteCluster(params RemoteClusterPrivileges[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L445"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of remote cluster permissions entries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor RemoteCluster(params RemoteClusterPrivileges[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges.html">RemoteClusterPrivileges</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteCluster_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteCluster*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteCluster_System_Action_Elastic_Clients_Elasticsearch_Security_RemoteClusterPrivilegesDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteCluster(System.Action{Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor}[])">
+  RemoteCluster(params Action&lt;RemoteClusterPrivilegesDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L456"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of remote cluster permissions entries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor RemoteCluster(params Action&lt;RemoteClusterPrivilegesDescriptor&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivilegesDescriptor.html">RemoteClusterPrivilegesDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteCluster_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteCluster*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteCluster_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Security_RemoteClusterPrivileges__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteCluster(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges})">
+  RemoteCluster(ICollection&lt;RemoteClusterPrivileges&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L434"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of remote cluster permissions entries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor RemoteCluster(ICollection&lt;RemoteClusterPrivileges&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.RemoteClusterPrivileges.html">RemoteClusterPrivileges</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteIndices_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteIndices_Elastic_Clients_Elasticsearch_Security_RemoteIndicesPrivileges___" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteIndices(Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges[])">
+  RemoteIndices(params RemoteIndicesPrivileges[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L492"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of remote indices permissions entries.
+</p>
+<p>
+NOTE: Remote indices are effective for remote clusters configured with the API key based model.
+They have no effect for remote clusters configured with the certificate based model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor RemoteIndices(params RemoteIndicesPrivileges[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges.html">RemoteIndicesPrivileges</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteIndices_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteIndices_System_Action_Elastic_Clients_Elasticsearch_Security_RemoteIndicesPrivilegesDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteIndices(System.Action{Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor}[])">
+  RemoteIndices(params Action&lt;RemoteIndicesPrivilegesDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L507"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of remote indices permissions entries.
+</p>
+<p>
+NOTE: Remote indices are effective for remote clusters configured with the API key based model.
+They have no effect for remote clusters configured with the certificate based model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor RemoteIndices(params Action&lt;RemoteIndicesPrivilegesDescriptor&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor.html">RemoteIndicesPrivilegesDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteIndices_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteIndices_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Security_RemoteIndicesPrivileges__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteIndices(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges})">
+  RemoteIndices(ICollection&lt;RemoteIndicesPrivileges&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L477"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of remote indices permissions entries.
+</p>
+<p>
+NOTE: Remote indices are effective for remote clusters configured with the API key based model.
+They have no effect for remote clusters configured with the certificate based model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor RemoteIndices(ICollection&lt;RemoteIndicesPrivileges&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivileges.html">RemoteIndicesPrivileges</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteIndices_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RemoteIndices__1_System_Action_Elastic_Clients_Elasticsearch_Security_RemoteIndicesPrivilegesDescriptor___0_____" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RemoteIndices``1(System.Action{Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor{``0}}[])">
+  RemoteIndices&lt;T&gt;(params Action&lt;RemoteIndicesPrivilegesDescriptor&lt;T&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L528"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of remote indices permissions entries.
+</p>
+<p>
+NOTE: Remote indices are effective for remote clusters configured with the API key based model.
+They have no effect for remote clusters configured with the certificate based model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor RemoteIndices&lt;T&gt;(params Action&lt;RemoteIndicesPrivilegesDescriptor&lt;T&gt;&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Security.RemoteIndicesPrivilegesDescriptor-1.html">RemoteIndicesPrivilegesDescriptor</a>&lt;T&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L640"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.11/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L646"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.11/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.11/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RunAs_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RunAs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RunAs_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RunAs(System.Collections.Generic.ICollection{System.String})">
+  RunAs(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L545"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of users that the owners of this role can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <code>run_as</code> field, but a non-empty list will be rejected.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor RunAs(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RunAs_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RunAs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_RunAs_System_String___" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.RunAs(System.String[])">
+  RunAs(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L556"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of users that the owners of this role can impersonate. <em>Note</em>: in Serverless, the run-as feature is disabled. For API compatibility, you can still specify an empty <code>run_as</code> field, but a non-empty list will be rejected.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor RunAs(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L634"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_TransientMetadata_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.TransientMetadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_TransientMetadata" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.TransientMetadata">
+  TransientMetadata()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L578"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates roles that might be incompatible with the current cluster license, specifically roles with document and field level security. When the cluster license doesn’t allow certain features for a given role, this parameter is updated dynamically to list the incompatible features. If <code>enabled</code> is <code>false</code>, the role is ignored, but is still listed in the response from the authenticate API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor TransientMetadata()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_TransientMetadata_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.TransientMetadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_TransientMetadata_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringObject__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.TransientMetadata(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject})">
+  TransientMetadata(Action&lt;FluentDictionaryOfStringObject&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L589"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates roles that might be incompatible with the current cluster license, specifically roles with document and field level security. When the cluster license doesn’t allow certain features for a given role, this parameter is updated dynamically to list the incompatible features. If <code>enabled</code> is <code>false</code>, the role is ignored, but is still listed in the response from the authenticate API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor TransientMetadata(Action&lt;FluentDictionaryOfStringObject&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.html">FluentDictionaryOfStringObject</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_TransientMetadata_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.TransientMetadata*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_TransientMetadata_System_Collections_Generic_IDictionary_System_String_System_Object__" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.TransientMetadata(System.Collections.Generic.IDictionary{System.String,System.Object})">
+  TransientMetadata(IDictionary&lt;string, object&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L567"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates roles that might be incompatible with the current cluster license, specifically roles with document and field level security. When the cluster license doesn’t allow certain features for a given role, this parameter is updated dynamically to list the incompatible features. If <code>enabled</code> is <code>false</code>, the role is ignored, but is still listed in the response from the authenticate API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutRoleRequestDescriptor TransientMetadata(IDictionary&lt;string, object&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Security_PutRoleRequest__Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Security.PutRoleRequest)~Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor">
+  explicit operator PutRoleRequestDescriptor(PutRoleRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L196"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator PutRoleRequestDescriptor(PutRoleRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequest.html">PutRoleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Security_PutRoleRequestDescriptor__Elastic_Clients_Elasticsearch_Security_PutRoleRequest" data-uid="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor)~Elastic.Clients.Elasticsearch.Security.PutRoleRequest">
+  implicit operator PutRoleRequest(PutRoleRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.11/src/Elastic.Clients.Elasticsearch/_Generated/Api/Security/PutRoleRequest.g.cs/#L197"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator PutRoleRequest(PutRoleRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor.html">PutRoleRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Security.PutRoleRequest.html">PutRoleRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
