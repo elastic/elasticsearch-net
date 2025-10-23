@@ -56,7 +56,9 @@ public sealed partial class InferenceEndpoint
 
 	/// <summary>
 	/// <para>
-	/// Chunking configuration object
+	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
@@ -117,7 +119,9 @@ public readonly partial struct InferenceEndpointDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Chunking configuration object
+	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
@@ -128,7 +132,9 @@ public readonly partial struct InferenceEndpointDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Chunking configuration object
+	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor ChunkingSettings()
@@ -139,7 +145,9 @@ public readonly partial struct InferenceEndpointDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Chunking configuration object
+	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)

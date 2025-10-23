@@ -51,6 +51,16 @@ public sealed partial class GoogleVertexAITaskSettings
 
 	/// <summary>
 	/// <para>
+	/// For <c>completion</c> and <c>chat_completion</c> tasks, specifies the <c>max_tokens</c> value for requests sent to the Google Model Garden <c>anthropic</c> provider.
+	/// If <c>provider</c> is not set to <c>anthropic</c>, this field is ignored.
+	/// If <c>max_tokens</c> is specified - it must be a positive integer. If not specified, the default value of 1024 is used.
+	/// Anthropic models require <c>max_tokens</c> to be set for each request. Please refer to the Anthropic documentation for more information.
+	/// </para>
+	/// </summary>
+	public int? MaxTokens { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// For a <c>completion</c> or <c>chat_completion</c> task, allows configuration of the thinking features for the model.
 	/// Refer to the Google documentation for the allowable configurations for each model type.
 	/// </para>
@@ -92,6 +102,20 @@ public readonly partial struct GoogleVertexAiTaskSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor AutoTruncate(bool? value = true)
 	{
 		Instance.AutoTruncate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For <c>completion</c> and <c>chat_completion</c> tasks, specifies the <c>max_tokens</c> value for requests sent to the Google Model Garden <c>anthropic</c> provider.
+	/// If <c>provider</c> is not set to <c>anthropic</c>, this field is ignored.
+	/// If <c>max_tokens</c> is specified - it must be a positive integer. If not specified, the default value of 1024 is used.
+	/// Anthropic models require <c>max_tokens</c> to be set for each request. Please refer to the Anthropic documentation for more information.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiTaskSettingsDescriptor MaxTokens(int? value)
+	{
+		Instance.MaxTokens = value;
 		return this;
 	}
 

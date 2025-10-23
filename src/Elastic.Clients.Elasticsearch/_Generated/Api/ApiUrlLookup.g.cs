@@ -40,6 +40,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls ClusterPendingTasks = new ApiUrls(new[] { "_cluster/pending_tasks" });
 	internal static ApiUrls ClusterPostVotingConfigExclusions = new ApiUrls(new[] { "_cluster/voting_config_exclusions" });
 	internal static ApiUrls ClusterPutComponentTemplate = new ApiUrls(new[] { "_component_template/{name}" });
+	internal static ApiUrls ClusterPutSettings = new ApiUrls(new[] { "_cluster/settings" });
 	internal static ApiUrls ClusterStats = new ApiUrls(new[] { "_cluster/stats", "_cluster/stats/nodes/{node_id}" });
 	internal static ApiUrls CrossClusterReplicationDeleteAutoFollowPattern = new ApiUrls(new[] { "_ccr/auto_follow/{name}" });
 	internal static ApiUrls CrossClusterReplicationFollow = new ApiUrls(new[] { "{index}/_ccr/follow" });
@@ -122,6 +123,8 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementGetIndexTemplate = new ApiUrls(new[] { "_index_template", "_index_template/{name}" });
 	internal static ApiUrls IndexManagementGetMapping = new ApiUrls(new[] { "_mapping", "{index}/_mapping" });
 	internal static ApiUrls IndexManagementGetMigrateReindexStatus = new ApiUrls(new[] { "_migration/reindex/{index}/_status" });
+	internal static ApiUrls IndexManagementGetSample = new ApiUrls(new[] { "{index}/_sample" });
+	internal static ApiUrls IndexManagementGetSampleStats = new ApiUrls(new[] { "{index}/_sample/stats" });
 	internal static ApiUrls IndexManagementGetSettings = new ApiUrls(new[] { "_settings", "{index}/_settings", "{index}/_settings/{name}", "_settings/{name}" });
 	internal static ApiUrls IndexManagementGetTemplate = new ApiUrls(new[] { "_template", "_template/{name}" });
 	internal static ApiUrls IndexManagementMigrateReindex = new ApiUrls(new[] { "_migration/reindex" });

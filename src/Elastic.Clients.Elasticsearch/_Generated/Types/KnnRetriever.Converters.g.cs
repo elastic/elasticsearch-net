@@ -35,6 +35,7 @@ public sealed partial class KnnRetrieverConverter : System.Text.Json.Serializati
 	private static readonly System.Text.Json.JsonEncodedText PropQueryVectorBuilder = System.Text.Json.JsonEncodedText.Encode("query_vector_builder");
 	private static readonly System.Text.Json.JsonEncodedText PropRescoreVector = System.Text.Json.JsonEncodedText.Encode("rescore_vector");
 	private static readonly System.Text.Json.JsonEncodedText PropSimilarity = System.Text.Json.JsonEncodedText.Encode("similarity");
+	private static readonly System.Text.Json.JsonEncodedText PropVisitPercentage = System.Text.Json.JsonEncodedText.Encode("visit_percentage");
 
 	public override Elastic.Clients.Elasticsearch.KnnRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -49,6 +50,7 @@ public sealed partial class KnnRetrieverConverter : System.Text.Json.Serializati
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryVectorBuilder?> propQueryVectorBuilder = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.RescoreVector?> propRescoreVector = default;
 		LocalJsonValue<float?> propSimilarity = default;
+		LocalJsonValue<float?> propVisitPercentage = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propField.TryReadProperty(ref reader, options, PropField, null))
@@ -101,6 +103,11 @@ public sealed partial class KnnRetrieverConverter : System.Text.Json.Serializati
 				continue;
 			}
 
+			if (propVisitPercentage.TryReadProperty(ref reader, options, PropVisitPercentage, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -122,7 +129,8 @@ public sealed partial class KnnRetrieverConverter : System.Text.Json.Serializati
 			QueryVector = propQueryVector.Value,
 			QueryVectorBuilder = propQueryVectorBuilder.Value,
 			RescoreVector = propRescoreVector.Value,
-			Similarity = propSimilarity.Value
+			Similarity = propSimilarity.Value,
+			VisitPercentage = propVisitPercentage.Value
 		};
 	}
 
@@ -139,6 +147,7 @@ public sealed partial class KnnRetrieverConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropQueryVectorBuilder, value.QueryVectorBuilder, null, null);
 		writer.WriteProperty(options, PropRescoreVector, value.RescoreVector, null, null);
 		writer.WriteProperty(options, PropSimilarity, value.Similarity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
+		writer.WriteProperty(options, PropVisitPercentage, value.VisitPercentage, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteEndObject();
 	}
 }
