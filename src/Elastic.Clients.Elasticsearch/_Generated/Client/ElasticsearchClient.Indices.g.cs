@@ -3400,6 +3400,202 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetMigrateReindexStatusRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse GetSample(Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse GetSample(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse GetSample(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse GetSample<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse GetSample<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse GetSample<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse> GetSampleAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse> GetSampleAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse> GetSampleAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse> GetSampleAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse> GetSampleAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse> GetSampleAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse GetSampleStats(Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse GetSampleStats(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse GetSampleStats(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse GetSampleStats<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse GetSampleStats<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse GetSampleStats<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse> GetSampleStatsAsync(Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse> GetSampleStatsAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse> GetSampleStatsAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse> GetSampleStatsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse> GetSampleStatsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse> GetSampleStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetSampleStatsRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsResponse GetSettings(Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest request)
 	{
 		request.BeforeRequest();

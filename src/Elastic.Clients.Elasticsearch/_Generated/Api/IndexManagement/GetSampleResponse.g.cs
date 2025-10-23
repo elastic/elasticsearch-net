@@ -21,17 +21,25 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Inference;
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.TaskTypeGoogleVertexAIConverter))]
-public enum TaskTypeGoogleVertexAI
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetSampleResponseConverter))]
+public sealed partial class GetSampleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
-	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
-	ChatCompletion,
-	[System.Runtime.Serialization.EnumMember(Value = "completion")]
-	Completion,
-	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
-	Rerank,
-	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
-	TextEmbedding
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetSampleResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetSampleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.IndexManagement.RawDocument> Sample { get; set; }
 }

@@ -21,79 +21,53 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Inference;
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutOpenaiResponseConverter))]
-public sealed partial class PutOpenaiResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.RawDocumentConverter))]
+public sealed partial class RawDocument
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutOpenaiResponse()
+	public RawDocument(string index, Elastic.Clients.Elasticsearch.Mapping.Properties source)
+	{
+		Index = index;
+		Source = source;
+	}
+#if NET7_0_OR_GREATER
+	public RawDocument()
 	{
 	}
-
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RawDocument()
+	{
+	}
+#endif
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal PutOpenaiResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal RawDocument(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The inference Id
+	/// Name of the index for this raw document.
 	/// </para>
 	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	string InferenceId { get; set; }
+	string Index { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The service type
+	/// The original raw source.
 	/// </para>
 	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	string Service { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	object ServiceSettings { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
-	public object? TaskSettings { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The task type
-	/// </para>
-	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI TaskType { get; set; }
+	Elastic.Clients.Elasticsearch.Mapping.Properties Source { get; set; }
 }

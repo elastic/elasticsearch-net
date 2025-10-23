@@ -27,6 +27,8 @@ public sealed partial class ElasticsearchServiceSettingsConverter : System.Text.
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAdaptiveAllocations = System.Text.Json.JsonEncodedText.Encode("adaptive_allocations");
 	private static readonly System.Text.Json.JsonEncodedText PropDeploymentId = System.Text.Json.JsonEncodedText.Encode("deployment_id");
+	private static readonly System.Text.Json.JsonEncodedText PropLongDocumentStrategy = System.Text.Json.JsonEncodedText.Encode("long_document_strategy");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxChunksPerDoc = System.Text.Json.JsonEncodedText.Encode("max_chunks_per_doc");
 	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
 	private static readonly System.Text.Json.JsonEncodedText PropNumAllocations = System.Text.Json.JsonEncodedText.Encode("num_allocations");
 	private static readonly System.Text.Json.JsonEncodedText PropNumThreads = System.Text.Json.JsonEncodedText.Encode("num_threads");
@@ -36,6 +38,8 @@ public sealed partial class ElasticsearchServiceSettingsConverter : System.Text.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.AdaptiveAllocations?> propAdaptiveAllocations = default;
 		LocalJsonValue<string?> propDeploymentId = default;
+		LocalJsonValue<string?> propLongDocumentStrategy = default;
+		LocalJsonValue<int?> propMaxChunksPerDoc = default;
 		LocalJsonValue<string> propModelId = default;
 		LocalJsonValue<int?> propNumAllocations = default;
 		LocalJsonValue<int> propNumThreads = default;
@@ -47,6 +51,16 @@ public sealed partial class ElasticsearchServiceSettingsConverter : System.Text.
 			}
 
 			if (propDeploymentId.TryReadProperty(ref reader, options, PropDeploymentId, null))
+			{
+				continue;
+			}
+
+			if (propLongDocumentStrategy.TryReadProperty(ref reader, options, PropLongDocumentStrategy, null))
+			{
+				continue;
+			}
+
+			if (propMaxChunksPerDoc.TryReadProperty(ref reader, options, PropMaxChunksPerDoc, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -80,6 +94,8 @@ public sealed partial class ElasticsearchServiceSettingsConverter : System.Text.
 		{
 			AdaptiveAllocations = propAdaptiveAllocations.Value,
 			DeploymentId = propDeploymentId.Value,
+			LongDocumentStrategy = propLongDocumentStrategy.Value,
+			MaxChunksPerDoc = propMaxChunksPerDoc.Value,
 			ModelId = propModelId.Value,
 			NumAllocations = propNumAllocations.Value,
 			NumThreads = propNumThreads.Value
@@ -91,6 +107,8 @@ public sealed partial class ElasticsearchServiceSettingsConverter : System.Text.
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAdaptiveAllocations, value.AdaptiveAllocations, null, null);
 		writer.WriteProperty(options, PropDeploymentId, value.DeploymentId, null, null);
+		writer.WriteProperty(options, PropLongDocumentStrategy, value.LongDocumentStrategy, null, null);
+		writer.WriteProperty(options, PropMaxChunksPerDoc, value.MaxChunksPerDoc, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
 		writer.WriteProperty(options, PropNumAllocations, value.NumAllocations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropNumThreads, value.NumThreads, null, null);

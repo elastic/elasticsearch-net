@@ -70,6 +70,42 @@ public sealed partial class ElasticsearchServiceSettings
 
 	/// <summary>
 	/// <para>
+	/// Available only for the <c>rerank</c> task type using the Elastic reranker model.
+	/// Controls the strategy used for processing long documents during inference.
+	/// </para>
+	/// <para>
+	/// Possible values:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>truncate</c> (default): Processes only the beginning of each document.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>chunk</c>: Splits long documents into smaller parts (chunks) before inference.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When <c>long_document_strategy</c> is set to <c>chunk</c>, Elasticsearch splits each document into smaller parts but still returns a single score per document.
+	/// That score reflects the highest relevance score among all chunks.
+	/// </para>
+	/// </summary>
+	public string? LongDocumentStrategy { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Only for the <c>rerank</c> task type.
+	/// Limits the number of chunks per document that are sent for inference when chunking is enabled.
+	/// If not set, all chunks generated for the document are processed.
+	/// </para>
+	/// </summary>
+	public int? MaxChunksPerDoc { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The name of the model to use for the inference task.
 	/// It can be the ID of a built-in model (for example, <c>.multilingual-e5-small</c> for E5) or a text embedding model that was uploaded by using the Eland client.
 	/// </para>
@@ -178,6 +214,50 @@ public readonly partial struct ElasticsearchServiceSettingsDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettingsDescriptor DeploymentId(string? value)
 	{
 		Instance.DeploymentId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Available only for the <c>rerank</c> task type using the Elastic reranker model.
+	/// Controls the strategy used for processing long documents during inference.
+	/// </para>
+	/// <para>
+	/// Possible values:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>truncate</c> (default): Processes only the beginning of each document.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>chunk</c>: Splits long documents into smaller parts (chunks) before inference.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When <c>long_document_strategy</c> is set to <c>chunk</c>, Elasticsearch splits each document into smaller parts but still returns a single score per document.
+	/// That score reflects the highest relevance score among all chunks.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettingsDescriptor LongDocumentStrategy(string? value)
+	{
+		Instance.LongDocumentStrategy = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Only for the <c>rerank</c> task type.
+	/// Limits the number of chunks per document that are sent for inference when chunking is enabled.
+	/// If not set, all chunks generated for the document are processed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.ElasticsearchServiceSettingsDescriptor MaxChunksPerDoc(int? value)
+	{
+		Instance.MaxChunksPerDoc = value;
 		return this;
 	}
 

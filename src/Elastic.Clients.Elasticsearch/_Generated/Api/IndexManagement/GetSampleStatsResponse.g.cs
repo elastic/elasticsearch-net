@@ -21,79 +21,74 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.Inference;
+namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.PutOpenaiResponseConverter))]
-public sealed partial class PutOpenaiResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.GetSampleStatsResponseConverter))]
+public sealed partial class GetSampleStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutOpenaiResponse()
+	public GetSampleStatsResponse()
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal PutOpenaiResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal GetSampleStatsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
-	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The inference Id
-	/// </para>
-	/// </summary>
+	public string? LastException { get; set; }
 	public
 #if NET7_0_OR_GREATER
-	required
+required
 #endif
-	string InferenceId { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The service type
-	/// </para>
-	/// </summary>
+long PotentialSamples { get; set; }
 	public
 #if NET7_0_OR_GREATER
-	required
+required
 #endif
-	string Service { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Settings specific to the service
-	/// </para>
-	/// </summary>
+long SamplesAccepted { get; set; }
 	public
 #if NET7_0_OR_GREATER
-	required
+required
 #endif
-	object ServiceSettings { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Task settings specific to the service and task type
-	/// </para>
-	/// </summary>
-	public object? TaskSettings { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The task type
-	/// </para>
-	/// </summary>
+long SamplesRejectedForCondition { get; set; }
 	public
 #if NET7_0_OR_GREATER
-	required
+required
 #endif
-	Elastic.Clients.Elasticsearch.Inference.TaskTypeOpenAI TaskType { get; set; }
+long SamplesRejectedForException { get; set; }
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+long SamplesRejectedForMaxSamplesExceeded { get; set; }
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+long SamplesRejectedForRate { get; set; }
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+long SamplesRejectedForSize { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TimeCompilingCondition { get; set; }
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+System.TimeSpan TimeCompilingConditionMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TimeEvaluatingCondition { get; set; }
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+System.TimeSpan TimeEvaluatingConditionMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TimeSampling { get; set; }
+	public
+#if NET7_0_OR_GREATER
+required
+#endif
+System.TimeSpan TimeSamplingMillis { get; set; }
 }
