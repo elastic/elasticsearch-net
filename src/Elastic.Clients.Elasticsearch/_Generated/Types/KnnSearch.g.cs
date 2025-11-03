@@ -121,6 +121,13 @@ public sealed partial class KnnSearch
 	/// </para>
 	/// </summary>
 	public float? Similarity { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The percentage of vectors to explore per shard while doing knn search with bbq_disk
+	/// </para>
+	/// </summary>
+	public float? VisitPercentage { get; set; }
 }
 
 public readonly partial struct KnnSearchDescriptor<TDocument>
@@ -343,6 +350,17 @@ public readonly partial struct KnnSearchDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> Similarity(float? value)
 	{
 		Instance.Similarity = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The percentage of vectors to explore per shard while doing knn search with bbq_disk
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> VisitPercentage(float? value)
+	{
+		Instance.VisitPercentage = value;
 		return this;
 	}
 
@@ -603,6 +621,17 @@ public readonly partial struct KnnSearchDescriptor
 	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor Similarity(float? value)
 	{
 		Instance.Similarity = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The percentage of vectors to explore per shard while doing knn search with bbq_disk
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.KnnSearchDescriptor VisitPercentage(float? value)
+	{
+		Instance.VisitPercentage = value;
 		return this;
 	}
 

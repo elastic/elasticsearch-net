@@ -108,7 +108,8 @@ public sealed partial class QueryRoleRequest : Elastic.Clients.Elasticsearch.Req
 	/// <summary>
 	/// <para>
 	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// You can sort on <c>name</c>, <c>description</c>, <c>metadata</c>, <c>applications.application</c>, <c>applications.privileges</c>,
+	/// and <c>applications.resources</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
@@ -246,7 +247,8 @@ public readonly partial struct QueryRoleRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// You can sort on <c>name</c>, <c>description</c>, <c>metadata</c>, <c>applications.application</c>, <c>applications.privileges</c>,
+	/// and <c>applications.resources</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
@@ -259,7 +261,8 @@ public readonly partial struct QueryRoleRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// You can sort on <c>name</c>, <c>description</c>, <c>metadata</c>, <c>applications.application</c>, <c>applications.privileges</c>,
+	/// and <c>applications.resources</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
@@ -272,7 +275,8 @@ public readonly partial struct QueryRoleRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// You can sort on <c>name</c>, <c>description</c>, <c>metadata</c>, <c>applications.application</c>, <c>applications.privileges</c>,
+	/// and <c>applications.resources</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
@@ -291,7 +295,8 @@ public readonly partial struct QueryRoleRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// You can sort on <c>name</c>, <c>description</c>, <c>metadata</c>, <c>applications.application</c>, <c>applications.privileges</c>,
+	/// and <c>applications.resources</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
@@ -478,7 +483,8 @@ public readonly partial struct QueryRoleRequestDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// You can sort on <c>name</c>, <c>description</c>, <c>metadata</c>, <c>applications.application</c>, <c>applications.privileges</c>,
+	/// and <c>applications.resources</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
@@ -491,7 +497,8 @@ public readonly partial struct QueryRoleRequestDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// You can sort on <c>name</c>, <c>description</c>, <c>metadata</c>, <c>applications.application</c>, <c>applications.privileges</c>,
+	/// and <c>applications.resources</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>
@@ -504,7 +511,8 @@ public readonly partial struct QueryRoleRequestDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// The sort definition.
-	/// You can sort on <c>username</c>, <c>roles</c>, or <c>enabled</c>.
+	/// You can sort on <c>name</c>, <c>description</c>, <c>metadata</c>, <c>applications.application</c>, <c>applications.privileges</c>,
+	/// and <c>applications.resources</c>.
 	/// In addition, sort can also be applied to the <c>_doc</c> field to sort by index order.
 	/// </para>
 	/// </summary>

@@ -72,7 +72,7 @@ public sealed partial class PercentilesAggregationConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propPercents.TryReadProperty(ref reader, options, PropPercents, static System.Collections.Generic.ICollection<double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<double>(o, null)))
+			if (propPercents.TryReadProperty(ref reader, options, PropPercents, static System.Collections.Generic.ICollection<double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<double>(o, null)))
 			{
 				continue;
 			}
@@ -117,7 +117,7 @@ public sealed partial class PercentilesAggregationConverter : System.Text.Json.S
 		writer.WriteProperty(options, PropHdr, value.Hdr, null, null);
 		writer.WriteProperty(options, PropKeyed, value.Keyed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropMissing, value.Missing, null, null);
-		writer.WriteProperty(options, PropPercents, value.Percents, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<double>? v) => w.WriteCollectionValue<double>(o, v, null));
+		writer.WriteProperty(options, PropPercents, value.Percents, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<double>? v) => w.WriteSingleOrManyCollectionValue<double>(o, v, null));
 		writer.WriteProperty(options, PropScript, value.Script, null, null);
 		writer.WriteProperty(options, PropTDigest, value.TDigest, null, null);
 		writer.WriteEndObject();

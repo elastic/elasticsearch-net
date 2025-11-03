@@ -27,16 +27,14 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 public sealed partial class NodeAllocationExplanation
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public NodeAllocationExplanation(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision> deciders, System.Collections.Generic.IReadOnlyDictionary<string, string> nodeAttributes, Elastic.Clients.Elasticsearch.Cluster.Decision nodeDecision, string nodeId, string nodeName, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> roles, string transportAddress, int weightRanking)
+	public NodeAllocationExplanation(System.Collections.Generic.IReadOnlyDictionary<string, string> nodeAttributes, Elastic.Clients.Elasticsearch.Cluster.Decision nodeDecision, string nodeId, string nodeName, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> roles, string transportAddress)
 	{
-		Deciders = deciders;
 		NodeAttributes = nodeAttributes;
 		NodeDecision = nodeDecision;
 		NodeId = nodeId;
 		NodeName = nodeName;
 		Roles = roles;
 		TransportAddress = transportAddress;
-		WeightRanking = weightRanking;
 	}
 #if NET7_0_OR_GREATER
 	public NodeAllocationExplanation()
@@ -55,11 +53,7 @@ public sealed partial class NodeAllocationExplanation
 		_ = sentinel;
 	}
 
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision> Deciders { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? Deciders { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
@@ -91,9 +85,5 @@ public sealed partial class NodeAllocationExplanation
 	required
 #endif
 	string TransportAddress { get; set; }
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	int WeightRanking { get; set; }
+	public int? WeightRanking { get; set; }
 }

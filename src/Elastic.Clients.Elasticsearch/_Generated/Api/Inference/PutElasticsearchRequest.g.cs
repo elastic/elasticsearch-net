@@ -124,6 +124,8 @@ public sealed partial class PutElasticsearchRequest : Elastic.Clients.Elasticsea
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
@@ -243,6 +245,8 @@ public readonly partial struct PutElasticsearchRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
@@ -254,6 +258,8 @@ public readonly partial struct PutElasticsearchRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor ChunkingSettings()
@@ -265,6 +271,8 @@ public readonly partial struct PutElasticsearchRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> and <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c>, <c>completion</c>, or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
