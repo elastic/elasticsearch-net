@@ -26,14 +26,21 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 public sealed partial class DownsampleConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropSamplingMethod = System.Text.Json.JsonEncodedText.Encode("sampling_method");
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string> propFixedInterval = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod?> propSamplingMethod = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propFixedInterval.TryReadProperty(ref reader, options, PropFixedInterval, null))
+			{
+				continue;
+			}
+
+			if (propSamplingMethod.TryReadProperty(ref reader, options, PropSamplingMethod, static Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod>(o)))
 			{
 				continue;
 			}
@@ -50,7 +57,8 @@ public sealed partial class DownsampleConfigConverter : System.Text.Json.Seriali
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			FixedInterval = propFixedInterval.Value
+			FixedInterval = propFixedInterval.Value,
+			SamplingMethod = propSamplingMethod.Value
 		};
 	}
 
@@ -58,6 +66,7 @@ public sealed partial class DownsampleConfigConverter : System.Text.Json.Seriali
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropFixedInterval, value.FixedInterval, null, null);
+		writer.WriteProperty(options, PropSamplingMethod, value.SamplingMethod, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? v) => w.WriteNullableValue<Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod>(o, v));
 		writer.WriteEndObject();
 	}
 }

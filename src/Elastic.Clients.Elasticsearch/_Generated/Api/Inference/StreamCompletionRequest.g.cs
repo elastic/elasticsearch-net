@@ -114,7 +114,7 @@ public sealed partial class StreamCompletionRequest : Elastic.Clients.Elasticsea
 
 	/// <summary>
 	/// <para>
-	/// Optional task settings
+	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
 	/// </para>
 	/// </summary>
 	public object? TaskSettings { get; set; }
@@ -213,7 +213,7 @@ public readonly partial struct StreamCompletionRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Optional task settings
+	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor TaskSettings(object? value)

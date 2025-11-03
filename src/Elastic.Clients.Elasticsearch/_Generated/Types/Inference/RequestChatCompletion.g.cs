@@ -70,7 +70,7 @@ public sealed partial class RequestChatCompletion
 
 	/// <summary>
 	/// <para>
-	/// The ID of the model to use.
+	/// The ID of the model to use. By default, the model ID is set to the value included when creating the inference endpoint.
 	/// </para>
 	/// </summary>
 	public string? Model { get; set; }
@@ -225,7 +225,7 @@ public readonly partial struct RequestChatCompletionDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The ID of the model to use.
+	/// The ID of the model to use. By default, the model ID is set to the value included when creating the inference endpoint.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.RequestChatCompletionDescriptor Model(string? value)

@@ -30,14 +30,29 @@ public sealed partial class DownsampleRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Downsample an index.
-/// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// Downsamples a time series (TSDS) index and reduces its size by keeping the last value or by pre-aggregating metrics:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// When running in <c>aggregate</c> mode, it pre-calculates and stores statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>)
+/// for each metric field grouped by a configured time interval and their dimensions.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// When running in <c>last_value</c> mode, it keeps the last value for each metric in the configured interval and their dimensions.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
 /// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
 /// All documents within an hour interval are summarized and stored as a single document in the downsample index.
 /// </para>
 /// <para>
 /// NOTE: Only indices in a time series data stream are supported.
 /// Neither field nor document level security can be defined on the source index.
-/// The source index must be read only (<c>index.blocks.write: true</c>).
+/// The source index must be read-only (<c>index.blocks.write: true</c>).
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DownsampleRequestConverter))]
@@ -104,14 +119,29 @@ public sealed partial class DownsampleRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Downsample an index.
-/// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// Downsamples a time series (TSDS) index and reduces its size by keeping the last value or by pre-aggregating metrics:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// When running in <c>aggregate</c> mode, it pre-calculates and stores statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>)
+/// for each metric field grouped by a configured time interval and their dimensions.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// When running in <c>last_value</c> mode, it keeps the last value for each metric in the configured interval and their dimensions.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
 /// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
 /// All documents within an hour interval are summarized and stored as a single document in the downsample index.
 /// </para>
 /// <para>
 /// NOTE: Only indices in a time series data stream are supported.
 /// Neither field nor document level security can be defined on the source index.
-/// The source index must be read only (<c>index.blocks.write: true</c>).
+/// The source index must be read-only (<c>index.blocks.write: true</c>).
 /// </para>
 /// </summary>
 public readonly partial struct DownsampleRequestDescriptor
@@ -228,14 +258,29 @@ public readonly partial struct DownsampleRequestDescriptor
 /// <summary>
 /// <para>
 /// Downsample an index.
-/// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// Downsamples a time series (TSDS) index and reduces its size by keeping the last value or by pre-aggregating metrics:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// When running in <c>aggregate</c> mode, it pre-calculates and stores statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>)
+/// for each metric field grouped by a configured time interval and their dimensions.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// When running in <c>last_value</c> mode, it keeps the last value for each metric in the configured interval and their dimensions.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
 /// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
 /// All documents within an hour interval are summarized and stored as a single document in the downsample index.
 /// </para>
 /// <para>
 /// NOTE: Only indices in a time series data stream are supported.
 /// Neither field nor document level security can be defined on the source index.
-/// The source index must be read only (<c>index.blocks.write: true</c>).
+/// The source index must be read-only (<c>index.blocks.write: true</c>).
 /// </para>
 /// </summary>
 public readonly partial struct DownsampleRequestDescriptor<TDocument>

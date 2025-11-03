@@ -44,7 +44,7 @@ public sealed partial class RRFRetrieverConverter : System.Text.Json.Serializati
 		LocalJsonValue<string?> propQuery = default;
 		LocalJsonValue<int?> propRankConstant = default;
 		LocalJsonValue<int?> propRankWindowSize = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever>> propRetrievers = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>>> propRetrievers = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
@@ -82,7 +82,7 @@ public sealed partial class RRFRetrieverConverter : System.Text.Json.Serializati
 				continue;
 			}
 
-			if (propRetrievers.TryReadProperty(ref reader, options, PropRetrievers, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Retriever>(o, null)!))
+			if (propRetrievers.TryReadProperty(ref reader, options, PropRetrievers, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>>(o, static Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByPropertyOfT2(ref r, o, "retriever"), null, null)!)!))
 			{
 				continue;
 			}
@@ -120,7 +120,7 @@ public sealed partial class RRFRetrieverConverter : System.Text.Json.Serializati
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteProperty(options, PropRankConstant, value.RankConstant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropRankWindowSize, value.RankWindowSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
-		writer.WriteProperty(options, PropRetrievers, value.Retrievers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Retriever>(o, v, null));
+		writer.WriteProperty(options, PropRetrievers, value.Retrievers, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent> v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>(o, v, null, null)));
 		writer.WriteEndObject();
 	}
 }
