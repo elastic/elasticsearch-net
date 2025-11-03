@@ -37,7 +37,7 @@ public sealed partial class GeoLineAggregationConverter : System.Text.Json.Seria
 		LocalJsonValue<bool?> propIncludeSort = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint> propPoint = default;
 		LocalJsonValue<int?> propSize = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort?> propSort = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.SortOrder?> propSortOrder = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
