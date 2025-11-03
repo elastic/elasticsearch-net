@@ -3,7 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Text.Json;
 using System.Text.Json.Serialization;
+
+using Elastic.Transport.Extensions;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -14,13 +17,13 @@ namespace Elastic.Clients.Elasticsearch;
 [JsonConverter(typeof(Json.LazyJsonConverter))]
 public readonly struct LazyJson
 {
-	internal LazyJson(byte[] bytes, IElasticsearchClientSettings settings)
+	internal LazyJson(JsonElement json, IElasticsearchClientSettings? settings)
 	{
-		Bytes = bytes;
+		Json = json;
 		Settings = settings;
 	}
 
-	internal byte[]? Bytes { get; }
+	internal JsonElement Json { get; }
 	internal IElasticsearchClientSettings? Settings { get; }
 
 	/// <summary>
@@ -30,10 +33,11 @@ public readonly struct LazyJson
 	/// <typeparam name="T">The type</typeparam>
 	public T? As<T>()
 	{
-		if (Bytes is null || Settings is null || Bytes.Length == 0)
-			return default;
+		if (Settings is null)
+		{
+			throw new InvalidOperationException($"Can not deserialize value without '{nameof(Settings)}'.");
+		}
 
-		using var ms = Settings.MemoryStreamFactory.Create(Bytes);
-		return Settings.SourceSerializer.Deserialize<T>(ms);
+		return Settings.SourceSerializer.Deserialize<T>(Json);
 	}
 }
