@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class InferenceChunkingSettings | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class InferenceChunkingSettings | Elasticsearch.NET ">
+      
+      <meta name="description" content="Chunking configuration object">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.2.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings" class="text-break">
+Class InferenceChunkingSettings  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/InferenceChunkingSettings.g.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Inference.html">Inference</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Chunking configuration object
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(InferenceChunkingSettingsConverter))]
+public sealed class InferenceChunkingSettings</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">InferenceChunkingSettings</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings__ctor_" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings__ctor" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.#ctor">
+  InferenceChunkingSettings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/InferenceChunkingSettings.g.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InferenceChunkingSettings()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_MaxChunkSize_" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.MaxChunkSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_MaxChunkSize" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.MaxChunkSize">
+  MaxChunkSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/InferenceChunkingSettings.g.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum size of a chunk in words.
+This value cannot be lower than <code>20</code> (for <code>sentence</code> strategy) or <code>10</code> (for <code>word</code> strategy).
+This value should not exceed the window size for the associated model.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxChunkSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_Overlap_" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.Overlap*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_Overlap" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.Overlap">
+  Overlap
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/InferenceChunkingSettings.g.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of overlapping words for chunks.
+It is applicable only to a <code>word</code> chunking strategy.
+This value cannot be higher than half the <code>max_chunk_size</code> value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Overlap { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_SentenceOverlap_" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.SentenceOverlap*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_SentenceOverlap" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.SentenceOverlap">
+  SentenceOverlap
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/InferenceChunkingSettings.g.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of overlapping sentences for chunks.
+It is applicable only for a <code>sentence</code> chunking strategy.
+It can be either <code>1</code> or <code>0</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? SentenceOverlap { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_SeparatorGroup_" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.SeparatorGroup*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_SeparatorGroup" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.SeparatorGroup">
+  SeparatorGroup
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/InferenceChunkingSettings.g.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only applicable to the <code>recursive</code> strategy and required when using it.
+</p>
+<p>
+Sets a predefined list of separators in the saved chunking settings based on the selected text type.
+Values can be <code>markdown</code> or <code>plaintext</code>.
+</p>
+<p>
+Using this parameter is an alternative to manually specifying a custom <code>separators</code> list.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? SeparatorGroup { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_Separators_" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.Separators*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_Separators" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.Separators">
+  Separators
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/InferenceChunkingSettings.g.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Only applicable to the <code>recursive</code> strategy and required when using it.
+</p>
+<p>
+A list of strings used as possible split points when chunking text.
+</p>
+<p>
+Each string can be a plain string or a regular expression (regex) pattern.
+The system tries each separator in order to split the text, starting from the first item in the list.
+</p>
+<p>
+After splitting, it attempts to recombine smaller pieces into larger chunks that stay within
+the <code>max_chunk_size</code> limit, to reduce the total number of chunks generated.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;string&gt;? Separators { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_Strategy_" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.Strategy*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Inference_InferenceChunkingSettings_Strategy" data-uid="Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings.Strategy">
+  Strategy
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Inference/InferenceChunkingSettings.g.cs/#L136"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The chunking strategy: <code>sentence</code>, <code>word</code>, <code>none</code> or <code>recursive</code>.
+</p>
+<ul><li>
+<p>
+If <code>strategy</code> is set to <code>recursive</code>, you must also specify:
+</p>
+</li></ul>
+<ul><li>
+<p>
+<code>max_chunk_size</code>
+</p>
+</li><li>
+<p>
+either <code>separators</code> or<code>separator_group</code>
+</p>
+</li></ul>
+<p>
+Learn more about different chunking strategies in the linked documentation.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Strategy { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
