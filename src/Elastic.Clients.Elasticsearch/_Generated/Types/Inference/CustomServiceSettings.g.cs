@@ -52,6 +52,15 @@ public sealed partial class CustomServiceSettings
 
 	/// <summary>
 	/// <para>
+	/// Specifies the batch size used for the semantic_text field. If the field is not provided, the default is 10.
+	/// The batch size is the maximum number of inputs in a single request to the upstream service.
+	/// The chunk within the batch are controlled by the selected chunking strategy for the semantic_text field.
+	/// </para>
+	/// </summary>
+	public int? BatchSize { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Specifies the HTTP header parameters – such as <c>Authentication</c> or <c>Content-Type</c> – that are required to access the custom service.
 	/// For example:
 	/// </para>
@@ -191,6 +200,19 @@ public readonly partial struct CustomServiceSettingsDescriptor
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor(Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings instance) => new Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Inference.CustomServiceSettings(Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Specifies the batch size used for the semantic_text field. If the field is not provided, the default is 10.
+	/// The batch size is the maximum number of inputs in a single request to the upstream service.
+	/// The chunk within the batch are controlled by the selected chunking strategy for the semantic_text field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.CustomServiceSettingsDescriptor BatchSize(int? value)
+	{
+		Instance.BatchSize = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
