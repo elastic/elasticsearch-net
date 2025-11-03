@@ -24,7 +24,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 namespace Elastic.Clients.Elasticsearch.Sql;
 
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.Json.GetAsyncResponseConverter))]
-public partial class GetAsyncResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+public sealed partial class GetAsyncResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetAsyncResponse()
@@ -93,4 +93,15 @@ public partial class GetAsyncResponse : Elastic.Transport.Products.Elasticsearch
 	required
 #endif
 	bool IsRunning { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The values for the search results.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.SqlRow> Rows { get; set; }
 }
