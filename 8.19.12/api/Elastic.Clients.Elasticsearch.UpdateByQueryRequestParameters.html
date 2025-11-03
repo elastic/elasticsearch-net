@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class UpdateByQueryRequestParameters | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class UpdateByQueryRequestParameters | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.12/apiSpec/new?filename=Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters" class="text-break">
+Class UpdateByQueryRequestParameters  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class UpdateByQueryRequestParameters : RequestParameters</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.12/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters</a></div>
+      <div><span class="xref">UpdateByQueryRequestParameters</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.12/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.ContainsQueryString(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.12/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.GetQueryStringValue&lt;TOut&gt;(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.12/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.SetQueryString(string, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.12/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.CreatePathWithQueryStrings(string, ITransportConfiguration)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.12/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.AcceptHeaderFromFormat(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.12/src/Elastic.Transport/Requests/RequestParameters.cs">RequestParameters.QueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_AllowNoIndices_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.AllowNoIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_AllowNoIndices" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.AllowNoIndices">
+  AllowNoIndices
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>false</code>, the request returns an error if any wildcard expression, index alias, or <code>_all</code> value targets only missing or closed indices.
+This behavior applies even if the request targets other open indices.
+For example, a request targeting <code>foo*,bar*</code> returns an error if an index starts with <code>foo</code> but no index starts with <code>bar</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? AllowNoIndices { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_AnalyzeWildcard_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.AnalyzeWildcard*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_AnalyzeWildcard" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.AnalyzeWildcard">
+  AnalyzeWildcard
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, wildcard and prefix queries are analyzed.
+This parameter can be used only when the <code>q</code> query string parameter is specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? AnalyzeWildcard { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Analyzer_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Analyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Analyzer" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Analyzer">
+  Analyzer
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The analyzer to use for the query string.
+This parameter can be used only when the <code>q</code> query string parameter is specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Analyzer { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_DefaultOperator_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.DefaultOperator*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_DefaultOperator" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.DefaultOperator">
+  DefaultOperator
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The default operator for query string query: <code>and</code> or <code>or</code>.
+This parameter can be used only when the <code>q</code> query string parameter is specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Operator? DefaultOperator { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Operator.html">Operator</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Df_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Df*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Df" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Df">
+  Df
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L67"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field to use as default where no field prefix is given in the query string.
+This parameter can be used only when the <code>q</code> query string parameter is specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Df { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_ExpandWildcards" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.ExpandWildcards">
+  ExpandWildcards
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L76"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+It supports comma-separated values, such as <code>open,hidden</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;ExpandWildcard&gt;? ExpandWildcards { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_From_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.From*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_From" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.From">
+  From
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L83"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Skips the specified number of documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? From { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_IgnoreUnavailable" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.IgnoreUnavailable">
+  IgnoreUnavailable
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>false</code>, the request returns an error if it targets a missing or closed index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IgnoreUnavailable { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Lenient_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Lenient*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Lenient" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Lenient">
+  Lenient
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L98"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+This parameter can be used only when the <code>q</code> query string parameter is specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Lenient { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Pipeline_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Pipeline*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Pipeline" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Pipeline">
+  Pipeline
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The ID of the pipeline to use to preprocess incoming documents.
+If the index has a default ingest pipeline specified, then setting the value to <code>_none</code> disables the default ingest pipeline for this request.
+If a final pipeline is configured it will always run, regardless of the value of this parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Pipeline { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Preference_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Preference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Preference" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Preference">
+  Preference
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The node or shard the operation should be performed on.
+It is random by default.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Preference { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_QueryLuceneSyntax_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.QueryLuceneSyntax*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_QueryLuceneSyntax" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.QueryLuceneSyntax">
+  QueryLuceneSyntax
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A query in the Lucene query string syntax.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? QueryLuceneSyntax { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Refresh_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Refresh" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Refresh">
+  Refresh
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L130"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, Elasticsearch refreshes affected shards to make the operation visible to search after the request completes.
+This is different than the update API's <code>refresh</code> parameter, which causes just the shard that received the request to be refreshed.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Refresh { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_RequestCache_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.RequestCache*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_RequestCache" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.RequestCache">
+  RequestCache
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request cache is used for this request.
+It defaults to the index-level setting.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? RequestCache { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_RequestsPerSecond_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.RequestsPerSecond*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_RequestsPerSecond" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.RequestsPerSecond">
+  RequestsPerSecond
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The throttle for this request in sub-requests per second.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float? RequestsPerSecond { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Routing_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Routing" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Routing">
+  Routing
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L152"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A custom value used to route operations to a specific shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Routing? Routing { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Routing.html">Routing</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Scroll_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Scroll*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Scroll" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Scroll">
+  Scroll
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L159"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period to retain the search context for scrolling.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? Scroll { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_ScrollSize_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.ScrollSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_ScrollSize" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.ScrollSize">
+  ScrollSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L166"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The size of the scroll request that powers the operation.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? ScrollSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_SearchTimeout_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.SearchTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_SearchTimeout" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.SearchTimeout">
+  SearchTimeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L174"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+An explicit timeout for each search request.
+By default, there is no timeout.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? SearchTimeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_SearchType_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.SearchType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_SearchType" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.SearchType">
+  SearchType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L181"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The type of the search operation. Available options include <code>query_then_fetch</code> and <code>dfs_query_then_fetch</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchType? SearchType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchType.html">SearchType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Slices_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Slices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Slices" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Slices">
+  Slices
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of slices this task should be divided into.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Slices? Slices { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Slices.html">Slices</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Sort_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Sort" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Sort">
+  Sort
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L195"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;string&gt;? Sort { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Stats_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Stats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Stats" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Stats">
+  Stats
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The specific <code>tag</code> of the request for logging and statistical purposes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;string&gt;? Stats { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_TerminateAfter_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.TerminateAfter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_TerminateAfter" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.TerminateAfter">
+  TerminateAfter
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L217"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of documents to collect for each shard.
+If a query reaches this limit, Elasticsearch terminates the query early.
+Elasticsearch collects documents before sorting.
+</p>
+<p>
+IMPORTANT: Use with caution.
+Elasticsearch applies this parameter to each shard handling the request.
+When possible, let Elasticsearch perform early termination automatically.
+Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long? TerminateAfter { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Timeout_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Timeout" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Timeout">
+  Timeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period each update request waits for the following operations: dynamic mapping updates, waiting for active shards.
+By default, it is one minute.
+This guarantees Elasticsearch waits for at least the timeout before failing.
+The actual wait time could be longer, particularly when multiple waits occur.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? Timeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Version_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_Version" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.Version">
+  Version
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L234"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, returns the document version as part of a hit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Version { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_VersionType_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.VersionType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_VersionType" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.VersionType">
+  VersionType
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L241"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Should the document increment the version number (internal) on hit or not (reindex)
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? VersionType { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_WaitForActiveShards_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.WaitForActiveShards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_WaitForActiveShards" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.WaitForActiveShards">
+  WaitForActiveShards
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L251"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of shard copies that must be active before proceeding with the operation.
+Set to <code>all</code> or any positive integer up to the total number of shards in the index (<code>number_of_replicas+1</code>).
+The <code>timeout</code> parameter controls how long each write request waits for unavailable shards to become available.
+Both work exactly the way they work in the bulk API.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WaitForActiveShards? WaitForActiveShards { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.WaitForActiveShards.html">WaitForActiveShards</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_WaitForCompletion_" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.WaitForCompletion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_UpdateByQueryRequestParameters_WaitForCompletion" data-uid="Elastic.Clients.Elasticsearch.UpdateByQueryRequestParameters.WaitForCompletion">
+  WaitForCompletion
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.12/src/Elastic.Clients.Elasticsearch/_Generated/Api/UpdateByQueryRequest.g.cs/#L260"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request blocks until the operation is complete.
+If <code>false</code>, Elasticsearch performs some preflight checks, launches the request, and returns a task ID that you can use to cancel or get the status of the task.
+Elasticsearch creates a record of this task as a document at <code>.tasks/task/${taskId}</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? WaitForCompletion { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
