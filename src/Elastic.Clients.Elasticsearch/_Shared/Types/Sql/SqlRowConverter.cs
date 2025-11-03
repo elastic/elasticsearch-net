@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -15,26 +14,13 @@ public sealed class SqlRowConverter : JsonConverter<SqlRow>
 {
 	public override SqlRow? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType == JsonTokenType.Null)
+		var values = reader.ReadCollectionValue<SqlValue>(options, null);
+		if (values is null)
 		{
-			reader.Read();
 			return null;
 		}
 
-		if (reader.TokenType == JsonTokenType.StartArray)
-		{
-			var values = new List<SqlValue>();
-
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
-			{
-				var value = reader.ReadValue<SqlValue>(options);
-				values.Add(value);
-			}
-
-			return new SqlRow(values);
-		}
-
-		throw new JsonException($"Unexpected JSON token when deserializing {nameof(SqlRow)}.");
+		return new SqlRow(values);
 	}
 
 	public override void Write(Utf8JsonWriter writer, SqlRow value, JsonSerializerOptions options) => throw new NotImplementedException();

@@ -30,6 +30,7 @@ public sealed partial class GetAsyncResponseConverter : System.Text.Json.Seriali
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
 	private static readonly System.Text.Json.JsonEncodedText PropIsPartial = System.Text.Json.JsonEncodedText.Encode("is_partial");
 	private static readonly System.Text.Json.JsonEncodedText PropIsRunning = System.Text.Json.JsonEncodedText.Encode("is_running");
+	private static readonly System.Text.Json.JsonEncodedText PropRows = System.Text.Json.JsonEncodedText.Encode("rows");
 
 	public override Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -39,6 +40,7 @@ public sealed partial class GetAsyncResponseConverter : System.Text.Json.Seriali
 		LocalJsonValue<string> propId = default;
 		LocalJsonValue<bool> propIsPartial = default;
 		LocalJsonValue<bool> propIsRunning = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.SqlRow>> propRows = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propColumns.TryReadProperty(ref reader, options, PropColumns, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Sql.Column>(o, null)))
@@ -66,6 +68,11 @@ public sealed partial class GetAsyncResponseConverter : System.Text.Json.Seriali
 				continue;
 			}
 
+			if (propRows.TryReadProperty(ref reader, options, PropRows, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.SqlRow> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Sql.SqlRow>(o, null)!))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -82,7 +89,8 @@ public sealed partial class GetAsyncResponseConverter : System.Text.Json.Seriali
 			Cursor = propCursor.Value,
 			Id = propId.Value,
 			IsPartial = propIsPartial.Value,
-			IsRunning = propIsRunning.Value
+			IsRunning = propIsRunning.Value,
+			Rows = propRows.Value
 		};
 	}
 
@@ -94,6 +102,7 @@ public sealed partial class GetAsyncResponseConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, null);
 		writer.WriteProperty(options, PropIsRunning, value.IsRunning, null, null);
+		writer.WriteProperty(options, PropRows, value.Rows, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.SqlRow> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Sql.SqlRow>(o, v, null));
 		writer.WriteEndObject();
 	}
 }
