@@ -27,10 +27,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 public sealed partial class GeoLineAggregation
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GeoLineAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint point, Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort sort)
+	public GeoLineAggregation(Elastic.Clients.Elasticsearch.Aggregations.GeoLinePoint point)
 	{
 		Point = point;
-		Sort = sort;
 	}
 #if NET7_0_OR_GREATER
 	public GeoLineAggregation()
@@ -81,11 +80,7 @@ public sealed partial class GeoLineAggregation
 	/// When the <c>geo_line</c> aggregation is nested inside a <c>time_series</c> aggregation, this field defaults to <c>@timestamp</c>, and any other value will result in error.
 	/// </para>
 	/// </summary>
-	public
-#if NET7_0_OR_GREATER
-	required
-#endif
-	Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort Sort { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort? Sort { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -165,7 +160,7 @@ public readonly partial struct GeoLineAggregationDescriptor<TDocument>
 	/// When the <c>geo_line</c> aggregation is nested inside a <c>time_series</c> aggregation, this field defaults to <c>@timestamp</c>, and any other value will result in error.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort value)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort? value)
 	{
 		Instance.Sort = value;
 		return this;
@@ -284,7 +279,7 @@ public readonly partial struct GeoLineAggregationDescriptor
 	/// When the <c>geo_line</c> aggregation is nested inside a <c>time_series</c> aggregation, this field defaults to <c>@timestamp</c>, and any other value will result in error.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort value)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregationDescriptor Sort(Elastic.Clients.Elasticsearch.Aggregations.GeoLineSort? value)
 	{
 		Instance.Sort = value;
 		return this;

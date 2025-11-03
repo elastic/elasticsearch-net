@@ -38,7 +38,7 @@ public sealed partial class NodeAllocationExplanationConverter : System.Text.Jso
 	public override Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>> propDeciders = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>?> propDeciders = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, string>> propNodeAttributes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.Decision> propNodeDecision = default;
 		LocalJsonValue<string> propNodeId = default;
@@ -46,10 +46,10 @@ public sealed partial class NodeAllocationExplanationConverter : System.Text.Jso
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole>> propRoles = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.AllocationStore?> propStore = default;
 		LocalJsonValue<string> propTransportAddress = default;
-		LocalJsonValue<int> propWeightRanking = default;
+		LocalJsonValue<int?> propWeightRanking = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDeciders.TryReadProperty(ref reader, options, PropDeciders, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, null)!))
+			if (propDeciders.TryReadProperty(ref reader, options, PropDeciders, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, null)))
 			{
 				continue;
 			}
@@ -89,7 +89,7 @@ public sealed partial class NodeAllocationExplanationConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propWeightRanking.TryReadProperty(ref reader, options, PropWeightRanking, null))
+			if (propWeightRanking.TryReadProperty(ref reader, options, PropWeightRanking, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -121,7 +121,7 @@ public sealed partial class NodeAllocationExplanationConverter : System.Text.Jso
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.NodeAllocationExplanation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDeciders, value.Deciders, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, v, null));
+		writer.WriteProperty(options, PropDeciders, value.Deciders, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Cluster.AllocationDecision>(o, v, null));
 		writer.WriteProperty(options, PropNodeAttributes, value.NodeAttributes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, string> v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
 		writer.WriteProperty(options, PropNodeDecision, value.NodeDecision, null, null);
 		writer.WriteProperty(options, PropNodeId, value.NodeId, null, null);
@@ -129,7 +129,7 @@ public sealed partial class NodeAllocationExplanationConverter : System.Text.Jso
 		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.NodeRole> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.NodeRole>(o, v, null));
 		writer.WriteProperty(options, PropStore, value.Store, null, null);
 		writer.WriteProperty(options, PropTransportAddress, value.TransportAddress, null, null);
-		writer.WriteProperty(options, PropWeightRanking, value.WeightRanking, null, null);
+		writer.WriteProperty(options, PropWeightRanking, value.WeightRanking, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();
 	}
 }
