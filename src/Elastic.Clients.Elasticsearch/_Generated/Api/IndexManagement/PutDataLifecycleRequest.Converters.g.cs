@@ -33,7 +33,7 @@ public sealed partial class PutDataLifecycleRequestConverter : System.Text.Json.
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDataRetention = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling?> propDownsampling = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>?> propDownsampling = default;
 		LocalJsonValue<bool?> propEnabled = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -42,7 +42,7 @@ public sealed partial class PutDataLifecycleRequestConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propDownsampling.TryReadProperty(ref reader, options, PropDownsampling, null))
+			if (propDownsampling.TryReadProperty(ref reader, options, PropDownsampling, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>(o, null)))
 			{
 				continue;
 			}
@@ -74,7 +74,7 @@ public sealed partial class PutDataLifecycleRequestConverter : System.Text.Json.
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDataRetention, value.DataRetention, null, null);
-		writer.WriteProperty(options, PropDownsampling, value.Downsampling, null, null);
+		writer.WriteProperty(options, PropDownsampling, value.Downsampling, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>(o, v, null));
 		writer.WriteProperty(options, PropEnabled, value.Enabled, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteEndObject();
 	}

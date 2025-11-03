@@ -21,26 +21,26 @@ using System;
 using System.Linq;
 using Elastic.Clients.Elasticsearch.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
+namespace Elastic.Clients.Elasticsearch.Json;
 
-public sealed partial class DownsamplingRoundConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>
+public sealed partial class RRFRetrieverComponentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RRFRetrieverComponent>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAfter = System.Text.Json.JsonEncodedText.Encode("after");
-	private static readonly System.Text.Json.JsonEncodedText PropFixedInterval = System.Text.Json.JsonEncodedText.Encode("fixed_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever");
+	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight");
 
-	public override Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.RRFRetrieverComponent Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration> propAfter = default;
-		LocalJsonValue<string> propFixedInterval = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever> propRetriever = default;
+		LocalJsonValue<float?> propWeight = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propAfter.TryReadProperty(ref reader, options, PropAfter, null))
+			if (propRetriever.TryReadProperty(ref reader, options, PropRetriever, null))
 			{
 				continue;
 			}
 
-			if (propFixedInterval.TryReadProperty(ref reader, options, PropFixedInterval, null))
+			if (propWeight.TryReadProperty(ref reader, options, PropWeight, static float? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<float>(o)))
 			{
 				continue;
 			}
@@ -55,18 +55,18 @@ public sealed partial class DownsamplingRoundConverter : System.Text.Json.Serial
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.RRFRetrieverComponent(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			After = propAfter.Value,
-			FixedInterval = propFixedInterval.Value
+			Retriever = propRetriever.Value,
+			Weight = propWeight.Value
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.RRFRetrieverComponent value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropAfter, value.After, null, null);
-		writer.WriteProperty(options, PropFixedInterval, value.FixedInterval, null, null);
+		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
+		writer.WriteProperty(options, PropWeight, value.Weight, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, float? v) => w.WriteNullableValue<float>(o, v));
 		writer.WriteEndObject();
 	}
 }

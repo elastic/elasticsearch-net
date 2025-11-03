@@ -27,10 +27,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 public sealed partial class DownsamplingRound
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DownsamplingRound(Elastic.Clients.Elasticsearch.Duration after, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config)
+	public DownsamplingRound(Elastic.Clients.Elasticsearch.Duration after, string fixedInterval)
 	{
 		After = after;
-		Config = config;
+		FixedInterval = fixedInterval;
 	}
 #if NET7_0_OR_GREATER
 	public DownsamplingRound()
@@ -62,14 +62,14 @@ public sealed partial class DownsamplingRound
 
 	/// <summary>
 	/// <para>
-	/// The downsample configuration to execute.
+	/// The downsample interval.
 	/// </para>
 	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Config { get; set; }
+	string FixedInterval { get; set; }
 }
 
 public readonly partial struct DownsamplingRoundDescriptor
@@ -104,23 +104,12 @@ public readonly partial struct DownsamplingRoundDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The downsample configuration to execute.
+	/// The downsample interval.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor FixedInterval(string value)
 	{
-		Instance.Config = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The downsample configuration to execute.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor Config(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> action)
-	{
-		Instance.Config = Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor.Build(action);
+		Instance.FixedInterval = value;
 		return this;
 	}
 

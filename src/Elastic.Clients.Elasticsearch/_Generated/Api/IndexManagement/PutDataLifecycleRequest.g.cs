@@ -135,7 +135,7 @@ public sealed partial class PutDataLifecycleRequest : Elastic.Clients.Elasticsea
 	/// The downsampling configuration to execute for the managed backing index after rollover.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? Downsampling { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? Downsampling { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -256,7 +256,7 @@ public readonly partial struct PutDataLifecycleRequestDescriptor
 	/// The downsampling configuration to execute for the managed backing index after rollover.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Downsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Downsampling(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>? value)
 	{
 		Instance.Downsampling = value;
 		return this;
@@ -267,9 +267,26 @@ public readonly partial struct PutDataLifecycleRequestDescriptor
 	/// The downsampling configuration to execute for the managed backing index after rollover.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Downsampling(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> action)
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Downsampling(params Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound[] values)
 	{
-		Instance.Downsampling = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor.Build(action);
+		Instance.Downsampling = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Downsampling(params System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRound>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.IndexManagement.DownsamplingRoundDescriptor.Build(action));
+		}
+
+		Instance.Downsampling = items;
 		return this;
 	}
 

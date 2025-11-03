@@ -58,6 +58,13 @@ public sealed partial class DownsampleConfig
 	required
 #endif
 	string FixedInterval { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The sampling method used to reduce the documents; it can be either <c>aggregate</c> or <c>last_value</c>. Defaults to <c>aggregate</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? SamplingMethod { get; set; }
 }
 
 public readonly partial struct DownsampleConfigDescriptor
@@ -87,6 +94,17 @@ public readonly partial struct DownsampleConfigDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor FixedInterval(string value)
 	{
 		Instance.FixedInterval = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The sampling method used to reduce the documents; it can be either <c>aggregate</c> or <c>last_value</c>. Defaults to <c>aggregate</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor SamplingMethod(Elastic.Clients.Elasticsearch.IndexManagement.SamplingMethod? value)
+	{
+		Instance.SamplingMethod = value;
 		return this;
 	}
 

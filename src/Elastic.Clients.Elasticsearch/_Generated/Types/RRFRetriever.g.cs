@@ -27,7 +27,7 @@ namespace Elastic.Clients.Elasticsearch;
 public sealed partial class RRFRetriever
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RRFRetriever(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> retrievers)
+	public RRFRetriever(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>> retrievers)
 	{
 		Retrievers = retrievers;
 	}
@@ -88,14 +88,14 @@ public sealed partial class RRFRetriever
 
 	/// <summary>
 	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them. Each retriever can optionally include a weight parameter.
 	/// </para>
 	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> Retrievers { get; set; }
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>> Retrievers { get; set; }
 }
 
 public readonly partial struct RrfRetrieverDescriptor<TDocument>
@@ -220,10 +220,10 @@ public readonly partial struct RrfRetrieverDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them. Each retriever can optionally include a weight parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> value)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>> value)
 	{
 		Instance.Retrievers = value;
 		return this;
@@ -231,29 +231,12 @@ public readonly partial struct RrfRetrieverDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them. Each retriever can optionally include a weight parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(params Elastic.Clients.Elasticsearch.Retriever[] values)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(params Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>[] values)
 	{
 		Instance.Retrievers = [.. values];
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor<TDocument> Retrievers(params System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>>[] actions)
-	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Retriever>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action));
-		}
-
-		Instance.Retrievers = items;
 		return this;
 	}
 
@@ -405,10 +388,10 @@ public readonly partial struct RrfRetrieverDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them. Each retriever can optionally include a weight parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Retriever> value)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>> value)
 	{
 		Instance.Retrievers = value;
 		return this;
@@ -416,46 +399,12 @@ public readonly partial struct RrfRetrieverDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
+	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them. Each retriever can optionally include a weight parameter.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(params Elastic.Clients.Elasticsearch.Retriever[] values)
+	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(params Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Retriever, Elastic.Clients.Elasticsearch.RRFRetrieverComponent>[] values)
 	{
 		Instance.Retrievers = [.. values];
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers(params System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor>[] actions)
-	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Retriever>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action));
-		}
-
-		Instance.Retrievers = items;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A list of child retrievers to specify which sets of returned top documents will have the RRF formula applied to them.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.RrfRetrieverDescriptor Retrievers<T>(params System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>>[] actions)
-	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Retriever>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action));
-		}
-
-		Instance.Retrievers = items;
 		return this;
 	}
 
