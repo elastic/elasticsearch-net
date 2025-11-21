@@ -69,19 +69,19 @@ public sealed partial class PutJobRequestParameters : Elastic.Transport.RequestP
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.Json.PutJobRequestConverter))]
 public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PutJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig analysisConfig, Elastic.Clients.Elasticsearch.MachineLearning.DataDescription dataDescription)
+	public PutJobRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutJobRequest(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig analysisConfig, Elastic.Clients.Elasticsearch.MachineLearning.DataDescription dataDescription) : base(r => r.Required("job_id", jobId))
 	{
 		AnalysisConfig = analysisConfig;
 		DataDescription = dataDescription;
 	}
 #if NET7_0_OR_GREATER
-	public PutJobRequest()
-	{
-	}
-#endif
-#if !NET7_0_OR_GREATER
-	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public PutJobRequest()
 	{
 	}
@@ -99,6 +99,17 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.put_job";
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -211,13 +222,6 @@ public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Reques
 
 	/// <summary>
 	/// <para>
-	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
-
-	/// <summary>
-	/// <para>
 	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
 	/// </para>
 	/// </summary>
@@ -271,13 +275,32 @@ public readonly partial struct PutJobRequestDescriptor
 		Instance = instance;
 	}
 
+	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(jobId);
+#pragma warning restore CS0618
+	}
+
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutJobRequestDescriptor()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -571,17 +594,6 @@ public readonly partial struct PutJobRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? value)
-	{
-		Instance.JobId = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
 	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
 	/// </para>
 	/// </summary>
@@ -738,13 +750,32 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
+	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(jobId);
+#pragma warning restore CS0618
+	}
+
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutJobRequestDescriptor()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -1000,17 +1031,6 @@ public readonly partial struct PutJobRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> Groups(params string[] values)
 	{
 		Instance.Groups = [.. values];
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id? value)
-	{
-		Instance.JobId = value;
 		return this;
 	}
 

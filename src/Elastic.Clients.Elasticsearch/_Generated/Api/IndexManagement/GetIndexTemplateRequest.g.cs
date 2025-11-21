@@ -44,6 +44,7 @@ public sealed partial class GetIndexTemplateRequestParameters : Elastic.Transpor
 	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -92,7 +93,7 @@ public sealed partial class GetIndexTemplateRequest : Elastic.Clients.Elasticsea
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
+	/// Name of index template to retrieve. Wildcard (*) expressions are supported.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
@@ -116,6 +117,7 @@ public sealed partial class GetIndexTemplateRequest : Elastic.Clients.Elasticsea
 	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -157,7 +159,7 @@ public readonly partial struct GetIndexTemplateRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Comma-separated list of index template names used to limit the request. Wildcard (*) expressions are supported.
+	/// Name of index template to retrieve. Wildcard (*) expressions are supported.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
@@ -188,6 +190,7 @@ public readonly partial struct GetIndexTemplateRequestDescriptor
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	/// <summary>
 	/// <para>
 	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.

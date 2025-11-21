@@ -3166,18 +3166,26 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse PutJob(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor(jobId);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse PutJob<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>(jobId);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -3190,18 +3198,26 @@ public partial class MachineLearningNamespacedClient : Elastic.Clients.Elasticse
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse> PutJobAsync(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor(jobId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor(jobId);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest, Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse> PutJobAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.MachineLearning.PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id jobId, System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>(jobId);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();

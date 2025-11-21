@@ -62,6 +62,7 @@ public sealed partial class AsyncSearchStatusResponse : Elastic.Transport.Produc
 	/// </summary>
 	public System.DateTimeOffset? CompletionTime { get; set; }
 	public System.DateTimeOffset? CompletionTimeInMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
 
 	/// <summary>
 	/// <para>

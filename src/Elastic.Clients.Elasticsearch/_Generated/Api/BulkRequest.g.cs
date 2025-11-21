@@ -247,6 +247,11 @@ public sealed partial class BulkRequestParameters : Elastic.Transport.RequestPar
 /// </item>
 /// <item>
 /// <para>
+/// Java: Check out <c>co.elastic.clients.elasticsearch._helpers.bulk.BulkIngester</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
 /// .NET: Check out <c>BulkAllObservable</c>
 /// </para>
 /// </item>
@@ -573,6 +578,11 @@ public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainR
 /// <item>
 /// <para>
 /// JavaScript: Check out <c>client.helpers.*</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Java: Check out <c>co.elastic.clients.elasticsearch._helpers.bulk.BulkIngester</c>
 /// </para>
 /// </item>
 /// <item>
@@ -1053,6 +1063,11 @@ public readonly partial struct BulkRequestDescriptor
 /// <item>
 /// <para>
 /// JavaScript: Check out <c>client.helpers.*</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Java: Check out <c>co.elastic.clients.elasticsearch._helpers.bulk.BulkIngester</c>
 /// </para>
 /// </item>
 /// <item>
