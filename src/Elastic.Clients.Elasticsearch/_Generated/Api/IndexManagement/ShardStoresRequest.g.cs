@@ -60,6 +60,8 @@ public sealed partial class ShardStoresRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Get index shard stores.
+/// </para>
+/// <para>
 /// Get store information about replica shards in one or more indices.
 /// For data streams, the API retrieves store information for the stream's backing indices.
 /// </para>
@@ -164,6 +166,8 @@ public sealed partial class ShardStoresRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Get index shard stores.
+/// </para>
+/// <para>
 /// Get store information about replica shards in one or more indices.
 /// For data streams, the API retrieves store information for the stream's backing indices.
 /// </para>
@@ -359,6 +363,8 @@ public readonly partial struct ShardStoresRequestDescriptor
 /// <summary>
 /// <para>
 /// Get index shard stores.
+/// </para>
+/// <para>
 /// Get store information about replica shards in one or more indices.
 /// For data streams, the API retrieves store information for the stream's backing indices.
 /// </para>

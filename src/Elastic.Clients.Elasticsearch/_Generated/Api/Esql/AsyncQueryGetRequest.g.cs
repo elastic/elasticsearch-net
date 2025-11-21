@@ -62,6 +62,8 @@ public sealed partial class AsyncQueryGetRequestParameters : Elastic.Transport.R
 /// <summary>
 /// <para>
 /// Get async ES|QL query results.
+/// </para>
+/// <para>
 /// Get the current status and available results or stored results for an ES|QL asynchronous query.
 /// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 /// </para>
@@ -142,6 +144,8 @@ public sealed partial class AsyncQueryGetRequest : Elastic.Clients.Elasticsearch
 /// <summary>
 /// <para>
 /// Get async ES|QL query results.
+/// </para>
+/// <para>
 /// Get the current status and available results or stored results for an ES|QL asynchronous query.
 /// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 /// </para>

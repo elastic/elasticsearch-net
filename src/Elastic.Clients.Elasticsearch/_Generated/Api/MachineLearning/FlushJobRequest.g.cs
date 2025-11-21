@@ -30,6 +30,8 @@ public sealed partial class FlushJobRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Force buffered data to be processed.
+/// </para>
+/// <para>
 /// The flush jobs API is only applicable when sending data for analysis using
 /// the post data API. Depending on the content of the buffer, then it might
 /// additionally calculate new results. Both flush and close operations are
@@ -116,6 +118,8 @@ public sealed partial class FlushJobRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Force buffered data to be processed.
+/// </para>
+/// <para>
 /// The flush jobs API is only applicable when sending data for analysis using
 /// the post data API. Depending on the content of the buffer, then it might
 /// additionally calculate new results. Both flush and close operations are

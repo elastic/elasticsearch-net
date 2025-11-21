@@ -106,6 +106,8 @@ public sealed partial class PutAzureaistudioRequest : Elastic.Clients.Elasticsea
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
@@ -119,7 +121,7 @@ public sealed partial class PutAzureaistudioRequest : Elastic.Clients.Elasticsea
 
 	/// <summary>
 	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openai</c> service.
+	/// Settings used to install the inference model. These settings are specific to the <c>azureaistudio</c> service.
 	/// </para>
 	/// </summary>
 	public
@@ -207,6 +209,8 @@ public readonly partial struct PutAzureaistudioRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
@@ -218,6 +222,8 @@ public readonly partial struct PutAzureaistudioRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor ChunkingSettings()
@@ -229,6 +235,8 @@ public readonly partial struct PutAzureaistudioRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
@@ -239,7 +247,7 @@ public readonly partial struct PutAzureaistudioRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openai</c> service.
+	/// Settings used to install the inference model. These settings are specific to the <c>azureaistudio</c> service.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings value)
@@ -250,7 +258,7 @@ public readonly partial struct PutAzureaistudioRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>openai</c> service.
+	/// Settings used to install the inference model. These settings are specific to the <c>azureaistudio</c> service.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettingsDescriptor> action)

@@ -50,6 +50,8 @@ public sealed partial class ClearCacheRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Clear the cache.
+/// </para>
+/// <para>
 /// Clear indices and data streams from the shared cache for partially mounted indices.
 /// </para>
 /// </summary>
@@ -116,6 +118,8 @@ public sealed partial class ClearCacheRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Clear the cache.
+/// </para>
+/// <para>
 /// Clear indices and data streams from the shared cache for partially mounted indices.
 /// </para>
 /// </summary>
@@ -257,6 +261,8 @@ public readonly partial struct ClearCacheRequestDescriptor
 /// <summary>
 /// <para>
 /// Clear the cache.
+/// </para>
+/// <para>
 /// Clear indices and data streams from the shared cache for partially mounted indices.
 /// </para>
 /// </summary>

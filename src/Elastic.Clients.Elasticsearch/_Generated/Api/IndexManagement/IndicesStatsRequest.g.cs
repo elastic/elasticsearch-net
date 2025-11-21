@@ -94,6 +94,8 @@ public sealed partial class IndicesStatsRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get index statistics.
+/// </para>
+/// <para>
 /// For data streams, the API retrieves statistics for the stream's backing indices.
 /// </para>
 /// <para>
@@ -230,6 +232,8 @@ public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get index statistics.
+/// </para>
+/// <para>
 /// For data streams, the API retrieves statistics for the stream's backing indices.
 /// </para>
 /// <para>
@@ -517,6 +521,8 @@ public readonly partial struct IndicesStatsRequestDescriptor
 /// <summary>
 /// <para>
 /// Get index statistics.
+/// </para>
+/// <para>
 /// For data streams, the API retrieves statistics for the stream's backing indices.
 /// </para>
 /// <para>

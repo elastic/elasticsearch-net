@@ -106,6 +106,8 @@ public sealed partial class PutLlamaRequest : Elastic.Clients.Elasticsearch.Requ
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
@@ -199,6 +201,8 @@ public readonly partial struct PutLlamaRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
@@ -210,6 +214,8 @@ public readonly partial struct PutLlamaRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor ChunkingSettings()
@@ -221,6 +227,8 @@ public readonly partial struct PutLlamaRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutLlamaRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)

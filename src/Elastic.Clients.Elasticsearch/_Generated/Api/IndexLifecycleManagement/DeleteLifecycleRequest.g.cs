@@ -43,6 +43,8 @@ public sealed partial class DeleteLifecycleRequestParameters : Elastic.Transport
 /// <summary>
 /// <para>
 /// Delete a lifecycle policy.
+/// </para>
+/// <para>
 /// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 /// </para>
 /// </summary>
@@ -101,6 +103,8 @@ public sealed partial class DeleteLifecycleRequest : Elastic.Clients.Elasticsear
 /// <summary>
 /// <para>
 /// Delete a lifecycle policy.
+/// </para>
+/// <para>
 /// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 /// </para>
 /// </summary>

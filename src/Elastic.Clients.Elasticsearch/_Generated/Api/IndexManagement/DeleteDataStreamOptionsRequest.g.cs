@@ -50,6 +50,8 @@ public sealed partial class DeleteDataStreamOptionsRequestParameters : Elastic.T
 /// <summary>
 /// <para>
 /// Delete data stream options.
+/// </para>
+/// <para>
 /// Removes the data stream options from a data stream.
 /// </para>
 /// </summary>
@@ -115,6 +117,8 @@ public sealed partial class DeleteDataStreamOptionsRequest : Elastic.Clients.Ela
 /// <summary>
 /// <para>
 /// Delete data stream options.
+/// </para>
+/// <para>
 /// Removes the data stream options from a data stream.
 /// </para>
 /// </summary>

@@ -70,6 +70,8 @@ public sealed partial class AsyncQueryRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Run an async ES|QL query.
+/// </para>
+/// <para>
 /// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
 /// </para>
 /// <para>
@@ -234,6 +236,8 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Run an async ES|QL query.
+/// </para>
+/// <para>
 /// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
 /// </para>
 /// <para>
@@ -519,6 +523,8 @@ public readonly partial struct AsyncQueryRequestDescriptor
 /// <summary>
 /// <para>
 /// Run an async ES|QL query.
+/// </para>
+/// <para>
 /// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
 /// </para>
 /// <para>

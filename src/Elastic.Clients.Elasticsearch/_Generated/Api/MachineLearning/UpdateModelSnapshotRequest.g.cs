@@ -30,6 +30,8 @@ public sealed partial class UpdateModelSnapshotRequestParameters : Elastic.Trans
 /// <summary>
 /// <para>
 /// Update a snapshot.
+/// </para>
+/// <para>
 /// Updates certain properties of a snapshot.
 /// </para>
 /// </summary>
@@ -101,6 +103,8 @@ public sealed partial class UpdateModelSnapshotRequest : Elastic.Clients.Elastic
 /// <summary>
 /// <para>
 /// Update a snapshot.
+/// </para>
+/// <para>
 /// Updates certain properties of a snapshot.
 /// </para>
 /// </summary>

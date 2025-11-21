@@ -82,6 +82,8 @@ public sealed partial class ClearCacheRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Clear the cache.
+/// </para>
+/// <para>
 /// Clear the cache of one or more indices.
 /// For data streams, the API clears the caches of the stream's backing indices.
 /// </para>
@@ -187,6 +189,8 @@ public sealed partial class ClearCacheRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Clear the cache.
+/// </para>
+/// <para>
 /// Clear the cache of one or more indices.
 /// For data streams, the API clears the caches of the stream's backing indices.
 /// </para>
@@ -396,6 +400,8 @@ public readonly partial struct ClearCacheRequestDescriptor
 /// <summary>
 /// <para>
 /// Clear the cache.
+/// </para>
+/// <para>
 /// Clear the cache of one or more indices.
 /// For data streams, the API clears the caches of the stream's backing indices.
 /// </para>

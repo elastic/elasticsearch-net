@@ -43,6 +43,8 @@ public sealed partial class DeleteIndexTemplateRequestParameters : Elastic.Trans
 /// <summary>
 /// <para>
 /// Delete an index template.
+/// </para>
+/// <para>
 /// The provided &lt;index-template> may contain multiple template names separated by a comma. If multiple template
 /// names are specified then there is no wildcard support and the provided names should match completely with
 /// existing templates.
@@ -103,6 +105,8 @@ public sealed partial class DeleteIndexTemplateRequest : Elastic.Clients.Elastic
 /// <summary>
 /// <para>
 /// Delete an index template.
+/// </para>
+/// <para>
 /// The provided &lt;index-template> may contain multiple template names separated by a comma. If multiple template
 /// names are specified then there is no wildcard support and the provided names should match completely with
 /// existing templates.

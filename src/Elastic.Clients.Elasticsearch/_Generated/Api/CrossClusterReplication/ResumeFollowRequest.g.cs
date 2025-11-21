@@ -36,6 +36,8 @@ public sealed partial class ResumeFollowRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Resume a follower.
+/// </para>
+/// <para>
 /// Resume a cross-cluster replication follower index that was paused.
 /// The follower index could have been paused with the pause follower API.
 /// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
@@ -100,6 +102,8 @@ public sealed partial class ResumeFollowRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Resume a follower.
+/// </para>
+/// <para>
 /// Resume a cross-cluster replication follower index that was paused.
 /// The follower index could have been paused with the pause follower API.
 /// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
@@ -266,6 +270,8 @@ public readonly partial struct ResumeFollowRequestDescriptor
 /// <summary>
 /// <para>
 /// Resume a follower.
+/// </para>
+/// <para>
 /// Resume a cross-cluster replication follower index that was paused.
 /// The follower index could have been paused with the pause follower API.
 /// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.

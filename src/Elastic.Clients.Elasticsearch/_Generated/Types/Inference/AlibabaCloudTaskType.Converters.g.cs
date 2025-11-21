@@ -27,7 +27,7 @@ public sealed partial class AlibabaCloudTaskTypeConverter : System.Text.Json.Ser
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
 	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
-	private static readonly System.Text.Json.JsonEncodedText MemberSpaceEmbedding = System.Text.Json.JsonEncodedText.Encode("space_embedding");
+	private static readonly System.Text.Json.JsonEncodedText MemberSparseEmbedding = System.Text.Json.JsonEncodedText.Encode("sparse_embedding");
 	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
 
 	public override Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -42,9 +42,9 @@ public sealed partial class AlibabaCloudTaskTypeConverter : System.Text.Json.Ser
 			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.Rerank;
 		}
 
-		if (reader.ValueTextEquals(MemberSpaceEmbedding))
+		if (reader.ValueTextEquals(MemberSparseEmbedding))
 		{
-			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.SpaceEmbedding;
+			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.SparseEmbedding;
 		}
 
 		if (reader.ValueTextEquals(MemberTextEmbedding))
@@ -63,9 +63,9 @@ public sealed partial class AlibabaCloudTaskTypeConverter : System.Text.Json.Ser
 			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.Rerank;
 		}
 
-		if (string.Equals(value, MemberSpaceEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		if (string.Equals(value, MemberSparseEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
-			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.SpaceEmbedding;
+			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.SparseEmbedding;
 		}
 
 		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -86,8 +86,8 @@ public sealed partial class AlibabaCloudTaskTypeConverter : System.Text.Json.Ser
 			case Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.Rerank:
 				writer.WriteStringValue(MemberRerank);
 				break;
-			case Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.SpaceEmbedding:
-				writer.WriteStringValue(MemberSpaceEmbedding);
+			case Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.SparseEmbedding:
+				writer.WriteStringValue(MemberSparseEmbedding);
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.TextEmbedding:
 				writer.WriteStringValue(MemberTextEmbedding);

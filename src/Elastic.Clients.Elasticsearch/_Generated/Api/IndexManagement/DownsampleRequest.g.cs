@@ -30,6 +30,8 @@ public sealed partial class DownsampleRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Downsample an index.
+/// </para>
+/// <para>
 /// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
 /// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
 /// All documents within an hour interval are summarized and stored as a single document in the downsample index.
@@ -104,6 +106,8 @@ public sealed partial class DownsampleRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Downsample an index.
+/// </para>
+/// <para>
 /// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
 /// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
 /// All documents within an hour interval are summarized and stored as a single document in the downsample index.
@@ -228,6 +232,8 @@ public readonly partial struct DownsampleRequestDescriptor
 /// <summary>
 /// <para>
 /// Downsample an index.
+/// </para>
+/// <para>
 /// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
 /// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
 /// All documents within an hour interval are summarized and stored as a single document in the downsample index.

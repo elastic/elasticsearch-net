@@ -47,12 +47,11 @@ public sealed partial class PutUserRequestParameters : Elastic.Transport.Request
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.Json.PutUserRequestConverter))]
 public sealed partial class PutUserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>
 {
-#if NET7_0_OR_GREATER
-	public PutUserRequest()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutUserRequest(Elastic.Clients.Elasticsearch.Username username) : base(r => r.Required("username", username))
 	{
 	}
-#endif
-#if !NET7_0_OR_GREATER
+#if NET7_0_OR_GREATER
 	public PutUserRequest()
 	{
 	}
@@ -70,6 +69,22 @@ public sealed partial class PutUserRequest : Elastic.Clients.Elasticsearch.Reque
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "security.put_user";
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the user.
+	/// </para>
+	/// <para>
+	/// NOTE: Usernames must be at least 1 and no more than 507 characters.
+	/// They can contain alphanumeric characters (a-z, A-Z, 0-9), spaces, punctuation, and printable symbols in the Basic Latin (ASCII) block.
+	/// Leading or trailing whitespace is not allowed.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Username Username { get => P<Elastic.Clients.Elasticsearch.Username>("username"); set => PR("username", value); }
 
 	/// <summary>
 	/// <para>
@@ -136,7 +151,6 @@ public sealed partial class PutUserRequest : Elastic.Clients.Elasticsearch.Reque
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<string>? Roles { get; set; }
-	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 
 /// <summary>
@@ -159,13 +173,35 @@ public readonly partial struct PutUserRequestDescriptor
 		Instance = instance;
 	}
 
+	public PutUserRequestDescriptor(Elastic.Clients.Elasticsearch.Username username)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.PutUserRequest(username);
+	}
+
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
 	public PutUserRequestDescriptor()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.Security.PutUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.PutUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Security.PutUserRequest(Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the user.
+	/// </para>
+	/// <para>
+	/// NOTE: Usernames must be at least 1 and no more than 507 characters.
+	/// They can contain alphanumeric characters (a-z, A-Z, 0-9), spaces, punctuation, and printable symbols in the Basic Latin (ASCII) block.
+	/// Leading or trailing whitespace is not allowed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username value)
+	{
+		Instance.Username = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -307,20 +343,9 @@ public readonly partial struct PutUserRequestDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
-	{
-		Instance.Username = value;
-		return this;
-	}
-
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Security.PutUserRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Security.PutUserRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Security.PutUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.PutUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

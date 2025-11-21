@@ -35,7 +35,7 @@ public sealed partial class CompletionRequestParameters : Elastic.Transport.Requ
 
 /// <summary>
 /// <para>
-/// Perform completion inference on the service
+/// Perform completion inference on the service.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.CompletionRequestConverter))]
@@ -103,7 +103,7 @@ public sealed partial class CompletionRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// Optional task settings
+	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
 	/// </para>
 	/// </summary>
 	public object? TaskSettings { get; set; }
@@ -111,7 +111,7 @@ public sealed partial class CompletionRequest : Elastic.Clients.Elasticsearch.Re
 
 /// <summary>
 /// <para>
-/// Perform completion inference on the service
+/// Perform completion inference on the service.
 /// </para>
 /// </summary>
 public readonly partial struct CompletionRequestDescriptor
@@ -188,7 +188,7 @@ public readonly partial struct CompletionRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Optional task settings
+	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor TaskSettings(object? value)

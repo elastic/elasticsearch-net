@@ -90,6 +90,8 @@ public sealed partial class RepositoryVerifyIntegrityRequestParameters : Elastic
 /// <summary>
 /// <para>
 /// Verify the repository integrity.
+/// </para>
+/// <para>
 /// Verify the integrity of the contents of a snapshot repository.
 /// </para>
 /// <para>
@@ -259,6 +261,8 @@ public sealed partial class RepositoryVerifyIntegrityRequest : Elastic.Clients.E
 /// <summary>
 /// <para>
 /// Verify the repository integrity.
+/// </para>
+/// <para>
 /// Verify the integrity of the contents of a snapshot repository.
 /// </para>
 /// <para>

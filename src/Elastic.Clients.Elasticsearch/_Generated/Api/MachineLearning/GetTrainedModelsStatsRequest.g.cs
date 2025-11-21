@@ -71,6 +71,8 @@ public sealed partial class GetTrainedModelsStatsRequestParameters : Elastic.Tra
 /// <summary>
 /// <para>
 /// Get trained models usage info.
+/// </para>
+/// <para>
 /// You can get usage information for multiple trained
 /// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 /// </para>
@@ -159,6 +161,8 @@ public sealed partial class GetTrainedModelsStatsRequest : Elastic.Clients.Elast
 /// <summary>
 /// <para>
 /// Get trained models usage info.
+/// </para>
+/// <para>
 /// You can get usage information for multiple trained
 /// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
 /// </para>

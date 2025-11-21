@@ -36,6 +36,8 @@ public sealed partial class PutAutoFollowPatternRequestParameters : Elastic.Tran
 /// <summary>
 /// <para>
 /// Create or update auto-follow patterns.
+/// </para>
+/// <para>
 /// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
 /// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
 /// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
@@ -209,6 +211,8 @@ public sealed partial class PutAutoFollowPatternRequest : Elastic.Clients.Elasti
 /// <summary>
 /// <para>
 /// Create or update auto-follow patterns.
+/// </para>
+/// <para>
 /// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
 /// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
 /// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.

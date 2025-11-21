@@ -30,6 +30,8 @@ public sealed partial class PutDataFrameAnalyticsRequestParameters : Elastic.Tra
 /// <summary>
 /// <para>
 /// Create a data frame analytics job.
+/// </para>
+/// <para>
 /// This API creates a data frame analytics job that performs an analysis on the
 /// source indices and stores the outcome in a destination index.
 /// By default, the query used in the source configuration is <c>{"match_all": {}}</c>.
@@ -207,6 +209,8 @@ public sealed partial class PutDataFrameAnalyticsRequest : Elastic.Clients.Elast
 /// <summary>
 /// <para>
 /// Create a data frame analytics job.
+/// </para>
+/// <para>
 /// This API creates a data frame analytics job that performs an analysis on the
 /// source indices and stores the outcome in a destination index.
 /// By default, the query used in the source configuration is <c>{"match_all": {}}</c>.
@@ -651,6 +655,8 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 /// <summary>
 /// <para>
 /// Create a data frame analytics job.
+/// </para>
+/// <para>
 /// This API creates a data frame analytics job that performs an analysis on the
 /// source indices and stores the outcome in a destination index.
 /// By default, the query used in the source configuration is <c>{"match_all": {}}</c>.

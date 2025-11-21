@@ -50,6 +50,8 @@ public sealed partial class PutPipelineRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Create or update a pipeline.
+/// </para>
+/// <para>
 /// Changes made using this API take effect immediately.
 /// </para>
 /// </summary>
@@ -165,6 +167,8 @@ public sealed partial class PutPipelineRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Create or update a pipeline.
+/// </para>
+/// <para>
 /// Changes made using this API take effect immediately.
 /// </para>
 /// </summary>
@@ -487,6 +491,8 @@ public readonly partial struct PutPipelineRequestDescriptor
 /// <summary>
 /// <para>
 /// Create or update a pipeline.
+/// </para>
+/// <para>
 /// Changes made using this API take effect immediately.
 /// </para>
 /// </summary>

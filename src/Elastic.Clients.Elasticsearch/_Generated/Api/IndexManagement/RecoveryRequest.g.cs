@@ -67,6 +67,8 @@ public sealed partial class RecoveryRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Get index recovery information.
+/// </para>
+/// <para>
 /// Get information about ongoing and completed shard recoveries for one or more indices.
 /// For data streams, the API returns information for the stream's backing indices.
 /// </para>
@@ -202,6 +204,8 @@ public sealed partial class RecoveryRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Get index recovery information.
+/// </para>
+/// <para>
 /// Get information about ongoing and completed shard recoveries for one or more indices.
 /// For data streams, the API returns information for the stream's backing indices.
 /// </para>
@@ -422,6 +426,8 @@ public readonly partial struct RecoveryRequestDescriptor
 /// <summary>
 /// <para>
 /// Get index recovery information.
+/// </para>
+/// <para>
 /// Get information about ongoing and completed shard recoveries for one or more indices.
 /// For data streams, the API returns information for the stream's backing indices.
 /// </para>

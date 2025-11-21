@@ -50,6 +50,8 @@ public sealed partial class PostStartTrialRequestParameters : Elastic.Transport.
 /// <summary>
 /// <para>
 /// Start a trial.
+/// </para>
+/// <para>
 /// Start a 30-day trial, which gives access to all subscription features.
 /// </para>
 /// <para>
@@ -112,6 +114,8 @@ public sealed partial class PostStartTrialRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Start a trial.
+/// </para>
+/// <para>
 /// Start a 30-day trial, which gives access to all subscription features.
 /// </para>
 /// <para>

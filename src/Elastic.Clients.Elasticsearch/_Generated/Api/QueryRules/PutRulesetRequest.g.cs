@@ -30,6 +30,8 @@ public sealed partial class PutRulesetRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Create or update a query ruleset.
+/// </para>
+/// <para>
 /// There is a limit of 100 rules per ruleset.
 /// This limit can be increased by using the <c>xpack.applications.rules.max_rules_per_ruleset</c> cluster setting.
 /// </para>
@@ -93,6 +95,8 @@ public sealed partial class PutRulesetRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Create or update a query ruleset.
+/// </para>
+/// <para>
 /// There is a limit of 100 rules per ruleset.
 /// This limit can be increased by using the <c>xpack.applications.rules.max_rules_per_ruleset</c> cluster setting.
 /// </para>

@@ -30,6 +30,8 @@ public sealed partial class UpdateJobRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Update an anomaly detection job.
+/// </para>
+/// <para>
 /// Updates certain properties of an anomaly detection job.
 /// </para>
 /// </summary>
@@ -189,6 +191,8 @@ public sealed partial class UpdateJobRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Update an anomaly detection job.
+/// </para>
+/// <para>
 /// Updates certain properties of an anomaly detection job.
 /// </para>
 /// </summary>
@@ -601,6 +605,8 @@ public readonly partial struct UpdateJobRequestDescriptor
 /// <summary>
 /// <para>
 /// Update an anomaly detection job.
+/// </para>
+/// <para>
 /// Updates certain properties of an anomaly detection job.
 /// </para>
 /// </summary>

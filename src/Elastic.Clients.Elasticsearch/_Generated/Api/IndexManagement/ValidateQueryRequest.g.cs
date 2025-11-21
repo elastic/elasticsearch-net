@@ -118,6 +118,8 @@ public sealed partial class ValidateQueryRequestParameters : Elastic.Transport.R
 /// <summary>
 /// <para>
 /// Validate a query.
+/// </para>
+/// <para>
 /// Validates a query without running it.
 /// </para>
 /// </summary>
@@ -260,6 +262,8 @@ public sealed partial class ValidateQueryRequest : Elastic.Clients.Elasticsearch
 /// <summary>
 /// <para>
 /// Validate a query.
+/// </para>
+/// <para>
 /// Validates a query without running it.
 /// </para>
 /// </summary>
@@ -541,6 +545,8 @@ public readonly partial struct ValidateQueryRequestDescriptor
 /// <summary>
 /// <para>
 /// Validate a query.
+/// </para>
+/// <para>
 /// Validates a query without running it.
 /// </para>
 /// </summary>

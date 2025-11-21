@@ -106,13 +106,6 @@ public sealed partial class PutAnthropicRequest : Elastic.Clients.Elasticsearch.
 
 	/// <summary>
 	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
-
-	/// <summary>
-	/// <para>
 	/// The type of service supported for the specified task type. In this case, <c>anthropic</c>.
 	/// </para>
 	/// </summary>
@@ -120,7 +113,7 @@ public sealed partial class PutAnthropicRequest : Elastic.Clients.Elasticsearch.
 
 	/// <summary>
 	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>watsonxai</c> service.
+	/// Settings used to install the inference model. These settings are specific to the <c>anthropic</c> service.
 	/// </para>
 	/// </summary>
 	public
@@ -208,40 +201,7 @@ public readonly partial struct PutAnthropicRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
-	{
-		Instance.ChunkingSettings = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor ChunkingSettings()
-	{
-		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
-	{
-		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>watsonxai</c> service.
+	/// Settings used to install the inference model. These settings are specific to the <c>anthropic</c> service.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor ServiceSettings(Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettings value)
@@ -252,7 +212,7 @@ public readonly partial struct PutAnthropicRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Settings used to install the inference model. These settings are specific to the <c>watsonxai</c> service.
+	/// Settings used to install the inference model. These settings are specific to the <c>anthropic</c> service.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor ServiceSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.AnthropicServiceSettingsDescriptor> action)

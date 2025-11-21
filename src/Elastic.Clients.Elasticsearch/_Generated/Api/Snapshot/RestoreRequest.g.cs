@@ -50,6 +50,8 @@ public sealed partial class RestoreRequestParameters : Elastic.Transport.Request
 /// <summary>
 /// <para>
 /// Restore a snapshot.
+/// </para>
+/// <para>
 /// Restore a snapshot of a cluster or data streams and indices.
 /// </para>
 /// <para>
@@ -294,6 +296,8 @@ public sealed partial class RestoreRequest : Elastic.Clients.Elasticsearch.Reque
 /// <summary>
 /// <para>
 /// Restore a snapshot.
+/// </para>
+/// <para>
 /// Restore a snapshot of a cluster or data streams and indices.
 /// </para>
 /// <para>
@@ -713,6 +717,8 @@ public readonly partial struct RestoreRequestDescriptor
 /// <summary>
 /// <para>
 /// Restore a snapshot.
+/// </para>
+/// <para>
 /// Restore a snapshot of a cluster or data streams and indices.
 /// </para>
 /// <para>

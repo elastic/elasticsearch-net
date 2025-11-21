@@ -53,6 +53,8 @@ public sealed partial class SplitIndexRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Split an index.
+/// </para>
+/// <para>
 /// Split an index into a new index with more primary shards.
 /// </para>
 /// <list type="bullet">
@@ -228,6 +230,8 @@ public sealed partial class SplitIndexRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Split an index.
+/// </para>
+/// <para>
 /// Split an index into a new index with more primary shards.
 /// </para>
 /// <list type="bullet">
@@ -589,6 +593,8 @@ public readonly partial struct SplitIndexRequestDescriptor
 /// <summary>
 /// <para>
 /// Split an index.
+/// </para>
+/// <para>
 /// Split an index into a new index with more primary shards.
 /// </para>
 /// <list type="bullet">

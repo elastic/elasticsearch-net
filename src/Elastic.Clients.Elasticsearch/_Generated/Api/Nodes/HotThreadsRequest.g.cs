@@ -80,6 +80,8 @@ public sealed partial class HotThreadsRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Get the hot threads for nodes.
+/// </para>
+/// <para>
 /// Get a breakdown of the hot threads on each selected node in the cluster.
 /// The output is plain text with a breakdown of the top hot threads for each node.
 /// </para>
@@ -176,6 +178,8 @@ public sealed partial class HotThreadsRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Get the hot threads for nodes.
+/// </para>
+/// <para>
 /// Get a breakdown of the hot threads on each selected node in the cluster.
 /// The output is plain text with a breakdown of the top hot threads for each node.
 /// </para>

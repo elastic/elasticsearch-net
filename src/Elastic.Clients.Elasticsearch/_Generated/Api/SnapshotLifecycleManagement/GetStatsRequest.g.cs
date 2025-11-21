@@ -43,6 +43,8 @@ public sealed partial class GetStatsRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Get snapshot lifecycle management statistics.
+/// </para>
+/// <para>
 /// Get global and policy-level statistics about actions taken by snapshot lifecycle management.
 /// </para>
 /// </summary>
@@ -91,6 +93,8 @@ public sealed partial class GetStatsRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Get snapshot lifecycle management statistics.
+/// </para>
+/// <para>
 /// Get global and policy-level statistics about actions taken by snapshot lifecycle management.
 /// </para>
 /// </summary>

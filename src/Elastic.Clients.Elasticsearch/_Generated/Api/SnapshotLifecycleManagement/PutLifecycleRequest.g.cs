@@ -47,6 +47,8 @@ public sealed partial class PutLifecycleRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Create or update a policy.
+/// </para>
+/// <para>
 /// Create or update a snapshot lifecycle policy.
 /// If the policy already exists, this request increments the policy version.
 /// Only the latest version of a policy is stored.
@@ -146,6 +148,8 @@ public sealed partial class PutLifecycleRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Create or update a policy.
+/// </para>
+/// <para>
 /// Create or update a snapshot lifecycle policy.
 /// If the policy already exists, this request increments the policy version.
 /// Only the latest version of a policy is stored.

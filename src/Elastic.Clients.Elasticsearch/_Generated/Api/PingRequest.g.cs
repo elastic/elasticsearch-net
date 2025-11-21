@@ -30,6 +30,8 @@ public sealed partial class PingRequestParameters : Elastic.Transport.RequestPar
 /// <summary>
 /// <para>
 /// Ping the cluster.
+/// </para>
+/// <para>
 /// Get information about whether the cluster is running.
 /// </para>
 /// </summary>
@@ -64,6 +66,8 @@ public sealed partial class PingRequest : Elastic.Clients.Elasticsearch.Requests
 /// <summary>
 /// <para>
 /// Ping the cluster.
+/// </para>
+/// <para>
 /// Get information about whether the cluster is running.
 /// </para>
 /// </summary>

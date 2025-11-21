@@ -30,6 +30,8 @@ public sealed partial class GetDataLifecycleStatsRequestParameters : Elastic.Tra
 /// <summary>
 /// <para>
 /// Get data stream lifecycle stats.
+/// </para>
+/// <para>
 /// Get statistics about the data streams that are managed by a data stream lifecycle.
 /// </para>
 /// </summary>
@@ -64,6 +66,8 @@ public sealed partial class GetDataLifecycleStatsRequest : Elastic.Clients.Elast
 /// <summary>
 /// <para>
 /// Get data stream lifecycle stats.
+/// </para>
+/// <para>
 /// Get statistics about the data streams that are managed by a data stream lifecycle.
 /// </para>
 /// </summary>

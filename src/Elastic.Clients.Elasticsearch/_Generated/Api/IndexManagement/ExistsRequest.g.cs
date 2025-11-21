@@ -74,6 +74,8 @@ public sealed partial class ExistsRequestParameters : Elastic.Transport.RequestP
 /// <summary>
 /// <para>
 /// Check indices.
+/// </para>
+/// <para>
 /// Check if one or more indices, index aliases, or data streams exist.
 /// </para>
 /// </summary>
@@ -163,6 +165,8 @@ public sealed partial class ExistsRequest : Elastic.Clients.Elasticsearch.Reques
 /// <summary>
 /// <para>
 /// Check indices.
+/// </para>
+/// <para>
 /// Check if one or more indices, index aliases, or data streams exist.
 /// </para>
 /// </summary>
@@ -337,6 +341,8 @@ public readonly partial struct ExistsRequestDescriptor
 /// <summary>
 /// <para>
 /// Check indices.
+/// </para>
+/// <para>
 /// Check if one or more indices, index aliases, or data streams exist.
 /// </para>
 /// </summary>

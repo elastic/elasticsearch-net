@@ -43,6 +43,8 @@ public sealed partial class GetRecordsRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Get anomaly records for an anomaly detection job.
+/// </para>
+/// <para>
 /// Records contain the detailed analytical results. They describe the anomalous
 /// activity that has been identified in the input data based on the detector
 /// configuration.
@@ -153,6 +155,8 @@ public sealed partial class GetRecordsRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Get anomaly records for an anomaly detection job.
+/// </para>
+/// <para>
 /// Records contain the detailed analytical results. They describe the anomalous
 /// activity that has been identified in the input data based on the detector
 /// configuration.
@@ -371,6 +375,8 @@ public readonly partial struct GetRecordsRequestDescriptor
 /// <summary>
 /// <para>
 /// Get anomaly records for an anomaly detection job.
+/// </para>
+/// <para>
 /// Records contain the detailed analytical results. They describe the anomalous
 /// activity that has been identified in the input data based on the detector
 /// configuration.

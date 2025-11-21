@@ -30,6 +30,8 @@ public sealed partial class GeoIpStatsRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Get GeoIP statistics.
+/// </para>
+/// <para>
 /// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 /// </para>
 /// </summary>
@@ -64,6 +66,8 @@ public sealed partial class GeoIpStatsRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Get GeoIP statistics.
+/// </para>
+/// <para>
 /// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 /// </para>
 /// </summary>

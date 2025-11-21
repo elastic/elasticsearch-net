@@ -108,13 +108,6 @@ public sealed partial class PutContextualaiRequest : Elastic.Clients.Elasticsear
 
 	/// <summary>
 	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
-
-	/// <summary>
-	/// <para>
 	/// The type of service supported for the specified task type. In this case, <c>contextualai</c>.
 	/// </para>
 	/// </summary>
@@ -207,39 +200,6 @@ public readonly partial struct PutContextualaiRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
-	{
-		Instance.ChunkingSettings = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor ChunkingSettings()
-	{
-		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The chunking configuration object.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Inference.PutContextualaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
-	{
-		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 

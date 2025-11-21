@@ -29,7 +29,10 @@ public sealed partial class TagsRequestParameters : Elastic.Transport.RequestPar
 
 /// <summary>
 /// <para>
-/// Return tags defined for the project
+/// Get tags.
+/// </para>
+/// <para>
+/// Get the tags that are defined for the project.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Project.Json.TagsRequestConverter))]
@@ -62,7 +65,10 @@ public sealed partial class TagsRequest : Elastic.Clients.Elasticsearch.Requests
 
 /// <summary>
 /// <para>
-/// Return tags defined for the project
+/// Get tags.
+/// </para>
+/// <para>
+/// Get the tags that are defined for the project.
 /// </para>
 /// </summary>
 public readonly partial struct TagsRequestDescriptor

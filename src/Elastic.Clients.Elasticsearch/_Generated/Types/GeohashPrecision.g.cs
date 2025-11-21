@@ -29,9 +29,9 @@ namespace Elastic.Clients.Elasticsearch;
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Json.GeohashPrecisionConverter))]
-public sealed partial class GeohashPrecision : Elastic.Clients.Elasticsearch.Union<long, string>
+public sealed partial class GeohashPrecision : Elastic.Clients.Elasticsearch.Union<int, string>
 {
-	public GeohashPrecision(long value) : base(value)
+	public GeohashPrecision(int value) : base(value)
 	{
 	}
 
@@ -39,13 +39,13 @@ public sealed partial class GeohashPrecision : Elastic.Clients.Elasticsearch.Uni
 	{
 	}
 
-	public static implicit operator Elastic.Clients.Elasticsearch.GeohashPrecision(long value) => new Elastic.Clients.Elasticsearch.GeohashPrecision(value);
+	public static implicit operator Elastic.Clients.Elasticsearch.GeohashPrecision(int value) => new Elastic.Clients.Elasticsearch.GeohashPrecision(value);
 	public static implicit operator Elastic.Clients.Elasticsearch.GeohashPrecision(string value) => new Elastic.Clients.Elasticsearch.GeohashPrecision(value);
 }
 
 public readonly partial struct GeohashPrecisionFactory
 {
-	public Elastic.Clients.Elasticsearch.GeohashPrecision GeohashLength(long value)
+	public Elastic.Clients.Elasticsearch.GeohashPrecision GeohashLength(int value)
 	{
 		return new Elastic.Clients.Elasticsearch.GeohashPrecision(value);
 	}

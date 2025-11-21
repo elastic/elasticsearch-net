@@ -53,6 +53,8 @@ public sealed partial class CloneIndexRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Clone an index.
+/// </para>
+/// <para>
 /// Clone an existing index into a new index.
 /// Each original primary shard is cloned into a new primary shard in the new index.
 /// </para>
@@ -231,6 +233,8 @@ public sealed partial class CloneIndexRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Clone an index.
+/// </para>
+/// <para>
 /// Clone an existing index into a new index.
 /// Each original primary shard is cloned into a new primary shard in the new index.
 /// </para>
@@ -595,6 +599,8 @@ public readonly partial struct CloneIndexRequestDescriptor
 /// <summary>
 /// <para>
 /// Clone an index.
+/// </para>
+/// <para>
 /// Clone an existing index into a new index.
 /// Each original primary shard is cloned into a new primary shard in the new index.
 /// </para>

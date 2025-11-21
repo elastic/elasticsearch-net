@@ -276,6 +276,8 @@ public sealed partial class FindFieldStructureRequestParameters : Elastic.Transp
 /// <summary>
 /// <para>
 /// Find the structure of a text field.
+/// </para>
+/// <para>
 /// Find the structure of a text field in an Elasticsearch index.
 /// </para>
 /// <para>
@@ -594,6 +596,8 @@ public sealed partial class FindFieldStructureRequest : Elastic.Clients.Elastics
 /// <summary>
 /// <para>
 /// Find the structure of a text field.
+/// </para>
+/// <para>
 /// Find the structure of a text field in an Elasticsearch index.
 /// </para>
 /// <para>
@@ -1048,6 +1052,8 @@ public readonly partial struct FindFieldStructureRequestDescriptor
 /// <summary>
 /// <para>
 /// Find the structure of a text field.
+/// </para>
+/// <para>
 /// Find the structure of a text field in an Elasticsearch index.
 /// </para>
 /// <para>

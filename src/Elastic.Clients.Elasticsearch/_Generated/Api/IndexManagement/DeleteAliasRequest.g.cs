@@ -45,6 +45,8 @@ public sealed partial class DeleteAliasRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Delete an alias.
+/// </para>
+/// <para>
 /// Removes a data stream or index from an alias.
 /// </para>
 /// </summary>
@@ -118,6 +120,8 @@ public sealed partial class DeleteAliasRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Delete an alias.
+/// </para>
+/// <para>
 /// Removes a data stream or index from an alias.
 /// </para>
 /// </summary>
@@ -247,6 +251,8 @@ public readonly partial struct DeleteAliasRequestDescriptor
 /// <summary>
 /// <para>
 /// Delete an alias.
+/// </para>
+/// <para>
 /// Removes a data stream or index from an alias.
 /// </para>
 /// </summary>

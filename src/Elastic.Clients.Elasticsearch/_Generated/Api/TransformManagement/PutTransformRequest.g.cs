@@ -47,6 +47,8 @@ public sealed partial class PutTransformRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Create a transform.
+/// </para>
+/// <para>
 /// Creates a transform.
 /// </para>
 /// <para>
@@ -224,6 +226,8 @@ public sealed partial class PutTransformRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Create a transform.
+/// </para>
+/// <para>
 /// Creates a transform.
 /// </para>
 /// <para>
@@ -682,6 +686,8 @@ public readonly partial struct PutTransformRequestDescriptor
 /// <summary>
 /// <para>
 /// Create a transform.
+/// </para>
+/// <para>
 /// Creates a transform.
 /// </para>
 /// <para>
