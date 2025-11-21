@@ -63,7 +63,7 @@ public sealed partial class GeotileGridAggregation
 	/// Values outside of the range [0,29] will be rejected.
 	/// </para>
 	/// </summary>
-	public long? Precision { get; set; }
+	public int? Precision { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -152,7 +152,7 @@ public readonly partial struct GeotileGridAggregationDescriptor<TDocument>
 	/// Values outside of the range [0,29] will be rejected.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Precision(long? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor<TDocument> Precision(int? value)
 	{
 		Instance.Precision = value;
 		return this;
@@ -266,7 +266,7 @@ public readonly partial struct GeotileGridAggregationDescriptor
 	/// Values outside of the range [0,29] will be rejected.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Precision(long? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.GeotileGridAggregationDescriptor Precision(int? value)
 	{
 		Instance.Precision = value;
 		return this;

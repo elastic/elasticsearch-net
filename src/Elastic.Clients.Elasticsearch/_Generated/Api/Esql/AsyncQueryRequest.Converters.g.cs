@@ -28,7 +28,7 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropColumnar = System.Text.Json.JsonEncodedText.Encode("columnar");
 	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
 	private static readonly System.Text.Json.JsonEncodedText PropIncludeCcsMetadata = System.Text.Json.JsonEncodedText.Encode("include_ccs_metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludeCcsMetadata1 = System.Text.Json.JsonEncodedText.Encode("include_execution_metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeExecutionMetadata = System.Text.Json.JsonEncodedText.Encode("include_execution_metadata");
 	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive");
 	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion");
 	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale");
@@ -43,6 +43,7 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 		LocalJsonValue<bool?> propColumnar = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
 		LocalJsonValue<bool?> propIncludeCcsMetadata = default;
+		LocalJsonValue<bool?> propIncludeExecutionMetadata = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propKeepAlive = default;
 		LocalJsonValue<bool?> propKeepOnCompletion = default;
 		LocalJsonValue<string?> propLocale = default;
@@ -62,7 +63,12 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)) || propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata1, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propIncludeExecutionMetadata.TryReadProperty(ref reader, options, PropIncludeExecutionMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -117,6 +123,7 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 			Columnar = propColumnar.Value,
 			Filter = propFilter.Value,
 			IncludeCcsMetadata = propIncludeCcsMetadata.Value,
+			IncludeExecutionMetadata = propIncludeExecutionMetadata.Value,
 			KeepAlive = propKeepAlive.Value,
 			KeepOnCompletion = propKeepOnCompletion.Value,
 			Locale = propLocale.Value,
@@ -133,6 +140,7 @@ public sealed partial class AsyncQueryRequestConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropColumnar, value.Columnar, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
 		writer.WriteProperty(options, PropIncludeCcsMetadata, value.IncludeCcsMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIncludeExecutionMetadata, value.IncludeExecutionMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
 		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropLocale, value.Locale, null, null);

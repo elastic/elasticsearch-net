@@ -30,7 +30,7 @@ public sealed partial class PutPipelineRequestParameters : Elastic.Transport.Req
 	/// Required version for optimistic concurrency control for pipeline updates
 	/// </para>
 	/// </summary>
-	public long? IfVersion { get => Q<long?>("if_version"); set => Q("if_version", value); }
+	public int? IfVersion { get => Q<int?>("if_version"); set => Q("if_version", value); }
 
 	/// <summary>
 	/// <para>
@@ -50,6 +50,8 @@ public sealed partial class PutPipelineRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Create or update a pipeline.
+/// </para>
+/// <para>
 /// Changes made using this API take effect immediately.
 /// </para>
 /// </summary>
@@ -95,7 +97,7 @@ public sealed partial class PutPipelineRequest : Elastic.Clients.Elasticsearch.R
 	/// Required version for optimistic concurrency control for pipeline updates
 	/// </para>
 	/// </summary>
-	public long? IfVersion { get => Q<long?>("if_version"); set => Q("if_version", value); }
+	public int? IfVersion { get => Q<int?>("if_version"); set => Q("if_version", value); }
 
 	/// <summary>
 	/// <para>
@@ -165,6 +167,8 @@ public sealed partial class PutPipelineRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Create or update a pipeline.
+/// </para>
+/// <para>
 /// Changes made using this API take effect immediately.
 /// </para>
 /// </summary>
@@ -208,7 +212,7 @@ public readonly partial struct PutPipelineRequestDescriptor
 	/// Required version for optimistic concurrency control for pipeline updates
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor IfVersion(long? value)
+	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor IfVersion(int? value)
 	{
 		Instance.IfVersion = value;
 		return this;
@@ -487,6 +491,8 @@ public readonly partial struct PutPipelineRequestDescriptor
 /// <summary>
 /// <para>
 /// Create or update a pipeline.
+/// </para>
+/// <para>
 /// Changes made using this API take effect immediately.
 /// </para>
 /// </summary>
@@ -530,7 +536,7 @@ public readonly partial struct PutPipelineRequestDescriptor<TDocument>
 	/// Required version for optimistic concurrency control for pipeline updates
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> IfVersion(long? value)
+	public Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument> IfVersion(int? value)
 	{
 		Instance.IfVersion = value;
 		return this;

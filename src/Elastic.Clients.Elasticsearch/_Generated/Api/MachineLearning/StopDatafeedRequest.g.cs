@@ -30,6 +30,8 @@ public sealed partial class StopDatafeedRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Stop datafeeds.
+/// </para>
+/// <para>
 /// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
 /// multiple times throughout its lifecycle.
 /// </para>
@@ -98,6 +100,8 @@ public sealed partial class StopDatafeedRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Stop datafeeds.
+/// </para>
+/// <para>
 /// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
 /// multiple times throughout its lifecycle.
 /// </para>

@@ -39,7 +39,7 @@ public sealed partial class InlineGetConverter<TDocument> : System.Text.Json.Ser
 		LocalJsonValue<bool> propFound = default;
 		System.Collections.Generic.Dictionary<string, object>? propMetadata = default;
 		LocalJsonValue<long?> propPrimaryTerm = default;
-		LocalJsonValue<string?> propRouting = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propRouting = default;
 		LocalJsonValue<long?> propSeqNo = default;
 		LocalJsonValue<TDocument?> propSource = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -59,7 +59,7 @@ public sealed partial class InlineGetConverter<TDocument> : System.Text.Json.Ser
 				continue;
 			}
 
-			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -98,7 +98,7 @@ public sealed partial class InlineGetConverter<TDocument> : System.Text.Json.Ser
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropFound, value.Found, null, null);
 		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
-		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		if (value.Metadata is not null)

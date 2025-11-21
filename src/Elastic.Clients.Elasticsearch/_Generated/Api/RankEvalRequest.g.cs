@@ -51,7 +51,7 @@ public sealed partial class RankEvalRequestParameters : Elastic.Transport.Reques
 	/// Search operation type
 	/// </para>
 	/// </summary>
-	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
+	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 }
 
 /// <summary>
@@ -142,7 +142,7 @@ public sealed partial class RankEvalRequest : Elastic.Clients.Elasticsearch.Requ
 	/// Search operation type
 	/// </para>
 	/// </summary>
-	public string? SearchType { get => Q<string?>("search_type"); set => Q("search_type", value); }
+	public Elastic.Clients.Elasticsearch.SearchType? SearchType { get => Q<Elastic.Clients.Elasticsearch.SearchType?>("search_type"); set => Q("search_type", value); }
 
 	/// <summary>
 	/// <para>
@@ -258,7 +258,7 @@ public readonly partial struct RankEvalRequestDescriptor
 	/// Search operation type
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor SearchType(string? value)
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;
@@ -499,7 +499,7 @@ public readonly partial struct RankEvalRequestDescriptor<TDocument>
 	/// Search operation type
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> SearchType(string? value)
+	public Elastic.Clients.Elasticsearch.RankEvalRequestDescriptor<TDocument> SearchType(Elastic.Clients.Elasticsearch.SearchType? value)
 	{
 		Instance.SearchType = value;
 		return this;

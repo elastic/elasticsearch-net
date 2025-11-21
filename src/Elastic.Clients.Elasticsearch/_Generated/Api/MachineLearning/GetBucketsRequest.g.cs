@@ -43,6 +43,8 @@ public sealed partial class GetBucketsRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Get anomaly detection job results for buckets.
+/// </para>
+/// <para>
 /// The API presents a chronological view of the records, grouped by bucket.
 /// </para>
 /// </summary>
@@ -164,6 +166,8 @@ public sealed partial class GetBucketsRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Get anomaly detection job results for buckets.
+/// </para>
+/// <para>
 /// The API presents a chronological view of the records, grouped by bucket.
 /// </para>
 /// </summary>
@@ -401,6 +405,8 @@ public readonly partial struct GetBucketsRequestDescriptor
 /// <summary>
 /// <para>
 /// Get anomaly detection job results for buckets.
+/// </para>
+/// <para>
 /// The API presents a chronological view of the records, grouped by bucket.
 /// </para>
 /// </summary>

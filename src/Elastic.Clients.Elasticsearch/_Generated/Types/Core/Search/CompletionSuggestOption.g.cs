@@ -53,7 +53,7 @@ public sealed partial class CompletionSuggestOption<TDocument>
 	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Fields { get; set; }
 	public string? Id { get; set; }
 	public string? Index { get; set; }
-	public string? Routing { get; set; }
+	public System.Collections.Generic.ICollection<string>? Routing { get; set; }
 	public double? Score { get; set; }
 	public double? Score0 { get; set; }
 	public TDocument? Source { get; set; }

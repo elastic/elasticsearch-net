@@ -43,6 +43,8 @@ public sealed partial class MigrateToDataStreamRequestParameters : Elastic.Trans
 /// <summary>
 /// <para>
 /// Convert an index alias to a data stream.
+/// </para>
+/// <para>
 /// Converts an index alias to a data stream.
 /// You must have a matching index template that is data stream enabled.
 /// The alias must meet the following criteria:
@@ -110,6 +112,8 @@ public sealed partial class MigrateToDataStreamRequest : Elastic.Clients.Elastic
 /// <summary>
 /// <para>
 /// Convert an index alias to a data stream.
+/// </para>
+/// <para>
 /// Converts an index alias to a data stream.
 /// You must have a matching index template that is data stream enabled.
 /// The alias must meet the following criteria:
@@ -233,6 +237,8 @@ public readonly partial struct MigrateToDataStreamRequestDescriptor
 /// <summary>
 /// <para>
 /// Convert an index alias to a data stream.
+/// </para>
+/// <para>
 /// Converts an index alias to a data stream.
 /// You must have a matching index template that is data stream enabled.
 /// The alias must meet the following criteria:

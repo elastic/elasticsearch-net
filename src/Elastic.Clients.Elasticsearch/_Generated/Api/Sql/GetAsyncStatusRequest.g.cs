@@ -30,6 +30,8 @@ public sealed partial class GetAsyncStatusRequestParameters : Elastic.Transport.
 /// <summary>
 /// <para>
 /// Get the async SQL search status.
+/// </para>
+/// <para>
 /// Get the current status of an async SQL search or a stored synchronous SQL search.
 /// </para>
 /// </summary>
@@ -74,6 +76,8 @@ public sealed partial class GetAsyncStatusRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Get the async SQL search status.
+/// </para>
+/// <para>
 /// Get the current status of an async SQL search or a stored synchronous SQL search.
 /// </para>
 /// </summary>

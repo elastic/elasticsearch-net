@@ -158,6 +158,8 @@ public sealed partial class PutCustomRequest : Elastic.Clients.Elasticsearch.Req
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
@@ -314,6 +316,8 @@ public readonly partial struct PutCustomRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
@@ -325,6 +329,8 @@ public readonly partial struct PutCustomRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor ChunkingSettings()
@@ -336,6 +342,8 @@ public readonly partial struct PutCustomRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutCustomRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)

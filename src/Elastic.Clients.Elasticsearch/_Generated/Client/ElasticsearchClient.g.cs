@@ -4248,17 +4248,17 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.IndexName index)
+	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(index);
+		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(indices);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequest<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(index);
+		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(indices);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -4282,9 +4282,9 @@ public partial class ElasticsearchClient
 		return DoRequest<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.TermsEnumResponse TermsEnum<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>> action)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(index);
+		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(indices);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -4297,17 +4297,17 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(index);
+		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(indices);
 		var request = builder.Instance;
 		request.BeforeRequest();
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(index);
+		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor(indices);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();
@@ -4331,9 +4331,9 @@ public partial class ElasticsearchClient
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.TermsEnumRequest, Elastic.Clients.Elasticsearch.TermsEnumResponse, Elastic.Clients.Elasticsearch.TermsEnumRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TermsEnumResponse> TermsEnumAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(index);
+		var builder = new Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument>(indices);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();

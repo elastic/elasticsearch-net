@@ -46,6 +46,8 @@ public sealed partial class MigrateToDataTiersRequestParameters : Elastic.Transp
 /// <summary>
 /// <para>
 /// Migrate to data tiers routing.
+/// </para>
+/// <para>
 /// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
 /// Optionally, delete one legacy index template.
 /// Using node roles enables ILM to automatically move the indices between data tiers.
@@ -126,6 +128,8 @@ public sealed partial class MigrateToDataTiersRequest : Elastic.Clients.Elastics
 /// <summary>
 /// <para>
 /// Migrate to data tiers routing.
+/// </para>
+/// <para>
 /// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
 /// Optionally, delete one legacy index template.
 /// Using node roles enables ILM to automatically move the indices between data tiers.

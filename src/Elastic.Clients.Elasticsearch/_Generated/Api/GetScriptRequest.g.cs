@@ -38,6 +38,8 @@ public sealed partial class GetScriptRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Get a script or search template.
+/// </para>
+/// <para>
 /// Retrieves a stored script or search template.
 /// </para>
 /// </summary>
@@ -91,6 +93,8 @@ public sealed partial class GetScriptRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Get a script or search template.
+/// </para>
+/// <para>
 /// Retrieves a stored script or search template.
 /// </para>
 /// </summary>

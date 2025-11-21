@@ -30,6 +30,8 @@ public sealed partial class GetRollupCapsRequestParameters : Elastic.Transport.R
 /// <summary>
 /// <para>
 /// Get the rollup job capabilities.
+/// </para>
+/// <para>
 /// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 /// </para>
 /// <para>
@@ -92,6 +94,8 @@ public sealed partial class GetRollupCapsRequest : Elastic.Clients.Elasticsearch
 /// <summary>
 /// <para>
 /// Get the rollup job capabilities.
+/// </para>
+/// <para>
 /// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 /// </para>
 /// <para>

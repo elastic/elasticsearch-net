@@ -60,6 +60,8 @@ public sealed partial class PutDatafeedRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Create a datafeed.
+/// </para>
+/// <para>
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -262,6 +264,8 @@ public sealed partial class PutDatafeedRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Create a datafeed.
+/// </para>
+/// <para>
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).
@@ -870,6 +874,8 @@ public readonly partial struct PutDatafeedRequestDescriptor
 /// <summary>
 /// <para>
 /// Create a datafeed.
+/// </para>
+/// <para>
 /// Datafeeds retrieve data from Elasticsearch for analysis by an anomaly detection job.
 /// You can associate only one datafeed with each anomaly detection job.
 /// The datafeed contains a query that runs at a defined interval (<c>frequency</c>).

@@ -32,7 +32,7 @@ public sealed partial class FindMessageStructureRequestParameters : Elastic.Tran
 	/// If the text does not have a header role, columns are named "column1", "column2", "column3", for example.
 	/// </para>
 	/// </summary>
-	public string? ColumnNames { get => Q<string?>("column_names"); set => Q("column_names", value); }
+	public System.Collections.Generic.ICollection<string>? ColumnNames { get => Q<System.Collections.Generic.ICollection<string>?>("column_names"); set => Q("column_names", value); }
 
 	/// <summary>
 	/// <para>
@@ -253,6 +253,8 @@ public sealed partial class FindMessageStructureRequestParameters : Elastic.Tran
 /// <summary>
 /// <para>
 /// Find the structure of text messages.
+/// </para>
+/// <para>
 /// Find the structure of a list of text messages.
 /// The messages must contain data that is suitable to be ingested into Elasticsearch.
 /// </para>
@@ -330,7 +332,7 @@ public sealed partial class FindMessageStructureRequest : Elastic.Clients.Elasti
 	/// If the text does not have a header role, columns are named "column1", "column2", "column3", for example.
 	/// </para>
 	/// </summary>
-	public string? ColumnNames { get => Q<string?>("column_names"); set => Q("column_names", value); }
+	public System.Collections.Generic.ICollection<string>? ColumnNames { get => Q<System.Collections.Generic.ICollection<string>?>("column_names"); set => Q("column_names", value); }
 
 	/// <summary>
 	/// <para>
@@ -562,6 +564,8 @@ public sealed partial class FindMessageStructureRequest : Elastic.Clients.Elasti
 /// <summary>
 /// <para>
 /// Find the structure of text messages.
+/// </para>
+/// <para>
 /// Find the structure of a list of text messages.
 /// The messages must contain data that is suitable to be ingested into Elasticsearch.
 /// </para>
@@ -624,9 +628,22 @@ public readonly partial struct FindMessageStructureRequestDescriptor
 	/// If the text does not have a header role, columns are named "column1", "column2", "column3", for example.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor ColumnNames(string? value)
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor ColumnNames(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.ColumnNames = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If the format is <c>delimited</c>, you can specify the column names in a comma-separated list.
+	/// If this parameter is not specified, the structure finder uses the column names from the header row of the text.
+	/// If the text does not have a header role, columns are named "column1", "column2", "column3", for example.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor ColumnNames(params string[] values)
+	{
+		Instance.ColumnNames = [.. values];
 		return this;
 	}
 
@@ -984,6 +1001,8 @@ public readonly partial struct FindMessageStructureRequestDescriptor
 /// <summary>
 /// <para>
 /// Find the structure of text messages.
+/// </para>
+/// <para>
 /// Find the structure of a list of text messages.
 /// The messages must contain data that is suitable to be ingested into Elasticsearch.
 /// </para>
@@ -1046,9 +1065,22 @@ public readonly partial struct FindMessageStructureRequestDescriptor<TDocument>
 	/// If the text does not have a header role, columns are named "column1", "column2", "column3", for example.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> ColumnNames(string? value)
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> ColumnNames(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.ColumnNames = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If the format is <c>delimited</c>, you can specify the column names in a comma-separated list.
+	/// If this parameter is not specified, the structure finder uses the column names from the header row of the text.
+	/// If the text does not have a header role, columns are named "column1", "column2", "column3", for example.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument> ColumnNames(params string[] values)
+	{
+		Instance.ColumnNames = [.. values];
 		return this;
 	}
 

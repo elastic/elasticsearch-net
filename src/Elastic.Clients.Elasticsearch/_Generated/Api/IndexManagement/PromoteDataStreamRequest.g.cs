@@ -36,6 +36,8 @@ public sealed partial class PromoteDataStreamRequestParameters : Elastic.Transpo
 /// <summary>
 /// <para>
 /// Promote a data stream.
+/// </para>
+/// <para>
 /// Promote a data stream from a replicated data stream managed by cross-cluster replication (CCR) to a regular data stream.
 /// </para>
 /// <para>
@@ -98,6 +100,8 @@ public sealed partial class PromoteDataStreamRequest : Elastic.Clients.Elasticse
 /// <summary>
 /// <para>
 /// Promote a data stream.
+/// </para>
+/// <para>
 /// Promote a data stream from a replicated data stream managed by cross-cluster replication (CCR) to a regular data stream.
 /// </para>
 /// <para>
@@ -212,6 +216,8 @@ public readonly partial struct PromoteDataStreamRequestDescriptor
 /// <summary>
 /// <para>
 /// Promote a data stream.
+/// </para>
+/// <para>
 /// Promote a data stream from a replicated data stream managed by cross-cluster replication (CCR) to a regular data stream.
 /// </para>
 /// <para>

@@ -30,6 +30,8 @@ public sealed partial class ProcessorGrokRequestParameters : Elastic.Transport.R
 /// <summary>
 /// <para>
 /// Run a grok processor.
+/// </para>
+/// <para>
 /// Extract structured fields out of a single text field within a document.
 /// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
 /// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
@@ -66,6 +68,8 @@ public sealed partial class ProcessorGrokRequest : Elastic.Clients.Elasticsearch
 /// <summary>
 /// <para>
 /// Run a grok processor.
+/// </para>
+/// <para>
 /// Extract structured fields out of a single text field within a document.
 /// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
 /// A grok pattern is like a regular expression that supports aliased expressions that can be reused.

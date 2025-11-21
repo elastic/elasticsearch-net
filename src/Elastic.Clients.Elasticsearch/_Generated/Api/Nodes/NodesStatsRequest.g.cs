@@ -92,6 +92,8 @@ public sealed partial class NodesStatsRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Get node statistics.
+/// </para>
+/// <para>
 /// Get statistics for nodes in a cluster.
 /// By default, all stats are returned. You can limit the returned information by using metrics.
 /// </para>
@@ -103,19 +105,19 @@ public sealed partial class NodesStatsRequest : Elastic.Clients.Elasticsearch.Re
 	{
 	}
 
-	public NodesStatsRequest(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
+	public NodesStatsRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric) : base(r => r.Optional("metric", metric))
 	{
 	}
 
-	public NodesStatsRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
+	public NodesStatsRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric) : base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
 	{
 	}
 
-	public NodesStatsRequest(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric) : base(r => r.Optional("metric", metric).Optional("index_metric", indexMetric))
+	public NodesStatsRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric) : base(r => r.Optional("metric", metric).Optional("index_metric", indexMetric))
 	{
 	}
 
-	public NodesStatsRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric) : base(r => r.Optional("node_id", nodeId).Optional("metric", metric).Optional("index_metric", indexMetric))
+	public NodesStatsRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric) : base(r => r.Optional("node_id", nodeId).Optional("metric", metric).Optional("index_metric", indexMetric))
 	{
 	}
 #if NET7_0_OR_GREATER
@@ -147,14 +149,14 @@ public sealed partial class NodesStatsRequest : Elastic.Clients.Elasticsearch.Re
 	/// Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Metrics? IndexMetric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("index_metric"); set => PO("index_metric", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? IndexMetric { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>?>("index_metric"); set => PO("index_metric", value); }
 
 	/// <summary>
 	/// <para>
 	/// Limit the information returned to the specified metrics
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? Metric { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>?>("metric"); set => PO("metric", value); }
 
 	/// <summary>
 	/// <para>
@@ -230,6 +232,8 @@ public sealed partial class NodesStatsRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Get node statistics.
+/// </para>
+/// <para>
 /// Get statistics for nodes in a cluster.
 /// By default, all stats are returned. You can limit the returned information by using metrics.
 /// </para>
@@ -249,22 +253,22 @@ public readonly partial struct NodesStatsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
+	public NodesStatsRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(metric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId, metric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	public NodesStatsRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(metric, indexMetric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId, metric, indexMetric);
 	}
@@ -282,9 +286,20 @@ public readonly partial struct NodesStatsRequestDescriptor
 	/// Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor IndexMetric(Elastic.Clients.Elasticsearch.Metrics? value)
+	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor IndexMetric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? value)
 	{
 		Instance.IndexMetric = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor IndexMetric(params Elastic.Clients.Elasticsearch.CommonStatsFlag[] values)
+	{
+		Instance.IndexMetric = [.. values];
 		return this;
 	}
 
@@ -293,9 +308,20 @@ public readonly partial struct NodesStatsRequestDescriptor
 	/// Limit the information returned to the specified metrics
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? value)
+	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? value)
 	{
 		Instance.Metric = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limit the information returned to the specified metrics
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor Metric(params Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric[] values)
+	{
+		Instance.Metric = [.. values];
 		return this;
 	}
 
@@ -512,6 +538,8 @@ public readonly partial struct NodesStatsRequestDescriptor
 /// <summary>
 /// <para>
 /// Get node statistics.
+/// </para>
+/// <para>
 /// Get statistics for nodes in a cluster.
 /// By default, all stats are returned. You can limit the returned information by using metrics.
 /// </para>
@@ -531,22 +559,22 @@ public readonly partial struct NodesStatsRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
+	public NodesStatsRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(metric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId, metric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	public NodesStatsRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(metric, indexMetric);
 	}
 
-	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	public NodesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest(nodeId, metric, indexMetric);
 	}
@@ -564,9 +592,20 @@ public readonly partial struct NodesStatsRequestDescriptor<TDocument>
 	/// Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> IndexMetric(Elastic.Clients.Elasticsearch.Metrics? value)
+	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> IndexMetric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? value)
 	{
 		Instance.IndexMetric = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> IndexMetric(params Elastic.Clients.Elasticsearch.CommonStatsFlag[] values)
+	{
+		Instance.IndexMetric = [.. values];
 		return this;
 	}
 
@@ -575,9 +614,20 @@ public readonly partial struct NodesStatsRequestDescriptor<TDocument>
 	/// Limit the information returned to the specified metrics
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Metrics? value)
+	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? value)
 	{
 		Instance.Metric = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limit the information returned to the specified metrics
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument> Metric(params Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric[] values)
+	{
+		Instance.Metric = [.. values];
 		return this;
 	}
 

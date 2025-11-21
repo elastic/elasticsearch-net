@@ -127,6 +127,8 @@ public sealed partial class BulkRequestParameters : Elastic.Transport.RequestPar
 /// <summary>
 /// <para>
 /// Bulk index or delete documents.
+/// </para>
+/// <para>
 /// Perform multiple <c>index</c>, <c>create</c>, <c>delete</c>, and <c>update</c> actions in a single request.
 /// This reduces overhead and can greatly increase indexing speed.
 /// </para>
@@ -243,6 +245,11 @@ public sealed partial class BulkRequestParameters : Elastic.Transport.RequestPar
 /// <item>
 /// <para>
 /// JavaScript: Check out <c>client.helpers.*</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Java: Check out <c>co.elastic.clients.elasticsearch._helpers.bulk.BulkIngester</c>
 /// </para>
 /// </item>
 /// <item>
@@ -461,6 +468,8 @@ public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainR
 /// <summary>
 /// <para>
 /// Bulk index or delete documents.
+/// </para>
+/// <para>
 /// Perform multiple <c>index</c>, <c>create</c>, <c>delete</c>, and <c>update</c> actions in a single request.
 /// This reduces overhead and can greatly increase indexing speed.
 /// </para>
@@ -577,6 +586,11 @@ public partial class BulkRequest : Elastic.Clients.Elasticsearch.Requests.PlainR
 /// <item>
 /// <para>
 /// JavaScript: Check out <c>client.helpers.*</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Java: Check out <c>co.elastic.clients.elasticsearch._helpers.bulk.BulkIngester</c>
 /// </para>
 /// </item>
 /// <item>
@@ -945,6 +959,8 @@ public readonly partial struct BulkRequestDescriptor
 /// <summary>
 /// <para>
 /// Bulk index or delete documents.
+/// </para>
+/// <para>
 /// Perform multiple <c>index</c>, <c>create</c>, <c>delete</c>, and <c>update</c> actions in a single request.
 /// This reduces overhead and can greatly increase indexing speed.
 /// </para>
@@ -1061,6 +1077,11 @@ public readonly partial struct BulkRequestDescriptor
 /// <item>
 /// <para>
 /// JavaScript: Check out <c>client.helpers.*</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Java: Check out <c>co.elastic.clients.elasticsearch._helpers.bulk.BulkIngester</c>
 /// </para>
 /// </item>
 /// <item>

@@ -68,6 +68,8 @@ public sealed partial class GetJobsRequestParameters : Elastic.Transport.Request
 /// <summary>
 /// <para>
 /// Get anomaly detection jobs configuration info.
+/// </para>
+/// <para>
 /// You can get information for multiple anomaly detection jobs in a single API
 /// request by using a group name, a comma-separated list of jobs, or a wildcard
 /// expression. You can get information for all anomaly detection jobs by using
@@ -156,6 +158,8 @@ public sealed partial class GetJobsRequest : Elastic.Clients.Elasticsearch.Reque
 /// <summary>
 /// <para>
 /// Get anomaly detection jobs configuration info.
+/// </para>
+/// <para>
 /// You can get information for multiple anomaly detection jobs in a single API
 /// request by using a group name, a comma-separated list of jobs, or a wildcard
 /// expression. You can get information for all anomaly detection jobs by using

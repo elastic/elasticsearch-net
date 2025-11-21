@@ -82,7 +82,7 @@ public sealed partial class RemoveBlockRequestParameters : Elastic.Transport.Req
 public sealed partial class RemoveBlockRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RemoveBlockRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block) : base(r => r.Required("index", index).Required("block", block))
+	public RemoveBlockRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block) : base(r => r.Required("index", indices).Required("block", block))
 	{
 	}
 #if NET7_0_OR_GREATER
@@ -127,7 +127,7 @@ public sealed partial class RemoveBlockRequest : Elastic.Clients.Elasticsearch.R
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -192,9 +192,9 @@ public readonly partial struct RemoveBlockRequestDescriptor
 		Instance = instance;
 	}
 
-	public RemoveBlockRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block)
+	public RemoveBlockRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block)
 	{
-		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest(index, block);
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest(indices, block);
 	}
 
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
@@ -225,9 +225,9 @@ public readonly partial struct RemoveBlockRequestDescriptor
 	/// You can update this setting in the <c>elasticsearch.yml</c> file or by using the cluster update settings API.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		Instance.Index = value;
+		Instance.Indices = value;
 		return this;
 	}
 
@@ -377,9 +377,9 @@ public readonly partial struct RemoveBlockRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public RemoveBlockRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block)
+	public RemoveBlockRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.IndexManagement.IndicesBlockOptions block)
 	{
-		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest(index, block);
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequest(indices, block);
 	}
 
 	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
@@ -410,9 +410,9 @@ public readonly partial struct RemoveBlockRequestDescriptor<TDocument>
 	/// You can update this setting in the <c>elasticsearch.yml</c> file or by using the cluster update settings API.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.RemoveBlockRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		Instance.Index = value;
+		Instance.Indices = value;
 		return this;
 	}
 

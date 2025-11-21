@@ -38,6 +38,8 @@ public sealed partial class QueryRequestParameters : Elastic.Transport.RequestPa
 /// <summary>
 /// <para>
 /// Get SQL search results.
+/// </para>
+/// <para>
 /// Run an SQL request.
 /// </para>
 /// </summary>
@@ -215,6 +217,8 @@ public sealed partial class QueryRequest : Elastic.Clients.Elasticsearch.Request
 /// <summary>
 /// <para>
 /// Get SQL search results.
+/// </para>
+/// <para>
 /// Run an SQL request.
 /// </para>
 /// </summary>
@@ -621,6 +625,8 @@ public readonly partial struct QueryRequestDescriptor
 /// <summary>
 /// <para>
 /// Get SQL search results.
+/// </para>
+/// <para>
 /// Run an SQL request.
 /// </para>
 /// </summary>

@@ -57,6 +57,8 @@ public sealed partial class EqlSearchRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Get EQL search results.
+/// </para>
+/// <para>
 /// Returns search results for an Event Query Language (EQL) query.
 /// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
@@ -96,7 +98,7 @@ public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to scope the operation
+	/// Comma-separated list of index names to scope the operation
 	/// </para>
 	/// </summary>
 	public
@@ -220,7 +222,7 @@ public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
+	/// Field containing event timestamp.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? TimestampField { get; set; }
@@ -230,6 +232,8 @@ public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Get EQL search results.
+/// </para>
+/// <para>
 /// Returns search results for an Event Query Language (EQL) query.
 /// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
@@ -262,7 +266,7 @@ public readonly partial struct EqlSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to scope the operation
+	/// Comma-separated list of index names to scope the operation
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
@@ -646,7 +650,7 @@ public readonly partial struct EqlSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
+	/// Field containing event timestamp.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TimestampField(Elastic.Clients.Elasticsearch.Field? value)
@@ -657,7 +661,7 @@ public readonly partial struct EqlSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
+	/// Field containing event timestamp.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TimestampField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
@@ -726,6 +730,8 @@ public readonly partial struct EqlSearchRequestDescriptor
 /// <summary>
 /// <para>
 /// Get EQL search results.
+/// </para>
+/// <para>
 /// Returns search results for an Event Query Language (EQL) query.
 /// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
@@ -759,7 +765,7 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to scope the operation
+	/// Comma-separated list of index names to scope the operation
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
@@ -1089,7 +1095,7 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
+	/// Field containing event timestamp.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TimestampField(Elastic.Clients.Elasticsearch.Field? value)
@@ -1100,7 +1106,7 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
+	/// Field containing event timestamp.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TimestampField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)

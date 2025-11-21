@@ -45,6 +45,8 @@ public sealed partial class PutAliasRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Create or update an alias.
+/// </para>
+/// <para>
 /// Adds a data stream or index to an alias.
 /// </para>
 /// </summary>
@@ -163,6 +165,8 @@ public sealed partial class PutAliasRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Create or update an alias.
+/// </para>
+/// <para>
 /// Adds a data stream or index to an alias.
 /// </para>
 /// </summary>
@@ -379,6 +383,8 @@ public readonly partial struct PutAliasRequestDescriptor
 /// <summary>
 /// <para>
 /// Create or update an alias.
+/// </para>
+/// <para>
 /// Adds a data stream or index to an alias.
 /// </para>
 /// </summary>

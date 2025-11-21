@@ -45,12 +45,12 @@ public sealed partial class TermsEnumRequest : Elastic.Clients.Elasticsearch.Req
 {
 	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TermsEnumRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	public TermsEnumRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TermsEnumRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Field field) : base(r => r.Required("index", index))
+	public TermsEnumRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field) : base(r => r.Required("index", indices))
 	{
 		Field = field;
 	}
@@ -84,7 +84,7 @@ public sealed partial class TermsEnumRequest : Elastic.Clients.Elasticsearch.Req
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -170,10 +170,10 @@ public readonly partial struct TermsEnumRequestDescriptor
 		Instance = instance;
 	}
 
-	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 #pragma warning disable CS0618
-		Instance = new Elastic.Clients.Elasticsearch.TermsEnumRequest(index);
+		Instance = new Elastic.Clients.Elasticsearch.TermsEnumRequest(indices);
 #pragma warning restore CS0618
 	}
 
@@ -193,9 +193,9 @@ public readonly partial struct TermsEnumRequestDescriptor
 	/// To search all data streams or indices, omit this parameter or use <c>*</c>  or <c>_all</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		Instance.Index = value;
+		Instance.Indices = value;
 		return this;
 	}
 
@@ -390,10 +390,10 @@ public readonly partial struct TermsEnumRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
+	public TermsEnumRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 #pragma warning disable CS0618
-		Instance = new Elastic.Clients.Elasticsearch.TermsEnumRequest(index);
+		Instance = new Elastic.Clients.Elasticsearch.TermsEnumRequest(indices);
 #pragma warning restore CS0618
 	}
 
@@ -414,9 +414,9 @@ public readonly partial struct TermsEnumRequestDescriptor<TDocument>
 	/// To search all data streams or indices, omit this parameter or use <c>*</c>  or <c>_all</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	public Elastic.Clients.Elasticsearch.TermsEnumRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		Instance.Index = value;
+		Instance.Indices = value;
 		return this;
 	}
 

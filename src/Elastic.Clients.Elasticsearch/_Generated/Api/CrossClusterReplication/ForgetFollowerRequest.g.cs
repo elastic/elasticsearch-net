@@ -36,6 +36,8 @@ public sealed partial class ForgetFollowerRequestParameters : Elastic.Transport.
 /// <summary>
 /// <para>
 /// Forget a follower.
+/// </para>
+/// <para>
 /// Remove the cross-cluster replication follower retention leases from the leader.
 /// </para>
 /// <para>
@@ -103,6 +105,8 @@ public sealed partial class ForgetFollowerRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Forget a follower.
+/// </para>
+/// <para>
 /// Remove the cross-cluster replication follower retention leases from the leader.
 /// </para>
 /// <para>
@@ -242,6 +246,8 @@ public readonly partial struct ForgetFollowerRequestDescriptor
 /// <summary>
 /// <para>
 /// Forget a follower.
+/// </para>
+/// <para>
 /// Remove the cross-cluster replication follower retention leases from the leader.
 /// </para>
 /// <para>

@@ -35,7 +35,7 @@ public sealed partial class TextEmbeddingRequestParameters : Elastic.Transport.R
 
 /// <summary>
 /// <para>
-/// Perform text embedding inference on the service
+/// Perform text embedding inference on the service.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.TextEmbeddingRequestConverter))]
@@ -146,7 +146,7 @@ public sealed partial class TextEmbeddingRequest : Elastic.Clients.Elasticsearch
 
 /// <summary>
 /// <para>
-/// Perform text embedding inference on the service
+/// Perform text embedding inference on the service.
 /// </para>
 /// </summary>
 public readonly partial struct TextEmbeddingRequestDescriptor

@@ -76,6 +76,8 @@ public sealed partial class PutMappingRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Update field mappings.
+/// </para>
+/// <para>
 /// Add new fields to an existing data stream or index.
 /// You can use the update mapping API to:
 /// </para>
@@ -306,6 +308,8 @@ public sealed partial class PutMappingRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Update field mappings.
+/// </para>
+/// <para>
 /// Add new fields to an existing data stream or index.
 /// You can use the update mapping API to:
 /// </para>
@@ -940,6 +944,8 @@ public readonly partial struct PutMappingRequestDescriptor
 /// <summary>
 /// <para>
 /// Update field mappings.
+/// </para>
+/// <para>
 /// Add new fields to an existing data stream or index.
 /// You can use the update mapping API to:
 /// </para>

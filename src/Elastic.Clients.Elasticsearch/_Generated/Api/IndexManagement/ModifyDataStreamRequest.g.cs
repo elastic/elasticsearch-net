@@ -30,6 +30,8 @@ public sealed partial class ModifyDataStreamRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Update data streams.
+/// </para>
+/// <para>
 /// Performs one or more data stream modification actions in a single atomic operation.
 /// </para>
 /// </summary>
@@ -81,6 +83,8 @@ public sealed partial class ModifyDataStreamRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Update data streams.
+/// </para>
+/// <para>
 /// Performs one or more data stream modification actions in a single atomic operation.
 /// </para>
 /// </summary>

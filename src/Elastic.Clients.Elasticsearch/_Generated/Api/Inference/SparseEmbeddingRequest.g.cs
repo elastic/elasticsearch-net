@@ -35,7 +35,7 @@ public sealed partial class SparseEmbeddingRequestParameters : Elastic.Transport
 
 /// <summary>
 /// <para>
-/// Perform sparse embedding inference on the service
+/// Perform sparse embedding inference on the service.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.SparseEmbeddingRequestConverter))]
@@ -111,7 +111,7 @@ public sealed partial class SparseEmbeddingRequest : Elastic.Clients.Elasticsear
 
 /// <summary>
 /// <para>
-/// Perform sparse embedding inference on the service
+/// Perform sparse embedding inference on the service.
 /// </para>
 /// </summary>
 public readonly partial struct SparseEmbeddingRequestDescriptor

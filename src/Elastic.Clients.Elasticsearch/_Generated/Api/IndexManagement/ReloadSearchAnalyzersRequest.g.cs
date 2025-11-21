@@ -57,6 +57,8 @@ public sealed partial class ReloadSearchAnalyzersRequestParameters : Elastic.Tra
 /// <summary>
 /// <para>
 /// Reload search analyzers.
+/// </para>
+/// <para>
 /// Reload an index's search analyzers and their resources.
 /// For data streams, the API reloads search analyzers and resources for the stream's backing indices.
 /// </para>
@@ -144,6 +146,8 @@ public sealed partial class ReloadSearchAnalyzersRequest : Elastic.Clients.Elast
 /// <summary>
 /// <para>
 /// Reload search analyzers.
+/// </para>
+/// <para>
 /// Reload an index's search analyzers and their resources.
 /// For data streams, the API reloads search analyzers and resources for the stream's backing indices.
 /// </para>
@@ -306,6 +310,8 @@ public readonly partial struct ReloadSearchAnalyzersRequestDescriptor
 /// <summary>
 /// <para>
 /// Reload search analyzers.
+/// </para>
+/// <para>
 /// Reload an index's search analyzers and their resources.
 /// For data streams, the API reloads search analyzers and resources for the stream's backing indices.
 /// </para>

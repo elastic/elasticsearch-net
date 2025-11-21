@@ -68,6 +68,8 @@ public sealed partial class RolloverRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Roll over to a new index.
+/// </para>
+/// <para>
 /// TIP: We recommend using the index lifecycle rollover action to automate rollovers. However, Serverless does not support Index Lifecycle Management (ILM), so don't use this approach in the Serverless context.
 /// </para>
 /// <para>
@@ -248,6 +250,8 @@ public sealed partial class RolloverRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Roll over to a new index.
+/// </para>
+/// <para>
 /// TIP: We recommend using the index lifecycle rollover action to automate rollovers. However, Serverless does not support Index Lifecycle Management (ILM), so don't use this approach in the Serverless context.
 /// </para>
 /// <para>
@@ -707,6 +711,8 @@ public readonly partial struct RolloverRequestDescriptor
 /// <summary>
 /// <para>
 /// Roll over to a new index.
+/// </para>
+/// <para>
 /// TIP: We recommend using the index lifecycle rollover action to automate rollovers. However, Serverless does not support Index Lifecycle Management (ILM), so don't use this approach in the Serverless context.
 /// </para>
 /// <para>

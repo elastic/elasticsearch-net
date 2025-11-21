@@ -68,6 +68,8 @@ public sealed partial class GetDatafeedsRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get datafeeds configuration info.
+/// </para>
+/// <para>
 /// You can get information for multiple datafeeds in a single API request by
 /// using a comma-separated list of datafeeds or a wildcard expression. You can
 /// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the
@@ -157,6 +159,8 @@ public sealed partial class GetDatafeedsRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get datafeeds configuration info.
+/// </para>
+/// <para>
 /// You can get information for multiple datafeeds in a single API request by
 /// using a comma-separated list of datafeeds or a wildcard expression. You can
 /// get information for all datafeeds by using <c>_all</c>, by specifying <c>*</c> as the

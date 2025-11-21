@@ -47,6 +47,8 @@ public sealed partial class DeleteRepositoryRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Delete snapshot repositories.
+/// </para>
+/// <para>
 /// When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
 /// The snapshots themselves are left untouched and in place.
 /// </para>
@@ -111,6 +113,8 @@ public sealed partial class DeleteRepositoryRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Delete snapshot repositories.
+/// </para>
+/// <para>
 /// When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
 /// The snapshots themselves are left untouched and in place.
 /// </para>

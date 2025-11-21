@@ -36,7 +36,7 @@ public sealed partial class GeotileGridAggregationConverter : System.Text.Json.S
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.GeoBounds?> propBounds = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
-		LocalJsonValue<long?> propPrecision = default;
+		LocalJsonValue<int?> propPrecision = default;
 		LocalJsonValue<int?> propShardSize = default;
 		LocalJsonValue<int?> propSize = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -51,7 +51,7 @@ public sealed partial class GeotileGridAggregationConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, static long? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<long>(o)))
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, static int? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<int>(o)))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ public sealed partial class GeotileGridAggregationConverter : System.Text.Json.S
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBounds, value.Bounds, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
-		writer.WriteProperty(options, PropPrecision, value.Precision, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropSize, value.Size, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteEndObject();

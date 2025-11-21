@@ -30,6 +30,8 @@ public sealed partial class DeleteRuleRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Delete a query rule.
+/// </para>
+/// <para>
 /// Delete a query rule within a query ruleset.
 /// This is a destructive action that is only recoverable by re-adding the same rule with the create or update query rule API.
 /// </para>
@@ -86,6 +88,8 @@ public sealed partial class DeleteRuleRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Delete a query rule.
+/// </para>
+/// <para>
 /// Delete a query rule within a query ruleset.
 /// This is a destructive action that is only recoverable by re-adding the same rule with the create or update query rule API.
 /// </para>

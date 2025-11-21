@@ -30,8 +30,8 @@ public enum AlibabaCloudTaskType
 	Completion,
 	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
 	Rerank,
-	[System.Runtime.Serialization.EnumMember(Value = "space_embedding")]
-	SpaceEmbedding,
+	[System.Runtime.Serialization.EnumMember(Value = "sparse_embedding")]
+	SparseEmbedding,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
 	TextEmbedding
 }

@@ -30,6 +30,8 @@ public sealed partial class DeleteBehavioralAnalyticsRequestParameters : Elastic
 /// <summary>
 /// <para>
 /// Delete a behavioral analytics collection.
+/// </para>
+/// <para>
 /// The associated data stream is also deleted.
 /// </para>
 /// </summary>
@@ -74,6 +76,8 @@ public sealed partial class DeleteBehavioralAnalyticsRequest : Elastic.Clients.E
 /// <summary>
 /// <para>
 /// Delete a behavioral analytics collection.
+/// </para>
+/// <para>
 /// The associated data stream is also deleted.
 /// </para>
 /// </summary>

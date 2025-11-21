@@ -35,7 +35,9 @@ public sealed partial class CompletionRequestParameters : Elastic.Transport.Requ
 
 /// <summary>
 /// <para>
-/// Perform completion inference on the service
+/// Perform completion inference on the service.
+/// </para>
+/// <para>
 /// Get responses for completion tasks.
 /// This API works only with the completion task type.
 /// </para>
@@ -119,7 +121,9 @@ public sealed partial class CompletionRequest : Elastic.Clients.Elasticsearch.Re
 
 /// <summary>
 /// <para>
-/// Perform completion inference on the service
+/// Perform completion inference on the service.
+/// </para>
+/// <para>
 /// Get responses for completion tasks.
 /// This API works only with the completion task type.
 /// </para>

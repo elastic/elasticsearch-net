@@ -35,7 +35,7 @@ public sealed partial class ChatCompletionUnifiedRequestParameters : Elastic.Tra
 
 /// <summary>
 /// <para>
-/// Perform chat completion inference on the service
+/// Perform chat completion inference on the service.
 /// </para>
 /// <para>
 /// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
@@ -107,7 +107,7 @@ public sealed partial class ChatCompletionUnifiedRequest : Elastic.Clients.Elast
 
 /// <summary>
 /// <para>
-/// Perform chat completion inference on the service
+/// Perform chat completion inference on the service.
 /// </para>
 /// <para>
 /// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.

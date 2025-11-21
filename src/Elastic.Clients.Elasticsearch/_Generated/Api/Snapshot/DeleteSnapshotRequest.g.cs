@@ -52,7 +52,7 @@ public sealed partial class DeleteSnapshotRequestParameters : Elastic.Transport.
 public sealed partial class DeleteSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DeleteSnapshotRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
+	public DeleteSnapshotRequest(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot) : base(r => r.Required("repository", repository).Required("snapshot", snapshot))
 	{
 	}
 #if NET7_0_OR_GREATER
@@ -95,7 +95,7 @@ public sealed partial class DeleteSnapshotRequest : Elastic.Clients.Elasticsearc
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.Name Snapshot { get => P<Elastic.Clients.Elasticsearch.Name>("snapshot"); set => PR("snapshot", value); }
+	Elastic.Clients.Elasticsearch.Names Snapshot { get => P<Elastic.Clients.Elasticsearch.Names>("snapshot"); set => PR("snapshot", value); }
 
 	/// <summary>
 	/// <para>
@@ -130,7 +130,7 @@ public readonly partial struct DeleteSnapshotRequestDescriptor
 		Instance = instance;
 	}
 
-	public DeleteSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
+	public DeleteSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest(repository, snapshot);
 	}
@@ -161,7 +161,7 @@ public readonly partial struct DeleteSnapshotRequestDescriptor
 	/// It also accepts wildcards (<c>*</c>).
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name value)
+	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Snapshot = value;
 		return this;

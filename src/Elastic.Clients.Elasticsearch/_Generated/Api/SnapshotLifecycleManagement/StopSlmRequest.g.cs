@@ -47,6 +47,8 @@ public sealed partial class StopSlmRequestParameters : Elastic.Transport.Request
 /// <summary>
 /// <para>
 /// Stop snapshot lifecycle management.
+/// </para>
+/// <para>
 /// Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
 /// This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
 /// Stopping SLM does not stop any snapshots that are in progress.
@@ -106,6 +108,8 @@ public sealed partial class StopSlmRequest : Elastic.Clients.Elasticsearch.Reque
 /// <summary>
 /// <para>
 /// Stop snapshot lifecycle management.
+/// </para>
+/// <para>
 /// Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
 /// This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
 /// Stopping SLM does not stop any snapshots that are in progress.

@@ -77,6 +77,8 @@ public sealed partial class StopTransformRequestParameters : Elastic.Transport.R
 /// <summary>
 /// <para>
 /// Stop transforms.
+/// </para>
+/// <para>
 /// Stops one or more transforms.
 /// </para>
 /// </summary>
@@ -170,6 +172,8 @@ public sealed partial class StopTransformRequest : Elastic.Clients.Elasticsearch
 /// <summary>
 /// <para>
 /// Stop transforms.
+/// </para>
+/// <para>
 /// Stops one or more transforms.
 /// </para>
 /// </summary>

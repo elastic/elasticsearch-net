@@ -43,6 +43,8 @@ public sealed partial class StopIlmRequestParameters : Elastic.Transport.Request
 /// <summary>
 /// <para>
 /// Stop the ILM plugin.
+/// </para>
+/// <para>
 /// Halt all lifecycle management operations and stop the index lifecycle management plugin.
 /// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
 /// </para>
@@ -96,6 +98,8 @@ public sealed partial class StopIlmRequest : Elastic.Clients.Elasticsearch.Reque
 /// <summary>
 /// <para>
 /// Stop the ILM plugin.
+/// </para>
+/// <para>
 /// Halt all lifecycle management operations and stop the index lifecycle management plugin.
 /// This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
 /// </para>

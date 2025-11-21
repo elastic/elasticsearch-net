@@ -1408,6 +1408,52 @@ public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.N
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestParameters>(request, cancellationToken);
 	}
 
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse PutOpenshiftAi(Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse PutOpenshiftAi(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType taskType, Elastic.Clients.Elasticsearch.Id openshiftaiInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor(taskType, openshiftaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse PutOpenshiftAi(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType taskType, Elastic.Clients.Elasticsearch.Id openshiftaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor(taskType, openshiftaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse> PutOpenshiftAiAsync(Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse> PutOpenshiftAiAsync(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType taskType, Elastic.Clients.Elasticsearch.Id openshiftaiInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor(taskType, openshiftaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse> PutOpenshiftAiAsync(Elastic.Clients.Elasticsearch.Inference.OpenShiftAiTaskType taskType, Elastic.Clients.Elasticsearch.Id openshiftaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestDescriptor(taskType, openshiftaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenshiftAiRequestParameters>(request, cancellationToken);
+	}
+
 	public virtual Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse PutVoyageai(Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequest request)
 	{
 		request.BeforeRequest();

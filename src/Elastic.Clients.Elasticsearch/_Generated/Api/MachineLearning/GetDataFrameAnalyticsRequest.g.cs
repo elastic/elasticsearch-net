@@ -83,6 +83,8 @@ public sealed partial class GetDataFrameAnalyticsRequestParameters : Elastic.Tra
 /// <summary>
 /// <para>
 /// Get data frame analytics job configuration info.
+/// </para>
+/// <para>
 /// You can get information for multiple data frame analytics jobs in a single
 /// API request by using a comma-separated list of data frame analytics jobs or a
 /// wildcard expression.
@@ -185,6 +187,8 @@ public sealed partial class GetDataFrameAnalyticsRequest : Elastic.Clients.Elast
 /// <summary>
 /// <para>
 /// Get data frame analytics job configuration info.
+/// </para>
+/// <para>
 /// You can get information for multiple data frame analytics jobs in a single
 /// API request by using a comma-separated list of data frame analytics jobs or a
 /// wildcard expression.

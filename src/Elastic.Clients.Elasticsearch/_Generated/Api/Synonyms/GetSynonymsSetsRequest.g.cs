@@ -43,6 +43,8 @@ public sealed partial class GetSynonymsSetsRequestParameters : Elastic.Transport
 /// <summary>
 /// <para>
 /// Get all synonym sets.
+/// </para>
+/// <para>
 /// Get a summary of all defined synonym sets.
 /// </para>
 /// </summary>
@@ -91,6 +93,8 @@ public sealed partial class GetSynonymsSetsRequest : Elastic.Clients.Elasticsear
 /// <summary>
 /// <para>
 /// Get all synonym sets.
+/// </para>
+/// <para>
 /// Get a summary of all defined synonym sets.
 /// </para>
 /// </summary>

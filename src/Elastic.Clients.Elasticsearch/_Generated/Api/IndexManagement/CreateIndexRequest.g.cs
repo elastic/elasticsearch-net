@@ -53,6 +53,8 @@ public sealed partial class CreateIndexRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Create an index.
+/// </para>
+/// <para>
 /// You can use the create index API to add a new index to an Elasticsearch cluster.
 /// When creating an index, you can specify the following:
 /// </para>
@@ -231,6 +233,8 @@ public sealed partial class CreateIndexRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Create an index.
+/// </para>
+/// <para>
 /// You can use the create index API to add a new index to an Elasticsearch cluster.
 /// When creating an index, you can specify the following:
 /// </para>
@@ -687,6 +691,8 @@ public readonly partial struct CreateIndexRequestDescriptor
 /// <summary>
 /// <para>
 /// Create an index.
+/// </para>
+/// <para>
 /// You can use the create index API to add a new index to an Elasticsearch cluster.
 /// When creating an index, you can specify the following:
 /// </para>

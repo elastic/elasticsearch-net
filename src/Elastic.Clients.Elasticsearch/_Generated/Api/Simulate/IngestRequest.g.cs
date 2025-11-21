@@ -47,6 +47,8 @@ public sealed partial class IngestRequestParameters : Elastic.Transport.RequestP
 /// <summary>
 /// <para>
 /// Simulate data ingestion.
+/// </para>
+/// <para>
 /// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
 /// </para>
 /// <para>
@@ -180,6 +182,8 @@ public sealed partial class IngestRequest : Elastic.Clients.Elasticsearch.Reques
 /// <summary>
 /// <para>
 /// Simulate data ingestion.
+/// </para>
+/// <para>
 /// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
 /// </para>
 /// <para>
@@ -625,6 +629,8 @@ public readonly partial struct IngestRequestDescriptor
 /// <summary>
 /// <para>
 /// Simulate data ingestion.
+/// </para>
+/// <para>
 /// Run ingest pipelines against a set of provided documents, optionally with substitute pipeline definitions, to simulate ingesting data into an index.
 /// </para>
 /// <para>

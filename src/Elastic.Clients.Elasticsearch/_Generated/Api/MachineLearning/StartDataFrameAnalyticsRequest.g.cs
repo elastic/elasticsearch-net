@@ -37,6 +37,8 @@ public sealed partial class StartDataFrameAnalyticsRequestParameters : Elastic.T
 /// <summary>
 /// <para>
 /// Start a data frame analytics job.
+/// </para>
+/// <para>
 /// A data frame analytics job can be started and stopped multiple times
 /// throughout its lifecycle.
 /// If the destination index does not exist, it is created automatically the
@@ -101,6 +103,8 @@ public sealed partial class StartDataFrameAnalyticsRequest : Elastic.Clients.Ela
 /// <summary>
 /// <para>
 /// Start a data frame analytics job.
+/// </para>
+/// <para>
 /// A data frame analytics job can be started and stopped multiple times
 /// throughout its lifecycle.
 /// If the destination index does not exist, it is created automatically the

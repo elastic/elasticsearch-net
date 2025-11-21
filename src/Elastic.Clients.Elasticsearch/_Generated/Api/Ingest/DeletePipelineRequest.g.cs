@@ -45,6 +45,8 @@ public sealed partial class DeletePipelineRequestParameters : Elastic.Transport.
 /// <summary>
 /// <para>
 /// Delete pipelines.
+/// </para>
+/// <para>
 /// Delete one or more ingest pipelines.
 /// </para>
 /// </summary>
@@ -106,6 +108,8 @@ public sealed partial class DeletePipelineRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Delete pipelines.
+/// </para>
+/// <para>
 /// Delete one or more ingest pipelines.
 /// </para>
 /// </summary>

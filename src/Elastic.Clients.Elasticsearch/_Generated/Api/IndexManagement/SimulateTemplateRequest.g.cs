@@ -57,6 +57,8 @@ public sealed partial class SimulateTemplateRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Simulate an index template.
+/// </para>
+/// <para>
 /// Get the index configuration that would be applied by a particular index template.
 /// </para>
 /// </summary>
@@ -214,6 +216,8 @@ public sealed partial class SimulateTemplateRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Simulate an index template.
+/// </para>
+/// <para>
 /// Get the index configuration that would be applied by a particular index template.
 /// </para>
 /// </summary>
@@ -598,6 +602,8 @@ public readonly partial struct SimulateTemplateRequestDescriptor
 /// <summary>
 /// <para>
 /// Simulate an index template.
+/// </para>
+/// <para>
 /// Get the index configuration that would be applied by a particular index template.
 /// </para>
 /// </summary>

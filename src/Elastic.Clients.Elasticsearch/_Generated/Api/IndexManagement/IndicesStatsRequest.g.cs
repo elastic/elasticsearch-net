@@ -94,6 +94,8 @@ public sealed partial class IndicesStatsRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get index statistics.
+/// </para>
+/// <para>
 /// For data streams, the API retrieves statistics for the stream's backing indices.
 /// </para>
 /// <para>
@@ -112,7 +114,7 @@ public sealed partial class IndicesStatsRequestParameters : Elastic.Transport.Re
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.IndicesStatsRequestConverter))]
 public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestParameters>
 {
-	public IndicesStatsRequest(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
+	public IndicesStatsRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? metric) : base(r => r.Optional("metric", metric))
 	{
 	}
 
@@ -120,7 +122,7 @@ public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.
 	{
 	}
 
-	public IndicesStatsRequest(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("index", indices).Optional("metric", metric))
+	public IndicesStatsRequest(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? metric) : base(r => r.Optional("index", indices).Optional("metric", metric))
 	{
 	}
 #if NET7_0_OR_GREATER
@@ -159,7 +161,7 @@ public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.
 	/// Limit the information returned the specific metrics.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? Metric { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>?>("metric"); set => PO("metric", value); }
 
 	/// <summary>
 	/// <para>
@@ -230,6 +232,8 @@ public sealed partial class IndicesStatsRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get index statistics.
+/// </para>
+/// <para>
 /// For data streams, the API retrieves statistics for the stream's backing indices.
 /// </para>
 /// <para>
@@ -255,7 +259,7 @@ public readonly partial struct IndicesStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
+	public IndicesStatsRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(metric);
 	}
@@ -265,7 +269,7 @@ public readonly partial struct IndicesStatsRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices);
 	}
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric)
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices, metric);
 	}
@@ -294,9 +298,20 @@ public readonly partial struct IndicesStatsRequestDescriptor
 	/// Limit the information returned the specific metrics.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? value)
 	{
 		Instance.Metric = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limit the information returned the specific metrics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor Metric(params Elastic.Clients.Elasticsearch.CommonStatsFlag[] values)
+	{
+		Instance.Metric = [.. values];
 		return this;
 	}
 
@@ -517,6 +532,8 @@ public readonly partial struct IndicesStatsRequestDescriptor
 /// <summary>
 /// <para>
 /// Get index statistics.
+/// </para>
+/// <para>
 /// For data streams, the API retrieves statistics for the stream's backing indices.
 /// </para>
 /// <para>
@@ -542,7 +559,7 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
+	public IndicesStatsRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(metric);
 	}
@@ -552,7 +569,7 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices);
 	}
 
-	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric)
+	public IndicesStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequest(indices, metric);
 	}
@@ -581,9 +598,20 @@ public readonly partial struct IndicesStatsRequestDescriptor<TDocument>
 	/// Limit the information returned the specific metrics.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Metric(Elastic.Clients.Elasticsearch.Metrics? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? value)
 	{
 		Instance.Metric = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limit the information returned the specific metrics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStatsRequestDescriptor<TDocument> Metric(params Elastic.Clients.Elasticsearch.CommonStatsFlag[] values)
+	{
+		Instance.Metric = [.. values];
 		return this;
 	}
 

@@ -30,6 +30,8 @@ public sealed partial class DownsampleRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Downsample an index.
+/// </para>
+/// <para>
 /// Downsamples a time series (TSDS) index and reduces its size by keeping the last value or by pre-aggregating metrics:
 /// </para>
 /// <list type="bullet">
@@ -119,6 +121,8 @@ public sealed partial class DownsampleRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Downsample an index.
+/// </para>
+/// <para>
 /// Downsamples a time series (TSDS) index and reduces its size by keeping the last value or by pre-aggregating metrics:
 /// </para>
 /// <list type="bullet">
@@ -258,6 +262,8 @@ public readonly partial struct DownsampleRequestDescriptor
 /// <summary>
 /// <para>
 /// Downsample an index.
+/// </para>
+/// <para>
 /// Downsamples a time series (TSDS) index and reduces its size by keeping the last value or by pre-aggregating metrics:
 /// </para>
 /// <list type="bullet">

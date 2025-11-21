@@ -44,7 +44,7 @@ public sealed partial class CompletionSuggestOptionConverter<TDocument> : System
 		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propFields = default;
 		LocalJsonValue<string?> propId = default;
 		LocalJsonValue<string?> propIndex = default;
-		LocalJsonValue<string?> propRouting = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propRouting = default;
 		LocalJsonValue<double?> propScore = default;
 		LocalJsonValue<double?> propScore0 = default;
 		LocalJsonValue<TDocument?> propSource = default;
@@ -76,7 +76,7 @@ public sealed partial class CompletionSuggestOptionConverter<TDocument> : System
 				continue;
 			}
 
-			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
 			{
 				continue;
 			}
@@ -134,7 +134,7 @@ public sealed partial class CompletionSuggestOptionConverter<TDocument> : System
 		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, object v) => w.WriteValueEx<object>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<object>))));
 		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteProperty(options, PropIndex, value.Index, null, null);
-		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropScore, value.Score, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropScore0, value.Score0, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, double? v) => w.WriteNullableValue<double>(o, v));
 		writer.WriteProperty(options, PropSource, value.Source, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, TDocument? v) => w.WriteValueEx<TDocument?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SourceMarker<TDocument?>)));

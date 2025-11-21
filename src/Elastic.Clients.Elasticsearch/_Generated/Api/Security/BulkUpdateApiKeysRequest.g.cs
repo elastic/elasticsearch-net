@@ -30,6 +30,8 @@ public sealed partial class BulkUpdateApiKeysRequestParameters : Elastic.Transpo
 /// <summary>
 /// <para>
 /// Bulk update API keys.
+/// </para>
+/// <para>
 /// Update the attributes for multiple API keys.
 /// </para>
 /// <para>
@@ -132,6 +134,8 @@ public sealed partial class BulkUpdateApiKeysRequest : Elastic.Clients.Elasticse
 /// <summary>
 /// <para>
 /// Bulk update API keys.
+/// </para>
+/// <para>
 /// Update the attributes for multiple API keys.
 /// </para>
 /// <para>
@@ -444,6 +448,8 @@ public readonly partial struct BulkUpdateApiKeysRequestDescriptor
 /// <summary>
 /// <para>
 /// Bulk update API keys.
+/// </para>
+/// <para>
 /// Update the attributes for multiple API keys.
 /// </para>
 /// <para>

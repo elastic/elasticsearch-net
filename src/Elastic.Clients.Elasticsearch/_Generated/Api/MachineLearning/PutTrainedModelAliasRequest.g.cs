@@ -38,6 +38,8 @@ public sealed partial class PutTrainedModelAliasRequestParameters : Elastic.Tran
 /// <summary>
 /// <para>
 /// Create or update a trained model alias.
+/// </para>
+/// <para>
 /// A trained model alias is a logical name used to reference a single trained
 /// model.
 /// You can use aliases instead of trained model identifiers to make it easier to
@@ -117,6 +119,8 @@ public sealed partial class PutTrainedModelAliasRequest : Elastic.Clients.Elasti
 /// <summary>
 /// <para>
 /// Create or update a trained model alias.
+/// </para>
+/// <para>
 /// A trained model alias is a logical name used to reference a single trained
 /// model.
 /// You can use aliases instead of trained model identifiers to make it easier to

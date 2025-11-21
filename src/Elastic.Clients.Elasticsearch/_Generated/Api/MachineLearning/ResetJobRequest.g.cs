@@ -46,6 +46,8 @@ public sealed partial class ResetJobRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Reset an anomaly detection job.
+/// </para>
+/// <para>
 /// All model state and results are deleted. The job is ready to start over as if
 /// it had just been created.
 /// It is not currently possible to reset multiple jobs using wildcards or a
@@ -110,6 +112,8 @@ public sealed partial class ResetJobRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Reset an anomaly detection job.
+/// </para>
+/// <para>
 /// All model state and results are deleted. The job is ready to start over as if
 /// it had just been created.
 /// It is not currently possible to reset multiple jobs using wildcards or a

@@ -45,6 +45,8 @@ public sealed partial class DeleteComponentTemplateRequestParameters : Elastic.T
 /// <summary>
 /// <para>
 /// Delete component templates.
+/// </para>
+/// <para>
 /// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 /// </para>
 /// </summary>
@@ -105,6 +107,8 @@ public sealed partial class DeleteComponentTemplateRequest : Elastic.Clients.Ela
 /// <summary>
 /// <para>
 /// Delete component templates.
+/// </para>
+/// <para>
 /// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 /// </para>
 /// </summary>

@@ -30,6 +30,8 @@ public sealed partial class EqlDeleteRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Delete an async EQL search.
+/// </para>
+/// <para>
 /// Delete an async EQL search or a stored synchronous EQL search.
 /// The API also deletes results for the search.
 /// </para>
@@ -77,6 +79,8 @@ public sealed partial class EqlDeleteRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Delete an async EQL search.
+/// </para>
+/// <para>
 /// Delete an async EQL search or a stored synchronous EQL search.
 /// The API also deletes results for the search.
 /// </para>

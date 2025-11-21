@@ -250,7 +250,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.Metrics? metric)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(metric);
 		var request = builder.Instance;
@@ -258,7 +258,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(metric);
 		action.Invoke(builder);
@@ -267,7 +267,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId, metric);
 		var request = builder.Instance;
@@ -275,7 +275,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId, metric);
 		action.Invoke(builder);
@@ -324,7 +324,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(metric);
 		var request = builder.Instance;
@@ -332,7 +332,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(metric);
 		action.Invoke(builder);
@@ -341,7 +341,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId, metric);
 		var request = builder.Instance;
@@ -349,7 +349,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId, metric);
 		action.Invoke(builder);
@@ -478,7 +478,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.Metrics? metric)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric);
 		var request = builder.Instance;
@@ -486,7 +486,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric);
 		action.Invoke(builder);
@@ -495,7 +495,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric);
 		var request = builder.Instance;
@@ -503,7 +503,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric);
 		action.Invoke(builder);
@@ -512,7 +512,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric, indexMetric);
 		var request = builder.Instance;
@@ -520,7 +520,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric, indexMetric);
 		action.Invoke(builder);
@@ -529,7 +529,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
 		var request = builder.Instance;
@@ -537,7 +537,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
 		action.Invoke(builder);
@@ -572,7 +572,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(metric);
 		action.Invoke(builder);
@@ -581,7 +581,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(nodeId, metric);
 		action.Invoke(builder);
@@ -590,7 +590,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(metric, indexMetric);
 		action.Invoke(builder);
@@ -599,7 +599,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
 		action.Invoke(builder);
@@ -648,7 +648,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric);
 		var request = builder.Instance;
@@ -656,7 +656,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric);
 		action.Invoke(builder);
@@ -665,7 +665,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric);
 		var request = builder.Instance;
@@ -673,7 +673,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric);
 		action.Invoke(builder);
@@ -682,7 +682,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric, indexMetric);
 		var request = builder.Instance;
@@ -690,7 +690,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric, indexMetric);
 		action.Invoke(builder);
@@ -699,7 +699,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
 		var request = builder.Instance;
@@ -707,7 +707,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
 		action.Invoke(builder);
@@ -742,7 +742,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(metric);
 		action.Invoke(builder);
@@ -751,7 +751,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(nodeId, metric);
 		action.Invoke(builder);
@@ -760,7 +760,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(metric, indexMetric);
 		action.Invoke(builder);
@@ -769,7 +769,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodeStatsMetric>? metric, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.CommonStatsFlag>? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
 		action.Invoke(builder);
@@ -818,7 +818,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.Metrics? metric)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(metric);
 		var request = builder.Instance;
@@ -826,7 +826,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(metric);
 		action.Invoke(builder);
@@ -835,7 +835,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId, metric);
 		var request = builder.Instance;
@@ -843,7 +843,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId, metric);
 		action.Invoke(builder);
@@ -892,7 +892,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(metric);
 		var request = builder.Instance;
@@ -900,7 +900,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(metric);
 		action.Invoke(builder);
@@ -909,7 +909,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId, metric);
 		var request = builder.Instance;
@@ -917,7 +917,7 @@ public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.Names
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId, metric);
 		action.Invoke(builder);

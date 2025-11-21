@@ -133,6 +133,8 @@ public sealed partial class GoogleVertexAIServiceSettings
 	/// If <c>url</c> is not provided, <c>streaming_url</c> is also used for non-streaming <c>completion</c> requests.
 	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>streaming_url</c> (or <c>url</c>).
 	/// At least one of <c>streaming_url</c> or <c>url</c> must be provided for Google Model Garden endpoint usage.
+	/// Certain providers require separate URLs for streaming and non-streaming operations (e.g., Anthropic, Mistral, AI21). Others support both operation types through a single URL (e.g., Meta, Hugging Face).
+	/// Information on constructing the URL for various providers can be found in the Google Model Garden documentation for the model, or on the endpoint’s <c>Sample request</c> page. The request examples also illustrate the proper formatting for the <c>streaming_url</c>.
 	/// </para>
 	/// </summary>
 	public string? StreamingUrl { get; set; }
@@ -144,6 +146,8 @@ public sealed partial class GoogleVertexAIServiceSettings
 	/// If <c>streaming_url</c> is not provided, <c>url</c> is also used for streaming <c>completion</c> and <c>chat_completion</c>.
 	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>url</c> (or <c>streaming_url</c>).
 	/// At least one of <c>url</c> or <c>streaming_url</c> must be provided for Google Model Garden endpoint usage.
+	/// Certain providers require separate URLs for streaming and non-streaming operations (e.g., Anthropic, Mistral, AI21). Others support both operation types through a single URL (e.g., Meta, Hugging Face).
+	/// Information on constructing the URL for various providers can be found in the Google Model Garden documentation for the model, or on the endpoint’s <c>Sample request</c> page. The request examples also illustrate the proper formatting for the <c>url</c>.
 	/// </para>
 	/// </summary>
 	public string? Url { get; set; }
@@ -301,6 +305,8 @@ public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 	/// If <c>url</c> is not provided, <c>streaming_url</c> is also used for non-streaming <c>completion</c> requests.
 	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>streaming_url</c> (or <c>url</c>).
 	/// At least one of <c>streaming_url</c> or <c>url</c> must be provided for Google Model Garden endpoint usage.
+	/// Certain providers require separate URLs for streaming and non-streaming operations (e.g., Anthropic, Mistral, AI21). Others support both operation types through a single URL (e.g., Meta, Hugging Face).
+	/// Information on constructing the URL for various providers can be found in the Google Model Garden documentation for the model, or on the endpoint’s <c>Sample request</c> page. The request examples also illustrate the proper formatting for the <c>streaming_url</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor StreamingUrl(string? value)
@@ -316,6 +322,8 @@ public readonly partial struct GoogleVertexAiServiceSettingsDescriptor
 	/// If <c>streaming_url</c> is not provided, <c>url</c> is also used for streaming <c>completion</c> and <c>chat_completion</c>.
 	/// If <c>provider</c> is not provided or set to <c>google</c> (Google Vertex AI), do not set <c>url</c> (or <c>streaming_url</c>).
 	/// At least one of <c>url</c> or <c>streaming_url</c> must be provided for Google Model Garden endpoint usage.
+	/// Certain providers require separate URLs for streaming and non-streaming operations (e.g., Anthropic, Mistral, AI21). Others support both operation types through a single URL (e.g., Meta, Hugging Face).
+	/// Information on constructing the URL for various providers can be found in the Google Model Garden documentation for the model, or on the endpoint’s <c>Sample request</c> page. The request examples also illustrate the proper formatting for the <c>url</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.GoogleVertexAiServiceSettingsDescriptor Url(string? value)

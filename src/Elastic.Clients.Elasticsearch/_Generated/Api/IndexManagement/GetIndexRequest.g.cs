@@ -89,6 +89,8 @@ public sealed partial class GetIndexRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Get index information.
+/// </para>
+/// <para>
 /// Get information about one or more indices. For data streams, the API returns information about the
 /// stream’s backing indices.
 /// </para>
@@ -195,6 +197,8 @@ public sealed partial class GetIndexRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Get index information.
+/// </para>
+/// <para>
 /// Get information about one or more indices. For data streams, the API returns information about the
 /// stream’s backing indices.
 /// </para>
@@ -405,6 +409,8 @@ public readonly partial struct GetIndexRequestDescriptor
 /// <summary>
 /// <para>
 /// Get index information.
+/// </para>
+/// <para>
 /// Get information about one or more indices. For data streams, the API returns information about the
 /// stream’s backing indices.
 /// </para>

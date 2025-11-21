@@ -30,6 +30,8 @@ public sealed partial class AnalyzeIndexRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get tokens from text analysis.
+/// </para>
+/// <para>
 /// The analyze API performs analysis on a text string and returns the resulting tokens.
 /// </para>
 /// <para>
@@ -149,6 +151,8 @@ public sealed partial class AnalyzeIndexRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get tokens from text analysis.
+/// </para>
+/// <para>
 /// The analyze API performs analysis on a text string and returns the resulting tokens.
 /// </para>
 /// <para>
@@ -459,6 +463,8 @@ public readonly partial struct AnalyzeIndexRequestDescriptor
 /// <summary>
 /// <para>
 /// Get tokens from text analysis.
+/// </para>
+/// <para>
 /// The analyze API performs analysis on a text string and returns the resulting tokens.
 /// </para>
 /// <para>

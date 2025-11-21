@@ -30,6 +30,8 @@ public sealed partial class RetryRequestParameters : Elastic.Transport.RequestPa
 /// <summary>
 /// <para>
 /// Retry a policy.
+/// </para>
+/// <para>
 /// Retry running the lifecycle policy for an index that is in the ERROR step.
 /// The API sets the policy back to the step where the error occurred and runs the step.
 /// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
@@ -76,6 +78,8 @@ public sealed partial class RetryRequest : Elastic.Clients.Elasticsearch.Request
 /// <summary>
 /// <para>
 /// Retry a policy.
+/// </para>
+/// <para>
 /// Retry running the lifecycle policy for an index that is in the ERROR step.
 /// The API sets the policy back to the step where the error occurred and runs the step.
 /// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
@@ -170,6 +174,8 @@ public readonly partial struct RetryRequestDescriptor
 /// <summary>
 /// <para>
 /// Retry a policy.
+/// </para>
+/// <para>
 /// Retry running the lifecycle policy for an index that is in the ERROR step.
 /// The API sets the policy back to the step where the error occurred and runs the step.
 /// Use the explain lifecycle state API to determine whether an index is in the ERROR step.

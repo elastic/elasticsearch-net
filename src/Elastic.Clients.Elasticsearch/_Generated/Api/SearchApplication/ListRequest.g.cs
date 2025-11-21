@@ -50,6 +50,8 @@ public sealed partial class ListRequestParameters : Elastic.Transport.RequestPar
 /// <summary>
 /// <para>
 /// Get search applications.
+/// </para>
+/// <para>
 /// Get information about search applications.
 /// </para>
 /// </summary>
@@ -105,6 +107,8 @@ public sealed partial class ListRequest : Elastic.Clients.Elasticsearch.Requests
 /// <summary>
 /// <para>
 /// Get search applications.
+/// </para>
+/// <para>
 /// Get information about search applications.
 /// </para>
 /// </summary>

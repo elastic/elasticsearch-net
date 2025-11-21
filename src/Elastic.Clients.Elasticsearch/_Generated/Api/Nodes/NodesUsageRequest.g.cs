@@ -46,11 +46,11 @@ public sealed partial class NodesUsageRequest : Elastic.Clients.Elasticsearch.Re
 	{
 	}
 
-	public NodesUsageRequest(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
+	public NodesUsageRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric) : base(r => r.Optional("metric", metric))
 	{
 	}
 
-	public NodesUsageRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
+	public NodesUsageRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric) : base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
 	{
 	}
 #if NET7_0_OR_GREATER
@@ -80,10 +80,10 @@ public sealed partial class NodesUsageRequest : Elastic.Clients.Elasticsearch.Re
 	/// <summary>
 	/// <para>
 	/// Limits the information returned to the specific metrics.
-	/// A comma-separated list of the following options: <c>_all</c>, <c>rest_actions</c>.
+	/// A comma-separated list of the following options: <c>_all</c>, <c>rest_actions</c>, <c>aggregations</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? Metric { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>?>("metric"); set => PO("metric", value); }
 
 	/// <summary>
 	/// <para>
@@ -121,12 +121,12 @@ public readonly partial struct NodesUsageRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest(nodeId);
 	}
 
-	public NodesUsageRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
+	public NodesUsageRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest(metric);
 	}
 
-	public NodesUsageRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	public NodesUsageRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest(nodeId, metric);
 	}
@@ -142,12 +142,24 @@ public readonly partial struct NodesUsageRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// Limits the information returned to the specific metrics.
-	/// A comma-separated list of the following options: <c>_all</c>, <c>rest_actions</c>.
+	/// A comma-separated list of the following options: <c>_all</c>, <c>rest_actions</c>, <c>aggregations</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? value)
+	public Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric>? value)
 	{
 		Instance.Metric = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limits the information returned to the specific metrics.
+	/// A comma-separated list of the following options: <c>_all</c>, <c>rest_actions</c>, <c>aggregations</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor Metric(params Elastic.Clients.Elasticsearch.Nodes.NodesUsageMetric[] values)
+	{
+		Instance.Metric = [.. values];
 		return this;
 	}
 
