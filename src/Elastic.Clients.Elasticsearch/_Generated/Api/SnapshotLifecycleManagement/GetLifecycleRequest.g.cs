@@ -45,6 +45,8 @@ public sealed partial class GetLifecycleRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get policy information.
+/// </para>
+/// <para>
 /// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 /// </para>
 /// </summary>
@@ -105,6 +107,8 @@ public sealed partial class GetLifecycleRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get policy information.
+/// </para>
+/// <para>
 /// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
 /// </para>
 /// </summary>

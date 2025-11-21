@@ -30,6 +30,8 @@ public sealed partial class PutTrainedModelVocabularyRequestParameters : Elastic
 /// <summary>
 /// <para>
 /// Create a trained model vocabulary.
+/// </para>
+/// <para>
 /// This API is supported only for natural language processing (NLP) models.
 /// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 /// </para>
@@ -107,6 +109,8 @@ public sealed partial class PutTrainedModelVocabularyRequest : Elastic.Clients.E
 /// <summary>
 /// <para>
 /// Create a trained model vocabulary.
+/// </para>
+/// <para>
 /// This API is supported only for natural language processing (NLP) models.
 /// The vocabulary is stored in the index as described in <c>inference_config.*.vocabulary</c> of the trained model definition.
 /// </para>

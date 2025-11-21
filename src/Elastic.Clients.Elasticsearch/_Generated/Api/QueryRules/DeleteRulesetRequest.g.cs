@@ -30,6 +30,8 @@ public sealed partial class DeleteRulesetRequestParameters : Elastic.Transport.R
 /// <summary>
 /// <para>
 /// Delete a query ruleset.
+/// </para>
+/// <para>
 /// Remove a query ruleset and its associated data.
 /// This is a destructive action that is not recoverable.
 /// </para>
@@ -75,6 +77,8 @@ public sealed partial class DeleteRulesetRequest : Elastic.Clients.Elasticsearch
 /// <summary>
 /// <para>
 /// Delete a query ruleset.
+/// </para>
+/// <para>
 /// Remove a query ruleset and its associated data.
 /// This is a destructive action that is not recoverable.
 /// </para>

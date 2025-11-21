@@ -36,6 +36,8 @@ public sealed partial class PutPolicyRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Create an enrich policy.
+/// </para>
+/// <para>
 /// Creates an enrich policy.
 /// </para>
 /// </summary>
@@ -108,6 +110,8 @@ public sealed partial class PutPolicyRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Create an enrich policy.
+/// </para>
+/// <para>
 /// Creates an enrich policy.
 /// </para>
 /// </summary>
@@ -310,6 +314,8 @@ public readonly partial struct PutPolicyRequestDescriptor
 /// <summary>
 /// <para>
 /// Create an enrich policy.
+/// </para>
+/// <para>
 /// Creates an enrich policy.
 /// </para>
 /// </summary>

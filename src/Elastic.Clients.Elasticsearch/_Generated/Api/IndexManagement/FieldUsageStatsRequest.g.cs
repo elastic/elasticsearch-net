@@ -61,6 +61,8 @@ public sealed partial class FieldUsageStatsRequestParameters : Elastic.Transport
 /// <summary>
 /// <para>
 /// Get field usage stats.
+/// </para>
+/// <para>
 /// Get field usage information for each shard and field of an index.
 /// Field usage statistics are automatically captured when queries are running on a cluster.
 /// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
@@ -143,6 +145,8 @@ public sealed partial class FieldUsageStatsRequest : Elastic.Clients.Elasticsear
 /// <summary>
 /// <para>
 /// Get field usage stats.
+/// </para>
+/// <para>
 /// Get field usage information for each shard and field of an index.
 /// Field usage statistics are automatically captured when queries are running on a cluster.
 /// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.
@@ -313,6 +317,8 @@ public readonly partial struct FieldUsageStatsRequestDescriptor
 /// <summary>
 /// <para>
 /// Get field usage stats.
+/// </para>
+/// <para>
 /// Get field usage information for each shard and field of an index.
 /// Field usage statistics are automatically captured when queries are running on a cluster.
 /// A shard-level search request that accesses a given field, even if multiple times during that request, is counted as a single use.

@@ -51,6 +51,8 @@ public sealed partial class PutComponentTemplateRequestParameters : Elastic.Tran
 /// <summary>
 /// <para>
 /// Create or update a component template.
+/// </para>
+/// <para>
 /// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 /// </para>
 /// <para>
@@ -190,6 +192,8 @@ public sealed partial class PutComponentTemplateRequest : Elastic.Clients.Elasti
 /// <summary>
 /// <para>
 /// Create or update a component template.
+/// </para>
+/// <para>
 /// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 /// </para>
 /// <para>
@@ -464,6 +468,8 @@ public readonly partial struct PutComponentTemplateRequestDescriptor
 /// <summary>
 /// <para>
 /// Create or update a component template.
+/// </para>
+/// <para>
 /// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 /// </para>
 /// <para>

@@ -52,6 +52,8 @@ public sealed partial class MountRequestParameters : Elastic.Transport.RequestPa
 /// <summary>
 /// <para>
 /// Mount a snapshot.
+/// </para>
+/// <para>
 /// Mount a snapshot as a searchable snapshot index.
 /// Do not use this API for snapshots managed by index lifecycle management (ILM).
 /// Manually mounting ILM-managed snapshots can interfere with ILM processes.
@@ -172,6 +174,8 @@ public sealed partial class MountRequest : Elastic.Clients.Elasticsearch.Request
 /// <summary>
 /// <para>
 /// Mount a snapshot.
+/// </para>
+/// <para>
 /// Mount a snapshot as a searchable snapshot index.
 /// Do not use this API for snapshots managed by index lifecycle management (ILM).
 /// Manually mounting ILM-managed snapshots can interfere with ILM processes.

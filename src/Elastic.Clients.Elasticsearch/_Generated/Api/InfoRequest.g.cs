@@ -30,6 +30,8 @@ public sealed partial class InfoRequestParameters : Elastic.Transport.RequestPar
 /// <summary>
 /// <para>
 /// Get cluster info.
+/// </para>
+/// <para>
 /// Get basic build, version, and cluster information.
 /// ::: In Serverless, this API is retained for backward compatibility only. Some response fields, such as the version number, should be ignored.
 /// </para>
@@ -65,6 +67,8 @@ public sealed partial class InfoRequest : Elastic.Clients.Elasticsearch.Requests
 /// <summary>
 /// <para>
 /// Get cluster info.
+/// </para>
+/// <para>
 /// Get basic build, version, and cluster information.
 /// ::: In Serverless, this API is retained for backward compatibility only. Some response fields, such as the version number, should be ignored.
 /// </para>

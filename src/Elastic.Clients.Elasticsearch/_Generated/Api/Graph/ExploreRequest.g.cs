@@ -45,6 +45,8 @@ public sealed partial class ExploreRequestParameters : Elastic.Transport.Request
 /// <summary>
 /// <para>
 /// Explore graph analytics.
+/// </para>
+/// <para>
 /// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
 /// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
 /// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
@@ -137,6 +139,8 @@ public sealed partial class ExploreRequest : Elastic.Clients.Elasticsearch.Reque
 /// <summary>
 /// <para>
 /// Explore graph analytics.
+/// </para>
+/// <para>
 /// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
 /// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
 /// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.
@@ -412,6 +416,8 @@ public readonly partial struct ExploreRequestDescriptor
 /// <summary>
 /// <para>
 /// Explore graph analytics.
+/// </para>
+/// <para>
 /// Extract and summarize information about the documents and terms in an Elasticsearch data stream or index.
 /// The easiest way to understand the behavior of this API is to use the Graph UI to explore connections.
 /// An initial request to the <c>_explore</c> API contains a seed query that identifies the documents of interest and specifies the fields that define the vertices and connections you want to include in the graph.

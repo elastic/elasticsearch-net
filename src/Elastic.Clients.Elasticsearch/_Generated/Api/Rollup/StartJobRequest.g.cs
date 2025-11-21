@@ -30,6 +30,8 @@ public sealed partial class StartJobRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Start rollup jobs.
+/// </para>
+/// <para>
 /// If you try to start a job that does not exist, an exception occurs.
 /// If you try to start a job that is already started, nothing happens.
 /// </para>
@@ -75,6 +77,8 @@ public sealed partial class StartJobRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Start rollup jobs.
+/// </para>
+/// <para>
 /// If you try to start a job that does not exist, an exception occurs.
 /// If you try to start a job that is already started, nothing happens.
 /// </para>

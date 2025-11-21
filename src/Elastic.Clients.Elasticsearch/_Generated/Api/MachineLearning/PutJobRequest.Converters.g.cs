@@ -35,7 +35,6 @@ public sealed partial class PutJobRequestConverter : System.Text.Json.Serializat
 	private static readonly System.Text.Json.JsonEncodedText PropDatafeedConfig = System.Text.Json.JsonEncodedText.Encode("datafeed_config");
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
 	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
 	private static readonly System.Text.Json.JsonEncodedText PropModelPlotConfig = System.Text.Json.JsonEncodedText.Encode("model_plot_config");
 	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshotRetentionDays = System.Text.Json.JsonEncodedText.Encode("model_snapshot_retention_days");
 	private static readonly System.Text.Json.JsonEncodedText PropRenormalizationWindowDays = System.Text.Json.JsonEncodedText.Encode("renormalization_window_days");
@@ -55,7 +54,6 @@ public sealed partial class PutJobRequestConverter : System.Text.Json.Serializat
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfig?> propDatafeedConfig = default;
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propGroups = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propJobId = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig?> propModelPlotConfig = default;
 		LocalJsonValue<long?> propModelSnapshotRetentionDays = default;
 		LocalJsonValue<long?> propRenormalizationWindowDays = default;
@@ -113,11 +111,6 @@ public sealed partial class PutJobRequestConverter : System.Text.Json.Serializat
 				continue;
 			}
 
-			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
-			{
-				continue;
-			}
-
 			if (propModelPlotConfig.TryReadProperty(ref reader, options, PropModelPlotConfig, null))
 			{
 				continue;
@@ -165,7 +158,6 @@ public sealed partial class PutJobRequestConverter : System.Text.Json.Serializat
 			DatafeedConfig = propDatafeedConfig.Value,
 			Description = propDescription.Value,
 			Groups = propGroups.Value,
-			JobId = propJobId.Value,
 			ModelPlotConfig = propModelPlotConfig.Value,
 			ModelSnapshotRetentionDays = propModelSnapshotRetentionDays.Value,
 			RenormalizationWindowDays = propRenormalizationWindowDays.Value,
@@ -187,7 +179,6 @@ public sealed partial class PutJobRequestConverter : System.Text.Json.Serializat
 		writer.WriteProperty(options, PropDatafeedConfig, value.DatafeedConfig, null, null);
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
 		writer.WriteProperty(options, PropModelPlotConfig, value.ModelPlotConfig, null, null);
 		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));
 		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, long? v) => w.WriteNullableValue<long>(o, v));

@@ -37,6 +37,8 @@ public sealed partial class PutSynonymRuleRequestParameters : Elastic.Transport.
 /// <summary>
 /// <para>
 /// Create or update a synonym rule.
+/// </para>
+/// <para>
 /// Create or update a synonym rule in a synonym set.
 /// </para>
 /// <para>
@@ -124,6 +126,8 @@ public sealed partial class PutSynonymRuleRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Create or update a synonym rule.
+/// </para>
+/// <para>
 /// Create or update a synonym rule in a synonym set.
 /// </para>
 /// <para>

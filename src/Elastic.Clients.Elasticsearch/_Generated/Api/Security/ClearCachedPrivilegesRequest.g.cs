@@ -40,7 +40,7 @@ public sealed partial class ClearCachedPrivilegesRequestParameters : Elastic.Tra
 public sealed partial class ClearCachedPrivilegesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ClearCachedPrivilegesRequest(Elastic.Clients.Elasticsearch.Name application) : base(r => r.Required("application", application))
+	public ClearCachedPrivilegesRequest(Elastic.Clients.Elasticsearch.Names application) : base(r => r.Required("application", application))
 	{
 	}
 #if NET7_0_OR_GREATER
@@ -73,7 +73,7 @@ public sealed partial class ClearCachedPrivilegesRequest : Elastic.Clients.Elast
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.Name Application { get => P<Elastic.Clients.Elasticsearch.Name>("application"); set => PR("application", value); }
+	Elastic.Clients.Elasticsearch.Names Application { get => P<Elastic.Clients.Elasticsearch.Names>("application"); set => PR("application", value); }
 }
 
 /// <summary>
@@ -95,7 +95,7 @@ public readonly partial struct ClearCachedPrivilegesRequestDescriptor
 		Instance = instance;
 	}
 
-	public ClearCachedPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Name application)
+	public ClearCachedPrivilegesRequestDescriptor(Elastic.Clients.Elasticsearch.Names application)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest(application);
 	}
@@ -116,7 +116,7 @@ public readonly partial struct ClearCachedPrivilegesRequestDescriptor
 	/// It does not support other wildcard patterns.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor Application(Elastic.Clients.Elasticsearch.Name value)
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor Application(Elastic.Clients.Elasticsearch.Names value)
 	{
 		Instance.Application = value;
 		return this;

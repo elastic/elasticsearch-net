@@ -228,7 +228,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse Delete(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot)
+	public virtual Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse Delete(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(repository, snapshot);
 		var request = builder.Instance;
@@ -236,7 +236,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse Delete(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor> action)
+	public virtual Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse Delete(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(repository, snapshot);
 		action.Invoke(builder);
@@ -251,7 +251,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(repository, snapshot);
 		var request = builder.Instance;
@@ -259,7 +259,7 @@ public partial class SnapshotNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequest, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse, Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestParameters>(request, cancellationToken);
 	}
 
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Name snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name repository, Elastic.Clients.Elasticsearch.Names snapshot, System.Action<Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor(repository, snapshot);
 		action.Invoke(builder);

@@ -46,7 +46,7 @@ public sealed partial class FieldCapsRequestParameters : Elastic.Transport.Reque
 	/// A comma-separated list of filters to apply to the response.
 	/// </para>
 	/// </summary>
-	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
+	public System.Collections.Generic.ICollection<string>? Filters { get => Q<System.Collections.Generic.ICollection<string>?>("filters"); set => Q("filters", value); }
 
 	/// <summary>
 	/// <para>
@@ -150,7 +150,7 @@ public sealed partial class FieldCapsRequest : Elastic.Clients.Elasticsearch.Req
 	/// A comma-separated list of filters to apply to the response.
 	/// </para>
 	/// </summary>
-	public string? Filters { get => Q<string?>("filters"); set => Q("filters", value); }
+	public System.Collections.Generic.ICollection<string>? Filters { get => Q<System.Collections.Generic.ICollection<string>?>("filters"); set => Q("filters", value); }
 
 	/// <summary>
 	/// <para>
@@ -297,9 +297,20 @@ public readonly partial struct FieldCapsRequestDescriptor
 	/// A comma-separated list of filters to apply to the response.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Filters(string? value)
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Filters(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Filters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of filters to apply to the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor Filters(params string[] values)
+	{
+		Instance.Filters = [.. values];
 		return this;
 	}
 
@@ -665,9 +676,20 @@ public readonly partial struct FieldCapsRequestDescriptor<TDocument>
 	/// A comma-separated list of filters to apply to the response.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Filters(string? value)
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Filters(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Filters = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of filters to apply to the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.FieldCapsRequestDescriptor<TDocument> Filters(params string[] values)
+	{
+		Instance.Filters = [.. values];
 		return this;
 	}
 

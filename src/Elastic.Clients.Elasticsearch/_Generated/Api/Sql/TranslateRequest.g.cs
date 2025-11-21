@@ -30,6 +30,8 @@ public sealed partial class TranslateRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Translate SQL into Elasticsearch queries.
+/// </para>
+/// <para>
 /// Translate an SQL search into a search API request containing Query DSL.
 /// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 /// </para>
@@ -103,6 +105,8 @@ public sealed partial class TranslateRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Translate SQL into Elasticsearch queries.
+/// </para>
+/// <para>
 /// Translate an SQL search into a search API request containing Query DSL.
 /// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 /// </para>
@@ -245,6 +249,8 @@ public readonly partial struct TranslateRequestDescriptor
 /// <summary>
 /// <para>
 /// Translate SQL into Elasticsearch queries.
+/// </para>
+/// <para>
 /// Translate an SQL search into a search API request containing Query DSL.
 /// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 /// </para>

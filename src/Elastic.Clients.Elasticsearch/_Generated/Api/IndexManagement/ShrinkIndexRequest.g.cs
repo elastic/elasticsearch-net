@@ -53,6 +53,8 @@ public sealed partial class ShrinkIndexRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Shrink an index.
+/// </para>
+/// <para>
 /// Shrink an index into a new index with fewer primary shards.
 /// </para>
 /// <para>
@@ -230,6 +232,8 @@ public sealed partial class ShrinkIndexRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Shrink an index.
+/// </para>
+/// <para>
 /// Shrink an index into a new index with fewer primary shards.
 /// </para>
 /// <para>
@@ -598,6 +602,8 @@ public readonly partial struct ShrinkIndexRequestDescriptor
 /// <summary>
 /// <para>
 /// Shrink an index.
+/// </para>
+/// <para>
 /// Shrink an index into a new index with fewer primary shards.
 /// </para>
 /// <para>

@@ -42,7 +42,10 @@ public sealed partial class DeleteInferenceRequestParameters : Elastic.Transport
 
 /// <summary>
 /// <para>
-/// Delete an inference endpoint
+/// Delete an inference endpoint.
+/// </para>
+/// <para>
+/// This API requires the manage_inference cluster privilege (the built-in <c>inference_admin</c> role grants this privilege).
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.DeleteInferenceRequestConverter))]
@@ -111,7 +114,10 @@ public sealed partial class DeleteInferenceRequest : Elastic.Clients.Elasticsear
 
 /// <summary>
 /// <para>
-/// Delete an inference endpoint
+/// Delete an inference endpoint.
+/// </para>
+/// <para>
+/// This API requires the manage_inference cluster privilege (the built-in <c>inference_admin</c> role grants this privilege).
 /// </para>
 /// </summary>
 public readonly partial struct DeleteInferenceRequestDescriptor

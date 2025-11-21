@@ -38,6 +38,8 @@ public sealed partial class TestGrokPatternRequestParameters : Elastic.Transport
 /// <summary>
 /// <para>
 /// Test a Grok pattern.
+/// </para>
+/// <para>
 /// Test a Grok pattern on one or more lines of text.
 /// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 /// </para>
@@ -111,6 +113,8 @@ public sealed partial class TestGrokPatternRequest : Elastic.Clients.Elasticsear
 /// <summary>
 /// <para>
 /// Test a Grok pattern.
+/// </para>
+/// <para>
 /// Test a Grok pattern on one or more lines of text.
 /// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 /// </para>

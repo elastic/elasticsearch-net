@@ -30,6 +30,8 @@ public sealed partial class GetRepositoriesMeteringInfoRequestParameters : Elast
 /// <summary>
 /// <para>
 /// Get cluster repositories metering.
+/// </para>
+/// <para>
 /// Get repositories metering information for a cluster.
 /// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
 /// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.
@@ -76,6 +78,8 @@ public sealed partial class GetRepositoriesMeteringInfoRequest : Elastic.Clients
 /// <summary>
 /// <para>
 /// Get cluster repositories metering.
+/// </para>
+/// <para>
 /// Get repositories metering information for a cluster.
 /// This API exposes monotonically non-decreasing counters and it is expected that clients would durably store the information needed to compute aggregations over a period of time.
 /// Additionally, the information exposed by this API is volatile, meaning that it will not be present after node restarts.

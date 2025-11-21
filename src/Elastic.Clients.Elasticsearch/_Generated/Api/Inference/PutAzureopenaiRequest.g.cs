@@ -125,6 +125,8 @@ public sealed partial class PutAzureopenaiRequest : Elastic.Clients.Elasticsearc
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> task type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
@@ -245,6 +247,8 @@ public readonly partial struct PutAzureopenaiRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> task type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
@@ -256,6 +260,8 @@ public readonly partial struct PutAzureopenaiRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> task type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor ChunkingSettings()
@@ -267,6 +273,8 @@ public readonly partial struct PutAzureopenaiRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> task type.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)

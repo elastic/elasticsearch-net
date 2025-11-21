@@ -43,6 +43,8 @@ public sealed partial class ListRulesetsRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get all query rulesets.
+/// </para>
+/// <para>
 /// Get summarized information about the query rulesets.
 /// </para>
 /// </summary>
@@ -91,6 +93,8 @@ public sealed partial class ListRulesetsRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get all query rulesets.
+/// </para>
+/// <para>
 /// Get summarized information about the query rulesets.
 /// </para>
 /// </summary>

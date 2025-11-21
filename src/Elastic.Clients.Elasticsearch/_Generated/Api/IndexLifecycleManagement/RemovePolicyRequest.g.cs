@@ -30,6 +30,8 @@ public sealed partial class RemovePolicyRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Remove policies from an index.
+/// </para>
+/// <para>
 /// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 /// It also stops managing the indices.
 /// </para>
@@ -75,6 +77,8 @@ public sealed partial class RemovePolicyRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Remove policies from an index.
+/// </para>
+/// <para>
 /// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 /// It also stops managing the indices.
 /// </para>
@@ -168,6 +172,8 @@ public readonly partial struct RemovePolicyRequestDescriptor
 /// <summary>
 /// <para>
 /// Remove policies from an index.
+/// </para>
+/// <para>
 /// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 /// It also stops managing the indices.
 /// </para>

@@ -26,8 +26,16 @@ namespace Elastic.Clients.Elasticsearch.Inference;
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.GoogleModelGardenProviderConverter))]
 public enum GoogleModelGardenProvider
 {
+	[System.Runtime.Serialization.EnumMember(Value = "ai21")]
+	Ai21,
 	[System.Runtime.Serialization.EnumMember(Value = "anthropic")]
 	Anthropic,
 	[System.Runtime.Serialization.EnumMember(Value = "google")]
-	Google
+	Google,
+	[System.Runtime.Serialization.EnumMember(Value = "hugging_face")]
+	HuggingFace,
+	[System.Runtime.Serialization.EnumMember(Value = "meta")]
+	Meta,
+	[System.Runtime.Serialization.EnumMember(Value = "mistral")]
+	Mistral
 }

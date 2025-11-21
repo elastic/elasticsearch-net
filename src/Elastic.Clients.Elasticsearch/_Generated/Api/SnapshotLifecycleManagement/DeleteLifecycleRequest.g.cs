@@ -45,6 +45,8 @@ public sealed partial class DeleteLifecycleRequestParameters : Elastic.Transport
 /// <summary>
 /// <para>
 /// Delete a policy.
+/// </para>
+/// <para>
 /// Delete a snapshot lifecycle policy definition.
 /// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
 /// </para>
@@ -106,6 +108,8 @@ public sealed partial class DeleteLifecycleRequest : Elastic.Clients.Elasticsear
 /// <summary>
 /// <para>
 /// Delete a policy.
+/// </para>
+/// <para>
 /// Delete a snapshot lifecycle policy definition.
 /// This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
 /// </para>

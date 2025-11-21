@@ -54,6 +54,8 @@ public sealed partial class PutDataStreamOptionsRequestParameters : Elastic.Tran
 /// <summary>
 /// <para>
 /// Update data stream options.
+/// </para>
+/// <para>
 /// Update the data stream options of the specified data streams.
 /// </para>
 /// </summary>
@@ -132,6 +134,8 @@ public sealed partial class PutDataStreamOptionsRequest : Elastic.Clients.Elasti
 /// <summary>
 /// <para>
 /// Update data stream options.
+/// </para>
+/// <para>
 /// Update the data stream options of the specified data streams.
 /// </para>
 /// </summary>

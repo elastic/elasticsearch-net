@@ -32,7 +32,7 @@ public sealed partial class FindFieldStructureRequestParameters : Elastic.Transp
 	/// If the text does not have a header row, columns are named "column1", "column2", "column3", for example.
 	/// </para>
 	/// </summary>
-	public string? ColumnNames { get => Q<string?>("column_names"); set => Q("column_names", value); }
+	public System.Collections.Generic.ICollection<string>? ColumnNames { get => Q<System.Collections.Generic.ICollection<string>?>("column_names"); set => Q("column_names", value); }
 
 	/// <summary>
 	/// <para>
@@ -276,6 +276,8 @@ public sealed partial class FindFieldStructureRequestParameters : Elastic.Transp
 /// <summary>
 /// <para>
 /// Find the structure of a text field.
+/// </para>
+/// <para>
 /// Find the structure of a text field in an Elasticsearch index.
 /// </para>
 /// <para>
@@ -350,7 +352,7 @@ public sealed partial class FindFieldStructureRequest : Elastic.Clients.Elastics
 	/// If the text does not have a header row, columns are named "column1", "column2", "column3", for example.
 	/// </para>
 	/// </summary>
-	public string? ColumnNames { get => Q<string?>("column_names"); set => Q("column_names", value); }
+	public System.Collections.Generic.ICollection<string>? ColumnNames { get => Q<System.Collections.Generic.ICollection<string>?>("column_names"); set => Q("column_names", value); }
 
 	/// <summary>
 	/// <para>
@@ -594,6 +596,8 @@ public sealed partial class FindFieldStructureRequest : Elastic.Clients.Elastics
 /// <summary>
 /// <para>
 /// Find the structure of a text field.
+/// </para>
+/// <para>
 /// Find the structure of a text field in an Elasticsearch index.
 /// </para>
 /// <para>
@@ -659,9 +663,22 @@ public readonly partial struct FindFieldStructureRequestDescriptor
 	/// If the text does not have a header row, columns are named "column1", "column2", "column3", for example.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor ColumnNames(string? value)
+	public Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor ColumnNames(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.ColumnNames = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>format</c> is set to <c>delimited</c>, you can specify the column names in a comma-separated list.
+	/// If this parameter is not specified, the structure finder uses the column names from the header row of the text.
+	/// If the text does not have a header row, columns are named "column1", "column2", "column3", for example.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor ColumnNames(params string[] values)
+	{
+		Instance.ColumnNames = [.. values];
 		return this;
 	}
 
@@ -1048,6 +1065,8 @@ public readonly partial struct FindFieldStructureRequestDescriptor
 /// <summary>
 /// <para>
 /// Find the structure of a text field.
+/// </para>
+/// <para>
 /// Find the structure of a text field in an Elasticsearch index.
 /// </para>
 /// <para>
@@ -1113,9 +1132,22 @@ public readonly partial struct FindFieldStructureRequestDescriptor<TDocument>
 	/// If the text does not have a header row, columns are named "column1", "column2", "column3", for example.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument> ColumnNames(string? value)
+	public Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument> ColumnNames(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.ColumnNames = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>format</c> is set to <c>delimited</c>, you can specify the column names in a comma-separated list.
+	/// If this parameter is not specified, the structure finder uses the column names from the header row of the text.
+	/// If the text does not have a header row, columns are named "column1", "column2", "column3", for example.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument> ColumnNames(params string[] values)
+	{
+		Instance.ColumnNames = [.. values];
 		return this;
 	}
 

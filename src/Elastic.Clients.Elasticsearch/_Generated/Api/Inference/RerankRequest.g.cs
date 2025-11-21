@@ -35,7 +35,7 @@ public sealed partial class RerankRequestParameters : Elastic.Transport.RequestP
 
 /// <summary>
 /// <para>
-/// Perform reranking inference on the service
+/// Perform reranking inference on the service.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.RerankRequestConverter))]
@@ -137,7 +137,7 @@ public sealed partial class RerankRequest : Elastic.Clients.Elasticsearch.Reques
 
 /// <summary>
 /// <para>
-/// Perform reranking inference on the service
+/// Perform reranking inference on the service.
 /// </para>
 /// </summary>
 public readonly partial struct RerankRequestDescriptor

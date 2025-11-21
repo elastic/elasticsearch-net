@@ -43,6 +43,8 @@ public sealed partial class ExecutePolicyRequestParameters : Elastic.Transport.R
 /// <summary>
 /// <para>
 /// Run an enrich policy.
+/// </para>
+/// <para>
 /// Create the enrich index for an existing enrich policy.
 /// </para>
 /// </summary>
@@ -101,6 +103,8 @@ public sealed partial class ExecutePolicyRequest : Elastic.Clients.Elasticsearch
 /// <summary>
 /// <para>
 /// Run an enrich policy.
+/// </para>
+/// <para>
 /// Create the enrich index for an existing enrich policy.
 /// </para>
 /// </summary>

@@ -56,7 +56,7 @@ public sealed partial class GetCategoriesRequestParameters : Elastic.Transport.R
 public sealed partial class GetCategoriesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestParameters>
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public GetCategoriesRequest(Elastic.Clients.Elasticsearch.Id jobId, string? categoryId) : base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
+	public GetCategoriesRequest(Elastic.Clients.Elasticsearch.Id jobId, long? categoryId) : base(r => r.Required("job_id", jobId).Optional("category_id", categoryId))
 	{
 	}
 
@@ -92,7 +92,7 @@ public sealed partial class GetCategoriesRequest : Elastic.Clients.Elasticsearch
 	/// the specified partition.
 	/// </para>
 	/// </summary>
-	public string? CategoryId { get => P<string?>("category_id"); set => PO("category_id", value); }
+	public long? CategoryId { get => P<long?>("category_id"); set => PO("category_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -150,7 +150,7 @@ public readonly partial struct GetCategoriesRequestDescriptor
 		Instance = instance;
 	}
 
-	public GetCategoriesRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, string? categoryId)
+	public GetCategoriesRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, long? categoryId)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequest(jobId, categoryId);
 	}
@@ -178,7 +178,7 @@ public readonly partial struct GetCategoriesRequestDescriptor
 	/// the specified partition.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor CategoryId(string? value)
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetCategoriesRequestDescriptor CategoryId(long? value)
 	{
 		Instance.CategoryId = value;
 		return this;

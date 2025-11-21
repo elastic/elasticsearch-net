@@ -135,6 +135,11 @@ public sealed partial class RateLimitSetting
 	/// </item>
 	/// <item>
 	/// <para>
+	/// <c>openshift_ai</c> service: <c>3000</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>voyageai</c> service: <c>2000</c>
 	/// </para>
 	/// </item>
@@ -256,6 +261,11 @@ public readonly partial struct RateLimitSettingDescriptor
 	/// <item>
 	/// <para>
 	/// <c>openai</c> service and task type <c>completion</c>: <c>500</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>openshift_ai</c> service: <c>3000</c>
 	/// </para>
 	/// </item>
 	/// <item>

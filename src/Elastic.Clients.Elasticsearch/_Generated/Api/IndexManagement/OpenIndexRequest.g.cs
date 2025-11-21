@@ -77,6 +77,8 @@ public sealed partial class OpenIndexRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Open a closed index.
+/// </para>
+/// <para>
 /// For data streams, the API opens any closed backing indices.
 /// </para>
 /// <para>
@@ -200,6 +202,8 @@ public sealed partial class OpenIndexRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Open a closed index.
+/// </para>
+/// <para>
 /// For data streams, the API opens any closed backing indices.
 /// </para>
 /// <para>
@@ -408,6 +412,8 @@ public readonly partial struct OpenIndexRequestDescriptor
 /// <summary>
 /// <para>
 /// Open a closed index.
+/// </para>
+/// <para>
 /// For data streams, the API opens any closed backing indices.
 /// </para>
 /// <para>

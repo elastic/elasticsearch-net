@@ -56,6 +56,8 @@ public sealed partial class CreateRepositoryRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Create or update a snapshot repository.
+/// </para>
+/// <para>
 /// IMPORTANT: If you are migrating searchable snapshots, the repository name must be identical in the source and destination clusters.
 /// To register a snapshot repository, the cluster's global metadata must be writeable.
 /// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.
@@ -145,6 +147,8 @@ public sealed partial class CreateRepositoryRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Create or update a snapshot repository.
+/// </para>
+/// <para>
 /// IMPORTANT: If you are migrating searchable snapshots, the repository name must be identical in the source and destination clusters.
 /// To register a snapshot repository, the cluster's global metadata must be writeable.
 /// Ensure there are no cluster blocks (for example, <c>cluster.blocks.read_only</c> and <c>clsuter.blocks.read_only_allow_delete</c> settings) that prevent write access.

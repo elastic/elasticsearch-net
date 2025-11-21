@@ -51,6 +51,8 @@ public sealed partial class PutTemplateRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Create or update a legacy index template.
+/// </para>
+/// <para>
 /// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 /// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 /// </para>
@@ -192,6 +194,8 @@ public sealed partial class PutTemplateRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Create or update a legacy index template.
+/// </para>
+/// <para>
 /// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 /// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 /// </para>
@@ -584,6 +588,8 @@ public readonly partial struct PutTemplateRequestDescriptor
 /// <summary>
 /// <para>
 /// Create or update a legacy index template.
+/// </para>
+/// <para>
 /// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 /// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 /// </para>

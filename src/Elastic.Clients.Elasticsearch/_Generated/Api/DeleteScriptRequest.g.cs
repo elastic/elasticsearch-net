@@ -47,6 +47,8 @@ public sealed partial class DeleteScriptRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Delete a script or search template.
+/// </para>
+/// <para>
 /// Deletes a stored script or search template.
 /// </para>
 /// </summary>
@@ -109,6 +111,8 @@ public sealed partial class DeleteScriptRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Delete a script or search template.
+/// </para>
+/// <para>
 /// Deletes a stored script or search template.
 /// </para>
 /// </summary>

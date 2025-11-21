@@ -43,6 +43,8 @@ public sealed partial class PutLifecycleRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Create or update a lifecycle policy.
+/// </para>
+/// <para>
 /// If the specified policy exists, it is replaced and the policy version is incremented.
 /// </para>
 /// <para>
@@ -105,6 +107,8 @@ public sealed partial class PutLifecycleRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Create or update a lifecycle policy.
+/// </para>
+/// <para>
 /// If the specified policy exists, it is replaced and the policy version is incremented.
 /// </para>
 /// <para>

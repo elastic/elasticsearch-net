@@ -80,6 +80,8 @@ public sealed partial class GetTransformRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get transforms.
+/// </para>
+/// <para>
 /// Get configuration information for transforms.
 /// </para>
 /// </summary>
@@ -178,6 +180,8 @@ public sealed partial class GetTransformRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get transforms.
+/// </para>
+/// <para>
 /// Get configuration information for transforms.
 /// </para>
 /// </summary>

@@ -55,11 +55,11 @@ public sealed partial class NodesInfoRequest : Elastic.Clients.Elasticsearch.Req
 	{
 	}
 
-	public NodesInfoRequest(Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("metric", metric))
+	public NodesInfoRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric) : base(r => r.Optional("metric", metric))
 	{
 	}
 
-	public NodesInfoRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric) : base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
+	public NodesInfoRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric) : base(r => r.Optional("node_id", nodeId).Optional("metric", metric))
 	{
 	}
 #if NET7_0_OR_GREATER
@@ -91,7 +91,7 @@ public sealed partial class NodesInfoRequest : Elastic.Clients.Elasticsearch.Req
 	/// Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Metrics? Metric { get => P<Elastic.Clients.Elasticsearch.Metrics?>("metric"); set => PO("metric", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? Metric { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>?>("metric"); set => PO("metric", value); }
 
 	/// <summary>
 	/// <para>
@@ -138,12 +138,12 @@ public readonly partial struct NodesInfoRequestDescriptor
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(nodeId);
 	}
 
-	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Metrics? metric)
+	public NodesInfoRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(metric);
 	}
 
-	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	public NodesInfoRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? metric)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest(nodeId, metric);
 	}
@@ -161,9 +161,20 @@ public readonly partial struct NodesInfoRequestDescriptor
 	/// Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor Metric(Elastic.Clients.Elasticsearch.Metrics? value)
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor Metric(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric>? value)
 	{
 		Instance.Metric = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor Metric(params Elastic.Clients.Elasticsearch.Nodes.NodesInfoMetric[] values)
+	{
+		Instance.Metric = [.. values];
 		return this;
 	}
 

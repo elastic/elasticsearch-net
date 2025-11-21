@@ -30,6 +30,8 @@ public sealed partial class MlInfoRequestParameters : Elastic.Transport.RequestP
 /// <summary>
 /// <para>
 /// Get machine learning information.
+/// </para>
+/// <para>
 /// Get defaults and limits used by machine learning.
 /// This endpoint is designed to be used by a user interface that needs to fully
 /// understand machine learning configurations where some options are not
@@ -70,6 +72,8 @@ public sealed partial class MlInfoRequest : Elastic.Clients.Elasticsearch.Reques
 /// <summary>
 /// <para>
 /// Get machine learning information.
+/// </para>
+/// <para>
 /// Get defaults and limits used by machine learning.
 /// This endpoint is designed to be used by a user interface that needs to fully
 /// understand machine learning configurations where some options are not

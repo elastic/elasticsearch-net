@@ -46,6 +46,8 @@ public sealed partial class SnapshotStatusRequestParameters : Elastic.Transport.
 /// <summary>
 /// <para>
 /// Get the snapshot status.
+/// </para>
+/// <para>
 /// Get a detailed description of the current state for each shard participating in the snapshot.
 /// </para>
 /// <para>
@@ -146,6 +148,8 @@ public sealed partial class SnapshotStatusRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Get the snapshot status.
+/// </para>
+/// <para>
 /// Get a detailed description of the current state for each shard participating in the snapshot.
 /// </para>
 /// <para>

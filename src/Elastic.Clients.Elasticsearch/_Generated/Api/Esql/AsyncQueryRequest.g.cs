@@ -70,6 +70,8 @@ public sealed partial class AsyncQueryRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Run an async ES|QL query.
+/// </para>
+/// <para>
 /// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
 /// </para>
 /// <para>
@@ -175,6 +177,16 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
+	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
+	/// object with information about the clusters that participated in the search along with info such as shards
+	/// count.
+	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
+	/// </para>
+	/// </summary>
+	public bool? IncludeExecutionMetadata { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The period for which the query and its results are stored in the cluster.
 	/// The default period is five days.
 	/// When this period expires, the query and its results are deleted, even if the query is still ongoing.
@@ -234,6 +246,8 @@ public sealed partial class AsyncQueryRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Run an async ES|QL query.
+/// </para>
+/// <para>
 /// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
 /// </para>
 /// <para>
@@ -369,6 +383,20 @@ public readonly partial struct AsyncQueryRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor IncludeCcsMetadata(bool? value = true)
 	{
 		Instance.IncludeCcsMetadata = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
+	/// object with information about the clusters that participated in the search along with info such as shards
+	/// count.
+	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor IncludeExecutionMetadata(bool? value = true)
+	{
+		Instance.IncludeExecutionMetadata = value;
 		return this;
 	}
 
@@ -519,6 +547,8 @@ public readonly partial struct AsyncQueryRequestDescriptor
 /// <summary>
 /// <para>
 /// Run an async ES|QL query.
+/// </para>
+/// <para>
 /// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
 /// </para>
 /// <para>
@@ -643,6 +673,20 @@ public readonly partial struct AsyncQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> IncludeCcsMetadata(bool? value = true)
 	{
 		Instance.IncludeCcsMetadata = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
+	/// object with information about the clusters that participated in the search along with info such as shards
+	/// count.
+	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.AsyncQueryRequestDescriptor<TDocument> IncludeExecutionMetadata(bool? value = true)
+	{
+		Instance.IncludeExecutionMetadata = value;
 		return this;
 	}
 

@@ -53,6 +53,8 @@ public sealed partial class SegmentsRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Get index segments.
+/// </para>
+/// <para>
 /// Get low-level information about the Lucene segments in index shards.
 /// For data streams, the API returns information about the stream's backing indices.
 /// </para>
@@ -124,6 +126,8 @@ public sealed partial class SegmentsRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Get index segments.
+/// </para>
+/// <para>
 /// Get low-level information about the Lucene segments in index shards.
 /// For data streams, the API returns information about the stream's backing indices.
 /// </para>
@@ -272,6 +276,8 @@ public readonly partial struct SegmentsRequestDescriptor
 /// <summary>
 /// <para>
 /// Get index segments.
+/// </para>
+/// <para>
 /// Get low-level information about the Lucene segments in index shards.
 /// For data streams, the API returns information about the stream's backing indices.
 /// </para>

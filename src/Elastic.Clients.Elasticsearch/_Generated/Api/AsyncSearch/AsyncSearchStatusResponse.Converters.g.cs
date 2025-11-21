@@ -29,6 +29,7 @@ public sealed partial class AsyncSearchStatusResponseConverter : System.Text.Jso
 	private static readonly System.Text.Json.JsonEncodedText PropCompletionStatus = System.Text.Json.JsonEncodedText.Encode("completion_status");
 	private static readonly System.Text.Json.JsonEncodedText PropCompletionTime = System.Text.Json.JsonEncodedText.Encode("completion_time");
 	private static readonly System.Text.Json.JsonEncodedText PropCompletionTimeInMillis = System.Text.Json.JsonEncodedText.Encode("completion_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
 	private static readonly System.Text.Json.JsonEncodedText PropExpirationTime = System.Text.Json.JsonEncodedText.Encode("expiration_time");
 	private static readonly System.Text.Json.JsonEncodedText PropExpirationTimeInMillis = System.Text.Json.JsonEncodedText.Encode("expiration_time_in_millis");
 	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
@@ -45,6 +46,7 @@ public sealed partial class AsyncSearchStatusResponseConverter : System.Text.Jso
 		LocalJsonValue<int?> propCompletionStatus = default;
 		LocalJsonValue<System.DateTimeOffset?> propCompletionTime = default;
 		LocalJsonValue<System.DateTimeOffset?> propCompletionTimeInMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propError = default;
 		LocalJsonValue<System.DateTimeOffset?> propExpirationTime = default;
 		LocalJsonValue<System.DateTimeOffset> propExpirationTimeInMillis = default;
 		LocalJsonValue<string?> propId = default;
@@ -71,6 +73,11 @@ public sealed partial class AsyncSearchStatusResponseConverter : System.Text.Jso
 			}
 
 			if (propCompletionTimeInMillis.TryReadProperty(ref reader, options, PropCompletionTimeInMillis, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propError.TryReadProperty(ref reader, options, PropError, null))
 			{
 				continue;
 			}
@@ -131,6 +138,7 @@ public sealed partial class AsyncSearchStatusResponseConverter : System.Text.Jso
 			CompletionStatus = propCompletionStatus.Value,
 			CompletionTime = propCompletionTime.Value,
 			CompletionTimeInMillis = propCompletionTimeInMillis.Value,
+			Error = propError.Value,
 			ExpirationTime = propExpirationTime.Value,
 			ExpirationTimeInMillis = propExpirationTimeInMillis.Value,
 			Id = propId.Value,
@@ -149,6 +157,7 @@ public sealed partial class AsyncSearchStatusResponseConverter : System.Text.Jso
 		writer.WriteProperty(options, PropCompletionStatus, value.CompletionStatus, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, int? v) => w.WriteNullableValue<int>(o, v));
 		writer.WriteProperty(options, PropCompletionTime, value.CompletionTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropCompletionTimeInMillis, value.CompletionTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropError, value.Error, null, null);
 		writer.WriteProperty(options, PropExpirationTime, value.ExpirationTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteNullableValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropExpirationTimeInMillis, value.ExpirationTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
 		writer.WriteProperty(options, PropId, value.Id, null, null);

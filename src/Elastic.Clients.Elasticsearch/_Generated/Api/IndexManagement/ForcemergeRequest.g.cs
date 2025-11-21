@@ -78,6 +78,8 @@ public sealed partial class ForcemergeRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Force a merge.
+/// </para>
+/// <para>
 /// Perform the force merge operation on the shards of one or more indices.
 /// For data streams, the API forces a merge on the shards of the stream's backing indices.
 /// </para>
@@ -250,6 +252,8 @@ public sealed partial class ForcemergeRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Force a merge.
+/// </para>
+/// <para>
 /// Perform the force merge operation on the shards of one or more indices.
 /// For data streams, the API forces a merge on the shards of the stream's backing indices.
 /// </para>
@@ -513,6 +517,8 @@ public readonly partial struct ForcemergeRequestDescriptor
 /// <summary>
 /// <para>
 /// Force a merge.
+/// </para>
+/// <para>
 /// Perform the force merge operation on the shards of one or more indices.
 /// For data streams, the API forces a merge on the shards of the stream's backing indices.
 /// </para>

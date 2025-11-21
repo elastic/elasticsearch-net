@@ -138,6 +138,11 @@ public sealed partial class PutInferenceRequestParameters : Elastic.Transport.Re
 /// </item>
 /// <item>
 /// <para>
+/// OpenShift AI (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
 /// VoyageAI (<c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
@@ -325,6 +330,11 @@ public sealed partial class PutInferenceRequest : Elastic.Clients.Elasticsearch.
 /// <item>
 /// <para>
 /// OpenAI (<c>chat_completion</c>, <c>completion</c>, <c>text_embedding</c>)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// OpenShift AI (<c>chat_completion</c>, <c>completion</c>, <c>rerank</c>, <c>text_embedding</c>)
 /// </para>
 /// </item>
 /// <item>

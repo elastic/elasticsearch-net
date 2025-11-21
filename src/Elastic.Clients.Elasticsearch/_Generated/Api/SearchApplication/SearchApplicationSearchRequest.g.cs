@@ -36,6 +36,8 @@ public sealed partial class SearchApplicationSearchRequestParameters : Elastic.T
 /// <summary>
 /// <para>
 /// Run a search application search.
+/// </para>
+/// <para>
 /// Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
 /// Unspecified template parameters are assigned their default values if applicable.
 /// </para>
@@ -95,6 +97,8 @@ public partial class SearchApplicationSearchRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Run a search application search.
+/// </para>
+/// <para>
 /// Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
 /// Unspecified template parameters are assigned their default values if applicable.
 /// </para>

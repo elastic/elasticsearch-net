@@ -47,6 +47,8 @@ public sealed partial class StartSlmRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Start snapshot lifecycle management.
+/// </para>
+/// <para>
 /// Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
 /// Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
 /// </para>
@@ -100,6 +102,8 @@ public sealed partial class StartSlmRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Start snapshot lifecycle management.
+/// </para>
+/// <para>
 /// Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
 /// Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
 /// </para>

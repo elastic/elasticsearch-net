@@ -30,6 +30,8 @@ public sealed partial class RevertModelSnapshotRequestParameters : Elastic.Trans
 /// <summary>
 /// <para>
 /// Revert to a snapshot.
+/// </para>
+/// <para>
 /// The machine learning features react quickly to anomalous input, learning new
 /// behaviors in data. Highly anomalous input increases the variance in the
 /// models whilst the system learns whether this is a new step-change in behavior
@@ -100,6 +102,8 @@ public sealed partial class RevertModelSnapshotRequest : Elastic.Clients.Elastic
 /// <summary>
 /// <para>
 /// Revert to a snapshot.
+/// </para>
+/// <para>
 /// The machine learning features react quickly to anomalous input, learning new
 /// behaviors in data. Highly anomalous input increases the variance in the
 /// models whilst the system learns whether this is a new step-change in behavior

@@ -30,6 +30,8 @@ public sealed partial class GetRulesetRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Get a query ruleset.
+/// </para>
+/// <para>
 /// Get details about a query ruleset.
 /// </para>
 /// </summary>
@@ -74,6 +76,8 @@ public sealed partial class GetRulesetRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Get a query ruleset.
+/// </para>
+/// <para>
 /// Get details about a query ruleset.
 /// </para>
 /// </summary>

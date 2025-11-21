@@ -45,6 +45,8 @@ public sealed partial class ExecuteRetentionRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Run a retention policy.
+/// </para>
+/// <para>
 /// Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
 /// The retention policy is normally applied according to its schedule.
 /// </para>
@@ -96,6 +98,8 @@ public sealed partial class ExecuteRetentionRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Run a retention policy.
+/// </para>
+/// <para>
 /// Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
 /// The retention policy is normally applied according to its schedule.
 /// </para>

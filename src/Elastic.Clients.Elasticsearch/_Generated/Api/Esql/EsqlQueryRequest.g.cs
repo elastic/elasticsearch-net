@@ -65,6 +65,8 @@ public sealed partial class EsqlQueryRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Run an ES|QL query.
+/// </para>
+/// <para>
 /// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>
@@ -159,6 +161,16 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 	/// </para>
 	/// </summary>
 	public bool? IncludeCcsMetadata { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
+	/// object with information about the clusters that participated in the search along with info such as shards
+	/// count.
+	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
+	/// </para>
+	/// </summary>
+	public bool? IncludeExecutionMetadata { get; set; }
 	public string? Locale { get; set; }
 
 	/// <summary>
@@ -193,6 +205,8 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Run an ES|QL query.
+/// </para>
+/// <para>
 /// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>
@@ -323,6 +337,20 @@ public readonly partial struct EsqlQueryRequestDescriptor
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
+	/// object with information about the clusters that participated in the search along with info such as shards
+	/// count.
+	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor IncludeExecutionMetadata(bool? value = true)
+	{
+		Instance.IncludeExecutionMetadata = value;
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor Locale(string? value)
 	{
 		Instance.Locale = value;
@@ -430,6 +458,8 @@ public readonly partial struct EsqlQueryRequestDescriptor
 /// <summary>
 /// <para>
 /// Run an ES|QL query.
+/// </para>
+/// <para>
 /// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>
@@ -546,6 +576,20 @@ public readonly partial struct EsqlQueryRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> IncludeCcsMetadata(bool? value = true)
 	{
 		Instance.IncludeCcsMetadata = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When set to <c>true</c>, the response will include an extra <c>_clusters</c>
+	/// object with information about the clusters that participated in the search along with info such as shards
+	/// count.
+	/// This is similar to <c>include_ccs_metadata</c>, but it also returns metadata when the query is not CCS/CPS
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Esql.EsqlQueryRequestDescriptor<TDocument> IncludeExecutionMetadata(bool? value = true)
+	{
+		Instance.IncludeExecutionMetadata = value;
 		return this;
 	}
 

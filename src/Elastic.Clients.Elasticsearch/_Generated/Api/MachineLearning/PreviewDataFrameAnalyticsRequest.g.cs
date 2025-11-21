@@ -30,6 +30,8 @@ public sealed partial class PreviewDataFrameAnalyticsRequestParameters : Elastic
 /// <summary>
 /// <para>
 /// Preview features used by data frame analytics.
+/// </para>
+/// <para>
 /// Preview the extracted features used by a data frame analytics config.
 /// </para>
 /// </summary>
@@ -83,6 +85,8 @@ public sealed partial class PreviewDataFrameAnalyticsRequest : Elastic.Clients.E
 /// <summary>
 /// <para>
 /// Preview features used by data frame analytics.
+/// </para>
+/// <para>
 /// Preview the extracted features used by a data frame analytics config.
 /// </para>
 /// </summary>
@@ -218,6 +222,8 @@ public readonly partial struct PreviewDataFrameAnalyticsRequestDescriptor
 /// <summary>
 /// <para>
 /// Preview features used by data frame analytics.
+/// </para>
+/// <para>
 /// Preview the extracted features used by a data frame analytics config.
 /// </para>
 /// </summary>

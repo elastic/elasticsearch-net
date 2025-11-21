@@ -47,6 +47,8 @@ public sealed partial class PutScriptRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Create or update a script or search template.
+/// </para>
+/// <para>
 /// Creates or updates a stored script or search template.
 /// </para>
 /// </summary>
@@ -148,6 +150,8 @@ public sealed partial class PutScriptRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Create or update a script or search template.
+/// </para>
+/// <para>
 /// Creates or updates a stored script or search template.
 /// </para>
 /// </summary>

@@ -47,6 +47,8 @@ public sealed partial class CleanupRepositoryRequestParameters : Elastic.Transpo
 /// <summary>
 /// <para>
 /// Clean up the snapshot repository.
+/// </para>
+/// <para>
 /// Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
 /// </para>
 /// </summary>
@@ -109,6 +111,8 @@ public sealed partial class CleanupRepositoryRequest : Elastic.Clients.Elasticse
 /// <summary>
 /// <para>
 /// Clean up the snapshot repository.
+/// </para>
+/// <para>
 /// Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
 /// </para>
 /// </summary>

@@ -45,6 +45,8 @@ public sealed partial class PendingTasksRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get the pending cluster tasks.
+/// </para>
+/// <para>
 /// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
 /// </para>
 /// <para>
@@ -100,6 +102,8 @@ public sealed partial class PendingTasksRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get the pending cluster tasks.
+/// </para>
+/// <para>
 /// Get information about cluster-level changes (such as create index, update mapping, allocate or fail shard) that have not yet taken effect.
 /// </para>
 /// <para>

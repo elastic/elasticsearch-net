@@ -29,7 +29,10 @@ public sealed partial class GetInferenceRequestParameters : Elastic.Transport.Re
 
 /// <summary>
 /// <para>
-/// Get an inference endpoint
+/// Get an inference endpoint.
+/// </para>
+/// <para>
+/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege).
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.GetInferenceRequestConverter))]
@@ -83,7 +86,10 @@ public sealed partial class GetInferenceRequest : Elastic.Clients.Elasticsearch.
 
 /// <summary>
 /// <para>
-/// Get an inference endpoint
+/// Get an inference endpoint.
+/// </para>
+/// <para>
+/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege).
 /// </para>
 /// </summary>
 public readonly partial struct GetInferenceRequestDescriptor

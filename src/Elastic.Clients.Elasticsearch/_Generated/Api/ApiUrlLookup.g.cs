@@ -100,6 +100,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementDeleteDataStream = new ApiUrls(new[] { "_data_stream/{name}" });
 	internal static ApiUrls IndexManagementDeleteDataStreamOptions = new ApiUrls(new[] { "_data_stream/{name}/_options" });
 	internal static ApiUrls IndexManagementDeleteIndexTemplate = new ApiUrls(new[] { "_index_template/{name}" });
+	internal static ApiUrls IndexManagementDeleteSampleConfiguration = new ApiUrls(new[] { "{index}/_sample/config" });
 	internal static ApiUrls IndexManagementDeleteTemplate = new ApiUrls(new[] { "_template/{name}" });
 	internal static ApiUrls IndexManagementDiskUsage = new ApiUrls(new[] { "{index}/_disk_usage" });
 	internal static ApiUrls IndexManagementDownsample = new ApiUrls(new[] { "{index}/_downsample/{target_index}" });
@@ -113,6 +114,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementForcemerge = new ApiUrls(new[] { "_forcemerge", "{index}/_forcemerge" });
 	internal static ApiUrls IndexManagementGet = new ApiUrls(new[] { "{index}" });
 	internal static ApiUrls IndexManagementGetAlias = new ApiUrls(new[] { "_alias", "_alias/{name}", "{index}/_alias/{name}", "{index}/_alias" });
+	internal static ApiUrls IndexManagementGetAllSampleConfiguration = new ApiUrls(new[] { "_sample/config" });
 	internal static ApiUrls IndexManagementGetDataLifecycle = new ApiUrls(new[] { "_data_stream/{name}/_lifecycle" });
 	internal static ApiUrls IndexManagementGetDataLifecycleStats = new ApiUrls(new[] { "_lifecycle/stats" });
 	internal static ApiUrls IndexManagementGetDataStream = new ApiUrls(new[] { "_data_stream", "_data_stream/{name}" });
@@ -124,6 +126,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementGetMapping = new ApiUrls(new[] { "_mapping", "{index}/_mapping" });
 	internal static ApiUrls IndexManagementGetMigrateReindexStatus = new ApiUrls(new[] { "_migration/reindex/{index}/_status" });
 	internal static ApiUrls IndexManagementGetSample = new ApiUrls(new[] { "{index}/_sample" });
+	internal static ApiUrls IndexManagementGetSampleConfiguration = new ApiUrls(new[] { "{index}/_sample/config" });
 	internal static ApiUrls IndexManagementGetSampleStats = new ApiUrls(new[] { "{index}/_sample/stats" });
 	internal static ApiUrls IndexManagementGetSettings = new ApiUrls(new[] { "_settings", "{index}/_settings", "{index}/_settings/{name}", "_settings/{name}" });
 	internal static ApiUrls IndexManagementGetTemplate = new ApiUrls(new[] { "_template", "_template/{name}" });
@@ -139,6 +142,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls IndexManagementPutDataStreamSettings = new ApiUrls(new[] { "_data_stream/{name}/_settings" });
 	internal static ApiUrls IndexManagementPutIndexTemplate = new ApiUrls(new[] { "_index_template/{name}" });
 	internal static ApiUrls IndexManagementPutMapping = new ApiUrls(new[] { "{index}/_mapping" });
+	internal static ApiUrls IndexManagementPutSampleConfiguration = new ApiUrls(new[] { "{index}/_sample/config" });
 	internal static ApiUrls IndexManagementPutSettings = new ApiUrls(new[] { "_settings", "{index}/_settings" });
 	internal static ApiUrls IndexManagementPutTemplate = new ApiUrls(new[] { "_template/{name}" });
 	internal static ApiUrls IndexManagementRecovery = new ApiUrls(new[] { "_recovery", "{index}/_recovery" });
@@ -183,6 +187,7 @@ internal static class ApiUrlLookup
 	internal static ApiUrls InferencePutLlama = new ApiUrls(new[] { "_inference/{task_type}/{llama_inference_id}" });
 	internal static ApiUrls InferencePutMistral = new ApiUrls(new[] { "_inference/{task_type}/{mistral_inference_id}" });
 	internal static ApiUrls InferencePutOpenai = new ApiUrls(new[] { "_inference/{task_type}/{openai_inference_id}" });
+	internal static ApiUrls InferencePutOpenshiftAi = new ApiUrls(new[] { "_inference/{task_type}/{openshiftai_inference_id}" });
 	internal static ApiUrls InferencePutVoyageai = new ApiUrls(new[] { "_inference/{task_type}/{voyageai_inference_id}" });
 	internal static ApiUrls InferencePutWatsonx = new ApiUrls(new[] { "_inference/{task_type}/{watsonx_inference_id}" });
 	internal static ApiUrls InferenceRerank = new ApiUrls(new[] { "_inference/rerank/{inference_id}" });

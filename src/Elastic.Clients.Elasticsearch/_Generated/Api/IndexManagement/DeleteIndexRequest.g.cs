@@ -69,6 +69,8 @@ public sealed partial class DeleteIndexRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Delete indices.
+/// </para>
+/// <para>
 /// Deleting an index deletes its documents, shards, and metadata.
 /// It does not delete related Kibana components, such as data views, visualizations, or dashboards.
 /// </para>
@@ -162,6 +164,8 @@ public sealed partial class DeleteIndexRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Delete indices.
+/// </para>
+/// <para>
 /// Deleting an index deletes its documents, shards, and metadata.
 /// It does not delete related Kibana components, such as data views, visualizations, or dashboards.
 /// </para>
@@ -336,6 +340,8 @@ public readonly partial struct DeleteIndexRequestDescriptor
 /// <summary>
 /// <para>
 /// Delete indices.
+/// </para>
+/// <para>
 /// Deleting an index deletes its documents, shards, and metadata.
 /// It does not delete related Kibana components, such as data views, visualizations, or dashboards.
 /// </para>

@@ -32,7 +32,6 @@ public sealed partial class PutUserRequestConverter : System.Text.Json.Serializa
 	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
 	private static readonly System.Text.Json.JsonEncodedText PropPasswordHash = System.Text.Json.JsonEncodedText.Encode("password_hash");
 	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
 
 	public override Elastic.Clients.Elasticsearch.Security.PutUserRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -44,7 +43,6 @@ public sealed partial class PutUserRequestConverter : System.Text.Json.Serializa
 		LocalJsonValue<string?> propPassword = default;
 		LocalJsonValue<string?> propPasswordHash = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propRoles = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propEmail.TryReadProperty(ref reader, options, PropEmail, null))
@@ -82,11 +80,6 @@ public sealed partial class PutUserRequestConverter : System.Text.Json.Serializa
 				continue;
 			}
 
-			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
-			{
-				continue;
-			}
-
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -105,8 +98,7 @@ public sealed partial class PutUserRequestConverter : System.Text.Json.Serializa
 			Metadata = propMetadata.Value,
 			Password = propPassword.Value,
 			PasswordHash = propPasswordHash.Value,
-			Roles = propRoles.Value,
-			Username = propUsername.Value
+			Roles = propRoles.Value
 		};
 	}
 
@@ -120,7 +112,6 @@ public sealed partial class PutUserRequestConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropPassword, value.Password, null, null);
 		writer.WriteProperty(options, PropPasswordHash, value.PasswordHash, null, null);
 		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
-		writer.WriteProperty(options, PropUsername, value.Username, null, null);
 		writer.WriteEndObject();
 	}
 }

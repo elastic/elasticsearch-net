@@ -30,6 +30,8 @@ public sealed partial class AsyncQueryDeleteRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Delete an async ES|QL query.
+/// </para>
+/// <para>
 /// If the query is still running, it is cancelled.
 /// Otherwise, the stored results are deleted.
 /// </para>
@@ -92,6 +94,8 @@ public sealed partial class AsyncQueryDeleteRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Delete an async ES|QL query.
+/// </para>
+/// <para>
 /// If the query is still running, it is cancelled.
 /// Otherwise, the stored results are deleted.
 /// </para>

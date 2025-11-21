@@ -30,6 +30,8 @@ public sealed partial class ClearRepositoriesMeteringArchiveRequestParameters : 
 /// <summary>
 /// <para>
 /// Clear the archived repositories metering.
+/// </para>
+/// <para>
 /// Clear the archived repositories metering information in the cluster.
 /// </para>
 /// </summary>
@@ -85,6 +87,8 @@ public sealed partial class ClearRepositoriesMeteringArchiveRequest : Elastic.Cl
 /// <summary>
 /// <para>
 /// Clear the archived repositories metering.
+/// </para>
+/// <para>
 /// Clear the archived repositories metering information in the cluster.
 /// </para>
 /// </summary>

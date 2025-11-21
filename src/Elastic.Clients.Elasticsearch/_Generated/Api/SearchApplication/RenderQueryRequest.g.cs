@@ -30,6 +30,8 @@ public sealed partial class RenderQueryRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Render a search application query.
+/// </para>
+/// <para>
 /// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
 /// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
 /// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
@@ -80,6 +82,8 @@ public sealed partial class RenderQueryRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Render a search application query.
+/// </para>
+/// <para>
 /// Generate an Elasticsearch query using the specified query parameters and the search template associated with the search application or a default template if none is specified.
 /// If a parameter used in the search template is not specified in <c>params</c>, the parameter's default value will be used.
 /// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.

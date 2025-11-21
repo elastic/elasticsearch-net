@@ -45,7 +45,7 @@ public sealed partial class DataStreamsStatsRequestParameters : Elastic.Transpor
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.Json.DataStreamsStatsRequestConverter))]
 public sealed partial class DataStreamsStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestParameters>
 {
-	public DataStreamsStatsRequest(Elastic.Clients.Elasticsearch.IndexName? name) : base(r => r.Optional("name", name))
+	public DataStreamsStatsRequest(Elastic.Clients.Elasticsearch.Indices? name) : base(r => r.Optional("name", name))
 	{
 	}
 #if NET7_0_OR_GREATER
@@ -79,7 +79,7 @@ public sealed partial class DataStreamsStatsRequest : Elastic.Clients.Elasticsea
 	/// To target all data streams in a cluster, omit this parameter or use <c>*</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexName? Name { get => P<Elastic.Clients.Elasticsearch.IndexName?>("name"); set => PO("name", value); }
+	public Elastic.Clients.Elasticsearch.Indices? Name { get => P<Elastic.Clients.Elasticsearch.Indices?>("name"); set => PO("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -108,7 +108,7 @@ public readonly partial struct DataStreamsStatsRequestDescriptor
 		Instance = instance;
 	}
 
-	public DataStreamsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? name)
+	public DataStreamsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(name);
 	}
@@ -128,7 +128,7 @@ public readonly partial struct DataStreamsStatsRequestDescriptor
 	/// To target all data streams in a cluster, omit this parameter or use <c>*</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor Name(Elastic.Clients.Elasticsearch.IndexName? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Name = value;
 		return this;
@@ -232,14 +232,14 @@ public readonly partial struct DataStreamsStatsRequestDescriptor<TDocument>
 		Instance = instance;
 	}
 
-	public DataStreamsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName? name)
+	public DataStreamsStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? name)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(name);
 	}
 
 	public DataStreamsStatsRequestDescriptor()
 	{
-		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(typeof(TDocument));
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
 	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument>(instance);
@@ -252,7 +252,7 @@ public readonly partial struct DataStreamsStatsRequestDescriptor<TDocument>
 	/// To target all data streams in a cluster, omit this parameter or use <c>*</c>.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.IndexName? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Indices? value)
 	{
 		Instance.Name = value;
 		return this;

@@ -30,6 +30,8 @@ public sealed partial class GetEqlStatusRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get the async EQL status.
+/// </para>
+/// <para>
 /// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 /// </para>
 /// </summary>
@@ -74,6 +76,8 @@ public sealed partial class GetEqlStatusRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get the async EQL status.
+/// </para>
+/// <para>
 /// Get the current status for an async EQL search or a stored synchronous EQL search without returning results.
 /// </para>
 /// </summary>

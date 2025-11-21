@@ -30,6 +30,8 @@ public sealed partial class GetEsqlQueryRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get a specific running ES|QL query information.
+/// </para>
+/// <para>
 /// Returns an object extended information about a running ES|QL query.
 /// </para>
 /// </summary>
@@ -74,6 +76,8 @@ public sealed partial class GetEsqlQueryRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get a specific running ES|QL query information.
+/// </para>
+/// <para>
 /// Returns an object extended information about a running ES|QL query.
 /// </para>
 /// </summary>

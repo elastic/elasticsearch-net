@@ -30,6 +30,8 @@ public sealed partial class GetJobsRequestParameters : Elastic.Transport.Request
 /// <summary>
 /// <para>
 /// Get rollup job information.
+/// </para>
+/// <para>
 /// Get the configuration, stats, and status of rollup jobs.
 /// </para>
 /// <para>
@@ -80,6 +82,8 @@ public sealed partial class GetJobsRequest : Elastic.Clients.Elasticsearch.Reque
 /// <summary>
 /// <para>
 /// Get rollup job information.
+/// </para>
+/// <para>
 /// Get the configuration, stats, and status of rollup jobs.
 /// </para>
 /// <para>

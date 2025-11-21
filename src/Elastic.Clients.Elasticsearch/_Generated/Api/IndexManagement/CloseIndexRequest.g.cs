@@ -77,6 +77,8 @@ public sealed partial class CloseIndexRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Close an index.
+/// </para>
+/// <para>
 /// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
 /// It is not possible to index documents or to search for documents in a closed index.
 /// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.
@@ -189,6 +191,8 @@ public sealed partial class CloseIndexRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Close an index.
+/// </para>
+/// <para>
 /// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
 /// It is not possible to index documents or to search for documents in a closed index.
 /// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.
@@ -386,6 +390,8 @@ public readonly partial struct CloseIndexRequestDescriptor
 /// <summary>
 /// <para>
 /// Close an index.
+/// </para>
+/// <para>
 /// A closed index is blocked for read or write operations and does not allow all operations that opened indices allow.
 /// It is not possible to index documents or to search for documents in a closed index.
 /// Closed indices do not have to maintain internal data structures for indexing or searching documents, which results in a smaller overhead on the cluster.

@@ -28,7 +28,7 @@ public sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seriali
 	private static readonly System.Text.Json.JsonEncodedText PropColumnar = System.Text.Json.JsonEncodedText.Encode("columnar");
 	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
 	private static readonly System.Text.Json.JsonEncodedText PropIncludeCcsMetadata = System.Text.Json.JsonEncodedText.Encode("include_ccs_metadata");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludeCcsMetadata1 = System.Text.Json.JsonEncodedText.Encode("include_execution_metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeExecutionMetadata = System.Text.Json.JsonEncodedText.Encode("include_execution_metadata");
 	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale");
 	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
 	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
@@ -40,6 +40,7 @@ public sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seriali
 		LocalJsonValue<bool?> propColumnar = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
 		LocalJsonValue<bool?> propIncludeCcsMetadata = default;
+		LocalJsonValue<bool?> propIncludeExecutionMetadata = default;
 		LocalJsonValue<string?> propLocale = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>?> propParams = default;
 		LocalJsonValue<bool?> propProfile = default;
@@ -56,7 +57,12 @@ public sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seriali
 				continue;
 			}
 
-			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)) || propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata1, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			if (propIncludeCcsMetadata.TryReadProperty(ref reader, options, PropIncludeCcsMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propIncludeExecutionMetadata.TryReadProperty(ref reader, options, PropIncludeExecutionMetadata, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
 			{
 				continue;
 			}
@@ -96,6 +102,7 @@ public sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seriali
 			Columnar = propColumnar.Value,
 			Filter = propFilter.Value,
 			IncludeCcsMetadata = propIncludeCcsMetadata.Value,
+			IncludeExecutionMetadata = propIncludeExecutionMetadata.Value,
 			Locale = propLocale.Value,
 			Params = propParams.Value,
 			Profile = propProfile.Value,
@@ -109,6 +116,7 @@ public sealed partial class EsqlQueryRequestConverter : System.Text.Json.Seriali
 		writer.WriteProperty(options, PropColumnar, value.Columnar, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
 		writer.WriteProperty(options, PropIncludeCcsMetadata, value.IncludeCcsMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropIncludeExecutionMetadata, value.IncludeExecutionMetadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
 		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
 		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? v) => w.WriteCollectionValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, v, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null)));
 		writer.WriteProperty(options, PropProfile, value.Profile, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));

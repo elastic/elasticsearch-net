@@ -47,6 +47,8 @@ public sealed partial class StopJobRequestParameters : Elastic.Transport.Request
 /// <summary>
 /// <para>
 /// Stop rollup jobs.
+/// </para>
+/// <para>
 /// If you try to stop a job that does not exist, an exception occurs.
 /// If you try to stop a job that is already stopped, nothing happens.
 /// </para>
@@ -121,6 +123,8 @@ public sealed partial class StopJobRequest : Elastic.Clients.Elasticsearch.Reque
 /// <summary>
 /// <para>
 /// Stop rollup jobs.
+/// </para>
+/// <para>
 /// If you try to stop a job that does not exist, an exception occurs.
 /// If you try to stop a job that is already stopped, nothing happens.
 /// </para>

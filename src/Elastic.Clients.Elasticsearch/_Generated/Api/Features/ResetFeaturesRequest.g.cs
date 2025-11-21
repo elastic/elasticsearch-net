@@ -36,6 +36,8 @@ public sealed partial class ResetFeaturesRequestParameters : Elastic.Transport.R
 /// <summary>
 /// <para>
 /// Reset the features.
+/// </para>
+/// <para>
 /// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
 /// </para>
 /// <para>
@@ -98,6 +100,8 @@ public sealed partial class ResetFeaturesRequest : Elastic.Clients.Elasticsearch
 /// <summary>
 /// <para>
 /// Reset the features.
+/// </para>
+/// <para>
 /// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
 /// </para>
 /// <para>

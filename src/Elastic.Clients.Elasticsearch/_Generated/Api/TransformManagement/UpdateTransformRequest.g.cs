@@ -46,6 +46,8 @@ public sealed partial class UpdateTransformRequestParameters : Elastic.Transport
 /// <summary>
 /// <para>
 /// Update a transform.
+/// </para>
+/// <para>
 /// Updates certain properties of a transform.
 /// </para>
 /// <para>
@@ -174,6 +176,8 @@ public sealed partial class UpdateTransformRequest : Elastic.Clients.Elasticsear
 /// <summary>
 /// <para>
 /// Update a transform.
+/// </para>
+/// <para>
 /// Updates certain properties of a transform.
 /// </para>
 /// <para>
@@ -543,6 +547,8 @@ public readonly partial struct UpdateTransformRequestDescriptor
 /// <summary>
 /// <para>
 /// Update a transform.
+/// </para>
+/// <para>
 /// Updates certain properties of a transform.
 /// </para>
 /// <para>

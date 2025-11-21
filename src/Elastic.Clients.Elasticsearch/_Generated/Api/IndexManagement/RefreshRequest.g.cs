@@ -53,6 +53,8 @@ public sealed partial class RefreshRequestParameters : Elastic.Transport.Request
 /// <summary>
 /// <para>
 /// Refresh an index.
+/// </para>
+/// <para>
 /// A refresh makes recent operations performed on one or more indices available for search.
 /// For data streams, the API runs the refresh operation on the stream’s backing indices.
 /// </para>
@@ -142,6 +144,8 @@ public sealed partial class RefreshRequest : Elastic.Clients.Elasticsearch.Reque
 /// <summary>
 /// <para>
 /// Refresh an index.
+/// </para>
+/// <para>
 /// A refresh makes recent operations performed on one or more indices available for search.
 /// For data streams, the API runs the refresh operation on the stream’s backing indices.
 /// </para>
@@ -308,6 +312,8 @@ public readonly partial struct RefreshRequestDescriptor
 /// <summary>
 /// <para>
 /// Refresh an index.
+/// </para>
+/// <para>
 /// A refresh makes recent operations performed on one or more indices available for search.
 /// For data streams, the API runs the refresh operation on the stream’s backing indices.
 /// </para>

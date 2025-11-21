@@ -30,6 +30,8 @@ public sealed partial class ClearScrollRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Clear a scrolling search.
+/// </para>
+/// <para>
 /// Clear the search context and results for a scrolling search.
 /// </para>
 /// </summary>
@@ -72,6 +74,8 @@ public sealed partial class ClearScrollRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Clear a scrolling search.
+/// </para>
+/// <para>
 /// Clear the search context and results for a scrolling search.
 /// </para>
 /// </summary>

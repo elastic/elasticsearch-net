@@ -60,6 +60,8 @@ public sealed partial class UpdateDatafeedRequestParameters : Elastic.Transport.
 /// <summary>
 /// <para>
 /// Update a datafeed.
+/// </para>
+/// <para>
 /// You must stop and start the datafeed for the changes to be applied.
 /// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 /// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -251,6 +253,8 @@ public sealed partial class UpdateDatafeedRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Update a datafeed.
+/// </para>
+/// <para>
 /// You must stop and start the datafeed for the changes to be applied.
 /// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 /// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,
@@ -837,6 +841,8 @@ public readonly partial struct UpdateDatafeedRequestDescriptor
 /// <summary>
 /// <para>
 /// Update a datafeed.
+/// </para>
+/// <para>
 /// You must stop and start the datafeed for the changes to be applied.
 /// When Elasticsearch security features are enabled, your datafeed remembers which roles the user who updated it had at
 /// the time of the update and runs the query using those same roles. If you provide secondary authorization headers,

@@ -25,11 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class GoogleModelGardenProviderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberAi21 = System.Text.Json.JsonEncodedText.Encode("ai21");
 	private static readonly System.Text.Json.JsonEncodedText MemberAnthropic = System.Text.Json.JsonEncodedText.Encode("anthropic");
 	private static readonly System.Text.Json.JsonEncodedText MemberGoogle = System.Text.Json.JsonEncodedText.Encode("google");
+	private static readonly System.Text.Json.JsonEncodedText MemberHuggingFace = System.Text.Json.JsonEncodedText.Encode("hugging_face");
+	private static readonly System.Text.Json.JsonEncodedText MemberMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText MemberMistral = System.Text.Json.JsonEncodedText.Encode("mistral");
 
 	public override Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberAi21))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Ai21;
+		}
+
 		if (reader.ValueTextEquals(MemberAnthropic))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Anthropic;
@@ -40,7 +49,27 @@ public sealed partial class GoogleModelGardenProviderConverter : System.Text.Jso
 			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Google;
 		}
 
+		if (reader.ValueTextEquals(MemberHuggingFace))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.HuggingFace;
+		}
+
+		if (reader.ValueTextEquals(MemberMeta))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Meta;
+		}
+
+		if (reader.ValueTextEquals(MemberMistral))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Mistral;
+		}
+
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAi21.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Ai21;
+		}
+
 		if (string.Equals(value, MemberAnthropic.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Anthropic;
@@ -51,6 +80,21 @@ public sealed partial class GoogleModelGardenProviderConverter : System.Text.Jso
 			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Google;
 		}
 
+		if (string.Equals(value, MemberHuggingFace.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.HuggingFace;
+		}
+
+		if (string.Equals(value, MemberMeta.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Meta;
+		}
+
+		if (string.Equals(value, MemberMistral.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Mistral;
+		}
+
 		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider)}'.");
 	}
 
@@ -58,11 +102,23 @@ public sealed partial class GoogleModelGardenProviderConverter : System.Text.Jso
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Ai21:
+				writer.WriteStringValue(MemberAi21);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Anthropic:
 				writer.WriteStringValue(MemberAnthropic);
 				break;
 			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Google:
 				writer.WriteStringValue(MemberGoogle);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.HuggingFace:
+				writer.WriteStringValue(MemberHuggingFace);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Meta:
+				writer.WriteStringValue(MemberMeta);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider.Mistral:
+				writer.WriteStringValue(MemberMistral);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.GoogleModelGardenProvider)}'.");

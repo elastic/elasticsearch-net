@@ -37,6 +37,8 @@ public sealed partial class PreviewTransformRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Preview a transform.
+/// </para>
+/// <para>
 /// Generates a preview of the results that you will get when you create a transform with the same configuration.
 /// </para>
 /// <para>
@@ -165,6 +167,8 @@ public sealed partial class PreviewTransformRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Preview a transform.
+/// </para>
+/// <para>
 /// Generates a preview of the results that you will get when you create a transform with the same configuration.
 /// </para>
 /// <para>
@@ -560,6 +564,8 @@ public readonly partial struct PreviewTransformRequestDescriptor
 /// <summary>
 /// <para>
 /// Preview a transform.
+/// </para>
+/// <para>
 /// Generates a preview of the results that you will get when you create a transform with the same configuration.
 /// </para>
 /// <para>

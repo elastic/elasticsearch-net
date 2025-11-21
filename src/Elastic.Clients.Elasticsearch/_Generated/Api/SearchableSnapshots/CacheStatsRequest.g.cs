@@ -31,6 +31,8 @@ public sealed partial class CacheStatsRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Get cache statistics.
+/// </para>
+/// <para>
 /// Get statistics about the shared cache for partially mounted indices.
 /// </para>
 /// </summary>
@@ -76,6 +78,8 @@ public sealed partial class CacheStatsRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Get cache statistics.
+/// </para>
+/// <para>
 /// Get statistics about the shared cache for partially mounted indices.
 /// </para>
 /// </summary>

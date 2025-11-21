@@ -30,6 +30,8 @@ public sealed partial class MoveToStepRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Move to a lifecycle step.
+/// </para>
+/// <para>
 /// Manually move an index into a specific step in the lifecycle policy and run that step.
 /// </para>
 /// <para>
@@ -119,6 +121,8 @@ public sealed partial class MoveToStepRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Move to a lifecycle step.
+/// </para>
+/// <para>
 /// Manually move an index into a specific step in the lifecycle policy and run that step.
 /// </para>
 /// <para>
@@ -272,6 +276,8 @@ public readonly partial struct MoveToStepRequestDescriptor
 /// <summary>
 /// <para>
 /// Move to a lifecycle step.
+/// </para>
+/// <para>
 /// Manually move an index into a specific step in the lifecycle policy and run that step.
 /// </para>
 /// <para>

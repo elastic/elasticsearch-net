@@ -36,6 +36,8 @@ public sealed partial class GetPolicyRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Get an enrich policy.
+/// </para>
+/// <para>
 /// Returns information about an enrich policy.
 /// </para>
 /// </summary>
@@ -88,6 +90,8 @@ public sealed partial class GetPolicyRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Get an enrich policy.
+/// </para>
+/// <para>
 /// Returns information about an enrich policy.
 /// </para>
 /// </summary>

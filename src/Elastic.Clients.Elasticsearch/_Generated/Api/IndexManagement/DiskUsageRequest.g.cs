@@ -70,6 +70,8 @@ public sealed partial class DiskUsageRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Analyze the index disk usage.
+/// </para>
+/// <para>
 /// Analyze the disk usage of each field of an index or data stream.
 /// This API might not support indices created in previous Elasticsearch versions.
 /// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.
@@ -166,6 +168,8 @@ public sealed partial class DiskUsageRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Analyze the index disk usage.
+/// </para>
+/// <para>
 /// Analyze the disk usage of each field of an index or data stream.
 /// This API might not support indices created in previous Elasticsearch versions.
 /// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.
@@ -343,6 +347,8 @@ public readonly partial struct DiskUsageRequestDescriptor
 /// <summary>
 /// <para>
 /// Analyze the index disk usage.
+/// </para>
+/// <para>
 /// Analyze the disk usage of each field of an index or data stream.
 /// This API might not support indices created in previous Elasticsearch versions.
 /// The result of a small index can be inaccurate as some parts of an index might not be analyzed by the API.

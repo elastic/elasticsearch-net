@@ -30,6 +30,8 @@ public sealed partial class UpdateFilterRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Update a filter.
+/// </para>
+/// <para>
 /// Updates the description of a filter, adds items, or removes items from the list.
 /// </para>
 /// </summary>
@@ -95,6 +97,8 @@ public sealed partial class UpdateFilterRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Update a filter.
+/// </para>
+/// <para>
 /// Updates the description of a filter, adds items, or removes items from the list.
 /// </para>
 /// </summary>
