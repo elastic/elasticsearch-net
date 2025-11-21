@@ -50,6 +50,8 @@ public sealed partial class HealthReportRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get the cluster health.
+/// </para>
+/// <para>
 /// Get a report with the health status of an Elasticsearch cluster.
 /// The report contains a list of indicators that compose Elasticsearch functionality.
 /// </para>
@@ -136,6 +138,8 @@ public sealed partial class HealthReportRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get the cluster health.
+/// </para>
+/// <para>
 /// Get a report with the health status of an Elasticsearch cluster.
 /// The report contains a list of indicators that compose Elasticsearch functionality.
 /// </para>

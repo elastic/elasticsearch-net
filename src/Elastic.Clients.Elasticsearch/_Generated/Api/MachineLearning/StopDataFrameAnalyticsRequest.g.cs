@@ -75,6 +75,8 @@ public sealed partial class StopDataFrameAnalyticsRequestParameters : Elastic.Tr
 /// <summary>
 /// <para>
 /// Stop data frame analytics jobs.
+/// </para>
+/// <para>
 /// A data frame analytics job can be started and stopped multiple times
 /// throughout its lifecycle.
 /// </para>
@@ -168,6 +170,8 @@ public sealed partial class StopDataFrameAnalyticsRequest : Elastic.Clients.Elas
 /// <summary>
 /// <para>
 /// Stop data frame analytics jobs.
+/// </para>
+/// <para>
 /// A data frame analytics job can be started and stopped multiple times
 /// throughout its lifecycle.
 /// </para>

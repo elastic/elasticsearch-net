@@ -36,6 +36,8 @@ public sealed partial class StreamCompletionRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Perform streaming inference.
+/// </para>
+/// <para>
 /// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
 /// This API works only with the completion task type.
 /// </para>
@@ -114,7 +116,7 @@ public sealed partial class StreamCompletionRequest : Elastic.Clients.Elasticsea
 
 	/// <summary>
 	/// <para>
-	/// Optional task settings
+	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
 	/// </para>
 	/// </summary>
 	public object? TaskSettings { get; set; }
@@ -123,6 +125,8 @@ public sealed partial class StreamCompletionRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Perform streaming inference.
+/// </para>
+/// <para>
 /// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
 /// This API works only with the completion task type.
 /// </para>
@@ -213,7 +217,7 @@ public readonly partial struct StreamCompletionRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Optional task settings
+	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor TaskSettings(object? value)

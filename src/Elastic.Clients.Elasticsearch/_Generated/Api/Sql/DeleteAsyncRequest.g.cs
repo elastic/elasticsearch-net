@@ -30,6 +30,8 @@ public sealed partial class DeleteAsyncRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Delete an async SQL search.
+/// </para>
+/// <para>
 /// Delete an async SQL search or a stored synchronous SQL search.
 /// If the search is still running, the API cancels it.
 /// </para>
@@ -90,6 +92,8 @@ public sealed partial class DeleteAsyncRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Delete an async SQL search.
+/// </para>
+/// <para>
 /// Delete an async SQL search or a stored synchronous SQL search.
 /// If the search is still running, the API cancels it.
 /// </para>

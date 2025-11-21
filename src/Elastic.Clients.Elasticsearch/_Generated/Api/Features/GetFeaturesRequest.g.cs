@@ -36,6 +36,8 @@ public sealed partial class GetFeaturesRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Get the features.
+/// </para>
+/// <para>
 /// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
 /// You can use this API to determine which feature states to include when taking a snapshot.
 /// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
@@ -87,6 +89,8 @@ public sealed partial class GetFeaturesRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Get the features.
+/// </para>
+/// <para>
 /// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
 /// You can use this API to determine which feature states to include when taking a snapshot.
 /// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.

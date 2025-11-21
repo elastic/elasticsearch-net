@@ -92,6 +92,8 @@ public sealed partial class NodesStatsRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Get node statistics.
+/// </para>
+/// <para>
 /// Get statistics for nodes in a cluster.
 /// By default, all stats are returned. You can limit the returned information by using metrics.
 /// </para>
@@ -230,6 +232,8 @@ public sealed partial class NodesStatsRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Get node statistics.
+/// </para>
+/// <para>
 /// Get statistics for nodes in a cluster.
 /// By default, all stats are returned. You can limit the returned information by using metrics.
 /// </para>
@@ -512,6 +516,8 @@ public readonly partial struct NodesStatsRequestDescriptor
 /// <summary>
 /// <para>
 /// Get node statistics.
+/// </para>
+/// <para>
 /// Get statistics for nodes in a cluster.
 /// By default, all stats are returned. You can limit the returned information by using metrics.
 /// </para>

@@ -43,6 +43,8 @@ public sealed partial class DeleteDataStreamRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Delete data streams.
+/// </para>
+/// <para>
 /// Deletes one or more data streams and their backing indices.
 /// </para>
 /// </summary>
@@ -101,6 +103,8 @@ public sealed partial class DeleteDataStreamRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Delete data streams.
+/// </para>
+/// <para>
 /// Deletes one or more data streams and their backing indices.
 /// </para>
 /// </summary>

@@ -43,6 +43,8 @@ public sealed partial class RollupSearchRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Search rolled-up data.
+/// </para>
+/// <para>
 /// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
 /// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 /// </para>
@@ -157,6 +159,8 @@ public partial class RollupSearchRequest : Elastic.Clients.Elasticsearch.Request
 /// <summary>
 /// <para>
 /// Search rolled-up data.
+/// </para>
+/// <para>
 /// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
 /// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 /// </para>
@@ -415,6 +419,8 @@ public readonly partial struct RollupSearchRequestDescriptor
 /// <summary>
 /// <para>
 /// Search rolled-up data.
+/// </para>
+/// <para>
 /// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
 /// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
 /// </para>

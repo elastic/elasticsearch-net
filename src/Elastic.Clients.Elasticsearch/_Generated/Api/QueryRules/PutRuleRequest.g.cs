@@ -30,6 +30,8 @@ public sealed partial class PutRuleRequestParameters : Elastic.Transport.Request
 /// <summary>
 /// <para>
 /// Create or update a query rule.
+/// </para>
+/// <para>
 /// Create or update a query rule within a query ruleset.
 /// </para>
 /// <para>
@@ -136,6 +138,8 @@ public sealed partial class PutRuleRequest : Elastic.Clients.Elasticsearch.Reque
 /// <summary>
 /// <para>
 /// Create or update a query rule.
+/// </para>
+/// <para>
 /// Create or update a query rule within a query ruleset.
 /// </para>
 /// <para>

@@ -61,6 +61,8 @@ public sealed partial class GetAliasRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Get aliases.
+/// </para>
+/// <para>
 /// Retrieves information for one or more data stream or index aliases.
 /// </para>
 /// </summary>
@@ -156,6 +158,8 @@ public sealed partial class GetAliasRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Get aliases.
+/// </para>
+/// <para>
 /// Retrieves information for one or more data stream or index aliases.
 /// </para>
 /// </summary>
@@ -338,6 +342,8 @@ public readonly partial struct GetAliasRequestDescriptor
 /// <summary>
 /// <para>
 /// Get aliases.
+/// </para>
+/// <para>
 /// Retrieves information for one or more data stream or index aliases.
 /// </para>
 /// </summary>

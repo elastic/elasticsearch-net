@@ -30,6 +30,8 @@ public sealed partial class ClusterInfoRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Get cluster info.
+/// </para>
+/// <para>
 /// Returns basic information about the cluster.
 /// </para>
 /// </summary>
@@ -74,6 +76,8 @@ public sealed partial class ClusterInfoRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Get cluster info.
+/// </para>
+/// <para>
 /// Returns basic information about the cluster.
 /// </para>
 /// </summary>

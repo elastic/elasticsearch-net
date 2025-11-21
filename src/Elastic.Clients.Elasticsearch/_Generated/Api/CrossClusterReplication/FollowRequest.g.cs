@@ -46,6 +46,8 @@ public sealed partial class FollowRequestParameters : Elastic.Transport.RequestP
 /// <summary>
 /// <para>
 /// Create a follower.
+/// </para>
+/// <para>
 /// Create a cross-cluster replication follower index that follows a specific leader index.
 /// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 /// </para>
@@ -227,6 +229,8 @@ public sealed partial class FollowRequest : Elastic.Clients.Elasticsearch.Reques
 /// <summary>
 /// <para>
 /// Create a follower.
+/// </para>
+/// <para>
 /// Create a cross-cluster replication follower index that follows a specific leader index.
 /// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 /// </para>
@@ -573,6 +577,8 @@ public readonly partial struct FollowRequestDescriptor
 /// <summary>
 /// <para>
 /// Create a follower.
+/// </para>
+/// <para>
 /// Create a cross-cluster replication follower index that follows a specific leader index.
 /// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
 /// </para>

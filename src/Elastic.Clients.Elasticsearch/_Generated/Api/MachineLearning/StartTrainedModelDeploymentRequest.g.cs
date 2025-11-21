@@ -98,6 +98,8 @@ public sealed partial class StartTrainedModelDeploymentRequestParameters : Elast
 /// <summary>
 /// <para>
 /// Start a trained model deployment.
+/// </para>
+/// <para>
 /// It allocates the model to every machine learning node.
 /// </para>
 /// </summary>
@@ -220,6 +222,8 @@ public sealed partial class StartTrainedModelDeploymentRequest : Elastic.Clients
 /// <summary>
 /// <para>
 /// Start a trained model deployment.
+/// </para>
+/// <para>
 /// It allocates the model to every machine learning node.
 /// </para>
 /// </summary>

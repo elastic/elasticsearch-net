@@ -72,6 +72,7 @@ public sealed partial class GetIndicesSettingsRequestParameters : Elastic.Transp
 	/// <c>false</c>, information is retrieved from the master node.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '9.1.0'. This parameter is a no-op and settings are always retrieved locally.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -87,6 +88,8 @@ public sealed partial class GetIndicesSettingsRequestParameters : Elastic.Transp
 /// <summary>
 /// <para>
 /// Get index settings.
+/// </para>
+/// <para>
 /// Get setting information for one or more indices.
 /// For data streams, it returns setting information for the stream's backing indices.
 /// </para>
@@ -192,6 +195,7 @@ public sealed partial class GetIndicesSettingsRequest : Elastic.Clients.Elastics
 	/// <c>false</c>, information is retrieved from the master node.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '9.1.0'. This parameter is a no-op and settings are always retrieved locally.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -207,6 +211,8 @@ public sealed partial class GetIndicesSettingsRequest : Elastic.Clients.Elastics
 /// <summary>
 /// <para>
 /// Get index settings.
+/// </para>
+/// <para>
 /// Get setting information for one or more indices.
 /// For data streams, it returns setting information for the stream's backing indices.
 /// </para>
@@ -342,6 +348,7 @@ public readonly partial struct GetIndicesSettingsRequestDescriptor
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '9.1.0'. This parameter is a no-op and settings are always retrieved locally.")]
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the request retrieves information from the local node only. If
@@ -426,6 +433,8 @@ public readonly partial struct GetIndicesSettingsRequestDescriptor
 /// <summary>
 /// <para>
 /// Get index settings.
+/// </para>
+/// <para>
 /// Get setting information for one or more indices.
 /// For data streams, it returns setting information for the stream's backing indices.
 /// </para>
@@ -561,6 +570,7 @@ public readonly partial struct GetIndicesSettingsRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '9.1.0'. This parameter is a no-op and settings are always retrieved locally.")]
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the request retrieves information from the local node only. If

@@ -43,6 +43,8 @@ public sealed partial class StartIlmRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Start the ILM plugin.
+/// </para>
+/// <para>
 /// Start the index lifecycle management plugin if it is currently stopped.
 /// ILM is started automatically when the cluster is formed.
 /// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
@@ -93,6 +95,8 @@ public sealed partial class StartIlmRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Start the ILM plugin.
+/// </para>
+/// <para>
 /// Start the index lifecycle management plugin if it is currently stopped.
 /// ILM is started automatically when the cluster is formed.
 /// Restarting ILM is necessary only when it has been stopped using the stop ILM API.

@@ -263,6 +263,8 @@ public sealed partial class UpdateByQueryRequestParameters : Elastic.Transport.R
 /// <summary>
 /// <para>
 /// Update documents.
+/// </para>
+/// <para>
 /// Updates documents that match the specified query.
 /// If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
 /// </para>
@@ -740,6 +742,8 @@ public sealed partial class UpdateByQueryRequest : Elastic.Clients.Elasticsearch
 /// <summary>
 /// <para>
 /// Update documents.
+/// </para>
+/// <para>
 /// Updates documents that match the specified query.
 /// If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
 /// </para>
@@ -1513,6 +1517,8 @@ public readonly partial struct UpdateByQueryRequestDescriptor
 /// <summary>
 /// <para>
 /// Update documents.
+/// </para>
+/// <para>
 /// Updates documents that match the specified query.
 /// If no query is specified, performs an update on every document in the data stream or index without modifying the source, which is useful for picking up mapping changes.
 /// </para>

@@ -50,6 +50,8 @@ public sealed partial class DeleteDataLifecycleRequestParameters : Elastic.Trans
 /// <summary>
 /// <para>
 /// Delete data stream lifecycles.
+/// </para>
+/// <para>
 /// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
 /// </para>
 /// </summary>
@@ -115,6 +117,8 @@ public sealed partial class DeleteDataLifecycleRequest : Elastic.Clients.Elastic
 /// <summary>
 /// <para>
 /// Delete data stream lifecycles.
+/// </para>
+/// <para>
 /// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
 /// </para>
 /// </summary>

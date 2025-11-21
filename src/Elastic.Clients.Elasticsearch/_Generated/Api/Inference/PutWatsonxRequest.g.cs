@@ -107,6 +107,15 @@ public sealed partial class PutWatsonxRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
+	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The type of service supported for the specified task type. In this case, <c>watsonxai</c>.
 	/// </para>
 	/// </summary>
@@ -190,6 +199,45 @@ public readonly partial struct PutWatsonxRequestDescriptor
 	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
+	{
+		Instance.ChunkingSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor ChunkingSettings()
+	{
+		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The chunking configuration object.
+	/// Applies only to the <c>text_embedding</c> task type.
+	/// Not applicable to the <c>completion</c> or <c>chat_completion</c> task types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
+	{
+		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
 		return this;
 	}
 

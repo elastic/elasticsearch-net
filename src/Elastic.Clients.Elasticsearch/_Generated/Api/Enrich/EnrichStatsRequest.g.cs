@@ -36,6 +36,8 @@ public sealed partial class EnrichStatsRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Get enrich stats.
+/// </para>
+/// <para>
 /// Returns enrich coordinator statistics and information about enrich policies that are currently executing.
 /// </para>
 /// </summary>
@@ -77,6 +79,8 @@ public sealed partial class EnrichStatsRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Get enrich stats.
+/// </para>
+/// <para>
 /// Returns enrich coordinator statistics and information about enrich policies that are currently executing.
 /// </para>
 /// </summary>

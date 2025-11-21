@@ -35,7 +35,7 @@ public sealed partial class SparseEmbeddingRequestParameters : Elastic.Transport
 
 /// <summary>
 /// <para>
-/// Perform sparse embedding inference on the service
+/// Perform sparse embedding inference on the service.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.SparseEmbeddingRequestConverter))]
@@ -103,7 +103,7 @@ public sealed partial class SparseEmbeddingRequest : Elastic.Clients.Elasticsear
 
 	/// <summary>
 	/// <para>
-	/// Optional task settings
+	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
 	/// </para>
 	/// </summary>
 	public object? TaskSettings { get; set; }
@@ -111,7 +111,7 @@ public sealed partial class SparseEmbeddingRequest : Elastic.Clients.Elasticsear
 
 /// <summary>
 /// <para>
-/// Perform sparse embedding inference on the service
+/// Perform sparse embedding inference on the service.
 /// </para>
 /// </summary>
 public readonly partial struct SparseEmbeddingRequestDescriptor
@@ -188,7 +188,7 @@ public readonly partial struct SparseEmbeddingRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Optional task settings
+	/// Task settings for the individual inference request. These settings are specific to the &lt;task_type> you specified and override the task settings specified when initializing the service.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor TaskSettings(object? value)

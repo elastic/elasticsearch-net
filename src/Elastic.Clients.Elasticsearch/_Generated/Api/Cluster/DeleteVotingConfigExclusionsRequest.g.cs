@@ -48,6 +48,8 @@ public sealed partial class DeleteVotingConfigExclusionsRequestParameters : Elas
 /// <summary>
 /// <para>
 /// Clear cluster voting config exclusions.
+/// </para>
+/// <para>
 /// Remove master-eligible nodes from the voting configuration exclusion list.
 /// </para>
 /// </summary>
@@ -101,6 +103,8 @@ public sealed partial class DeleteVotingConfigExclusionsRequest : Elastic.Client
 /// <summary>
 /// <para>
 /// Clear cluster voting config exclusions.
+/// </para>
+/// <para>
 /// Remove master-eligible nodes from the voting configuration exclusion list.
 /// </para>
 /// </summary>

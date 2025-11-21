@@ -65,6 +65,8 @@ public sealed partial class EsqlQueryRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Run an ES|QL query.
+/// </para>
+/// <para>
 /// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>
@@ -193,6 +195,8 @@ public sealed partial class EsqlQueryRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Run an ES|QL query.
+/// </para>
+/// <para>
 /// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>
@@ -430,6 +434,8 @@ public readonly partial struct EsqlQueryRequestDescriptor
 /// <summary>
 /// <para>
 /// Run an ES|QL query.
+/// </para>
+/// <para>
 /// Get search results for an ES|QL (Elasticsearch query language) query.
 /// </para>
 /// </summary>

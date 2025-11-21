@@ -30,6 +30,8 @@ public sealed partial class GetSynonymRuleRequestParameters : Elastic.Transport.
 /// <summary>
 /// <para>
 /// Get a synonym rule.
+/// </para>
+/// <para>
 /// Get a synonym rule from a synonym set.
 /// </para>
 /// </summary>
@@ -85,6 +87,8 @@ public sealed partial class GetSynonymRuleRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Get a synonym rule.
+/// </para>
+/// <para>
 /// Get a synonym rule from a synonym set.
 /// </para>
 /// </summary>

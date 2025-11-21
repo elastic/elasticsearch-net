@@ -91,6 +91,8 @@ public sealed partial class GetInfluencersRequestParameters : Elastic.Transport.
 /// <summary>
 /// <para>
 /// Get anomaly detection job results for influencers.
+/// </para>
+/// <para>
 /// Influencers are the entities that have contributed to, or are to blame for,
 /// the anomalies. Influencer results are available only if an
 /// <c>influencer_field_name</c> is specified in the job configuration.
@@ -207,6 +209,8 @@ public sealed partial class GetInfluencersRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Get anomaly detection job results for influencers.
+/// </para>
+/// <para>
 /// Influencers are the entities that have contributed to, or are to blame for,
 /// the anomalies. Influencer results are available only if an
 /// <c>influencer_field_name</c> is specified in the job configuration.
@@ -443,6 +447,8 @@ public readonly partial struct GetInfluencersRequestDescriptor
 /// <summary>
 /// <para>
 /// Get anomaly detection job results for influencers.
+/// </para>
+/// <para>
 /// Influencers are the entities that have contributed to, or are to blame for,
 /// the anomalies. Influencer results are available only if an
 /// <c>influencer_field_name</c> is specified in the job configuration.

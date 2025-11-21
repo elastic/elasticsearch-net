@@ -30,6 +30,8 @@ public sealed partial class TestRequestParameters : Elastic.Transport.RequestPar
 /// <summary>
 /// <para>
 /// Test a query ruleset.
+/// </para>
+/// <para>
 /// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 /// </para>
 /// </summary>
@@ -93,6 +95,8 @@ public sealed partial class TestRequest : Elastic.Clients.Elasticsearch.Requests
 /// <summary>
 /// <para>
 /// Test a query ruleset.
+/// </para>
+/// <para>
 /// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
 /// </para>
 /// </summary>

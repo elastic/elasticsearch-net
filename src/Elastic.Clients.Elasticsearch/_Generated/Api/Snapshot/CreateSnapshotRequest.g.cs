@@ -45,6 +45,8 @@ public sealed partial class CreateSnapshotRequestParameters : Elastic.Transport.
 /// <summary>
 /// <para>
 /// Create a snapshot.
+/// </para>
+/// <para>
 /// Take a snapshot of a cluster or of data streams and indices.
 /// </para>
 /// </summary>
@@ -195,6 +197,8 @@ public sealed partial class CreateSnapshotRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Create a snapshot.
+/// </para>
+/// <para>
 /// Take a snapshot of a cluster or of data streams and indices.
 /// </para>
 /// </summary>

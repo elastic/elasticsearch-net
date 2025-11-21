@@ -69,6 +69,8 @@ public sealed partial class GetMappingRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Get mapping definitions.
+/// </para>
+/// <para>
 /// For data streams, the API retrieves mappings for the stream’s backing indices.
 /// </para>
 /// </summary>
@@ -155,6 +157,8 @@ public sealed partial class GetMappingRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Get mapping definitions.
+/// </para>
+/// <para>
 /// For data streams, the API retrieves mappings for the stream’s backing indices.
 /// </para>
 /// </summary>
@@ -326,6 +330,8 @@ public readonly partial struct GetMappingRequestDescriptor
 /// <summary>
 /// <para>
 /// Get mapping definitions.
+/// </para>
+/// <para>
 /// For data streams, the API retrieves mappings for the stream’s backing indices.
 /// </para>
 /// </summary>

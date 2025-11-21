@@ -36,6 +36,8 @@ public sealed partial class DeletePolicyRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Delete an enrich policy.
+/// </para>
+/// <para>
 /// Deletes an existing enrich policy and its enrich index.
 /// </para>
 /// </summary>
@@ -87,6 +89,8 @@ public sealed partial class DeletePolicyRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Delete an enrich policy.
+/// </para>
+/// <para>
 /// Deletes an existing enrich policy and its enrich index.
 /// </para>
 /// </summary>

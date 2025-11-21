@@ -60,6 +60,8 @@ public sealed partial class GetFieldMappingRequestParameters : Elastic.Transport
 /// <summary>
 /// <para>
 /// Get mapping definitions.
+/// </para>
+/// <para>
 /// Retrieves mapping definitions for one or more fields.
 /// For data streams, the API retrieves field mappings for the stream’s backing indices.
 /// </para>
@@ -154,6 +156,8 @@ public sealed partial class GetFieldMappingRequest : Elastic.Clients.Elasticsear
 /// <summary>
 /// <para>
 /// Get mapping definitions.
+/// </para>
+/// <para>
 /// Retrieves mapping definitions for one or more fields.
 /// For data streams, the API retrieves field mappings for the stream’s backing indices.
 /// </para>
@@ -341,6 +345,8 @@ public readonly partial struct GetFieldMappingRequestDescriptor
 /// <summary>
 /// <para>
 /// Get mapping definitions.
+/// </para>
+/// <para>
 /// Retrieves mapping definitions for one or more fields.
 /// For data streams, the API retrieves field mappings for the stream’s backing indices.
 /// </para>

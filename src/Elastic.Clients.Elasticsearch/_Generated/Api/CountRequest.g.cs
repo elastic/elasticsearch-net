@@ -146,6 +146,8 @@ public sealed partial class CountRequestParameters : Elastic.Transport.RequestPa
 /// <summary>
 /// <para>
 /// Count search results.
+/// </para>
+/// <para>
 /// Get the number of documents matching a query.
 /// </para>
 /// <para>
@@ -329,6 +331,8 @@ public partial class CountRequest : Elastic.Clients.Elasticsearch.Requests.Plain
 /// <summary>
 /// <para>
 /// Count search results.
+/// </para>
+/// <para>
 /// Get the number of documents matching a query.
 /// </para>
 /// <para>
@@ -661,6 +665,8 @@ public readonly partial struct CountRequestDescriptor
 /// <summary>
 /// <para>
 /// Count search results.
+/// </para>
+/// <para>
 /// Get the number of documents matching a query.
 /// </para>
 /// <para>

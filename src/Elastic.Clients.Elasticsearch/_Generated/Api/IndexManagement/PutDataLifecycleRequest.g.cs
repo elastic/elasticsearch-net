@@ -54,6 +54,8 @@ public sealed partial class PutDataLifecycleRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Update data stream lifecycles.
+/// </para>
+/// <para>
 /// Update the data stream lifecycle of the specified data streams.
 /// </para>
 /// </summary>
@@ -149,6 +151,8 @@ public sealed partial class PutDataLifecycleRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Update data stream lifecycles.
+/// </para>
+/// <para>
 /// Update the data stream lifecycle of the specified data streams.
 /// </para>
 /// </summary>

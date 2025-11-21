@@ -37,6 +37,8 @@ public sealed partial class DeleteSynonymRuleRequestParameters : Elastic.Transpo
 /// <summary>
 /// <para>
 /// Delete a synonym rule.
+/// </para>
+/// <para>
 /// Delete a synonym rule from a synonym set.
 /// </para>
 /// </summary>
@@ -100,6 +102,8 @@ public sealed partial class DeleteSynonymRuleRequest : Elastic.Clients.Elasticse
 /// <summary>
 /// <para>
 /// Delete a synonym rule.
+/// </para>
+/// <para>
 /// Delete a synonym rule from a synonym set.
 /// </para>
 /// </summary>

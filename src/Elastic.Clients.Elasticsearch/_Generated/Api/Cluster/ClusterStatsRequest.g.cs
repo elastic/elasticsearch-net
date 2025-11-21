@@ -45,6 +45,8 @@ public sealed partial class ClusterStatsRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Get cluster statistics.
+/// </para>
+/// <para>
 /// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 /// </para>
 /// </summary>
@@ -105,6 +107,8 @@ public sealed partial class ClusterStatsRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Get cluster statistics.
+/// </para>
+/// <para>
 /// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 /// </para>
 /// </summary>

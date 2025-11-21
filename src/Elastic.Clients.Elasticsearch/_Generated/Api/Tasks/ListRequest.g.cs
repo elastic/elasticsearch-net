@@ -85,6 +85,8 @@ public sealed partial class ListRequestParameters : Elastic.Transport.RequestPar
 /// <summary>
 /// <para>
 /// Get all tasks.
+/// </para>
+/// <para>
 /// Get information about the tasks currently running on one or more nodes in the cluster.
 /// </para>
 /// <para>
@@ -236,6 +238,8 @@ public sealed partial class ListRequest : Elastic.Clients.Elasticsearch.Requests
 /// <summary>
 /// <para>
 /// Get all tasks.
+/// </para>
+/// <para>
 /// Get information about the tasks currently running on one or more nodes in the cluster.
 /// </para>
 /// <para>

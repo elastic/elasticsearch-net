@@ -44,6 +44,8 @@ public sealed partial class GetTasksRequestParameters : Elastic.Transport.Reques
 /// <summary>
 /// <para>
 /// Get task information.
+/// </para>
+/// <para>
 /// Get information about a task currently running in the cluster.
 /// </para>
 /// <para>
@@ -110,6 +112,8 @@ public sealed partial class GetTasksRequest : Elastic.Clients.Elasticsearch.Requ
 /// <summary>
 /// <para>
 /// Get task information.
+/// </para>
+/// <para>
 /// Get information about a task currently running in the cluster.
 /// </para>
 /// <para>

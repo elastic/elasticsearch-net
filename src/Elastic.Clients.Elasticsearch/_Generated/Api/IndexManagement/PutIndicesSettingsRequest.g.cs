@@ -97,6 +97,8 @@ public sealed partial class PutIndicesSettingsRequestParameters : Elastic.Transp
 /// <summary>
 /// <para>
 /// Update index settings.
+/// </para>
+/// <para>
 /// Changes dynamic index settings in real time.
 /// For data streams, index setting changes are applied to all backing indices by default.
 /// </para>
@@ -288,6 +290,8 @@ public sealed partial class PutIndicesSettingsRequest : Elastic.Clients.Elastics
 /// <summary>
 /// <para>
 /// Update index settings.
+/// </para>
+/// <para>
 /// Changes dynamic index settings in real time.
 /// For data streams, index setting changes are applied to all backing indices by default.
 /// </para>
@@ -578,6 +582,8 @@ public readonly partial struct PutIndicesSettingsRequestDescriptor
 /// <summary>
 /// <para>
 /// Update index settings.
+/// </para>
+/// <para>
 /// Changes dynamic index settings in real time.
 /// For data streams, index setting changes are applied to all backing indices by default.
 /// </para>

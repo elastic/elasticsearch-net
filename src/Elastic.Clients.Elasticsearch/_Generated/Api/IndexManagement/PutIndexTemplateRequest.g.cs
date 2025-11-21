@@ -51,6 +51,8 @@ public sealed partial class PutIndexTemplateRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Create or update an index template.
+/// </para>
+/// <para>
 /// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 /// </para>
 /// <para>
@@ -238,6 +240,8 @@ public sealed partial class PutIndexTemplateRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Create or update an index template.
+/// </para>
+/// <para>
 /// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 /// </para>
 /// <para>
@@ -648,6 +652,8 @@ public readonly partial struct PutIndexTemplateRequestDescriptor
 /// <summary>
 /// <para>
 /// Create or update an index template.
+/// </para>
+/// <para>
 /// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 /// </para>
 /// <para>

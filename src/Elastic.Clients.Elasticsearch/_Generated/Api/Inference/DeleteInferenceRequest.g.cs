@@ -27,7 +27,7 @@ public sealed partial class DeleteInferenceRequestParameters : Elastic.Transport
 {
 	/// <summary>
 	/// <para>
-	/// When true, the endpoint is not deleted and a list of ingest processors which reference this endpoint is returned.
+	/// When true, checks the semantic_text fields and inference processors that reference the endpoint and returns them in a list, but does not delete the endpoint.
 	/// </para>
 	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
@@ -42,7 +42,10 @@ public sealed partial class DeleteInferenceRequestParameters : Elastic.Transport
 
 /// <summary>
 /// <para>
-/// Delete an inference endpoint
+/// Delete an inference endpoint.
+/// </para>
+/// <para>
+/// This API requires the manage_inference cluster privilege (the built-in <c>inference_admin</c> role grants this privilege).
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.Json.DeleteInferenceRequestConverter))]
@@ -96,7 +99,7 @@ public sealed partial class DeleteInferenceRequest : Elastic.Clients.Elasticsear
 
 	/// <summary>
 	/// <para>
-	/// When true, the endpoint is not deleted and a list of ingest processors which reference this endpoint is returned.
+	/// When true, checks the semantic_text fields and inference processors that reference the endpoint and returns them in a list, but does not delete the endpoint.
 	/// </para>
 	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
@@ -111,7 +114,10 @@ public sealed partial class DeleteInferenceRequest : Elastic.Clients.Elasticsear
 
 /// <summary>
 /// <para>
-/// Delete an inference endpoint
+/// Delete an inference endpoint.
+/// </para>
+/// <para>
+/// This API requires the manage_inference cluster privilege (the built-in <c>inference_admin</c> role grants this privilege).
 /// </para>
 /// </summary>
 public readonly partial struct DeleteInferenceRequestDescriptor
@@ -167,7 +173,7 @@ public readonly partial struct DeleteInferenceRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// When true, the endpoint is not deleted and a list of ingest processors which reference this endpoint is returned.
+	/// When true, checks the semantic_text fields and inference processors that reference the endpoint and returns them in a list, but does not delete the endpoint.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor DryRun(bool? value = true)

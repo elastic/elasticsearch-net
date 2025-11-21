@@ -253,6 +253,8 @@ public sealed partial class FindMessageStructureRequestParameters : Elastic.Tran
 /// <summary>
 /// <para>
 /// Find the structure of text messages.
+/// </para>
+/// <para>
 /// Find the structure of a list of text messages.
 /// The messages must contain data that is suitable to be ingested into Elasticsearch.
 /// </para>
@@ -562,6 +564,8 @@ public sealed partial class FindMessageStructureRequest : Elastic.Clients.Elasti
 /// <summary>
 /// <para>
 /// Find the structure of text messages.
+/// </para>
+/// <para>
 /// Find the structure of a list of text messages.
 /// The messages must contain data that is suitable to be ingested into Elasticsearch.
 /// </para>
@@ -984,6 +988,8 @@ public readonly partial struct FindMessageStructureRequestDescriptor
 /// <summary>
 /// <para>
 /// Find the structure of text messages.
+/// </para>
+/// <para>
 /// Find the structure of a list of text messages.
 /// The messages must contain data that is suitable to be ingested into Elasticsearch.
 /// </para>

@@ -30,6 +30,8 @@ public sealed partial class ListQueriesRequestParameters : Elastic.Transport.Req
 /// <summary>
 /// <para>
 /// Get running ES|QL queries information.
+/// </para>
+/// <para>
 /// Returns an object containing IDs and other information about the running ES|QL queries.
 /// </para>
 /// </summary>
@@ -64,6 +66,8 @@ public sealed partial class ListQueriesRequest : Elastic.Clients.Elasticsearch.R
 /// <summary>
 /// <para>
 /// Get running ES|QL queries information.
+/// </para>
+/// <para>
 /// Returns an object containing IDs and other information about the running ES|QL queries.
 /// </para>
 /// </summary>

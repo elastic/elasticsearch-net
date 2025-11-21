@@ -45,6 +45,8 @@ public sealed partial class GetMemoryStatsRequestParameters : Elastic.Transport.
 /// <summary>
 /// <para>
 /// Get machine learning memory usage info.
+/// </para>
+/// <para>
 /// Get information about how machine learning jobs and trained models are using memory,
 /// on each node, both within the JVM heap, and natively, outside of the JVM.
 /// </para>
@@ -107,6 +109,8 @@ public sealed partial class GetMemoryStatsRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Get machine learning memory usage info.
+/// </para>
+/// <para>
 /// Get information about how machine learning jobs and trained models are using memory,
 /// on each node, both within the JVM heap, and natively, outside of the JVM.
 /// </para>

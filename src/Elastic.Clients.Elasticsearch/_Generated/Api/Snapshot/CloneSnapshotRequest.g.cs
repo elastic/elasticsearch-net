@@ -38,6 +38,8 @@ public sealed partial class CloneSnapshotRequestParameters : Elastic.Transport.R
 /// <summary>
 /// <para>
 /// Clone a snapshot.
+/// </para>
+/// <para>
 /// Clone part of all of a snapshot into another snapshot in the same repository.
 /// </para>
 /// </summary>
@@ -132,6 +134,8 @@ public sealed partial class CloneSnapshotRequest : Elastic.Clients.Elasticsearch
 /// <summary>
 /// <para>
 /// Clone a snapshot.
+/// </para>
+/// <para>
 /// Clone part of all of a snapshot into another snapshot in the same repository.
 /// </para>
 /// </summary>

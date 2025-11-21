@@ -43,6 +43,8 @@ public sealed partial class GetFiltersRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Get filters.
+/// </para>
+/// <para>
 /// You can get a single filter or all filters.
 /// </para>
 /// </summary>
@@ -101,6 +103,8 @@ public sealed partial class GetFiltersRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Get filters.
+/// </para>
+/// <para>
 /// You can get a single filter or all filters.
 /// </para>
 /// </summary>

@@ -38,6 +38,8 @@ public sealed partial class XpackUsageRequestParameters : Elastic.Transport.Requ
 /// <summary>
 /// <para>
 /// Get usage information.
+/// </para>
+/// <para>
 /// Get information about the features that are currently enabled and available under the current license.
 /// The API also provides some usage statistics.
 /// </para>
@@ -82,6 +84,8 @@ public sealed partial class XpackUsageRequest : Elastic.Clients.Elasticsearch.Re
 /// <summary>
 /// <para>
 /// Get usage information.
+/// </para>
+/// <para>
 /// Get information about the features that are currently enabled and available under the current license.
 /// The API also provides some usage statistics.
 /// </para>

@@ -47,6 +47,8 @@ public sealed partial class VerifyRepositoryRequestParameters : Elastic.Transpor
 /// <summary>
 /// <para>
 /// Verify a snapshot repository.
+/// </para>
+/// <para>
 /// Check for common misconfigurations in a snapshot repository.
 /// </para>
 /// </summary>
@@ -109,6 +111,8 @@ public sealed partial class VerifyRepositoryRequest : Elastic.Clients.Elasticsea
 /// <summary>
 /// <para>
 /// Verify a snapshot repository.
+/// </para>
+/// <para>
 /// Check for common misconfigurations in a snapshot repository.
 /// </para>
 /// </summary>

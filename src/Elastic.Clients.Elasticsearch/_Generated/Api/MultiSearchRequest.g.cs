@@ -51,6 +51,7 @@ public sealed partial class MultiSearchRequestParameters : Elastic.Transport.Req
 	/// If true, concrete, expanded or aliased indices are ignored when frozen.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'. This parameter is deprecated because frozen indices have been deprecated.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
@@ -223,6 +224,7 @@ public partial class MultiSearchRequest : Elastic.Clients.Elasticsearch.Requests
 	/// If true, concrete, expanded or aliased indices are ignored when frozen.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'. This parameter is deprecated because frozen indices have been deprecated.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
@@ -403,6 +405,7 @@ public readonly partial struct MultiSearchRequestDescriptor
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '7.16.0'. This parameter is deprecated because frozen indices have been deprecated.")]
 	/// <summary>
 	/// <para>
 	/// If true, concrete, expanded or aliased indices are ignored when frozen.
@@ -685,6 +688,7 @@ public readonly partial struct MultiSearchRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '7.16.0'. This parameter is deprecated because frozen indices have been deprecated.")]
 	/// <summary>
 	/// <para>
 	/// If true, concrete, expanded or aliased indices are ignored when frozen.

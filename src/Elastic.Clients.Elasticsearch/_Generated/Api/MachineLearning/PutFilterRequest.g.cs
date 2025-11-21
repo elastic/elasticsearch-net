@@ -30,6 +30,8 @@ public sealed partial class PutFilterRequestParameters : Elastic.Transport.Reque
 /// <summary>
 /// <para>
 /// Create a filter.
+/// </para>
+/// <para>
 /// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 /// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 /// </para>
@@ -90,6 +92,8 @@ public sealed partial class PutFilterRequest : Elastic.Clients.Elasticsearch.Req
 /// <summary>
 /// <para>
 /// Create a filter.
+/// </para>
+/// <para>
 /// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 /// Specifically, filters are referenced in the <c>custom_rules</c> property of detector configuration objects.
 /// </para>

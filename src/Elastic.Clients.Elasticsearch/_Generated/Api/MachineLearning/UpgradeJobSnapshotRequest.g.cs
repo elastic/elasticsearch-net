@@ -44,6 +44,8 @@ public sealed partial class UpgradeJobSnapshotRequestParameters : Elastic.Transp
 /// <summary>
 /// <para>
 /// Upgrade a snapshot.
+/// </para>
+/// <para>
 /// Upgrade an anomaly detection model snapshot to the latest major version.
 /// Over time, older snapshot formats are deprecated and removed. Anomaly
 /// detection jobs support only snapshots that are from the current or previous
@@ -122,6 +124,8 @@ public sealed partial class UpgradeJobSnapshotRequest : Elastic.Clients.Elastics
 /// <summary>
 /// <para>
 /// Upgrade a snapshot.
+/// </para>
+/// <para>
 /// Upgrade an anomaly detection model snapshot to the latest major version.
 /// Over time, older snapshot formats are deprecated and removed. Anomaly
 /// detection jobs support only snapshots that are from the current or previous

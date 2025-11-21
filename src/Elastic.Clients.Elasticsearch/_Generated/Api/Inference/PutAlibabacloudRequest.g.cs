@@ -106,6 +106,8 @@ public sealed partial class PutAlibabacloudRequest : Elastic.Clients.Elasticsear
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
@@ -207,6 +209,8 @@ public readonly partial struct PutAlibabacloudRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
@@ -218,6 +222,8 @@ public readonly partial struct PutAlibabacloudRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor ChunkingSettings()
@@ -229,6 +235,8 @@ public readonly partial struct PutAlibabacloudRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// The chunking configuration object.
+	/// Applies only to the <c>sparse_embedding</c> or <c>text_embedding</c> task types.
+	/// Not applicable to the <c>rerank</c> or <c>completion</c> task types.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)

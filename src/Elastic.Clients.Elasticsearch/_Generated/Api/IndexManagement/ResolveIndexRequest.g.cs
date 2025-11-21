@@ -61,6 +61,8 @@ public sealed partial class ResolveIndexRequestParameters : Elastic.Transport.Re
 /// <summary>
 /// <para>
 /// Resolve indices.
+/// </para>
+/// <para>
 /// Resolve the names and/or index patterns for indices, aliases, and data streams.
 /// Multiple patterns and remote clusters are supported.
 /// </para>
@@ -139,6 +141,8 @@ public sealed partial class ResolveIndexRequest : Elastic.Clients.Elasticsearch.
 /// <summary>
 /// <para>
 /// Resolve indices.
+/// </para>
+/// <para>
 /// Resolve the names and/or index patterns for indices, aliases, and data streams.
 /// Multiple patterns and remote clusters are supported.
 /// </para>

@@ -43,6 +43,8 @@ public sealed partial class ExplainDataLifecycleRequestParameters : Elastic.Tran
 /// <summary>
 /// <para>
 /// Get the status for a data stream lifecycle.
+/// </para>
+/// <para>
 /// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 /// </para>
 /// </summary>
@@ -74,7 +76,7 @@ public sealed partial class ExplainDataLifecycleRequest : Elastic.Clients.Elasti
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to explain
+	/// Comma-separated list of index names to explain
 	/// </para>
 	/// </summary>
 	public
@@ -101,6 +103,8 @@ public sealed partial class ExplainDataLifecycleRequest : Elastic.Clients.Elasti
 /// <summary>
 /// <para>
 /// Get the status for a data stream lifecycle.
+/// </para>
+/// <para>
 /// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 /// </para>
 /// </summary>
@@ -130,7 +134,7 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to explain
+	/// Comma-separated list of index names to explain
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
@@ -215,6 +219,8 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor
 /// <summary>
 /// <para>
 /// Get the status for a data stream lifecycle.
+/// </para>
+/// <para>
 /// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 /// </para>
 /// </summary>
@@ -243,7 +249,7 @@ public readonly partial struct ExplainDataLifecycleRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The name of the index to explain
+	/// Comma-separated list of index names to explain
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ExplainDataLifecycleRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)

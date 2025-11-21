@@ -46,6 +46,8 @@ public sealed partial class PutTrainedModelRequestParameters : Elastic.Transport
 /// <summary>
 /// <para>
 /// Create a trained model.
+/// </para>
+/// <para>
 /// Enable you to supply a trained model that is not created by data frame analytics.
 /// </para>
 /// </summary>
@@ -198,6 +200,8 @@ public sealed partial class PutTrainedModelRequest : Elastic.Clients.Elasticsear
 /// <summary>
 /// <para>
 /// Create a trained model.
+/// </para>
+/// <para>
 /// Enable you to supply a trained model that is not created by data frame analytics.
 /// </para>
 /// </summary>
@@ -534,6 +538,8 @@ public readonly partial struct PutTrainedModelRequestDescriptor
 /// <summary>
 /// <para>
 /// Create a trained model.
+/// </para>
+/// <para>
 /// Enable you to supply a trained model that is not created by data frame analytics.
 /// </para>
 /// </summary>
