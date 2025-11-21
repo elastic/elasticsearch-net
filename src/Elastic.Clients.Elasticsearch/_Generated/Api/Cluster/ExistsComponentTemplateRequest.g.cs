@@ -31,6 +31,7 @@ public sealed partial class ExistsComponentTemplateRequestParameters : Elastic.T
 	/// Defaults to false, which means information is retrieved from the master node.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -93,6 +94,7 @@ public sealed partial class ExistsComponentTemplateRequest : Elastic.Clients.Ela
 	/// Defaults to false, which means information is retrieved from the master node.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -147,6 +149,7 @@ public readonly partial struct ExistsComponentTemplateRequestDescriptor
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	/// <summary>
 	/// <para>
 	/// If true, the request retrieves information from the local node only.

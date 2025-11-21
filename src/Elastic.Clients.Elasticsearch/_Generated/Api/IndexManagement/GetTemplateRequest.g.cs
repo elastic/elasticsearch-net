@@ -37,6 +37,7 @@ public sealed partial class GetTemplateRequestParameters : Elastic.Transport.Req
 	/// If <c>true</c>, the request retrieves information from the local node only.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter is a no-op and templates are always retrieved locally.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -108,6 +109,7 @@ public sealed partial class GetTemplateRequest : Elastic.Clients.Elasticsearch.R
 	/// If <c>true</c>, the request retrieves information from the local node only.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter is a no-op and templates are always retrieved locally.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -175,6 +177,7 @@ public readonly partial struct GetTemplateRequestDescriptor
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter is a no-op and templates are always retrieved locally.")]
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the request retrieves information from the local node only.

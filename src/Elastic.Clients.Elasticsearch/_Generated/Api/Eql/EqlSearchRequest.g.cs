@@ -220,7 +220,7 @@ public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Req
 
 	/// <summary>
 	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
+	/// Field containing event timestamp.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Field? TimestampField { get; set; }
@@ -646,7 +646,7 @@ public readonly partial struct EqlSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
+	/// Field containing event timestamp.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TimestampField(Elastic.Clients.Elasticsearch.Field? value)
@@ -657,7 +657,7 @@ public readonly partial struct EqlSearchRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
+	/// Field containing event timestamp.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TimestampField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
@@ -1089,7 +1089,7 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
+	/// Field containing event timestamp.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TimestampField(Elastic.Clients.Elasticsearch.Field? value)
@@ -1100,7 +1100,7 @@ public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
+	/// Field containing event timestamp.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TimestampField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)

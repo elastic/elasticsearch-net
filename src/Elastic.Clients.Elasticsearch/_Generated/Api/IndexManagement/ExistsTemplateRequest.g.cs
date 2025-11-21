@@ -37,6 +37,7 @@ public sealed partial class ExistsTemplateRequestParameters : Elastic.Transport.
 	/// Indicates whether to get information from the local node only.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -109,6 +110,7 @@ public sealed partial class ExistsTemplateRequest : Elastic.Clients.Elasticsearc
 	/// Indicates whether to get information from the local node only.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -178,6 +180,7 @@ public readonly partial struct ExistsTemplateRequestDescriptor
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '9.0.0'. This parameter has no effect, is now deprecated, and will be removed in a future version.")]
 	/// <summary>
 	/// <para>
 	/// Indicates whether to get information from the local node only.

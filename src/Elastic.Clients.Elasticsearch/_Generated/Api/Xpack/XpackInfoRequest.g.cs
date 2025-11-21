@@ -30,6 +30,7 @@ public sealed partial class XpackInfoRequestParameters : Elastic.Transport.Reque
 	/// If this param is used it must be set to true
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '8.0.0'. Supported for backwards compatibility with 7.x")]
 	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
 
 	/// <summary>
@@ -96,6 +97,7 @@ public sealed partial class XpackInfoRequest : Elastic.Clients.Elasticsearch.Req
 	/// If this param is used it must be set to true
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '8.0.0'. Supported for backwards compatibility with 7.x")]
 	public bool? AcceptEnterprise { get => Q<bool?>("accept_enterprise"); set => Q("accept_enterprise", value); }
 
 	/// <summary>
@@ -148,6 +150,7 @@ public readonly partial struct XpackInfoRequestDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest instance) => new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor descriptor) => descriptor.Instance;
 
+	[System.Obsolete("Deprecated in '8.0.0'. Supported for backwards compatibility with 7.x")]
 	/// <summary>
 	/// <para>
 	/// If this param is used it must be set to true
