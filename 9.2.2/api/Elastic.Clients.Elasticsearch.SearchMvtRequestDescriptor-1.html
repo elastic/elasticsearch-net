@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct SearchMvtRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct SearchMvtRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Search a vector tile.   Search a vector tile for geospatial values. Before using this API, you should be familiar with the Mapbox vector tile specification. The API returns results as a binary mapbox vector tile.   Internally, Elasticsearch translates a vector tile search API request into a search containing:    A geo_bounding_box query on the &amp;lt;field&amp;gt;. The query uses the &amp;lt;zoom&amp;gt;/&amp;lt;x&amp;gt;/&amp;lt;y&amp;gt; tile as a bounding box.    A geotile_grid or geohex_grid aggregation on the &amp;lt;field&amp;gt;. The grid_agg parameter determines the aggregation type. The aggregation uses the &amp;lt;zoom&amp;gt;/&amp;lt;x&amp;gt;/&amp;lt;y&amp;gt; tile as a bounding box.    Optionally, a geo_bounds aggregation on the &amp;lt;field&amp;gt;. The search only includes this aggregation if the exact_bounds parameter is true.    If the optional parameter with_labels is true, the internal search will include a dynamic runtime field that calls the getLabelPosition function of the geometry doc value. This enables the generation of new point features containing suggested geometry labels, so that, for example, multi-polygons will have only one label.    The API returns results as a binary Mapbox vector tile. Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:    A hits layer containing a feature for each &amp;lt;field&amp;gt; value matching the geo_bounding_box query.    An aggs layer containing a feature for each cell of the geotile_grid or geohex_grid. The layer only contains features for cells with matching data.    A meta layer containing:    A feature containing a bounding box. By default, this is the bounding box of the tile.    Value ranges for any sub-aggregations on the geotile_grid or geohex_grid.    Metadata for the search.     The API only returns features that can display at its zoom level. For example, if a polygon feature has no area at its zoom level, the API omits it. The API returns errors as UTF-8 encoded JSON.   IMPORTANT: You can specify several options for this API as either a query parameter or request body parameter. If you specify both parameters, the query parameter takes precedence.   Grid precision for geotile   For a grid_agg of geotile, you can use cells in the aggs layer as tiles for lower zoom levels. grid_precision represents the additional zoom levels available through these cells. The final precision is computed by as follows: &amp;lt;zoom&amp;gt; + grid_precision. For example, if &amp;lt;zoom&amp;gt; is 7 and grid_precision is 8, then the geotile_grid aggregation will use a precision of 15. The maximum final precision is 29. The grid_precision also determines the number of cells for the grid as follows: (2^grid_precision) x (2^grid_precision). For example, a value of 8 divides the tile into a grid of 256 x 256 cells. The aggs layer only contains features for cells with matching data.   Grid precision for geohex   For a grid_agg of geohex, Elasticsearch uses &amp;lt;zoom&amp;gt; and grid_precision to calculate a final precision as follows: &amp;lt;zoom&amp;gt; + grid_precision.   This precision determines the H3 resolution of the hexagonal cells produced by the geohex aggregation. The following table maps the H3 resolution for each precision. For example, if &amp;lt;zoom&amp;gt; is 3 and grid_precision is 3, the precision is 6. At a precision of 6, hexagonal cells have an H3 resolution of 2. If &amp;lt;zoom&amp;gt; is 3 and grid_precision is 4, the precision is 7. At a precision of 7, hexagonal cells have an H3 resolution of 3.   | Precision | Unique tile bins | H3 resolution | Unique hex bins |	Ratio | | --------- | ---------------- | ------------- | ----------------| ----- | | 1  | 4                  | 0  | 122             | 30.5           | | 2  | 16                 | 0  | 122             | 7.625          | | 3  | 64                 | 1  | 842             | 13.15625       | | 4  | 256                | 1  | 842             | 3.2890625      | | 5  | 1024               | 2  | 5882            | 5.744140625    | | 6  | 4096               | 2  | 5882            | 1.436035156    | | 7  | 16384              | 3  | 41162           | 2.512329102    | | 8  | 65536              | 3  | 41162           | 0.6280822754   | | 9  | 262144             | 4  | 288122          | 1.099098206    | | 10 | 1048576            | 4  | 288122          | 0.2747745514   | | 11 | 4194304            | 5  | 2016842         | 0.4808526039   | | 12 | 16777216           | 6  | 14117882        | 0.8414913416   | | 13 | 67108864           | 6  | 14117882        | 0.2103728354   | | 14 | 268435456          | 7  | 98825162        | 0.3681524172   | | 15 | 1073741824         | 8  | 691776122       | 0.644266719    | | 16 | 4294967296         | 8  | 691776122       | 0.1610666797   | | 17 | 17179869184        | 9  | 4842432842      | 0.2818666889   | | 18 | 68719476736        | 10 | 33897029882     | 0.4932667053   | | 19 | 274877906944       | 11 | 237279209162    | 0.8632167343   | | 20 | 1099511627776      | 11 | 237279209162    | 0.2158041836   | | 21 | 4398046511104      | 12 | 1660954464122   | 0.3776573213   | | 22 | 17592186044416     | 13 | 11626681248842  | 0.6609003122   | | 23 | 70368744177664     | 13 | 11626681248842  | 0.165225078    | | 24 | 281474976710656    | 14 | 81386768741882  | 0.2891438866   | | 25 | 1125899906842620   | 15 | 569707381193162 | 0.5060018015   | | 26 | 4503599627370500   | 15 | 569707381193162 | 0.1265004504   | | 27 | 18014398509482000  | 15 | 569707381193162 | 0.03162511259  | | 28 | 72057594037927900  | 15 | 569707381193162 | 0.007906278149 | | 29 | 288230376151712000 | 15 | 569707381193162 | 0.001976569537 |   Hexagonal cells don&#39;t align perfectly on a vector tile. Some cells may intersect more than one vector tile. To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level. Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.   Learn how to use the vector tile search API with practical examples in the Vector tile search examples guide.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.2.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1" class="text-break">
+Struct SearchMvtRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1617"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Search a vector tile.
+</p>
+<p>
+Search a vector tile for geospatial values.
+Before using this API, you should be familiar with the Mapbox vector tile specification.
+The API returns results as a binary mapbox vector tile.
+</p>
+<p>
+Internally, Elasticsearch translates a vector tile search API request into a search containing:
+</p>
+<ul><li>
+<p>
+A <code>geo_bounding_box</code> query on the <code>&lt;field&gt;</code>. The query uses the <code>&lt;zoom&gt;/&lt;x&gt;/&lt;y&gt;</code> tile as a bounding box.
+</p>
+</li><li>
+<p>
+A <code>geotile_grid</code> or <code>geohex_grid</code> aggregation on the <code>&lt;field&gt;</code>. The <code>grid_agg</code> parameter determines the aggregation type. The aggregation uses the <code>&lt;zoom&gt;/&lt;x&gt;/&lt;y&gt;</code> tile as a bounding box.
+</p>
+</li><li>
+<p>
+Optionally, a <code>geo_bounds</code> aggregation on the <code>&lt;field&gt;</code>. The search only includes this aggregation if the <code>exact_bounds</code> parameter is <code>true</code>.
+</p>
+</li><li>
+<p>
+If the optional parameter <code>with_labels</code> is <code>true</code>, the internal search will include a dynamic runtime field that calls the <code>getLabelPosition</code> function of the geometry doc value. This enables the generation of new point features containing suggested geometry labels, so that, for example, multi-polygons will have only one label.
+</p>
+</li></ul>
+<p>
+The API returns results as a binary Mapbox vector tile.
+Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
+</p>
+<ul><li>
+<p>
+A <code>hits</code> layer containing a feature for each <code>&lt;field&gt;</code> value matching the <code>geo_bounding_box</code> query.
+</p>
+</li><li>
+<p>
+An <code>aggs</code> layer containing a feature for each cell of the <code>geotile_grid</code> or <code>geohex_grid</code>. The layer only contains features for cells with matching data.
+</p>
+</li><li>
+<p>
+A meta layer containing:
+</p>
+<ul><li>
+<p>
+A feature containing a bounding box. By default, this is the bounding box of the tile.
+</p>
+</li><li>
+<p>
+Value ranges for any sub-aggregations on the <code>geotile_grid</code> or <code>geohex_grid</code>.
+</p>
+</li><li>
+<p>
+Metadata for the search.
+</p>
+</li></ul>
+</li></ul>
+<p>
+The API only returns features that can display at its zoom level.
+For example, if a polygon feature has no area at its zoom level, the API omits it.
+The API returns errors as UTF-8 encoded JSON.
+</p>
+<p>
+IMPORTANT: You can specify several options for this API as either a query parameter or request body parameter.
+If you specify both parameters, the query parameter takes precedence.
+</p>
+<p>
+<strong>Grid precision for geotile</strong>
+</p>
+<p>
+For a <code>grid_agg</code> of <code>geotile</code>, you can use cells in the <code>aggs</code> layer as tiles for lower zoom levels.
+<code>grid_precision</code> represents the additional zoom levels available through these cells. The final precision is computed by as follows: <code>&lt;zoom&gt; + grid_precision</code>.
+For example, if <code>&lt;zoom&gt;</code> is 7 and <code>grid_precision</code> is 8, then the <code>geotile_grid</code> aggregation will use a precision of 15.
+The maximum final precision is 29.
+The <code>grid_precision</code> also determines the number of cells for the grid as follows: <code>(2^grid_precision) x (2^grid_precision)</code>.
+For example, a value of 8 divides the tile into a grid of 256 x 256 cells.
+The <code>aggs</code> layer only contains features for cells with matching data.
+</p>
+<p>
+<strong>Grid precision for geohex</strong>
+</p>
+<p>
+For a <code>grid_agg</code> of <code>geohex</code>, Elasticsearch uses <code>&lt;zoom&gt;</code> and <code>grid_precision</code> to calculate a final precision as follows: <code>&lt;zoom&gt; + grid_precision</code>.
+</p>
+<p>
+This precision determines the H3 resolution of the hexagonal cells produced by the <code>geohex</code> aggregation.
+The following table maps the H3 resolution for each precision.
+For example, if <code>&lt;zoom&gt;</code> is 3 and <code>grid_precision</code> is 3, the precision is 6.
+At a precision of 6, hexagonal cells have an H3 resolution of 2.
+If <code>&lt;zoom&gt;</code> is 3 and <code>grid_precision</code> is 4, the precision is 7.
+At a precision of 7, hexagonal cells have an H3 resolution of 3.
+</p>
+<p>
+| Precision | Unique tile bins | H3 resolution | Unique hex bins |	Ratio |
+| --------- | ---------------- | ------------- | ----------------| ----- |
+| 1  | 4                  | 0  | 122             | 30.5           |
+| 2  | 16                 | 0  | 122             | 7.625          |
+| 3  | 64                 | 1  | 842             | 13.15625       |
+| 4  | 256                | 1  | 842             | 3.2890625      |
+| 5  | 1024               | 2  | 5882            | 5.744140625    |
+| 6  | 4096               | 2  | 5882            | 1.436035156    |
+| 7  | 16384              | 3  | 41162           | 2.512329102    |
+| 8  | 65536              | 3  | 41162           | 0.6280822754   |
+| 9  | 262144             | 4  | 288122          | 1.099098206    |
+| 10 | 1048576            | 4  | 288122          | 0.2747745514   |
+| 11 | 4194304            | 5  | 2016842         | 0.4808526039   |
+| 12 | 16777216           | 6  | 14117882        | 0.8414913416   |
+| 13 | 67108864           | 6  | 14117882        | 0.2103728354   |
+| 14 | 268435456          | 7  | 98825162        | 0.3681524172   |
+| 15 | 1073741824         | 8  | 691776122       | 0.644266719    |
+| 16 | 4294967296         | 8  | 691776122       | 0.1610666797   |
+| 17 | 17179869184        | 9  | 4842432842      | 0.2818666889   |
+| 18 | 68719476736        | 10 | 33897029882     | 0.4932667053   |
+| 19 | 274877906944       | 11 | 237279209162    | 0.8632167343   |
+| 20 | 1099511627776      | 11 | 237279209162    | 0.2158041836   |
+| 21 | 4398046511104      | 12 | 1660954464122   | 0.3776573213   |
+| 22 | 17592186044416     | 13 | 11626681248842  | 0.6609003122   |
+| 23 | 70368744177664     | 13 | 11626681248842  | 0.165225078    |
+| 24 | 281474976710656    | 14 | 81386768741882  | 0.2891438866   |
+| 25 | 1125899906842620   | 15 | 569707381193162 | 0.5060018015   |
+| 26 | 4503599627370500   | 15 | 569707381193162 | 0.1265004504   |
+| 27 | 18014398509482000  | 15 | 569707381193162 | 0.03162511259  |
+| 28 | 72057594037927900  | 15 | 569707381193162 | 0.007906278149 |
+| 29 | 288230376151712000 | 15 | 569707381193162 | 0.001976569537 |
+</p>
+<p>
+Hexagonal cells don't align perfectly on a vector tile.
+Some cells may intersect more than one vector tile.
+To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
+Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
+</p>
+<p>
+Learn how to use the vector tile search API with practical examples in the <a href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/vector-tile-search">Vector tile search examples</a> guide.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct SearchMvtRequestDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.#ctor">
+  SearchMvtRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1632"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public SearchMvtRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_Indices_Elastic_Clients_Elasticsearch_Field_System_Int32_System_Int32_System_Int32_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.Indices,Elastic.Clients.Elasticsearch.Field,System.Int32,System.Int32,System.Int32)">
+  SearchMvtRequestDescriptor(Indices, Field, int, int, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1627"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor(Indices indices, Field field, int zoom, int x, int y)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>zoom</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>x</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>y</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_SearchMvtRequest_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.SearchMvtRequest)">
+  SearchMvtRequestDescriptor(SearchMvtRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1621"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor(SearchMvtRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequest.html">SearchMvtRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddAgg_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddAgg*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddAgg_System_String_Elastic_Clients_Elasticsearch_Aggregations_Aggregation_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddAgg(System.String,Elastic.Clients.Elasticsearch.Aggregations.Aggregation)">
+  AddAgg(string, Aggregation)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1944"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; AddAgg(string key, Aggregation value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddAgg_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddAgg*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddAgg_System_String_System_Action_Elastic_Clients_Elasticsearch_Aggregations_AggregationDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddAgg(System.String,System.Action{Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor{`0}})">
+  AddAgg(string, Action&lt;AggregationDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1951"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; AddAgg(string key, Action&lt;AggregationDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor-1.html">AggregationDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddRuntimeMapping_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeField_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeField)">
+  AddRuntimeMapping(Field, RuntimeField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; AddRuntimeMapping(Field key, RuntimeField value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddRuntimeMapping_Elastic_Clients_Elasticsearch_Field_System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field,System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor{`0}})">
+  AddRuntimeMapping(Field, Action&lt;RuntimeFieldDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2133"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; AddRuntimeMapping(Field key, Action&lt;RuntimeFieldDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor-1.html">RuntimeFieldDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddRuntimeMapping_System_Linq_Expressions_Expression_System_Func__0_System_Object___Elastic_Clients_Elasticsearch_Mapping_RuntimeField_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddRuntimeMapping(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Elastic.Clients.Elasticsearch.Mapping.RuntimeField)">
+  AddRuntimeMapping(Expression&lt;Func&lt;TDocument, object?&gt;&gt;, RuntimeField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2126"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; AddRuntimeMapping(Expression&lt;Func&lt;TDocument, object?&gt;&gt; key, RuntimeField value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_AddRuntimeMapping_System_Linq_Expressions_Expression_System_Func__0_System_Object___System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.AddRuntimeMapping(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor{`0}})">
+  AddRuntimeMapping(Expression&lt;Func&lt;TDocument, object?&gt;&gt;, Action&lt;RuntimeFieldDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2140"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; AddRuntimeMapping(Expression&lt;Func&lt;TDocument, object?&gt;&gt; key, Action&lt;RuntimeFieldDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor-1.html">RuntimeFieldDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Aggs_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Aggs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Aggs" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Aggs">
+  Aggs()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1859"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sub-aggregations for the geotile_grid.
+</p>
+<p>
+It supports the following aggregation types:
+</p>
+<ul><li>
+<p>
+<code>avg</code>
+</p>
+</li><li>
+<p>
+<code>boxplot</code>
+</p>
+</li><li>
+<p>
+<code>cardinality</code>
+</p>
+</li><li>
+<p>
+<code>extended stats</code>
+</p>
+</li><li>
+<p>
+<code>max</code>
+</p>
+</li><li>
+<p>
+<code>median absolute deviation</code>
+</p>
+</li><li>
+<p>
+<code>min</code>
+</p>
+</li><li>
+<p>
+<code>percentile</code>
+</p>
+</li><li>
+<p>
+<code>percentile-rank</code>
+</p>
+</li><li>
+<p>
+<code>stats</code>
+</p>
+</li><li>
+<p>
+<code>sum</code>
+</p>
+</li><li>
+<p>
+<code>value count</code>
+</p>
+</li></ul>
+<p>
+The aggregation names can't start with <code>_mvt_</code>. The <code>_mvt_</code> prefix is reserved for internal aggregations.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Aggs()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Aggs_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Aggs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Aggs_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfStringAggregation__0___" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Aggs(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation{`0}})">
+  Aggs(Action&lt;FluentDictionaryOfStringAggregation&lt;TDocument&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1938"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sub-aggregations for the geotile_grid.
+</p>
+<p>
+It supports the following aggregation types:
+</p>
+<ul><li>
+<p>
+<code>avg</code>
+</p>
+</li><li>
+<p>
+<code>boxplot</code>
+</p>
+</li><li>
+<p>
+<code>cardinality</code>
+</p>
+</li><li>
+<p>
+<code>extended stats</code>
+</p>
+</li><li>
+<p>
+<code>max</code>
+</p>
+</li><li>
+<p>
+<code>median absolute deviation</code>
+</p>
+</li><li>
+<p>
+<code>min</code>
+</p>
+</li><li>
+<p>
+<code>percentile</code>
+</p>
+</li><li>
+<p>
+<code>percentile-rank</code>
+</p>
+</li><li>
+<p>
+<code>stats</code>
+</p>
+</li><li>
+<p>
+<code>sum</code>
+</p>
+</li><li>
+<p>
+<code>value count</code>
+</p>
+</li></ul>
+<p>
+The aggregation names can't start with <code>_mvt_</code>. The <code>_mvt_</code> prefix is reserved for internal aggregations.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Aggs(Action&lt;FluentDictionaryOfStringAggregation&lt;TDocument&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation-1.html">FluentDictionaryOfStringAggregation</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Aggs_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Aggs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Aggs_System_Collections_Generic_IDictionary_System_String_Elastic_Clients_Elasticsearch_Aggregations_Aggregation__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Aggs(System.Collections.Generic.IDictionary{System.String,Elastic.Clients.Elasticsearch.Aggregations.Aggregation})">
+  Aggs(IDictionary&lt;string, Aggregation&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1780"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sub-aggregations for the geotile_grid.
+</p>
+<p>
+It supports the following aggregation types:
+</p>
+<ul><li>
+<p>
+<code>avg</code>
+</p>
+</li><li>
+<p>
+<code>boxplot</code>
+</p>
+</li><li>
+<p>
+<code>cardinality</code>
+</p>
+</li><li>
+<p>
+<code>extended stats</code>
+</p>
+</li><li>
+<p>
+<code>max</code>
+</p>
+</li><li>
+<p>
+<code>median absolute deviation</code>
+</p>
+</li><li>
+<p>
+<code>min</code>
+</p>
+</li><li>
+<p>
+<code>percentile</code>
+</p>
+</li><li>
+<p>
+<code>percentile-rank</code>
+</p>
+</li><li>
+<p>
+<code>stats</code>
+</p>
+</li><li>
+<p>
+<code>sum</code>
+</p>
+</li><li>
+<p>
+<code>value count</code>
+</p>
+</li></ul>
+<p>
+The aggregation names can't start with <code>_mvt_</code>. The <code>_mvt_</code> prefix is reserved for internal aggregations.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Aggs(IDictionary&lt;string, Aggregation&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Aggregation.html">Aggregation</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Buffer_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Buffer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Buffer_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Buffer(System.Nullable{System.Int32})">
+  Buffer(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1964"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The size, in pixels, of a clipping buffer outside the tile. This allows renderers
+to avoid outline artifacts from geometries that extend past the extent of the tile.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Buffer(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2276"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_ExactBounds_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.ExactBounds*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_ExactBounds_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.ExactBounds(System.Nullable{System.Boolean})">
+  ExactBounds(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1979"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>false</code>, the meta layer's feature is the bounding box of the tile.
+If <code>true</code>, the meta layer's feature is a bounding box resulting from a
+<code>geo_bounds</code> aggregation. The aggregation runs on &lt;field&gt; values that intersect
+the <code>&lt;zoom&gt;/&lt;x&gt;/&lt;y&gt;</code> tile with <code>wrap_longitude</code> set to <code>false</code>. The resulting
+bounding box may be larger than the vector tile.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; ExactBounds(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Extent_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Extent*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Extent_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Extent(System.Nullable{System.Int32})">
+  Extent(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1990"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Extent(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Field_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Field_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Field(Elastic.Clients.Elasticsearch.Field)">
+  Field(Field)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1646"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing geospatial data to return
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Field(Field value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Field_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Field_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Field(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  Field(Expression&lt;Func&lt;TDocument, object?&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1657"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing geospatial data to return
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Field(Expression&lt;Func&lt;TDocument, object?&gt;&gt; value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Fields_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Fields_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Fields(Elastic.Clients.Elasticsearch.Fields)">
+  Fields(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2004"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The fields to return in the <code>hits</code> layer.
+It supports wildcards (<code>*</code>).
+This parameter does not support fields with array values. Fields with array
+values may return inconsistent results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Fields(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Fields_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Fields_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Fields(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+  Fields(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2018"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The fields to return in the <code>hits</code> layer.
+It supports wildcards (<code>*</code>).
+This parameter does not support fields with array values. Fields with array
+values may return inconsistent results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Fields(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2282"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_GridAgg_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.GridAgg*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_GridAgg_System_Nullable_Elastic_Clients_Elasticsearch_Core_SearchMvt_GridAggregationType__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.GridAgg(System.Nullable{Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType})">
+  GridAgg(GridAggregationType?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2029"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The aggregation used to create a grid for the <code>field</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; GridAgg(GridAggregationType? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType.html">GridAggregationType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_GridPrecision_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.GridPrecision*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_GridPrecision_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.GridPrecision(System.Nullable{System.Int32})">
+  GridPrecision(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2042"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Additional zoom levels available through the aggs layer. For example, if <code>&lt;zoom&gt;</code> is <code>7</code>
+and <code>grid_precision</code> is <code>8</code>, you can zoom in up to level 15. Accepts 0-8. If 0, results
+don't include the aggs layer.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; GridPrecision(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_GridType_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.GridType*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_GridType_System_Nullable_Elastic_Clients_Elasticsearch_Core_SearchMvt_GridType__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.GridType(System.Nullable{Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType})">
+  GridType(GridType?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2055"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Determines the geometry type for features in the aggs layer. In the aggs layer,
+each feature represents a <code>geotile_grid</code> cell. If <code>grid, each feature is a polygon of the cells bounding box. If </code>point`, each feature is a Point that is the centroid
+of the cell.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; GridType(GridType? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType.html">GridType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Human_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2288"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Indices_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Indices_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Indices(Elastic.Clients.Elasticsearch.Indices)">
+  Indices(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1668"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Comma-separated list of data streams, indices, or aliases to search
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Indices(Indices value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Pretty_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2294"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Query_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Query_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Query(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  Query(Query?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2066"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The query DSL used to filter documents for the search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Query(Query? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Query_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Query_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Query(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor{`0}})">
+  Query(Action&lt;QueryDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2077"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The query DSL used to filter documents for the search.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Query(Action&lt;QueryDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor-1.html">QueryDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2306"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.2.2/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2312"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.2.2/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.2.2/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_RuntimeMappings" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.RuntimeMappings">
+  RuntimeMappings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2101"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines one or more runtime fields in the search request. These fields take
+precedence over mapped fields with the same name.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; RuntimeMappings()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_RuntimeMappings_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfFieldRuntimeField__0___" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.RuntimeMappings(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField{`0}})">
+  RuntimeMappings(Action&lt;FluentDictionaryOfFieldRuntimeField&lt;TDocument&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2113"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines one or more runtime fields in the search request. These fields take
+precedence over mapped fields with the same name.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; RuntimeMappings(Action&lt;FluentDictionaryOfFieldRuntimeField&lt;TDocument&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField-1.html">FluentDictionaryOfFieldRuntimeField</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_RuntimeMappings_System_Collections_Generic_IDictionary_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeField__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.RuntimeMappings(System.Collections.Generic.IDictionary{Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeField})">
+  RuntimeMappings(IDictionary&lt;Field, RuntimeField&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2089"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines one or more runtime fields in the search request. These fields take
+precedence over mapped fields with the same name.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; RuntimeMappings(IDictionary&lt;Field, RuntimeField&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Size_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Size_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Size(System.Nullable{System.Int32})">
+  Size(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2153"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of features to return in the hits layer. Accepts 0-10000.
+If 0, results don't include the hits layer.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Size(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Sort_Elastic_Clients_Elasticsearch_SortOptions___" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Sort(Elastic.Clients.Elasticsearch.SortOptions[])">
+  Sort(params SortOptions[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sort the features in the hits layer. By default, the API calculates a bounding
+box for each feature. It sorts features based on this box's diagonal length,
+from longest to shortest.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Sort(params SortOptions[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Sort_System_Action_Elastic_Clients_Elasticsearch_SortOptionsDescriptor__0_____" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Sort(System.Action{Elastic.Clients.Elasticsearch.SortOptionsDescriptor{`0}}[])">
+  Sort(params Action&lt;SortOptionsDescriptor&lt;TDocument&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2192"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sort the features in the hits layer. By default, the API calculates a bounding
+box for each feature. It sorts features based on this box's diagonal length,
+from longest to shortest.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Sort(params Action&lt;SortOptionsDescriptor&lt;TDocument&gt;&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor-1.html">SortOptionsDescriptor</a>&lt;TDocument&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Sort_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_SortOptions__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Sort(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.SortOptions})">
+  Sort(ICollection&lt;SortOptions&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2166"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sort the features in the hits layer. By default, the API calculates a bounding
+box for each feature. It sorts features based on this box's diagonal length,
+from longest to shortest.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Sort(ICollection&lt;SortOptions&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2300"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_TrackTotalHits_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.TrackTotalHits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_TrackTotalHits_Elastic_Clients_Elasticsearch_Core_Search_TrackHits_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits)">
+  TrackTotalHits(TrackHits?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2211"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of hits matching the query to count accurately. If <code>true</code>, the exact number
+of hits is returned at the cost of some performance. If <code>false</code>, the response does
+not include the total number of hits matching the query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; TrackTotalHits(TrackHits? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TrackHits.html">TrackHits</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_TrackTotalHits_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.TrackTotalHits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_TrackTotalHits_System_Func_Elastic_Clients_Elasticsearch_Core_Search_TrackHitsFactory_Elastic_Clients_Elasticsearch_Core_Search_TrackHits__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.TrackTotalHits(System.Func{Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory,Elastic.Clients.Elasticsearch.Core.Search.TrackHits})">
+  TrackTotalHits(Func&lt;TrackHitsFactory, TrackHits&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2224"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of hits matching the query to count accurately. If <code>true</code>, the exact number
+of hits is returned at the cost of some performance. If <code>false</code>, the response does
+not include the total number of hits matching the query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; TrackTotalHits(Func&lt;TrackHitsFactory, TrackHits&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.html">TrackHitsFactory</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TrackHits.html">TrackHits</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_WithLabels_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.WithLabels*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_WithLabels_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.WithLabels(System.Nullable{System.Boolean})">
+  WithLabels(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L2262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the hits and aggs layers will contain additional point features representing
+suggested label positions for the original features.
+</p>
+<ul><li>
+<p>
+<code>Point</code> and <code>MultiPoint</code> features will have one of the points selected.
+</p>
+</li><li>
+<p>
+<code>Polygon</code> and <code>MultiPolygon</code> features will have a single point generated, either the centroid, if it is within the polygon, or another point within the polygon selected from the sorted triangle-tree.
+</p>
+</li><li>
+<p>
+<code>LineString</code> features will likewise provide a roughly central point selected from the triangle-tree.
+</p>
+</li><li>
+<p>
+The aggregation results will provide one central point for each aggregation bucket.
+</p>
+</li></ul>
+<p>
+All attributes from the original features will also be copied to the new label features.
+In addition, the new features will be distinguishable using the tag <code>_mvt_label_position</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; WithLabels(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_X_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.X*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_X_System_Int32_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.X(System.Int32)">
+  X(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1679"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+X coordinate for the vector tile to search
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; X(int value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Y_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Y*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Y_System_Int32_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Y(System.Int32)">
+  Y(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1690"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Y coordinate for the vector tile to search
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Y(int value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Zoom_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Zoom*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_Zoom_System_Int32_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.Zoom(System.Int32)">
+  Zoom(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1701"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Zoom level for the vector tile to search
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SearchMvtRequestDescriptor&lt;TDocument&gt; Zoom(int value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_SearchMvtRequest__Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.SearchMvtRequest)~Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor{`0}">
+  explicit operator SearchMvtRequestDescriptor&lt;TDocument&gt;(SearchMvtRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1638"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator SearchMvtRequestDescriptor&lt;TDocument&gt;(SearchMvtRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequest.html">SearchMvtRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_SearchMvtRequestDescriptor__0___Elastic_Clients_Elasticsearch_SearchMvtRequest" data-uid="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor{`0})~Elastic.Clients.Elasticsearch.SearchMvtRequest">
+  implicit operator SearchMvtRequest(SearchMvtRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/SearchMvtRequest.g.cs/#L1639"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator SearchMvtRequest(SearchMvtRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor-1.html">SearchMvtRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SearchMvtRequest.html">SearchMvtRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

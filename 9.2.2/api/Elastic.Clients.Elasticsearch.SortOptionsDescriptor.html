@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct SortOptionsDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct SortOptionsDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.2.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_SortOptionsDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.SortOptionsDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor" class="text-break">
+Struct SortOptionsDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Shared/Types/SortOptions.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct SortOptionsDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.#ctor">
+  SortOptionsDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L186"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor__ctor_Elastic_Clients_Elasticsearch_SortOptions_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.#ctor(Elastic.Clients.Elasticsearch.SortOptions)">
+  SortOptionsDescriptor(SortOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L180"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor(SortOptions instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Doc_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Doc*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Doc" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Doc">
+  Doc()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L201"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Doc()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Doc_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Doc*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Doc_Elastic_Clients_Elasticsearch_ScoreSort_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Doc(Elastic.Clients.Elasticsearch.ScoreSort)">
+  Doc(ScoreSort?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L195"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Doc(ScoreSort? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ScoreSort.html">ScoreSort</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Doc_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Doc*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Doc_System_Action_Elastic_Clients_Elasticsearch_ScoreSortDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Doc(System.Action{Elastic.Clients.Elasticsearch.ScoreSortDescriptor})">
+  Doc(Action&lt;ScoreSortDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L207"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Doc(Action&lt;ScoreSortDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ScoreSortDescriptor.html">ScoreSortDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field(Elastic.Clients.Elasticsearch.Field)">
+  Field(Field)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Shared/Types/SortOptions.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field(Field field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_SortOrder_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field(Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder)">
+  Field(Field, SortOrder)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Shared/Types/SortOptions.cs/#L175"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field(Field field, SortOrder order)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>order</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOrder.html">SortOrder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_SortOrder_System_Action_Elastic_Clients_Elasticsearch_FieldSortDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field(Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder,System.Action{Elastic.Clients.Elasticsearch.FieldSortDescriptor})">
+  Field(Field, SortOrder, Action&lt;FieldSortDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Shared/Types/SortOptions.cs/#L195"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field(Field field, SortOrder order, Action&lt;FieldSortDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>order</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOrder.html">SortOrder</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor.html">FieldSortDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_Elastic_Clients_Elasticsearch_Field_System_Action_Elastic_Clients_Elasticsearch_FieldSortDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field(Elastic.Clients.Elasticsearch.Field,System.Action{Elastic.Clients.Elasticsearch.FieldSortDescriptor})">
+  Field(Field, Action&lt;FieldSortDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Shared/Types/SortOptions.cs/#L130"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field(Field field, Action&lt;FieldSortDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor.html">FieldSortDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_Elastic_Clients_Elasticsearch_FieldSort_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field(Elastic.Clients.Elasticsearch.FieldSort)">
+  Field(FieldSort?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field(FieldSort? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.FieldSort.html">FieldSort</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_System_Action_Elastic_Clients_Elasticsearch_FieldSortDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field(System.Action{Elastic.Clients.Elasticsearch.FieldSortDescriptor})">
+  Field(Action&lt;FieldSortDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field(Action&lt;FieldSortDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor.html">FieldSortDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field__1_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_SortOrder_System_Action_Elastic_Clients_Elasticsearch_FieldSortDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field``1(Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.SortOrder,System.Action{Elastic.Clients.Elasticsearch.FieldSortDescriptor{``0}})">
+  Field&lt;T&gt;(Field, SortOrder, Action&lt;FieldSortDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Shared/Types/SortOptions.cs/#L213"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field&lt;T&gt;(Field field, SortOrder order, Action&lt;FieldSortDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>order</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOrder.html">SortOrder</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor-1.html">FieldSortDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field__1_Elastic_Clients_Elasticsearch_Field_System_Action_Elastic_Clients_Elasticsearch_FieldSortDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field``1(Elastic.Clients.Elasticsearch.Field,System.Action{Elastic.Clients.Elasticsearch.FieldSortDescriptor{``0}})">
+  Field&lt;T&gt;(Field, Action&lt;FieldSortDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Shared/Types/SortOptions.cs/#L145"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field&lt;T&gt;(Field field, Action&lt;FieldSortDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor-1.html">FieldSortDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field__1_System_Action_Elastic_Clients_Elasticsearch_FieldSortDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field``1(System.Action{Elastic.Clients.Elasticsearch.FieldSortDescriptor{``0}})">
+  Field&lt;T&gt;(Action&lt;FieldSortDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L225"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field&lt;T&gt;(Action&lt;FieldSortDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor-1.html">FieldSortDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  Field&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Shared/Types/SortOptions.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___Elastic_Clients_Elasticsearch_SortOrder_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},Elastic.Clients.Elasticsearch.SortOrder)">
+  Field&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;, SortOrder)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Shared/Types/SortOptions.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; field, SortOrder order)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>order</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOrder.html">SortOrder</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___Elastic_Clients_Elasticsearch_SortOrder_System_Action_Elastic_Clients_Elasticsearch_FieldSortDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},Elastic.Clients.Elasticsearch.SortOrder,System.Action{Elastic.Clients.Elasticsearch.FieldSortDescriptor{``0}})">
+  Field&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;, SortOrder, Action&lt;FieldSortDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Shared/Types/SortOptions.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; field, SortOrder order, Action&lt;FieldSortDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>order</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOrder.html">SortOrder</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor-1.html">FieldSortDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Field__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Action_Elastic_Clients_Elasticsearch_FieldSortDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Field``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Action{Elastic.Clients.Elasticsearch.FieldSortDescriptor{``0}})">
+  Field&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;, Action&lt;FieldSortDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Shared/Types/SortOptions.cs/#L160"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Field&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; field, Action&lt;FieldSortDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.FieldSortDescriptor-1.html">FieldSortDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_GeoDistance_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.GeoDistance*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_GeoDistance_Elastic_Clients_Elasticsearch_GeoDistanceSort_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.GeoDistance(Elastic.Clients.Elasticsearch.GeoDistanceSort)">
+  GeoDistance(GeoDistanceSort?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L231"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor GeoDistance(GeoDistanceSort? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.GeoDistanceSort.html">GeoDistanceSort</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_GeoDistance_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.GeoDistance*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_GeoDistance_System_Action_Elastic_Clients_Elasticsearch_GeoDistanceSortDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.GeoDistance(System.Action{Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor})">
+  GeoDistance(Action&lt;GeoDistanceSortDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor GeoDistance(Action&lt;GeoDistanceSortDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor.html">GeoDistanceSortDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_GeoDistance_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.GeoDistance*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_GeoDistance__1_System_Action_Elastic_Clients_Elasticsearch_GeoDistanceSortDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.GeoDistance``1(System.Action{Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor{``0}})">
+  GeoDistance&lt;T&gt;(Action&lt;GeoDistanceSortDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L243"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor GeoDistance&lt;T&gt;(Action&lt;GeoDistanceSortDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.GeoDistanceSortDescriptor-1.html">GeoDistanceSortDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Score_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Score*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Score" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Score">
+  Score()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Score()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Score_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Score*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Score_Elastic_Clients_Elasticsearch_ScoreSort_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Score(Elastic.Clients.Elasticsearch.ScoreSort)">
+  Score(ScoreSort?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L249"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Score(ScoreSort? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ScoreSort.html">ScoreSort</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Score_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Score*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Score_System_Action_Elastic_Clients_Elasticsearch_ScoreSortDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Score(System.Action{Elastic.Clients.Elasticsearch.ScoreSortDescriptor})">
+  Score(Action&lt;ScoreSortDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L261"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Score(Action&lt;ScoreSortDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ScoreSortDescriptor.html">ScoreSortDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Script_Elastic_Clients_Elasticsearch_ScriptSort_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Script(Elastic.Clients.Elasticsearch.ScriptSort)">
+  Script(ScriptSort?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Script(ScriptSort? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ScriptSort.html">ScriptSort</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Script_System_Action_Elastic_Clients_Elasticsearch_ScriptSortDescriptor__" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Script(System.Action{Elastic.Clients.Elasticsearch.ScriptSortDescriptor})">
+  Script(Action&lt;ScriptSortDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L273"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Script(Action&lt;ScriptSortDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ScriptSortDescriptor.html">ScriptSortDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Script_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_Script__1_System_Action_Elastic_Clients_Elasticsearch_ScriptSortDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Script``1(System.Action{Elastic.Clients.Elasticsearch.ScriptSortDescriptor{``0}})">
+  Script&lt;T&gt;(Action&lt;ScriptSortDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L279"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SortOptionsDescriptor Script&lt;T&gt;(Action&lt;ScriptSortDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ScriptSortDescriptor-1.html">ScriptSortDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_SortOptions__Elastic_Clients_Elasticsearch_SortOptionsDescriptor" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.SortOptions)~Elastic.Clients.Elasticsearch.SortOptionsDescriptor">
+  explicit operator SortOptionsDescriptor(SortOptions)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L192"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator SortOptionsDescriptor(SortOptions instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_SortOptionsDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_SortOptionsDescriptor__Elastic_Clients_Elasticsearch_SortOptions" data-uid="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.SortOptionsDescriptor)~Elastic.Clients.Elasticsearch.SortOptions">
+  implicit operator SortOptions(SortOptionsDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.2.2/src/Elastic.Clients.Elasticsearch/_Generated/Types/SortOptions.g.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator SortOptions(SortOptionsDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor.html">SortOptionsDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
