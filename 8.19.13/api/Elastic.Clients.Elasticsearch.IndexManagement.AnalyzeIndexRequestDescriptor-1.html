@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct AnalyzeIndexRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct AnalyzeIndexRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Get tokens from text analysis. The analyze API performs analysis on a text string and returns the resulting tokens.   Generating excessive amount of tokens may cause a node to run out of memory. The index.analyze.max_token_count setting enables you to limit the number of tokens that can be produced. If more than this limit of tokens gets generated, an error occurs. The _analyze endpoint without a specified index will always use 10000 as its limit.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.13/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1" class="text-break">
+Struct AnalyzeIndexRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L471"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Get tokens from text analysis.
+The analyze API performs analysis on a text string and returns the resulting tokens.
+</p>
+<p>
+Generating excessive amount of tokens may cause a node to run out of memory.
+The <code>index.analyze.max_token_count</code> setting enables you to limit the number of tokens that can be produced.
+If more than this limit of tokens gets generated, an error occurs.
+The <code>_analyze</code> endpoint without a specified index will always use <code>10000</code> as its limit.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct AnalyzeIndexRequestDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.#ctor">
+  AnalyzeIndexRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L486"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequest_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest)">
+  AnalyzeIndexRequestDescriptor(AnalyzeIndexRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L475"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor(AnalyzeIndexRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest.html">AnalyzeIndexRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.IndexName)">
+  AnalyzeIndexRequestDescriptor(IndexName?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L481"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor(IndexName? index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Analyzer_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Analyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Analyzer_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Analyzer(System.String)">
+  Analyzer(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L513"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the analyzer that should be applied to the provided <code>text</code>.
+This could be a built-in analyzer, or an analyzer that’s been configured in the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Analyzer(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Attributes_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Attributes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Attributes_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Attributes(System.Collections.Generic.ICollection{System.String})">
+  Attributes(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L524"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of token attributes used to filter the output of the <code>explain</code> parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Attributes(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Attributes_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Attributes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Attributes_System_String___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Attributes(System.String[])">
+  Attributes(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L535"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of token attributes used to filter the output of the <code>explain</code> parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Attributes(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_CharFilter_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.CharFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_CharFilter_Elastic_Clients_Elasticsearch_Analysis_ICharFilter___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.CharFilter(Elastic.Clients.Elasticsearch.Analysis.ICharFilter[])">
+  CharFilter(params ICharFilter[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L557"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of character filters used to preprocess characters before the tokenizer.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; CharFilter(params ICharFilter[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ICharFilter.html">ICharFilter</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_CharFilter_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.CharFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_CharFilter_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Analysis_ICharFilter__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.CharFilter(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Analysis.ICharFilter})">
+  CharFilter(ICollection&lt;ICharFilter&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L546"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of character filters used to preprocess characters before the tokenizer.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; CharFilter(ICollection&lt;ICharFilter&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ICharFilter.html">ICharFilter</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_CharFilter_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.CharFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_CharFilter_System_Func_Elastic_Clients_Elasticsearch_Analysis_CharFilterFactory_Elastic_Clients_Elasticsearch_Analysis_ICharFilter____" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.CharFilter(System.Func{Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory,Elastic.Clients.Elasticsearch.Analysis.ICharFilter}[])">
+  CharFilter(params Func&lt;CharFilterFactory, ICharFilter&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L568"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of character filters used to preprocess characters before the tokenizer.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; CharFilter(params Func&lt;CharFilterFactory, ICharFilter&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.CharFilterFactory.html">CharFilterFactory</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ICharFilter.html">ICharFilter</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L726"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Explain_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Explain*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Explain_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Explain(System.Nullable{System.Boolean})">
+  Explain(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L585"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the response includes token attributes and additional details.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Explain(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Field_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Field_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Field(Elastic.Clients.Elasticsearch.Field)">
+  Field(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L598"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field used to derive the analyzer.
+To use this parameter, you must specify an index.
+If specified, the <code>analyzer</code> parameter overrides this value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Field(Field? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Field_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Field_System_Linq_Expressions_Expression_System_Func__0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Field(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+  Field(Expression&lt;Func&lt;TDocument, object?&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L611"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field used to derive the analyzer.
+To use this parameter, you must specify an index.
+If specified, the <code>analyzer</code> parameter overrides this value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Field(Expression&lt;Func&lt;TDocument, object?&gt;&gt; value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Filter_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Filter_Elastic_Clients_Elasticsearch_Analysis_ITokenFilter___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Filter(Elastic.Clients.Elasticsearch.Analysis.ITokenFilter[])">
+  Filter(params ITokenFilter[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L633"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of token filters used to apply after the tokenizer.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Filter(params ITokenFilter[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenFilter.html">ITokenFilter</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Filter_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Filter_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Analysis_ITokenFilter__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Filter(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Analysis.ITokenFilter})">
+  Filter(ICollection&lt;ITokenFilter&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L622"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of token filters used to apply after the tokenizer.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Filter(ICollection&lt;ITokenFilter&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenFilter.html">ITokenFilter</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Filter_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Filter_System_Func_Elastic_Clients_Elasticsearch_Analysis_TokenFilterFactory_Elastic_Clients_Elasticsearch_Analysis_ITokenFilter____" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Filter(System.Func{Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory,Elastic.Clients.Elasticsearch.Analysis.ITokenFilter}[])">
+  Filter(params Func&lt;TokenFilterFactory, ITokenFilter&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L644"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of token filters used to apply after the tokenizer.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Filter(params Func&lt;TokenFilterFactory, ITokenFilter&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.TokenFilterFactory.html">TokenFilterFactory</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenFilter.html">ITokenFilter</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L732"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Human_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L738"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Index_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Index_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Index(Elastic.Clients.Elasticsearch.IndexName)">
+  Index(IndexName?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L501"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Index used to derive the analyzer.
+If specified, the <code>analyzer</code> or field parameter overrides this value.
+If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Index(IndexName? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Normalizer_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Normalizer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Normalizer_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Normalizer(System.String)">
+  Normalizer(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L661"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Normalizer to use to convert text into a single token.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Normalizer(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Pretty_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L744"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L756"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.13/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L762"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.13/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.13/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L750"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Text_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Text*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Text_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Text(System.Collections.Generic.ICollection{System.String})">
+  Text(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L673"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Text to analyze.
+If an array of strings is provided, it is analyzed as a multi-value field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Text(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Text_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Text*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Text_System_String___" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Text(System.String[])">
+  Text(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L685"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Text to analyze.
+If an array of strings is provided, it is analyzed as a multi-value field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Text(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Tokenizer_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Tokenizer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Tokenizer_Elastic_Clients_Elasticsearch_Analysis_ITokenizer_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Tokenizer(Elastic.Clients.Elasticsearch.Analysis.ITokenizer)">
+  Tokenizer(ITokenizer?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L696"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Tokenizer to use to convert text into tokens.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Tokenizer(ITokenizer? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Tokenizer_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Tokenizer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_Tokenizer_System_Func_Elastic_Clients_Elasticsearch_Analysis_TokenizerFactory_Elastic_Clients_Elasticsearch_Analysis_ITokenizer__" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.Tokenizer(System.Func{Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory,Elastic.Clients.Elasticsearch.Analysis.ITokenizer})">
+  Tokenizer(Func&lt;TokenizerFactory, ITokenizer&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L707"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Tokenizer to use to convert text into tokens.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AnalyzeIndexRequestDescriptor&lt;TDocument&gt; Tokenizer(Func&lt;TokenizerFactory, ITokenizer&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.TokenizerFactory.html">TokenizerFactory</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Analysis.ITokenizer.html">ITokenizer</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequest__Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest)~Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor{`0}">
+  explicit operator AnalyzeIndexRequestDescriptor&lt;TDocument&gt;(AnalyzeIndexRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L491"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator AnalyzeIndexRequestDescriptor&lt;TDocument&gt;(AnalyzeIndexRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest.html">AnalyzeIndexRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequestDescriptor__0___Elastic_Clients_Elasticsearch_IndexManagement_AnalyzeIndexRequest" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor{`0})~Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest">
+  implicit operator AnalyzeIndexRequest(AnalyzeIndexRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/AnalyzeIndexRequest.g.cs/#L492"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator AnalyzeIndexRequest(AnalyzeIndexRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequestDescriptor-1.html">AnalyzeIndexRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.AnalyzeIndexRequest.html">AnalyzeIndexRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct InnerHitsDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct InnerHitsDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.13/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1" class="text-break">
+Struct InnerHitsDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.html">Core</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.html">Search</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct InnerHitsDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.#ctor">
+  InnerHitsDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1__ctor_Elastic_Clients_Elasticsearch_Core_Search_InnerHits_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.Core.Search.InnerHits)">
+  InnerHitsDescriptor(InnerHits)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor(InnerHits instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHits.html">InnerHits</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_AddScriptField_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.AddScriptField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_AddScriptField_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_ScriptField_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.AddScriptField(Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.ScriptField)">
+  AddScriptField(Field, ScriptField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L221"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; AddScriptField(Field key, ScriptField value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ScriptField.html">ScriptField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_AddScriptField_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.AddScriptField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_AddScriptField_Elastic_Clients_Elasticsearch_Field_System_Action_Elastic_Clients_Elasticsearch_ScriptFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.AddScriptField(Elastic.Clients.Elasticsearch.Field,System.Action{Elastic.Clients.Elasticsearch.ScriptFieldDescriptor})">
+  AddScriptField(Field, Action&lt;ScriptFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L235"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; AddScriptField(Field key, Action&lt;ScriptFieldDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.html">ScriptFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_AddScriptField_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.AddScriptField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_AddScriptField_System_Linq_Expressions_Expression_System_Func__0_System_Object___Elastic_Clients_Elasticsearch_ScriptField_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.AddScriptField(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Elastic.Clients.Elasticsearch.ScriptField)">
+  AddScriptField(Expression&lt;Func&lt;TDocument, object?&gt;&gt;, ScriptField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L228"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; AddScriptField(Expression&lt;Func&lt;TDocument, object?&gt;&gt; key, ScriptField value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ScriptField.html">ScriptField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_AddScriptField_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.AddScriptField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_AddScriptField_System_Linq_Expressions_Expression_System_Func__0_System_Object___System_Action_Elastic_Clients_Elasticsearch_ScriptFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.AddScriptField(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},System.Action{Elastic.Clients.Elasticsearch.ScriptFieldDescriptor})">
+  AddScriptField(Expression&lt;Func&lt;TDocument, object?&gt;&gt;, Action&lt;ScriptFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; AddScriptField(Expression&lt;Func&lt;TDocument, object?&gt;&gt; key, Action&lt;ScriptFieldDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ScriptFieldDescriptor.html">ScriptFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Collapse_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Collapse*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Collapse_Elastic_Clients_Elasticsearch_Core_Search_FieldCollapse_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse)">
+  Collapse(FieldCollapse?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Collapse(FieldCollapse? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse.html">FieldCollapse</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Collapse_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Collapse*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Collapse_System_Action_Elastic_Clients_Elasticsearch_Core_Search_FieldCollapseDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Collapse(System.Action{Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor{`0}})">
+  Collapse(Action&lt;FieldCollapseDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Collapse(Action&lt;FieldCollapseDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor-1.html">FieldCollapseDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_DocvalueFields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.DocvalueFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_DocvalueFields_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormat___" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.DocvalueFields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[])">
+  DocvalueFields(params FieldAndFormat[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; DocvalueFields(params FieldAndFormat[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat.html">FieldAndFormat</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_DocvalueFields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.DocvalueFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_DocvalueFields_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor__0_____" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.DocvalueFields(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor{`0}}[])">
+  DocvalueFields(params Action&lt;FieldAndFormatDescriptor&lt;TDocument&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L132"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; DocvalueFields(params Action&lt;FieldAndFormatDescriptor&lt;TDocument&gt;&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor-1.html">FieldAndFormatDescriptor</a>&lt;TDocument&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_DocvalueFields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.DocvalueFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_DocvalueFields_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormat__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.DocvalueFields(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat})">
+  DocvalueFields(ICollection&lt;FieldAndFormat&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L120"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; DocvalueFields(ICollection&lt;FieldAndFormat&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat.html">FieldAndFormat</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Explain_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Explain*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Explain_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Explain(System.Nullable{System.Boolean})">
+  Explain(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L144"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Explain(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Fields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Fields_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Fields(Elastic.Clients.Elasticsearch.Fields)">
+  Fields(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L150"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Fields(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Fields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Fields_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Fields(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+  Fields(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L156"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Fields(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_From_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.From*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_From_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.From(System.Nullable{System.Int32})">
+  From(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L167"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Inner hit starting document offset.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; From(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Highlight_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Highlight_Elastic_Clients_Elasticsearch_Core_Search_Highlight_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight)">
+  Highlight(Highlight?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L173"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Highlight(Highlight? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.Highlight.html">Highlight</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Highlight_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Highlight*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Highlight_System_Action_Elastic_Clients_Elasticsearch_Core_Search_HighlightDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Highlight(System.Action{Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor{`0}})">
+  Highlight(Action&lt;HighlightDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Highlight(Action&lt;HighlightDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor-1.html">HighlightDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_IgnoreUnmapped_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.IgnoreUnmapped*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_IgnoreUnmapped_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.IgnoreUnmapped(System.Nullable{System.Boolean})">
+  IgnoreUnmapped(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L185"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; IgnoreUnmapped(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Name_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Name*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Name_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Name(Elastic.Clients.Elasticsearch.Name)">
+  Name(Name?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L197"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name for the particular inner hit definition in the response.
+Useful when a search request contains multiple inner hits.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Name(Name? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_ScriptFields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.ScriptFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_ScriptFields" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.ScriptFields">
+  ScriptFields()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L209"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; ScriptFields()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_ScriptFields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.ScriptFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_ScriptFields_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfFieldScriptField__0___" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.ScriptFields(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldScriptField{`0}})">
+  ScriptFields(Action&lt;FluentDictionaryOfFieldScriptField&lt;TDocument&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L215"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; ScriptFields(Action&lt;FluentDictionaryOfFieldScriptField&lt;TDocument&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldScriptField-1.html">FluentDictionaryOfFieldScriptField</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_ScriptFields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.ScriptFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_ScriptFields_System_Collections_Generic_IDictionary_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_ScriptField__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.ScriptFields(System.Collections.Generic.IDictionary{Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.ScriptField})">
+  ScriptFields(IDictionary&lt;Field, ScriptField&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L203"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; ScriptFields(IDictionary&lt;Field, ScriptField&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.ScriptField.html">ScriptField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_SeqNoPrimaryTerm_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.SeqNoPrimaryTerm*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_SeqNoPrimaryTerm_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.SeqNoPrimaryTerm(System.Nullable{System.Boolean})">
+  SeqNoPrimaryTerm(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L249"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; SeqNoPrimaryTerm(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Size_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Size_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Size(System.Nullable{System.Int32})">
+  Size(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L260"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum number of hits to return per <code>inner_hits</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Size(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Sort_Elastic_Clients_Elasticsearch_SortOptions___" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Sort(Elastic.Clients.Elasticsearch.SortOptions[])">
+  Sort(params SortOptions[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L284"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+How the inner hits should be sorted per <code>inner_hits</code>.
+By default, inner hits are sorted by score.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Sort(params SortOptions[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Sort_System_Action_Elastic_Clients_Elasticsearch_SortOptionsDescriptor__0_____" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Sort(System.Action{Elastic.Clients.Elasticsearch.SortOptionsDescriptor{`0}}[])">
+  Sort(params Action&lt;SortOptionsDescriptor&lt;TDocument&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L296"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+How the inner hits should be sorted per <code>inner_hits</code>.
+By default, inner hits are sorted by score.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Sort(params Action&lt;SortOptionsDescriptor&lt;TDocument&gt;&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptionsDescriptor-1.html">SortOptionsDescriptor</a>&lt;TDocument&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Sort_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Sort_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_SortOptions__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Sort(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.SortOptions})">
+  Sort(ICollection&lt;SortOptions&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L272"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+How the inner hits should be sorted per <code>inner_hits</code>.
+By default, inner hits are sorted by score.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Sort(ICollection&lt;SortOptions&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.SortOptions.html">SortOptions</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Source_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Source_Elastic_Clients_Elasticsearch_Core_Search_SourceConfig_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig)">
+  Source(SourceConfig?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L308"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Source(SourceConfig? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfig.html">SourceConfig</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Source_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Source_System_Func_Elastic_Clients_Elasticsearch_Core_Search_SourceConfigFactory__0__Elastic_Clients_Elasticsearch_Core_Search_SourceConfig__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Source(System.Func{Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory{`0},Elastic.Clients.Elasticsearch.Core.Search.SourceConfig})">
+  Source(Func&lt;SourceConfigFactory&lt;TDocument&gt;, SourceConfig&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L314"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Source(Func&lt;SourceConfigFactory&lt;TDocument&gt;, SourceConfig&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory-1.html">SourceConfigFactory</a>&lt;TDocument&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfig.html">SourceConfig</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_StoredFields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.StoredFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_StoredFields_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.StoredFields(Elastic.Clients.Elasticsearch.Fields)">
+  StoredFields(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L320"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; StoredFields(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_StoredFields_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.StoredFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_StoredFields_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.StoredFields(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+  StoredFields(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L326"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; StoredFields(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_TrackScores_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.TrackScores*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_TrackScores_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.TrackScores(System.Nullable{System.Boolean})">
+  TrackScores(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L332"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; TrackScores(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Version_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Version*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_Version_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.Version(System.Nullable{System.Boolean})">
+  Version(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L338"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InnerHitsDescriptor&lt;TDocument&gt; Version(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_Core_Search_InnerHits__Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.Core.Search.InnerHits)~Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor{`0}">
+  explicit operator InnerHitsDescriptor&lt;TDocument&gt;(InnerHits)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L105"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator InnerHitsDescriptor&lt;TDocument&gt;(InnerHits instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHits.html">InnerHits</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_Core_Search_InnerHitsDescriptor__0___Elastic_Clients_Elasticsearch_Core_Search_InnerHits" data-uid="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor{`0})~Elastic.Clients.Elasticsearch.Core.Search.InnerHits">
+  implicit operator InnerHits(InnerHitsDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/InnerHits.g.cs/#L106"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator InnerHits(InnerHitsDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHitsDescriptor-1.html">InnerHitsDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.InnerHits.html">InnerHits</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

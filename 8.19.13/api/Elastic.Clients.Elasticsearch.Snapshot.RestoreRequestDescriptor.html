@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct RestoreRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct RestoreRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Restore a snapshot. Restore a snapshot of a cluster or data streams and indices.   You can restore a snapshot only to a running cluster with an elected master node. The snapshot repository must be registered and available to the cluster. The snapshot and cluster versions must be compatible.   To restore a snapshot, the cluster&#39;s global metadata must be writable. Ensure there are&#39;t any cluster blocks that prevent writes. The restore operation ignores index blocks.   Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:  GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream  If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can&#39;t roll over or create backing indices.   If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.13/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor" class="text-break">
+Struct RestoreRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L320"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.html">Snapshot</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Restore a snapshot.
+Restore a snapshot of a cluster or data streams and indices.
+</p>
+<p>
+You can restore a snapshot only to a running cluster with an elected master node.
+The snapshot repository must be registered and available to the cluster.
+The snapshot and cluster versions must be compatible.
+</p>
+<p>
+To restore a snapshot, the cluster's global metadata must be writable. Ensure there are't any cluster blocks that prevent writes. The restore operation ignores index blocks.
+</p>
+<p>
+Before you restore a data stream, ensure the cluster contains a matching index template with data streams enabled. To check, use the index management feature in Kibana or the get index template API:
+</p>
+<pre><code class="lang-csharp">GET _index_template/*?filter_path=index_templates.name,index_templates.index_template.index_patterns,index_templates.index_template.data_stream</code></pre>
+<p>
+If no such template exists, you can create one or restore a cluster state that contains one. Without a matching index template, a data stream can't roll over or create backing indices.
+</p>
+<p>
+If your snapshot contains data from App Search or Workplace Search, you must restore the Enterprise Search encryption key before you restore the snapshot.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct RestoreRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.#ctor">
+  RestoreRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L335"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public RestoreRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Name_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Name,Elastic.Clients.Elasticsearch.Name)">
+  RestoreRequestDescriptor(Name, Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L330"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor(Name repository, Name snapshot)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>repository</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+    <dt><code>snapshot</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Snapshot_RestoreRequest_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest)">
+  RestoreRequestDescriptor(RestoreRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L324"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor(RestoreRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest.html">RestoreRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L670"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_FeatureStates_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.FeatureStates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_FeatureStates_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.FeatureStates(System.Collections.Generic.ICollection{System.String})">
+  FeatureStates(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L404"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The feature states to restore.
+If <code>include_global_state</code> is <code>true</code>, the request restores all feature states in the snapshot by default.
+If <code>include_global_state</code> is <code>false</code>, the request restores no feature states by default.
+Note that specifying an empty array will result in the default behavior.
+To restore no feature states, regardless of the <code>include_global_state</code> value, specify an array containing only the value <code>none</code> (<code>["none"]</code>).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor FeatureStates(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_FeatureStates_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.FeatureStates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_FeatureStates_System_String___" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.FeatureStates(System.String[])">
+  FeatureStates(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L419"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The feature states to restore.
+If <code>include_global_state</code> is <code>true</code>, the request restores all feature states in the snapshot by default.
+If <code>include_global_state</code> is <code>false</code>, the request restores no feature states by default.
+Note that specifying an empty array will result in the default behavior.
+To restore no feature states, regardless of the <code>include_global_state</code> value, specify an array containing only the value <code>none</code> (<code>["none"]</code>).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor FeatureStates(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L676"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L682"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IgnoreIndexSettings_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IgnoreIndexSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IgnoreIndexSettings_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IgnoreIndexSettings(System.Collections.Generic.ICollection{System.String})">
+  IgnoreIndexSettings(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L435"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The index settings to not restore from the snapshot.
+You can't use this option to ignore <code>index.number_of_shards</code>.
+</p>
+<p>
+For data streams, this option applies only to restored backing indices.
+New backing indices are configured using the data stream's matching index template.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor IgnoreIndexSettings(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IgnoreIndexSettings_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IgnoreIndexSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IgnoreIndexSettings_System_String___" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IgnoreIndexSettings(System.String[])">
+  IgnoreIndexSettings(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L451"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The index settings to not restore from the snapshot.
+You can't use this option to ignore <code>index.number_of_shards</code>.
+</p>
+<p>
+For data streams, this option applies only to restored backing indices.
+New backing indices are configured using the data stream's matching index template.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor IgnoreIndexSettings(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IgnoreUnavailable_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IgnoreUnavailable(System.Nullable{System.Boolean})">
+  IgnoreUnavailable(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L463"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request ignores any index or data stream in indices that's missing from the snapshot.
+If <code>false</code>, the request returns an error for any missing index or data stream.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor IgnoreUnavailable(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IncludeAliases_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IncludeAliases*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IncludeAliases_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IncludeAliases(System.Nullable{System.Boolean})">
+  IncludeAliases(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L475"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request restores aliases for any restored data streams and indices.
+If <code>false</code>, the request doesn’t restore aliases.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor IncludeAliases(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IncludeGlobalState_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IncludeGlobalState*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IncludeGlobalState_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IncludeGlobalState(System.Nullable{System.Boolean})">
+  IncludeGlobalState(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L533"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, restore the cluster state. The cluster state includes:
+</p>
+<ul><li>
+<p>
+Persistent cluster settings
+</p>
+</li><li>
+<p>
+Index templates
+</p>
+</li><li>
+<p>
+Legacy index templates
+</p>
+</li><li>
+<p>
+Ingest pipelines
+</p>
+</li><li>
+<p>
+Index lifecycle management (ILM) policies
+</p>
+</li><li>
+<p>
+Stored scripts
+</p>
+</li><li>
+<p>
+For snapshots taken after 7.12.0, feature states
+</p>
+</li></ul>
+<p>
+If <code>include_global_state</code> is <code>true</code>, the restore operation merges the legacy index templates in your cluster with the templates contained in the snapshot, replacing any existing ones whose name matches one in the snapshot.
+It completely removes all persistent settings, non-legacy index templates, ingest pipelines, and ILM lifecycle policies that exist in your cluster and replaces them with the corresponding items from the snapshot.
+</p>
+<p>
+Use the <code>feature_states</code> parameter to configure how feature states are restored.
+</p>
+<p>
+If <code>include_global_state</code> is <code>true</code> and a snapshot was created without a global state then the restore request will fail.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor IncludeGlobalState(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IndexSettings_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IndexSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IndexSettings" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IndexSettings">
+  IndexSettings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L565"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Index settings to add or change in restored indices, including backing indices.
+You can't use this option to change <code>index.number_of_shards</code>.
+</p>
+<p>
+For data streams, this option applies only to restored backing indices.
+New backing indices are configured using the data stream's matching index template.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor IndexSettings()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IndexSettings_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IndexSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IndexSettings_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettings_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IndexSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings)">
+  IndexSettings(IndexSettings?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L549"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Index settings to add or change in restored indices, including backing indices.
+You can't use this option to change <code>index.number_of_shards</code>.
+</p>
+<p>
+For data streams, this option applies only to restored backing indices.
+New backing indices are configured using the data stream's matching index template.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor IndexSettings(IndexSettings? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings.html">IndexSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IndexSettings_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IndexSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IndexSettings_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IndexSettings(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor})">
+  IndexSettings(Action&lt;IndexSettingsDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L581"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Index settings to add or change in restored indices, including backing indices.
+You can't use this option to change <code>index.number_of_shards</code>.
+</p>
+<p>
+For data streams, this option applies only to restored backing indices.
+New backing indices are configured using the data stream's matching index template.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor IndexSettings(Action&lt;IndexSettingsDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.html">IndexSettingsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IndexSettings_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IndexSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_IndexSettings__1_System_Action_Elastic_Clients_Elasticsearch_IndexManagement_IndexSettingsDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.IndexSettings``1(System.Action{Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor{``0}})">
+  IndexSettings&lt;T&gt;(Action&lt;IndexSettingsDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L597"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Index settings to add or change in restored indices, including backing indices.
+You can't use this option to change <code>index.number_of_shards</code>.
+</p>
+<p>
+For data streams, this option applies only to restored backing indices.
+New backing indices are configured using the data stream's matching index template.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor IndexSettings&lt;T&gt;(Action&lt;IndexSettingsDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor-1.html">IndexSettingsDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Indices_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Indices_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Indices(Elastic.Clients.Elasticsearch.Indices)">
+  Indices(Indices?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L614"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of indices and data streams to restore.
+It supports a multi-target syntax.
+The default behavior is all regular indices and regular data streams in the snapshot.
+</p>
+<p>
+You can't use this parameter to restore system indices or system data streams.
+Use <code>feature_states</code> instead.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor Indices(Indices? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_MasterTimeout_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.MasterTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_MasterTimeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.MasterTimeout(Elastic.Clients.Elasticsearch.Duration)">
+  MasterTimeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L373"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The period to wait for the master node.
+If the master node is not available before the timeout expires, the request fails and returns an error.
+To indicate that the request should never timeout, set it to <code>-1</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor MasterTimeout(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Partial_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Partial*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Partial_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Partial(System.Nullable{System.Boolean})">
+  Partial(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L630"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>false</code>, the entire restore operation will fail if one or more indices included in the snapshot do not have all primary shards available.
+</p>
+<p>
+If true, it allows restoring a partial snapshot of indices with unavailable shards.
+Only shards that were successfully included in the snapshot will be restored.
+All missing shards will be recreated as empty.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor Partial(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L688"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_RenamePattern_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.RenamePattern*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_RenamePattern_System_String_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.RenamePattern(System.String)">
+  RenamePattern(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L645"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A rename pattern to apply to restored data streams and indices.
+Data streams and indices matching the rename pattern will be renamed according to <code>rename_replacement</code>.
+</p>
+<p>
+The rename pattern is applied as defined by the regular expression that supports referencing the original text, according to the <code>appendReplacement</code> logic.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor RenamePattern(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_RenameReplacement_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.RenameReplacement*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_RenameReplacement_System_String_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.RenameReplacement(System.String)">
+  RenameReplacement(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L656"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The rename replacement string that is used with the <code>rename_pattern</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor RenameReplacement(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Repository_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Repository*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Repository_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Repository(Elastic.Clients.Elasticsearch.Name)">
+  Repository(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L349"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the repository to restore a snapshot from.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor Repository(Name value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L700"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.13/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L706"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.13/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.13/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Snapshot_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Snapshot*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_Snapshot_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.Snapshot(Elastic.Clients.Elasticsearch.Name)">
+  Snapshot(Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L360"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the snapshot to restore.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor Snapshot(Name value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L694"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_WaitForCompletion_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.WaitForCompletion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_WaitForCompletion_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.WaitForCompletion(System.Nullable{System.Boolean})">
+  WaitForCompletion(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L389"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request returns a response when the restore operation completes.
+The operation is complete when it finishes all attempts to recover primary shards for restored indices.
+This applies even if one or more of the recovery attempts fail.
+</p>
+<p>
+If <code>false</code>, the request returns a response when the restore operation initializes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RestoreRequestDescriptor WaitForCompletion(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Snapshot_RestoreRequest__Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest)~Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor">
+  explicit operator RestoreRequestDescriptor(RestoreRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L341"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator RestoreRequestDescriptor(RestoreRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest.html">RestoreRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Snapshot_RestoreRequestDescriptor__Elastic_Clients_Elasticsearch_Snapshot_RestoreRequest" data-uid="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor)~Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest">
+  implicit operator RestoreRequest(RestoreRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/Snapshot/RestoreRequest.g.cs/#L342"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator RestoreRequest(RestoreRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequestDescriptor.html">RestoreRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest.html">RestoreRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

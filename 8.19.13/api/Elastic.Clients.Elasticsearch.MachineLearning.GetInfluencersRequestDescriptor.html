@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct GetInfluencersRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct GetInfluencersRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Get anomaly detection job results for influencers. Influencers are the entities that have contributed to, or are to blame for, the anomalies. Influencer results are available only if an influencer_field_name is specified in the job configuration.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.13/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor" class="text-break">
+Struct GetInfluencersRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L215"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Get anomaly detection job results for influencers.
+Influencers are the entities that have contributed to, or are to blame for,
+the anomalies. Influencer results are available only if an
+<code>influencer_field_name</code> is specified in the job configuration.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct GetInfluencersRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.#ctor">
+  GetInfluencersRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L230"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public GetInfluencersRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Id)">
+  GetInfluencersRequestDescriptor(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L225"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor(Id jobId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>jobId</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequest_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest)">
+  GetInfluencersRequestDescriptor(GetInfluencersRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor(GetInfluencersRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest.html">GetInfluencersRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Desc_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Desc*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Desc_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Desc(System.Nullable{System.Boolean})">
+  Desc(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, the results are sorted in descending order.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor Desc(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_End_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.End*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_End_System_Nullable_System_DateTimeOffset__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.End(System.Nullable{System.DateTimeOffset})">
+  End(DateTimeOffset?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L268"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns influencers with timestamps earlier than this time.
+The default value means it is unset and results are not limited to
+specific timestamps.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor End(DateTimeOffset? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L400"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_ExcludeInterim_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.ExcludeInterim*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_ExcludeInterim_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.ExcludeInterim(System.Nullable{System.Boolean})">
+  ExcludeInterim(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L280"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, the output excludes interim results. By default, interim results
+are included.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor ExcludeInterim(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L406"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_From_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.From*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_From_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.From(System.Nullable{System.Int32})">
+  From(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L291"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Skips the specified number of influencers.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor From(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L412"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_InfluencerScore_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.InfluencerScore*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_InfluencerScore_System_Nullable_System_Double__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.InfluencerScore(System.Nullable{System.Double})">
+  InfluencerScore(double?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L303"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns influencers with anomaly scores greater than or equal to this
+value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor InfluencerScore(double? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_JobId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.JobId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_JobId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.JobId(Elastic.Clients.Elasticsearch.Id)">
+  JobId(Id)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L244"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Identifier for the anomaly detection job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor JobId(Id value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Page_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Page*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Page" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Page">
+  Page()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L374"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configures pagination.
+This parameter has the <code>from</code> and <code>size</code> properties.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor Page()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Page_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Page*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Page_Elastic_Clients_Elasticsearch_MachineLearning_Page_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Page(Elastic.Clients.Elasticsearch.MachineLearning.Page)">
+  Page(Page?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L362"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configures pagination.
+This parameter has the <code>from</code> and <code>size</code> properties.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor Page(Page? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.Page.html">Page</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Page_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Page*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Page_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_PageDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Page(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor})">
+  Page(Action&lt;PageDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L386"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configures pagination.
+This parameter has the <code>from</code> and <code>size</code> properties.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor Page(Action&lt;PageDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PageDescriptor.html">PageDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L418"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L430"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.13/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L436"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.13/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.13/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Size_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Size_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Size(System.Nullable{System.Int32})">
+  Size(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L314"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies the maximum number of influencers to obtain.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor Size(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Sort_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Sort(Elastic.Clients.Elasticsearch.Field)">
+  Sort(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L326"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies the sort field for the requested influencers. By default, the
+influencers are sorted by the <code>influencer_score</code> value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor Sort(Field? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Sort__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Sort``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  Sort&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L338"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies the sort field for the requested influencers. By default, the
+influencers are sorted by the <code>influencer_score</code> value.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor Sort&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L424"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Start_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Start*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_Start_System_Nullable_System_DateTimeOffset__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.Start(System.Nullable{System.DateTimeOffset})">
+  Start(DateTimeOffset?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L350"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Returns influencers with timestamps after this time. The default value
+means it is unset and results are not limited to specific timestamps.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GetInfluencersRequestDescriptor Start(DateTimeOffset? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetimeoffset">DateTimeOffset</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequest__Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest)~Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor">
+  explicit operator GetInfluencersRequestDescriptor(GetInfluencersRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L236"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator GetInfluencersRequestDescriptor(GetInfluencersRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest.html">GetInfluencersRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequestDescriptor__Elastic_Clients_Elasticsearch_MachineLearning_GetInfluencersRequest" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor)~Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest">
+  implicit operator GetInfluencersRequest(GetInfluencersRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.13/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/GetInfluencersRequest.g.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator GetInfluencersRequest(GetInfluencersRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequestDescriptor.html">GetInfluencersRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.GetInfluencersRequest.html">GetInfluencersRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
