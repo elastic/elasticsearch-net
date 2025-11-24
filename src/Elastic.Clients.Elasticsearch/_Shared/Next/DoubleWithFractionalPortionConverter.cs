@@ -39,7 +39,13 @@ internal sealed class DoubleWithFractionalPortionConverter :
 			return reader.GetDouble();
 		}
 
+#if !NETFRAMEWORK
 		if (options.NumberHandling.HasFlag(JsonNumberHandling.AllowNamedFloatingPointLiterals))
+#else
+		// Optimize hot-path for performance since `HasFlag` causes boxing on .NET Framework.
+		if (((int)options.NumberHandling & (int)JsonNumberHandling.AllowNamedFloatingPointLiterals) ==
+		    (int)JsonNumberHandling.AllowNamedFloatingPointLiterals)
+#endif
 		{
 			if (reader.ValueTextEquals(NaN))
 			{
@@ -57,7 +63,13 @@ internal sealed class DoubleWithFractionalPortionConverter :
 			}
 		}
 
+#if !NETFRAMEWORK
 		if (!options.NumberHandling.HasFlag(JsonNumberHandling.AllowReadingFromString))
+#else
+		// Optimize hot-path for performance since `HasFlag` causes boxing on .NET Framework.
+		if (((int)options.NumberHandling & (int)JsonNumberHandling.AllowReadingFromString) !=
+		    (int)JsonNumberHandling.AllowReadingFromString)
+#endif
 		{
 			return reader.GetDouble();
 		}
@@ -71,7 +83,13 @@ internal sealed class DoubleWithFractionalPortionConverter :
 
 	public override void Write(Utf8JsonWriter writer, double value, JsonSerializerOptions options)
 	{
+#if !NETFRAMEWORK
 		if (options.NumberHandling.HasFlag(JsonNumberHandling.AllowNamedFloatingPointLiterals))
+#else
+		// Optimize hot-path for performance since `HasFlag` causes boxing on .NET Framework.
+		if (((int)options.NumberHandling & (int)JsonNumberHandling.AllowNamedFloatingPointLiterals) ==
+		    (int)JsonNumberHandling.AllowNamedFloatingPointLiterals)
+#endif
 		{
 			if (double.IsNaN(value))
 			{
@@ -92,7 +110,13 @@ internal sealed class DoubleWithFractionalPortionConverter :
 			}
 		}
 
+#if !NETFRAMEWORK
 		if (options.NumberHandling.HasFlag(JsonNumberHandling.WriteAsString))
+#else
+		// Optimize hot-path for performance since `HasFlag` causes boxing on .NET Framework.
+		if (((int)options.NumberHandling & (int)JsonNumberHandling.WriteAsString) ==
+		    (int)JsonNumberHandling.WriteAsString)
+#endif
 		{
 			throw new NotImplementedException("'JsonNumberHandling.WriteAsString' is currently not supported.");
 		}
