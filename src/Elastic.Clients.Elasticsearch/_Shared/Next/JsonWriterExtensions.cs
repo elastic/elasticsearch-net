@@ -250,6 +250,21 @@ internal static class JsonWriterExtensions
 		);
 	}
 
+	public static void WriteSpanValue<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, ReadOnlySpan<T> span,
+		JsonWriteFunc<T>? writeElement)
+	{
+		writeElement ??= static (w, o, v) => WriteValue(w, o, v);
+
+		writer.WriteStartArray();
+
+		foreach (var element in span)
+		{
+			writeElement(writer, options, element);
+		}
+
+		writer.WriteEndArray();
+	}
+
 	#endregion Delegate Based Write Methods
 
 	#region Specialized Write Methods
