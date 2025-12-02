@@ -9,9 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using Elastic.Clients.Elasticsearch.Serialization;
-
-namespace Elastic.Clients.Elasticsearch;
+namespace Elastic.Clients.Elasticsearch.Serialization;
 
 /// <summary>
 /// The encoding to use when serializing vector data using the <see cref="FloatVectorDataConverter"/> converter.

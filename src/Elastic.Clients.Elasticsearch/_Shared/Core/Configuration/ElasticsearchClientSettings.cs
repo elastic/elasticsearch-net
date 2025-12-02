@@ -115,8 +115,8 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 	private readonly Serializer _sourceSerializer;
 	private BeforeRequestEvent? _onBeforeRequest;
 	private bool _experimentalEnableSerializeNullInferredValues;
-	private FloatVectorDataEncoding _floatVectorDataEncoding = Elasticsearch.FloatVectorDataEncoding.Base64;
-	private ByteVectorDataEncoding _byteVectorDataEncoding = Elasticsearch.ByteVectorDataEncoding.Base64;
+	private FloatVectorDataEncoding _floatVectorDataEncoding = Serialization.FloatVectorDataEncoding.Base64;
+	private ByteVectorDataEncoding _byteVectorDataEncoding = Serialization.ByteVectorDataEncoding.Base64;
 	private ExperimentalSettings _experimentalSettings = new();
 
 	private bool _defaultDisableAllInference;

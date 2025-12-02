@@ -5,7 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+
 using Elastic.Clients.Elasticsearch.Requests;
+using Elastic.Clients.Elasticsearch.Serialization;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
