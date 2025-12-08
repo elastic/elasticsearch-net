@@ -8,6 +8,6 @@ TEST_SUITE:
   - platinum
 
 DOTNET_VERSION:
-  - 9.0.100
+  - 10.0.100
 
 exclude: ~
