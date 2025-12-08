@@ -5,6 +5,7 @@
 using System;
 using System.Buffers;
 using System.Buffers.Binary;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -57,7 +58,7 @@ public sealed class FloatVectorDataConverter :
 		switch (_encoding)
 		{
 			case FloatVectorDataEncoding.Legacy:
-				writer.WriteSpanValue(options, value.Span, null);
+				writer.WriteMemoryValue(options, value, null);
 				break;
 
 			case FloatVectorDataEncoding.Base64:
@@ -69,6 +70,7 @@ public sealed class FloatVectorDataConverter :
 		}
 	}
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static ReadOnlyMemory<float> ReadBase64VectorData(ref Utf8JsonReader reader)
 	{
 		var bytes = reader.GetBytesFromBase64();
@@ -98,6 +100,7 @@ public sealed class FloatVectorDataConverter :
 		return new(result);
 	}
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static void WriteBase64VectorData(Utf8JsonWriter writer, ReadOnlyMemory<float> value)
 	{
 		if (value.IsEmpty)
@@ -192,7 +195,7 @@ public sealed class ByteVectorDataConverter :
 		switch (_encoding)
 		{
 			case ByteVectorDataEncoding.Legacy:
-				writer.WriteSpanValue(options, value.Span, (w, _, b) => w.WriteNumberValue(unchecked((sbyte)b)));
+				writer.WriteMemoryValue(options, value, (w, _, b) => w.WriteNumberValue(unchecked((sbyte)b)));
 				break;
 
 			case ByteVectorDataEncoding.Hex:
@@ -208,6 +211,7 @@ public sealed class ByteVectorDataConverter :
 		}
 	}
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static ReadOnlyMemory<byte> ReadStringVectorData(ref Utf8JsonReader reader)
 	{
 		if (reader.TryGetBytesFromBase64(out var result))
@@ -218,6 +222,7 @@ public sealed class ByteVectorDataConverter :
 		return ReadHexVectorData(ref reader);
 	}
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static ReadOnlyMemory<byte> ReadHexVectorData(ref Utf8JsonReader reader)
 	{
 #if NET5_0_OR_GREATER
@@ -229,6 +234,7 @@ public sealed class ByteVectorDataConverter :
 		return new(data);
 	}
 
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	private static void WriteHexVectorData(Utf8JsonWriter writer, ReadOnlyMemory<byte> value)
 	{
 		if (value.IsEmpty)
@@ -267,7 +273,8 @@ public sealed class ByteVectorDataConverter :
 	}
 
 #if !NET5_0_OR_GREATER
-	public static byte[] FromHex(string data)
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	private static byte[] FromHex(string data)
 	{
 		if (data.Length is 0)
 		{

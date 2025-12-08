@@ -250,13 +250,28 @@ internal static class JsonWriterExtensions
 		);
 	}
 
-	public static void WriteSpanValue<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, ReadOnlySpan<T> span,
+	public static void WriteMemoryValue<T>(this Utf8JsonWriter writer, JsonSerializerOptions options, ReadOnlyMemory<T> memory,
 		JsonWriteFunc<T>? writeElement)
 	{
-		writeElement ??= static (w, o, v) => WriteValue(w, o, v);
+		if (writeElement is null)
+		{
+			var converter = options.GetConverter<T>(null);
+
+			writeElement = (w, o, v) =>
+			{
+				if ((v is null) && !converter.HandleNull)
+				{
+					w.WriteNullValue();
+					return;
+				}
+
+				converter.Write(w, v, o);
+			};
+		}
 
 		writer.WriteStartArray();
 
+		var span = memory.Span;
 		foreach (var element in span)
 		{
 			writeElement(writer, options, element);
