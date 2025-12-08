@@ -16,24 +16,24 @@ public sealed class GeoBoundsConverter :
 {
 	// Coordinates.
 
-	private static readonly JsonEncodedText PropBottom = JsonEncodedText.Encode("bottom");
-	private static readonly JsonEncodedText PropLeft = JsonEncodedText.Encode("left");
-	private static readonly JsonEncodedText PropRight = JsonEncodedText.Encode("right");
-	private static readonly JsonEncodedText PropTop = JsonEncodedText.Encode("top");
+	private static readonly JsonEncodedText PropBottom = JsonEncodedText.Encode("bottom"u8);
+	private static readonly JsonEncodedText PropLeft = JsonEncodedText.Encode("left"u8);
+	private static readonly JsonEncodedText PropRight = JsonEncodedText.Encode("right"u8);
+	private static readonly JsonEncodedText PropTop = JsonEncodedText.Encode("top"u8);
 
 	// TopLeftBottomRight.
 
-	private static readonly JsonEncodedText PropBottomRight = JsonEncodedText.Encode("bottom_right");
-	private static readonly JsonEncodedText PropTopLeft = JsonEncodedText.Encode("top_left");
+	private static readonly JsonEncodedText PropBottomRight = JsonEncodedText.Encode("bottom_right"u8);
+	private static readonly JsonEncodedText PropTopLeft = JsonEncodedText.Encode("top_left"u8);
 
 	// TopRightBottomLeft.
 
-	private static readonly JsonEncodedText PropBottomLeft = JsonEncodedText.Encode("bottom_left");
-	private static readonly JsonEncodedText PropTopRight = JsonEncodedText.Encode("top_right");
+	private static readonly JsonEncodedText PropBottomLeft = JsonEncodedText.Encode("bottom_left"u8);
+	private static readonly JsonEncodedText PropTopRight = JsonEncodedText.Encode("top_right"u8);
 
 	// WKT.
 
-	private static readonly JsonEncodedText PropWkt = JsonEncodedText.Encode("wkt");
+	private static readonly JsonEncodedText PropWkt = JsonEncodedText.Encode("wkt"u8);
 
 	public override GeoBounds? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
