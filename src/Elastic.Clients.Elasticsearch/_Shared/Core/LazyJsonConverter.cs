@@ -18,9 +18,7 @@ public sealed class LazyJsonConverter : JsonConverter<LazyJson>
 	{
 		InitializeSettings(options);
 
-#pragma warning disable IL2026, IL3050 // The `TypeInfoResolver` for `RequestResponseConverter` knows how to handle `JsonElement`.
-		return new LazyJson(JsonSerializer.Deserialize<JsonElement>(ref reader, options), _settings!);
-#pragma warning restore IL2026, IL3050
+		return new LazyJson(JsonElement.ParseValue(ref reader), _settings!);
 	}
 
 	private void InitializeSettings(JsonSerializerOptions options)
