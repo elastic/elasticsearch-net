@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class AzureOpenAITaskSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user");
+	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

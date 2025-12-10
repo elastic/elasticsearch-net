@@ -25,22 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class CalendarIntervalConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDay = System.Text.Json.JsonEncodedText.Encode("day");
-	private static readonly System.Text.Json.JsonEncodedText MemberDay1 = System.Text.Json.JsonEncodedText.Encode("1d");
-	private static readonly System.Text.Json.JsonEncodedText MemberHour = System.Text.Json.JsonEncodedText.Encode("hour");
-	private static readonly System.Text.Json.JsonEncodedText MemberHour1 = System.Text.Json.JsonEncodedText.Encode("1h");
-	private static readonly System.Text.Json.JsonEncodedText MemberMinute = System.Text.Json.JsonEncodedText.Encode("minute");
-	private static readonly System.Text.Json.JsonEncodedText MemberMinute1 = System.Text.Json.JsonEncodedText.Encode("1m");
-	private static readonly System.Text.Json.JsonEncodedText MemberMonth = System.Text.Json.JsonEncodedText.Encode("month");
-	private static readonly System.Text.Json.JsonEncodedText MemberMonth1 = System.Text.Json.JsonEncodedText.Encode("1M");
-	private static readonly System.Text.Json.JsonEncodedText MemberQuarter = System.Text.Json.JsonEncodedText.Encode("quarter");
-	private static readonly System.Text.Json.JsonEncodedText MemberQuarter1 = System.Text.Json.JsonEncodedText.Encode("1q");
-	private static readonly System.Text.Json.JsonEncodedText MemberSecond = System.Text.Json.JsonEncodedText.Encode("second");
-	private static readonly System.Text.Json.JsonEncodedText MemberSecond1 = System.Text.Json.JsonEncodedText.Encode("1s");
-	private static readonly System.Text.Json.JsonEncodedText MemberWeek = System.Text.Json.JsonEncodedText.Encode("week");
-	private static readonly System.Text.Json.JsonEncodedText MemberWeek1 = System.Text.Json.JsonEncodedText.Encode("1w");
-	private static readonly System.Text.Json.JsonEncodedText MemberYear = System.Text.Json.JsonEncodedText.Encode("year");
-	private static readonly System.Text.Json.JsonEncodedText MemberYear1 = System.Text.Json.JsonEncodedText.Encode("1y");
+	private static readonly System.Text.Json.JsonEncodedText MemberDay = System.Text.Json.JsonEncodedText.Encode("day"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDay1 = System.Text.Json.JsonEncodedText.Encode("1d"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHour = System.Text.Json.JsonEncodedText.Encode("hour"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHour1 = System.Text.Json.JsonEncodedText.Encode("1h"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMinute = System.Text.Json.JsonEncodedText.Encode("minute"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMinute1 = System.Text.Json.JsonEncodedText.Encode("1m"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMonth = System.Text.Json.JsonEncodedText.Encode("month"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMonth1 = System.Text.Json.JsonEncodedText.Encode("1M"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberQuarter = System.Text.Json.JsonEncodedText.Encode("quarter"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberQuarter1 = System.Text.Json.JsonEncodedText.Encode("1q"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSecond = System.Text.Json.JsonEncodedText.Encode("second"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSecond1 = System.Text.Json.JsonEncodedText.Encode("1s"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWeek = System.Text.Json.JsonEncodedText.Encode("week"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberWeek1 = System.Text.Json.JsonEncodedText.Encode("1w"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberYear = System.Text.Json.JsonEncodedText.Encode("year"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberYear1 = System.Text.Json.JsonEncodedText.Encode("1y"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.CalendarInterval Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

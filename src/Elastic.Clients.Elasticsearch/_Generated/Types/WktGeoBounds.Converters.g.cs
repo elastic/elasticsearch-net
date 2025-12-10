@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class WktGeoBoundsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.WktGeoBounds>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropWkt = System.Text.Json.JsonEncodedText.Encode("wkt");
+	private static readonly System.Text.Json.JsonEncodedText PropWkt = System.Text.Json.JsonEncodedText.Encode("wkt"u8);
 
 	public override Elastic.Clients.Elasticsearch.WktGeoBounds Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

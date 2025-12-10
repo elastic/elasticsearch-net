@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class DeleteInferenceResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
-	private static readonly System.Text.Json.JsonEncodedText PropPipelines = System.Text.Json.JsonEncodedText.Encode("pipelines");
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPipelines = System.Text.Json.JsonEncodedText.Encode("pipelines"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

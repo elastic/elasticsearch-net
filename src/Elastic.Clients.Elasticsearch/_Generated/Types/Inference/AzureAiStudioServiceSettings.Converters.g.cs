@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class AzureAiStudioServiceSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
-	private static readonly System.Text.Json.JsonEncodedText PropEndpointType = System.Text.Json.JsonEncodedText.Encode("endpoint_type");
-	private static readonly System.Text.Json.JsonEncodedText PropProvider = System.Text.Json.JsonEncodedText.Encode("provider");
-	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropTarget = System.Text.Json.JsonEncodedText.Encode("target");
+	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEndpointType = System.Text.Json.JsonEncodedText.Encode("endpoint_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProvider = System.Text.Json.JsonEncodedText.Encode("provider"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRateLimit = System.Text.Json.JsonEncodedText.Encode("rate_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTarget = System.Text.Json.JsonEncodedText.Encode("target"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.AzureAiStudioServiceSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

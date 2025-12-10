@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class UserProfileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.UserProfile>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropLabels = System.Text.Json.JsonEncodedText.Encode("labels");
-	private static readonly System.Text.Json.JsonEncodedText PropUid = System.Text.Json.JsonEncodedText.Encode("uid");
-	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user");
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLabels = System.Text.Json.JsonEncodedText.Encode("labels"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUid = System.Text.Json.JsonEncodedText.Encode("uid"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUser = System.Text.Json.JsonEncodedText.Encode("user"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.UserProfile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

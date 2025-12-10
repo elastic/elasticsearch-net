@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class HistogramAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExtendedBounds = System.Text.Json.JsonEncodedText.Encode("extended_bounds");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropHardBounds = System.Text.Json.JsonEncodedText.Encode("hard_bounds");
-	private static readonly System.Text.Json.JsonEncodedText PropInterval = System.Text.Json.JsonEncodedText.Encode("interval");
-	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing");
-	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset");
-	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
-	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropExtendedBounds = System.Text.Json.JsonEncodedText.Encode("extended_bounds"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHardBounds = System.Text.Json.JsonEncodedText.Encode("hard_bounds"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInterval = System.Text.Json.JsonEncodedText.Encode("interval"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissing = System.Text.Json.JsonEncodedText.Encode("missing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOffset = System.Text.Json.JsonEncodedText.Encode("offset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.HistogramAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

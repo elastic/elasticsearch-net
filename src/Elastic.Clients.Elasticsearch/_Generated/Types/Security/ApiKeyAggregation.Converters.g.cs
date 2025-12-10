@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class ApiKeyAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ApiKeyAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
-	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
 	private static readonly System.Text.Json.JsonEncodedText VariantCardinality = System.Text.Json.JsonEncodedText.Encode("cardinality");
 	private static readonly System.Text.Json.JsonEncodedText VariantComposite = System.Text.Json.JsonEncodedText.Encode("composite");
 	private static readonly System.Text.Json.JsonEncodedText VariantDateRange = System.Text.Json.JsonEncodedText.Encode("date_range");

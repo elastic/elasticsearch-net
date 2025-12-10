@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ConfusionMatrixThresholdConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThreshold>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFalseNegative = System.Text.Json.JsonEncodedText.Encode("fn");
-	private static readonly System.Text.Json.JsonEncodedText PropFalsePositive = System.Text.Json.JsonEncodedText.Encode("fp");
-	private static readonly System.Text.Json.JsonEncodedText PropTrueNegative = System.Text.Json.JsonEncodedText.Encode("tn");
-	private static readonly System.Text.Json.JsonEncodedText PropTruePositive = System.Text.Json.JsonEncodedText.Encode("tp");
+	private static readonly System.Text.Json.JsonEncodedText PropFalseNegative = System.Text.Json.JsonEncodedText.Encode("fn"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFalsePositive = System.Text.Json.JsonEncodedText.Encode("fp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrueNegative = System.Text.Json.JsonEncodedText.Encode("tn"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTruePositive = System.Text.Json.JsonEncodedText.Encode("tp"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixThreshold Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

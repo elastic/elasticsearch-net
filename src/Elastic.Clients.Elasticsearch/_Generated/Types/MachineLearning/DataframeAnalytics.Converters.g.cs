@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalyticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalytics>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAssignmentExplanation = System.Text.Json.JsonEncodedText.Encode("assignment_explanation");
-	private static readonly System.Text.Json.JsonEncodedText PropDataCounts = System.Text.Json.JsonEncodedText.Encode("data_counts");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropMemoryUsage = System.Text.Json.JsonEncodedText.Encode("memory_usage");
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
-	private static readonly System.Text.Json.JsonEncodedText PropProgress = System.Text.Json.JsonEncodedText.Encode("progress");
-	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
+	private static readonly System.Text.Json.JsonEncodedText PropAssignmentExplanation = System.Text.Json.JsonEncodedText.Encode("assignment_explanation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataCounts = System.Text.Json.JsonEncodedText.Encode("data_counts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMemoryUsage = System.Text.Json.JsonEncodedText.Encode("memory_usage"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProgress = System.Text.Json.JsonEncodedText.Encode("progress"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalytics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

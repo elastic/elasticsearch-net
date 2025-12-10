@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeAnalyticsMemoryEstimationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExpectedMemoryWithDisk = System.Text.Json.JsonEncodedText.Encode("expected_memory_with_disk");
-	private static readonly System.Text.Json.JsonEncodedText PropExpectedMemoryWithoutDisk = System.Text.Json.JsonEncodedText.Encode("expected_memory_without_disk");
+	private static readonly System.Text.Json.JsonEncodedText PropExpectedMemoryWithDisk = System.Text.Json.JsonEncodedText.Encode("expected_memory_with_disk"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExpectedMemoryWithoutDisk = System.Text.Json.JsonEncodedText.Encode("expected_memory_without_disk"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsMemoryEstimation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

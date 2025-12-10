@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class RepositoryLocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBasePath = System.Text.Json.JsonEncodedText.Encode("base_path");
-	private static readonly System.Text.Json.JsonEncodedText PropBucket = System.Text.Json.JsonEncodedText.Encode("bucket");
-	private static readonly System.Text.Json.JsonEncodedText PropContainer = System.Text.Json.JsonEncodedText.Encode("container");
+	private static readonly System.Text.Json.JsonEncodedText PropBasePath = System.Text.Json.JsonEncodedText.Encode("base_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBucket = System.Text.Json.JsonEncodedText.Encode("bucket"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropContainer = System.Text.Json.JsonEncodedText.Encode("container"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.RepositoryLocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

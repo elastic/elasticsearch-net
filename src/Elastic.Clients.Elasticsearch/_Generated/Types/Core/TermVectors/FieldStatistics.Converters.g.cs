@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.TermVectors.Json;
 
 public sealed partial class FieldStatisticsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropSumDocFreq = System.Text.Json.JsonEncodedText.Encode("sum_doc_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropSumTtf = System.Text.Json.JsonEncodedText.Encode("sum_ttf");
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSumDocFreq = System.Text.Json.JsonEncodedText.Encode("sum_doc_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSumTtf = System.Text.Json.JsonEncodedText.Encode("sum_ttf"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.TermVectors.FieldStatistics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

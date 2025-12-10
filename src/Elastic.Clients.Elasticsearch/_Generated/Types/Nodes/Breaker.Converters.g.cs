@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class BreakerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Breaker>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEstimatedSize = System.Text.Json.JsonEncodedText.Encode("estimated_size");
-	private static readonly System.Text.Json.JsonEncodedText PropEstimatedSizeInBytes = System.Text.Json.JsonEncodedText.Encode("estimated_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropLimitSize = System.Text.Json.JsonEncodedText.Encode("limit_size");
-	private static readonly System.Text.Json.JsonEncodedText PropLimitSizeInBytes = System.Text.Json.JsonEncodedText.Encode("limit_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropOverhead = System.Text.Json.JsonEncodedText.Encode("overhead");
-	private static readonly System.Text.Json.JsonEncodedText PropTripped = System.Text.Json.JsonEncodedText.Encode("tripped");
+	private static readonly System.Text.Json.JsonEncodedText PropEstimatedSize = System.Text.Json.JsonEncodedText.Encode("estimated_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEstimatedSizeInBytes = System.Text.Json.JsonEncodedText.Encode("estimated_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLimitSize = System.Text.Json.JsonEncodedText.Encode("limit_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLimitSizeInBytes = System.Text.Json.JsonEncodedText.Encode("limit_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOverhead = System.Text.Json.JsonEncodedText.Encode("overhead"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTripped = System.Text.Json.JsonEncodedText.Encode("tripped"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Breaker Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class SynonymGraphTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExpand = System.Text.Json.JsonEncodedText.Encode("expand");
-	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
-	private static readonly System.Text.Json.JsonEncodedText PropLenient = System.Text.Json.JsonEncodedText.Encode("lenient");
-	private static readonly System.Text.Json.JsonEncodedText PropSynonyms = System.Text.Json.JsonEncodedText.Encode("synonyms");
-	private static readonly System.Text.Json.JsonEncodedText PropSynonymsPath = System.Text.Json.JsonEncodedText.Encode("synonyms_path");
-	private static readonly System.Text.Json.JsonEncodedText PropSynonymsSet = System.Text.Json.JsonEncodedText.Encode("synonyms_set");
-	private static readonly System.Text.Json.JsonEncodedText PropTokenizer = System.Text.Json.JsonEncodedText.Encode("tokenizer");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropUpdateable = System.Text.Json.JsonEncodedText.Encode("updateable");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropExpand = System.Text.Json.JsonEncodedText.Encode("expand"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLenient = System.Text.Json.JsonEncodedText.Encode("lenient"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSynonyms = System.Text.Json.JsonEncodedText.Encode("synonyms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSynonymsPath = System.Text.Json.JsonEncodedText.Encode("synonyms_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSynonymsSet = System.Text.Json.JsonEncodedText.Encode("synonyms_set"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokenizer = System.Text.Json.JsonEncodedText.Encode("tokenizer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpdateable = System.Text.Json.JsonEncodedText.Encode("updateable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.SynonymGraphTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

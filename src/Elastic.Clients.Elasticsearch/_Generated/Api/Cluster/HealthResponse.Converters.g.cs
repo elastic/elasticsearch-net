@@ -25,25 +25,25 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class HealthResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.HealthResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActivePrimaryShards = System.Text.Json.JsonEncodedText.Encode("active_primary_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropActiveShards = System.Text.Json.JsonEncodedText.Encode("active_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropActiveShardsPercent = System.Text.Json.JsonEncodedText.Encode("active_shards_percent");
-	private static readonly System.Text.Json.JsonEncodedText PropActiveShardsPercentAsNumber = System.Text.Json.JsonEncodedText.Encode("active_shards_percent_as_number");
-	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
-	private static readonly System.Text.Json.JsonEncodedText PropDelayedUnassignedShards = System.Text.Json.JsonEncodedText.Encode("delayed_unassigned_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropInitializingShards = System.Text.Json.JsonEncodedText.Encode("initializing_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfDataNodes = System.Text.Json.JsonEncodedText.Encode("number_of_data_nodes");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfInFlightFetch = System.Text.Json.JsonEncodedText.Encode("number_of_in_flight_fetch");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfNodes = System.Text.Json.JsonEncodedText.Encode("number_of_nodes");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfPendingTasks = System.Text.Json.JsonEncodedText.Encode("number_of_pending_tasks");
-	private static readonly System.Text.Json.JsonEncodedText PropRelocatingShards = System.Text.Json.JsonEncodedText.Encode("relocating_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropTaskMaxWaitingInQueue = System.Text.Json.JsonEncodedText.Encode("task_max_waiting_in_queue");
-	private static readonly System.Text.Json.JsonEncodedText PropTaskMaxWaitingInQueueMillis = System.Text.Json.JsonEncodedText.Encode("task_max_waiting_in_queue_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTimedOut = System.Text.Json.JsonEncodedText.Encode("timed_out");
-	private static readonly System.Text.Json.JsonEncodedText PropUnassignedPrimaryShards = System.Text.Json.JsonEncodedText.Encode("unassigned_primary_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropUnassignedShards = System.Text.Json.JsonEncodedText.Encode("unassigned_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropActivePrimaryShards = System.Text.Json.JsonEncodedText.Encode("active_primary_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropActiveShards = System.Text.Json.JsonEncodedText.Encode("active_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropActiveShardsPercent = System.Text.Json.JsonEncodedText.Encode("active_shards_percent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropActiveShardsPercentAsNumber = System.Text.Json.JsonEncodedText.Encode("active_shards_percent_as_number"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDelayedUnassignedShards = System.Text.Json.JsonEncodedText.Encode("delayed_unassigned_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitializingShards = System.Text.Json.JsonEncodedText.Encode("initializing_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfDataNodes = System.Text.Json.JsonEncodedText.Encode("number_of_data_nodes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfInFlightFetch = System.Text.Json.JsonEncodedText.Encode("number_of_in_flight_fetch"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfNodes = System.Text.Json.JsonEncodedText.Encode("number_of_nodes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfPendingTasks = System.Text.Json.JsonEncodedText.Encode("number_of_pending_tasks"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRelocatingShards = System.Text.Json.JsonEncodedText.Encode("relocating_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTaskMaxWaitingInQueue = System.Text.Json.JsonEncodedText.Encode("task_max_waiting_in_queue"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTaskMaxWaitingInQueueMillis = System.Text.Json.JsonEncodedText.Encode("task_max_waiting_in_queue_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimedOut = System.Text.Json.JsonEncodedText.Encode("timed_out"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedPrimaryShards = System.Text.Json.JsonEncodedText.Encode("unassigned_primary_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedShards = System.Text.Json.JsonEncodedText.Encode("unassigned_shards"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.HealthResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

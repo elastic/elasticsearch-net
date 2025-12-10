@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class TermsAggregationCollectModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBreadthFirst = System.Text.Json.JsonEncodedText.Encode("breadth_first");
-	private static readonly System.Text.Json.JsonEncodedText MemberDepthFirst = System.Text.Json.JsonEncodedText.Encode("depth_first");
+	private static readonly System.Text.Json.JsonEncodedText MemberBreadthFirst = System.Text.Json.JsonEncodedText.Encode("breadth_first"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDepthFirst = System.Text.Json.JsonEncodedText.Encode("depth_first"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.TermsAggregationCollectMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

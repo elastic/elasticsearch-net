@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Rollup.Json;
 
 public sealed partial class TermsGroupingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.TermsGrouping>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
 
 	public override Elastic.Clients.Elasticsearch.Rollup.TermsGrouping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

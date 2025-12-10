@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.QueryRules.Json;
 
 public sealed partial class TestRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.TestRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMatchCriteria = System.Text.Json.JsonEncodedText.Encode("match_criteria");
+	private static readonly System.Text.Json.JsonEncodedText PropMatchCriteria = System.Text.Json.JsonEncodedText.Encode("match_criteria"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryRules.TestRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

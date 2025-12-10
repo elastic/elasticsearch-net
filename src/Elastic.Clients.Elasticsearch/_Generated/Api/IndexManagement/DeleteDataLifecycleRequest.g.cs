@@ -34,14 +34,14 @@ public sealed partial class DeleteDataLifecycleRequestParameters : Elastic.Trans
 
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit timestamp for the document
+	/// The period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -81,7 +81,8 @@ public sealed partial class DeleteDataLifecycleRequest : Elastic.Clients.Elastic
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of data streams of which the data stream lifecycle will be deleted; use <c>*</c> to get all data streams
+	/// A comma-separated list of data streams of which the data stream lifecycle will be deleted.
+	/// Use <c>*</c> to get all data streams
 	/// </para>
 	/// </summary>
 	public
@@ -99,14 +100,14 @@ public sealed partial class DeleteDataLifecycleRequest : Elastic.Clients.Elastic
 
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit timestamp for the document
+	/// The period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -144,7 +145,8 @@ public readonly partial struct DeleteDataLifecycleRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of data streams of which the data stream lifecycle will be deleted; use <c>*</c> to get all data streams
+	/// A comma-separated list of data streams of which the data stream lifecycle will be deleted.
+	/// Use <c>*</c> to get all data streams
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames value)
@@ -177,7 +179,7 @@ public readonly partial struct DeleteDataLifecycleRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Specify timeout for connection to master
+	/// The period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
@@ -188,7 +190,7 @@ public readonly partial struct DeleteDataLifecycleRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Explicit timestamp for the document
+	/// The period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.DeleteDataLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)

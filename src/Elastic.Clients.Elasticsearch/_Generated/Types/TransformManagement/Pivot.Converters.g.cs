@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement.Json;
 
 public sealed partial class PivotConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Pivot>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
-	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
-	private static readonly System.Text.Json.JsonEncodedText PropGroupBy = System.Text.Json.JsonEncodedText.Encode("group_by");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGroupBy = System.Text.Json.JsonEncodedText.Encode("group_by"u8);
 
 	public override Elastic.Clients.Elasticsearch.TransformManagement.Pivot Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class DetailsInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.DetailsInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBlob = System.Text.Json.JsonEncodedText.Encode("blob");
-	private static readonly System.Text.Json.JsonEncodedText PropOverwriteElapsed = System.Text.Json.JsonEncodedText.Encode("overwrite_elapsed");
-	private static readonly System.Text.Json.JsonEncodedText PropOverwriteElapsedNanos = System.Text.Json.JsonEncodedText.Encode("overwrite_elapsed_nanos");
-	private static readonly System.Text.Json.JsonEncodedText PropWriteElapsed = System.Text.Json.JsonEncodedText.Encode("write_elapsed");
-	private static readonly System.Text.Json.JsonEncodedText PropWriteElapsedNanos = System.Text.Json.JsonEncodedText.Encode("write_elapsed_nanos");
-	private static readonly System.Text.Json.JsonEncodedText PropWriterNode = System.Text.Json.JsonEncodedText.Encode("writer_node");
-	private static readonly System.Text.Json.JsonEncodedText PropWriteThrottled = System.Text.Json.JsonEncodedText.Encode("write_throttled");
-	private static readonly System.Text.Json.JsonEncodedText PropWriteThrottledNanos = System.Text.Json.JsonEncodedText.Encode("write_throttled_nanos");
+	private static readonly System.Text.Json.JsonEncodedText PropBlob = System.Text.Json.JsonEncodedText.Encode("blob"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOverwriteElapsed = System.Text.Json.JsonEncodedText.Encode("overwrite_elapsed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOverwriteElapsedNanos = System.Text.Json.JsonEncodedText.Encode("overwrite_elapsed_nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWriteElapsed = System.Text.Json.JsonEncodedText.Encode("write_elapsed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWriteElapsedNanos = System.Text.Json.JsonEncodedText.Encode("write_elapsed_nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWriterNode = System.Text.Json.JsonEncodedText.Encode("writer_node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWriteThrottled = System.Text.Json.JsonEncodedText.Encode("write_throttled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWriteThrottledNanos = System.Text.Json.JsonEncodedText.Encode("write_throttled_nanos"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.DetailsInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

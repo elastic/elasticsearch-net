@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class EnsembleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Ensemble>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAggregateOutput = System.Text.Json.JsonEncodedText.Encode("aggregate_output");
-	private static readonly System.Text.Json.JsonEncodedText PropClassificationLabels = System.Text.Json.JsonEncodedText.Encode("classification_labels");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureNames = System.Text.Json.JsonEncodedText.Encode("feature_names");
-	private static readonly System.Text.Json.JsonEncodedText PropTargetType = System.Text.Json.JsonEncodedText.Encode("target_type");
-	private static readonly System.Text.Json.JsonEncodedText PropTrainedModels = System.Text.Json.JsonEncodedText.Encode("trained_models");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregateOutput = System.Text.Json.JsonEncodedText.Encode("aggregate_output"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropClassificationLabels = System.Text.Json.JsonEncodedText.Encode("classification_labels"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureNames = System.Text.Json.JsonEncodedText.Encode("feature_names"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTargetType = System.Text.Json.JsonEncodedText.Encode("target_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrainedModels = System.Text.Json.JsonEncodedText.Encode("trained_models"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Ensemble Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

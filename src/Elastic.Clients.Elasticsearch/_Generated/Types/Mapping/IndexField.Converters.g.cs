@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class IndexFieldConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.IndexField>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.IndexField Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

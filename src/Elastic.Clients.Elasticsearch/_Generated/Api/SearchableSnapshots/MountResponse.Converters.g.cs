@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.SearchableSnapshots.Json;
 
 public sealed partial class MountResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot");
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshot = System.Text.Json.JsonEncodedText.Encode("snapshot"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchableSnapshots.MountResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

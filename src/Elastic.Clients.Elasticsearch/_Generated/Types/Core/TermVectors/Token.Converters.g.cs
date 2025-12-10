@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Core.TermVectors.Json;
 
 public sealed partial class TokenConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.TermVectors.Token>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEndOffset = System.Text.Json.JsonEncodedText.Encode("end_offset");
-	private static readonly System.Text.Json.JsonEncodedText PropPayload = System.Text.Json.JsonEncodedText.Encode("payload");
-	private static readonly System.Text.Json.JsonEncodedText PropPosition = System.Text.Json.JsonEncodedText.Encode("position");
-	private static readonly System.Text.Json.JsonEncodedText PropStartOffset = System.Text.Json.JsonEncodedText.Encode("start_offset");
+	private static readonly System.Text.Json.JsonEncodedText PropEndOffset = System.Text.Json.JsonEncodedText.Encode("end_offset"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPayload = System.Text.Json.JsonEncodedText.Encode("payload"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPosition = System.Text.Json.JsonEncodedText.Encode("position"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartOffset = System.Text.Json.JsonEncodedText.Encode("start_offset"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.TermVectors.Token Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterIndicesShardsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries");
-	private static readonly System.Text.Json.JsonEncodedText PropReplication = System.Text.Json.JsonEncodedText.Encode("replication");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReplication = System.Text.Json.JsonEncodedText.Encode("replication"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterIndicesShards Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class DataStreamsStatsItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBackingIndices = System.Text.Json.JsonEncodedText.Encode("backing_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropDataStream = System.Text.Json.JsonEncodedText.Encode("data_stream");
-	private static readonly System.Text.Json.JsonEncodedText PropMaximumTimestamp = System.Text.Json.JsonEncodedText.Encode("maximum_timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropStoreSize = System.Text.Json.JsonEncodedText.Encode("store_size");
-	private static readonly System.Text.Json.JsonEncodedText PropStoreSizeBytes = System.Text.Json.JsonEncodedText.Encode("store_size_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropBackingIndices = System.Text.Json.JsonEncodedText.Encode("backing_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataStream = System.Text.Json.JsonEncodedText.Encode("data_stream"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaximumTimestamp = System.Text.Json.JsonEncodedText.Encode("maximum_timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStoreSize = System.Text.Json.JsonEncodedText.Encode("store_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStoreSizeBytes = System.Text.Json.JsonEncodedText.Encode("store_size_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamsStatsItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

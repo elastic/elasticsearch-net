@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class PutMappingRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDateDetection = System.Text.Json.JsonEncodedText.Encode("date_detection");
-	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
-	private static readonly System.Text.Json.JsonEncodedText PropDynamicDateFormats = System.Text.Json.JsonEncodedText.Encode("dynamic_date_formats");
-	private static readonly System.Text.Json.JsonEncodedText PropDynamicTemplates = System.Text.Json.JsonEncodedText.Encode("dynamic_templates");
-	private static readonly System.Text.Json.JsonEncodedText PropFieldNames = System.Text.Json.JsonEncodedText.Encode("_field_names");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
-	private static readonly System.Text.Json.JsonEncodedText PropNumericDetection = System.Text.Json.JsonEncodedText.Encode("numeric_detection");
-	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing");
-	private static readonly System.Text.Json.JsonEncodedText PropRuntime = System.Text.Json.JsonEncodedText.Encode("runtime");
-	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
+	private static readonly System.Text.Json.JsonEncodedText PropDateDetection = System.Text.Json.JsonEncodedText.Encode("date_detection"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicDateFormats = System.Text.Json.JsonEncodedText.Encode("dynamic_date_formats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicTemplates = System.Text.Json.JsonEncodedText.Encode("dynamic_templates"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFieldNames = System.Text.Json.JsonEncodedText.Encode("_field_names"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumericDetection = System.Text.Json.JsonEncodedText.Encode("numeric_detection"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("_routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuntime = System.Text.Json.JsonEncodedText.Encode("runtime"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

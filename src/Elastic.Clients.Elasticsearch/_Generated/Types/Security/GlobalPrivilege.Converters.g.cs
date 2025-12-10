@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class GlobalPrivilegeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GlobalPrivilege>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application");
+	private static readonly System.Text.Json.JsonEncodedText PropApplication = System.Text.Json.JsonEncodedText.Encode("application"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.GlobalPrivilege Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

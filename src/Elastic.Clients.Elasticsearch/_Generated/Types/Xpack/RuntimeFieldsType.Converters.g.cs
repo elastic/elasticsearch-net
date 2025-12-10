@@ -25,20 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class RuntimeFieldsTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldsType>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCharsMax = System.Text.Json.JsonEncodedText.Encode("chars_max");
-	private static readonly System.Text.Json.JsonEncodedText PropCharsTotal = System.Text.Json.JsonEncodedText.Encode("chars_total");
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropDocMax = System.Text.Json.JsonEncodedText.Encode("doc_max");
-	private static readonly System.Text.Json.JsonEncodedText PropDocTotal = System.Text.Json.JsonEncodedText.Encode("doc_total");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
-	private static readonly System.Text.Json.JsonEncodedText PropLang = System.Text.Json.JsonEncodedText.Encode("lang");
-	private static readonly System.Text.Json.JsonEncodedText PropLinesMax = System.Text.Json.JsonEncodedText.Encode("lines_max");
-	private static readonly System.Text.Json.JsonEncodedText PropLinesTotal = System.Text.Json.JsonEncodedText.Encode("lines_total");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropScriptlessCount = System.Text.Json.JsonEncodedText.Encode("scriptless_count");
-	private static readonly System.Text.Json.JsonEncodedText PropShadowedCount = System.Text.Json.JsonEncodedText.Encode("shadowed_count");
-	private static readonly System.Text.Json.JsonEncodedText PropSourceMax = System.Text.Json.JsonEncodedText.Encode("source_max");
-	private static readonly System.Text.Json.JsonEncodedText PropSourceTotal = System.Text.Json.JsonEncodedText.Encode("source_total");
+	private static readonly System.Text.Json.JsonEncodedText PropCharsMax = System.Text.Json.JsonEncodedText.Encode("chars_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCharsTotal = System.Text.Json.JsonEncodedText.Encode("chars_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocMax = System.Text.Json.JsonEncodedText.Encode("doc_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocTotal = System.Text.Json.JsonEncodedText.Encode("doc_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLang = System.Text.Json.JsonEncodedText.Encode("lang"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLinesMax = System.Text.Json.JsonEncodedText.Encode("lines_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLinesTotal = System.Text.Json.JsonEncodedText.Encode("lines_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScriptlessCount = System.Text.Json.JsonEncodedText.Encode("scriptless_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShadowedCount = System.Text.Json.JsonEncodedText.Encode("shadowed_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSourceMax = System.Text.Json.JsonEncodedText.Encode("source_max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSourceTotal = System.Text.Json.JsonEncodedText.Encode("source_total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.RuntimeFieldsType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

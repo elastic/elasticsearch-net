@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Graph.Json;
 
 public sealed partial class ExploreControlsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.ExploreControls>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSampleDiversity = System.Text.Json.JsonEncodedText.Encode("sample_diversity");
-	private static readonly System.Text.Json.JsonEncodedText PropSampleSize = System.Text.Json.JsonEncodedText.Encode("sample_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
-	private static readonly System.Text.Json.JsonEncodedText PropUseSignificance = System.Text.Json.JsonEncodedText.Encode("use_significance");
+	private static readonly System.Text.Json.JsonEncodedText PropSampleDiversity = System.Text.Json.JsonEncodedText.Encode("sample_diversity"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSampleSize = System.Text.Json.JsonEncodedText.Encode("sample_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUseSignificance = System.Text.Json.JsonEncodedText.Encode("use_significance"u8);
 
 	public override Elastic.Clients.Elasticsearch.Graph.ExploreControls Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class GeoLineAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIncludeSort = System.Text.Json.JsonEncodedText.Encode("include_sort");
-	private static readonly System.Text.Json.JsonEncodedText PropPoint = System.Text.Json.JsonEncodedText.Encode("point");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
-	private static readonly System.Text.Json.JsonEncodedText PropSortOrder = System.Text.Json.JsonEncodedText.Encode("sort_order");
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeSort = System.Text.Json.JsonEncodedText.Encode("include_sort"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPoint = System.Text.Json.JsonEncodedText.Encode("point"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSortOrder = System.Text.Json.JsonEncodedText.Encode("sort_order"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.GeoLineAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

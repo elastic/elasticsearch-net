@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class IntervalsAnyOfConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropIntervals = System.Text.Json.JsonEncodedText.Encode("intervals");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIntervals = System.Text.Json.JsonEncodedText.Encode("intervals"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsAnyOf Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

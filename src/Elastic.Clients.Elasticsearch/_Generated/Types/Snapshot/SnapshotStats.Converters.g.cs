@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class SnapshotStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIncremental = System.Text.Json.JsonEncodedText.Encode("incremental");
-	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropIncremental = System.Text.Json.JsonEncodedText.Encode("incremental"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStartTimeInMillis = System.Text.Json.JsonEncodedText.Encode("start_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTime = System.Text.Json.JsonEncodedText.Encode("time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeInMillis = System.Text.Json.JsonEncodedText.Encode("time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

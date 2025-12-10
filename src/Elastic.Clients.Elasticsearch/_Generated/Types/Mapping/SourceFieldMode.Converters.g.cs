@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class SourceFieldModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDisabled = System.Text.Json.JsonEncodedText.Encode("disabled");
-	private static readonly System.Text.Json.JsonEncodedText MemberStored = System.Text.Json.JsonEncodedText.Encode("stored");
-	private static readonly System.Text.Json.JsonEncodedText MemberSynthetic = System.Text.Json.JsonEncodedText.Encode("synthetic");
+	private static readonly System.Text.Json.JsonEncodedText MemberDisabled = System.Text.Json.JsonEncodedText.Encode("disabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStored = System.Text.Json.JsonEncodedText.Encode("stored"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSynthetic = System.Text.Json.JsonEncodedText.Encode("synthetic"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.SourceFieldMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

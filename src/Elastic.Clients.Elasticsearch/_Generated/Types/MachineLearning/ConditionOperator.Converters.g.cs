@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ConditionOperatorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberGt = System.Text.Json.JsonEncodedText.Encode("gt");
-	private static readonly System.Text.Json.JsonEncodedText MemberGte = System.Text.Json.JsonEncodedText.Encode("gte");
-	private static readonly System.Text.Json.JsonEncodedText MemberLt = System.Text.Json.JsonEncodedText.Encode("lt");
-	private static readonly System.Text.Json.JsonEncodedText MemberLte = System.Text.Json.JsonEncodedText.Encode("lte");
+	private static readonly System.Text.Json.JsonEncodedText MemberGt = System.Text.Json.JsonEncodedText.Encode("gt"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGte = System.Text.Json.JsonEncodedText.Encode("gte"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLt = System.Text.Json.JsonEncodedText.Encode("lt"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberLte = System.Text.Json.JsonEncodedText.Encode("lte"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ConditionOperator Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

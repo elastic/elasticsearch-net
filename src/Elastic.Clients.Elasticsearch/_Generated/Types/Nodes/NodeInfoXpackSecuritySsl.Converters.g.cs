@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoXpackSecuritySslConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecuritySsl>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropSsl = System.Text.Json.JsonEncodedText.Encode("ssl");
+	private static readonly System.Text.Json.JsonEncodedText PropSsl = System.Text.Json.JsonEncodedText.Encode("ssl"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpackSecuritySsl Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

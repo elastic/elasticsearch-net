@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class FeatureConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Feature>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
-	private static readonly System.Text.Json.JsonEncodedText MemberMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
-	private static readonly System.Text.Json.JsonEncodedText MemberSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+	private static readonly System.Text.Json.JsonEncodedText MemberAliases = System.Text.Json.JsonEncodedText.Encode("aliases"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMappings = System.Text.Json.JsonEncodedText.Encode("mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSettings = System.Text.Json.JsonEncodedText.Encode("settings"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.Feature Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

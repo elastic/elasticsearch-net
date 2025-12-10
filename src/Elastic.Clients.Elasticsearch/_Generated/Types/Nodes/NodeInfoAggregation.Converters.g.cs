@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropTypes = System.Text.Json.JsonEncodedText.Encode("types");
+	private static readonly System.Text.Json.JsonEncodedText PropTypes = System.Text.Json.JsonEncodedText.Encode("types"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

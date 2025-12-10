@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class SearchableSnapshotActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropForceMergeIndex = System.Text.Json.JsonEncodedText.Encode("force_merge_index");
-	private static readonly System.Text.Json.JsonEncodedText PropSnapshotRepository = System.Text.Json.JsonEncodedText.Encode("snapshot_repository");
+	private static readonly System.Text.Json.JsonEncodedText PropForceMergeIndex = System.Text.Json.JsonEncodedText.Encode("force_merge_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSnapshotRepository = System.Text.Json.JsonEncodedText.Encode("snapshot_repository"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

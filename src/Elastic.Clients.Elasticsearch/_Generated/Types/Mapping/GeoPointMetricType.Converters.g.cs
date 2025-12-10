@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class GeoPointMetricTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCounter = System.Text.Json.JsonEncodedText.Encode("counter");
-	private static readonly System.Text.Json.JsonEncodedText MemberGauge = System.Text.Json.JsonEncodedText.Encode("gauge");
-	private static readonly System.Text.Json.JsonEncodedText MemberPosition = System.Text.Json.JsonEncodedText.Encode("position");
+	private static readonly System.Text.Json.JsonEncodedText MemberCounter = System.Text.Json.JsonEncodedText.Encode("counter"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGauge = System.Text.Json.JsonEncodedText.Encode("gauge"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPosition = System.Text.Json.JsonEncodedText.Encode("position"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.GeoPointMetricType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

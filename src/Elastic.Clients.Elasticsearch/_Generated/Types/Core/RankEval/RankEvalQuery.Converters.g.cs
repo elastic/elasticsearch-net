@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval.Json;
 
 public sealed partial class RankEvalQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

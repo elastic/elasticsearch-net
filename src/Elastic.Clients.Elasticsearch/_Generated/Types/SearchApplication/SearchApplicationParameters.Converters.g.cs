@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.SearchApplication.Json;
 
 public sealed partial class SearchApplicationParametersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyticsCollectionName = System.Text.Json.JsonEncodedText.Encode("analytics_collection_name");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyticsCollectionName = System.Text.Json.JsonEncodedText.Encode("analytics_collection_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

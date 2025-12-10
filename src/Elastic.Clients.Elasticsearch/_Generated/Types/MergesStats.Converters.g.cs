@@ -25,22 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class MergesStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MergesStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current");
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentDocs = System.Text.Json.JsonEncodedText.Encode("current_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentSize = System.Text.Json.JsonEncodedText.Encode("current_size");
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentSizeInBytes = System.Text.Json.JsonEncodedText.Encode("current_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalAutoThrottle = System.Text.Json.JsonEncodedText.Encode("total_auto_throttle");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalAutoThrottleInBytes = System.Text.Json.JsonEncodedText.Encode("total_auto_throttle_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalDocs = System.Text.Json.JsonEncodedText.Encode("total_docs");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalStoppedTime = System.Text.Json.JsonEncodedText.Encode("total_stopped_time");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalStoppedTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_stopped_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottledTime = System.Text.Json.JsonEncodedText.Encode("total_throttled_time");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottledTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_throttled_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentDocs = System.Text.Json.JsonEncodedText.Encode("current_docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentSize = System.Text.Json.JsonEncodedText.Encode("current_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentSizeInBytes = System.Text.Json.JsonEncodedText.Encode("current_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalAutoThrottle = System.Text.Json.JsonEncodedText.Encode("total_auto_throttle"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalAutoThrottleInBytes = System.Text.Json.JsonEncodedText.Encode("total_auto_throttle_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDocs = System.Text.Json.JsonEncodedText.Encode("total_docs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalStoppedTime = System.Text.Json.JsonEncodedText.Encode("total_stopped_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalStoppedTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_stopped_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottledTime = System.Text.Json.JsonEncodedText.Encode("total_throttled_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottledTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_throttled_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.MergesStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

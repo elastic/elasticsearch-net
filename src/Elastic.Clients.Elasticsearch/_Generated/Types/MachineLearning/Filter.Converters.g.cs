@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class FilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Filter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropFilterId = System.Text.Json.JsonEncodedText.Encode("filter_id");
-	private static readonly System.Text.Json.JsonEncodedText PropItems = System.Text.Json.JsonEncodedText.Encode("items");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFilterId = System.Text.Json.JsonEncodedText.Encode("filter_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropItems = System.Text.Json.JsonEncodedText.Encode("items"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Filter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

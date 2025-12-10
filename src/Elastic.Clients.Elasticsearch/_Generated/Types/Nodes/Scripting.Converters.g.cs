@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class ScriptingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Scripting>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCacheEvictions = System.Text.Json.JsonEncodedText.Encode("cache_evictions");
-	private static readonly System.Text.Json.JsonEncodedText PropCompilationLimitTriggered = System.Text.Json.JsonEncodedText.Encode("compilation_limit_triggered");
-	private static readonly System.Text.Json.JsonEncodedText PropCompilations = System.Text.Json.JsonEncodedText.Encode("compilations");
-	private static readonly System.Text.Json.JsonEncodedText PropCompilationsHistory = System.Text.Json.JsonEncodedText.Encode("compilations_history");
-	private static readonly System.Text.Json.JsonEncodedText PropContexts = System.Text.Json.JsonEncodedText.Encode("contexts");
+	private static readonly System.Text.Json.JsonEncodedText PropCacheEvictions = System.Text.Json.JsonEncodedText.Encode("cache_evictions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompilationLimitTriggered = System.Text.Json.JsonEncodedText.Encode("compilation_limit_triggered"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompilations = System.Text.Json.JsonEncodedText.Encode("compilations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCompilationsHistory = System.Text.Json.JsonEncodedText.Encode("compilations_history"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropContexts = System.Text.Json.JsonEncodedText.Encode("contexts"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.Scripting Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

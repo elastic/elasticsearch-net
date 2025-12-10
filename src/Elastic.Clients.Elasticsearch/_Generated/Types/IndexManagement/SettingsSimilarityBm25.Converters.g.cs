@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SettingsSimilarityBm25Converter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropB = System.Text.Json.JsonEncodedText.Encode("b");
-	private static readonly System.Text.Json.JsonEncodedText PropDiscountOverlaps = System.Text.Json.JsonEncodedText.Encode("discount_overlaps");
-	private static readonly System.Text.Json.JsonEncodedText PropK1 = System.Text.Json.JsonEncodedText.Encode("k1");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropB = System.Text.Json.JsonEncodedText.Encode("b"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiscountOverlaps = System.Text.Json.JsonEncodedText.Encode("discount_overlaps"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropK1 = System.Text.Json.JsonEncodedText.Encode("k1"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityBm25 Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

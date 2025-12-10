@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class AggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.Aggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
-	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
 	private static readonly System.Text.Json.JsonEncodedText VariantAdjacencyMatrix = System.Text.Json.JsonEncodedText.Encode("adjacency_matrix");
 	private static readonly System.Text.Json.JsonEncodedText VariantAutoDateHistogram = System.Text.Json.JsonEncodedText.Encode("auto_date_histogram");
 	private static readonly System.Text.Json.JsonEncodedText VariantAvg = System.Text.Json.JsonEncodedText.Encode("avg");

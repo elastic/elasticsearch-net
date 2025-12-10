@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class RecoveryFilesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RecoveryFiles>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details");
-	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent");
-	private static readonly System.Text.Json.JsonEncodedText PropRecovered = System.Text.Json.JsonEncodedText.Encode("recovered");
-	private static readonly System.Text.Json.JsonEncodedText PropReused = System.Text.Json.JsonEncodedText.Encode("reused");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropDetails = System.Text.Json.JsonEncodedText.Encode("details"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPercent = System.Text.Json.JsonEncodedText.Encode("percent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecovered = System.Text.Json.JsonEncodedText.Encode("recovered"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReused = System.Text.Json.JsonEncodedText.Encode("reused"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.RecoveryFiles Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class SamlAuthenticateResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
-	private static readonly System.Text.Json.JsonEncodedText PropExpiresIn = System.Text.Json.JsonEncodedText.Encode("expires_in");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
-	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
-	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExpiresIn = System.Text.Json.JsonEncodedText.Encode("expires_in"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

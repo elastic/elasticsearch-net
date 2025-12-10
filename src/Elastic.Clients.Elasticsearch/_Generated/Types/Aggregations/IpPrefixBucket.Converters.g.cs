@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class IpPrefixBucketConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixBucket>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropIsIpv6 = System.Text.Json.JsonEncodedText.Encode("is_ipv6");
-	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key");
-	private static readonly System.Text.Json.JsonEncodedText PropNetmask = System.Text.Json.JsonEncodedText.Encode("netmask");
-	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
+	private static readonly System.Text.Json.JsonEncodedText PropDocCount = System.Text.Json.JsonEncodedText.Encode("doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsIpv6 = System.Text.Json.JsonEncodedText.Encode("is_ipv6"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKey = System.Text.Json.JsonEncodedText.Encode("key"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNetmask = System.Text.Json.JsonEncodedText.Encode("netmask"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.IpPrefixBucket Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

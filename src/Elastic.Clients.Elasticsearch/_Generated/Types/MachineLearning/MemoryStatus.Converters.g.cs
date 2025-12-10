@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class MemoryStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberHardLimit = System.Text.Json.JsonEncodedText.Encode("hard_limit");
-	private static readonly System.Text.Json.JsonEncodedText MemberOk = System.Text.Json.JsonEncodedText.Encode("ok");
-	private static readonly System.Text.Json.JsonEncodedText MemberSoftLimit = System.Text.Json.JsonEncodedText.Encode("soft_limit");
+	private static readonly System.Text.Json.JsonEncodedText MemberHardLimit = System.Text.Json.JsonEncodedText.Encode("hard_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberOk = System.Text.Json.JsonEncodedText.Encode("ok"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSoftLimit = System.Text.Json.JsonEncodedText.Encode("soft_limit"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.MemoryStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

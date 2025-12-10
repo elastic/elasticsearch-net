@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeBufferPoolConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeBufferPool>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalCapacity = System.Text.Json.JsonEncodedText.Encode("total_capacity");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalCapacityInBytes = System.Text.Json.JsonEncodedText.Encode("total_capacity_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropUsed = System.Text.Json.JsonEncodedText.Encode("used");
-	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCapacity = System.Text.Json.JsonEncodedText.Encode("total_capacity"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalCapacityInBytes = System.Text.Json.JsonEncodedText.Encode("total_capacity_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsed = System.Text.Json.JsonEncodedText.Encode("used"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeBufferPool Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

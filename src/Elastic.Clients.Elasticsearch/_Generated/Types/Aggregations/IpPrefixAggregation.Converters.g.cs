@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class IpPrefixAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAppendPrefixLength = System.Text.Json.JsonEncodedText.Encode("append_prefix_length");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropIsIpv6 = System.Text.Json.JsonEncodedText.Encode("is_ipv6");
-	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length");
+	private static readonly System.Text.Json.JsonEncodedText PropAppendPrefixLength = System.Text.Json.JsonEncodedText.Encode("append_prefix_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsIpv6 = System.Text.Json.JsonEncodedText.Encode("is_ipv6"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrefixLength = System.Text.Json.JsonEncodedText.Encode("prefix_length"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.IpPrefixAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class IoStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.IoStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDevices = System.Text.Json.JsonEncodedText.Encode("devices");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropDevices = System.Text.Json.JsonEncodedText.Encode("devices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.IoStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

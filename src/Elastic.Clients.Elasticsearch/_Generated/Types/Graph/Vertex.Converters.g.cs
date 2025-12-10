@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Graph.Json;
 
 public sealed partial class VertexConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Graph.Vertex>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDepth = System.Text.Json.JsonEncodedText.Encode("depth");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropTerm = System.Text.Json.JsonEncodedText.Encode("term");
-	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight");
+	private static readonly System.Text.Json.JsonEncodedText PropDepth = System.Text.Json.JsonEncodedText.Encode("depth"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTerm = System.Text.Json.JsonEncodedText.Encode("term"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight"u8);
 
 	public override Elastic.Clients.Elasticsearch.Graph.Vertex Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

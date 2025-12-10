@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Synonyms.Json;
 
 public sealed partial class PutSynonymRuleResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropReloadAnalyzersDetails = System.Text.Json.JsonEncodedText.Encode("reload_analyzers_details");
-	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result");
+	private static readonly System.Text.Json.JsonEncodedText PropReloadAnalyzersDetails = System.Text.Json.JsonEncodedText.Encode("reload_analyzers_details"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result"u8);
 
 	public override Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

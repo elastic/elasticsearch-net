@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class CompletionSuggesterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropContexts = System.Text.Json.JsonEncodedText.Encode("contexts");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy");
-	private static readonly System.Text.Json.JsonEncodedText PropRegex = System.Text.Json.JsonEncodedText.Encode("regex");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSkipDuplicates = System.Text.Json.JsonEncodedText.Encode("skip_duplicates");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropContexts = System.Text.Json.JsonEncodedText.Encode("contexts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRegex = System.Text.Json.JsonEncodedText.Encode("regex"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSkipDuplicates = System.Text.Json.JsonEncodedText.Encode("skip_duplicates"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

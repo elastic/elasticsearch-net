@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class MinHashTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBucketCount = System.Text.Json.JsonEncodedText.Encode("bucket_count");
-	private static readonly System.Text.Json.JsonEncodedText PropHashCount = System.Text.Json.JsonEncodedText.Encode("hash_count");
-	private static readonly System.Text.Json.JsonEncodedText PropHashSetSize = System.Text.Json.JsonEncodedText.Encode("hash_set_size");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
-	private static readonly System.Text.Json.JsonEncodedText PropWithRotation = System.Text.Json.JsonEncodedText.Encode("with_rotation");
+	private static readonly System.Text.Json.JsonEncodedText PropBucketCount = System.Text.Json.JsonEncodedText.Encode("bucket_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHashCount = System.Text.Json.JsonEncodedText.Encode("hash_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHashSetSize = System.Text.Json.JsonEncodedText.Encode("hash_set_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWithRotation = System.Text.Json.JsonEncodedText.Encode("with_rotation"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class IndicesVersionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.IndicesVersions>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardCount = System.Text.Json.JsonEncodedText.Encode("primary_shard_count");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalPrimaryBytes = System.Text.Json.JsonEncodedText.Encode("total_primary_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalPrimarySize = System.Text.Json.JsonEncodedText.Encode("total_primary_size");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCount = System.Text.Json.JsonEncodedText.Encode("index_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimaryShardCount = System.Text.Json.JsonEncodedText.Encode("primary_shard_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalPrimaryBytes = System.Text.Json.JsonEncodedText.Encode("total_primary_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalPrimarySize = System.Text.Json.JsonEncodedText.Encode("total_primary_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.IndicesVersions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

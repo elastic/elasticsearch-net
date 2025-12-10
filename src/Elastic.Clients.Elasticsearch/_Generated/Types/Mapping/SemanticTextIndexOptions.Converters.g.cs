@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class SemanticTextIndexOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDenseVector = System.Text.Json.JsonEncodedText.Encode("dense_vector");
+	private static readonly System.Text.Json.JsonEncodedText PropDenseVector = System.Text.Json.JsonEncodedText.Encode("dense_vector"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.SemanticTextIndexOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

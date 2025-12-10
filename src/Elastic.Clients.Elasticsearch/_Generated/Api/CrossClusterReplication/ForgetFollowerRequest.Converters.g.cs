@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication.Json;
 
 public sealed partial class ForgetFollowerRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFollowerCluster = System.Text.Json.JsonEncodedText.Encode("follower_cluster");
-	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndex = System.Text.Json.JsonEncodedText.Encode("follower_index");
-	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndexUuid = System.Text.Json.JsonEncodedText.Encode("follower_index_uuid");
-	private static readonly System.Text.Json.JsonEncodedText PropLeaderRemoteCluster = System.Text.Json.JsonEncodedText.Encode("leader_remote_cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerCluster = System.Text.Json.JsonEncodedText.Encode("follower_cluster"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndex = System.Text.Json.JsonEncodedText.Encode("follower_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndexUuid = System.Text.Json.JsonEncodedText.Encode("follower_index_uuid"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLeaderRemoteCluster = System.Text.Json.JsonEncodedText.Encode("leader_remote_cluster"u8);
 
 	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.ForgetFollowerRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

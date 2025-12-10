@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class AppliesToConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberActual = System.Text.Json.JsonEncodedText.Encode("actual");
-	private static readonly System.Text.Json.JsonEncodedText MemberDiffFromTypical = System.Text.Json.JsonEncodedText.Encode("diff_from_typical");
-	private static readonly System.Text.Json.JsonEncodedText MemberTime = System.Text.Json.JsonEncodedText.Encode("time");
-	private static readonly System.Text.Json.JsonEncodedText MemberTypical = System.Text.Json.JsonEncodedText.Encode("typical");
+	private static readonly System.Text.Json.JsonEncodedText MemberActual = System.Text.Json.JsonEncodedText.Encode("actual"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDiffFromTypical = System.Text.Json.JsonEncodedText.Encode("diff_from_typical"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTime = System.Text.Json.JsonEncodedText.Encode("time"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTypical = System.Text.Json.JsonEncodedText.Encode("typical"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.AppliesTo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

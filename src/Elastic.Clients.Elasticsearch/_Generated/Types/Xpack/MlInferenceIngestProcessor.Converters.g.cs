@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class MlInferenceIngestProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessor>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNumDocsProcessed = System.Text.Json.JsonEncodedText.Encode("num_docs_processed");
-	private static readonly System.Text.Json.JsonEncodedText PropNumFailures = System.Text.Json.JsonEncodedText.Encode("num_failures");
-	private static readonly System.Text.Json.JsonEncodedText PropPipelines = System.Text.Json.JsonEncodedText.Encode("pipelines");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeMs = System.Text.Json.JsonEncodedText.Encode("time_ms");
+	private static readonly System.Text.Json.JsonEncodedText PropNumDocsProcessed = System.Text.Json.JsonEncodedText.Encode("num_docs_processed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumFailures = System.Text.Json.JsonEncodedText.Encode("num_failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPipelines = System.Text.Json.JsonEncodedText.Encode("pipelines"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeMs = System.Text.Json.JsonEncodedText.Encode("time_ms"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.MlInferenceIngestProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

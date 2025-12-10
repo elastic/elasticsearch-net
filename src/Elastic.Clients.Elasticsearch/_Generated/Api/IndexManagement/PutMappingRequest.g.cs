@@ -143,7 +143,8 @@ public sealed partial class PutMappingRequest : Elastic.Clients.Elasticsearch.Re
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of index names the mapping should be added to (supports wildcards); use <c>_all</c> or omit to add the mapping on all indices.
+	/// A comma-separated list of index names the mapping should be added to (supports wildcards).
+	/// Use <c>_all</c> or omit to add the mapping on all indices.
 	/// </para>
 	/// </summary>
 	public
@@ -366,7 +367,8 @@ public readonly partial struct PutMappingRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of index names the mapping should be added to (supports wildcards); use <c>_all</c> or omit to add the mapping on all indices.
+	/// A comma-separated list of index names the mapping should be added to (supports wildcards).
+	/// Use <c>_all</c> or omit to add the mapping on all indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
@@ -994,7 +996,8 @@ public readonly partial struct PutMappingRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of index names the mapping should be added to (supports wildcards); use <c>_all</c> or omit to add the mapping on all indices.
+	/// A comma-separated list of index names the mapping should be added to (supports wildcards).
+	/// Use <c>_all</c> or omit to add the mapping on all indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.PutMappingRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)

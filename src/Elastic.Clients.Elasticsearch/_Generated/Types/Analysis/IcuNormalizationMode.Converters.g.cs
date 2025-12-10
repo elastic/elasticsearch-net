@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class IcuNormalizationModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCompose = System.Text.Json.JsonEncodedText.Encode("compose");
-	private static readonly System.Text.Json.JsonEncodedText MemberDecompose = System.Text.Json.JsonEncodedText.Encode("decompose");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompose = System.Text.Json.JsonEncodedText.Encode("compose"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDecompose = System.Text.Json.JsonEncodedText.Encode("decompose"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class DeleteRoleResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found");
+	private static readonly System.Text.Json.JsonEncodedText PropFound = System.Text.Json.JsonEncodedText.Encode("found"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

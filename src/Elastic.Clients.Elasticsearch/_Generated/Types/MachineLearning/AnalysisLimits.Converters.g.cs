@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class AnalysisLimitsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizationExamplesLimit = System.Text.Json.JsonEncodedText.Encode("categorization_examples_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationExamplesLimit = System.Text.Json.JsonEncodedText.Encode("categorization_examples_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

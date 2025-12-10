@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class SecuritySettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SecuritySettings>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.SecuritySettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

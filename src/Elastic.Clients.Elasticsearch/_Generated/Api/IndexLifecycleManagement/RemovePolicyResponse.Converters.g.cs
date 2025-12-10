@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class RemovePolicyResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFailedIndexes = System.Text.Json.JsonEncodedText.Encode("failed_indexes");
-	private static readonly System.Text.Json.JsonEncodedText PropHasFailures = System.Text.Json.JsonEncodedText.Encode("has_failures");
+	private static readonly System.Text.Json.JsonEncodedText PropFailedIndexes = System.Text.Json.JsonEncodedText.Encode("failed_indexes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHasFailures = System.Text.Json.JsonEncodedText.Encode("has_failures"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

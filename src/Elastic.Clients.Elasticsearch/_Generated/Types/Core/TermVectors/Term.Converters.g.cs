@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.TermVectors.Json;
 
 public sealed partial class TermConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.TermVectors.Term>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDocFreq = System.Text.Json.JsonEncodedText.Encode("doc_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score");
-	private static readonly System.Text.Json.JsonEncodedText PropTermFreq = System.Text.Json.JsonEncodedText.Encode("term_freq");
-	private static readonly System.Text.Json.JsonEncodedText PropTokens = System.Text.Json.JsonEncodedText.Encode("tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropTtf = System.Text.Json.JsonEncodedText.Encode("ttf");
+	private static readonly System.Text.Json.JsonEncodedText PropDocFreq = System.Text.Json.JsonEncodedText.Encode("doc_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTermFreq = System.Text.Json.JsonEncodedText.Encode("term_freq"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokens = System.Text.Json.JsonEncodedText.Encode("tokens"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTtf = System.Text.Json.JsonEncodedText.Encode("ttf"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.TermVectors.Term Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

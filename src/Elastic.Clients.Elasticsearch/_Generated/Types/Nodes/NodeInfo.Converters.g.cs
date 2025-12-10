@@ -25,33 +25,33 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfo>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
-	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildFlavor = System.Text.Json.JsonEncodedText.Encode("build_flavor");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildHash = System.Text.Json.JsonEncodedText.Encode("build_hash");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildType = System.Text.Json.JsonEncodedText.Encode("build_type");
-	private static readonly System.Text.Json.JsonEncodedText PropComponentVersions = System.Text.Json.JsonEncodedText.Encode("component_versions");
-	private static readonly System.Text.Json.JsonEncodedText PropHost = System.Text.Json.JsonEncodedText.Encode("host");
-	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexVersion = System.Text.Json.JsonEncodedText.Encode("index_version");
-	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
-	private static readonly System.Text.Json.JsonEncodedText PropIp = System.Text.Json.JsonEncodedText.Encode("ip");
-	private static readonly System.Text.Json.JsonEncodedText PropJvm = System.Text.Json.JsonEncodedText.Encode("jvm");
-	private static readonly System.Text.Json.JsonEncodedText PropModules = System.Text.Json.JsonEncodedText.Encode("modules");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropOs = System.Text.Json.JsonEncodedText.Encode("os");
-	private static readonly System.Text.Json.JsonEncodedText PropPlugins = System.Text.Json.JsonEncodedText.Encode("plugins");
-	private static readonly System.Text.Json.JsonEncodedText PropProcess = System.Text.Json.JsonEncodedText.Encode("process");
-	private static readonly System.Text.Json.JsonEncodedText PropRemoteClusterServer = System.Text.Json.JsonEncodedText.Encode("remote_cluster_server");
-	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
-	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
-	private static readonly System.Text.Json.JsonEncodedText PropThreadPool = System.Text.Json.JsonEncodedText.Encode("thread_pool");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalIndexingBuffer = System.Text.Json.JsonEncodedText.Encode("total_indexing_buffer");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalIndexingBufferInBytes = System.Text.Json.JsonEncodedText.Encode("total_indexing_buffer_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address");
-	private static readonly System.Text.Json.JsonEncodedText PropTransportVersion = System.Text.Json.JsonEncodedText.Encode("transport_version");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAttributes = System.Text.Json.JsonEncodedText.Encode("attributes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildFlavor = System.Text.Json.JsonEncodedText.Encode("build_flavor"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildHash = System.Text.Json.JsonEncodedText.Encode("build_hash"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildType = System.Text.Json.JsonEncodedText.Encode("build_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropComponentVersions = System.Text.Json.JsonEncodedText.Encode("component_versions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHost = System.Text.Json.JsonEncodedText.Encode("host"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHttp = System.Text.Json.JsonEncodedText.Encode("http"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexVersion = System.Text.Json.JsonEncodedText.Encode("index_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIp = System.Text.Json.JsonEncodedText.Encode("ip"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJvm = System.Text.Json.JsonEncodedText.Encode("jvm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModules = System.Text.Json.JsonEncodedText.Encode("modules"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOs = System.Text.Json.JsonEncodedText.Encode("os"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPlugins = System.Text.Json.JsonEncodedText.Encode("plugins"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcess = System.Text.Json.JsonEncodedText.Encode("process"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteClusterServer = System.Text.Json.JsonEncodedText.Encode("remote_cluster_server"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropThreadPool = System.Text.Json.JsonEncodedText.Encode("thread_pool"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalIndexingBuffer = System.Text.Json.JsonEncodedText.Encode("total_indexing_buffer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalIndexingBufferInBytes = System.Text.Json.JsonEncodedText.Encode("total_indexing_buffer_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransport = System.Text.Json.JsonEncodedText.Encode("transport"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransportAddress = System.Text.Json.JsonEncodedText.Encode("transport_address"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransportVersion = System.Text.Json.JsonEncodedText.Encode("transport_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfo Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

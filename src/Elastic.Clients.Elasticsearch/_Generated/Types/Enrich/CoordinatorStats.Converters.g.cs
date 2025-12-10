@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Json;
 
 public sealed partial class CoordinatorStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExecutedSearchesTotal = System.Text.Json.JsonEncodedText.Encode("executed_searches_total");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id");
-	private static readonly System.Text.Json.JsonEncodedText PropQueueSize = System.Text.Json.JsonEncodedText.Encode("queue_size");
-	private static readonly System.Text.Json.JsonEncodedText PropRemoteRequestsCurrent = System.Text.Json.JsonEncodedText.Encode("remote_requests_current");
-	private static readonly System.Text.Json.JsonEncodedText PropRemoteRequestsTotal = System.Text.Json.JsonEncodedText.Encode("remote_requests_total");
+	private static readonly System.Text.Json.JsonEncodedText PropExecutedSearchesTotal = System.Text.Json.JsonEncodedText.Encode("executed_searches_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueueSize = System.Text.Json.JsonEncodedText.Encode("queue_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteRequestsCurrent = System.Text.Json.JsonEncodedText.Encode("remote_requests_current"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteRequestsTotal = System.Text.Json.JsonEncodedText.Encode("remote_requests_total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Enrich.CoordinatorStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

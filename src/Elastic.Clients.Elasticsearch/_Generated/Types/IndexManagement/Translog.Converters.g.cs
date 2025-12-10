@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class TranslogConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Translog>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDurability = System.Text.Json.JsonEncodedText.Encode("durability");
-	private static readonly System.Text.Json.JsonEncodedText PropFlushThresholdSize = System.Text.Json.JsonEncodedText.Encode("flush_threshold_size");
-	private static readonly System.Text.Json.JsonEncodedText PropRetention = System.Text.Json.JsonEncodedText.Encode("retention");
-	private static readonly System.Text.Json.JsonEncodedText PropSyncInterval = System.Text.Json.JsonEncodedText.Encode("sync_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropDurability = System.Text.Json.JsonEncodedText.Encode("durability"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFlushThresholdSize = System.Text.Json.JsonEncodedText.Encode("flush_threshold_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetention = System.Text.Json.JsonEncodedText.Encode("retention"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSyncInterval = System.Text.Json.JsonEncodedText.Encode("sync_interval"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.Translog Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

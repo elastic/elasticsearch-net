@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class CohereInputTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CohereInputType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberClassification = System.Text.Json.JsonEncodedText.Encode("classification");
-	private static readonly System.Text.Json.JsonEncodedText MemberClustering = System.Text.Json.JsonEncodedText.Encode("clustering");
-	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
-	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
+	private static readonly System.Text.Json.JsonEncodedText MemberClassification = System.Text.Json.JsonEncodedText.Encode("classification"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberClustering = System.Text.Json.JsonEncodedText.Encode("clustering"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.CohereInputType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

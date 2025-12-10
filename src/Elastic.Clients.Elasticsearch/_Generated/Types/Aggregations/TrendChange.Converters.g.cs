@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class TrendChangeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TrendChange>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropChangePoint = System.Text.Json.JsonEncodedText.Encode("change_point");
-	private static readonly System.Text.Json.JsonEncodedText PropPValue = System.Text.Json.JsonEncodedText.Encode("p_value");
-	private static readonly System.Text.Json.JsonEncodedText PropRValue = System.Text.Json.JsonEncodedText.Encode("r_value");
+	private static readonly System.Text.Json.JsonEncodedText PropChangePoint = System.Text.Json.JsonEncodedText.Encode("change_point"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPValue = System.Text.Json.JsonEncodedText.Encode("p_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRValue = System.Text.Json.JsonEncodedText.Encode("r_value"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.TrendChange Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

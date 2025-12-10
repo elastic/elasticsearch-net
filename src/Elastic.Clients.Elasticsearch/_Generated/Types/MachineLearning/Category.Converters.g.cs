@@ -25,20 +25,20 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class CategoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Category>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCategoryId = System.Text.Json.JsonEncodedText.Encode("category_id");
-	private static readonly System.Text.Json.JsonEncodedText PropExamples = System.Text.Json.JsonEncodedText.Encode("examples");
-	private static readonly System.Text.Json.JsonEncodedText PropGrokPattern = System.Text.Json.JsonEncodedText.Encode("grok_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxMatchingLength = System.Text.Json.JsonEncodedText.Encode("max_matching_length");
-	private static readonly System.Text.Json.JsonEncodedText PropMlcategory = System.Text.Json.JsonEncodedText.Encode("mlcategory");
-	private static readonly System.Text.Json.JsonEncodedText PropNumMatches = System.Text.Json.JsonEncodedText.Encode("num_matches");
-	private static readonly System.Text.Json.JsonEncodedText PropP = System.Text.Json.JsonEncodedText.Encode("p");
-	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldName = System.Text.Json.JsonEncodedText.Encode("partition_field_name");
-	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldValue = System.Text.Json.JsonEncodedText.Encode("partition_field_value");
-	private static readonly System.Text.Json.JsonEncodedText PropPreferredToCategories = System.Text.Json.JsonEncodedText.Encode("preferred_to_categories");
-	private static readonly System.Text.Json.JsonEncodedText PropRegex = System.Text.Json.JsonEncodedText.Encode("regex");
-	private static readonly System.Text.Json.JsonEncodedText PropResultType = System.Text.Json.JsonEncodedText.Encode("result_type");
-	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+	private static readonly System.Text.Json.JsonEncodedText PropCategoryId = System.Text.Json.JsonEncodedText.Encode("category_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExamples = System.Text.Json.JsonEncodedText.Encode("examples"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGrokPattern = System.Text.Json.JsonEncodedText.Encode("grok_pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxMatchingLength = System.Text.Json.JsonEncodedText.Encode("max_matching_length"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMlcategory = System.Text.Json.JsonEncodedText.Encode("mlcategory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumMatches = System.Text.Json.JsonEncodedText.Encode("num_matches"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropP = System.Text.Json.JsonEncodedText.Encode("p"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldName = System.Text.Json.JsonEncodedText.Encode("partition_field_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPartitionFieldValue = System.Text.Json.JsonEncodedText.Encode("partition_field_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreferredToCategories = System.Text.Json.JsonEncodedText.Encode("preferred_to_categories"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRegex = System.Text.Json.JsonEncodedText.Encode("regex"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResultType = System.Text.Json.JsonEncodedText.Encode("result_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Category Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class UpdateFilterRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAddItems = System.Text.Json.JsonEncodedText.Encode("add_items");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropRemoveItems = System.Text.Json.JsonEncodedText.Encode("remove_items");
+	private static readonly System.Text.Json.JsonEncodedText PropAddItems = System.Text.Json.JsonEncodedText.Encode("add_items"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemoveItems = System.Text.Json.JsonEncodedText.Encode("remove_items"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateFilterRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

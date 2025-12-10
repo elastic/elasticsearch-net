@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class RestoreRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreIndexSettings = System.Text.Json.JsonEncodedText.Encode("ignore_index_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludeAliases = System.Text.Json.JsonEncodedText.Encode("include_aliases");
-	private static readonly System.Text.Json.JsonEncodedText PropIncludeGlobalState = System.Text.Json.JsonEncodedText.Encode("include_global_state");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexSettings = System.Text.Json.JsonEncodedText.Encode("index_settings");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropPartial = System.Text.Json.JsonEncodedText.Encode("partial");
-	private static readonly System.Text.Json.JsonEncodedText PropRenamePattern = System.Text.Json.JsonEncodedText.Encode("rename_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropRenameReplacement = System.Text.Json.JsonEncodedText.Encode("rename_replacement");
+	private static readonly System.Text.Json.JsonEncodedText PropFeatureStates = System.Text.Json.JsonEncodedText.Encode("feature_states"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreIndexSettings = System.Text.Json.JsonEncodedText.Encode("ignore_index_settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeAliases = System.Text.Json.JsonEncodedText.Encode("include_aliases"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIncludeGlobalState = System.Text.Json.JsonEncodedText.Encode("include_global_state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexSettings = System.Text.Json.JsonEncodedText.Encode("index_settings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPartial = System.Text.Json.JsonEncodedText.Encode("partial"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRenamePattern = System.Text.Json.JsonEncodedText.Encode("rename_pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRenameReplacement = System.Text.Json.JsonEncodedText.Encode("rename_replacement"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.RestoreRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class GetScriptLanguagesResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLanguageContexts = System.Text.Json.JsonEncodedText.Encode("language_contexts");
-	private static readonly System.Text.Json.JsonEncodedText PropTypesAllowed = System.Text.Json.JsonEncodedText.Encode("types_allowed");
+	private static readonly System.Text.Json.JsonEncodedText PropLanguageContexts = System.Text.Json.JsonEncodedText.Encode("language_contexts"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTypesAllowed = System.Text.Json.JsonEncodedText.Encode("types_allowed"u8);
 
 	public override Elastic.Clients.Elasticsearch.GetScriptLanguagesResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

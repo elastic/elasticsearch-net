@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class GeoDistanceFeatureQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin");
-	private static readonly System.Text.Json.JsonEncodedText PropPivot = System.Text.Json.JsonEncodedText.Encode("pivot");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrigin = System.Text.Json.JsonEncodedText.Encode("origin"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPivot = System.Text.Json.JsonEncodedText.Encode("pivot"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.GeoDistanceFeatureQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

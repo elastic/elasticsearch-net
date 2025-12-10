@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class TrainedModelSizeStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropModelSizeBytes = System.Text.Json.JsonEncodedText.Encode("model_size_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropRequiredNativeMemoryBytes = System.Text.Json.JsonEncodedText.Encode("required_native_memory_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSizeBytes = System.Text.Json.JsonEncodedText.Encode("model_size_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequiredNativeMemoryBytes = System.Text.Json.JsonEncodedText.Encode("required_native_memory_bytes"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelSizeStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

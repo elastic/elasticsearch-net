@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Enrich.Json;
 
 public sealed partial class EnrichPolicyPhaseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCancelled = System.Text.Json.JsonEncodedText.Encode("CANCELLED");
-	private static readonly System.Text.Json.JsonEncodedText MemberComplete = System.Text.Json.JsonEncodedText.Encode("COMPLETE");
-	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("FAILED");
-	private static readonly System.Text.Json.JsonEncodedText MemberRunning = System.Text.Json.JsonEncodedText.Encode("RUNNING");
-	private static readonly System.Text.Json.JsonEncodedText MemberScheduled = System.Text.Json.JsonEncodedText.Encode("SCHEDULED");
+	private static readonly System.Text.Json.JsonEncodedText MemberCancelled = System.Text.Json.JsonEncodedText.Encode("CANCELLED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberComplete = System.Text.Json.JsonEncodedText.Encode("COMPLETE"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFailed = System.Text.Json.JsonEncodedText.Encode("FAILED"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberRunning = System.Text.Json.JsonEncodedText.Encode("RUNNING"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberScheduled = System.Text.Json.JsonEncodedText.Encode("SCHEDULED"u8);
 
 	public override Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeEvaluationClassificationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActualField = System.Text.Json.JsonEncodedText.Encode("actual_field");
-	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictedField = System.Text.Json.JsonEncodedText.Encode("predicted_field");
-	private static readonly System.Text.Json.JsonEncodedText PropTopClassesField = System.Text.Json.JsonEncodedText.Encode("top_classes_field");
+	private static readonly System.Text.Json.JsonEncodedText PropActualField = System.Text.Json.JsonEncodedText.Encode("actual_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPredictedField = System.Text.Json.JsonEncodedText.Encode("predicted_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopClassesField = System.Text.Json.JsonEncodedText.Encode("top_classes_field"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

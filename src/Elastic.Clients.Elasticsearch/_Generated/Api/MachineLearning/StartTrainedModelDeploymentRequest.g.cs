@@ -56,7 +56,7 @@ public sealed partial class StartTrainedModelDeploymentRequestParameters : Elast
 
 	/// <summary>
 	/// <para>
-	/// The deployment priority.
+	/// The deployment priority
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority? Priority { get => Q<Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority?>("priority"); set => Q("priority", value); }
@@ -169,7 +169,7 @@ public sealed partial class StartTrainedModelDeploymentRequest : Elastic.Clients
 
 	/// <summary>
 	/// <para>
-	/// The deployment priority.
+	/// The deployment priority
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority? Priority { get => Q<Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority?>("priority"); set => Q("priority", value); }
@@ -314,7 +314,7 @@ public readonly partial struct StartTrainedModelDeploymentRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The deployment priority.
+	/// The deployment priority
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.MachineLearning.StartTrainedModelDeploymentRequestDescriptor Priority(Elastic.Clients.Elasticsearch.MachineLearning.TrainingPriority? value)

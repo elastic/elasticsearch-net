@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class HintConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.Hint>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLabels = System.Text.Json.JsonEncodedText.Encode("labels");
-	private static readonly System.Text.Json.JsonEncodedText PropUids = System.Text.Json.JsonEncodedText.Encode("uids");
+	private static readonly System.Text.Json.JsonEncodedText PropLabels = System.Text.Json.JsonEncodedText.Encode("labels"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUids = System.Text.Json.JsonEncodedText.Encode("uids"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.Hint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

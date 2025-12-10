@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class BulkStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.BulkStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvgSize = System.Text.Json.JsonEncodedText.Encode("avg_size");
-	private static readonly System.Text.Json.JsonEncodedText PropAvgSizeInBytes = System.Text.Json.JsonEncodedText.Encode("avg_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropAvgTime = System.Text.Json.JsonEncodedText.Encode("avg_time");
-	private static readonly System.Text.Json.JsonEncodedText PropAvgTimeInMillis = System.Text.Json.JsonEncodedText.Encode("avg_time_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalOperations = System.Text.Json.JsonEncodedText.Encode("total_operations");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_size_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgSize = System.Text.Json.JsonEncodedText.Encode("avg_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvgSizeInBytes = System.Text.Json.JsonEncodedText.Encode("avg_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvgTime = System.Text.Json.JsonEncodedText.Encode("avg_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvgTimeInMillis = System.Text.Json.JsonEncodedText.Encode("avg_time_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalOperations = System.Text.Json.JsonEncodedText.Encode("total_operations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_size_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.BulkStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

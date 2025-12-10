@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.GetScriptContext.Json;
 
 public sealed partial class ContextMethodConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
-	private static readonly System.Text.Json.JsonEncodedText PropReturnType = System.Text.Json.JsonEncodedText.Encode("return_type");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReturnType = System.Text.Json.JsonEncodedText.Encode("return_type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.GetScriptContext.ContextMethod Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

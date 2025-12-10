@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Snapshot.Json;
 
 public sealed partial class ShardsStatsStageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDone = System.Text.Json.JsonEncodedText.Encode("DONE");
-	private static readonly System.Text.Json.JsonEncodedText MemberFailure = System.Text.Json.JsonEncodedText.Encode("FAILURE");
-	private static readonly System.Text.Json.JsonEncodedText MemberFinalize = System.Text.Json.JsonEncodedText.Encode("FINALIZE");
-	private static readonly System.Text.Json.JsonEncodedText MemberInit = System.Text.Json.JsonEncodedText.Encode("INIT");
-	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("STARTED");
+	private static readonly System.Text.Json.JsonEncodedText MemberDone = System.Text.Json.JsonEncodedText.Encode("DONE"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFailure = System.Text.Json.JsonEncodedText.Encode("FAILURE"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFinalize = System.Text.Json.JsonEncodedText.Encode("FINALIZE"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInit = System.Text.Json.JsonEncodedText.Encode("INIT"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("STARTED"u8);
 
 	public override Elastic.Clients.Elasticsearch.Snapshot.ShardsStatsStage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

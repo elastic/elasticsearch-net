@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class IpDatabaseConfigurationMetadataConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.IpDatabaseConfigurationMetadata>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDatabase = System.Text.Json.JsonEncodedText.Encode("database");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
-	private static readonly System.Text.Json.JsonEncodedText PropModifiedDate = System.Text.Json.JsonEncodedText.Encode("modified_date");
-	private static readonly System.Text.Json.JsonEncodedText PropModifiedDateMillis = System.Text.Json.JsonEncodedText.Encode("modified_date_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropDatabase = System.Text.Json.JsonEncodedText.Encode("database"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDate = System.Text.Json.JsonEncodedText.Encode("modified_date"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDateMillis = System.Text.Json.JsonEncodedText.Encode("modified_date_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.IpDatabaseConfigurationMetadata Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

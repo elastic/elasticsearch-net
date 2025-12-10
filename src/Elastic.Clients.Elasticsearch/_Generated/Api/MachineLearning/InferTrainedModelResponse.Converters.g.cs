@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class InferTrainedModelResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropInferenceResults = System.Text.Json.JsonEncodedText.Encode("inference_results");
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceResults = System.Text.Json.JsonEncodedText.Encode("inference_results"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.InferTrainedModelResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

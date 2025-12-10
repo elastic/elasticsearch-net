@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeClassificationSummaryMulticlassConfusionMatrixConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryMulticlassConfusionMatrix>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropConfusionMatrix = System.Text.Json.JsonEncodedText.Encode("confusion_matrix");
-	private static readonly System.Text.Json.JsonEncodedText PropOtherActualClassCount = System.Text.Json.JsonEncodedText.Encode("other_actual_class_count");
+	private static readonly System.Text.Json.JsonEncodedText PropConfusionMatrix = System.Text.Json.JsonEncodedText.Encode("confusion_matrix"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOtherActualClassCount = System.Text.Json.JsonEncodedText.Encode("other_actual_class_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeClassificationSummaryMulticlassConfusionMatrix Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

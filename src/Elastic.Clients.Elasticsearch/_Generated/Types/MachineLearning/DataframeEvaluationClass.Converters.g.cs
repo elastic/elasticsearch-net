@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataframeEvaluationClassConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClass>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClassName = System.Text.Json.JsonEncodedText.Encode("class_name");
-	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
+	private static readonly System.Text.Json.JsonEncodedText PropClassName = System.Text.Json.JsonEncodedText.Encode("class_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClass Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

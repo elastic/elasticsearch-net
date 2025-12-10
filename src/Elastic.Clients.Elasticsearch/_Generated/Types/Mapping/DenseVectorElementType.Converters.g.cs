@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class DenseVectorElementTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberBit = System.Text.Json.JsonEncodedText.Encode("bit");
-	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte");
-	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
+	private static readonly System.Text.Json.JsonEncodedText MemberBit = System.Text.Json.JsonEncodedText.Encode("bit"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorElementType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

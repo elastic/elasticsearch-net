@@ -25,25 +25,25 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DataCountsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataCounts>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBucketCount = System.Text.Json.JsonEncodedText.Encode("bucket_count");
-	private static readonly System.Text.Json.JsonEncodedText PropEarliestRecordTimestamp = System.Text.Json.JsonEncodedText.Encode("earliest_record_timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropEmptyBucketCount = System.Text.Json.JsonEncodedText.Encode("empty_bucket_count");
-	private static readonly System.Text.Json.JsonEncodedText PropInputBytes = System.Text.Json.JsonEncodedText.Encode("input_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropInputFieldCount = System.Text.Json.JsonEncodedText.Encode("input_field_count");
-	private static readonly System.Text.Json.JsonEncodedText PropInputRecordCount = System.Text.Json.JsonEncodedText.Encode("input_record_count");
-	private static readonly System.Text.Json.JsonEncodedText PropInvalidDateCount = System.Text.Json.JsonEncodedText.Encode("invalid_date_count");
-	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
-	private static readonly System.Text.Json.JsonEncodedText PropLastDataTime = System.Text.Json.JsonEncodedText.Encode("last_data_time");
-	private static readonly System.Text.Json.JsonEncodedText PropLatestBucketTimestamp = System.Text.Json.JsonEncodedText.Encode("latest_bucket_timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropLatestEmptyBucketTimestamp = System.Text.Json.JsonEncodedText.Encode("latest_empty_bucket_timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropLatestRecordTimestamp = System.Text.Json.JsonEncodedText.Encode("latest_record_timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropLatestSparseBucketTimestamp = System.Text.Json.JsonEncodedText.Encode("latest_sparse_bucket_timestamp");
-	private static readonly System.Text.Json.JsonEncodedText PropLogTime = System.Text.Json.JsonEncodedText.Encode("log_time");
-	private static readonly System.Text.Json.JsonEncodedText PropMissingFieldCount = System.Text.Json.JsonEncodedText.Encode("missing_field_count");
-	private static readonly System.Text.Json.JsonEncodedText PropOutOfOrderTimestampCount = System.Text.Json.JsonEncodedText.Encode("out_of_order_timestamp_count");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessedFieldCount = System.Text.Json.JsonEncodedText.Encode("processed_field_count");
-	private static readonly System.Text.Json.JsonEncodedText PropProcessedRecordCount = System.Text.Json.JsonEncodedText.Encode("processed_record_count");
-	private static readonly System.Text.Json.JsonEncodedText PropSparseBucketCount = System.Text.Json.JsonEncodedText.Encode("sparse_bucket_count");
+	private static readonly System.Text.Json.JsonEncodedText PropBucketCount = System.Text.Json.JsonEncodedText.Encode("bucket_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEarliestRecordTimestamp = System.Text.Json.JsonEncodedText.Encode("earliest_record_timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEmptyBucketCount = System.Text.Json.JsonEncodedText.Encode("empty_bucket_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInputBytes = System.Text.Json.JsonEncodedText.Encode("input_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInputFieldCount = System.Text.Json.JsonEncodedText.Encode("input_field_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInputRecordCount = System.Text.Json.JsonEncodedText.Encode("input_record_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInvalidDateCount = System.Text.Json.JsonEncodedText.Encode("invalid_date_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastDataTime = System.Text.Json.JsonEncodedText.Encode("last_data_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLatestBucketTimestamp = System.Text.Json.JsonEncodedText.Encode("latest_bucket_timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLatestEmptyBucketTimestamp = System.Text.Json.JsonEncodedText.Encode("latest_empty_bucket_timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLatestRecordTimestamp = System.Text.Json.JsonEncodedText.Encode("latest_record_timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLatestSparseBucketTimestamp = System.Text.Json.JsonEncodedText.Encode("latest_sparse_bucket_timestamp"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLogTime = System.Text.Json.JsonEncodedText.Encode("log_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMissingFieldCount = System.Text.Json.JsonEncodedText.Encode("missing_field_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOutOfOrderTimestampCount = System.Text.Json.JsonEncodedText.Encode("out_of_order_timestamp_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcessedFieldCount = System.Text.Json.JsonEncodedText.Encode("processed_field_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProcessedRecordCount = System.Text.Json.JsonEncodedText.Encode("processed_record_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSparseBucketCount = System.Text.Json.JsonEncodedText.Encode("sparse_bucket_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.DataCounts Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

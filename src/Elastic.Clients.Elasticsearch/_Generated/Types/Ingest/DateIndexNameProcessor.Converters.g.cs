@@ -25,18 +25,18 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class DateIndexNameProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDateFormats = System.Text.Json.JsonEncodedText.Encode("date_formats");
-	private static readonly System.Text.Json.JsonEncodedText PropDateRounding = System.Text.Json.JsonEncodedText.Encode("date_rounding");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexNameFormat = System.Text.Json.JsonEncodedText.Encode("index_name_format");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexNamePrefix = System.Text.Json.JsonEncodedText.Encode("index_name_prefix");
-	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale");
-	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
-	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
-	private static readonly System.Text.Json.JsonEncodedText PropTimezone = System.Text.Json.JsonEncodedText.Encode("timezone");
+	private static readonly System.Text.Json.JsonEncodedText PropDateFormats = System.Text.Json.JsonEncodedText.Encode("date_formats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDateRounding = System.Text.Json.JsonEncodedText.Encode("date_rounding"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexNameFormat = System.Text.Json.JsonEncodedText.Encode("index_name_format"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexNamePrefix = System.Text.Json.JsonEncodedText.Encode("index_name_prefix"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimezone = System.Text.Json.JsonEncodedText.Encode("timezone"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class BucketCorrelationAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path");
-	private static readonly System.Text.Json.JsonEncodedText PropFunction = System.Text.Json.JsonEncodedText.Encode("function");
+	private static readonly System.Text.Json.JsonEncodedText PropBucketsPath = System.Text.Json.JsonEncodedText.Encode("buckets_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFunction = System.Text.Json.JsonEncodedText.Encode("function"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.BucketCorrelationAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

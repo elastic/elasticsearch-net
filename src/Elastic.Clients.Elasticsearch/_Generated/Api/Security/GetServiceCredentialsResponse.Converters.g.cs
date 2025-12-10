@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class GetServiceCredentialsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
-	private static readonly System.Text.Json.JsonEncodedText PropNodesCredentials = System.Text.Json.JsonEncodedText.Encode("nodes_credentials");
-	private static readonly System.Text.Json.JsonEncodedText PropServiceAccount = System.Text.Json.JsonEncodedText.Encode("service_account");
-	private static readonly System.Text.Json.JsonEncodedText PropTokens = System.Text.Json.JsonEncodedText.Encode("tokens");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodesCredentials = System.Text.Json.JsonEncodedText.Encode("nodes_credentials"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropServiceAccount = System.Text.Json.JsonEncodedText.Encode("service_account"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTokens = System.Text.Json.JsonEncodedText.Encode("tokens"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

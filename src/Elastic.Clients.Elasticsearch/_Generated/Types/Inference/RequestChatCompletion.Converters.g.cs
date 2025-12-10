@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.Inference.Json;
 
 public sealed partial class RequestChatCompletionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxCompletionTokens = System.Text.Json.JsonEncodedText.Encode("max_completion_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropMessages = System.Text.Json.JsonEncodedText.Encode("messages");
-	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model");
-	private static readonly System.Text.Json.JsonEncodedText PropStop = System.Text.Json.JsonEncodedText.Encode("stop");
-	private static readonly System.Text.Json.JsonEncodedText PropTemperature = System.Text.Json.JsonEncodedText.Encode("temperature");
-	private static readonly System.Text.Json.JsonEncodedText PropToolChoice = System.Text.Json.JsonEncodedText.Encode("tool_choice");
-	private static readonly System.Text.Json.JsonEncodedText PropTools = System.Text.Json.JsonEncodedText.Encode("tools");
-	private static readonly System.Text.Json.JsonEncodedText PropTopP = System.Text.Json.JsonEncodedText.Encode("top_p");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxCompletionTokens = System.Text.Json.JsonEncodedText.Encode("max_completion_tokens"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMessages = System.Text.Json.JsonEncodedText.Encode("messages"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModel = System.Text.Json.JsonEncodedText.Encode("model"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStop = System.Text.Json.JsonEncodedText.Encode("stop"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTemperature = System.Text.Json.JsonEncodedText.Encode("temperature"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropToolChoice = System.Text.Json.JsonEncodedText.Encode("tool_choice"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTools = System.Text.Json.JsonEncodedText.Encode("tools"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopP = System.Text.Json.JsonEncodedText.Encode("top_p"u8);
 
 	public override Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

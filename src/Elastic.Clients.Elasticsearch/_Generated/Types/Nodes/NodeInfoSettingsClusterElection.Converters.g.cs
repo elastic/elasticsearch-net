@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoSettingsClusterElectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsClusterElection>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropStrategy = System.Text.Json.JsonEncodedText.Encode("strategy");
+	private static readonly System.Text.Json.JsonEncodedText PropStrategy = System.Text.Json.JsonEncodedText.Encode("strategy"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoSettingsClusterElection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

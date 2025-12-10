@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class GetUserProfileResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors");
-	private static readonly System.Text.Json.JsonEncodedText PropProfiles = System.Text.Json.JsonEncodedText.Encode("profiles");
+	private static readonly System.Text.Json.JsonEncodedText PropErrors = System.Text.Json.JsonEncodedText.Encode("errors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProfiles = System.Text.Json.JsonEncodedText.Encode("profiles"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

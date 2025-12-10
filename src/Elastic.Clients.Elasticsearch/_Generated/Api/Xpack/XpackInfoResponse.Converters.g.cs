@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class XpackInfoResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBuild = System.Text.Json.JsonEncodedText.Encode("build");
-	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features");
-	private static readonly System.Text.Json.JsonEncodedText PropLicense = System.Text.Json.JsonEncodedText.Encode("license");
-	private static readonly System.Text.Json.JsonEncodedText PropTagline = System.Text.Json.JsonEncodedText.Encode("tagline");
+	private static readonly System.Text.Json.JsonEncodedText PropBuild = System.Text.Json.JsonEncodedText.Encode("build"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFeatures = System.Text.Json.JsonEncodedText.Encode("features"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLicense = System.Text.Json.JsonEncodedText.Encode("license"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTagline = System.Text.Json.JsonEncodedText.Encode("tagline"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

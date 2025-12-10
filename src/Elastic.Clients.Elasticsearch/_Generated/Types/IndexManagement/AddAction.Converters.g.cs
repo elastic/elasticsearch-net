@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class AddActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.AddAction>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAlias = System.Text.Json.JsonEncodedText.Encode("alias");
-	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
-	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexRouting = System.Text.Json.JsonEncodedText.Encode("index_routing");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
-	private static readonly System.Text.Json.JsonEncodedText PropIsHidden = System.Text.Json.JsonEncodedText.Encode("is_hidden");
-	private static readonly System.Text.Json.JsonEncodedText PropIsWriteIndex = System.Text.Json.JsonEncodedText.Encode("is_write_index");
-	private static readonly System.Text.Json.JsonEncodedText PropMustExist = System.Text.Json.JsonEncodedText.Encode("must_exist");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchRouting = System.Text.Json.JsonEncodedText.Encode("search_routing");
+	private static readonly System.Text.Json.JsonEncodedText PropAlias = System.Text.Json.JsonEncodedText.Encode("alias"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexRouting = System.Text.Json.JsonEncodedText.Encode("index_routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsHidden = System.Text.Json.JsonEncodedText.Encode("is_hidden"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsWriteIndex = System.Text.Json.JsonEncodedText.Encode("is_write_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMustExist = System.Text.Json.JsonEncodedText.Encode("must_exist"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchRouting = System.Text.Json.JsonEncodedText.Encode("search_routing"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.AddAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

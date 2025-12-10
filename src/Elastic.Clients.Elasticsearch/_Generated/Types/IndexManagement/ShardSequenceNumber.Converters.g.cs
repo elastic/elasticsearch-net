@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ShardSequenceNumberConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardSequenceNumber>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropGlobalCheckpoint = System.Text.Json.JsonEncodedText.Encode("global_checkpoint");
-	private static readonly System.Text.Json.JsonEncodedText PropLocalCheckpoint = System.Text.Json.JsonEncodedText.Encode("local_checkpoint");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSeqNo = System.Text.Json.JsonEncodedText.Encode("max_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropGlobalCheckpoint = System.Text.Json.JsonEncodedText.Encode("global_checkpoint"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLocalCheckpoint = System.Text.Json.JsonEncodedText.Encode("local_checkpoint"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSeqNo = System.Text.Json.JsonEncodedText.Encode("max_seq_no"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardSequenceNumber Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

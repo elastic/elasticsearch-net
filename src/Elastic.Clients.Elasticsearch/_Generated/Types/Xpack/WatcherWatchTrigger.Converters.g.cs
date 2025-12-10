@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class WatcherWatchTriggerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all");
-	private static readonly System.Text.Json.JsonEncodedText PropSchedule = System.Text.Json.JsonEncodedText.Encode("schedule");
+	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("_all"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSchedule = System.Text.Json.JsonEncodedText.Encode("schedule"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.WatcherWatchTrigger Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

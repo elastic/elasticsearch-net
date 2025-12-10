@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class ClusterAppliedStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.ClusterAppliedStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropRecordings = System.Text.Json.JsonEncodedText.Encode("recordings");
+	private static readonly System.Text.Json.JsonEncodedText PropRecordings = System.Text.Json.JsonEncodedText.Encode("recordings"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.ClusterAppliedStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

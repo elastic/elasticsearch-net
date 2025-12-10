@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class NodeInfoXpackConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpack>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLicense = System.Text.Json.JsonEncodedText.Encode("license");
-	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml");
-	private static readonly System.Text.Json.JsonEncodedText PropNotification = System.Text.Json.JsonEncodedText.Encode("notification");
-	private static readonly System.Text.Json.JsonEncodedText PropSecurity = System.Text.Json.JsonEncodedText.Encode("security");
+	private static readonly System.Text.Json.JsonEncodedText PropLicense = System.Text.Json.JsonEncodedText.Encode("license"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNotification = System.Text.Json.JsonEncodedText.Encode("notification"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSecurity = System.Text.Json.JsonEncodedText.Encode("security"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.NodeInfoXpack Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

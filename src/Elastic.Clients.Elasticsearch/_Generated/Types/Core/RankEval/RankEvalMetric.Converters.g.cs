@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.RankEval.Json;
 
 public sealed partial class RankEvalMetricConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDcg = System.Text.Json.JsonEncodedText.Encode("dcg");
-	private static readonly System.Text.Json.JsonEncodedText PropExpectedReciprocalRank = System.Text.Json.JsonEncodedText.Encode("expected_reciprocal_rank");
-	private static readonly System.Text.Json.JsonEncodedText PropMeanReciprocalRank = System.Text.Json.JsonEncodedText.Encode("mean_reciprocal_rank");
-	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
-	private static readonly System.Text.Json.JsonEncodedText PropRecall = System.Text.Json.JsonEncodedText.Encode("recall");
+	private static readonly System.Text.Json.JsonEncodedText PropDcg = System.Text.Json.JsonEncodedText.Encode("dcg"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExpectedReciprocalRank = System.Text.Json.JsonEncodedText.Encode("expected_reciprocal_rank"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeanReciprocalRank = System.Text.Json.JsonEncodedText.Encode("mean_reciprocal_rank"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecall = System.Text.Json.JsonEncodedText.Encode("recall"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetric Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

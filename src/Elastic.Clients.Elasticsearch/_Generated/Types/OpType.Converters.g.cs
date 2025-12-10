@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class OpTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.OpType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCreate = System.Text.Json.JsonEncodedText.Encode("create");
-	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText MemberCreate = System.Text.Json.JsonEncodedText.Encode("create"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
 
 	public override Elastic.Clients.Elasticsearch.OpType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class TimeUnitConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TimeUnit>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberDays = System.Text.Json.JsonEncodedText.Encode("d");
-	private static readonly System.Text.Json.JsonEncodedText MemberHours = System.Text.Json.JsonEncodedText.Encode("h");
-	private static readonly System.Text.Json.JsonEncodedText MemberMinutes = System.Text.Json.JsonEncodedText.Encode("m");
-	private static readonly System.Text.Json.JsonEncodedText MemberMicroseconds = System.Text.Json.JsonEncodedText.Encode("micros");
-	private static readonly System.Text.Json.JsonEncodedText MemberMilliseconds = System.Text.Json.JsonEncodedText.Encode("ms");
-	private static readonly System.Text.Json.JsonEncodedText MemberNanoseconds = System.Text.Json.JsonEncodedText.Encode("nanos");
-	private static readonly System.Text.Json.JsonEncodedText MemberSeconds = System.Text.Json.JsonEncodedText.Encode("s");
+	private static readonly System.Text.Json.JsonEncodedText MemberDays = System.Text.Json.JsonEncodedText.Encode("d"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberHours = System.Text.Json.JsonEncodedText.Encode("h"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMinutes = System.Text.Json.JsonEncodedText.Encode("m"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMicroseconds = System.Text.Json.JsonEncodedText.Encode("micros"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMilliseconds = System.Text.Json.JsonEncodedText.Encode("ms"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNanoseconds = System.Text.Json.JsonEncodedText.Encode("nanos"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSeconds = System.Text.Json.JsonEncodedText.Encode("s"u8);
 
 	public override Elastic.Clients.Elasticsearch.TimeUnit Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

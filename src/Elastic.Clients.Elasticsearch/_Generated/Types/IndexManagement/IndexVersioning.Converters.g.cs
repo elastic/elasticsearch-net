@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexVersioningConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCreated = System.Text.Json.JsonEncodedText.Encode("created");
-	private static readonly System.Text.Json.JsonEncodedText PropCreatedString = System.Text.Json.JsonEncodedText.Encode("created_string");
+	private static readonly System.Text.Json.JsonEncodedText PropCreated = System.Text.Json.JsonEncodedText.Encode("created"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCreatedString = System.Text.Json.JsonEncodedText.Encode("created_string"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexVersioning Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

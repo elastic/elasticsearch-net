@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class InferenceConfigClassificationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNumTopClasses = System.Text.Json.JsonEncodedText.Encode("num_top_classes");
-	private static readonly System.Text.Json.JsonEncodedText PropNumTopFeatureImportanceValues = System.Text.Json.JsonEncodedText.Encode("num_top_feature_importance_values");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictionFieldType = System.Text.Json.JsonEncodedText.Encode("prediction_field_type");
-	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
-	private static readonly System.Text.Json.JsonEncodedText PropTopClassesResultsField = System.Text.Json.JsonEncodedText.Encode("top_classes_results_field");
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopClasses = System.Text.Json.JsonEncodedText.Encode("num_top_classes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopFeatureImportanceValues = System.Text.Json.JsonEncodedText.Encode("num_top_feature_importance_values"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPredictionFieldType = System.Text.Json.JsonEncodedText.Encode("prediction_field_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTopClassesResultsField = System.Text.Json.JsonEncodedText.Encode("top_classes_results_field"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.InferenceConfigClassification Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

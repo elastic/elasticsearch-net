@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class CategorizeTextAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizationAnalyzer = System.Text.Json.JsonEncodedText.Encode("categorization_analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFilters = System.Text.Json.JsonEncodedText.Encode("categorization_filters");
-	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxMatchedTokens = System.Text.Json.JsonEncodedText.Encode("max_matched_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxUniqueTokens = System.Text.Json.JsonEncodedText.Encode("max_unique_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropShardMinDocCount = System.Text.Json.JsonEncodedText.Encode("shard_min_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
-	private static readonly System.Text.Json.JsonEncodedText PropSimilarityThreshold = System.Text.Json.JsonEncodedText.Encode("similarity_threshold");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationAnalyzer = System.Text.Json.JsonEncodedText.Encode("categorization_analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFilters = System.Text.Json.JsonEncodedText.Encode("categorization_filters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxMatchedTokens = System.Text.Json.JsonEncodedText.Encode("max_matched_tokens"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxUniqueTokens = System.Text.Json.JsonEncodedText.Encode("max_unique_tokens"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinDocCount = System.Text.Json.JsonEncodedText.Encode("min_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardMinDocCount = System.Text.Json.JsonEncodedText.Encode("shard_min_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSimilarityThreshold = System.Text.Json.JsonEncodedText.Encode("similarity_threshold"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

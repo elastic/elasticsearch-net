@@ -25,20 +25,20 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class SearchMvtRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchMvtRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAggs = System.Text.Json.JsonEncodedText.Encode("aggs");
-	private static readonly System.Text.Json.JsonEncodedText PropBuffer = System.Text.Json.JsonEncodedText.Encode("buffer");
-	private static readonly System.Text.Json.JsonEncodedText PropExactBounds = System.Text.Json.JsonEncodedText.Encode("exact_bounds");
-	private static readonly System.Text.Json.JsonEncodedText PropExtent = System.Text.Json.JsonEncodedText.Encode("extent");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropGridAgg = System.Text.Json.JsonEncodedText.Encode("grid_agg");
-	private static readonly System.Text.Json.JsonEncodedText PropGridPrecision = System.Text.Json.JsonEncodedText.Encode("grid_precision");
-	private static readonly System.Text.Json.JsonEncodedText PropGridType = System.Text.Json.JsonEncodedText.Encode("grid_type");
-	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
-	private static readonly System.Text.Json.JsonEncodedText PropTrackTotalHits = System.Text.Json.JsonEncodedText.Encode("track_total_hits");
-	private static readonly System.Text.Json.JsonEncodedText PropWithLabels = System.Text.Json.JsonEncodedText.Encode("with_labels");
+	private static readonly System.Text.Json.JsonEncodedText PropAggs = System.Text.Json.JsonEncodedText.Encode("aggs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuffer = System.Text.Json.JsonEncodedText.Encode("buffer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExactBounds = System.Text.Json.JsonEncodedText.Encode("exact_bounds"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExtent = System.Text.Json.JsonEncodedText.Encode("extent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGridAgg = System.Text.Json.JsonEncodedText.Encode("grid_agg"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGridPrecision = System.Text.Json.JsonEncodedText.Encode("grid_precision"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGridType = System.Text.Json.JsonEncodedText.Encode("grid_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrackTotalHits = System.Text.Json.JsonEncodedText.Encode("track_total_hits"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWithLabels = System.Text.Json.JsonEncodedText.Encode("with_labels"u8);
 
 	public override Elastic.Clients.Elasticsearch.SearchMvtRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

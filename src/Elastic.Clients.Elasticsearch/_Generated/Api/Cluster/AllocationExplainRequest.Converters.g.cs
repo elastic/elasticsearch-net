@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class AllocationExplainRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCurrentNode = System.Text.Json.JsonEncodedText.Encode("current_node");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
-	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentNode = System.Text.Json.JsonEncodedText.Encode("current_node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.AllocationExplainRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -34,7 +34,7 @@ public sealed partial class GetComponentTemplateRequestParameters : Elastic.Tran
 
 	/// <summary>
 	/// <para>
-	/// Return all default configurations for the component template (default: false)
+	/// Return all default configurations for the component template
 	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
@@ -117,7 +117,7 @@ public sealed partial class GetComponentTemplateRequest : Elastic.Clients.Elasti
 
 	/// <summary>
 	/// <para>
-	/// Return all default configurations for the component template (default: false)
+	/// Return all default configurations for the component template
 	/// </para>
 	/// </summary>
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
@@ -201,7 +201,7 @@ public readonly partial struct GetComponentTemplateRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Return all default configurations for the component template (default: false)
+	/// Return all default configurations for the component template
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor IncludeDefaults(bool? value = true)

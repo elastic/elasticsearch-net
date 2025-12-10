@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.LicenseManagement.Json;
 
 public sealed partial class GetTrialStatusResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEligibleToStartTrial = System.Text.Json.JsonEncodedText.Encode("eligible_to_start_trial");
+	private static readonly System.Text.Json.JsonEncodedText PropEligibleToStartTrial = System.Text.Json.JsonEncodedText.Encode("eligible_to_start_trial"u8);
 
 	public override Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

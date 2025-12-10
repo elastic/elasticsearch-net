@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class DataStreamStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropBackingIndicesInError = System.Text.Json.JsonEncodedText.Encode("backing_indices_in_error");
-	private static readonly System.Text.Json.JsonEncodedText PropBackingIndicesInTotal = System.Text.Json.JsonEncodedText.Encode("backing_indices_in_total");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropBackingIndicesInError = System.Text.Json.JsonEncodedText.Encode("backing_indices_in_error"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBackingIndicesInTotal = System.Text.Json.JsonEncodedText.Encode("backing_indices_in_total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

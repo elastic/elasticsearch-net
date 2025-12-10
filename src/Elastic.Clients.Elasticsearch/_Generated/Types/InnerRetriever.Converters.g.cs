@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class InnerRetrieverConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.InnerRetriever>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNormalizer = System.Text.Json.JsonEncodedText.Encode("normalizer");
-	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever");
-	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight");
+	private static readonly System.Text.Json.JsonEncodedText PropNormalizer = System.Text.Json.JsonEncodedText.Encode("normalizer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWeight = System.Text.Json.JsonEncodedText.Encode("weight"u8);
 
 	public override Elastic.Clients.Elasticsearch.InnerRetriever Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

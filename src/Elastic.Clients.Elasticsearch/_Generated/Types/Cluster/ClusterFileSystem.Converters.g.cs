@@ -25,23 +25,23 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterFileSystemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropAvailableInBytes = System.Text.Json.JsonEncodedText.Encode("available_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropFloodStageFreeSpace = System.Text.Json.JsonEncodedText.Encode("flood_stage_free_space");
-	private static readonly System.Text.Json.JsonEncodedText PropFloodStageFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("flood_stage_free_space_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free");
-	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropFrozenFloodStageFreeSpace = System.Text.Json.JsonEncodedText.Encode("frozen_flood_stage_free_space");
-	private static readonly System.Text.Json.JsonEncodedText PropFrozenFloodStageFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("frozen_flood_stage_free_space_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropHighWatermarkFreeSpace = System.Text.Json.JsonEncodedText.Encode("high_watermark_free_space");
-	private static readonly System.Text.Json.JsonEncodedText PropHighWatermarkFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("high_watermark_free_space_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropLowWatermarkFreeSpace = System.Text.Json.JsonEncodedText.Encode("low_watermark_free_space");
-	private static readonly System.Text.Json.JsonEncodedText PropLowWatermarkFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("low_watermark_free_space_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropMount = System.Text.Json.JsonEncodedText.Encode("mount");
-	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAvailableInBytes = System.Text.Json.JsonEncodedText.Encode("available_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFloodStageFreeSpace = System.Text.Json.JsonEncodedText.Encode("flood_stage_free_space"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFloodStageFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("flood_stage_free_space_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFree = System.Text.Json.JsonEncodedText.Encode("free"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFrozenFloodStageFreeSpace = System.Text.Json.JsonEncodedText.Encode("frozen_flood_stage_free_space"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFrozenFloodStageFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("frozen_flood_stage_free_space_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHighWatermarkFreeSpace = System.Text.Json.JsonEncodedText.Encode("high_watermark_free_space"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHighWatermarkFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("high_watermark_free_space_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLowWatermarkFreeSpace = System.Text.Json.JsonEncodedText.Encode("low_watermark_free_space"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLowWatermarkFreeSpaceInBytes = System.Text.Json.JsonEncodedText.Encode("low_watermark_free_space_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMount = System.Text.Json.JsonEncodedText.Encode("mount"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterFileSystem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

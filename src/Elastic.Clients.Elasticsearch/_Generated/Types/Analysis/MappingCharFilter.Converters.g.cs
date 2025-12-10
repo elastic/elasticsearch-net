@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class MappingCharFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
-	private static readonly System.Text.Json.JsonEncodedText PropMappingsPath = System.Text.Json.JsonEncodedText.Encode("mappings_path");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMappingsPath = System.Text.Json.JsonEncodedText.Encode("mappings_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.MappingCharFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class RescoreConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.Rescore>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropWindowSize = System.Text.Json.JsonEncodedText.Encode("window_size");
+	private static readonly System.Text.Json.JsonEncodedText PropWindowSize = System.Text.Json.JsonEncodedText.Encode("window_size"u8);
 	private static readonly System.Text.Json.JsonEncodedText VariantLearningToRank = System.Text.Json.JsonEncodedText.Encode("learning_to_rank");
 	private static readonly System.Text.Json.JsonEncodedText VariantQuery = System.Text.Json.JsonEncodedText.Encode("query");
 

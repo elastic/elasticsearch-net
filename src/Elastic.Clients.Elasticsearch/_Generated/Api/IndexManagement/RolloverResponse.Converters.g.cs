@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class RolloverResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged");
-	private static readonly System.Text.Json.JsonEncodedText PropConditions = System.Text.Json.JsonEncodedText.Encode("conditions");
-	private static readonly System.Text.Json.JsonEncodedText PropDryRun = System.Text.Json.JsonEncodedText.Encode("dry_run");
-	private static readonly System.Text.Json.JsonEncodedText PropNewIndex = System.Text.Json.JsonEncodedText.Encode("new_index");
-	private static readonly System.Text.Json.JsonEncodedText PropOldIndex = System.Text.Json.JsonEncodedText.Encode("old_index");
-	private static readonly System.Text.Json.JsonEncodedText PropRolledOver = System.Text.Json.JsonEncodedText.Encode("rolled_over");
-	private static readonly System.Text.Json.JsonEncodedText PropShardsAcknowledged = System.Text.Json.JsonEncodedText.Encode("shards_acknowledged");
+	private static readonly System.Text.Json.JsonEncodedText PropAcknowledged = System.Text.Json.JsonEncodedText.Encode("acknowledged"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropConditions = System.Text.Json.JsonEncodedText.Encode("conditions"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDryRun = System.Text.Json.JsonEncodedText.Encode("dry_run"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNewIndex = System.Text.Json.JsonEncodedText.Encode("new_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOldIndex = System.Text.Json.JsonEncodedText.Encode("old_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRolledOver = System.Text.Json.JsonEncodedText.Encode("rolled_over"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardsAcknowledged = System.Text.Json.JsonEncodedText.Encode("shards_acknowledged"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.RolloverResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

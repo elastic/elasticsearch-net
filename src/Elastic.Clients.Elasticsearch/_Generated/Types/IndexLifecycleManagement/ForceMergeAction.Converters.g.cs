@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Json;
 
 public sealed partial class ForceMergeActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIndexCodec = System.Text.Json.JsonEncodedText.Encode("index_codec");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNumSegments = System.Text.Json.JsonEncodedText.Encode("max_num_segments");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCodec = System.Text.Json.JsonEncodedText.Encode("index_codec"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumSegments = System.Text.Json.JsonEncodedText.Encode("max_num_segments"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

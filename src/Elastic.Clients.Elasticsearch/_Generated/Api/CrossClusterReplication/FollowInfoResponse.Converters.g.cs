@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication.Json;
 
 public sealed partial class FollowInfoResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndices = System.Text.Json.JsonEncodedText.Encode("follower_indices");
+	private static readonly System.Text.Json.JsonEncodedText PropFollowerIndices = System.Text.Json.JsonEncodedText.Encode("follower_indices"u8);
 
 	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowInfoResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

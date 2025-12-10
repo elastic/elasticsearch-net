@@ -25,26 +25,26 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class KnnQueryProfileBreakdownConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileBreakdown>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAdvance = System.Text.Json.JsonEncodedText.Encode("advance");
-	private static readonly System.Text.Json.JsonEncodedText PropAdvanceCount = System.Text.Json.JsonEncodedText.Encode("advance_count");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildScorer = System.Text.Json.JsonEncodedText.Encode("build_scorer");
-	private static readonly System.Text.Json.JsonEncodedText PropBuildScorerCount = System.Text.Json.JsonEncodedText.Encode("build_scorer_count");
-	private static readonly System.Text.Json.JsonEncodedText PropComputeMaxScore = System.Text.Json.JsonEncodedText.Encode("compute_max_score");
-	private static readonly System.Text.Json.JsonEncodedText PropComputeMaxScoreCount = System.Text.Json.JsonEncodedText.Encode("compute_max_score_count");
-	private static readonly System.Text.Json.JsonEncodedText PropCountWeight = System.Text.Json.JsonEncodedText.Encode("count_weight");
-	private static readonly System.Text.Json.JsonEncodedText PropCountWeightCount = System.Text.Json.JsonEncodedText.Encode("count_weight_count");
-	private static readonly System.Text.Json.JsonEncodedText PropCreateWeight = System.Text.Json.JsonEncodedText.Encode("create_weight");
-	private static readonly System.Text.Json.JsonEncodedText PropCreateWeightCount = System.Text.Json.JsonEncodedText.Encode("create_weight_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMatch = System.Text.Json.JsonEncodedText.Encode("match");
-	private static readonly System.Text.Json.JsonEncodedText PropMatchCount = System.Text.Json.JsonEncodedText.Encode("match_count");
-	private static readonly System.Text.Json.JsonEncodedText PropNextDoc = System.Text.Json.JsonEncodedText.Encode("next_doc");
-	private static readonly System.Text.Json.JsonEncodedText PropNextDocCount = System.Text.Json.JsonEncodedText.Encode("next_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score");
-	private static readonly System.Text.Json.JsonEncodedText PropScoreCount = System.Text.Json.JsonEncodedText.Encode("score_count");
-	private static readonly System.Text.Json.JsonEncodedText PropSetMinCompetitiveScore = System.Text.Json.JsonEncodedText.Encode("set_min_competitive_score");
-	private static readonly System.Text.Json.JsonEncodedText PropSetMinCompetitiveScoreCount = System.Text.Json.JsonEncodedText.Encode("set_min_competitive_score_count");
-	private static readonly System.Text.Json.JsonEncodedText PropShallowAdvance = System.Text.Json.JsonEncodedText.Encode("shallow_advance");
-	private static readonly System.Text.Json.JsonEncodedText PropShallowAdvanceCount = System.Text.Json.JsonEncodedText.Encode("shallow_advance_count");
+	private static readonly System.Text.Json.JsonEncodedText PropAdvance = System.Text.Json.JsonEncodedText.Encode("advance"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAdvanceCount = System.Text.Json.JsonEncodedText.Encode("advance_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildScorer = System.Text.Json.JsonEncodedText.Encode("build_scorer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropBuildScorerCount = System.Text.Json.JsonEncodedText.Encode("build_scorer_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropComputeMaxScore = System.Text.Json.JsonEncodedText.Encode("compute_max_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropComputeMaxScoreCount = System.Text.Json.JsonEncodedText.Encode("compute_max_score_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCountWeight = System.Text.Json.JsonEncodedText.Encode("count_weight"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCountWeightCount = System.Text.Json.JsonEncodedText.Encode("count_weight_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCreateWeight = System.Text.Json.JsonEncodedText.Encode("create_weight"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCreateWeightCount = System.Text.Json.JsonEncodedText.Encode("create_weight_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatch = System.Text.Json.JsonEncodedText.Encode("match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatchCount = System.Text.Json.JsonEncodedText.Encode("match_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNextDoc = System.Text.Json.JsonEncodedText.Encode("next_doc"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNextDocCount = System.Text.Json.JsonEncodedText.Encode("next_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScore = System.Text.Json.JsonEncodedText.Encode("score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropScoreCount = System.Text.Json.JsonEncodedText.Encode("score_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSetMinCompetitiveScore = System.Text.Json.JsonEncodedText.Encode("set_min_competitive_score"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSetMinCompetitiveScoreCount = System.Text.Json.JsonEncodedText.Encode("set_min_competitive_score_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShallowAdvance = System.Text.Json.JsonEncodedText.Encode("shallow_advance"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShallowAdvanceCount = System.Text.Json.JsonEncodedText.Encode("shallow_advance_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.KnnQueryProfileBreakdown Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

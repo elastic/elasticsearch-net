@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SearchIdleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAfter = System.Text.Json.JsonEncodedText.Encode("after");
+	private static readonly System.Text.Json.JsonEncodedText PropAfter = System.Text.Json.JsonEncodedText.Encode("after"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SearchIdle Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

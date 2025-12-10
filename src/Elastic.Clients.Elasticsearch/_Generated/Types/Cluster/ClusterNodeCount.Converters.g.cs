@@ -25,22 +25,22 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class ClusterNodeCountConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingOnly = System.Text.Json.JsonEncodedText.Encode("coordinating_only");
-	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data");
-	private static readonly System.Text.Json.JsonEncodedText PropDataCold = System.Text.Json.JsonEncodedText.Encode("data_cold");
-	private static readonly System.Text.Json.JsonEncodedText PropDataContent = System.Text.Json.JsonEncodedText.Encode("data_content");
-	private static readonly System.Text.Json.JsonEncodedText PropDataFrozen = System.Text.Json.JsonEncodedText.Encode("data_frozen");
-	private static readonly System.Text.Json.JsonEncodedText PropDataHot = System.Text.Json.JsonEncodedText.Encode("data_hot");
-	private static readonly System.Text.Json.JsonEncodedText PropDataWarm = System.Text.Json.JsonEncodedText.Encode("data_warm");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
-	private static readonly System.Text.Json.JsonEncodedText PropMaster = System.Text.Json.JsonEncodedText.Encode("master");
-	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml");
-	private static readonly System.Text.Json.JsonEncodedText PropRemoteClusterClient = System.Text.Json.JsonEncodedText.Encode("remote_cluster_client");
-	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
-	private static readonly System.Text.Json.JsonEncodedText PropTransform = System.Text.Json.JsonEncodedText.Encode("transform");
-	private static readonly System.Text.Json.JsonEncodedText PropVotingOnly = System.Text.Json.JsonEncodedText.Encode("voting_only");
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinatingOnly = System.Text.Json.JsonEncodedText.Encode("coordinating_only"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropData = System.Text.Json.JsonEncodedText.Encode("data"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataCold = System.Text.Json.JsonEncodedText.Encode("data_cold"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataContent = System.Text.Json.JsonEncodedText.Encode("data_content"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataFrozen = System.Text.Json.JsonEncodedText.Encode("data_frozen"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataHot = System.Text.Json.JsonEncodedText.Encode("data_hot"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDataWarm = System.Text.Json.JsonEncodedText.Encode("data_warm"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIngest = System.Text.Json.JsonEncodedText.Encode("ingest"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaster = System.Text.Json.JsonEncodedText.Encode("master"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMl = System.Text.Json.JsonEncodedText.Encode("ml"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteClusterClient = System.Text.Json.JsonEncodedText.Encode("remote_cluster_client"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransform = System.Text.Json.JsonEncodedText.Encode("transform"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVotingOnly = System.Text.Json.JsonEncodedText.Encode("voting_only"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterNodeCount Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

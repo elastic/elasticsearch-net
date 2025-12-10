@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class IndexHealthStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActivePrimaryShards = System.Text.Json.JsonEncodedText.Encode("active_primary_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropActiveShards = System.Text.Json.JsonEncodedText.Encode("active_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropInitializingShards = System.Text.Json.JsonEncodedText.Encode("initializing_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfReplicas = System.Text.Json.JsonEncodedText.Encode("number_of_replicas");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfShards = System.Text.Json.JsonEncodedText.Encode("number_of_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropRelocatingShards = System.Text.Json.JsonEncodedText.Encode("relocating_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropUnassignedPrimaryShards = System.Text.Json.JsonEncodedText.Encode("unassigned_primary_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropUnassignedShards = System.Text.Json.JsonEncodedText.Encode("unassigned_shards");
+	private static readonly System.Text.Json.JsonEncodedText PropActivePrimaryShards = System.Text.Json.JsonEncodedText.Encode("active_primary_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropActiveShards = System.Text.Json.JsonEncodedText.Encode("active_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInitializingShards = System.Text.Json.JsonEncodedText.Encode("initializing_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfReplicas = System.Text.Json.JsonEncodedText.Encode("number_of_replicas"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfShards = System.Text.Json.JsonEncodedText.Encode("number_of_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRelocatingShards = System.Text.Json.JsonEncodedText.Encode("relocating_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedPrimaryShards = System.Text.Json.JsonEncodedText.Encode("unassigned_primary_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedShards = System.Text.Json.JsonEncodedText.Encode("unassigned_shards"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.IndexHealthStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -27,7 +27,8 @@ public sealed partial class ReloadSearchAnalyzersRequestParameters : Elastic.Tra
 {
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -114,7 +115,8 @@ public sealed partial class ReloadSearchAnalyzersRequest : Elastic.Clients.Elast
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -199,7 +201,8 @@ public readonly partial struct ReloadSearchAnalyzersRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor AllowNoIndices(bool? value = true)
@@ -360,7 +363,8 @@ public readonly partial struct ReloadSearchAnalyzersRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices.
+	/// (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)

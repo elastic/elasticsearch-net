@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication.Json;
 
 public sealed partial class AutoFollowStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAutoFollowedClusters = System.Text.Json.JsonEncodedText.Encode("auto_followed_clusters");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfFailedFollowIndices = System.Text.Json.JsonEncodedText.Encode("number_of_failed_follow_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfFailedRemoteClusterStateRequests = System.Text.Json.JsonEncodedText.Encode("number_of_failed_remote_cluster_state_requests");
-	private static readonly System.Text.Json.JsonEncodedText PropNumberOfSuccessfulFollowIndices = System.Text.Json.JsonEncodedText.Encode("number_of_successful_follow_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropRecentAutoFollowErrors = System.Text.Json.JsonEncodedText.Encode("recent_auto_follow_errors");
+	private static readonly System.Text.Json.JsonEncodedText PropAutoFollowedClusters = System.Text.Json.JsonEncodedText.Encode("auto_followed_clusters"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfFailedFollowIndices = System.Text.Json.JsonEncodedText.Encode("number_of_failed_follow_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfFailedRemoteClusterStateRequests = System.Text.Json.JsonEncodedText.Encode("number_of_failed_remote_cluster_state_requests"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumberOfSuccessfulFollowIndices = System.Text.Json.JsonEncodedText.Encode("number_of_successful_follow_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecentAutoFollowErrors = System.Text.Json.JsonEncodedText.Encode("recent_auto_follow_errors"u8);
 
 	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

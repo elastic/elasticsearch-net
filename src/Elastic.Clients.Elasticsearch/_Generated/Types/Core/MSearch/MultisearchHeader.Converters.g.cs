@@ -25,17 +25,17 @@ namespace Elastic.Clients.Elasticsearch.Core.MSearch.Json;
 
 public sealed partial class MultisearchHeaderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowNoIndices = System.Text.Json.JsonEncodedText.Encode("allow_no_indices");
-	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSearchResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_search_results");
-	private static readonly System.Text.Json.JsonEncodedText PropCcsMinimizeRoundtrips = System.Text.Json.JsonEncodedText.Encode("ccs_minimize_roundtrips");
-	private static readonly System.Text.Json.JsonEncodedText PropExpandWildcards = System.Text.Json.JsonEncodedText.Encode("expand_wildcards");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreThrottled = System.Text.Json.JsonEncodedText.Encode("ignore_throttled");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable");
-	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropPreference = System.Text.Json.JsonEncodedText.Encode("preference");
-	private static readonly System.Text.Json.JsonEncodedText PropRequestCache = System.Text.Json.JsonEncodedText.Encode("request_cache");
-	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
-	private static readonly System.Text.Json.JsonEncodedText PropSearchType = System.Text.Json.JsonEncodedText.Encode("search_type");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowNoIndices = System.Text.Json.JsonEncodedText.Encode("allow_no_indices"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSearchResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_search_results"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCcsMinimizeRoundtrips = System.Text.Json.JsonEncodedText.Encode("ccs_minimize_roundtrips"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExpandWildcards = System.Text.Json.JsonEncodedText.Encode("expand_wildcards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreThrottled = System.Text.Json.JsonEncodedText.Encode("ignore_throttled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreUnavailable = System.Text.Json.JsonEncodedText.Encode("ignore_unavailable"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreference = System.Text.Json.JsonEncodedText.Encode("preference"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRequestCache = System.Text.Json.JsonEncodedText.Encode("request_cache"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSearchType = System.Text.Json.JsonEncodedText.Encode("search_type"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchHeader Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

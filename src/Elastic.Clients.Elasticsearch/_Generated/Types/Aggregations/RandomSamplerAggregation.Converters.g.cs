@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class RandomSamplerAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropProbability = System.Text.Json.JsonEncodedText.Encode("probability");
-	private static readonly System.Text.Json.JsonEncodedText PropSeed = System.Text.Json.JsonEncodedText.Encode("seed");
-	private static readonly System.Text.Json.JsonEncodedText PropShardSeed = System.Text.Json.JsonEncodedText.Encode("shard_seed");
+	private static readonly System.Text.Json.JsonEncodedText PropProbability = System.Text.Json.JsonEncodedText.Encode("probability"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSeed = System.Text.Json.JsonEncodedText.Encode("seed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShardSeed = System.Text.Json.JsonEncodedText.Encode("shard_seed"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.RandomSamplerAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

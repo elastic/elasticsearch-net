@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.Search.Json;
 
 public sealed partial class HighlighterFragmenterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberSimple = System.Text.Json.JsonEncodedText.Encode("simple");
-	private static readonly System.Text.Json.JsonEncodedText MemberSpan = System.Text.Json.JsonEncodedText.Encode("span");
+	private static readonly System.Text.Json.JsonEncodedText MemberSimple = System.Text.Json.JsonEncodedText.Encode("simple"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberSpan = System.Text.Json.JsonEncodedText.Encode("span"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.Search.HighlighterFragmenter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

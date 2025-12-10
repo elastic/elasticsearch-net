@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class MinimalLicenseInformationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.MinimalLicenseInformation>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExpiryDateInMillis = System.Text.Json.JsonEncodedText.Encode("expiry_date_in_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
-	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropUid = System.Text.Json.JsonEncodedText.Encode("uid");
+	private static readonly System.Text.Json.JsonEncodedText PropExpiryDateInMillis = System.Text.Json.JsonEncodedText.Encode("expiry_date_in_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUid = System.Text.Json.JsonEncodedText.Encode("uid"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.MinimalLicenseInformation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

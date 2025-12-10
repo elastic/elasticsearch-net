@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class DiagnosisConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.Diagnosis>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action");
-	private static readonly System.Text.Json.JsonEncodedText PropAffectedResources = System.Text.Json.JsonEncodedText.Encode("affected_resources");
-	private static readonly System.Text.Json.JsonEncodedText PropCause = System.Text.Json.JsonEncodedText.Encode("cause");
-	private static readonly System.Text.Json.JsonEncodedText PropHelpUrl = System.Text.Json.JsonEncodedText.Encode("help_url");
-	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropAffectedResources = System.Text.Json.JsonEncodedText.Encode("affected_resources"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCause = System.Text.Json.JsonEncodedText.Encode("cause"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHelpUrl = System.Text.Json.JsonEncodedText.Encode("help_url"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.Diagnosis Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SettingsSearchConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIdle = System.Text.Json.JsonEncodedText.Encode("idle");
-	private static readonly System.Text.Json.JsonEncodedText PropSlowlog = System.Text.Json.JsonEncodedText.Encode("slowlog");
+	private static readonly System.Text.Json.JsonEncodedText PropIdle = System.Text.Json.JsonEncodedText.Encode("idle"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSlowlog = System.Text.Json.JsonEncodedText.Encode("slowlog"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSearch Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

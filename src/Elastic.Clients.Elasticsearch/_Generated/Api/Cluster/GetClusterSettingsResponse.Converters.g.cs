@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Cluster.Json;
 
 public sealed partial class GetClusterSettingsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDefaults = System.Text.Json.JsonEncodedText.Encode("defaults");
-	private static readonly System.Text.Json.JsonEncodedText PropPersistent = System.Text.Json.JsonEncodedText.Encode("persistent");
-	private static readonly System.Text.Json.JsonEncodedText PropTransient = System.Text.Json.JsonEncodedText.Encode("transient");
+	private static readonly System.Text.Json.JsonEncodedText PropDefaults = System.Text.Json.JsonEncodedText.Encode("defaults"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPersistent = System.Text.Json.JsonEncodedText.Encode("persistent"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTransient = System.Text.Json.JsonEncodedText.Encode("transient"u8);
 
 	public override Elastic.Clients.Elasticsearch.Cluster.GetClusterSettingsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class VersionTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.VersionType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberExternal = System.Text.Json.JsonEncodedText.Encode("external");
-	private static readonly System.Text.Json.JsonEncodedText MemberExternalGte = System.Text.Json.JsonEncodedText.Encode("external_gte");
-	private static readonly System.Text.Json.JsonEncodedText MemberInternal = System.Text.Json.JsonEncodedText.Encode("internal");
+	private static readonly System.Text.Json.JsonEncodedText MemberExternal = System.Text.Json.JsonEncodedText.Encode("external"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberExternalGte = System.Text.Json.JsonEncodedText.Encode("external_gte"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberInternal = System.Text.Json.JsonEncodedText.Encode("internal"u8);
 
 	public override Elastic.Clients.Elasticsearch.VersionType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

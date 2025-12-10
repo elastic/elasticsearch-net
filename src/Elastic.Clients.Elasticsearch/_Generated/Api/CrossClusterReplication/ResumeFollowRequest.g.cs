@@ -70,7 +70,7 @@ public sealed partial class ResumeFollowRequest : Elastic.Clients.Elasticsearch.
 
 	/// <summary>
 	/// <para>
-	/// The name of the follow index to resume following.
+	/// Name of the follow index to resume following
 	/// </para>
 	/// </summary>
 	public
@@ -132,7 +132,7 @@ public readonly partial struct ResumeFollowRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the follow index to resume following.
+	/// Name of the follow index to resume following
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
@@ -297,7 +297,7 @@ public readonly partial struct ResumeFollowRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The name of the follow index to resume following.
+	/// Name of the follow index to resume following
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.ResumeFollowRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class PostCalendarEventsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEvents = System.Text.Json.JsonEncodedText.Encode("events");
+	private static readonly System.Text.Json.JsonEncodedText PropEvents = System.Text.Json.JsonEncodedText.Encode("events"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.PostCalendarEventsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

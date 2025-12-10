@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class MasterIsStableIndicatorExceptionFetchingHistoryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorExceptionFetchingHistory>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMessage = System.Text.Json.JsonEncodedText.Encode("message");
-	private static readonly System.Text.Json.JsonEncodedText PropStackTrace = System.Text.Json.JsonEncodedText.Encode("stack_trace");
+	private static readonly System.Text.Json.JsonEncodedText PropMessage = System.Text.Json.JsonEncodedText.Encode("message"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStackTrace = System.Text.Json.JsonEncodedText.Encode("stack_trace"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorExceptionFetchingHistory Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

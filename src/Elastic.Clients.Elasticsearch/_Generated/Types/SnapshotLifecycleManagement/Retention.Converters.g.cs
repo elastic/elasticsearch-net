@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json;
 
 public sealed partial class RetentionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropExpireAfter = System.Text.Json.JsonEncodedText.Encode("expire_after");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxCount = System.Text.Json.JsonEncodedText.Encode("max_count");
-	private static readonly System.Text.Json.JsonEncodedText PropMinCount = System.Text.Json.JsonEncodedText.Encode("min_count");
+	private static readonly System.Text.Json.JsonEncodedText PropExpireAfter = System.Text.Json.JsonEncodedText.Encode("expire_after"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxCount = System.Text.Json.JsonEncodedText.Encode("max_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinCount = System.Text.Json.JsonEncodedText.Encode("min_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

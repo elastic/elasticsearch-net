@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Ingest.Json;
 
 public sealed partial class RedactConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.Redact>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropIsRedacted = System.Text.Json.JsonEncodedText.Encode("_is_redacted");
+	private static readonly System.Text.Json.JsonEncodedText PropIsRedacted = System.Text.Json.JsonEncodedText.Encode("_is_redacted"u8);
 
 	public override Elastic.Clients.Elasticsearch.Ingest.Redact Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

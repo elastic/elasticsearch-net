@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class ConfusionMatrixItemConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixItem>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropActualClass = System.Text.Json.JsonEncodedText.Encode("actual_class");
-	private static readonly System.Text.Json.JsonEncodedText PropActualClassDocCount = System.Text.Json.JsonEncodedText.Encode("actual_class_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropOtherPredictedClassDocCount = System.Text.Json.JsonEncodedText.Encode("other_predicted_class_doc_count");
-	private static readonly System.Text.Json.JsonEncodedText PropPredictedClasses = System.Text.Json.JsonEncodedText.Encode("predicted_classes");
+	private static readonly System.Text.Json.JsonEncodedText PropActualClass = System.Text.Json.JsonEncodedText.Encode("actual_class"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropActualClassDocCount = System.Text.Json.JsonEncodedText.Encode("actual_class_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOtherPredictedClassDocCount = System.Text.Json.JsonEncodedText.Encode("other_predicted_class_doc_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPredictedClasses = System.Text.Json.JsonEncodedText.Encode("predicted_classes"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.ConfusionMatrixItem Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

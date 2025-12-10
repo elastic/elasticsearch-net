@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class ResultConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Result>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCreated = System.Text.Json.JsonEncodedText.Encode("created");
-	private static readonly System.Text.Json.JsonEncodedText MemberDeleted = System.Text.Json.JsonEncodedText.Encode("deleted");
-	private static readonly System.Text.Json.JsonEncodedText MemberNoOp = System.Text.Json.JsonEncodedText.Encode("noop");
-	private static readonly System.Text.Json.JsonEncodedText MemberNotFound = System.Text.Json.JsonEncodedText.Encode("not_found");
-	private static readonly System.Text.Json.JsonEncodedText MemberUpdated = System.Text.Json.JsonEncodedText.Encode("updated");
+	private static readonly System.Text.Json.JsonEncodedText MemberCreated = System.Text.Json.JsonEncodedText.Encode("created"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDeleted = System.Text.Json.JsonEncodedText.Encode("deleted"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNoOp = System.Text.Json.JsonEncodedText.Encode("noop"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberNotFound = System.Text.Json.JsonEncodedText.Encode("not_found"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberUpdated = System.Text.Json.JsonEncodedText.Encode("updated"u8);
 
 	public override Elastic.Clients.Elasticsearch.Result Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class ChangePasswordRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
-	private static readonly System.Text.Json.JsonEncodedText PropPasswordHash = System.Text.Json.JsonEncodedText.Encode("password_hash");
+	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPasswordHash = System.Text.Json.JsonEncodedText.Encode("password_hash"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

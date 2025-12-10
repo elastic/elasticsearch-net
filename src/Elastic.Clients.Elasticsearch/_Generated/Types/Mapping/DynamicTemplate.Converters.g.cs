@@ -25,13 +25,13 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class DynamicTemplateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMatch = System.Text.Json.JsonEncodedText.Encode("match");
-	private static readonly System.Text.Json.JsonEncodedText PropMatchMappingType = System.Text.Json.JsonEncodedText.Encode("match_mapping_type");
-	private static readonly System.Text.Json.JsonEncodedText PropMatchPattern = System.Text.Json.JsonEncodedText.Encode("match_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropPathMatch = System.Text.Json.JsonEncodedText.Encode("path_match");
-	private static readonly System.Text.Json.JsonEncodedText PropPathUnmatch = System.Text.Json.JsonEncodedText.Encode("path_unmatch");
-	private static readonly System.Text.Json.JsonEncodedText PropUnmatch = System.Text.Json.JsonEncodedText.Encode("unmatch");
-	private static readonly System.Text.Json.JsonEncodedText PropUnmatchMappingType = System.Text.Json.JsonEncodedText.Encode("unmatch_mapping_type");
+	private static readonly System.Text.Json.JsonEncodedText PropMatch = System.Text.Json.JsonEncodedText.Encode("match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatchMappingType = System.Text.Json.JsonEncodedText.Encode("match_mapping_type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMatchPattern = System.Text.Json.JsonEncodedText.Encode("match_pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPathMatch = System.Text.Json.JsonEncodedText.Encode("path_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPathUnmatch = System.Text.Json.JsonEncodedText.Encode("path_unmatch"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnmatch = System.Text.Json.JsonEncodedText.Encode("unmatch"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnmatchMappingType = System.Text.Json.JsonEncodedText.Encode("unmatch_mapping_type"u8);
 	private static readonly System.Text.Json.JsonEncodedText VariantMapping = System.Text.Json.JsonEncodedText.Encode("mapping");
 	private static readonly System.Text.Json.JsonEncodedText VariantRuntime = System.Text.Json.JsonEncodedText.Encode("runtime");
 

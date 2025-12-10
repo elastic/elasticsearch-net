@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class NodeShardConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.NodeShard>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllocationId = System.Text.Json.JsonEncodedText.Encode("allocation_id");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node");
-	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
-	private static readonly System.Text.Json.JsonEncodedText PropRecoverySource = System.Text.Json.JsonEncodedText.Encode("recovery_source");
-	private static readonly System.Text.Json.JsonEncodedText PropRelocatingNode = System.Text.Json.JsonEncodedText.Encode("relocating_node");
-	private static readonly System.Text.Json.JsonEncodedText PropRelocationFailureInfo = System.Text.Json.JsonEncodedText.Encode("relocation_failure_info");
-	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard");
-	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state");
-	private static readonly System.Text.Json.JsonEncodedText PropUnassignedInfo = System.Text.Json.JsonEncodedText.Encode("unassigned_info");
+	private static readonly System.Text.Json.JsonEncodedText PropAllocationId = System.Text.Json.JsonEncodedText.Encode("allocation_id"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNode = System.Text.Json.JsonEncodedText.Encode("node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrimary = System.Text.Json.JsonEncodedText.Encode("primary"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRecoverySource = System.Text.Json.JsonEncodedText.Encode("recovery_source"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRelocatingNode = System.Text.Json.JsonEncodedText.Encode("relocating_node"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRelocationFailureInfo = System.Text.Json.JsonEncodedText.Encode("relocation_failure_info"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShard = System.Text.Json.JsonEncodedText.Encode("shard"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropState = System.Text.Json.JsonEncodedText.Encode("state"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUnassignedInfo = System.Text.Json.JsonEncodedText.Encode("unassigned_info"u8);
 
 	public override Elastic.Clients.Elasticsearch.NodeShard Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class SettingsAnalyzeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropMaxTokenCount = System.Text.Json.JsonEncodedText.Encode("max_token_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxTokenCount = System.Text.Json.JsonEncodedText.Encode("max_token_count"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsAnalyze Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

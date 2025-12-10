@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Json;
 
 public sealed partial class GeoLineConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.GeoLine>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCoordinates = System.Text.Json.JsonEncodedText.Encode("coordinates");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropCoordinates = System.Text.Json.JsonEncodedText.Encode("coordinates"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
 
 	public override Elastic.Clients.Elasticsearch.GeoLine Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

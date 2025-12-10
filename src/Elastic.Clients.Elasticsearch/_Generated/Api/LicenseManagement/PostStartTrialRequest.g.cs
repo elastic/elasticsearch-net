@@ -27,7 +27,7 @@ public sealed partial class PostStartTrialRequestParameters : Elastic.Transport.
 {
 	/// <summary>
 	/// <para>
-	/// whether the user has acknowledged acknowledge messages (default: false)
+	/// Whether the user has acknowledged acknowledge messages
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
@@ -41,7 +41,7 @@ public sealed partial class PostStartTrialRequestParameters : Elastic.Transport.
 
 	/// <summary>
 	/// <para>
-	/// The type of trial license to generate (default: "trial")
+	/// The type of trial license to generate
 	/// </para>
 	/// </summary>
 	public string? Type { get => Q<string?>("type"); set => Q("type", value); }
@@ -89,7 +89,7 @@ public sealed partial class PostStartTrialRequest : Elastic.Clients.Elasticsearc
 
 	/// <summary>
 	/// <para>
-	/// whether the user has acknowledged acknowledge messages (default: false)
+	/// Whether the user has acknowledged acknowledge messages
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
@@ -103,7 +103,7 @@ public sealed partial class PostStartTrialRequest : Elastic.Clients.Elasticsearc
 
 	/// <summary>
 	/// <para>
-	/// The type of trial license to generate (default: "trial")
+	/// The type of trial license to generate
 	/// </para>
 	/// </summary>
 	public string? Type { get => Q<string?>("type"); set => Q("type", value); }
@@ -142,7 +142,7 @@ public readonly partial struct PostStartTrialRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// whether the user has acknowledged acknowledge messages (default: false)
+	/// Whether the user has acknowledged acknowledge messages
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor Acknowledge(bool? value = true)
@@ -164,7 +164,7 @@ public readonly partial struct PostStartTrialRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The type of trial license to generate (default: "trial")
+	/// The type of trial license to generate
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor Type(string? value)

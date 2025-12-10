@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class ScriptedHeuristicConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.ScriptedHeuristic Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class InvalidateTokenResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropErrorCount = System.Text.Json.JsonEncodedText.Encode("error_count");
-	private static readonly System.Text.Json.JsonEncodedText PropErrorDetails = System.Text.Json.JsonEncodedText.Encode("error_details");
-	private static readonly System.Text.Json.JsonEncodedText PropInvalidatedTokens = System.Text.Json.JsonEncodedText.Encode("invalidated_tokens");
-	private static readonly System.Text.Json.JsonEncodedText PropPreviouslyInvalidatedTokens = System.Text.Json.JsonEncodedText.Encode("previously_invalidated_tokens");
+	private static readonly System.Text.Json.JsonEncodedText PropErrorCount = System.Text.Json.JsonEncodedText.Encode("error_count"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropErrorDetails = System.Text.Json.JsonEncodedText.Encode("error_details"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInvalidatedTokens = System.Text.Json.JsonEncodedText.Encode("invalidated_tokens"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPreviouslyInvalidatedTokens = System.Text.Json.JsonEncodedText.Encode("previously_invalidated_tokens"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,11 +25,33 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class StopTrainedModelDeploymentRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropAllowNoMatch = System.Text.Json.JsonEncodedText.Encode("allow_no_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropForce = System.Text.Json.JsonEncodedText.Encode("force"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id"u8);
+
 	public override Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowNoMatch = default;
+		LocalJsonValue<bool?> propForce = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propAllowNoMatch.TryReadProperty(ref reader, options, PropAllowNoMatch, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propForce.TryReadProperty(ref reader, options, PropForce, static bool? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadNullableValue<bool>(o)))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.SafeSkip();
@@ -42,12 +64,18 @@ public sealed partial class StopTrainedModelDeploymentRequestConverter : System.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			AllowNoMatch = propAllowNoMatch.Value,
+			Force = propForce.Value,
+			Id = propId.Value
 		};
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.StopTrainedModelDeploymentRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowNoMatch, value.AllowNoMatch, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropForce, value.Force, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, bool? v) => w.WriteNullableValue<bool>(o, v));
+		writer.WriteProperty(options, PropId, value.Id, null, null);
 		writer.WriteEndObject();
 	}
 }

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class DenseVectorSimilarityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCosine = System.Text.Json.JsonEncodedText.Encode("cosine");
-	private static readonly System.Text.Json.JsonEncodedText MemberDotProduct = System.Text.Json.JsonEncodedText.Encode("dot_product");
-	private static readonly System.Text.Json.JsonEncodedText MemberL2Norm = System.Text.Json.JsonEncodedText.Encode("l2_norm");
-	private static readonly System.Text.Json.JsonEncodedText MemberMaxInnerProduct = System.Text.Json.JsonEncodedText.Encode("max_inner_product");
+	private static readonly System.Text.Json.JsonEncodedText MemberCosine = System.Text.Json.JsonEncodedText.Encode("cosine"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberDotProduct = System.Text.Json.JsonEncodedText.Encode("dot_product"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberL2Norm = System.Text.Json.JsonEncodedText.Encode("l2_norm"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberMaxInnerProduct = System.Text.Json.JsonEncodedText.Encode("max_inner_product"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.DenseVectorSimilarity Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

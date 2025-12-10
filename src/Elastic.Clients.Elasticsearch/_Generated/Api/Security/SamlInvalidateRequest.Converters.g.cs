@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Security.Json;
 
 public sealed partial class SamlInvalidateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAcs = System.Text.Json.JsonEncodedText.Encode("acs");
-	private static readonly System.Text.Json.JsonEncodedText PropQueryString = System.Text.Json.JsonEncodedText.Encode("query_string");
-	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm");
+	private static readonly System.Text.Json.JsonEncodedText PropAcs = System.Text.Json.JsonEncodedText.Encode("acs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQueryString = System.Text.Json.JsonEncodedText.Encode("query_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRealm = System.Text.Json.JsonEncodedText.Encode("realm"u8);
 
 	public override Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

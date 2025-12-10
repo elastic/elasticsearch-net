@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class DefinitionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Definition>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPreprocessors = System.Text.Json.JsonEncodedText.Encode("preprocessors");
-	private static readonly System.Text.Json.JsonEncodedText PropTrainedModel = System.Text.Json.JsonEncodedText.Encode("trained_model");
+	private static readonly System.Text.Json.JsonEncodedText PropPreprocessors = System.Text.Json.JsonEncodedText.Encode("preprocessors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrainedModel = System.Text.Json.JsonEncodedText.Encode("trained_model"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Definition Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

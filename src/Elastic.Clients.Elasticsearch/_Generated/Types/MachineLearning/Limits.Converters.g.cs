@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class LimitsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Limits>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEffectiveMaxModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("effective_max_model_memory_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("max_model_memory_limit");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxSingleMlNodeProcessors = System.Text.Json.JsonEncodedText.Encode("max_single_ml_node_processors");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalMlMemory = System.Text.Json.JsonEncodedText.Encode("total_ml_memory");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalMlProcessors = System.Text.Json.JsonEncodedText.Encode("total_ml_processors");
+	private static readonly System.Text.Json.JsonEncodedText PropEffectiveMaxModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("effective_max_model_memory_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("max_model_memory_limit"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSingleMlNodeProcessors = System.Text.Json.JsonEncodedText.Encode("max_single_ml_node_processors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalMlMemory = System.Text.Json.JsonEncodedText.Encode("total_ml_memory"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalMlProcessors = System.Text.Json.JsonEncodedText.Encode("total_ml_processors"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Limits Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

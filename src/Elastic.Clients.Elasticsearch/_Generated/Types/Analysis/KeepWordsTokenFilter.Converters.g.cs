@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class KeepWordsTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropKeepWords = System.Text.Json.JsonEncodedText.Encode("keep_words");
-	private static readonly System.Text.Json.JsonEncodedText PropKeepWordsCase = System.Text.Json.JsonEncodedText.Encode("keep_words_case");
-	private static readonly System.Text.Json.JsonEncodedText PropKeepWordsPath = System.Text.Json.JsonEncodedText.Encode("keep_words_path");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepWords = System.Text.Json.JsonEncodedText.Encode("keep_words"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeepWordsCase = System.Text.Json.JsonEncodedText.Encode("keep_words_case"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKeepWordsPath = System.Text.Json.JsonEncodedText.Encode("keep_words_path"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

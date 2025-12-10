@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class UpdateDataFrameAnalyticsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyStart = System.Text.Json.JsonEncodedText.Encode("allow_lazy_start");
-	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxNumThreads = System.Text.Json.JsonEncodedText.Encode("max_num_threads");
-	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyStart = System.Text.Json.JsonEncodedText.Encode("allow_lazy_start"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxNumThreads = System.Text.Json.JsonEncodedText.Encode("max_num_threads"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateDataFrameAnalyticsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

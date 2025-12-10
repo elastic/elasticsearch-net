@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class StopDatafeedRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAllowNoMatch = System.Text.Json.JsonEncodedText.Encode("allow_no_match");
-	private static readonly System.Text.Json.JsonEncodedText PropForce = System.Text.Json.JsonEncodedText.Encode("force");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowNoMatch = System.Text.Json.JsonEncodedText.Encode("allow_no_match"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropForce = System.Text.Json.JsonEncodedText.Encode("force"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeout = System.Text.Json.JsonEncodedText.Encode("timeout"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.StopDatafeedRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

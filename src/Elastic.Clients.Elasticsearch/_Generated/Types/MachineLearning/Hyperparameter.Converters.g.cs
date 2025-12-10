@@ -25,11 +25,11 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning.Json;
 
 public sealed partial class HyperparameterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAbsoluteImportance = System.Text.Json.JsonEncodedText.Encode("absolute_importance");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropRelativeImportance = System.Text.Json.JsonEncodedText.Encode("relative_importance");
-	private static readonly System.Text.Json.JsonEncodedText PropSupplied = System.Text.Json.JsonEncodedText.Encode("supplied");
-	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
+	private static readonly System.Text.Json.JsonEncodedText PropAbsoluteImportance = System.Text.Json.JsonEncodedText.Encode("absolute_importance"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRelativeImportance = System.Text.Json.JsonEncodedText.Encode("relative_importance"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSupplied = System.Text.Json.JsonEncodedText.Encode("supplied"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value"u8);
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.Hyperparameter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class ValidateQueryResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
-	private static readonly System.Text.Json.JsonEncodedText PropExplanations = System.Text.Json.JsonEncodedText.Encode("explanations");
-	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards");
-	private static readonly System.Text.Json.JsonEncodedText PropValid = System.Text.Json.JsonEncodedText.Encode("valid");
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropExplanations = System.Text.Json.JsonEncodedText.Encode("explanations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropShards = System.Text.Json.JsonEncodedText.Encode("_shards"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropValid = System.Text.Json.JsonEncodedText.Encode("valid"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ValidateQueryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

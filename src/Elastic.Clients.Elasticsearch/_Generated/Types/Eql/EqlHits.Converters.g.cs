@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Eql.Json;
 
 public sealed partial class EqlHitsConverter<TEvent> : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent>>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropEvents = System.Text.Json.JsonEncodedText.Encode("events");
-	private static readonly System.Text.Json.JsonEncodedText PropSequences = System.Text.Json.JsonEncodedText.Encode("sequences");
-	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropEvents = System.Text.Json.JsonEncodedText.Encode("events"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSequences = System.Text.Json.JsonEncodedText.Encode("sequences"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total"u8);
 
 	public override Elastic.Clients.Elasticsearch.Eql.EqlHits<TEvent> Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

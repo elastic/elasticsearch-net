@@ -25,32 +25,32 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class IcuCollationPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAlternate = System.Text.Json.JsonEncodedText.Encode("alternate");
-	private static readonly System.Text.Json.JsonEncodedText PropCaseFirst = System.Text.Json.JsonEncodedText.Encode("case_first");
-	private static readonly System.Text.Json.JsonEncodedText PropCaseLevel = System.Text.Json.JsonEncodedText.Encode("case_level");
-	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
-	private static readonly System.Text.Json.JsonEncodedText PropCountry = System.Text.Json.JsonEncodedText.Encode("country");
-	private static readonly System.Text.Json.JsonEncodedText PropDecomposition = System.Text.Json.JsonEncodedText.Encode("decomposition");
-	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values");
-	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
-	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
-	private static readonly System.Text.Json.JsonEncodedText PropHiraganaQuaternaryMode = System.Text.Json.JsonEncodedText.Encode("hiragana_quaternary_mode");
-	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options");
-	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("language");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
-	private static readonly System.Text.Json.JsonEncodedText PropNorms = System.Text.Json.JsonEncodedText.Encode("norms");
-	private static readonly System.Text.Json.JsonEncodedText PropNullValue = System.Text.Json.JsonEncodedText.Encode("null_value");
-	private static readonly System.Text.Json.JsonEncodedText PropNumeric = System.Text.Json.JsonEncodedText.Encode("numeric");
-	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
-	private static readonly System.Text.Json.JsonEncodedText PropRules = System.Text.Json.JsonEncodedText.Encode("rules");
-	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
-	private static readonly System.Text.Json.JsonEncodedText PropStrength = System.Text.Json.JsonEncodedText.Encode("strength");
-	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropVariableTop = System.Text.Json.JsonEncodedText.Encode("variable_top");
-	private static readonly System.Text.Json.JsonEncodedText PropVariant = System.Text.Json.JsonEncodedText.Encode("variant");
+	private static readonly System.Text.Json.JsonEncodedText PropAlternate = System.Text.Json.JsonEncodedText.Encode("alternate"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCaseFirst = System.Text.Json.JsonEncodedText.Encode("case_first"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCaseLevel = System.Text.Json.JsonEncodedText.Encode("case_level"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCountry = System.Text.Json.JsonEncodedText.Encode("country"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDecomposition = System.Text.Json.JsonEncodedText.Encode("decomposition"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHiraganaQuaternaryMode = System.Text.Json.JsonEncodedText.Encode("hiragana_quaternary_mode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLanguage = System.Text.Json.JsonEncodedText.Encode("language"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNorms = System.Text.Json.JsonEncodedText.Encode("norms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNullValue = System.Text.Json.JsonEncodedText.Encode("null_value"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNumeric = System.Text.Json.JsonEncodedText.Encode("numeric"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRules = System.Text.Json.JsonEncodedText.Encode("rules"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStrength = System.Text.Json.JsonEncodedText.Encode("strength"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVariableTop = System.Text.Json.JsonEncodedText.Encode("variable_top"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVariant = System.Text.Json.JsonEncodedText.Encode("variant"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.IcuCollationProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

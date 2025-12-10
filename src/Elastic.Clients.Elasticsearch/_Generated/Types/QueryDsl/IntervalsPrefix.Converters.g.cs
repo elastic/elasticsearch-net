@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl.Json;
 
 public sealed partial class IntervalsPrefixConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
-	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
-	private static readonly System.Text.Json.JsonEncodedText PropUseField = System.Text.Json.JsonEncodedText.Encode("use_field");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUseField = System.Text.Json.JsonEncodedText.Encode("use_field"u8);
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.IntervalsPrefix Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

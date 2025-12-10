@@ -25,14 +25,14 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class FieldSummaryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.FieldSummary>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAny = System.Text.Json.JsonEncodedText.Encode("any");
-	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values");
-	private static readonly System.Text.Json.JsonEncodedText PropInvertedIndex = System.Text.Json.JsonEncodedText.Encode("inverted_index");
-	private static readonly System.Text.Json.JsonEncodedText PropKnnVectors = System.Text.Json.JsonEncodedText.Encode("knn_vectors");
-	private static readonly System.Text.Json.JsonEncodedText PropNorms = System.Text.Json.JsonEncodedText.Encode("norms");
-	private static readonly System.Text.Json.JsonEncodedText PropPoints = System.Text.Json.JsonEncodedText.Encode("points");
-	private static readonly System.Text.Json.JsonEncodedText PropStoredFields = System.Text.Json.JsonEncodedText.Encode("stored_fields");
-	private static readonly System.Text.Json.JsonEncodedText PropTermVectors = System.Text.Json.JsonEncodedText.Encode("term_vectors");
+	private static readonly System.Text.Json.JsonEncodedText PropAny = System.Text.Json.JsonEncodedText.Encode("any"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInvertedIndex = System.Text.Json.JsonEncodedText.Encode("inverted_index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropKnnVectors = System.Text.Json.JsonEncodedText.Encode("knn_vectors"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNorms = System.Text.Json.JsonEncodedText.Encode("norms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropPoints = System.Text.Json.JsonEncodedText.Encode("points"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropStoredFields = System.Text.Json.JsonEncodedText.Encode("stored_fields"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTermVectors = System.Text.Json.JsonEncodedText.Encode("term_vectors"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.FieldSummary Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

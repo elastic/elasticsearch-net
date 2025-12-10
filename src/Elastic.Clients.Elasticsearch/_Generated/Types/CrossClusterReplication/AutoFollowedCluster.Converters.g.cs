@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication.Json;
 
 public sealed partial class AutoFollowedClusterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
-	private static readonly System.Text.Json.JsonEncodedText PropLastSeenMetadataVersion = System.Text.Json.JsonEncodedText.Encode("last_seen_metadata_version");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeSinceLastCheckMillis = System.Text.Json.JsonEncodedText.Encode("time_since_last_check_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLastSeenMetadataVersion = System.Text.Json.JsonEncodedText.Encode("last_seen_metadata_version"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSinceLastCheckMillis = System.Text.Json.JsonEncodedText.Encode("time_since_last_check_millis"u8);
 
 	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowedCluster Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

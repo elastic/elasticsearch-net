@@ -25,15 +25,15 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class DataStreamLifecycleExplainConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
-	private static readonly System.Text.Json.JsonEncodedText PropGenerationTime = System.Text.Json.JsonEncodedText.Encode("generation_time");
-	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
-	private static readonly System.Text.Json.JsonEncodedText PropIndexCreationDateMillis = System.Text.Json.JsonEncodedText.Encode("index_creation_date_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle");
-	private static readonly System.Text.Json.JsonEncodedText PropManagedByLifecycle = System.Text.Json.JsonEncodedText.Encode("managed_by_lifecycle");
-	private static readonly System.Text.Json.JsonEncodedText PropRolloverDateMillis = System.Text.Json.JsonEncodedText.Encode("rollover_date_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeSinceIndexCreation = System.Text.Json.JsonEncodedText.Encode("time_since_index_creation");
-	private static readonly System.Text.Json.JsonEncodedText PropTimeSinceRollover = System.Text.Json.JsonEncodedText.Encode("time_since_rollover");
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropGenerationTime = System.Text.Json.JsonEncodedText.Encode("generation_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIndexCreationDateMillis = System.Text.Json.JsonEncodedText.Encode("index_creation_date_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLifecycle = System.Text.Json.JsonEncodedText.Encode("lifecycle"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropManagedByLifecycle = System.Text.Json.JsonEncodedText.Encode("managed_by_lifecycle"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRolloverDateMillis = System.Text.Json.JsonEncodedText.Encode("rollover_date_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSinceIndexCreation = System.Text.Json.JsonEncodedText.Encode("time_since_index_creation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSinceRollover = System.Text.Json.JsonEncodedText.Encode("time_since_rollover"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleExplain Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

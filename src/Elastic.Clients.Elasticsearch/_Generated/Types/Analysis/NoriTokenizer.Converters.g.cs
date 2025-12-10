@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Analysis.Json;
 
 public sealed partial class NoriTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDecompoundMode = System.Text.Json.JsonEncodedText.Encode("decompound_mode");
-	private static readonly System.Text.Json.JsonEncodedText PropDiscardPunctuation = System.Text.Json.JsonEncodedText.Encode("discard_punctuation");
-	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
-	private static readonly System.Text.Json.JsonEncodedText PropUserDictionary = System.Text.Json.JsonEncodedText.Encode("user_dictionary");
-	private static readonly System.Text.Json.JsonEncodedText PropUserDictionaryRules = System.Text.Json.JsonEncodedText.Encode("user_dictionary_rules");
-	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropDecompoundMode = System.Text.Json.JsonEncodedText.Encode("decompound_mode"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropDiscardPunctuation = System.Text.Json.JsonEncodedText.Encode("discard_punctuation"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUserDictionary = System.Text.Json.JsonEncodedText.Encode("user_dictionary"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUserDictionaryRules = System.Text.Json.JsonEncodedText.Encode("user_dictionary_rules"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version"u8);
 
 	public override Elastic.Clients.Elasticsearch.Analysis.NoriTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Json;
 
 public sealed partial class GetStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropPolicyStats = System.Text.Json.JsonEncodedText.Encode("policy_stats");
-	private static readonly System.Text.Json.JsonEncodedText PropRetentionDeletionTime = System.Text.Json.JsonEncodedText.Encode("retention_deletion_time");
-	private static readonly System.Text.Json.JsonEncodedText PropRetentionDeletionTimeMillis = System.Text.Json.JsonEncodedText.Encode("retention_deletion_time_millis");
-	private static readonly System.Text.Json.JsonEncodedText PropRetentionFailed = System.Text.Json.JsonEncodedText.Encode("retention_failed");
-	private static readonly System.Text.Json.JsonEncodedText PropRetentionRuns = System.Text.Json.JsonEncodedText.Encode("retention_runs");
-	private static readonly System.Text.Json.JsonEncodedText PropRetentionTimedOut = System.Text.Json.JsonEncodedText.Encode("retention_timed_out");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotDeletionFailures = System.Text.Json.JsonEncodedText.Encode("total_snapshot_deletion_failures");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotsDeleted = System.Text.Json.JsonEncodedText.Encode("total_snapshots_deleted");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotsFailed = System.Text.Json.JsonEncodedText.Encode("total_snapshots_failed");
-	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotsTaken = System.Text.Json.JsonEncodedText.Encode("total_snapshots_taken");
+	private static readonly System.Text.Json.JsonEncodedText PropPolicyStats = System.Text.Json.JsonEncodedText.Encode("policy_stats"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionDeletionTime = System.Text.Json.JsonEncodedText.Encode("retention_deletion_time"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionDeletionTimeMillis = System.Text.Json.JsonEncodedText.Encode("retention_deletion_time_millis"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionFailed = System.Text.Json.JsonEncodedText.Encode("retention_failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionRuns = System.Text.Json.JsonEncodedText.Encode("retention_runs"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropRetentionTimedOut = System.Text.Json.JsonEncodedText.Encode("retention_timed_out"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotDeletionFailures = System.Text.Json.JsonEncodedText.Encode("total_snapshot_deletion_failures"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotsDeleted = System.Text.Json.JsonEncodedText.Encode("total_snapshots_deleted"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotsFailed = System.Text.Json.JsonEncodedText.Encode("total_snapshots_failed"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSnapshotsTaken = System.Text.Json.JsonEncodedText.Encode("total_snapshots_taken"u8);
 
 	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

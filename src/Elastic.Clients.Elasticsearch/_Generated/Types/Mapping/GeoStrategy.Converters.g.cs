@@ -25,8 +25,8 @@ namespace Elastic.Clients.Elasticsearch.Mapping.Json;
 
 public sealed partial class GeoStrategyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.GeoStrategy>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberRecursive = System.Text.Json.JsonEncodedText.Encode("recursive");
-	private static readonly System.Text.Json.JsonEncodedText MemberTerm = System.Text.Json.JsonEncodedText.Encode("term");
+	private static readonly System.Text.Json.JsonEncodedText MemberRecursive = System.Text.Json.JsonEncodedText.Encode("recursive"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberTerm = System.Text.Json.JsonEncodedText.Encode("term"u8);
 
 	public override Elastic.Clients.Elasticsearch.Mapping.GeoStrategy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

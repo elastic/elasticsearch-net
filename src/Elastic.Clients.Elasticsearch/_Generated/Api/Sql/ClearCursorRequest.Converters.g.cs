@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Sql.Json;
 
 public sealed partial class ClearCursorRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropCursor = System.Text.Json.JsonEncodedText.Encode("cursor");
+	private static readonly System.Text.Json.JsonEncodedText PropCursor = System.Text.Json.JsonEncodedText.Encode("cursor"u8);
 
 	public override Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

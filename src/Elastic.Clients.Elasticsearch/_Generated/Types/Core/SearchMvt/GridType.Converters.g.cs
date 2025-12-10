@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.SearchMvt.Json;
 
 public sealed partial class GridTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType>
 {
-	private static readonly System.Text.Json.JsonEncodedText MemberCentroid = System.Text.Json.JsonEncodedText.Encode("centroid");
-	private static readonly System.Text.Json.JsonEncodedText MemberGrid = System.Text.Json.JsonEncodedText.Encode("grid");
-	private static readonly System.Text.Json.JsonEncodedText MemberPoint = System.Text.Json.JsonEncodedText.Encode("point");
+	private static readonly System.Text.Json.JsonEncodedText MemberCentroid = System.Text.Json.JsonEncodedText.Encode("centroid"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberGrid = System.Text.Json.JsonEncodedText.Encode("grid"u8);
+	private static readonly System.Text.Json.JsonEncodedText MemberPoint = System.Text.Json.JsonEncodedText.Encode("point"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

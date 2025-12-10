@@ -25,7 +25,7 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement.Json;
 
 public sealed partial class IndexSettingsLifecycleStepConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropWaitTimeThreshold = System.Text.Json.JsonEncodedText.Encode("wait_time_threshold");
+	private static readonly System.Text.Json.JsonEncodedText PropWaitTimeThreshold = System.Text.Json.JsonEncodedText.Encode("wait_time_threshold"u8);
 
 	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsLifecycleStep Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

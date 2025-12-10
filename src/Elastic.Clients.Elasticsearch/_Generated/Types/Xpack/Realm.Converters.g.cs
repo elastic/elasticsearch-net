@@ -25,16 +25,16 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class RealmConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.Realm>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available");
-	private static readonly System.Text.Json.JsonEncodedText PropCache = System.Text.Json.JsonEncodedText.Encode("cache");
-	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
-	private static readonly System.Text.Json.JsonEncodedText PropHasAuthorizationRealms = System.Text.Json.JsonEncodedText.Encode("has_authorization_realms");
-	private static readonly System.Text.Json.JsonEncodedText PropHasDefaultUsernamePattern = System.Text.Json.JsonEncodedText.Encode("has_default_username_pattern");
-	private static readonly System.Text.Json.JsonEncodedText PropHasTruststore = System.Text.Json.JsonEncodedText.Encode("has_truststore");
-	private static readonly System.Text.Json.JsonEncodedText PropIsAuthenticationDelegated = System.Text.Json.JsonEncodedText.Encode("is_authentication_delegated");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order");
-	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropAvailable = System.Text.Json.JsonEncodedText.Encode("available"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCache = System.Text.Json.JsonEncodedText.Encode("cache"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHasAuthorizationRealms = System.Text.Json.JsonEncodedText.Encode("has_authorization_realms"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHasDefaultUsernamePattern = System.Text.Json.JsonEncodedText.Encode("has_default_username_pattern"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropHasTruststore = System.Text.Json.JsonEncodedText.Encode("has_truststore"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropIsAuthenticationDelegated = System.Text.Json.JsonEncodedText.Encode("is_authentication_delegated"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOrder = System.Text.Json.JsonEncodedText.Encode("order"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.Realm Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

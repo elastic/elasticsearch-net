@@ -25,10 +25,10 @@ namespace Elastic.Clients.Elasticsearch.Xpack.Json;
 
 public sealed partial class WatcherWatchConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Xpack.WatcherWatch>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action");
-	private static readonly System.Text.Json.JsonEncodedText PropCondition = System.Text.Json.JsonEncodedText.Encode("condition");
-	private static readonly System.Text.Json.JsonEncodedText PropInput = System.Text.Json.JsonEncodedText.Encode("input");
-	private static readonly System.Text.Json.JsonEncodedText PropTrigger = System.Text.Json.JsonEncodedText.Encode("trigger");
+	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropCondition = System.Text.Json.JsonEncodedText.Encode("condition"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropInput = System.Text.Json.JsonEncodedText.Encode("input"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropTrigger = System.Text.Json.JsonEncodedText.Encode("trigger"u8);
 
 	public override Elastic.Clients.Elasticsearch.Xpack.WatcherWatch Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

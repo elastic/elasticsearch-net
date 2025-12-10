@@ -25,9 +25,9 @@ namespace Elastic.Clients.Elasticsearch.Core.HealthReport.Json;
 
 public sealed partial class MasterIsStableIndicatorClusterFormationNodeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorClusterFormationNode>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropClusterFormationMessage = System.Text.Json.JsonEncodedText.Encode("cluster_formation_message");
-	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
-	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterFormationMessage = System.Text.Json.JsonEncodedText.Encode("cluster_formation_message"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id"u8);
 
 	public override Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicatorClusterFormationNode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

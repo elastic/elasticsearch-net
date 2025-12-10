@@ -25,21 +25,21 @@ namespace Elastic.Clients.Elasticsearch.Aggregations.Json;
 
 public sealed partial class BoxplotAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropLower = System.Text.Json.JsonEncodedText.Encode("lower");
-	private static readonly System.Text.Json.JsonEncodedText PropLowerAsString = System.Text.Json.JsonEncodedText.Encode("lower_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxAsString = System.Text.Json.JsonEncodedText.Encode("max_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
-	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min");
-	private static readonly System.Text.Json.JsonEncodedText PropMinAsString = System.Text.Json.JsonEncodedText.Encode("min_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropQ1 = System.Text.Json.JsonEncodedText.Encode("q1");
-	private static readonly System.Text.Json.JsonEncodedText PropQ1AsString = System.Text.Json.JsonEncodedText.Encode("q1_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropQ2 = System.Text.Json.JsonEncodedText.Encode("q2");
-	private static readonly System.Text.Json.JsonEncodedText PropQ2AsString = System.Text.Json.JsonEncodedText.Encode("q2_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropQ3 = System.Text.Json.JsonEncodedText.Encode("q3");
-	private static readonly System.Text.Json.JsonEncodedText PropQ3AsString = System.Text.Json.JsonEncodedText.Encode("q3_as_string");
-	private static readonly System.Text.Json.JsonEncodedText PropUpper = System.Text.Json.JsonEncodedText.Encode("upper");
-	private static readonly System.Text.Json.JsonEncodedText PropUpperAsString = System.Text.Json.JsonEncodedText.Encode("upper_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropLower = System.Text.Json.JsonEncodedText.Encode("lower"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropLowerAsString = System.Text.Json.JsonEncodedText.Encode("lower_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMax = System.Text.Json.JsonEncodedText.Encode("max"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMaxAsString = System.Text.Json.JsonEncodedText.Encode("max_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMin = System.Text.Json.JsonEncodedText.Encode("min"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropMinAsString = System.Text.Json.JsonEncodedText.Encode("min_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQ1 = System.Text.Json.JsonEncodedText.Encode("q1"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQ1AsString = System.Text.Json.JsonEncodedText.Encode("q1_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQ2 = System.Text.Json.JsonEncodedText.Encode("q2"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQ2AsString = System.Text.Json.JsonEncodedText.Encode("q2_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQ3 = System.Text.Json.JsonEncodedText.Encode("q3"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropQ3AsString = System.Text.Json.JsonEncodedText.Encode("q3_as_string"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpper = System.Text.Json.JsonEncodedText.Encode("upper"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropUpperAsString = System.Text.Json.JsonEncodedText.Encode("upper_as_string"u8);
 
 	public override Elastic.Clients.Elasticsearch.Aggregations.BoxplotAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{

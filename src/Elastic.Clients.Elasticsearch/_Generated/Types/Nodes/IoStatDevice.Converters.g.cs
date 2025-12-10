@@ -25,12 +25,12 @@ namespace Elastic.Clients.Elasticsearch.Nodes.Json;
 
 public sealed partial class IoStatDeviceConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.IoStatDevice>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropDeviceName = System.Text.Json.JsonEncodedText.Encode("device_name");
-	private static readonly System.Text.Json.JsonEncodedText PropOperations = System.Text.Json.JsonEncodedText.Encode("operations");
-	private static readonly System.Text.Json.JsonEncodedText PropReadKilobytes = System.Text.Json.JsonEncodedText.Encode("read_kilobytes");
-	private static readonly System.Text.Json.JsonEncodedText PropReadOperations = System.Text.Json.JsonEncodedText.Encode("read_operations");
-	private static readonly System.Text.Json.JsonEncodedText PropWriteKilobytes = System.Text.Json.JsonEncodedText.Encode("write_kilobytes");
-	private static readonly System.Text.Json.JsonEncodedText PropWriteOperations = System.Text.Json.JsonEncodedText.Encode("write_operations");
+	private static readonly System.Text.Json.JsonEncodedText PropDeviceName = System.Text.Json.JsonEncodedText.Encode("device_name"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropOperations = System.Text.Json.JsonEncodedText.Encode("operations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadKilobytes = System.Text.Json.JsonEncodedText.Encode("read_kilobytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropReadOperations = System.Text.Json.JsonEncodedText.Encode("read_operations"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWriteKilobytes = System.Text.Json.JsonEncodedText.Encode("write_kilobytes"u8);
+	private static readonly System.Text.Json.JsonEncodedText PropWriteOperations = System.Text.Json.JsonEncodedText.Encode("write_operations"u8);
 
 	public override Elastic.Clients.Elasticsearch.Nodes.IoStatDevice Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
